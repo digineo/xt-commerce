@@ -52,24 +52,22 @@ $max = count($_SESSION[tracking][products_history]);
 
 while ($i < $max) {
 
-    $product_history_query = "select * from " . TABLE_PRODUCTS . " where products_status = '1' and products_id = '".$_SESSION['tracking']['products_history'][$i]."'";
-
-    $product_history_query = xtDBquery($product_history_query);
+    $product_history_query = xtDBquery("select * from " . TABLE_PRODUCTS . " where products_status = '1' and products_id = '".$_SESSION['tracking']['products_history'][$i]."'");
     $history_product = xtc_db_fetch_array(&$product_history_query,true);
     $products_name = xtc_get_products_name($_SESSION['tracking']['products_history'][$i]);
     $products_image = xtc_get_products_image((int)$_SESSION['tracking']['products_history'][$i]);
     $products_price = $xtPrice->xtcGetPrice($history_product['products_id'],$format=true,1,$history_product['products_tax_class_id'],$history_product['products_price']);
     $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $_SESSION['tracking']['products_history'][$i], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $products_name . TEXT_NOW);
     $cpath= xtc_get_product_path($_SESSION['tracking']['products_history'][$i]);
+    if ($history_product['products_status'] != 0) {
     $products_history[]=array(
                         'PRODUCTS_NAME' => $products_name,
                         'PRODUCTS_IMAGE' => DIR_WS_THUMBNAIL_IMAGES . $products_image,
                         'PRODUCTS_PRICE' => $products_price,
                         'PRODUCTS_URL' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $_SESSION['tracking']['products_history'][$i]),
                         'PRODUCTS_CATEGORY_URL' => xtc_href_link(FILENAME_DEFAULT, 'cPath=' . $cpath),
-                        'BUY_NOW_BUTTON' => $buy_now);
-                       
- $i++;  }
+                        'BUY_NOW_BUTTON' => $buy_now);                      
+ $i++;  }}
 
 $order_content='';
   if (xtc_count_customer_orders() > 0) {
@@ -113,6 +111,7 @@ $order_content='';
   $smarty->assign('LINK_EDIT',xtc_href_link(FILENAME_ACCOUNT_EDIT, '', 'SSL'));
   $smarty->assign('LINK_ADDRESS',xtc_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL'));
   $smarty->assign('LINK_PASSWORD',xtc_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL'));
+  if (!isset($_SESSION['customer_id'])) $smarty->assign('LINK_LOGIN',xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
   $smarty->assign('LINK_ORDERS',xtc_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL'));
   $smarty->assign('LINK_NEWSLETTER',xtc_href_link(FILENAME_NEWSLETTER, '', 'SSL'));
   $smarty->assign('LINK_NOTIFICATIONS',xtc_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL'));

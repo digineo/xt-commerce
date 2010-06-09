@@ -40,7 +40,7 @@
 
     function update_status() {
       global $order;
-
+      if (strstr($_SESSION['shipping']['id'],'ups')) $this->enabled = false;
       if ( ($this->enabled == true) && ((int)MODULE_PAYMENT_COD_ZONE > 0) ) {
         $check_flag = false;
         $check_query = xtc_db_query("select zone_id from " . TABLE_ZONES_TO_GEO_ZONES . " where geo_zone_id = '" . MODULE_PAYMENT_COD_ZONE . "' and zone_country_id = '" . $order->delivery['country']['id'] . "' order by zone_id");
@@ -87,7 +87,9 @@
     }
 
     function after_process() {
-      return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

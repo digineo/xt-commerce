@@ -61,7 +61,7 @@
       $class = basename($_GET['module']);
       if (file_exists($module_directory . $class . $file_extension)) {
         include($module_directory . $class . $file_extension);
-        $module = new $class;
+        $module = new $class(0);
         if ($_GET['action'] == 'install') {
           $module->install();
         } elseif ($_GET['action'] == 'remove') {

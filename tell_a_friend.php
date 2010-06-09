@@ -24,8 +24,7 @@
   require_once(DIR_FS_INC . 'xtc_draw_textarea_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
   require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
-  require_once(DIR_WS_CLASSES.'class.phpmailer.php');
-  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
+
 
   if (isset($_SESSION['customer_id'])) {
     $account = xtc_db_query("select customers_firstname, customers_lastname, customers_email_address from " . TABLE_CUSTOMERS . " where customers_id = '" . (int)$_SESSION['customer_id'] . "'");
@@ -139,7 +138,7 @@ $smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_continue.gif', IMAGE_BU
   }
 
   $smarty->assign('language', $_SESSION['language']);
-
+  $smarty->assign('FORM_END','</form>');
 
                // set cache ID
   $smarty->caching = 0;

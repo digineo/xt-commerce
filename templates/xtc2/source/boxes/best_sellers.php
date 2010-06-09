@@ -53,6 +53,7 @@ $box_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
                                         and pd.language_id = '" . (int)$_SESSION['languages_id'] . "'
                                         and p.products_id = p2c.products_id ".$fsk_lock."
                                         ".$group_check."
+                                        ".$fsk_lock."
                                         and p2c.categories_id = c.categories_id and '" . $current_category_id . "'
                                         in (c.categories_id, c.parent_id)
                                         order by p.products_ordered desc, pd.products_name limit " . MAX_DISPLAY_BESTSELLERS;

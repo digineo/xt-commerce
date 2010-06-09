@@ -70,6 +70,13 @@ TR.headerError {
   background: #ff0000;
 }
 
+.moduleHeading {
+	font-family: Verdana, Arial, sans-serif;
+	font-size: small;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
 TD.headerError {
   font-family: Tahoma, Verdana, Arial, sans-serif;
   font-size: 12px;
@@ -311,6 +318,13 @@ SPAN.productDiscountPrice {
   font-family: Verdana, Arial, sans-serif;
   color: #ff0000;
   font-weight: bold;
+}
+
+.smallHeading {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	font-weight: bold;
+	color: Black;
 }
 
 .moduleRow {

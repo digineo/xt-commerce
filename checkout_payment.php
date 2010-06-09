@@ -104,6 +104,7 @@
   $order_total_modules = new order_total(&$xtPrice);// GV Code ICW ADDED FOR CREDIT CLASS SYSTEM
 
 
+
   $total_weight = $_SESSION['cart']->show_weight();
 
 //  $total_count = $_SESSION['cart']->count_contents();
@@ -116,6 +117,9 @@
   require(DIR_WS_CLASSES . 'payment.php');
   $payment_modules = new payment;
 
+    $order_total_modules->process();
+  // redirect if Coupon matches ammount
+
 
   $breadcrumb->add(NAVBAR_TITLE_1_CHECKOUT_PAYMENT, xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
   $breadcrumb->add(NAVBAR_TITLE_2_CHECKOUT_PAYMENT, xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
@@ -125,13 +129,12 @@ $smarty->assign('FORM_ACTION',xtc_draw_form('checkout_payment', xtc_href_link(FI
 $smarty->assign('ADDRESS_LABEL',xtc_address_label($_SESSION['customer_id'], $_SESSION['billto'], true, ' ', '<br>'));
 $smarty->assign('BUTTON_ADDRESS','<a href="' . xtc_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '">' . xtc_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>');
 $smarty->assign('BUTTON_CONTINUE',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
-
+$smarty->assign('FORM_END','</form>');
 ?>
 
 
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
-
-<?php
+<?php require(DIR_WS_INCLUDES . 'header.php');
+if ($order->info['total']>0) {
   if (isset($_GET['payment_error']) && is_object(${$_GET['payment_error']}) && ($error = ${$_GET['payment_error']}->get_error())) {
 
 $smarty->assign('error','<table border="0" width="100%" cellspacing="1" cellpadding="2" class="infoBoxNotice">
@@ -229,6 +232,10 @@ $payment_block .= '
         </table></td>
       </tr>
     </table>';
+} else {
+ $smarty->assign('GV_COVER','true');
+}
+
   if (ACTIVATE_GIFT_SYSTEM=='true') {
   $payment_block .= $order_total_modules->credit_selection();
   }
@@ -237,13 +244,17 @@ $payment_block .= '
   //check if display conditions on checkout page is true
   if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
 
+    if (GROUP_CHECK=='true') {
+   $group_check="and group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
+  }
+
     	 $shop_content_query=xtc_db_query("SELECT
  					content_title,
  					content_heading,
  					content_text,
  					content_file
  					FROM ".TABLE_CONTENT_MANAGER."
- 					WHERE content_group='3'
+ 					WHERE content_group='3' ".$group_check."
  					AND languages_id='".$_SESSION['languages_id']."'");
  	$shop_content_data=xtc_db_fetch_array($shop_content_query);
 

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: render_vvcode.inc.php,v 1.0
+   $Id: xtc_render_vvcode.inc.php,v 1.0
    
    Copyright (c) 2003 XT-Commerce
    -----------------------------------------------------------------------------------------
@@ -11,18 +11,20 @@
    ---------------------------------------------------------------------------------------*/
 
 require_once(DIR_FS_INC . 'xtc_rand.inc.php');
-   
+
 function vvcode_render_code($code) {
     if (!empty($code)) {
 
-    $ttf[0] = DIR_FS_CATALOG.'/includes/fonts/Dustismo_sans.ttf';
-    $ttf[1] = DIR_FS_CATALOG.'/includes/fonts/dustismo_bold_italic.ttf';
-    $ttf[2] = DIR_FS_CATALOG.'/includes/fonts/dustismo_italic.ttf';
-    $ttf[3] = DIR_FS_CATALOG.'/includes/fonts/Dustismo_Roman.ttf';
-    $ttf[4] = DIR_FS_CATALOG.'/includes/fonts/Dustismo_Roman_Bold.ttf';
-    $ttf[5] = DIR_FS_CATALOG.'/includes/fonts/Dustismo_Roman_Italic.ttf';
-    $ttf[6] = DIR_FS_CATALOG.'/includes/fonts/Dustismo_Roman_Italic_Bold.ttf';
-
+    // load fonts
+    $ttf=array();
+    if ($dir= opendir(DIR_WS_INCLUDES.'fonts/')){
+    while  (($file = readdir($dir)) !==false) {
+    if (is_file(DIR_WS_INCLUDES.'fonts/'.$file) and (strstr(strtoupper($file),'.TTF'))){
+        $ttf[]=DIR_FS_CATALOG.'/includes/fonts/'.$file;
+        }
+        }
+        closedir($dir);
+    }
     $width = 240;
     $height =50;
 

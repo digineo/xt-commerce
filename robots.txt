@@ -14,13 +14,14 @@ Disallow: checkout_confirmation.php
 Disallow: checkout_payment.php 
 Disallow: checkout_success.php 
 Disallow: contact_us.php 
-Disallow: create_account.php 
+Disallow: create_account.php
+Disallow: create_account_guest.php  
 Disallow: create_account_process.php 
 Disallow: create_account_success.php 
 Disallow: info_shopping_cart.php 
 Disallow: login.php 
-Disallow: logoff.php 
-Disallow: password_forgotten.php 
+Disallow: logoff.php
+Disallow: password_double_opt.php
 Disallow: popup_image.php 
 Disallow: popup_search_help.php 
 Disallow: privacy.php 
@@ -29,7 +30,8 @@ Disallow: product_reviews.php
 Disallow: product_reviews_info.php 
 Disallow: reviews.php 
 Disallow: shipping.php 
-Disallow: admin/ 
+Disallow: admin/
+Disallow: export/
 Disallow: download/ 
 Disallow: includes/ 
 Disallow: pub/ 

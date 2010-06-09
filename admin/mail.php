@@ -22,6 +22,9 @@
 
   require('includes/application_top.php');
 
+  require_once(DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
+  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
+
   if ( ($_GET['action'] == 'send_email_to_user') && ($_POST['customers_email_address']) && (!$_POST['back_x']) ) {
     switch ($_POST['customers_email_address']) {
       case '***':
@@ -52,14 +55,24 @@
     $subject = xtc_db_prepare_input($_POST['subject']);
     $message = xtc_db_prepare_input($_POST['message']);
 
-    //Let's build a message object using the email class
-    $mimemessage = new email(array('X-Mailer: neXTCommerce bulk mailer'));
-    // add the message to the object
-    $mimemessage->add_text($message);
-    $mimemessage->build_message();
+
     while ($mail = xtc_db_fetch_array($mail_query)) {
-      $mimemessage->send($mail['customers_firstname'] . ' ' . $mail['customers_lastname'], $mail['customers_email_address'], '', $from, $subject);
+
+      xtc_php_mail(EMAIL_SUPPORT_ADDRESS,
+               EMAIL_SUPPORT_NAME,
+               $mail['customers_email_address'] ,
+               $mail['customers_firstname'] . ' ' . $mail['customers_lastname'] ,
+               '',
+               EMAIL_SUPPORT_REPLY_ADDRESS,
+               EMAIL_SUPPORT_REPLY_ADDRESS_NAME,
+                '',
+                '',
+                $subject,
+                $message,
+                $message);
     }
+
+
 
     xtc_redirect(xtc_href_link(FILENAME_MAIL, 'mail_sent_to=' . urlencode($mail_sent_to)));
   }
@@ -74,6 +87,24 @@
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
+<?php if (USE_SPAW=='true') {
+ $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
+ $data=xtc_db_fetch_array($query);
+ ?>
+<script type="text/javascript">
+   _editor_url = "includes/htmlarea/";
+   _editor_lang = "<?php echo $data['code']; ?>";
+</script>
+    <!-- DWD Modify -> Add: HTMLArea v3.0 !-->
+    <!-- Load HTMLArea Core Files. !-->
+<script type="text/javascript" src="includes/htmlarea/htmlarea.js"></script>
+<script type="text/javascript" src="includes/htmlarea/dialog.js"></script>
+<script tyle="text/javascript" src="includes/htmlarea/lang/<?php echo $data['code']; ?>.js"></script>
+
+
+
+
+<?php } ?>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>"> 
 <title><?php echo TITLE; ?></title>
@@ -225,7 +256,7 @@
               </tr>
               <tr>
                 <td valign="top" class="main"><?php echo TEXT_MESSAGE; ?></td>
-                <td><?php echo xtc_draw_textarea_field('message', 'soft', '60', '15'); ?></td>
+                <td><?php echo xtc_draw_textarea_field('message', 'soft', '100%', '30'); ?></td>
               </tr>
               <tr>
                 <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -250,6 +281,30 @@
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 <br>
+<?php if (USE_SPAW=='true') { ?>
+<script type="text/javascript">
+      HTMLArea.loadPlugin("SpellChecker");
+      HTMLArea.loadPlugin("TableOperations");
+      HTMLArea.loadPlugin("FullPage");
+      HTMLArea.loadPlugin("CharacterMap");
+      HTMLArea.loadPlugin("ContextMenu");
+      HTMLArea.loadPlugin("ImageManager");
+HTMLArea.onload = function() {
+
+
+var editor= new HTMLArea("message");
+editor.registerPlugin(TableOperations);
+editor.registerPlugin(FullPage);
+editor.registerPlugin(ContextMenu);
+editor.registerPlugin(CharacterMap);
+editor.registerPlugin(ImageManager);
+editor.generate();
+
+
+};
+HTMLArea.init();
+</script>
+<?php } ?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

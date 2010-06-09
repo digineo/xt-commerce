@@ -1,7 +1,7 @@
 {config_load file="$language/lang_$language.conf" section="gift_cart"}
 <br>
   {if $ACTIVATE_GIFT=='true'}
-<form name="gift_coupon" action="{$FORM_ACTION}" method="post">
+{$FORM_ACTION}
 <table width="80%"  border="0" align="center" bgcolor="#FFCC99" style="border: 1px solid; border-color:#000000;">
   <tr>
     <td class="main" align="center"><b>{#title#}</b></td>
@@ -68,5 +68,5 @@
   </tr>
 </table>
 <br>
-</form>
+{$FORM_END}
   {/if}

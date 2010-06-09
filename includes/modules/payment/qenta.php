@@ -107,7 +107,7 @@
     }
 
     function process_button() {
-      global $order, $order_total_modules, $currencies, $currency;
+      global $order, $order_total_modules, $currencies, $xtPrice;
 
       $result = xtc_db_query("SELECT code FROM languages WHERE languages_id = '".$_SESSION['languages_id']."'");
       list($lang_code) = mysql_fetch_row($result);
@@ -125,9 +125,9 @@
       }
 
       $this->transaction_id = $this->generate_trid();
-      
+
       $request_fingerprint = md5(MODULE_PAYMENT_QENTA_MERCHANTKEY.
-	  						     xtc_round($order->info['total'] * $currencies->get_value($qCurrency), $currencies->get_decimal_places($qCurrency)).
+	  						     round($xtPrice->xtcCalculateCurrEx($order->info['total'] ,$qCurrency), $xtPrice->get_decimal_places($qCurrency)).
 	  						     $qCurrency.
 	  						     $qLanguage.
 	  						     $this->transaction_id.'-'.$order->customer['firstname'].' '.$order->customer['lastname'].
@@ -141,7 +141,7 @@
    	  $result = xtc_db_query("INSERT INTO payment_qenta (q_TRID, q_DATE) VALUES ('$this->transaction_id', NOW())");
 
       $process_button_string = xtc_draw_hidden_field('merchantKey', MODULE_PAYMENT_QENTA_MERCHANTKEY) .
-                               xtc_draw_hidden_field('amount', xtc_round($order->info['total'] * $currencies->get_value($qCurrency), $currencies->get_decimal_places($qCurrency))) .
+                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($order->info['total'] ,$qCurrency), $xtPrice->get_decimal_places($qCurrency))) .
                                xtc_draw_hidden_field('currency', $qCurrency) .
                                xtc_draw_hidden_field('paymentType', MODULE_PAYMENT_QENTA_PAYMENTTYPE) .
                                xtc_draw_hidden_field('language', $qLanguage) .
@@ -189,7 +189,10 @@
       global $insert_id;
       // Finally, insert order ID into the Qenta table
       $result = xtc_db_query("UPDATE payment_qenta SET q_ORDERID = $insert_id WHERE q_TRID = '$this->transaction_id'");
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
+
 
     function get_error() {
 

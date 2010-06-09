@@ -79,7 +79,7 @@
     }
 
     function process_button() {
-      global $order, $currencies;
+      global $order, $xtPrice;
 
       switch (MODULE_PAYMENT_SECPAY_CURRENCY) {
         case 'Default Currency':
@@ -106,7 +106,7 @@
 
       $process_button_string = xtc_draw_hidden_field('merchant', MODULE_PAYMENT_SECPAY_MERCHANT_ID) .
                                xtc_draw_hidden_field('trans_id', STORE_NAME . date('Ymdhis')) .
-                               xtc_draw_hidden_field('amount', number_format($order->info['total'] * $currencies->get_value($sec_currency), $currencies->currencies[$sec_currency]['decimal_places'], '.', '')) .
+                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($order->info['total'] ,$sec_currency), $xtPrice->get_decimal_places($sec_currency))) .
                                xtc_draw_hidden_field('bill_name', $order->billing['firstname'] . ' ' . $order->billing['lastname']) .
                                xtc_draw_hidden_field('bill_addr_1', $order->billing['street_address']) .
                                xtc_draw_hidden_field('bill_addr_2', $order->billing['suburb']) .
@@ -148,7 +148,9 @@
     }
 
     function after_process() {
-      return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

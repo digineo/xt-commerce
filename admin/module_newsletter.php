@@ -285,13 +285,26 @@ $limit_up = $limits['1'];
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>"> 
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<?php if (USE_SPAW=='true') {
+ $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
+ $data=xtc_db_fetch_array($query);
+ ?>
 <script type="text/javascript">
    _editor_url = "includes/htmlarea/";
-   _editor_lang = "de";
+   _editor_lang = "<?php echo $data['code']; ?>";
 </script>
+    <!-- DWD Modify -> Add: HTMLArea v3.0 !-->
+    <!-- Load HTMLArea Core Files. !-->
 <script type="text/javascript" src="includes/htmlarea/htmlarea.js"></script>
+<script type="text/javascript" src="includes/htmlarea/dialog.js"></script>
+<script tyle="text/javascript" src="includes/htmlarea/lang/<?php echo $data['code']; ?>.js"></script>
+
+
+
+
+<?php } ?>
 </head>
-<body onload="HTMLArea.replaceAll()" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -633,6 +646,30 @@ echo xtc_draw_textarea_field('newsletter_body', 'soft', '150', '45', stripslashe
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
+<?php if (USE_SPAW=='true') { ?>
+<script type="text/javascript">
+      HTMLArea.loadPlugin("SpellChecker");
+      HTMLArea.loadPlugin("TableOperations");
+      HTMLArea.loadPlugin("FullPage");
+      HTMLArea.loadPlugin("CharacterMap");
+      HTMLArea.loadPlugin("ContextMenu");
+      HTMLArea.loadPlugin("ImageManager");
+HTMLArea.onload = function() {
+
+
+var editor= new HTMLArea("newsletter_body");
+editor.registerPlugin(TableOperations);
+editor.registerPlugin(FullPage);
+editor.registerPlugin(ContextMenu);
+editor.registerPlugin(CharacterMap);
+editor.registerPlugin(ImageManager);
+editor.generate();
+
+
+};
+HTMLArea.init();
+</script>
+<?php } ?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

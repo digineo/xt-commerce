@@ -87,13 +87,20 @@
         $my_currency = substr(MODULE_PAYMENT_PAYPAL_CURRENCY, 5);
       }
       if (!in_array($my_currency, array('CAD', 'EUR', 'GBP', 'JPY', 'USD'))) {
-        $my_currency = 'USD';
+        $my_currency = 'EUR';
+      }
+      if ($_SESSION['currency']==$my_currency) {
+      $amount=round($order->info['total'], $xtPrice->get_decimal_places($my_currency));
+      $shipping=round($order->info['shipping_cost'], $xtPrice->get_decimal_places($my_currency));
+      } else {
+      $amount=round($xtPrice->xtcCalculateCurrEx($order->info['total'],$my_currency) , $xtPrice->get_decimal_places($my_currency));
+      $shipping=round($xtPrice->xtcCalculateCurrEx($order->info['shipping_cost'],$my_currency) , $xtPrice->get_decimal_places($my_currency));
       }
       $process_button_string = xtc_draw_hidden_field('cmd', '_xclick') .
                                xtc_draw_hidden_field('business', MODULE_PAYMENT_PAYPAL_ID) .
                                xtc_draw_hidden_field('item_name', STORE_NAME) .
-                               xtc_draw_hidden_field('amount', number_format(($order->info['total'] - $order->info['shipping_cost']) , $xtPrice->get_decimal_places($my_currency))) .
-                               xtc_draw_hidden_field('shipping', number_format($order->info['shipping_cost'] , $xtPrice->get_decimal_places($my_currency))) .
+                               xtc_draw_hidden_field('amount', $amount) .
+                               xtc_draw_hidden_field('shipping', $shipping) .
                                xtc_draw_hidden_field('currency_code', $my_currency) .
                                xtc_draw_hidden_field('return', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL')) .
                                xtc_draw_hidden_field('cancel_return', xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
@@ -106,7 +113,8 @@
     }
 
     function after_process() {
-      return false;
+        global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
     }
 
     function output_error() {

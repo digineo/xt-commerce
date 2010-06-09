@@ -292,7 +292,7 @@ function resize() {
 //--></script>
 
 
-
+<?php } ?>
 </head>
 <?php
 if (strstr($PHP_SELF, FILENAME_POPUP_IMAGE )) {
@@ -300,8 +300,8 @@ echo '<body onload="resize();"> ';
 } else {
 echo '<body>';
 }
-}
-if (strstr($PHP_SELF, FILENAME_CHECKOUT_SUCCESS)) {
+
+if (strstr($PHP_SELF, FILENAME_CHECKOUT_SUCCESS) && GOOGLE_CONVERSION == 'true') {
 require('includes/google_conversiontracking.js.php');
 }
 

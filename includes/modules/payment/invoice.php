@@ -41,15 +41,16 @@
     function update_status() {
       global $order;
 
-       $customer_id = $_SESSION['customer_id'];
 
-       $check_order_query = xtc_db_query("select orders_id from " . TABLE_ORDERS . " where customers_id = '" . $customer_id . "'");
-       $order_check = xtc_db_num_rows($check_order_query);
+       $check_order_query = xtc_db_query("select count(*) as count from " . TABLE_ORDERS . " where customers_id = '" . (int)$_SESSION['customer_id'] . "'");
+       $order_check = xtc_db_fetch_array($check_order_query);
 
-       if ($order_check >= MODULE_PAYMENT_INVOICE_MIN_ORDER) {
+       if ($order_check['count'] <= MODULE_PAYMENT_INVOICE_MIN_ORDER) {
        $check_flag = false;
+       $this->enabled = false;
 
        }else{
+       $check_flag = true;
 
       if ( ($this->enabled == true) && ((int)MODULE_PAYMENT_INVOICE_ZONE > 0) ) {
         $check_flag = false;
@@ -104,7 +105,9 @@
     }
 
     function after_process() {
-      return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

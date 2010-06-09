@@ -62,11 +62,11 @@
           $shipping_tax = xtc_get_tax_rate($GLOBALS[$module]->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
           $shipping_tax_description = xtc_get_tax_description($GLOBALS[$module]->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
           $tax = xtc_add_tax($order->info['shipping_cost'], $shipping_tax)-$order->info['shipping_cost'];
-          $order->info['shipping_cost'] = xtc_add_tax($order->info['shipping_cost'], $shipping_tax);
 
+          $order->info['shipping_cost'] = xtc_add_tax($order->info['shipping_cost'], $shipping_tax);
           $order->info['tax'] += $tax;
           $order->info['tax_groups'][TAX_ADD_TAX . "$shipping_tax_description"] += $tax;
-        $order->info['total'] += $tax;
+          $order->info['total'] += $tax;
 
         } else {
 

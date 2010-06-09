@@ -26,8 +26,6 @@ require(DIR_FS_CATALOG .'templates/'.CURRENT_TEMPLATE. '/source/boxes.php');
 // include needed functions
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_radio_field.inc.php');
-  require_once(DIR_WS_CLASSES.'class.phpmailer.php');
-  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
   require_once(DIR_FS_INC . 'xtc_render_vvcode.inc.php');
   require_once(DIR_FS_INC . 'xtc_random_charcode.inc.php');
   require_once(DIR_FS_INC . 'xtc_encrypt_password.inc.php');
@@ -169,7 +167,7 @@ $breadcrumb->add(NAVBAR_TITLE_NEWSLETTER, xtc_href_link(FILENAME_NEWSLETTER, '',
 
 require(DIR_WS_INCLUDES . 'header.php');
 
-$smarty->assign('VVIMG', '<img src="' . FILENAME_DISPLAY_VVCODES . '"');
+$smarty->assign('VVIMG', '<img src="' . FILENAME_DISPLAY_VVCODES . '">');
 
 $smarty->assign('text_newsletter', TEXT_NEWSLETTER);
 $smarty->assign('info_message', $info_message);
@@ -179,6 +177,7 @@ $smarty->assign('INPUT_CODE', xtc_draw_input_field('vvcode','','size="6" maxleng
 $smarty->assign('CHECK_INP', xtc_draw_radio_field('check', 'inp'));
 $smarty->assign('CHECK_DEL', xtc_draw_radio_field('check', 'del'));
 $smarty->assign('BUTTON_SEND', xtc_image_submit('button_send.gif', IMAGE_BUTTON_LOGIN));
+$smarty->assign('FORM_END','</form>');
 
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;
@@ -187,4 +186,5 @@ $smarty->assign('main_content',$main_content);
 
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;
+if (!defined(RM)) $smarty->load_filter('output', 'note'); 
 $smarty->display(CURRENT_TEMPLATE . '/index.html');?>

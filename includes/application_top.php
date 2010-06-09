@@ -41,10 +41,9 @@
     include('includes/configure.php');
   }
 
-
   
   // define the project version
-  define('PROJECT_VERSION', 'XT-Commerce v3.0.1');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.2');
 
   // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -127,10 +126,11 @@
   require_once(DIR_FS_INC . 'xtc_get_tax_rate_from_desc.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_tax_rate.inc.php');
   require_once(DIR_FS_INC . 'xtc_add_tax.inc.php');
+  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 
   require_once(DIR_FS_INC . 'xtc_input_validation.inc.php');
 
-
+  require_once(DIR_FS_INC . 'xtc_Security.inc.php');
 
 
   // make a connection to the database... now
@@ -144,6 +144,8 @@
     define($configuration['cfgKey'], $configuration['cfgValue']);
   }
 
+  // check GET/POST/COOKIE VARS
+  xtc_Security();
     // set the application parameters
   function xtDBquery($query) {
        if (DB_CACHE=='true') {
@@ -314,8 +316,8 @@
 
 
   // include the mail classes
-  if (EMAIL_TRANSPORT == 'sendmail') include(DIR_WS_CLASSES . 'class.phpmailer.php');
-  if (EMAIL_TRANSPORT == 'smtp') include(DIR_WS_CLASSES . 'class.smtp.php');
+  require_once(DIR_WS_CLASSES . 'class.phpmailer.php');
+  if (EMAIL_TRANSPORT == 'smtp') require_once(DIR_WS_CLASSES . 'class.smtp.php');
 
 
   // set the language
@@ -444,8 +446,8 @@
   $messageStack = new messageStack;
 
   // set which precautions should be checked
-  define('WARN_INSTALL_EXISTENCE', 'false');
-  define('WARN_CONFIG_WRITEABLE', 'false');
+  define('WARN_INSTALL_EXISTENCE', 'true');
+  define('WARN_CONFIG_WRITEABLE', 'true');
   define('WARN_SESSION_DIRECTORY_NOT_WRITEABLE', 'true');
   define('WARN_SESSION_AUTO_START', 'true');
   define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
@@ -454,7 +456,7 @@
 
 
   // Include Template Engine
-  require(DIR_WS_CLASSES . 'Smarty_2.6.3/Smarty.class.php');
+  require(DIR_WS_CLASSES . 'Smarty_2.6.5/Smarty.class.php');
 
   if (isset($_SESSION['customer_id'])) {
   $account_type_query=xtc_db_query("SELECT
@@ -483,5 +485,6 @@
   // modification for nre graduated system
   unset($_SESSION['actual_content']);
   xtc_count_cart();
+
 
 ?>

@@ -98,7 +98,7 @@
   }
 
     // Include Template Engine
-  require(DIR_WS_CLASSES . 'Smarty_2.6.3/Smarty.class.php');
-    // file uploading class
+  require(DIR_WS_CLASSES . 'Smarty_2.6.5/Smarty.class.php');
+
 
 ?>

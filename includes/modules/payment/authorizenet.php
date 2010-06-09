@@ -228,7 +228,7 @@ function InsertFP ($loginid, $txnkey, $amount, $sequence, $currency = "") {
       $process_button_string = xtc_draw_hidden_field('x_Login', MODULE_PAYMENT_AUTHORIZENET_LOGIN) .
                                xtc_draw_hidden_field('x_Card_Num', $this->cc_card_number) .
                                xtc_draw_hidden_field('x_Exp_Date', $this->cc_expiry_month . substr($this->cc_expiry_year, -2)) .
-                               xtc_draw_hidden_field('x_Amount', number_format($order->info['total'], 2)) .
+                               xtc_draw_hidden_field('x_Amount', round($order->info['total'], 2)) .
                                xtc_draw_hidden_field('x_Relay_URL', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL', false)) .
                                xtc_draw_hidden_field('x_Method', ((MODULE_PAYMENT_AUTHORIZENET_METHOD == 'Credit Card') ? 'CC' : 'ECHECK')) .
                                xtc_draw_hidden_field('x_Version', '3.0') .
@@ -251,7 +251,7 @@ function InsertFP ($loginid, $txnkey, $amount, $sequence, $currency = "") {
                                xtc_draw_hidden_field('x_ship_to_zip', $order->delivery['postcode']) .
                                xtc_draw_hidden_field('x_ship_to_country', $order->delivery['country']['title']) .
                                xtc_draw_hidden_field('x_Customer_IP', $_SERVER['REMOTE_ADDR']) .
-                               $this->InsertFP(MODULE_PAYMENT_AUTHORIZENET_LOGIN, MODULE_PAYMENT_AUTHORIZENET_TXNKEY, number_format($order->info['total'], 2), $sequence);
+                               $this->InsertFP(MODULE_PAYMENT_AUTHORIZENET_LOGIN, MODULE_PAYMENT_AUTHORIZENET_TXNKEY, round($order->info['total'], 2), $sequence);
       if (MODULE_PAYMENT_AUTHORIZENET_TESTMODE == 'Test') $process_button_string .= xtc_draw_hidden_field('x_Test_Request', 'TRUE');
 
       $process_button_string .= xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
@@ -270,7 +270,9 @@ function InsertFP ($loginid, $txnkey, $amount, $sequence, $currency = "") {
     }
 
     function after_process() {
-      return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

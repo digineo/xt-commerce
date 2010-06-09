@@ -99,7 +99,7 @@
  $smarty->assign('FORM_ACTION',xtc_draw_form('order', xtc_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')));
  $smarty->assign('BUTTON_CONTINUE',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
  $smarty->assign('BUTTON_PRINT','<img src="'.'templates/'.CURRENT_TEMPLATE.'/buttons/' . $_SESSION['language'].'/button_print.gif" style="cursor:hand" onClick="window.open(\''. xtc_href_link(FILENAME_PRINT_ORDER,'oID='.$orders['orders_id']).'\', \'popup\', \'toolbar=0, width=640, height=600\')">');
-
+ $smarty->assign('FORM_END','</form>');
  // GV Code Start
  $gv_query=xtc_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id='".$_SESSION['customer_id']."'");
     if ($gv_result=xtc_db_fetch_array($gv_query)) {

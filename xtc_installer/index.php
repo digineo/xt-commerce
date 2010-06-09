@@ -164,6 +164,18 @@
     $message .= 'WRONG PERMISSION on '.DIR_FS_CATALOG . 'admin/rss/<br>';
  }
 
+      if (!is_writeable(DIR_FS_CATALOG . 'admin/images/graphs')) {
+    $error_flag=true;
+    $folder_flag=true;
+    $message .= 'WRONG PERMISSION on '.DIR_FS_CATALOG . 'admin/images/graphs<br>';
+ }
+
+    if (!is_writeable(DIR_FS_CATALOG . 'admin/backups/')) {
+    $error_flag=true;
+    $folder_flag=true;
+    $message .= 'WRONG PERMISSION on '.DIR_FS_CATALOG . 'admin/backups/<br>';
+ }
+
  // image folders
       if (!is_writeable(DIR_FS_CATALOG . 'images/')) {
     $error_flag=true;

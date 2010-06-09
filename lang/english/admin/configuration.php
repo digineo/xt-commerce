@@ -205,21 +205,21 @@ define('IMAGE_REQUIRED_DESC' , 'Enable to display broken images. Good for develo
 
 //This is for the Images showing your products for preview. All the small stuff.
 
-define('PRODUCT_IMAGE_THUMBNAIL_BEVEL_TITLE' , 'Products-Thumbnails:Bevel');
+define('PRODUCT_IMAGE_THUMBNAIL_BEVEL_TITLE' , 'Products-Thumbnails:Bevel<br><img src="images/config_bevel.gif">');
 define('PRODUCT_IMAGE_THUMBNAIL_BEVEL_DESC' , 'Products-Thumbnails:Bevel<br><br>Default-values: (8,FFCCCC,330000)<br><br>shaded bevelled edges<br>Usage:<br>(edge width,hex light colour,hex dark colour)');
-define('PRODUCT_IMAGE_THUMBNAIL_GREYSCALE_TITLE' , 'Products-Thumbnails:Greyscale');
+define('PRODUCT_IMAGE_THUMBNAIL_GREYSCALE_TITLE' , 'Products-Thumbnails:Greyscale<br><img src="images/config_greyscale.gif">');
 define('PRODUCT_IMAGE_THUMBNAIL_GREYSCALE_DESC' , 'Products-Thumbnails:Greyscale<br><br>Default-values: (32,22,22)<br><br>basic black n white<br>Usage:<br>(int red,int green,int blue)');
-define('PRODUCT_IMAGE_THUMBNAIL_ELLIPSE_TITLE' , 'Products-Thumbnails:Ellipse');
+define('PRODUCT_IMAGE_THUMBNAIL_ELLIPSE_TITLE' , 'Products-Thumbnails:Ellipse<br><img src="images/config_eclipse.gif">');
 define('PRODUCT_IMAGE_THUMBNAIL_ELLIPSE_DESC' , 'Products-Thumbnails:Ellipse<br><br>Default-values: (FFFFFF)<br><br>ellipse on bg colour<br>Usage:<br>(hex background colour)');
-define('PRODUCT_IMAGE_THUMBNAIL_ROUND_EDGES_TITLE' , 'Products-Thumbnails:Round-edges');
+define('PRODUCT_IMAGE_THUMBNAIL_ROUND_EDGES_TITLE' , 'Products-Thumbnails:Round-edges<br><img src="images/config_edge.gif">');
 define('PRODUCT_IMAGE_THUMBNAIL_ROUND_EDGES_DESC' , 'Products-Thumbnails:Round-edges<br><br>Default-values: (5,FFFFFF,3)<br><br>corner trimming<br>Usage:<br>(edge_radius,background colour,anti-alias width)');
-define('PRODUCT_IMAGE_THUMBNAIL_MERGE_TITLE' , 'Products-Thumbnails:Merge');
+define('PRODUCT_IMAGE_THUMBNAIL_MERGE_TITLE' , 'Products-Thumbnails:Merge<br><img src="images/config_merge.gif">');
 define('PRODUCT_IMAGE_THUMBNAIL_MERGE_DESC' , 'Products-Thumbnails:Merge<br><br>Default-values: (overlay.gif,10,-50,60,FF0000)<br><br>overlay merge image<br>Usage:<br>(merge image,x start [neg = from right],y start [neg = from base],opacity, transparent colour on merge image)');
-define('PRODUCT_IMAGE_THUMBNAIL_FRAME_TITLE' , 'Products-Thumbnails:Frame');
-define('PRODUCT_IMAGE_THUMBNAIL_FRAME_DESC' , 'Products-Thumbnails:Frame<br><br>Default-values: <br><br>plain raised border<br>Usage:<br>(hex light colour,hex dark colour,int width of mid bit,hex frame colour [optional - defaults to half way between light and dark edges])');
-define('PRODUCT_IMAGE_THUMBNAIL_DROP_SHADDOW_TITLE' , 'Products-Thumbnails:Drop-Shadow');
+define('PRODUCT_IMAGE_THUMBNAIL_FRAME_TITLE' , 'Products-Thumbnails:Frame<br><img src="images/config_frame.gif">');
+define('PRODUCT_IMAGE_THUMBNAIL_FRAME_DESC' , 'Products-Thumbnails:Frame<br><br>Default-values: (FFFFFF,000000,3,EEEEEE)<br><br>plain raised border<br>Usage:<br>(hex light colour,hex dark colour,int width of mid bit,hex frame colour [optional - defaults to half way between light and dark edges])');
+define('PRODUCT_IMAGE_THUMBNAIL_DROP_SHADDOW_TITLE' , 'Products-Thumbnails:Drop-Shadow<br><img src="images/config_shadow.gif">');
 define('PRODUCT_IMAGE_THUMBNAIL_DROP_SHADDOW_DESC' , 'Products-Thumbnails:Drop-Shadow<br><br>Default-values: (3,333333,FFFFFF)<br><br>more like a dodgy motion blur [semi buggy]<br>Usage:<br>(shadow width,hex shadow colour,hex background colour)');
-define('PRODUCT_IMAGE_THUMBNAIL_MOTION_BLUR_TITLE' , 'Products-Thumbnails:Motion-Blur');
+define('PRODUCT_IMAGE_THUMBNAIL_MOTION_BLUR_TITLE' , 'Products-Thumbnails:Motion-Blur<br><img src="images/config_motion.gif">');
 define('PRODUCT_IMAGE_THUMBNAIL_MOTION_BLUR_DESC' , 'Products-Thumbnails:Motion-Blur<br><br>Default-values: (4,FFFFFF)<br><br>fading parallel lines<br>Usage:<br>(int number of lines,hex background colour)');
 
 //And this is for the Images showing your products in single-view
@@ -254,11 +254,14 @@ define('PRODUCT_IMAGE_POPUP_ROUND_EDGES_DESC' , 'Product-Popup-Images:Round-edge
 define('PRODUCT_IMAGE_POPUP_MERGE_TITLE' , 'Product-Popup-Images:Merge');
 define('PRODUCT_IMAGE_POPUP_MERGE_DESC' , 'Product-Popup-Images:Merge<br><br>Default-values: (overlay.gif,10,-50,60,FF0000)<br><br>overlay merge image<br>Usage:<br>(merge image,x start [neg = from right],y start [neg = from base],opacity,transparent colour on merge image)');
 define('PRODUCT_IMAGE_POPUP_FRAME_TITLE' , 'Product-Popup-Images:Frame');
-define('PRODUCT_IMAGE_POPUP_FRAME_DESC' , 'Product-Popup-Images:Frame<br><br>Default-values: <br><br>plain raised border<br>Usage:<br>(hex light colour,hex dark colour,int width of mid bit,hex frame colour [optional - defaults to half way between light and dark edges])');
+define('PRODUCT_IMAGE_POPUP_FRAME_DESC' , 'Product-Popup-Images:Frame<br><br>Default-values: (FFFFFF,000000,3,EEEEEE)<br><br>plain raised border<br>Usage:<br>(hex light colour,hex dark colour,int width of mid bit,hex frame colour [optional - defaults to half way between light and dark edges])');
 define('PRODUCT_IMAGE_POPUP_DROP_SHADDOW_TITLE' , 'Product-Popup-Images:Drop-Shadow');
 define('PRODUCT_IMAGE_POPUP_DROP_SHADDOW_DESC' , 'Product-Popup-Images:Drop-Shadow<br><br>Default-values: (3,333333,FFFFFF)<br><br>more like a dodgy motion blur [semi buggy]<br>Usage:<br>(shadow width,hex shadow colour,hex background colour)');
 define('PRODUCT_IMAGE_POPUP_MOTION_BLUR_TITLE' , 'Product-Popup-Images:Motion-Blur');
 define('PRODUCT_IMAGE_POPUP_MOTION_BLUR_DESC' , 'Product-Popup-Images:Motion-Blur<br><br>Default-values: (4,FFFFFF)<br><br>fading parallel lines<br>Usage:<br>(int number of lines,hex background colour)');
+
+define('MO_PICS_TITLE','Number of products images');
+define('MO_PICS_DESC','if this number is set > 0 , you will be able to upload/display more images per product');
 
 define('IMAGE_MANIPULATOR_TITLE','GDlib processing');
 define('IMAGE_MANIPULATOR_DESC','Image Manipulator for GD2 or GD1');
@@ -533,7 +536,8 @@ define('ACCOUNT_COMPANY_VAT_GROUP_TITLE' , 'Kundengruppe nach UST ID Check anpas
 define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'Durch einschalten dieser Option wird die Kundengruppe nach einen postiven UST ID Check geändert');
 define('ACCOUNT_VAT_BLOCK_ERROR_TITLE' , 'Eintragung falscher oder ungeprüfter UstID Nummern sperren?');
 define('ACCOUNT_VAT_BLOCK_ERROR_DESC' , 'Durch einschalten dieser Option werden nur geprüfte und richtige UstIDs eingetragen');
-
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_TITLE','Kundenstatus f&uuml;r UST ID Geprüfte Kunden (Innland)');
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_DESC','W&auml;hlen Sie den Kundenstatus(Gruppe) f&uuml;r UST ID geprüfte Kunden aus!');
 // Google Conversion
 define('GOOGLE_CONVERSION_TITLE','Google Conversion-Tracking');
 define('GOOGLE_CONVERSION_DESC','Track the Conversion Keywords at orders');

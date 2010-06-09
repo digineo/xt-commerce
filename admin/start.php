@@ -2,14 +2,15 @@
 /* --------------------------------------------------------------
    $Id: start.php,v 1.5 2004/03/17 16:31:26 fanta2k Exp $
 
-   neXTCommerce - ebusiness solutions
-   http://www.nextcommerce.org
+   XT-Commerce - community made shopping
+   http://www.xt-commerce.com
 
-   Copyright (c) 2003 neXTCommerce
+   Copyright (c) 2003 XT-Commerce
    --------------------------------------------------------------
    based on: 
    (c) 2000-2001 The Exchange Project 
-   (c) 2002-2003 osCommerce coding standards (a typical file) www.oscommerce.com 
+   (c) 2002-2003 osCommerce coding standards (a typical file) www.oscommerce.com
+   (c) 2003     nextcommerce (start.php,1.5 2004/03/17); www.nextcommerce.org
 
    Released under the GNU General Public License 
    --------------------------------------------------------------*/

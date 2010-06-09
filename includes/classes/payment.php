@@ -36,7 +36,7 @@
 
     // class constructor
     function payment($module = '') {
-      global $PHP_SELF;
+      global $PHP_SELF,$order;
 
       if (defined('MODULE_PAYMENT_INSTALLED') && xtc_not_null(MODULE_PAYMENT_INSTALLED)) {
         $this->modules = explode(';', MODULE_PAYMENT_INSTALLED);
@@ -56,6 +56,11 @@
         }
 	// load unallowed modules into array
 	$unallowed_modules = explode(',', $_SESSION['customers_status']['customers_status_payment_unallowed']);
+    // add unallowed modules/Download
+    if ($order->content_type == 'virtual' || ($order->content_type == 'virtual_weight')) {
+     $unallowed_modules = array_merge($unallowed_modules,explode(',',DOWNLOAD_UNALLOWED_PAYMENT));
+    }
+
         //print_r($include_modules);
         for ($i = 0, $n = sizeof($include_modules); $i < $n; $i++) {
           if (!in_array($include_modules[$i]['class'], $unallowed_modules)) {
@@ -67,8 +72,10 @@
             }
             if (in_array($_SESSION['delivery_zone'], $unallowed_zones) == true || count($unallowed_zones) == 0) {
               if ($include_modules[$i]['file']!='' && $include_modules[$i]['file']!='no_payment') {
+
               include(DIR_WS_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $include_modules[$i]['file']);
               include(DIR_WS_MODULES . 'payment/' . $include_modules[$i]['file']);
+
               }
               $GLOBALS[$include_modules[$i]['class']] = new $include_modules[$i]['class'];
             }

@@ -25,7 +25,7 @@
   require_once(DIR_FS_INC . 'xtc_filesize.inc.php');
   
   $languages = xtc_get_languages();
-  
+
  
  if ($_GET['special']=='delete') {
  
@@ -229,20 +229,25 @@ if ($select_file=='default') {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>">
 <title><?php echo TITLE; ?></title>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<?php if (USE_SPAW=='true') {
+ $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
+ $data=xtc_db_fetch_array($query);
+?>
 <script type="text/javascript">
    _editor_url = "includes/htmlarea/";
-   _editor_lang = "de";
+   _editor_lang = "<?php echo $data['code']; ?>";
 </script>
+    <!-- DWD Modify -> Add: HTMLArea v3.0 !-->
+    <!-- Load HTMLArea Core Files. !-->
 <script type="text/javascript" src="includes/htmlarea/htmlarea.js"></script>
-<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<style type="text/css">
-<!--
-.messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-weight: bold; font-size: 10px; background-color: #; }
--->
-</style>
+<script type="text/javascript" src="includes/htmlarea/dialog.js"></script>
+<script tyle="text/javascript" src="includes/htmlarea/lang/<?php echo $data['code']; ?>.js"></script>
+
+<?php } ?>
 
 </head>
-<body onload="HTMLArea.replaceAll()" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
@@ -379,7 +384,7 @@ for ($ii = 0, $nn = sizeof($content); $ii < $nn; $ii++) {
 <?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:hand"').'  '.TEXT_EDIT.'</a>'; ?>
  <a style="cursor:hand" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'coID='.$content[$ii]['CONTENT_ID']); ?>', 'popup', 'toolbar=0, width=640, height=600')"><?php echo xtc_image(DIR_WS_ICONS.'preview.gif','Preview','','','style="cursor:hand"').'&nbsp;&nbsp;'.TEXT_PREVIEW.'</a>'; ?>
  </td>
- </tr> 
+ </tr>
  
  <?php
  $content_1='';
@@ -825,7 +830,7 @@ echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[
       <tr>
       <td width="10%" valign="top"><?php echo TEXT_FILE_DESC; ?></td>
       <td width="90%"><?php
-          echo xtc_draw_textarea_field('file_comment','','100','15',$content['file_comment']);
+          echo xtc_draw_textarea_field('file_comment','','100','30',$content['file_comment']);
         ?></td>
    </tr>
       <tr>
@@ -1067,10 +1072,41 @@ echo '</table></td></tr>';
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
+<?php if (USE_SPAW=='true') { ?>
 
-<?php
 
-?>
+<script type="text/javascript">
+      HTMLArea.loadPlugin("SpellChecker");
+      HTMLArea.loadPlugin("TableOperations");
+      HTMLArea.loadPlugin("FullPage");
+      HTMLArea.loadPlugin("CharacterMap");
+      HTMLArea.loadPlugin("ContextMenu");
+      HTMLArea.loadPlugin("ImageManager");
+HTMLArea.onload = function() {
+
+<?php if ($_GET['action']!='new_products_content') { ?>
+var editor= new HTMLArea("cont");
+editor.registerPlugin(TableOperations);
+editor.registerPlugin(FullPage);
+editor.registerPlugin(ContextMenu);
+editor.registerPlugin(CharacterMap);
+editor.registerPlugin(ImageManager);
+editor.generate();
+<?php } else { ?>
+var editor2= new HTMLArea("file_comment");
+editor2.registerPlugin(TableOperations);
+editor2.registerPlugin(FullPage);
+editor2.registerPlugin(ContextMenu);
+editor2.registerPlugin(CharacterMap);
+editor2.registerPlugin(ImageManager);
+editor2.generate();
+<?php } ?>
+
+};
+HTMLArea.init();
+</script>
+
+<?php } ?>
 
 </body>
 

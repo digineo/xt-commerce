@@ -82,7 +82,9 @@
     $categories_string .= '<br>';
 
     if ($foo[$counter]['next_id']) {
-      xtc_show_category($foo[$counter]['next_id']);
+        xtc_show_category($foo[$counter]['next_id']);
+    } else {
+        $categories_string .= '</td></tr></table>';
     }
   }
 

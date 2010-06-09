@@ -10,7 +10,7 @@
    -----------------------------------------------------------------------------------------
    Third Party contributions:
    class thumbnail - proportional thumbnails with manipulations by mark@teckis.com
-   You find more great scripts and some information at www.teckies.com
+   You find more great scripts and some information at www.teckis.com
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/

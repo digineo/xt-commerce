@@ -41,12 +41,10 @@
   require_once(DIR_FS_INC . 'xtc_draw_password_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
   require_once(DIR_FS_INC . 'xtc_encrypt_password.inc.php');
-  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_hidden_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_pull_down_menu.inc.php');
   require_once(DIR_FS_INC . 'xtc_validate_vatid.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_geo_zone_code.inc.php');
-  require_once(DIR_WS_CLASSES . 'class.phpmailer.php');
   require_once(DIR_FS_INC . 'xtc_write_user_info.inc.php');
 
 
@@ -123,10 +121,13 @@
   }
 
   if($validate_vatid == '1') {
-  if ($country == '81'){
-  $customer_group = DEFAULT_CUSTOMERS_STATUS_ID;
+  if ($country == STORE_COUNTRY){
+      if (ACCOUNT_COMPANY_VAT_GROUP == 'true'){
+      $customer_group = DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL;
+      } else {
+       $customer_group = DEFAULT_CUSTOMERS_STATUS_ID;
+      }
   }else{
-
   if (ACCOUNT_COMPANY_VAT_GROUP == 'true'){
   $customer_group = DEFAULT_CUSTOMERS_VAT_STATUS_ID;
   }else{
@@ -250,6 +251,9 @@
       $messageStack->add('create_account', ENTRY_PASSWORD_ERROR_NOT_MATCHING);
     }
 
+	//don't know why, but this happens sometimes and new user becomes admin
+	if ($customer_group == 0 || !$customer_group) $customer_group = DEFAULT_CUSTOMERS_STATUS_ID;
+	if (!$newsletter) $newsletter=0;
     if ($error == false) {
       $sql_data_array = array('customers_vat_id' => $vat,
                               'customers_vat_id_status' => $customers_vat_id_status,
@@ -336,7 +340,7 @@
       $smarty->assign('content', $module_content);
       $smarty->caching = false;
 
-
+if (ACTIVATE_GIFT_SYSTEM=='true') {
       // GV Code Start
             // ICW - CREDIT CLASS CODE BLOCK ADDED  ******************************************************* BEGIN
               if (NEW_SIGNUP_GIFT_VOUCHER_AMOUNT > 0) {
@@ -368,6 +372,7 @@
               }
             // ICW - CREDIT CLASS CODE BLOCK ADDED  ******************************************************* END
             // GV Code End       // create templates
+}
       $smarty->caching = 0;
       $html_mail = $smarty->fetch(CURRENT_TEMPLATE . '/mail/'.$_SESSION['language'].'/create_account_mail.html');
       $smarty->caching = 0;
@@ -483,7 +488,7 @@
   //$smarty->assign('CHECKBOX_NEWSLETTER',xtc_draw_checkbox_field('newsletter', '1') . '&nbsp;' . (xtc_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">' . ENTRY_NEWSLETTER_TEXT . '</span>': ''));
   $smarty->assign('INPUT_PASSWORD',xtc_draw_password_field('password') . '&nbsp;' . (xtc_not_null(ENTRY_PASSWORD_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_TEXT . '</span>': ''));
   $smarty->assign('INPUT_CONFIRMATION',xtc_draw_password_field('confirmation') . '&nbsp;' . (xtc_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>': ''));
-
+  $smarty->assign('FORM_END','</form>');
   $smarty->assign('language', $_SESSION['language']);
   $smarty->caching = 0;
   $smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));

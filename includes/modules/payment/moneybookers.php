@@ -41,7 +41,7 @@
 
       $result = xtc_db_query("SELECT mb_currID FROM payment_moneybookers_currencies");
       while (list($currID) = mysql_fetch_row($result)) {
-        $this->mbCurrencies[] = $currID; 
+        $this->mbCurrencies[] = $currID;
       }
 
       $result = xtc_db_query("SELECT code FROM currencies");
@@ -111,7 +111,7 @@
     }
 
     function process_button() {
-      global $order, $order_total_modules, $currencies, $currency, $languages_id;
+      global $order, $order_total_modules, $currency, $languages_id,$xtPrice;
 
       $result = xtc_db_query("SELECT code FROM languages WHERE languages_id = '".$_SESSION['languages_id']."'");
       list($lang_code) = mysql_fetch_row($result);
@@ -135,9 +135,9 @@
       $result = xtc_db_query("INSERT INTO payment_moneybookers (mb_TRID, mb_DATE) VALUES ('{$this->transaction_id}', NOW())");
 
       if ($_SESSION['currency']==$mbCurrency) {
-      $amount=xtc_round($order->info['total'], $currencies->get_decimal_places($mbCurrency));
+      $amount=round($order->info['total'], $xtPrice->get_decimal_places($mbCurrency));
       } else {
-      $amount=xtc_round($order->info['total'] * $currencies->get_value($mbCurrency), $currencies->get_decimal_places($mbCurrency));
+      $amount=round($xtPrice->xtcCalculateCurrEx($order->info['total'],$mbCurrency) , $xtPrice->get_decimal_places($mbCurrency));
       }
 
 
@@ -258,8 +258,10 @@
 
     function after_process() {
       global $insert_id;
-      // Finally, insert osCommerce order ID into the moneybookers table
       $result = xtc_db_query("UPDATE payment_moneybookers SET mb_ORDERID = $insert_id WHERE mb_TRID = '{$this->transaction_id}'");
+
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

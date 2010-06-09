@@ -111,4 +111,5 @@ define('WARNING_ORDER_NOT_UPDATED', 'Warning: Nothing to change. The order was n
 
 define('TABLE_HEADING_DISCOUNT','Discount');
 define('ENTRY_CUSTOMERS_GROUP','Customers Group:');
+define('ENTRY_CUSTOMERS_VAT_ID','VAT-ID:');
 ?>

@@ -104,7 +104,7 @@ define('PULL_DOWN_DEFAULT', 'Bitte w&auml;hlen');
 define('TYPE_BELOW', 'Bitte unten eingeben');
 
 // javascript messages
-define('JS_ERROR', 'Notwendige Angaben fehlen!\n Bitte richtig ausf&uuml;llen.\n\n');
+define('JS_ERROR', 'Notwendige Angaben fehlen!\nBitte richtig ausf&uuml;llen.\n\n');
 
 define('JS_REVIEW_TEXT', '* Der Text muss mindestens aus ' . REVIEW_TEXT_MIN_LENGTH . ' Buchstaben bestehen.\n');
 define('JS_REVIEW_RATING', '* Geben Sie Ihre Bewertung ein.\n');
@@ -270,21 +270,6 @@ define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warnung: Das Verzeichnis für 
 define('TEXT_CCVAL_ERROR_INVALID_DATE', 'Das "G&uuml;ltig bis" Datum ist ung&uuml;ltig.<br>Bitte korrigieren Sie Ihre Angaben.');
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'Die "KreditkarteNummer", die Sie angegeben haben, ist ung&uuml;ltig.<br>Bitte korrigieren Sie Ihre Angaben.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Die ersten 4 Ziffern Ihrer Kreditkarte sind: %s<br>Wenn diese Angaben stimmen, wird dieser Kartentyp leider nicht akzeptiert.<br>Bitte korrigieren Sie Ihre Angaben gegebenfalls.');
-
-/*
-  The following copyright announcement can only be
-  appropriately modified or removed if the layout of
-  the site theme has been modified to distinguish
-  itself from the default osCommerce-copyrighted
-  theme.
-
-  Please leave this comment intact together with the
-  following copyright announcement.
-  
-  Copyright announcement changed due to the permissions
-  from LG Hamburg from 28th February 2003 / AZ 308 O 70/03
-*/
-define('FOOTER_TEXT_BODY', 'Copyright &copy; 2003 <a href="http://www.xt-commerce.com" target="_blank">XT-Commerce</a><br>Powered by <a href="http://www.xt-commerce.com" target="_blank">XT-Commerce</a>');
 
 //  conditions check
 
@@ -493,6 +478,14 @@ define('MAIN_MESSAGE', 'Sie haben sich dazu entschieden, einen Gutschein im Wert
 define('REDEEMED_AMOUNT','Ihr Gutschein wurde erfolgreich auf Ihr Konto verbucht. Gutscheinwert:');
 define('REDEEMED_COUPON','Ihr Coupon wurde erfolgreich eingelöst und wird bei Ihrer nächsten Bestellung automatisch eingelöst.');
 
+define('ERROR_INVALID_USES_USER_COUPON','Sie können den Kupon nur ');
+
+define('ERROR_INVALID_USES_COUPON','Dieser Kupon können Kunden nur ');
+
+define('TIMES',' mal einlösen.');
+define('ERROR_INVALID_STARTDATE_COUPON','Ihr Kupon ist noch nicht verfügbar.');
+define('ERROR_INVALID_FINISDATE_COUPON','Ihr Kupon ist bereits abgelaufen.');
+
 define('PERSONAL_MESSAGE', '%s schreibt: ');
 
 define('NAVBAR_GV_FAQ', 'Gutschein FAQ');
@@ -506,4 +499,10 @@ define('TEXT_CLOSE_WINDOW', 'Fenster schließen.');
 define('ENTRY_VAT_TEXT', 'Nur für Deutschland und EU!');
 define('ENTRY_VAT_ERROR', 'Die Eingegebene UstID ist ungültig oder kann derzeit nicht Überprüft werden! Bitte geben Sie eine gültige ID ein oder lassen Sie das Feld leer.');
 
+define('MSRP','UVP');
+define('YOUR_PRICE','Ihr Preis ');
+define('ONLY',' Nur ');
+define('FROM','Ab ');
+define('YOU_SAVE','Sie Sparen ');
+define('INSTEAD','Statt ');
 ?>

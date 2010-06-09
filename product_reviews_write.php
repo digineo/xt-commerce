@@ -81,7 +81,7 @@
     $smarty->assign('FORM_ACTION',xtc_draw_form('product_reviews_write', xtc_href_link(FILENAME_PRODUCT_REVIEWS_WRITE, 'action=process&products_id=' . $_GET['products_id']), 'post', 'onSubmit="return checkForm();"'));
     $smarty->assign('BUTTON_BACK','<a href="javascript:history.back(1)">' . xtc_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>');
     $smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE).xtc_draw_hidden_field('get_params', $get_params));
-
+    $smarty->assign('FORM_END','</form>');
 }
   $smarty->assign('language', $_SESSION['language']);
 

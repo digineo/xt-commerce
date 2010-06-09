@@ -1,8 +1,8 @@
                                      INFO
 ###################################################################################
 
-  XT-Commerce v3.0.1
-  Release Datum: 14.09.2004
+  XT-Commerce v3.0.2
+  Release Datum: 09.10.2004
   
   ------------------------------------------------------------------------
   Dieses Programm ist freie Software. Sie können es unter den Bedingungen
@@ -38,29 +38,15 @@
 
   Installation:
   ------------------------------------------------------------------------
-  Kopieren Sie den Inhalt des Verzeichnisses /xtcommerce/ auf ihren Webserver,
-  starten Sie die Installation aus dem Verzeichnis /xtc_installer/ und folgen den
-  Anweisungen
 
-  Eine einfache Installationsanleitung finden sie hier zum download:
-  http://www.xt-commerce.com/modules/wfsection/dossier-54.html
+  Eine Update Anleitung für Ihren Shop und templates finden Sie hier:
+  http://www.xt-commerce.com/modules/ipboard/forum-post-6277.html
 
-
-  Support:
-  ------------------------------------------------------------------------
-  Unter www.xt-commerce.com finden Sie Kompetente Ansprechpartner für Ihre
-  Probleme oder Ideen bezüglich XT-Commerce und e-Commerce.
-  Ebenfalls erreichen Sie unter obiger Adresse Unsere Community und Zugang
-  zu Informationen rund um XT-Commerce.
-
-  Wir weisen darauf hin das es sich bei XT-C v3.0 um einen relativ stabilen
-  ReleaseClient handelt. Falls Sie Einen Bug oder eine Unklarheit Entdecken,
-  bitte benutzen Sie den dafür angelegten Bereich auf www.xt-commerce.com
-  (Bug Tracker).
-  Bitte geben Sie eine genaue Beschreibung des Fehlers an, wann und wo er
-  auftritt und welche Entwicklungsumgebung Sie benutzen.
+  You will find an update guide for your shopsystem an templates here:
+  http://www.xt-commerce.com/modules/ipboard/forum-post-6277.html
 
 
-  Gutes Gelingen und Gute Geschäfte wünscht Ihnen das XT-Commerce Team.
 
-  www.xt-commerce.com
+   
+
+

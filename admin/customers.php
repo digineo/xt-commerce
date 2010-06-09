@@ -973,21 +973,21 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent" width="1"><?php echo TABLE_HEADING_ACCOUNT_TYPE; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LASTNAME; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_FIRSTNAME; ?></td>
+                <td class="dataTableHeadingContent" width="40"><?php echo TABLE_HEADING_ACCOUNT_TYPE; ?></td>
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LASTNAME.xtc_sorting(FILENAME_CUSTOMERS,'customers_lastname'); ?></td>
+                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_FIRSTNAME.xtc_sorting(FILENAME_CUSTOMERS,'customers_firstname'); ?></td>
                 <td class="dataTableHeadingContent" align="left"><?php echo HEADING_TITLE_STATUS; ?></td>
                 <?php if (ACCOUNT_COMPANY_VAT_CHECK == 'true') {?>
                 <td class="dataTableHeadingContent" align="left"><?php echo HEADING_TITLE_VAT; ?></td>
                 <?php } ?>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACCOUNT_CREATED; ?></td>
+                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACCOUNT_CREATED.xtc_sorting(FILENAME_CUSTOMERS,'date_account_created'); ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
     $search = '';
     if ( ($_GET['search']) && (xtc_not_null($_GET['search'])) ) {
       $keywords = xtc_db_input(xtc_db_prepare_input($_GET['search']));
-      $search = "and c.customers_lastname like '%" . $keywords . "%' or c.customers_firstname like '%" . $keywords . "%' or c.customers_email_address like '%" . $keywords . "%'";
+      $search = "and (c.customers_lastname like '%" . $keywords . "%' or c.customers_firstname like '%" . $keywords . "%' or c.customers_email_address like '%" . $keywords . "%')";
     }
 
     if ($_GET['status'] && $_GET['status']!='100' or $_GET['status']=='0') {
@@ -995,6 +995,37 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
     //  echo $status;
       $search ="and c.customers_status = '". $status . "'";
     }
+
+    if ($_GET['sorting']) {
+     switch ($_GET['sorting']){
+
+         case 'customers_firstname':
+            $sort='order by c.customers_firstname';
+            break;
+
+         case 'customers_firstname-desc':
+            $sort='order by c.customers_firstname DESC';
+            break;
+
+         case 'customers_lastname':
+            $sort='order by c.customers_lastname';
+            break;
+
+         case 'customers_lastname-desc':
+            $sort='order by c.customers_lastname DESC';
+            break;
+
+         case 'date_account_created':
+            $sort='order by ci.customers_info_date_account_created';
+            break;
+
+         case 'date_account_created-desc':
+            $sort='order by ci.customers_info_date_account_created DESC';
+            break;
+     }
+
+    }
+
     $customers_query_raw = "select
                                 c.account_type,
                                 c.customers_id,
@@ -1005,17 +1036,19 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
                                 c.customers_email_address,
                                 a.entry_country_id,
                                 c.customers_status,
-                                c.member_flag
+                                c.member_flag,
+                                ci.customers_info_date_account_created
                                 from
                                 " . TABLE_CUSTOMERS . " c ,
-                                " . TABLE_ADDRESS_BOOK . " a
+                                " . TABLE_ADDRESS_BOOK . " a,
+                                " . TABLE_CUSTOMERS_INFO . " ci
                                 Where
                                 c.customers_id = a.customers_id
                                 and c.customers_default_address_id = a.address_book_id
+                                and ci.customers_info_id = c.customers_id
                                 " . $search . "
-                                group by c.customers_id 
-                                order by c.customers_lastname,
-                                c.customers_firstname ";
+                                group by c.customers_id
+                                ".$sort;
 
     $customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
     $customers_query = xtc_db_query($customers_query_raw);

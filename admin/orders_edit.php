@@ -438,10 +438,13 @@ $total_price += $products_a['price_prefix'].$products_a['options_values_price'];
 
 
 $sa_price=$xtPrice->xtcFormat($total_price,false,$products['products_tax_class_id']);
+
+
+
 $sp_price = $final_price=$xtPrice->xtcGetPrice($_POST['pID'],
                                         $format=false,
+                                        $_POST['qTY'],
                                         $products['products_tax_class_id'],
-                                        $tax_id,
                                         '');
 
 $inp_price = ($sa_price + $sp_price);

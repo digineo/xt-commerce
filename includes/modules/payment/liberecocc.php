@@ -274,6 +274,9 @@ require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
                         nl2br($message),
                         $message);
       }
+
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

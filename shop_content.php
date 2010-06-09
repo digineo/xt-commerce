@@ -25,18 +25,20 @@
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_textarea_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
-  require_once(DIR_WS_CLASSES.'class.phpmailer.php');
-  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 
+
+   if (GROUP_CHECK=='true') {
+   $group_check="and group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
+  }
 
        $shop_content_query=xtc_db_query("SELECT
-                         content_id,
+                     content_id,
                      content_title,
                      content_heading,
                      content_text,
                      content_file
                      FROM ".TABLE_CONTENT_MANAGER."
-                     WHERE content_group='".(int)$_GET['coID']."'
+                     WHERE content_group='".(int)$_GET['coID']."' ".$group_check."
                      AND languages_id='".(int)$_SESSION['languages_id']."'");
      $shop_content_data=xtc_db_fetch_array($shop_content_query);
 
@@ -111,6 +113,7 @@ $smarty->assign('INPUT_NAME',xtc_draw_input_field('name', ($error ? $_POST['name
 $smarty->assign('INPUT_EMAIL',xtc_draw_input_field('email', ($error ? $_POST['email'] : $email_address)));
 $smarty->assign('INPUT_TEXT',xtc_draw_textarea_field('message_body', 'soft', 50, 15, $_POST['']));
 $smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
+$smarty->assign('FORM_END','</form>');
   }
 
   $smarty->assign('language', $_SESSION['language']);

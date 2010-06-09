@@ -36,8 +36,6 @@
   require_once(DIR_FS_INC . 'xtc_draw_textarea_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
   require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
-  require_once(DIR_WS_CLASSES.'class.phpmailer.php');
-  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 
 
   $smarty = new Smarty;
@@ -163,6 +161,7 @@
 	$smarty->assign('TEXTAREA_MESSAGE', xtc_draw_textarea_field('message', 'soft', 50, 15, stripslashes($_POST['message'])));
     $smarty->assign('LINK_SUBMIT', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
   }
+$smarty->assign('FORM_END','</form>');
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;
 $main_content=$smarty->fetch(CURRENT_TEMPLATE . '/module/gv_send.html');

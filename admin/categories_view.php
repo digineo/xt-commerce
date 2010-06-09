@@ -351,7 +351,7 @@ if ($_GET['search']) {
             $contents[] = array('text' => '<br>' . TEXT_DATE_ADDED . ' ' . xtc_date_short($pInfo->products_date_added));
             if (xtc_not_null($pInfo->products_last_modified)) $contents[] = array('text' => TEXT_LAST_MODIFIED . ' ' . xtc_date_short($pInfo->products_last_modified));
             if (date('Y-m-d') < $pInfo->products_date_available) $contents[] = array('text' => TEXT_DATE_AVAILABLE . ' ' . xtc_date_short($pInfo->products_date_available));
-            $contents[] = array('text' => '<br>' . xtc_product_info_image($pInfo->products_image, $pInfo->products_name) . '<br>' . $pInfo->products_image);
+            $contents[] = array('text' => '<br><div align="center">' . xtc_product_thumb_image($pInfo->products_image, $pInfo->products_name) . '<br>' . $pInfo->products_image.'</div>');
                      // START IN-SOLUTION Berechung des Bruttopreises
             $price=$pInfo->products_price;
             $price=xtc_round($price,PRICE_PRECISION);

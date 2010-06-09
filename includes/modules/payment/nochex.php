@@ -79,11 +79,11 @@
     }
 
     function process_button() {
-      global $order, $currencies;
+      global $order, $xtPrice;
 
       $process_button_string = xtc_draw_hidden_field('cmd', '_xclick') .
                                xtc_draw_hidden_field('email', MODULE_PAYMENT_NOCHEX_ID) .
-                               xtc_draw_hidden_field('amount', number_format($order->info['total'] * $currencies->currencies['GBP']['value'], $currencies->currencies['GBP']['decimal_places'])) .
+                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($order->info['total'],'GBP'), $xtPrice->get_decimal_places('GBP'))) .
                                xtc_draw_hidden_field('ordernumber', $_SESSION['customer_id'] . '-' . date('Ymdhis')) .
                                xtc_draw_hidden_field('returnurl', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL')) .
                                xtc_draw_hidden_field('cancel_return', xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
@@ -96,7 +96,9 @@
     }
 
     function after_process() {
-      return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function output_error() {

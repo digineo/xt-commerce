@@ -20,12 +20,15 @@
   if ($_GET['action']) {
     switch ($_GET['action']) {
       case 'save':
-        $configuration_value = xtc_db_prepare_input($_POST['configuration_value']);
-        $cID = xtc_db_prepare_input($_GET['cID']);
 
-        xtc_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . xtc_db_input($configuration_value) . "', last_modified = now() where configuration_id = '" . xtc_db_input($cID) . "'");
-        xtc_redirect(xtc_href_link(FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&cID=' . $cID));
+          $configuration_query = xtc_db_query("select configuration_key,configuration_id, configuration_value, use_function,set_function from " . TABLE_CONFIGURATION . " where configuration_group_id = '" . (int)$_GET['gID'] . "' order by sort_order");
+
+          while ($configuration = xtc_db_fetch_array($configuration_query))
+              xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value='".$_POST[$configuration['configuration_key']]."' where configuration_key='".$configuration['configuration_key']."'");
+
+               xtc_redirect(FILENAME_CONFIGURATION. '?gID=' . (int)$_GET['gID']);
         break;
+
     }
   }
 
@@ -67,17 +70,14 @@
 </table> </td>
       </tr>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td style="border-top: 3px solid; border-color: #cccccc;"><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
-              <tr class="dataTableHeadingRow">
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CONFIGURATION_TITLE; ?></td>
-                <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CONFIGURATION_VALUE; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
-              </tr>
+            <td valign="top" align="right">
+<?php echo xtc_draw_form('configuration', FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&action=save'); ?>
+            <table width="100%"  border="0" cellspacing="0" cellpadding="4">
 <?php
-  $configuration_query = xtc_db_query("select configuration_key,configuration_id, configuration_value, use_function from " . TABLE_CONFIGURATION . " where configuration_group_id = '" . (int)$_GET['gID'] . "' order by sort_order");
-  
+  $configuration_query = xtc_db_query("select configuration_key,configuration_id, configuration_value, use_function,set_function from " . TABLE_CONFIGURATION . " where configuration_group_id = '" . (int)$_GET['gID'] . "' order by sort_order");
+
   while ($configuration = xtc_db_fetch_array($configuration_query)) {
     if ($_GET['gID'] == 6) {
       switch ($configuration['configuration_key']) {
@@ -126,66 +126,40 @@
     }
 
     if (((!$_GET['cID']) || (@$_GET['cID'] == $configuration['configuration_id'])) && (!$cInfo) && (substr($_GET['action'], 0, 3) != 'new')) {
-      $cfg_extra_query = xtc_db_query("select configuration_key, date_added, last_modified, use_function, set_function from " . TABLE_CONFIGURATION . " where configuration_id = '" . $configuration['configuration_id'] . "'");
+      $cfg_extra_query = xtc_db_query("select configuration_key,configuration_value, date_added, last_modified, use_function, set_function from " . TABLE_CONFIGURATION . " where configuration_id = '" . $configuration['configuration_id'] . "'");
       $cfg_extra = xtc_db_fetch_array($cfg_extra_query);
 
       $cInfo_array = xtc_array_merge($configuration, $cfg_extra);
       $cInfo = new objectInfo($cInfo_array);
     }
-
-    if ( (is_object($cInfo)) && ($configuration['configuration_id'] == $cInfo->configuration_id) ) {
-      echo '                  <tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=edit') . '\'">' . "\n";
-    } else {
-      echo '                  <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&cID=' . $configuration['configuration_id']) . '\'">' . "\n";
-    }
-?>
-                <td class="dataTableContent"><?php echo constant(strtoupper( $configuration['configuration_key'].'_TITLE')); ?></td>
-                <td class="dataTableContent"><?php $short_cfgValue = $cfgValue; if(is_string($short_cfgValue)) { if(strlen($short_cfgValue) > 30) $short_cfgValue = substr($short_cfgValue,0,30) . ' ...'; } echo htmlspecialchars($short_cfgValue); ?>&nbsp;</td>
-                
-                <td class="dataTableContent" align="right"><?php if ( (is_object($cInfo)) && ($configuration['configuration_id'] == $cInfo->configuration_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . xtc_href_link(FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&cID=' . $configuration['configuration_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
-              </tr>
-<?php
-  }
-?>
-            </table></td>
-<?php
-  $heading = array();
-  $contents = array();
-  switch ($_GET['action']) {
-    case 'edit':
-      $heading[] = array('text' => '<b>' .constant(strtoupper($cInfo->configuration_key .'_TITLE')) . '</b>');
-
-      if ($cInfo->set_function) {
-        eval('$value_field = ' . $cInfo->set_function . '"' . htmlspecialchars($cInfo->configuration_value) . '");');
+    if ($configuration['set_function']) {
+        eval('$value_field = ' . $configuration['set_function'] . '"' . htmlspecialchars($configuration['configuration_value']) . '");');
       } else {
-        $value_field = xtc_draw_input_field('configuration_value', $cInfo->configuration_value);
+        $value_field = xtc_draw_input_field($configuration['configuration_key'], $configuration['configuration_value'],'size=40');
       }
+   // add
 
-      $contents = array('form' => xtc_draw_form('configuration', FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=save'));
-      $contents[] = array('text' => TEXT_INFO_EDIT_INTRO);
-      $contents[] = array('text' => '<br><b>' .constant(strtoupper($cInfo->configuration_key .'_TITLE')) . '</b><br>' .xtc_get_lang_definition($cInfo->configuration_key,$config_lang,'_DESC'). '<br>' . $value_field);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . xtc_image_submit('button_update.gif', IMAGE_UPDATE) . '&nbsp;<a href="' . xtc_href_link(FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&cID=' . $cInfo->configuration_id) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
-      break;
-    default:
-      if (is_object($cInfo)) {
-        $heading[] = array('text' => '<b>' . constant(strtoupper($cInfo->configuration_key .'_TITLE')). '</b>');
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_CONFIGURATION, 'gID=' . $_GET['gID'] . '&cID=' . $cInfo->configuration_id . '&action=edit') . '">' . xtc_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
-        $contents[] = array('text' => '<br>' . constant(strtoupper($cInfo->configuration_key .'_DESC')));
-        $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_ADDED . ' ' . xtc_date_short($cInfo->date_added));
-        if (xtc_not_null($cInfo->last_modified)) $contents[] = array('text' => TEXT_INFO_LAST_MODIFIED . ' ' . xtc_date_short($cInfo->last_modified));
-      }
-      break;
-  }
+   if (strstr($value_field,'configuration_value')) $value_field=str_replace('configuration_value',$configuration['configuration_key'],$value_field);
 
-  if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
-    echo '            <td width="25%" valign="top">' . "\n";
+   echo '
+  <tr>
+    <td width="300" valign="top" class="dataTableContent"><b>'.constant(strtoupper($configuration['configuration_key'].'_TITLE')).'</b></td>
+    <td valign="top" class="dataTableContent">
+    <table width="100%"  border="0" cellspacing="0" cellpadding="2">
+      <tr>
+        <td style="background-color:#FCF2CF ; border: 1px solid; border-color: #CCCCCC;" class="dataTableContent">'.$value_field.'</td>
+      </tr>
+    </table>
+    <br>'.constant(strtoupper( $configuration['configuration_key'].'_DESC')).'</td>
+  </tr>
+  ';
 
-    $box = new box;
-    echo $box->infoBox($heading, $contents);
-
-    echo '            </td>' . "\n";
   }
 ?>
+            </table>
+<?php echo xtc_image_submit('button_save.gif', IMAGE_SAVE); ?></form>
+            </td>
+
           </tr>
         </table></td>
       </tr>

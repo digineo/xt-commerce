@@ -70,6 +70,7 @@
                                     and c.categories_id = p2c.categories_id
                                     and products_status = '1'
                                     ".$group_check."
+                                    ".$fsk_lock."                                    
                                     ".$days."
                                     order
                                     by

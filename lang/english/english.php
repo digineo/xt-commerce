@@ -490,6 +490,12 @@ define('MAIN_MESSAGE', 'You have decided to send a gift voucher worth %s to %s w
 
 define('REDEEMED_AMOUNT','Your gift voucher was successfully added to your account. Gift voucher ammount:');
 
+define('ERROR_INVALID_USES_USER_COUPON','Customers can redeem this coupon only ');
+define('ERROR_INVALID_USES_COUPON','Customers can redeem this coupon only ');
+define('TIMES',' times.');
+define('ERROR_INVALID_STARTDATE_COUPON','Your coupon is not aviable yet.');
+define('ERROR_INVALID_FINISDATE_COUPON','Your coupon is out of date.');
+
 define('PERSONAL_MESSAGE', '%s says:');
 
 define('NAVBAR_GV_FAQ', 'Gift Voucher FAQ');
@@ -498,4 +504,11 @@ define('NAVBAR_GV_SEND', 'Send Voucher');
 
 //Popup Window
 define('TEXT_CLOSE_WINDOW', 'Close Window.');
+
+define('MSRP','MSRP');
+define('YOUR_PRICE','your price ');
+define('ONLY',' only ');
+define('FROM','from ');
+define('YOU_SAVE','you save ');
+define('INSTEAD','instead ');
 ?>

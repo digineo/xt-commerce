@@ -472,6 +472,8 @@ if (( strtolower(USE_CC_CVV) == 'true' ) && ( strtolower(USE_CC_ISS) == 'true' )
         
         xtc_php_mail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER, MODULE_PAYMENT_CC_EMAIL, '', '', STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER, '', '', 'Extra Order Info: #' . $insert_id, nl2br($message), $message);
       }
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

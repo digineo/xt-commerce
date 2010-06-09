@@ -249,7 +249,7 @@
       global $order;
       switch ($method) {
         case 'Standard':
-        $ratio1 = xtc_round($od_amount / $amount,2);
+        $ratio1 = number_format($od_amount / $amount,2);
         $tod_amount = 0;
         reset($order->info['tax_groups']);
         while (list($key, $value) = each($order->info['tax_groups'])) {

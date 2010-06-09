@@ -152,7 +152,7 @@
       global $order;
 
       $process_button_string = xtc_draw_hidden_field('x_login', MODULE_PAYMENT_2CHECKOUT_LOGIN) .
-                               xtc_draw_hidden_field('x_amount', number_format($order->info['total'], 2)) .
+                               xtc_draw_hidden_field('x_amount', round($order->info['total'], 2)) .
                                xtc_draw_hidden_field('x_invoice_num', date('YmdHis')) .
                                xtc_draw_hidden_field('x_test_request', ((MODULE_PAYMENT_2CHECKOUT_TESTMODE == 'Test') ? 'Y' : 'N')) .
                                xtc_draw_hidden_field('x_card_num', $this->cc_card_number) .
@@ -188,7 +188,9 @@
     }
 
     function after_process() {
-      return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

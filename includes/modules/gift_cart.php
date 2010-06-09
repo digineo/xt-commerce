@@ -59,10 +59,11 @@ if (ACTIVATE_GIFT_SYSTEM=='true') {
   $gift_smarty->assign('C_FLAG','true');
   }
   $gift_smarty->assign('LINK_ACCOUNT',xtc_href_link(FILENAME_CREATE_ACCOUNT));
-  $gift_smarty->assign('FORM_ACTION',xtc_href_link(FILENAME_SHOPPING_CART, 'action=check_gift','NONSSL'));
+  $gift_smarty->assign('FORM_ACTION',xtc_draw_form('gift_coupon', xtc_href_link(FILENAME_SHOPPING_CART, 'action=check_gift','NONSSL')));
   $gift_smarty->assign('INPUT_CODE',xtc_draw_input_field('gv_redeem_code'));
   $gift_smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_redeem.gif', IMAGE_REDEEM_GIFT));
   $gift_smarty->assign('language', $_SESSION['language']);
+  $gift_smarty->assign('FORM_END','</form>');
   $gift_smarty->caching = 0;
 
   $smarty->assign('MODULE_gift_cart',$gift_smarty->fetch(CURRENT_TEMPLATE.'/module/gift_cart.html'));

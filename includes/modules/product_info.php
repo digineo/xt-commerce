@@ -31,7 +31,7 @@
 
    
  $info_smarty = new Smarty;
- $info_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/'); 
+ $info_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
   $group_check='';
  if (GROUP_CHECK=='true') {
    $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
@@ -103,7 +103,7 @@
         // fsk18
         if ($_SESSION['customers_status']['customers_fsk18']=='1') {
             if ($product_info['products_fsk18']=='0') {
-            $info_smarty->assign('ADD_QTY',xtc_draw_input_field('products_qty', '1','size="3"') . ' ' . xtc_draw_hidden_field('products_id', $product_info['products_id']));
+            $info_smarty->assign('ADD_QTY',xtc_draw_hidden_field('products_qty', '1') . ' ' . xtc_draw_hidden_field('products_id', $product_info['products_id'])); 
             $info_smarty->assign('ADD_CART_BUTTON', xtc_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART));
         }
         } else {
@@ -120,7 +120,8 @@
     $info_smarty->assign('SHIPPING_NAME',$shipping_status['name']);
     if ($shipping_status['image']!='')  $info_smarty->assign('SHIPPING_IMAGE','admin/images/icons/'.$shipping_status['image']);
     }
-    $info_smarty->assign('FORM_ACTION',xtc_href_link(FILENAME_PRODUCT_INFO, xtc_get_all_get_params(array('action')) . 'action=add_product'));
+    $info_smarty->assign('FORM_ACTION', xtc_draw_form('cart_quantity', xtc_href_link(FILENAME_PRODUCT_INFO, xtc_get_all_get_params(array('action')) . 'action=add_product')));
+    $info_smarty->assign('FORM_END','</form>');
     $info_smarty->assign('PRODUCTS_PRICE',$products_price);
     $info_smarty->assign('PRODUCTS_ID',$product_info['products_id']);
     $info_smarty->assign('PRODUCTS_NAME',$product_info['products_name']);

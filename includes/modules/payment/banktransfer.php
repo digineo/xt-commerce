@@ -49,9 +49,8 @@
     function update_status() {
       global $order;
 
-       $customer_id = $_SESSION['customer_id'];
 
-       $check_order_query = xtc_db_query("select orders_id from " . TABLE_ORDERS . " where customers_id = '" . $customer_id . "'");
+       $check_order_query = xtc_db_query("select orders_id from " . TABLE_ORDERS . " where customers_id = '" . $_SESSION['customer_id'] . "'");
        $order_check = xtc_db_num_rows($check_order_query);
 
 
@@ -243,6 +242,8 @@
       xtc_db_query("INSERT INTO banktransfer (orders_id, banktransfer_blz, banktransfer_bankname, banktransfer_number, banktransfer_owner, banktransfer_status, banktransfer_prz) VALUES ('" . $insert_id . "', '" . $_POST['banktransfer_blz'] . "', '" . $_POST['banktransfer_bankname'] . "', '" . $_POST['banktransfer_number'] . "', '" . $_POST['banktransfer_owner'] ."', '" . $_POST['banktransfer_status'] ."', '" . $_POST['banktransfer_prz'] ."')");
       if ($_POST['banktransfer_fax'])
         xtc_db_query("update banktransfer set banktransfer_fax = '" . $_POST['banktransfer_fax'] ."' where orders_id = '" . $insert_id . "'");
+
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
     }
 
     function get_error() {

@@ -48,7 +48,7 @@
         }
       }
     } else {
-      $cPath_new = @implode('_', $cPath_array);
+       $cPath_new = (xtc_not_null($cPath_array)) ? implode('_', $cPath_array) : '';
     }
 
     return 'cPath=' . $cPath_new;

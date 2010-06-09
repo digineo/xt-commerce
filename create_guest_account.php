@@ -19,6 +19,8 @@
 
   require('includes/application_top.php');
 
+  if (ACCOUNT_OPTIONS == 'account') xtc_redirect(FILENAME_DEFAULT);
+
        // create smarty elements
   $smarty = new Smarty;
   // include boxes
@@ -31,8 +33,6 @@ require_once(DIR_FS_INC . 'xtc_draw_checkbox_field.inc.php');
 require_once(DIR_FS_INC . 'xtc_draw_password_field.inc.php');
 require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
 require_once(DIR_FS_INC . 'xtc_encrypt_password.inc.php');
-require_once(DIR_WS_CLASSES.'class.phpmailer.php');
-require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 require_once(DIR_FS_INC . 'xtc_create_password.inc.php');
 require_once(DIR_FS_INC . 'xtc_draw_hidden_field.inc.php');
 require_once(DIR_FS_INC . 'xtc_draw_pull_down_menu.inc.php');
@@ -114,10 +114,13 @@ require_once(DIR_FS_INC . 'xtc_get_geo_zone_code.inc.php');
   }
 
   if($validate_vatid == '1') {
-  if ($country == '81'){
-  $customer_group = DEFAULT_CUSTOMERS_STATUS_ID;
+  if ($country == STORE_COUNTRY){
+      if (ACCOUNT_COMPANY_VAT_GROUP == 'true'){
+      $customer_group = DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL;
+      } else {
+       $customer_group = DEFAULT_CUSTOMERS_STATUS_ID;
+      }
   }else{
-
   if (ACCOUNT_COMPANY_VAT_GROUP == 'true'){
   $customer_group = DEFAULT_CUSTOMERS_VAT_STATUS_ID;
   }else{
@@ -207,7 +210,7 @@ require_once(DIR_FS_INC . 'xtc_get_geo_zone_code.inc.php');
     //create password   
     $password= xtc_create_password(8);
 
-
+    if (!$newsletter) $newsletter=0;
     if ($error == false) {
       $sql_data_array = array('customers_vat_id' => $vat,
                               'customers_vat_id_status' => $customers_vat_id_status,
@@ -376,7 +379,7 @@ require(DIR_WS_INCLUDES . 'header.php');
   $smarty->assign('INPUT_TEL',xtc_draw_input_field('telephone') . '&nbsp;' . (xtc_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="inputRequirement">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>': ''));
   $smarty->assign('INPUT_FAX',xtc_draw_input_field('fax') . '&nbsp;' . (xtc_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="inputRequirement">' . ENTRY_FAX_NUMBER_TEXT . '</span>': ''));
 //  $smarty->assign('CHECKBOX_NEWSLETTER',xtc_draw_checkbox_field('newsletter', '1') . '&nbsp;' . (xtc_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">' . ENTRY_NEWSLETTER_TEXT . '</span>': ''));
-
+  $smarty->assign('FORM_END','</form>');
   $smarty->assign('language', $_SESSION['language']);
   $smarty->caching = 0;
   $smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));

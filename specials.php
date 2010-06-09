@@ -47,6 +47,7 @@
                                 and s.products_id = p.products_id ".$fsk_lock."
                                 and p.products_id = pd.products_id
                                 ".$group_check."
+                                ".$fsk_lock."
                                 and pd.language_id = '" . (int)$_SESSION['languages_id'] . "'
                                 and s.status = '1' order by s.specials_date_added DESC";
   $specials_split = new splitPageResults($specials_query_raw, $_GET['page'], MAX_DISPLAY_SPECIAL_PRODUCTS);

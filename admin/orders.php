@@ -30,6 +30,7 @@
   require_once(DIR_FS_INC . 'xtc_add_tax.inc.php');
   require_once(DIR_FS_INC . 'changedataout.inc.php');
   require_once(DIR_FS_INC . 'xtc_validate_vatid_status.inc.php');
+  require_once(DIR_FS_INC . 'xtc_get_attributes_model.inc.php');
 
   // initiate template engine for mail
   $smarty = new Smarty;
@@ -409,22 +410,38 @@ if ($order->info['cc_number'] != '0000000000000000') {
 
           echo '<br><nobr><small>&nbsp;<i> - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] . ': ';
 
-          if ($order->products[$i]['attributes'][$j]['price'] != '0')
-          echo '&nbsp; ';
-          echo $order->products[$i]['attributes'][$j]['prefix'];
-          if ($order->products[$i]['allow_tax'] == 1) {
-          echo $currencies->format(xtc_add_tax($order->products[$i]['attributes'][$j]['price'] * $order->products[$i]['qty'],$order->products[$i]['tax']), true, $order->info['currency'], $order->info['currency_value']);
-          } else {
-          echo  $currencies->format($order->products[$i]['attributes'][$j]['price'] * $order->products[$i]['qty'], true, $order->info['currency'], $order->info['currency_value']);
-          }
-          echo '&nbsp;';
+
           }
 
           echo '</i></small></nobr>';
           }
 
       echo '            </td>' . "\n" .
-           '            <td class="dataTableContent" valign="top">' . $order->products[$i]['model'] . '&nbsp;</td>' . "\n" .
+           '            <td class="dataTableContent" valign="top">';
+
+
+
+           if ($order->products[$i]['model']!='') {
+               echo $order->products[$i]['model'];
+           } else {
+               echo '<br>';
+           }
+
+           // attribute models
+      if (sizeof($order->products[$i]['attributes']) > 0) {
+        for ($j = 0, $k = sizeof($order->products[$i]['attributes']); $j < $k; $j++) {
+
+            $model=xtc_get_attributes_model($order->products[$i]['id'],$order->products[$i]['attributes'][$j]['value']);
+            if ($model!='') {
+               echo $model;
+           } else {
+               echo '<br>';
+           }
+        }
+      }
+
+
+      echo '&nbsp;</td>' . "\n" .
            '            <td class="dataTableContent" align="right" valign="top">' .
            format_price($order->products[$i]['final_price']/$order->products[$i]['qty'], 1, $order->info['currency'], $order->products[$i]['allow_tax'], $order->products[$i]['tax']) .
            '</td>' . "\n";

@@ -6,7 +6,7 @@
 // Distributed under the same terms as HTMLArea itself.
 // This notice MUST stay intact for use (see license.txt).
 //
-// $Id: spell-checker.js,v 1.7 2004/01/30 00:25:06 mishoo Exp $
+// $Id: spell-checker.js,v 1.8 2004/07/13 15:19:51 mishoo Exp $
 
 function SpellChecker(editor) {
 	this.editor = editor;
@@ -18,7 +18,7 @@ function SpellChecker(editor) {
 
 	// register the toolbar buttons provided by this plugin
 	var toolbar = [];
-	for (var i in bl) {
+	for (var i = 0; i < bl.length; ++i) {
 		var btn = bl[i];
 		if (!btn) {
 			toolbar.push("separator");
@@ -33,7 +33,7 @@ function SpellChecker(editor) {
 		}
 	}
 
-	for (var i in toolbar) {
+	for (var i = 0; i < toolbar.length; ++i) {
 		cfg.toolbar[0].push(toolbar[i]);
 	}
 };

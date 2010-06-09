@@ -39,7 +39,14 @@
           <td style="border-right: 1px solid; border-color: #cccccc;" width="100%" valign="top" class="main">{#text_payment#}<br> 
             <br> <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
-                <td>{$PAYMENT_BLOCK}</td>
+                <td class="main">{if $GV_COVER!='true'}{$PAYMENT_BLOCK}{else}<font size="1" face="Verdana, Arial, Helvetica, sans-serif">
+                  <table width="100%"  border="0">
+                    <tr>
+                      <td bgcolor="#00CC33" class="main">
+                        <div align="center"> {#text_gccover#}</div></td>
+                    </tr>
+                  </table>
+                </font>{/if}</td>
               </tr>
             </table></td>
         </tr>
@@ -100,7 +107,7 @@
       </table></td>
   </tr>
 </table>
-</form>
+{$FORM_END}
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr> 

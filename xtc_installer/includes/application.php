@@ -28,7 +28,7 @@
       $local_install_path=str_replace('install_step7.php','',$local_install_path);
       $local_install_path=str_replace('install_finished.php','',$local_install_path);
       define('DIR_FS_CATALOG', DIR_FS_DOCUMENT_ROOT . $local_install_path);
-  } 
+  }
   define('DIR_FS_INC', DIR_FS_CATALOG.'inc/');
 
 // include

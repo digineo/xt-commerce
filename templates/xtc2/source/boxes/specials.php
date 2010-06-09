@@ -45,6 +45,7 @@ $box_content='';
                                            and pd.language_id = '" . $_SESSION['languages_id'] . "'
                                            and s.status = '1'
                                            ".$group_check."
+                                           ".$fsk_lock."                                             
                                            order by s.specials_date_added
                                            desc limit " . MAX_RANDOM_SELECT_SPECIALS)) {
 

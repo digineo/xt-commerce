@@ -18,9 +18,7 @@
   $xx_mins_ago = (time() - 900);
 
   require('includes/application_top.php');
-
-  require(DIR_WS_CLASSES . 'currencies.php');
-  $currencies = new currencies();
+  require(DIR_FS_INC. 'xtc_get_products.inc.php');
 
   // remove entries that have expired
   xtc_db_query("delete from " . TABLE_WHOS_ONLINE . " where time_last_click < '" . $xx_mins_ago . "'");
@@ -97,6 +95,7 @@
               </tr>
             </table></td>
 <?php
+
   $heading = array();
   $contents = array();
   if ($info) {
@@ -113,54 +112,22 @@
       }
     }
 
-    if ($length = strlen($session_data)) {
-        $start_id = strpos($session_data, 'customer_id|s');
-        $start_cart = strpos($session_data, 'cart|O');
-        $start_currency = strpos($session_data, 'currency|s');
-        $start_country = strpos($session_data, 'customer_country_id|s');
-        $start_zone = strpos($session_data, 'customer_zone_id|s');
-
-      for ($i=$start_cart; $i<$length; $i++) {
-        if ($session_data[$i] == '{') {
-          if (isset($tag)) {
-            $tag++;
-          } else {
-            $tag = 1;
-          }
-        } elseif ($session_data[$i] == '}') {
-          $tag--;
-        } elseif ( (isset($tag)) && ($tag < 1) ) {
-          break;
-        }
-      }
-
-      $session_data_id = substr($session_data, $start_id, (strpos($session_data, ';', $start_id) - $start_id + 1));
-      $session_data_cart = substr($session_data, $start_cart, $i-$start_cart);
-      $session_data_currency = substr($session_data, $start_currency, (strpos($session_data, ';', $start_currency) - $start_currency + 1));
-      $session_data_country = substr($session_data, $start_country, (strpos($session_data, ';', $start_country) - $start_country + 1));
-      $session_data_zone = substr($session_data, $start_zone, (strpos($session_data, ';', $start_zone) - $start_zone + 1));
-
-      session_decode($session_data_id);
-      session_decode($session_data_currency);
-      session_decode($session_data_country);
-      session_decode($session_data_zone);
-      session_decode($session_data_cart);
-
-      if (is_object($cart)) {
-        $products = $cart->get_products();
+      $user_session = unserialize_session_data($session_data);
+		
+      if ($user_session) {
+        $products = xtc_get_products($user_session);
         for ($i = 0, $n = sizeof($products); $i < $n; $i++) {
           $contents[] = array('text' => $products[$i]['quantity'] . ' x ' . $products[$i]['name']);
         }
 
         if (sizeof($products) > 0) {
           $contents[] = array('text' => xtc_draw_separator('pixel_black.gif', '100%', '1'));
-          $contents[] = array('align' => 'right', 'text'  => TEXT_SHOPPING_CART_SUBTOTAL . ' ' . $currencies->format($cart->show_total(), true, $currency));
+          $contents[] = array('align' => 'right', 'text'  => TEXT_SHOPPING_CART_SUBTOTAL . ' ' . $user_session['cart']->total . ' ' . $user_session['currency']);
         } else {
           $contents[] = array('text' => '&nbsp;');
         }
       }
     }
-  }
 
   if ( (xtc_not_null($heading)) && (xtc_not_null($contents)) ) {
     echo '            <td width="25%" valign="top">' . "\n";

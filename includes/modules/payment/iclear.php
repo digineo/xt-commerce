@@ -110,11 +110,11 @@
       $process_products_string = '';
 
       for ($i=0; $i<sizeof($order->products); $i++) {
-        $process_products_string .= $order->products[$i]['name'] . '::' . $order->products[$i]['model'] . '::' . $order->products[$i]['qty'] . '::' . $order->products[$i]['price'] . '::' . number_format($order->products[$i]['price'], 2) . '::' . number_format($order->products[$i]['tax'], 0) . ':::';
+        $process_products_string .= $order->products[$i]['name'] . '::' . $order->products[$i]['model'] . '::' . $order->products[$i]['qty'] . '::' . $order->products[$i]['price'] . '::' . round($order->products[$i]['price'], 2) . '::' . round($order->products[$i]['tax'], 0) . ':::';
       }
 
       if (($order->info['shipping_method'])&&($_SESSION['shipping']['cost'] !='0')) {
-        $process_products_string .= 'Versandkosten::Versand::1::' . number_format( $_SESSION['shipping']['cost'], 2) . '::' . number_format($order->info['shipping_cost'], 2) . '::' . number_format(($order->info['shipping_cost'] /  $_SESSION['shipping']['cost'] - 1) * 100, 0) . ':::';
+        $process_products_string .= 'Versandkosten::Versand::1::' . round( $_SESSION['shipping']['cost'], 2) . '::' . round($order->info['shipping_cost'], 2) . '::' . round(($order->info['shipping_cost'] /  $_SESSION['shipping']['cost'] - 1) * 100, 0) . ':::';
       }
 
       $process_button_string .= xtc_draw_hidden_field('ProductIndex', $i) .
@@ -488,7 +488,9 @@ include('send_order.php');
     }
 
     function after_process() {
-	  return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function output_error() {

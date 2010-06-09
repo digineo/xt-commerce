@@ -625,7 +625,12 @@ xtc_db_query("INSERT INTO zones_to_geo_zones (association_id, zone_country_id, z
 xtc_db_query("INSERT INTO zones_to_geo_zones (association_id, zone_country_id, zone_id, geo_zone_id, last_modified, date_added) VALUES (230, 238, 0, 6, NULL, now())");
 xtc_db_query("INSERT INTO zones_to_geo_zones (association_id, zone_country_id, zone_id, geo_zone_id, last_modified, date_added) VALUES (231, 239, 0, 6, NULL, now())");
 
+// update for new EU countries
 
+xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_id='56'");
+xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_id='189'");
+xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_id='170'");
+xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_id='97'");
 
 
 

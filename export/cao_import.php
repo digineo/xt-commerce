@@ -25,57 +25,19 @@
    CAO-Faktura für Windows Version 1.0
    Copyright (C) 2003 Jan Pokrandt / Jan@JP-SOFT.de
 
-*                                                                                          *
-*  CAO-Faktura für Windows Version 1.0                                                     *
-*  Copyright (C) 2003 Jan Pokrandt / Jan@JP-SOFT.de                                        *
-*                                                                                          *
-*  This program is free software; you can redistribute it and/or                           *
-*  modify it under the terms of the GNU General Public License                             *
-*  as published by the Free Software Foundation; either version 2                          *
-*  of the License, or any later version.                                                   *
-*                                                                                          *
-*  This program is distributed in the hope that it will be useful,                         *
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of                          *
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                           *
-*  GNU General Public License for more details.                                            *
-*                                                                                          *
-*  You should have received a copy of the GNU General Public License                       *
-*  along with this program; if not, write to the Free Software                             *
-*  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
-*                                                                                          *
-*  ******* CAO-Faktura comes with ABSOLUTELY NO WARRANTY ***************                   *
-*                                                                                          *
-*  Programm     : CAO-Faktura                                                              *
-*  Modul        : cao_update.php                                                           *
-*  Stand        : 01.11.2003                                                               *
-*  Version      : 0.8                                                                      *
-*  Beschreibung : Script zum Datenaustausch CAO-Faktura <--> osCommerce-Shop               *
-*                                                                                          *
-*  based on:                                                                               *
-*  (c) 2001 - 2003 osCommerce, Open Source E-Commerce Solutions                            *
-*  (c) 2003 IN-Solution, Henri Schmidhuber                                                 *
-*  (c) 2003 JP-Soft, Jan Pokrandt                                                          *
-*                                                                                          *
-*  History :                                                                               *
-*                                                                                          *
-*  - 25.06.2003 Version 0.1 released Jan Pokrandt                                          *
-*  - 29.06.2003 order_opdate aus xml_export.php hierher verschoben                         *
-*  - 17.07.2003 xtc_array_merge durch array_merge ersetzt                                  *
-*  - 18.07.2003 Code fuer Image_Upload hinzugefuegt                                        *
-*  - 23.08.2003 Code fuer Hersteller-Update hinzugefuegt                                   *
-*  - 01.11.2003 Statusänderung werden wenn möglich in der Bestellsprache ausgeführt        * 
 *******************************************************************************************/
 
 /*
   Changes:
   1.1     :	switching POST/GET vars for CAO imageUpload
   1.2     : mulitlang inserts for Categories
+  1.3     : xt:C v3.0 update
 
 
 */
 
-$version_nr    = '1.1';
-$version_datum = '2004.15.04';
+$version_nr    = '1.3';
+$version_datum = '2004.28.09';
 define('CHARSET','iso-8859-1');
 
 // falls die MWST vom shop vertauscht wird, hier false setzen.

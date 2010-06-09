@@ -112,7 +112,7 @@
 <!-- left_navigation_eof //-->
     </table></td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>

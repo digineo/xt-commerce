@@ -21,7 +21,7 @@
   </tr>
 </table>
 {else}
-<form name="cart_quantity" action="{$FORM_ACTION}" method="post">
+{$FORM_ACTION}
 {$HIDDEN_OPTIONS}
   <br>
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -40,6 +40,6 @@
   </tr>
 </table>
 
-</form>
+{$FORM_END}
 <div align="center" class="main"></div>
 <p>{/if} </p>

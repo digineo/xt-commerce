@@ -235,7 +235,7 @@ require(DIR_WS_INCLUDES . 'header.php');
   $smarty->assign('INPUT_FAX',xtc_draw_input_field('fax',$account['customers_fax']) . '&nbsp;' . (xtc_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="inputRequirement">' . ENTRY_FAX_NUMBER_TEXT . '</span>': ''));
   $smarty->assign('BUTTON_BACK','<a href="' . xtc_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . xtc_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>');
   $smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
-
+  $smarty->assign('FORM_END','</form>');
   $smarty->assign('language', $_SESSION['language']);
 
   $smarty->caching = 0;

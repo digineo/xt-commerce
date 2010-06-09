@@ -27,8 +27,6 @@ require(DIR_FS_CATALOG .'templates/'.CURRENT_TEMPLATE. '/source/boxes.php');
 // include needed functions
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_radio_field.inc.php');
-  require_once(DIR_WS_CLASSES.'class.phpmailer.php');
-  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
   require_once(DIR_FS_INC . 'xtc_render_vvcode.inc.php');
   require_once(DIR_FS_INC . 'xtc_random_charcode.inc.php');
   require_once(DIR_FS_INC . 'xtc_encrypt_password.inc.php');
@@ -194,6 +192,7 @@ case double_opt:
     $smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', $_POST['email']));
     $smarty->assign('INPUT_CODE', xtc_draw_input_field('vvcode','','size="6" maxlenght="6"',false,'',false));
     $smarty->assign('BUTTON_SEND', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_LOGIN));
+    $smarty->assign('FORM_END','</form>');
     $smarty->assign('language', $_SESSION['language']);
     $smarty->caching = 0;
     $main_content=$smarty->fetch(CURRENT_TEMPLATE . '/module/password_double_opt_in.html');

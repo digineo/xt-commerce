@@ -188,7 +188,7 @@
                                xtc_draw_hidden_field('trxpassword', MODULE_PAYMENT_IPAYMENT_PASSWORD) .
                                xtc_draw_hidden_field('item_name', STORE_NAME) .
                                xtc_draw_hidden_field('trx_currency', $trx_currency) .
-                               xtc_draw_hidden_field('trx_amount', number_format($order->info['total'] * 100 * $currencies->get_value($trx_currency), 0, '','')) .
+                               xtc_draw_hidden_field('trx_amount', round($xtPrice->xtcCalculateCurr($order->info['total']), 0, '','')) .
                                xtc_draw_hidden_field('cc_expdate_month', $_POST['ipayment_cc_expires_month']) .
                                xtc_draw_hidden_field('cc_expdate_year', $_POST['ipayment_cc_expires_year']) .
                                xtc_draw_hidden_field('cc_number', $_POST['ipayment_cc_number']) .
@@ -206,7 +206,9 @@
     }
 
     function after_process() {
-      return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

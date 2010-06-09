@@ -363,9 +363,9 @@
     return $image;
   }
   
-  function xtc_product_info_image($image, $alt, $width = '', $height = '') {
-    if ( ($image) && (file_exists(DIR_FS_CATALOG_INFO_IMAGES . $image)) ) {
-      $image = xtc_image(DIR_WS_CATALOG_INFO_IMAGES . $image, $alt, $width, $height);
+  function xtc_product_thumb_image($image, $alt, $width = '', $height = '') {
+    if ( ($image) && (file_exists(DIR_FS_CATALOG_THUMBNAIL_IMAGES . $image)) ) {
+      $image = xtc_image(DIR_WS_CATALOG_THUMBNAIL_IMAGES . $image, $alt, $width, $height);
     } else {
       $image = TEXT_IMAGE_NONEXISTENT;
     }

@@ -49,7 +49,7 @@
   define('SQL_CACHEDIR',DIR_FS_CATALOG.'cache/');
 
   // Define the project version
-  define('PROJECT_VERSION', 'XT-Commerce v3.0.1');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.2');
 
   // Set the length of the redeem code, the longer the more secure
   define('SECURITY_CODE_LENGTH', '6');
@@ -421,9 +421,6 @@
   // entry/item info classes
   require(DIR_WS_CLASSES . 'object_info.php');
 
-  // email classes
-  require(DIR_WS_CLASSES . 'mime.php');
-  require(DIR_WS_CLASSES . 'email.php');
 
   // file uploading class
   require(DIR_WS_CLASSES . 'upload.php');
@@ -482,7 +479,7 @@
 
 
     // Include Template Engine
-  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.3/Smarty.class.php');
+  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.5/Smarty.class.php');
 
   
 ?>

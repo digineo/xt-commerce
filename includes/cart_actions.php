@@ -114,7 +114,7 @@
                                 }
                                 if ($_SESSION['customers_status']['customers_fsk18_display']=='0' && $quickie['products_fsk18']=='1') {
                                 xtc_redirect(xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $quickie['products_id'], 'NONSSL'));
-                                                                  }
+                                }
                                 if ($_POST['quickie']!='') {
                                     $act_qty=$_SESSION['cart']->get_quantity(xtc_get_uprid($quickie['products_id'], 1));
                                     if ($act_qty>MAX_PRODUCTS_QTY) $act_qty=MAX_PRODUCTS_QTY-1;
@@ -130,9 +130,18 @@
       case 'buy_now':
         if (isset($_GET['BUYproducts_id'])) {
         // check permission to view product
-        $permission_query=xtc_db_query("SELECT group_ids from ".TABLE_PRODUCTS." where products_id='".(int)$_GET['BUYproducts_id']."'");
-         $permission=xtc_db_fetch_array($permission_query);
-           if (GROUP_CHECK=='true') {
+        $permission_query=xtc_db_query("SELECT group_ids,products_fsk18 from ".TABLE_PRODUCTS." where products_id='".(int)$_GET['BUYproducts_id']."'");
+        $permission=xtc_db_fetch_array($permission_query);
+
+         // check for FSK18
+         if ($permission['products_fsk18']=='1' && $_SESSION['customers_status']['customers_fsk18']=='1') {
+         xtc_redirect(xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . (int)$_GET['BUYproducts_id'], 'NONSSL'));
+            }
+         if ($_SESSION['customers_status']['customers_fsk18_display']=='0' && $permission['products_fsk18']=='1') {
+            xtc_redirect(xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . (int)$_GET['BUYproducts_id'], 'NONSSL'));
+         }
+
+         if (GROUP_CHECK=='true') {
 
          if (!strstr($permission['group_ids'],'c_'.$_SESSION['customers_status']['customers_status_id'].'_group')) {
           xtc_redirect(xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . (int)$_GET['BUYproducts_id']));

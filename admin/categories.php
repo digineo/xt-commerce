@@ -40,6 +40,7 @@
   }     
   if ($_GET['action']) {
     switch ($_GET['action']) {
+    	
       case 'setcflag':
         if ( ($_GET['flag'] == '0') || ($_GET['flag'] == '1') ) {
           if ($_GET['cID']) {
@@ -294,8 +295,10 @@
           $pname_arr = explode('.',$products_image->filename);
           $nsuffix = array_pop($pname_arr);
           $products_image_name = $products_id . '_0.' . $nsuffix;
-          @xtc_del_image_file($_POST['products_previous_image_0']);
-          rename(DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$products_image->filename, DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image_name);
+          $dup_check_query = xtDBquery("SELECT count(*) as total FROM ".TABLE_PRODUCTS." WHERE products_image = '".$_POST['products_previous_image_0']."'");
+          $dup_check = xtc_db_fetch_array($dup_check_query);
+          if ($dup_check['total'] < 2) { @xtc_del_image_file($_POST['products_previous_image_0']); }
+          rename(DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image->filename, DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image_name);
           $sql_data_array['products_image'] = xtc_db_prepare_input($products_image_name);
 
 		  require(DIR_WS_INCLUDES . 'product_thumbnail_images.php');
@@ -309,7 +312,9 @@
           //are we asked to delete some mo_pics?
           if ($_POST['del_mo_pic'] != '') {
           	foreach ($_POST['del_mo_pic'] as $val){
-          	@xtc_del_image_file($val);
+          	$dup_check_query = xtDBquery("SELECT count(*) as total FROM ".TABLE_PRODUCTS_IMAGES." WHERE image_name = '".$val."'");
+          	$dup_check = xtc_db_fetch_array($dup_check_query);
+          	if ($dup_check['total'] < 2) @xtc_del_image_file($val);
           	xtc_db_query("delete from " . TABLE_PRODUCTS_IMAGES . " where products_id = '" . xtc_db_input($products_id) . "' AND image_name = '".$val."'");
           	}
           } 
@@ -320,7 +325,9 @@
           $pname_arr = explode('.',$pIMG->filename);
           $nsuffix = array_pop($pname_arr);
           $products_image_name = $products_id . '_' . ($img+1) . '.' . $nsuffix;
-          @xtc_del_image_file($_POST['products_previous_image_'.($img+1)]);
+          $dup_check_query = xtDBquery("SELECT count(*) as total FROM ".TABLE_PRODUCTS_IMAGES." WHERE image_name = '".$_POST['products_previous_image_'.($img+1)]."'");
+          $dup_check = xtc_db_fetch_array($dup_check_query);
+          if ($dup_check['total'] < 2) @xtc_del_image_file($_POST['products_previous_image_'.($img+1)]); 
           @xtc_del_image_file($products_image_name);
           rename(DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$pIMG->filename, DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$products_image_name);          	         
 		  //get data & write to table
@@ -330,7 +337,7 @@
 		  if ($_GET['action'] == 'insert_product'){					  
           	xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);
 		  } elseif ($_GET['action'] == 'update_product' && $_POST['products_previous_image_'.($img+1)]) {
-		  	foreach ($_POST['del_mo_pic'] as $val){ if ($val == $_POST['products_previous_image_'.($img+1)]) xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);break; }	
+		  	if ($_POST['del_mo_pic']) foreach ($_POST['del_mo_pic'] as $val){ if ($val == $_POST['products_previous_image_'.($img+1)]) xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);break; }	
 		  	xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img, 'update', 'image_name = \'' . xtc_db_input($_POST['products_previous_image_'.($img+1)]). '\'');		  	
 		  } elseif (!$_POST['products_previous_image_'.($img+1)]){
 		  	xtc_db_perform(TABLE_PRODUCTS_IMAGES, $mo_img);
@@ -652,13 +659,25 @@
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <script language="javascript" src="includes/general.js"></script>
+<?php if (USE_SPAW=='true') {
+ $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
+ $data=xtc_db_fetch_array($query);
+ ?>
 <script type="text/javascript">
    _editor_url = "includes/htmlarea/";
-   _editor_lang = "de";
+   _editor_lang = "<?php echo $data['code']; ?>";
 </script>
+    <!-- DWD Modify -> Add: HTMLArea v3.0 !-->
+    <!-- Load HTMLArea Core Files. !-->
 <script type="text/javascript" src="includes/htmlarea/htmlarea.js"></script>
+<script type="text/javascript" src="includes/htmlarea/dialog.js"></script>
+<script tyle="text/javascript" src="includes/htmlarea/lang/<?php echo $data['code']; ?>.js"></script>
+
+
+<?php } ?>
 </head>
-<body onload="HTMLArea.replaceAll()" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
+<body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
+
 <div id="spiffycalendar" class="text"></div>
 <!-- header //-->
 <?php require(DIR_WS_INCLUDES . 'header.php'); ?>
@@ -686,6 +705,8 @@
   } elseif ($_GET['action'] == 'new_product_preview') {
   // preview removed
   } else {
+  //set $cPath to 0 if not set - FireFox workaround, didn't work when de/activating categories and $cPath wasn't set
+  if (!$cPath) $cPath = '0';
   include('categories_view.php');
   }
 ?>
@@ -699,6 +720,66 @@
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 <br>
+<?php if (USE_SPAW=='true') { ?>
+<script type="text/javascript">
+      HTMLArea.loadPlugin("SpellChecker");
+      HTMLArea.loadPlugin("TableOperations");
+      HTMLArea.loadPlugin("FullPage");
+      HTMLArea.loadPlugin("CharacterMap");
+      HTMLArea.loadPlugin("ContextMenu");
+      HTMLArea.loadPlugin("ImageManager");
+HTMLArea.onload = function() {
+
+<?php
+// generate  for categories EDIT
+$languages = xtc_get_languages();
+if ($_GET['action'] == 'new_category_ACD' || $_GET['action'] == 'edit_category_ACD') {
+for ($i=0; $i<sizeof($languages); $i++) {
+?>
+var editor<?php echo $languages[$i]['id']; ?> = new HTMLArea("categories_description[<?php echo $languages[$i]['id']; ?>]");
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(TableOperations);
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(FullPage);
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(ContextMenu);
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(CharacterMap);
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(ImageManager);
+
+editor<?php echo $languages[$i]['id']; ?>.generate();
+
+<?php
+
+}
+}
+// generate editor for products
+if ($_GET['action'] == 'new_product') {
+
+for ($i=0; $i<sizeof($languages); $i++) {
+?>
+var editor<?php echo $languages[$i]['id']; ?> = new HTMLArea("products_description_<?php echo $languages[$i]['id']; ?>");
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(TableOperations);
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(FullPage);
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(ContextMenu);
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(CharacterMap);
+editor<?php echo $languages[$i]['id']; ?>.registerPlugin(ImageManager);
+editor<?php echo $languages[$i]['id']; ?>.generate();
+
+var editorshort<?php echo $languages[$i]['id']; ?> = new HTMLArea("products_short_description_<?php echo $languages[$i]['id']; ?>");
+editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(TableOperations);
+editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(FullPage);
+editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(ContextMenu);
+editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(CharacterMap);
+editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(ImageManager);
+editorshort<?php echo $languages[$i]['id']; ?>.generate();
+
+<?php
+}
+}
+
+?>
+
+};
+HTMLArea.init();
+</script>
+<?php } ?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

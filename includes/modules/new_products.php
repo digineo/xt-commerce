@@ -94,7 +94,6 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
     $image=DIR_WS_THUMBNAIL_IMAGES . $new_products['products_image'];
     }
 
-
     $module_content[]=array(
                             'PRODUCTS_NAME' => $new_products['products_name'],
                             'PRODUCTS_DESCRIPTION' => $new_products['products_short_description'],

@@ -33,8 +33,6 @@
   // include needed functions
   require_once(DIR_FS_INC . 'xtc_calculate_tax.inc.php');
   require_once(DIR_FS_INC . 'xtc_address_label.inc.php');
-  require_once(DIR_WS_CLASSES.'class.phpmailer.php');
-  require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
   require_once(DIR_FS_INC . 'changedatain.inc.php');
   
   // initialize smarty

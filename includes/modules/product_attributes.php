@@ -21,7 +21,7 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-  
+
 $module_smarty=new Smarty;
 $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
 
@@ -58,6 +58,15 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
         $col = 0;
         while ($products_options = xtc_db_fetch_array($products_options_query)) {
           $price='';
+           if ($_SESSION['customers_status']['customers_status_show_price'] == '0') {
+                      $products_options_data[$row]['DATA'][$col]=array(
+                                    'ID' => $products_options['products_options_values_id'],
+                                    'TEXT' =>$products_options['products_options_values_name'],
+                                    'MODEL' =>$products_options['attributes_model'],
+                                    'PRICE' =>'',
+                                    'FULL_PRICE'=>'',
+                                    'PREFIX' =>$products_options['price_prefix']);
+           } else {
           if ($products_options['options_values_price']!='0.00') {
           $price = $xtPrice->xtcFormat($products_options['options_values_price'],false,$product_info['products_tax_class_id']);
           }
@@ -75,7 +84,7 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
             						'PRICE' =>$xtPrice->xtcFormat($price,true),
                                     'FULL_PRICE'=>$xtPrice->xtcFormat($products_price+$price,true),
             						'PREFIX' =>$products_options['price_prefix']);
-
+          }
         $col++;
         }
       $row++;

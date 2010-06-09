@@ -245,7 +245,7 @@
   ////
   // Output a form textarea field
   function xtc_draw_textarea_field($name, $wrap, $width, $height, $text = '', $params = '', $reinsert_value = true) {
-    $field = '<textarea name="' . $name . '" wrap="' . $wrap . '" cols="' . $width . '" rows="' . $height . '"';
+    $field = '<textarea id="'.$name.'" name="' . $name . '" wrap="' . $wrap . '" cols="' . $width . '" rows="' . $height . '"';
     if ($params) $field .= ' ' . $params;
     $field .= '>';
     if ( ($GLOBALS[$name]) && ($reinsert_value) ) {
@@ -290,5 +290,24 @@
     if ($required) $field .= TEXT_FIELD_REQUIRED;
 
     return $field;
+  }
+
+  // output 2 Soring arrows
+  function xtc_sorting($page,$sort) {
+
+      switch ($page) {
+          case FILENAME_CUSTOMERS:
+
+          $nav='<br><a href="'.xtc_href_link(FILENAME_CUSTOMERS,'sorting='.$sort.'&'.xtc_get_all_get_params(array('action','sorting'))).'">';
+          $nav.=xtc_image(DIR_WS_ICONS . 'sort_down.gif', '', '20' ,'20').'</a>';
+          $nav.='<a href="'.xtc_href_link(FILENAME_CUSTOMERS,'sorting='.$sort.'-desc&'.xtc_get_all_get_params(array('action','sorting'))).'">';
+          $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '', '20' ,'20').'</a>';
+
+          break;
+
+      }
+
+      return $nav;
+
   }
 ?>

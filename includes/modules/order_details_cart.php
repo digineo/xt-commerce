@@ -95,7 +95,6 @@ $mark_stock='';
       				'MODEL'=>$products[$i][$option]['products_options_model'],
       				'NAME' => $products[$i][$option]['products_options_name'],
       				'VALUE_NAME' => $products[$i][$option]['products_options_values_name'].$attribute_stock_check
-      	//			'PRICE' => xtc_get_products_attribute_price($products[$i][$option]['options_values_price'], $tax_class=$products[$i]['tax_class_id'],$price_special=1,$quantity=$products[$i]['quantity'],$prefix= $products[$i][$option]['price_prefix'])
                     );
         
 

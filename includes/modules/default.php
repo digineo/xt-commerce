@@ -383,7 +383,9 @@ $new_products_category_id = $current_category_id;
  include(DIR_WS_MODULES . FILENAME_PRODUCT_LISTING);
 
   } else { // default page
-
+     if (GROUP_CHECK=='true') {
+   $group_check="and group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
+  }
              $shop_content_query=xtc_db_query("SELECT
                      content_title,
                      content_heading,
@@ -391,6 +393,7 @@ $new_products_category_id = $current_category_id;
                      content_file
                      FROM ".TABLE_CONTENT_MANAGER."
                      WHERE content_group='5'
+                     ".$group_check."
                      AND languages_id='".$_SESSION['languages_id']."'");
      $shop_content_data=xtc_db_fetch_array($shop_content_query);
 

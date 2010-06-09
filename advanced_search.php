@@ -115,6 +115,7 @@ $error='';
 
   $smarty->assign('error',$error);
   $smarty->assign('language', $_SESSION['language']);
+  $smarty->assign('FORM_END','</form>');
 
   $smarty->caching = 0;
   $main_content= $smarty->fetch(CURRENT_TEMPLATE.'/module/advanced_search.html');

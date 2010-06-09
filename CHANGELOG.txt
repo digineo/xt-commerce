@@ -1,11 +1,39 @@
                                      CHANGELOG
 ###################################################################################
 
-  XT-Commerce v3.0.1
-  Release Datum: 14.09.2004
+  XT-Commerce v3.0.2
+  Release Datum: 09.10.2004
   
   ------------------------------------------------------------------------
-
+3.0.1 (09.10.2004)
+*fonts for vvcodes loaded autoamtically
+*fixed content query in index file to display group related content
+*fixed content query in checkout_payment to display group related content
+*fixed content query in shop_content to display group related content
+*BUGFIX 0000357 not active products got shown in view history
+*updated HTML area to new Version and added some plugins
+*new Style for Configuration in admin area
+*fixed bug in create account, sometimes user got pruned into admin group (but without access)
+*fixed some caluclation bugs in payment modules with different currencies
+*BUGFIX 0000354  calculationbug in order edit
+*fixed displaybug in admin-orderview, deletet products attributes price
+*fixed bug in priceclass, activating graduated prices now not necessary to display group prices
+*fixed whos_online
+*fixed buy in priceclass, dont show attribute prices if group isn't allowed to see prices
+*added new EU countries to EU zone
+*fixed coupon module
+*fixed FSK18 system, not possible to buy FSK18 products via direct link
+*fixed dowloadsystem, not permitet paymentmodules wont appear now anymore
+*added new option to VAT-ID processing, admin can setup new rule to perform customers with correct vat id in different groups
+*added new SQL injection and cross-site scripting dedection and guarding, admin will get noticed if anyone tried to hack the system
+*added new feature to payment modules, setting order to a defined status is not possible for each module
+*fixed mailfunction im admin/mail.php
+*fixed specialprice system in admin, percentages didnt worked correctly
+*fixed bug in shipping/payment addresses with country Sachsen
+*added nwe Tag to templates with forms, use {$FORM_END} instead of </form>
+*box_cart template cleaned up
+*fixed bug in breadcrumb, categories name didnt got displayed at products linked to top
+*fixed performance bug in customers search in admin area
 
 
 3.0.1 (14.09.2004)

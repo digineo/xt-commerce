@@ -98,10 +98,11 @@ $smarty->assign('account_option',ACCOUNT_OPTIONS);
 $smarty->assign('BUTTON_NEW_ACCOUNT','<a href="' . xtc_href_link(FILENAME_CREATE_ACCOUNT, '', 'SSL') . '">' . xtc_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>');
 $smarty->assign('BUTTON_LOGIN',xtc_image_submit('button_login.gif', IMAGE_BUTTON_LOGIN));
 $smarty->assign('BUTTON_GUEST','<a href="' . xtc_href_link(FILENAME_CREATE_GUEST_ACCOUNT, '', 'SSL') . '">' . xtc_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>');
-$smarty->assign('FORM_ACTION',xtc_href_link(FILENAME_LOGIN, 'action=process', 'SSL'));
+$smarty->assign('FORM_ACTION',xtc_draw_form('login', xtc_href_link(FILENAME_LOGIN, 'action=process', 'SSL')));
 $smarty->assign('INPUT_MAIL',xtc_draw_input_field('email_address'));
 $smarty->assign('INPUT_PASSWORD',xtc_draw_password_field('password'));
 $smarty->assign('LINK_LOST_PASSWORD',xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, '', 'SSL'));
+$smarty->assign('FORM_END','</form>');
 
 
 

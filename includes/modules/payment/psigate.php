@@ -163,7 +163,7 @@
     }
 
     function process_button() {
-      global $order, $currencies;
+      global $order, $xtPrice;
 
       switch (MODULE_PAYMENT_PSIGATE_TRANSACTION_MODE) {
         case 'Always Good':
@@ -195,8 +195,8 @@
       }
 
       $process_button_string = xtc_draw_hidden_field('MerchantID', MODULE_PAYMENT_PSIGATE_MERCHANT_ID) .
-                               xtc_draw_hidden_field('FullTotal', number_format($order->info['total'] * $currencies->get_value(MODULE_PAYMENT_PSIGATE_CURRENCY), $currencies->currencies[MODULE_PAYMENT_PSIGATE_CURRENCY]['decimal_places'])) .
-                               xtc_draw_hidden_field('ThanksURL', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL', true)) . 
+                               xtc_draw_hidden_field('FullTotal', round($xtPrice->xtcCalculateCurrEx($order->info['total'],MODULE_PAYMENT_PSIGATE_CURRENCY), $xtPrice->get_decimal_places(MODULE_PAYMENT_PSIGATE_CURRENCY))) .
+                               xtc_draw_hidden_field('ThanksURL', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL', true)) .
                                xtc_draw_hidden_field('NoThanksURL', xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error=' . $this->code, 'NONSSL', true)) . 
                                xtc_draw_hidden_field('Bname', $order->billing['firstname'] . ' ' . $order->billing['lastname']) .
                                xtc_draw_hidden_field('Baddr1', $order->billing['street_address']) .
@@ -230,7 +230,9 @@
     }
 
     function after_process() {
-      return false;
+    global $insert_id;
+        if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+
     }
 
     function get_error() {

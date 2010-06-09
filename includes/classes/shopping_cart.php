@@ -226,6 +226,7 @@
     }
 
     function calculate() {
+        global $xtPrice;
       $this->total = 0;
       $this->weight = 0;
       if (!is_array($this->contents)) return 0;
@@ -240,8 +241,6 @@
         $product_query = xtc_db_query("select products_id, products_price, products_discount_allowed, products_tax_class_id, products_weight from " . TABLE_PRODUCTS . " where products_id='" . xtc_get_prid($products_id) . "'");
         if ($product = xtc_db_fetch_array($product_query)) {
 
-            // dirty workaround
-           $xtPrice = new xtcPrice($_SESSION['currency'],$_SESSION['customers_status']['customers_status_id']);
           $products_price=$xtPrice->xtcGetPrice($product['products_id'],
                                         $format=false,
                                         $qty,
@@ -266,10 +265,8 @@
             }
 
             if ($attribute_price['price_prefix'] == '+') {
-              //$this->total += xtc_get_products_attribute_price($attribute_price['options_values_price'], $tax_class=$attribute_price['products_tax_class_id'], $price_special=0, $quantity=$qty, $prefix=$attribute_price['price_prefix']);
               $this->total +=$xtPrice->xtcFormat($attribute_price['options_values_price'],false,$attribute_price['products_tax_class_id'])*$qty;
             } else {
-              //$this->total -= xtc_get_products_attribute_price($attribute_price['options_values_price'], $tax_class=$attribute_price['products_tax_class_id'], $price_special=0, $quantity=$qty, $prefix=$attribute_price['price_prefix']);
               $this->total -=$xtPrice->xtcFormat($attribute_price['options_values_price'],false,$attribute_price['products_tax_class_id'])*$qty;
             }	
           }
@@ -282,7 +279,7 @@
     }
 
     function attributes_price($products_id) {
-        $xtPrice = new xtcPrice($_SESSION['currency'],$_SESSION['customers_status']['customers_status_id']);
+        global $xtPrice;
       if (isset($this->contents[$products_id]['attributes'])) {
         reset($this->contents[$products_id]['attributes']);
         while (list($option, $value) = each($this->contents[$products_id]['attributes'])) {
@@ -290,11 +287,9 @@
           $attribute_price = xtc_db_fetch_array($attribute_price_query);
           if ($attribute_price['price_prefix'] == '+') {
 
-           // $attributes_price += xtc_get_products_attribute_price($attribute_price['options_values_price'], $tax_class=$attribute_price['products_tax_class_id'], $price_special=0, $quantity=1, $prefix=$attribute_price['price_prefix']);
             $attributes_price += $xtPrice->xtcFormat($attribute_price['options_values_price'],false,$attribute_price['products_tax_class_id']);
 
           } else {
-            //$attributes_price -= xtc_get_products_attribute_price($attribute_price['options_values_price'], $tax_class=$attribute_price['products_tax_class_id'], $price_special=0, $quantity=1, $prefix=$attribute_price['price_prefix']);
             $attributes_price -= $xtPrice->xtcFormat($attribute_price['options_values_price'],false,$attribute_price['products_tax_class_id']);
           }
         }
@@ -303,6 +298,7 @@
     }
 
     function get_products() {
+        global $xtPrice;
       if (!is_array($this->contents)) return false;
 
       $products_array = array();
@@ -312,9 +308,6 @@
         if ($products = xtc_db_fetch_array($products_query)) {
           $prid = $products['products_id'];
 
-
-          // dirty workaround
-          $xtPrice = new xtcPrice($_SESSION['currency'],$_SESSION['customers_status']['customers_status_id']);
           $products_price=$xtPrice->xtcGetPrice($products['products_id'],
                                         $format=false,
                                         $this->contents[$products_id]['qty'],
@@ -330,7 +323,6 @@
                                     'quantity' => $this->contents[$products_id]['qty'],
                                     'weight' => $products['products_weight'],
                                     'final_price' => ($products_price+ $this->attributes_price($products_id)),
-//                                   'final_price' => ($products_price + $this->attributes_price($products_id)),
                                     'tax_class_id' => $products['products_tax_class_id'],
                                     'attributes' => $this->contents[$products_id]['attributes']);
         }

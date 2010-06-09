@@ -94,9 +94,12 @@ class xtcPrice {
         // check Product Discount
         if ($discount = $this->xtcCheckDiscount($pID)) return $this->xtcFormatSpecialDiscount($discount,$pPrice,$format);
 
-        // check graduated+Group Price
+        // check graduated
         if ($this->cStatus['customers_status_graduated_prices']=='1'){
         if ($sPrice = $this->xtcGetGraduatedPrice($pID,$qty)) return $this->xtcFormatSpecialGraduated($this->xtcAddTax($sPrice,$products_tax),$pPrice,$format);
+        } else {
+        // check Group Price
+        if ($sPrice = $this->xtcGetGroupPrice($pID,1)) return $this->xtcFormatSpecialGraduated($this->xtcAddTax($sPrice,$products_tax),$pPrice,$format);
         }
 
         return $this->xtcFormat($pPrice,$format);
@@ -138,6 +141,32 @@ class xtcPrice {
 
 
  function xtcGetGraduatedPrice($pID,$qty) {
+ 			if (!$this->cStatus['customers_status_id']) $this->cStatus['customers_status_id'] = DEFAULT_CUSTOMERS_STATUS_ID_GUEST;
+        $graduated_price_query="SELECT max(quantity) as qty
+                                FROM personal_offers_by_customers_status_".$this->cStatus['customers_status_id']."
+                                WHERE products_id='".$pID."'
+                                AND quantity<='".$qty."'";
+        $graduated_price_query = xtDBquery($graduated_price_query);
+        $graduated_price_data=xtc_db_fetch_array(&$graduated_price_query,true);
+        if ($graduated_price_data['qty']) {
+        $graduated_price_query="SELECT personal_offer
+                                FROM personal_offers_by_customers_status_".$this->cStatus['customers_status_id']."
+                                WHERE products_id='".$pID."'
+                                AND quantity='".$graduated_price_data['qty']."'";
+        $graduated_price_query = xtDBquery($graduated_price_query);
+        $graduated_price_data=xtc_db_fetch_array(&$graduated_price_query,true);
+
+        $sPrice=$graduated_price_data['personal_offer'];
+        if ($sPrice != 0.00 ) return $sPrice;
+        } else {
+            return;
+        }
+
+
+ }
+
+ function xtcGetGroupPrice($pID,$qty) {
+
         $graduated_price_query="SELECT max(quantity) as qty
                                 FROM personal_offers_by_customers_status_".$this->cStatus['customers_status_id']."
                                 WHERE products_id='".$pID."'
@@ -190,6 +219,10 @@ class xtcPrice {
 
  }
 
+ function xtcCalculateCurrEx($price, $curr) {
+         return $price*($this->currencies[$curr]['value']/$this->currencies[$this->actualCurr]['value']);
+}
+
 
  /*
  *
@@ -227,9 +260,9 @@ class xtcPrice {
    if ($format) {
     return '<font size="-1" color="#ff0000">Statt <s>'
                 .$this->xtcFormat($pPrice,$format).
-                '</s></font><br>Nur '
+                '</s></font><br>'.ONLY
                 .$this->xtcFormat($sPrice,$format).
-                '<br><font size="-1">Sie Sparen '
+                '<br><font size="-1">'.YOU_SAVE
                 .$discount.
                 '%';
    } else {
@@ -239,9 +272,9 @@ class xtcPrice {
 
 function xtcFormatSpecial($sPrice,$pPrice,$format) {
   if ($format) {
-  return '<font size="-1" color="#ff0000">Statt <s>'
+  return '<font size="-1" color="#ff0000">'.INSTEAD.'<s>'
         .$this->xtcFormat($pPrice,$format).
-        '</s></font><br>Nur '.
+        '</s></font><br>'.ONLY.
         $this->xtcFormat($sPrice,$format);
   } else {
    return $sPrice;
@@ -251,9 +284,9 @@ function xtcFormatSpecial($sPrice,$pPrice,$format) {
 function xtcFormatSpecialGraduated($sPrice,$pPrice,$format) {
   if ($format) {
    if ($sPrice != $pPrice) {
-   return '<font size="-1" color="#ff0000">UVP <s>'.$this->xtcFormat($pPrice,$format).'</s></font><br>Ihr Preis '.$this->xtcFormat($sPrice,$format);
+   return '<font size="-1" color="#ff0000">'.MSRP.' <s>'.$this->xtcFormat($pPrice,$format).'</s></font><br>'.YOUR_PRICE.$this->xtcFormat($sPrice,$format);
    } else {
-   return 'Ab '.$this->xtcFormat($sPrice,$format);
+   return FROM.$this->xtcFormat($sPrice,$format);
    }
   } else {
    return $sPrice;

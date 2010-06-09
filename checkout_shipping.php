@@ -49,7 +49,7 @@
 
   // if the customer is not logged on, redirect them to the login page
   if (!isset($_SESSION['customer_id'])) {
-    
+
     xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
   }
 
@@ -177,7 +177,7 @@ $smarty->assign('FORM_ACTION',xtc_draw_form('checkout_address', xtc_href_link(FI
 $smarty->assign('ADDRESS_LABEL',xtc_address_label($_SESSION['customer_id'], $_SESSION['sendto'], true, ' ', '<br>'));
 $smarty->assign('BUTTON_ADDRESS','<a href="' . xtc_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL') . '">' . xtc_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>');
 $smarty->assign('BUTON_CONTINUE',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
-
+$smarty->assign('FORM_END','</form>');
 
 
   if (xtc_count_shipping_modules() > 0) {
