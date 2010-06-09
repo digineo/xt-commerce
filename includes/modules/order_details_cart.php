@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: order_details_cart.php 1173 2005-08-22 19:29:02Z mz $   
+   $Id: order_details_cart.php 1281 2005-10-03 09:30:17Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -80,13 +80,22 @@ for ($i = 0, $n = sizeof($products); $i < $n; $i ++) {
 }
 
 $total_content = '';
+$total =$_SESSION['cart']->show_total();
 if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1' && $_SESSION['customers_status']['customers_status_ot_discount'] != '0.00') {
-	$discount = xtc_recalculate_price($_SESSION['cart']->show_total(), $_SESSION['customers_status']['customers_status_ot_discount']);
+	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+		$price = $total-$_SESSION['cart']->show_tax(false);
+	} else {
+		$price = $total;
+	}
+	$discount = $xtPrice->xtcGetDC($price, $_SESSION['customers_status']['customers_status_ot_discount']);
 	$total_content = $_SESSION['customers_status']['customers_status_ot_discount'].' % '.SUB_TITLE_OT_DISCOUNT.' -'.xtc_format_price($discount, $price_special = 1, $calculate_currencies = false).'<br />';
 }
 
 if ($_SESSION['customers_status']['customers_status_show_price'] == '1') {
-	$total_content .= SUB_TITLE_SUB_TOTAL.$xtPrice->xtcFormat($_SESSION['cart']->show_total(), true).'<br />';
+	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 0) $total-=$discount;
+	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) $total-=$discount;
+	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 1) $total-=$discount;
+	$total_content .= SUB_TITLE_SUB_TOTAL.$xtPrice->xtcFormat($total, true).'<br />';
 } else {
 	$total_content .= TEXT_INFO_SHOW_PRICE_NO.'<br />';
 }

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_coupon.php 1085 2005-07-23 19:04:14Z gwinger $
+   $Id: ot_coupon.php 1322 2005-10-27 13:58:22Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -161,29 +161,29 @@ class ot_coupon {
 				$coupon_get = xtc_db_query("select coupon_amount, coupon_minimum_order, restrict_to_products, restrict_to_categories, coupon_type from ".TABLE_COUPONS." where coupon_code = '".$coupon_result['coupon_code']."'");
 				$get_result = xtc_db_fetch_array($coupon_get);
 				$c_deduct = $get_result['coupon_amount'];
+				
+				
 				if ($get_result['coupon_type'] == 'S')
 					$c_deduct = $order->info['shipping_cost'];
+					
+				if ($get_result['coupon_type']=='S' && $get_result['coupon_amount'] > 0 ) $c_deduct = $order->info['shipping_cost'] + $get_result['coupon_amount'];
+				
 				if ($get_result['coupon_minimum_order'] <= $this->get_order_total()) {
+
 					if ($get_result['restrict_to_products'] || $get_result['restrict_to_categories']) {
+						
 						for ($i = 0; $i < sizeof($order->products); $i ++) {
 							if ($get_result['restrict_to_products']) {
 								$pr_ids = split("[,]", $get_result['restrict_to_products']);
-								for ($ii = 0; $ii < count($pr_ids); $ii ++) {
+								for ($ii = 0; $p < count($pr_ids); $ii ++) {
 									if ($pr_ids[$ii] == xtc_get_prid($order->products[$i]['id'])) {
 										if ($get_result['coupon_type'] == 'P') {
-											/* Fixes to Gift Voucher module 5.03
-											=================================
-											Submitted by Rob Cote, robc@traininghott.com
 											
-											original code: $od_amount = round($amount*10)/10*$c_deduct/100;
-											$pr_c = $order->products[$i]['final_price']*$order->products[$i]['qty'];
-											$pod_amount = round($pr_c*10)/10*$c_deduct/100;
-											*/
-											//$pr_c = $order->products[$i]['final_price']*$order->products[$i]['qty'];
-											//$pr_c = $this->product_price($pr_ids[$ii]); //Fred 2003-10-28, fix for the row above, otherwise the discount is calc based on price excl VAT!
-											//$pod_amount = round($pr_c * 10) / 10 * $c_deduct / 100;
-											//$od_amount = $od_amount + $pod_amount;
 											$od_amount = $amount * $get_result['coupon_amount'] / 100;
+											$pr_c = $this->product_price($pr_ids[$ii]); //Fred 2003-10-28, fix for the row above, otherwise the discount is calc based on price excl VAT!
+											$pod_amount = round($pr_c*10)/10*$c_deduct/100;
+											$od_amount = $od_amount + $pod_amount;
+										
 										} else {
 											$od_amount = $c_deduct;
 										}
@@ -198,25 +198,14 @@ class ot_coupon {
 										for ($ii = 0; $ii < count($cat_ids); $ii ++) {
 											if ($sub_cat_ids[$iii] == $cat_ids[$ii]) {
 												if ($get_result['coupon_type'] == 'P') {
-													/* Category Restriction Fix to Gift Voucher module 5.04
-													Date: August 3, 2003
-													=================================
-													Nick Stanko of UkiDev.com, nick@ukidev.com
-													
-													original code:
-													$od_amount = round($amount*10)/10*$c_deduct/100;
-													$pr_c = $order->products[$i]['final_price']*$order->products[$i]['qty'];
+													$pr_c = $this->product_price(xtc_get_prid($order->products[$i]['id'])); //Fred 2003-10-28, fix for the row above, otherwise the discount is calc based on price excl VAT!
 													$pod_amount = round($pr_c*10)/10*$c_deduct/100;
-													*/
-													//$od_amount = round($amount*10)/10*$c_deduct/100;
-													//$pr_c = $order->products[$i]['final_price']*$order->products[$i]['qty'];
-													//$pr_c = $this->product_price(xtc_get_prid($order->products[$i]['id'])); //Fred 2003-10-28, fix for the row above, otherwise the discount is calc based on price excl VAT!
-													//$pod_amount = round($pr_c * 10) / 10 * $c_deduct / 100;
-													//$od_amount = $od_amount + $pod_amount;
-													$od_amount = $amount * $get_result['coupon_amount'] / 100;
+													$od_amount = $od_amount + $pod_amount;
+                                                       continue 3;      // v5.13a Tanaka 2005-4-30: to prevent double counting of a product discount  
 												} else {
 													$od_amount = $c_deduct;
-												}
+													continue 3;
+     											}
 											}
 										}
 									}
@@ -261,27 +250,41 @@ class ot_coupon {
 					// calculate ratio based on total net
 					// for each product reduce tax group per product by ratio amount.
 					$products = $_SESSION['cart']->get_products();
+					
+					
 					$valid_product = false;
 					for ($i = 0; $i < sizeof($products); $i ++) {
 						$valid_product = false;
+					
 						$t_prid = xtc_get_prid($products[$i]['id']);
 						$cc_query = xtc_db_query("select products_tax_class_id from ".TABLE_PRODUCTS." where products_id = '".$t_prid."'");
 						$cc_result = xtc_db_fetch_array($cc_query);
+						
+						
 						if ($get_result['restrict_to_products']) {
 							$pr_ids = split("[,]", $get_result['restrict_to_products']);
 							for ($p = 0; $p < sizeof($pr_ids); $p ++) {
 								if ($pr_ids[$p] == $t_prid)
 									$valid_product = true;
-							}
-						}
+							                                          }
+						                                          }
+						                                          
 						if ($get_result['restrict_to_categories']) {
-							$cat_ids = split("[,]", $get_result['restrict_to_categories']);
-							for ($c = 0; $c < sizeof($cat_ids); $c ++) {
-								$cat_query = xtc_db_query("select products_id from products_to_categories where products_id = '".$products_id."' and categories_id = '".$cat_ids[$i]."'");
-								if (xtc_db_num_rows($cat_query) != 0)
-									$valid_product = true;
-							}
-						}
+                        // v5.13a Tanaka 2005-4-30:  New code, this correctly identifies valid products in subcategories
+                        $cat_ids = split("[,]", $get_result['restrict_to_categories']);
+                        $my_path = xtc_get_product_path($t_prid);
+                        $sub_cat_ids = split("[_]", $my_path);
+                        for ($iii = 0; $iii < count($sub_cat_ids); $iii++) {
+                            for ($ii = 0; $ii < count($cat_ids); $ii++) {
+                                if ($sub_cat_ids[$iii] == $cat_ids[$ii]) {
+                                    $valid_product = true;
+                                    continue 2;
+                                }
+                            }
+                            
+                        }
+						}					 
+						
 						if ($valid_product) {
 							$price_excl_vat = $products[$i]['final_price'] * $products[$i]['quantity'];
 							$price_incl_vat = $this->product_price($t_prid);
@@ -300,6 +303,7 @@ class ot_coupon {
 						if ($method == 'Credit Note') {
 							$tax_rate = xtc_get_tax_rate($this->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
 							$tax_desc = xtc_get_tax_description($this->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
+
 							if ($get_result['coupon_type'] == 'P') {
 								$tod_amount = $od_amount / (100 + $tax_rate) * $tax_rate;
 							} else {
@@ -343,7 +347,8 @@ class ot_coupon {
 								}
 							}
 						}
-						$order->info['tax'] -= $tod_amount;
+					$order->info['total'] -= $tod_amount;						
+$order->info['tax'] -= $tod_amount;
 					}
 					
 					if ($get_result['coupon_type'] == 'P') {

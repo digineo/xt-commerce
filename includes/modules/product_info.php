@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: product_info.php 1238 2005-09-24 10:51:19Z mz $   
+   $Id: product_info.php 1317 2005-10-21 16:03:18Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -66,13 +66,12 @@ if (!is_object($product) || !$product->isProduct()) { // product not found in da
 		}
 		if (ACTIVATE_SHIPPING_STATUS == 'true') {
 			$info_smarty->assign('SHIPPING_NAME', $main->getShippingStatusName($product->data['products_shippingtime']));
-			if ($shipping_status['image'] != '')
-				$info_smarty->assign('SHIPPING_IMAGE', $main->getShippingStatusImage($product->data['products_shippingtime']));
+			$info_smarty->assign('SHIPPING_IMAGE', $main->getShippingStatusImage($product->data['products_shippingtime']));
 		}
 		$info_smarty->assign('FORM_ACTION', xtc_draw_form('cart_quantity', xtc_href_link(FILENAME_PRODUCT_INFO, xtc_get_all_get_params(array ('action')).'action=add_product')));
 		$info_smarty->assign('FORM_END', '</form>');
 		$info_smarty->assign('PRODUCTS_PRICE', $products_price['formated']);
-		if ($product_info['products_vpe_status'] == 1 && $product->data['products_vpe_value'] != 0.0 && $products_price['plain'] > 0)
+		if ($product->data['products_vpe_status'] == 1 && $product->data['products_vpe_value'] != 0.0 && $products_price['plain'] > 0)
 			$info_smarty->assign('PRODUCTS_VPE', $xtPrice->xtcFormat($products_price['plain'] * (1 / $product->data['products_vpe_value']), true).TXT_PER.xtc_get_vpe_name($product->data['products_vpe']));
 		$info_smarty->assign('PRODUCTS_ID', $product->data['products_id']);
 		$info_smarty->assign('PRODUCTS_NAME', $product->data['products_name']);

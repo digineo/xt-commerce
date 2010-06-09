@@ -1,6 +1,6 @@
 <?php
    /* -----------------------------------------------------------------------------------------
-   $Id: listcategories.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: listcategories.php 1313 2005-10-18 15:49:15Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -56,7 +56,7 @@ td {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
    echo "<tr><th>Category ID</th><th>Category Name</th></tr><tr>";
    $cat_ids = split("[,]", $get_result['restrict_to_categories']);
    for ($i = 0; $i < count($cat_ids); $i++) {
-     $result = xtc_db_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $_SESSION['languages_id'] . "' and categories.categories_id='" . $cat_ids[$i] . "'");
+     $result = xtc_db_query("SELECT * FROM ".TABLE_CATEGORIES." c, ".TABLE_CATEGORIES_DESCRIPTION." cd WHERE c.categories_id = cd.categories_id and cd.language_id = '" . $_SESSION['languages_id'] . "' and c.categories_id='" . $cat_ids[$i] . "'");
      if ($row = xtc_db_fetch_array($result)) {
        echo "<td>".$row["categories_id"]."</td>\n";
        echo "<td>".$row["categories_name"]."</td>\n";

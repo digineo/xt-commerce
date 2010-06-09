@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: new_products.php 1238 2005-09-24 10:51:19Z mz $
+   $Id: new_products.php 1292 2005-10-07 16:10:55Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -31,7 +31,7 @@ if ($_SESSION['customers_status']['customers_fsk18_display'] == '0')
 
 if ((!isset ($new_products_category_id)) || ($new_products_category_id == '0')) {
 	if (GROUP_CHECK == 'true')
-		$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+		$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 
 	$new_products_query = "SELECT * FROM
 	                                         ".TABLE_PRODUCTS." p,

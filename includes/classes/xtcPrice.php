@@ -2,7 +2,7 @@
 
 
 /* -----------------------------------------------------------------------------------------
-   $Id: xtcPrice.php 1239 2005-09-24 20:09:56Z mz $
+   $Id: xtcPrice.php 1316 2005-10-21 15:30:58Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -154,14 +154,14 @@ class xtcPrice {
 				$qty = xtc_get_qty($pID);
 		//if (!is_int($this->cStatus['customers_status_id']) && $this->cStatus['customers_status_id']!=0) $this->cStatus['customers_status_id'] = DEFAULT_CUSTOMERS_STATUS_ID_GUEST;
 		$graduated_price_query = "SELECT max(quantity) as qty
-				                                FROM personal_offers_by_customers_status_".$this->actualGroup."
+				                                FROM ".TABLE_PERSONAL_OFFERS_BY.$this->actualGroup."
 				                                WHERE products_id='".$pID."'
 				                                AND quantity<='".$qty."'";
 		$graduated_price_query = xtDBquery($graduated_price_query);
 		$graduated_price_data = xtc_db_fetch_array($graduated_price_query, true);
 		if ($graduated_price_data['qty']) {
 			$graduated_price_query = "SELECT personal_offer
-						                                FROM personal_offers_by_customers_status_".$this->actualGroup."
+						                                FROM ".TABLE_PERSONAL_OFFERS_BY.$this->actualGroup."
 						                                WHERE products_id='".$pID."'
 						                                AND quantity='".$graduated_price_data['qty']."'";
 			$graduated_price_query = xtDBquery($graduated_price_query);
@@ -179,14 +179,14 @@ class xtcPrice {
 	function xtcGetGroupPrice($pID, $qty) {
 
 		$graduated_price_query = "SELECT max(quantity) as qty
-				                                FROM personal_offers_by_customers_status_".$this->actualGroup."
+				                                FROM ".TABLE_PERSONAL_OFFERS_BY.$this->actualGroup."
 				                                WHERE products_id='".$pID."'
 				                                AND quantity<='".$qty."'";
 		$graduated_price_query = xtDBquery($graduated_price_query);
 		$graduated_price_data = xtc_db_fetch_array($graduated_price_query, true);
 		if ($graduated_price_data['qty']) {
 			$graduated_price_query = "SELECT personal_offer
-						                                FROM personal_offers_by_customers_status_".$this->actualGroup."
+						                                FROM ".TABLE_PERSONAL_OFFERS_BY.$this->actualGroup."
 						                                WHERE products_id='".$pID."'
 						                                AND quantity='".$graduated_price_data['qty']."'";
 			$graduated_price_query = xtDBquery($graduated_price_query);
@@ -264,6 +264,20 @@ class xtcPrice {
 	function xtcGetTax($price, $tax) {
 		$tax = $price - $this->xtcRemoveTax($price, $tax);
 		return $tax;
+	}
+	
+	function xtcRemoveDC($price,$dc) {
+	
+		$price = $price - ($price/100*$dc);
+		
+		return $price;	
+	}
+	
+	function xtcGetDC($price,$dc) {
+		
+		$dc = $price/100*$dc;
+	
+		return $dc;	
 	}
 
 	function checkAttributes($pID) {

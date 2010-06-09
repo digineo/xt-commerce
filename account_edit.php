@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: account_edit.php 1222 2005-09-20 22:03:05Z matthias $   
+   $Id: account_edit.php 1314 2005-10-20 14:00:46Z mz $   
    
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -30,6 +30,9 @@ require_once (DIR_FS_INC.'xtc_get_customers_country.inc.php');
 
 if (!isset ($_SESSION['customer_id']))
 	xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+	
+if ($_SESSION['customers_status']['customers_status_id']==0)
+	xtc_redirect(xtc_href_link_admin(FILENAME_CUSTOMERS, 'cID='.$_SESSION['customer_id'].'&action=edit', 'SSL'));
 
 if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	if (ACCOUNT_GENDER == 'true')
@@ -72,7 +75,6 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 
 	// New VAT Check
 	$country = xtc_get_customers_country($_SESSION['customer_id']);
-	if (xtc_get_geo_zone_code($country) != '6') {
 	require_once(DIR_WS_CLASSES.'vat_validation.php');
 	$vatID = new vat_validation($vat, $_SESSION['customer_id'], '', $country);
 
@@ -85,7 +87,6 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	$error = true;
   }
 
-  }
 // New VAT CHECK END
 
 
@@ -104,12 +105,8 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 		$messageStack->add('account_edit', ENTRY_TELEPHONE_NUMBER_ERROR);
 	}
 
-	if($_SESSION['customers_status']['customers_status_id']!=0){
 	if ($customers_status == 0 || !$customers_status)
 		$customers_status = DEFAULT_CUSTOMERS_STATUS_ID;
-	}else{
-		$customers_status = $_SESSION['customers_status']['customers_status_id'];
-	}
 
 	if ($error == false) {
 		$sql_data_array = array ('customers_vat_id' => $vat, 'customers_vat_id_status' => $customers_vat_id_status, 'customers_status' => $customers_status, 'customers_firstname' => $firstname, 'customers_lastname' => $lastname, 'customers_email_address' => $email_address, 'customers_telephone' => $telephone, 'customers_fax' => $fax,'customers_last_modified' => 'now()');

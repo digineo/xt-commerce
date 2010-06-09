@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: database_tables.php 1232 2005-09-21 15:29:07Z mz $   
+   $Id: database_tables.php 1316 2005-10-21 15:30:58Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -49,6 +49,7 @@
   define('TABLE_ORDERS_STATUS_HISTORY', 'orders_status_history');
   define('TABLE_ORDERS_TOTAL', 'orders_total');
   define('TABLE_SHIPPING_STATUS', 'shipping_status');
+  define('TABLE_PERSONAL_OFFERS_BY','personal_offers_by_customers_status_');
   define('TABLE_PRODUCTS', 'products');
   define('TABLE_PRODUCTS_ATTRIBUTES', 'products_attributes');
   define('TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD', 'products_attributes_download');
@@ -81,7 +82,5 @@
   define('TABLE_COUPONS', 'coupons');
   define('TABLE_COUPONS_DESCRIPTION', 'coupons_description');
   define('TABLE_BLACKLIST', 'card_blacklist');
-  define('TABLE_BOT_LOG', 'bot_log');
-  define('TABLE_SERVER_TRACKING', 'server_tracking');
   define('TABLE_CAMPAIGNS_IP','campaigns_ip');
 ?>

@@ -1,8 +1,8 @@
                                      INFO
 ###################################################################################
 
-  XT-Commerce v3.0.4
-  Release Datum: 01.10.2005
+  XT-Commerce v3.0.4SP1
+  Release Datum: 28.10.2005
   
   ------------------------------------------------------------------------
   Dieses Programm ist freie Software. Sie koennen es unter den Bedingungen

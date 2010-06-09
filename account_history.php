@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: account_history.php 971 2005-06-06 18:31:20Z khan_thep $   
+   $Id: account_history.php 1309 2005-10-17 08:01:11Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -52,7 +52,7 @@ if (($orders_total = xtc_count_customer_orders()) > 0) {
 			$order_type = TEXT_ORDER_BILLED_TO;
 			$order_name = $history['billing_name'];
 		}
-		$module_content[] = array ('ORDER_ID' => $history['orders_id'], 'ORDER_STATUS' => $history['orders_status_name'], 'ORDER_DATE' => xtc_date_long($history['date_purchased']), 'ORDER_PRODUCTS' => $products['count'], 'ORDER_TOTAL' => strip_tags($history['order_total']), 'ORDER_BUTTON' => '<a href="'.xtc_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'page='.(empty($_GET['page']) ? "1" : $_GET['page']) .'&order_id='.$history['orders_id'], 'SSL').'">'.xtc_image_button('small_view.gif', SMALL_IMAGE_BUTTON_VIEW).'</a>');
+		$module_content[] = array ('ORDER_ID' => $history['orders_id'], 'ORDER_STATUS' => $history['orders_status_name'], 'ORDER_DATE' => xtc_date_long($history['date_purchased']), 'ORDER_PRODUCTS' => $products['count'], 'ORDER_TOTAL' => strip_tags($history['order_total']), 'ORDER_BUTTON' => '<a href="'.xtc_href_link(FILENAME_ACCOUNT_HISTORY_INFO, 'page='.(empty($_GET['page']) ? "1" : (int)$_GET['page']) .'&order_id='.$history['orders_id'], 'SSL').'">'.xtc_image_button('small_view.gif', SMALL_IMAGE_BUTTON_VIEW).'</a>');
 
 	}
 }

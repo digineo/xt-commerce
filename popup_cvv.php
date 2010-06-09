@@ -1,7 +1,7 @@
 <?php
 
 /*------------------------------------------------------------------------------
-  $Id: popup_cvv.php 1169 2005-08-22 16:07:09Z mz $
+  $Id: popup_cvv.php 1310 2005-10-17 10:06:32Z mz $
 
   XTC-CC - Contribution for XT-Commerce http://www.xt-commerce.com
   modified by http://www.netz-designer.de
@@ -9,7 +9,7 @@
   Copyright (c) 2003 netz-designer
   -----------------------------------------------------------------------------
   based on:
-  $Id: popup_cvv.php 1169 2005-08-22 16:07:09Z mz $
+  $Id: popup_cvv.php 1310 2005-10-17 10:06:32Z mz $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -21,7 +21,7 @@
 
 require ('includes/application_top.php');
 
-require (DIR_WS_LANGUAGES.$_SESSION['language'].'/'.modules.'/'.payment.'/'.'cc.php');
+require (DIR_WS_LANGUAGES.$_SESSION['language'].'/modules/payment/cc.php');
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: shipping.php 985 2005-06-17 22:35:22Z mz $   
+   $Id: shipping.php 1305 2005-10-14 10:30:03Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -115,7 +115,7 @@
             $quotes = $GLOBALS[$class]->quotes;
             $size = sizeof($quotes['methods']);
             for ($i=0; $i<$size; $i++) {
-              if ($quotes['methods'][$i]['cost']) {
+            if(array_key_exists("cost",$quotes['methods'][$i])) {
                 $rates[] = array('id' => $quotes['id'] . '_' . $quotes['methods'][$i]['id'],
                                  'title' => $quotes['module'] . ' (' . $quotes['methods'][$i]['title'] . ')',
                                  'cost' => $quotes['methods'][$i]['cost']);

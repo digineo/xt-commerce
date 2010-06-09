@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_findTitle.inc.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: xtc_findTitle.inc.php 1313 2005-10-18 15:49:15Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -22,14 +22,14 @@
 
 
   function xtc_findTitle($current_pid, $languageFilter) {
-    $query = "SELECT * FROM products_description where language_id = '" . $_SESSION['languages_id'] . "' AND products_id = '" . $current_pid . "'";
+    $query = "SELECT * FROM ".TABLE_PRODUCTS_DESCRIPTION."  where language_id = '" . $_SESSION['languages_id'] . "' AND products_id = '" . $current_pid . "'";
 
-    $result = mysql_query($query) or die(mysql_error());
+    $result = xtc_db_query($query);
 
-    $matches = mysql_num_rows($result);
+    $matches = xtc_db_num_rows($result);
 
     if ($matches) {
-      while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
+      while ($line = xtc_db_fetch_array($result)) {
         $productName = $line['products_name'];
       }
       return $productName;

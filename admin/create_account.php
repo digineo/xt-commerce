@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: create_account.php 1224 2005-09-20 22:04:14Z matthias $   
+   $Id: create_account.php 1296 2005-10-08 17:52:26Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -27,6 +27,7 @@ require_once (DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
 require_once (DIR_FS_INC.'xtc_php_mail.inc.php');
 require_once (DIR_FS_INC.'xtc_create_password.inc.php');
 require_once (DIR_FS_INC.'xtc_get_geo_zone_code.inc.php');
+
 
 // initiate template engine for mail
 $smarty = new Smarty;

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: cart_actions.php 1211 2005-08-31 20:57:38Z novalis $
+   $Id: cart_actions.php 1298 2005-10-09 13:14:44Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -44,7 +44,7 @@ if (isset ($_GET['action'])) {
 		if ($_GET['action'] == 'buy_now') {
 			$parameters = array ('action', 'pid', 'products_id', 'BUYproducts_id');
 		} else {
-			$parameters = array ('action', 'pid', 'BUYproducts_id');
+			$parameters = array ('action', 'pid', 'BUYproducts_id','info');
 		}
 	}
 	switch ($_GET['action']) {
@@ -69,7 +69,7 @@ if (isset ($_GET['action'])) {
 					$_POST['products_qty'] = MAX_PRODUCTS_QTY;
 				$_SESSION['cart']->add_cart((int) $_POST['products_id'], $_SESSION['cart']->get_quantity(xtc_get_uprid($_POST['products_id'], $_POST['id'])) + xtc_remove_non_numeric($_POST['products_qty']), $_POST['id']);
 			}
-			xtc_redirect(xtc_href_link($goto, xtc_get_all_get_params($parameters)));
+			xtc_redirect(xtc_href_link($goto, 'products_id='.(int) $_POST['products_id'].'&'.xtc_get_all_get_params($parameters)));
 			break;
 
 		case 'check_gift' :

@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: sales_report.php 987 2005-06-18 15:30:18Z mz $
+   $Id: sales_report.php 1311 2005-10-18 12:30:40Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -49,14 +49,14 @@
   class sales_report {
     var $mode, $globalStartDate, $startDate, $endDate, $actDate, $showDate, $showDateEnd, $sortString, $status, $outlet;
 
-    function sales_report($mode, $startDate = 0, $endDate = 0, $sort = 0, $statusFilter = 0, $filter = 0) {
+    function sales_report($mode, $startDate = 0, $endDate = 0, $sort = 0, $statusFilter = 0, $filter = 0,$payment = 0) {
       // startDate and endDate have to be a unix timestamp. Use mktime !
       // if set then both have to be valid startDate and endDate
       $this->mode = $mode;
       $this->tax_include = DISPLAY_PRICE_WITH_TAX;
 
       $this->statusFilter = $statusFilter;
-            
+      $this->paymentFilter = $payment;     
       // get date of first sale
       $firstQuery = xtc_db_query("select UNIX_TIMESTAMP(min(date_purchased)) as first FROM " . TABLE_ORDERS);
       $first = xtc_db_fetch_array($firstQuery);
@@ -162,6 +162,11 @@
       if ($this->statusFilter > 0) {
         $filterString .= " AND o.orders_status = " . $this->statusFilter . " ";
       }
+      
+      if (!is_numeric($this->paymentFilter)) {
+      	$filterString .= " AND o.payment_method ='" . xtc_db_prepare_input($this->paymentFilter) . "' ";
+      }
+      
       $rqOrders = xtc_db_query($this->queryOrderCnt . " WHERE o.date_purchased >= '" . xtc_db_input(date("Y-m-d\TH:i:s", $sd)) . "' AND o.date_purchased < '" . xtc_db_input(date("Y-m-d\TH:i:s", $ed)) . "'" . $filterString);
       $order = xtc_db_fetch_array($rqOrders);
 

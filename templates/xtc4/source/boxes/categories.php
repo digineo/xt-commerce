@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: categories.php 1262 2005-09-30 10:00:32Z mz $   
+   $Id: categories.php 1302 2005-10-12 16:21:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -35,7 +35,7 @@ if (!CacheCheck()) {
 	$box_smarty->caching = 1;
 	$box_smarty->cache_lifetime = CACHE_LIFETIME;
 	$box_smarty->cache_modified_check = CACHE_CHECK;
-	$cache_id = $_SESSION['language'].$cPath;
+	$cache_id = $_SESSION['language'].$_SESSION['customers_status']['customers_status_id'].$cPath;
 }
 
 if(!$box_smarty->is_cached(CURRENT_TEMPLATE.'/boxes/box_categories.html', $cache_id) || !$cache){

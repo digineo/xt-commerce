@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: orders.php 1191 2005-08-28 17:01:38Z matthias $   
+   $Id: orders.php 1308 2005-10-15 14:22:18Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -113,5 +113,5 @@ define('WARNING_ORDER_NOT_UPDATED', 'Hinweis: Es wurde nichts ge&auml;ndert. Dah
 
 define('TABLE_HEADING_DISCOUNT','Rabatt');
 define('ENTRY_CUSTOMERS_GROUP','Kundengruppe:');
-define('TEXT_VALIDATING','Nicht bestätigt');
+define('TEXT_VALIDATING','Nicht best&auml;tigt');
 ?>

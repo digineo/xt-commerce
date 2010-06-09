@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: general.php,v 1.35 2003/08/13 23:38:04 mbs Exp   
+   $Id: general.php 1316 2005-10-21 15:30:58Z mz $  
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -246,9 +246,9 @@ function xtc_datetime_short($raw_datetime) {
 }
 
 function xtc_array_merge($array1, $array2, $array3 = '') {
-   if ($array1 == '') { $array1 = array (); }
-   if ($array2 == '') { $array2 = array (); }
-	if ($array3 == '') { $array3 = array (); }
+   if (!is_array($array1)) { $array1 = array (); }
+   if (!is_array($array2)) { $array2 = array (); }
+	if (!is_array($array3)) { $array3 = array (); }
 	if (function_exists('array_merge')) {
 		$array_merged = array_merge($array1, $array2, $array3);
 	} else {
@@ -1462,14 +1462,14 @@ function xtc_get_uploaded_file($filename) {
 
 function get_group_price($group_id, $product_id) {
 	// well, first try to get group price from database
-	$group_price_query = xtc_db_query("SELECT personal_offer FROM personal_offers_by_customers_status_".$group_id." WHERE products_id = '".$product_id."' and quantity=1");
+	$group_price_query = xtc_db_query("SELECT personal_offer FROM ".TABLE_PERSONAL_OFFERS_BY.$group_id." WHERE products_id = '".$product_id."' and quantity=1");
 	$group_price_data = xtc_db_fetch_array($group_price_query);
 	// if we found a price, everything is ok if not, we will create new entry
 
 	// if there is no entry, create one. if there are more entries. keep one, dropp rest.
 	if (!xtc_db_num_rows($group_price_query)) {
-		xtc_db_query("INSERT INTO personal_offers_by_customers_status_".$group_id." (price_id, products_id, quantity, personal_offer) VALUES ('', '".$product_id."', '1', '0.00')");
-		$group_price_query = xtc_db_query("SELECT personal_offer FROM personal_offers_by_customers_status_".$group_id." WHERE products_id = '".$product_id."' ORDER BY quantity ASC");
+		xtc_db_query("INSERT INTO ".TABLE_PERSONAL_OFFERS_BY.$group_id." (price_id, products_id, quantity, personal_offer) VALUES ('', '".$product_id."', '1', '0.00')");
+		$group_price_query = xtc_db_query("SELECT personal_offer FROM ".TABLE_PERSONAL_OFFERS_BY.$group_id." WHERE products_id = '".$product_id."' ORDER BY quantity ASC");
 		$group_price_data = xtc_db_fetch_array($group_price_query);
 
 	} else
@@ -1477,9 +1477,9 @@ function get_group_price($group_id, $product_id) {
 			while ($data = xtc_db_fetch_array($group_price_query)) {
 				$group_price_data['personal_offer'] = $data['personal_offer'];
 			}
-			xtc_db_query("DELETE FROM personal_offers_by_customers_status_".$group_id." WHERE products_id='".$product_id."' and quantity=1");
-			xtc_db_query("INSERT INTO personal_offers_by_customers_status_".$group_id." (price_id, products_id, quantity, personal_offer) VALUES ('', '".$product_id."', '1', '".$group_price_data['personal_offer']."')");
-			$group_price_query = xtc_db_query("SELECT personal_offer FROM personal_offers_by_customers_status_".$group_id." WHERE products_id = '".$product_id."' ORDER BY quantity ASC");
+			xtc_db_query("DELETE FROM ".TABLE_PERSONAL_OFFERS_BY.$group_id." WHERE products_id='".$product_id."' and quantity=1");
+			xtc_db_query("INSERT INTO ".TABLE_PERSONAL_OFFERS_BY.$group_id." (price_id, products_id, quantity, personal_offer) VALUES ('', '".$product_id."', '1', '".$group_price_data['personal_offer']."')");
+			$group_price_query = xtc_db_query("SELECT personal_offer FROM ".TABLE_PERSONAL_OFFERS_BY.$group_id." WHERE products_id = '".$product_id."' ORDER BY quantity ASC");
 			$group_price_data = xtc_db_fetch_array($group_price_query);
 		}
 

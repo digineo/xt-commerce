@@ -15,7 +15,6 @@
  * File Authors:
  * 		Frederico Caldeira Knabben (fredck@fckeditor.net)
  */
- defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
 include('config.php') ;
 include('util.php') ;
 include('io.php') ;

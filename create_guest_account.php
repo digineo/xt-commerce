@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: create_guest_account.php 1222 2005-09-20 22:03:05Z matthias $
+   $Id: create_guest_account.php 1311 2005-10-18 12:30:40Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -109,7 +109,6 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	}
 
 // New VAT Check
-	if (xtc_get_geo_zone_code($country) != '6') {
 	require_once(DIR_WS_CLASSES.'vat_validation.php');
 	$vatID = new vat_validation($vat, '', '', $country,true);
 
@@ -120,8 +119,6 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	if($error==1){
 	$messageStack->add('create_account', ENTRY_VAT_ERROR);
 	$error = true;
-  }
-
   }
 // New VAT CHECK END
 
@@ -182,8 +179,8 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 		$messageStack->add('create_account', ENTRY_TELEPHONE_NUMBER_ERROR);
 	}
 
-	if ($customer_group == 0 || !$customer_group)
-		$customer_group = DEFAULT_CUSTOMERS_STATUS_ID_GUEST;
+	if ($customers_status == 0 || !$customers_status)
+		$customers_status = DEFAULT_CUSTOMERS_STATUS_ID_GUEST;
 	$password = xtc_create_password(8);
 
 	if (!$newsletter)

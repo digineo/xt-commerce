@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: product_navigator.php 1140 2005-08-10 10:16:00Z mz $
+   $Id: product_navigator.php 1292 2005-10-07 16:10:55Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -22,7 +22,7 @@ if ($_SESSION['customers_status']['customers_fsk18_display'] == '0') {
 }
 $group_check = "";
 if (GROUP_CHECK == 'true') {
-	$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+	$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 }
 $products_query = xtDBquery("SELECT
                                  pc.products_id,

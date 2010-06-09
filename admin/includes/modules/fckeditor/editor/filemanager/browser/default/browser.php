@@ -25,6 +25,7 @@ defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
 		<script type="text/javascript" src="<? echo DIR_WS_FILEMANAGER; ?>js/fckxml.js"></script>
 		<script language="javascript">
 
+
 function GetUrlParam( paramName )
 {
 	var oRegex = new RegExp( '[\?&]' + paramName + '=([^&]+)', 'i' ) ;

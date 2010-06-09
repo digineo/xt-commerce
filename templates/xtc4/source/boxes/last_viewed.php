@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: last_viewed.php 1262 2005-09-30 10:00:32Z mz $   
+   $Id: last_viewed.php 1292 2005-10-07 16:10:55Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -30,7 +30,7 @@ $random_last_viewed = xtc_rand(0,$max);
   $fsk_lock=' and p.products_fsk18!=1';
   }
      if (GROUP_CHECK=='true') {
-       $group_check="and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+       $group_check=" and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 
   }
 

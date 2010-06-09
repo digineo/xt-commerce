@@ -2,7 +2,7 @@
 
 
 /* --------------------------------------------------------------
-   $Id: categories.php 1248 2005-09-27 10:27:23Z gwinger $
+   $Id: categories.php 1318 2005-10-21 19:40:59Z mz $
   
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -132,7 +132,8 @@ class categories {
 
 		$permission = array ();
 		for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-			$permission[$customers_statuses_array[$i]['id']] = 0;
+			if (isset($customers_statuses_array[$i]['id']))
+				$permission[$customers_statuses_array[$i]['id']] = 0;
 		}
 		if (isset ($categories_data['groups']))
 			foreach ($categories_data['groups'] AS $dummy => $b) {
@@ -141,16 +142,23 @@ class categories {
 		// build array
 		if ($permission['all']==1) {
 			$permission = array ();
-			for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-				$permission[$customers_statuses_array[$i]['id']] = 1;
+			end($customers_statuses_array);
+			for ($i = 0; $n = key($customers_statuses_array), $i < $n+1; $i ++) {
+				if (isset($customers_statuses_array[$i]['id']))
+					$permission[$customers_statuses_array[$i]['id']] = 1;
 			}
 		}
+		
 
 		$permission_array = array ();
-
-		for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-			$permission_array = array_merge($permission_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $permission[$customers_statuses_array[$i]['id']]));
-
+		
+		
+		// set pointer to last key
+		end($customers_statuses_array);		
+		for ($i = 0; $n = key($customers_statuses_array), $i < $n+1; $i ++) {
+			if (isset($customers_statuses_array[$i]['id'])) {
+				$permission_array = array_merge($permission_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $permission[$customers_statuses_array[$i]['id']]));
+			}
 		}
 
 
@@ -171,10 +179,8 @@ class categories {
 		$languages = xtc_get_languages();
 		foreach ($languages AS $lang) {
 			$categories_name_array = $categories_data['name'];
-			$sql_data_array = array ('categories_name' => xtc_db_prepare_input($categories_name_array[$language_id]));
-			if (ALLOW_CATEGORY_DESCRIPTIONS == 'true') {
-				$sql_data_array = array ('categories_name' => xtc_db_prepare_input($categories_data['categories_name'][$lang['id']]), 'categories_heading_title' => xtc_db_prepare_input($categories_data['categories_heading_title'][$lang['id']]), 'categories_description' => xtc_db_prepare_input($categories_data['categories_description'][$lang['id']]), 'categories_meta_title' => xtc_db_prepare_input($categories_data['categories_meta_title'][$lang['id']]), 'categories_meta_description' => xtc_db_prepare_input($categories_data['categories_meta_description'][$lang['id']]), 'categories_meta_keywords' => xtc_db_prepare_input($categories_data['categories_meta_keywords'][$lang['id']]));
-			}
+			$sql_data_array = array ('categories_name' => xtc_db_prepare_input($categories_data['categories_name'][$lang['id']]), 'categories_heading_title' => xtc_db_prepare_input($categories_data['categories_heading_title'][$lang['id']]), 'categories_description' => xtc_db_prepare_input($categories_data['categories_description'][$lang['id']]), 'categories_meta_title' => xtc_db_prepare_input($categories_data['categories_meta_title'][$lang['id']]), 'categories_meta_description' => xtc_db_prepare_input($categories_data['categories_meta_description'][$lang['id']]), 'categories_meta_keywords' => xtc_db_prepare_input($categories_data['categories_meta_keywords'][$lang['id']]));
+
 
 			if ($action == 'insert') {
 				$insert_sql_data = array ('categories_id' => $categories_id, 'language_id' => $lang['id']);
@@ -278,8 +284,8 @@ class categories {
 					$customers_statuses_array = xtc_get_customers_statuses();
 
 		for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-			$sql_data_array = array_merge($sql_data_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $product['group_permission_'.$customers_statuses_array[$i]['id']]));
-
+			if (isset($customers_statuses_array[$i]['id']))
+				$sql_data_array = array_merge($sql_data_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $product['group_permission_'.$customers_statuses_array[$i]['id']]));
 		}
 			
 			xtc_db_perform(TABLE_CATEGORIES, $sql_data_array);
@@ -385,7 +391,8 @@ class categories {
 
 		$customers_status_array = xtc_get_customers_statuses();
 		for ($i = 0, $n = sizeof($customers_status_array); $i < $n; $i ++) {
-			xtc_db_query("delete from personal_offers_by_customers_status_".$i." where products_id = '".xtc_db_input($product_id)."'");
+			if (isset($customers_statuses_array[$i]['id']))
+				xtc_db_query("delete from personal_offers_by_customers_status_".$customers_statuses_array[$i]['id']." where products_id = '".xtc_db_input($product_id)."'");
 		}
 
 		$product_reviews_query = xtc_db_query("select reviews_id from ".TABLE_REVIEWS." where products_id = '".xtc_db_input($product_id)."'");
@@ -456,11 +463,15 @@ class categories {
 			$products_data['products_price'] = round(($products_data['products_price'] / (xtc_get_tax_rate($products_data['products_tax_class_id']) + 100) * 100), PRICE_PRECISION);
 		}
 
+
+		
+		//
 		$customers_statuses_array = xtc_get_customers_statuses();
 
 		$permission = array ();
 		for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-			$permission[$customers_statuses_array[$i]['id']] = 0;
+			if (isset($customers_statuses_array[$i]['id']))
+				$permission[$customers_statuses_array[$i]['id']] = 0;
 		}
 		if (isset ($products_data['groups']))
 			foreach ($products_data['groups'] AS $dummy => $b) {
@@ -469,19 +480,25 @@ class categories {
 		// build array
 		if ($permission['all']==1) {
 			$permission = array ();
-			for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-				$permission[$customers_statuses_array[$i]['id']] = 1;
+			end($customers_statuses_array);
+			for ($i = 0; $n = key($customers_statuses_array), $i < $n+1; $i ++) {
+				if (isset($customers_statuses_array[$i]['id']))
+					$permission[$customers_statuses_array[$i]['id']] = 1;
 			}
 		}
+		
 
 		$permission_array = array ();
-
-		for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-			$permission_array = array_merge($permission_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $permission[$customers_statuses_array[$i]['id']]));
-
+		
+		
+		// set pointer to last key
+		end($customers_statuses_array);		
+		for ($i = 0; $n = key($customers_statuses_array), $i < $n+1; $i ++) {
+			if (isset($customers_statuses_array[$i]['id'])) {
+				$permission_array = array_merge($permission_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $permission[$customers_statuses_array[$i]['id']]));
+			}
 		}
-
-
+		//
 		$sql_data_array = array ('products_quantity' => xtc_db_prepare_input($products_data['products_quantity']), 'products_model' => xtc_db_prepare_input($products_data['products_model']), 'products_ean' => xtc_db_prepare_input($products_data['products_ean']), 'products_price' => xtc_db_prepare_input($products_data['products_price']), 'products_sort' => xtc_db_prepare_input($products_data['products_sort']), 'products_shippingtime' => xtc_db_prepare_input($products_data['shipping_status']), 'products_discount_allowed' => xtc_db_prepare_input($products_data['products_discount_allowed']), 'products_date_available' => $products_date_available, 'products_weight' => xtc_db_prepare_input($products_data['products_weight']), 'products_status' => $products_status, 'products_startpage' => xtc_db_prepare_input($products_data['products_startpage']), 'products_startpage_sort' => xtc_db_prepare_input($products_data['products_startpage_sort']), 'products_tax_class_id' => xtc_db_prepare_input($products_data['products_tax_class_id']), 'product_template' => xtc_db_prepare_input($products_data['info_template']), 'options_template' => xtc_db_prepare_input($products_data['options_template']), 'manufacturers_id' => xtc_db_prepare_input($products_data['manufacturers_id']), 'products_fsk18' => xtc_db_prepare_input($products_data['fsk18']), 'products_vpe_value' => xtc_db_prepare_input($products_data['products_vpe_value']), 'products_vpe_status' => xtc_db_prepare_input($products_data['products_vpe_status']), 'products_vpe' => xtc_db_prepare_input($products_data['products_vpe']));
 		$sql_data_array = array_merge($sql_data_array, $permission_array);
 		//get the next ai-value from table products if no products_id is set
@@ -744,7 +761,8 @@ class categories {
 		$customers_statuses_array = xtc_get_customers_statuses();
 
 		for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-			$sql_data_array = array_merge($sql_data_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $product['group_permission_'.$customers_statuses_array[$i]['id']]));
+			if (isset($customers_statuses_array[$i]['id']))
+				$sql_data_array = array_merge($sql_data_array, array ('group_permission_'.$customers_statuses_array[$i]['id'] => $product['group_permission_'.$customers_statuses_array[$i]['id']]));
 
 		}
 		

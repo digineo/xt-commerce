@@ -1,6 +1,6 @@
 <?php
    /* -----------------------------------------------------------------------------------------
-   $Id: validproducts.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: validproducts.php 1313 2005-10-18 15:49:15Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -45,7 +45,7 @@ require('includes/application_top.php');
 </tr>
 <?
     echo "<tr><th class=\"dataTableHeadingContent\">". TEXT_VALID_PRODUCTS_ID . "</th><th class=\"dataTableHeadingContent\">" . TEXT_VALID_PRODUCTS_NAME . "</th><th class=\"dataTableHeadingContent\">" . TEXT_VALID_PRODUCTS_MODEL . "</th></tr><tr>";
-    $result = xtc_db_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $_SESSION['languages_id'] . "' ORDER BY products_description.products_name");
+    $result = xtc_db_query("SELECT * FROM ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." WHERE p.products_id = pd.products_id and pd.language_id = '" . $_SESSION['languages_id'] . "' ORDER BY pd.products_name");
     if ($row = xtc_db_fetch_array($result)) {
         do {
             echo "<td class=\"dataTableHeadingContent\">".$row["products_id"]."</td>\n";

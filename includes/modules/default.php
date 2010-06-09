@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: default.php 1238 2005-09-24 10:51:19Z mz $   
+   $Id: default.php 1292 2005-10-07 16:10:55Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -173,7 +173,7 @@ if (xtc_check_categories_status($current_category_id) >= 1) {
 				$sorting = ' ORDER BY '.$sorting_data['products_sorting'].' '.$sorting_data['products_sorting2'].' ';
 				// We are asked to show only a specific category
 				if (GROUP_CHECK == 'true') {
-					$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+					$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 				}
 				$listing_sql = "select DISTINCT p.products_fsk18,
 				                               p.products_shippingtime,
@@ -209,7 +209,7 @@ if (xtc_check_categories_status($current_category_id) >= 1) {
 			} else {
 				// We show them all
 				if (GROUP_CHECK == 'true') {
-					$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+					$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 				}
 				$listing_sql = "select p.products_fsk18,
 				                        p.products_shippingtime,
@@ -253,7 +253,7 @@ if (xtc_check_categories_status($current_category_id) >= 1) {
 				$sorting = ' ORDER BY '.$sorting_data['products_sorting'].' '.$sorting_data['products_sorting2'].' ';
 				// We are asked to show only specific catgeory
 				if (GROUP_CHECK == 'true') {
-					$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+					$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 				}
 				$listing_sql = "select p.products_fsk18,
 				                               p.products_shippingtime,
@@ -296,7 +296,7 @@ if (xtc_check_categories_status($current_category_id) >= 1) {
 				$sorting = ' ORDER BY '.$sorting_data['products_sorting'].' '.$sorting_data['products_sorting2'].' ';
 				// We show them all
 				if (GROUP_CHECK == 'true') {
-					$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+					$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 				}
 				$listing_sql = "select p.products_fsk18,
 				                               p.products_shippingtime,

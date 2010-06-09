@@ -1,6 +1,6 @@
 <?PHP
 /* -----------------------------------------------------------------------------------------
-   $Id: selfpickup.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: selfpickup.php 1306 2005-10-14 10:32:31Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -31,7 +31,7 @@ class selfpickup
         $this->description = MODULE_SHIPPING_SELFPICKUP_TEXT_DESCRIPTION;
         $this->icon        = '';   // change $this->icon =  DIR_WS_ICONS . 'shipping_ups.gif'; to some freeshipping icon
         $this->sort_order  = MODULE_SHIPPING_SELFPICKUP_SORT_ORDER;
-        $this->enabled     = MODULE_SHIPPING_SELFPICKUP_STATUS;
+        $this->enabled = ((MODULE_SHIPPING_SELFPICKUP_STATUS == 'True') ? true : false);
     }
 
     function quote($method = '')

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: application_top_export.php 1203 2005-08-29 18:28:51Z hhgag $
+   $Id: application_top_export.php 1323 2005-10-27 17:58:08Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -37,7 +37,7 @@
 
   
   // define the project version
-  define('PROJECT_VERSION', 'xt:Commerce v3.0.3');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP1');
 
   // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == '1' || getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';

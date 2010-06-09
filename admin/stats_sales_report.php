@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: stats_sales_report.php 1023 2005-07-14 11:41:37Z novalis $
+   $Id: stats_sales_report.php 1311 2005-10-18 12:30:40Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -100,6 +100,13 @@
     $srStatus = 0;
   }
   
+   // paymenttype
+  if ( ($_GET['payment']) && (xtc_not_null($_GET['payment'])) )
+{    $srPayment = $_GET['payment'];
+  } else {
+ 	$srPayment = 0;
+  }
+  
   // sort
   if ( ($_GET['sort']) && (xtc_not_null($_GET['sort'])) ) {
     $srSort = $_GET['sort'];
@@ -162,8 +169,8 @@
   }
   
   require(DIR_WS_CLASSES . 'sales_report.php');
-  $sr = new sales_report($srView, $startDate, $endDate, $srSort, $srStatus, 
-$srFilter);  $startDate = $sr->startDate;
+  $sr = new sales_report($srView, $startDate, $endDate, $srSort, $srStatus, $srFilter,$srPayment);  
+  $startDate = $sr->startDate;
   $endDate = $sr->endDate;  
 
   if ($srExp < 2) {
@@ -301,6 +308,28 @@ $srFilter);  $startDate = $sr->startDate;
                       <option value="<?php echo $value["orders_status_id"]?>"<?php if ($srStatus == $value["orders_status_id"]) echo " selected"; ?>><?php echo $value["orders_status_name"] ; ?></option>
 <?php
                          }
+?>
+                    </select><br />
+                   <?php echo REPORT_PAYMENT_FILTER; ?><br />
+                    <select name="payment" size="1">
+                      <option value="0"><?php echo REPORT_ALL; ?></option>
+<?php
+
+  $payments = split(';', MODULE_PAYMENT_INSTALLED);
+  for ($i=0; $i<count($payments); $i++){
+  
+  require(DIR_FS_LANGUAGES . $_SESSION['language'] . '/modules/payment/' . $payments[$i]);	
+  
+  $payment = substr($payments[$i], 0, strrpos($payments[$i], '.'));	
+  $payment_text = constant(MODULE_PAYMENT_.strtoupper($payment)._TEXT_TITLE);
+  
+                         
+?>                           
+    <option value="<?php echo $payment; ?>"<?php if ($srPayment == $payment) echo " selected"; ?>><?php echo $payment_text ; ?></option>
+                           
+  <?php                         
+  }
+                       
 ?>
                     </select><br />
                   </td>

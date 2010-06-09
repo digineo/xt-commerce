@@ -1,6 +1,6 @@
 <?php
    /* -----------------------------------------------------------------------------------------
-   $Id: listproducts.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: listproducts.php 1312 2005-10-18 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -57,7 +57,7 @@ td {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
     echo "<tr><th>Product ID</th><th>Product Name</th><th>Product Size</th></tr><tr>";
     $pr_ids = split("[,]", $get_result['restrict_to_products']);
     for ($i = 0; $i < count($pr_ids); $i++) {
-      $result = xtc_db_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $_SESSION['languages_id'] . "'and products.products_id = '" . $pr_ids[$i] . "'");
+      $result = xtc_db_query("SELECT * FROM ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE p.products_id = pd.products_id and pd.language_id = '" . $_SESSION['languages_id'] . "'and p.products_id = '" . $pr_ids[$i] . "'");
       if ($row = xtc_db_fetch_array($result)) {
             echo "<td>".$row["products_id"]."</td>\n";
             echo "<td>".$row["products_name"]."</td>\n";

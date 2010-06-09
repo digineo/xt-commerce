@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: popup_coupon_help.php 1135 2005-08-07 12:41:42Z mz $
+   $Id: popup_coupon_help.php 1313 2005-10-18 15:49:15Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -56,7 +56,7 @@ $get_result = xtc_db_fetch_array($coupon_get);
 
 $cat_ids = split("[,]", $get_result['restrict_to_categories']);
 for ($i = 0; $i < count($cat_ids); $i ++) {
-	$result = xtc_db_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '".$_SESSION['languages_id']."' and categories.categories_id='".$cat_ids[$i]."'");
+	$result = xtc_db_query("SELECT * FROM ".TABLE_CATEGORIES." c, ".TABLE_CATEGORIES_DESCRIPTION." cd WHERE c.categories_id = cd.categories_id and cd.language_id = '".$_SESSION['languages_id']."' and c.categories_id='".$cat_ids[$i]."'");
 	if ($row = xtc_db_fetch_array($result)) {
 		$cats .= '<br />'.$row["categories_name"];
 	}
@@ -70,7 +70,7 @@ $get_result = xtc_db_fetch_array($coupon_get);
 
 $pr_ids = split("[,]", $get_result['restrict_to_products']);
 for ($i = 0; $i < count($pr_ids); $i ++) {
-	$result = xtc_db_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '".$_SESSION['languages_id']."'and products.products_id = '".$pr_ids[$i]."'");
+	$result = xtc_db_query("SELECT * FROM ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." pd WHERE p.products_id = pd.products_id and pd.language_id = '".$_SESSION['languages_id']."'and p.products_id = '".$pr_ids[$i]."'");
 	if ($row = xtc_db_fetch_array($result)) {
 		$prods .= '<br />'.$row["products_name"];
 	}

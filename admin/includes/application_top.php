@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: application_top.php 1263 2005-09-30 10:14:08Z mz $
+   $Id: application_top.php 1323 2005-10-27 17:58:08Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -52,7 +52,7 @@
   define('SQL_CACHEDIR',DIR_FS_CATALOG.'cache/');
 
   // Define the project version
-  define('PROJECT_VERSION', 'xt:Commerce v3.0.4');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP1');
 
   // Set the length of the redeem code, the longer the more secure
   define('SECURITY_CODE_LENGTH', '6');
@@ -173,6 +173,7 @@
   define('TABLE_ORDERS_STATUS_HISTORY', 'orders_status_history');
   define('TABLE_ORDERS_TOTAL', 'orders_total');
   define('TABLE_ORDERS_RECALCULATE', 'orders_recalculate');
+  define('TABLE_PERSONAL_OFFERS_BY','personal_offers_by_customers_status_');
   define('TABLE_PRODUCTS', 'products');
   define('TABLE_PRODUCTS_ATTRIBUTES', 'products_attributes');
   define('TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD', 'products_attributes_download');

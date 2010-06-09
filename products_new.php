@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: products_new.php 1179 2005-08-25 12:37:13Z mz $   
+   $Id: products_new.php 1292 2005-10-07 16:10:55Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -39,7 +39,7 @@ if ($_SESSION['customers_status']['customers_fsk18_display'] == '0') {
 	$fsk_lock = ' and p.products_fsk18!=1';
 }
 if (GROUP_CHECK == 'true') {
-	$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+	$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 }
 if (MAX_DISPLAY_NEW_PRODUCTS_DAYS != '0') {
 	$date_new_products = date("Y.m.d", mktime(1, 1, 1, date(m), date(d) - MAX_DISPLAY_NEW_PRODUCTS_DAYS, date(Y)));

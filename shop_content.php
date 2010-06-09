@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: shop_content.php 1238 2005-09-24 10:51:19Z mz $   
+   $Id: shop_content.php 1303 2005-10-12 16:47:31Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -80,11 +80,14 @@ if ($_GET['coID'] == 7) {
 
 	} else {
 		if ($shop_content_data['content_file'] != '') {
+			ob_start();
 			if (strpos($shop_content_data['content_file'], '.txt'))
 				echo '<pre>';
 			include (DIR_FS_CATALOG.'media/content/'.$shop_content_data['content_file']);
 			if (strpos($shop_content_data['content_file'], '.txt'))
 				echo '</pre>';
+		$contact_content = ob_get_contents();
+		ob_end_clean();
 		} else {
 			$contact_content = $shop_content_data['content_text'];
 		}

@@ -19,10 +19,10 @@
 global $Config ;
 
 // SECURITY: You must explicitelly enable this "connector". (Set it to "true").
-$Config['Enabled'] = false ;
+$Config['Enabled'] = true ;
 
 // Path to user files relative to the document root.
-$Config['UserFilesPath'] = '/UserFiles/' ;
+//$Config['UserFilesPath'] = '/svn/images/';
 
 $Config['AllowedExtensions']['File']	= array() ;
 $Config['DeniedExtensions']['File']		= array('php','php3','php5','phtml','asp','aspx','ascx','jsp','cfm','cfc','pl','bat','exe','dll','reg','cgi') ;

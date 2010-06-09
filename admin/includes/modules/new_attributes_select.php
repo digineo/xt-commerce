@@ -35,7 +35,7 @@ echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
   echo "<TR>";
   echo "<TD class=\"main\"><SELECT NAME=\"current_product_id\">";
 
-  $query = "SELECT * FROM products_description where products_id LIKE '%' AND language_id = '" . $_SESSION['languages_id'] . "' ORDER BY products_name ASC";
+  $query = "SELECT * FROM  ".TABLE_PRODUCTS_DESCRIPTION."  where products_id LIKE '%' AND language_id = '" . $_SESSION['languages_id'] . "' ORDER BY products_name ASC";
 
   $result = xtc_db_query($query);
 
@@ -71,7 +71,7 @@ echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
   echo "<TR>";
   echo "<TD class=\"main\"><SELECT NAME=\"copy_product_id\">";
 
-  $copy_query = xtc_db_query("SELECT pd.products_name, pd.products_id FROM products_description pd, products_attributes pa where pa.products_id = pd.products_id AND pd.products_id LIKE '%' AND pd.language_id = '" . $_SESSION['languages_id'] . "' GROUP BY pd.products_id ORDER BY pd.products_name ASC");
+  $copy_query = xtc_db_query("SELECT pd.products_name, pd.products_id FROM  ".TABLE_PRODUCTS_DESCRIPTION."  pd, ".TABLE_PRODUCTS_ATTRIBUTES." pa where pa.products_id = pd.products_id AND pd.products_id LIKE '%' AND pd.language_id = '" . $_SESSION['languages_id'] . "' GROUP BY pd.products_id ORDER BY pd.products_name ASC");
   $copy_count = xtc_db_num_rows($copy_query);
 
   if ($copy_count) {

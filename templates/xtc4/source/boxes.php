@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: boxes.php 1262 2005-09-30 10:00:32Z mz $   
+   $Id: boxes.php 1298 2005-10-09 13:14:44Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -33,14 +33,6 @@
   if (isset($_SESSION['customer_id'])) include(DIR_WS_BOXES . 'order_history.php');
 
   if (!$product->isProduct()) {
-    if (isset($_SESSION['customer_id'])) {
-      $check_query = xtc_db_query("select count(*) as count from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . $_SESSION['customer_id'] . "' and global_product_notifications = '1'");
-      $check = xtc_db_fetch_array($check_query);
-      if ($check['count'] > 0) {
-        include(DIR_WS_BOXES . 'best_sellers.php');
-      }
-    } 
-  } else {
     include(DIR_WS_BOXES . 'best_sellers.php');
   }
 

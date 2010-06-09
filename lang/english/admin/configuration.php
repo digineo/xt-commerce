@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: configuration.php 1234 2005-09-21 16:25:21Z mz $   
+   $Id: configuration.php 1286 2005-10-07 10:10:18Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -82,8 +82,6 @@ define('ALLOW_ADD_TO_CART_TITLE' , 'Allow add to cart');
 define('ALLOW_ADD_TO_CART_DESC' , 'Allow customers to add products into cart if groupsetting for "show prices" is set to 0');
 define('ALLOW_DISCOUNT_ON_PRODUCTS_ATTRIBUTES_TITLE' , 'Allow discount on products attribute?');
 define('ALLOW_DISCOUNT_ON_PRODUCTS_ATTRIBUTES_DESC' , 'Allow customers to get discount on attribute price (if main product is not a "special" product)');
-define('ALLOW_CATEGORY_DESCRIPTIONS_TITLE' , 'Use Category Descriptions');
-define('ALLOW_CATEGORY_DESCRIPTIONS_DESC' , 'Allows to add descriptions for categories');
 define('CURRENT_TEMPLATE_TITLE' , 'Templateset (Theme)');
 define('CURRENT_TEMPLATE_DESC' , 'Choose a Templateset (Theme). The Theme must be saved before in the following folder: www.Your-Domain.com/templates/');
 

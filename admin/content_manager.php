@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: content_manager.php 1023 2005-07-14 11:41:37Z novalis $
+   $Id: content_manager.php 1304 2005-10-12 18:04:43Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -24,6 +24,7 @@
   require_once(DIR_FS_INC . 'xtc_format_filesize.inc.php');
   require_once(DIR_FS_INC . 'xtc_filesize.inc.php');
   require_once(DIR_FS_INC . 'xtc_wysiwyg.inc.php');
+  
   
   $languages = xtc_get_languages();
 

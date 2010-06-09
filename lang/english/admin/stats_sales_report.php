@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: stats_sales_report.php 1086 2005-07-23 21:38:43Z mz $   
+   $Id: stats_sales_report.php 1311 2005-10-18 12:30:40Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -56,6 +56,7 @@ define('SORT_VAL5', 'Revenue');
 define('SORT_VAL6', 'Revenue desc');
 
 define('REPORT_STATUS_FILTER', 'Status');
+define('REPORT_PAYMENT_FILTER','Paymenttype');
 
 define('SR_SEPARATOR1', ';');
 define('SR_SEPARATOR2', ';');

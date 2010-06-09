@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: shopping_cart.php 1262 2005-09-30 10:00:32Z mz $   
+   $Id: shopping_cart.php 1281 2005-10-03 09:30:17Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -44,13 +44,28 @@ if ($_SESSION['cart']->count_contents() > 0) {
 }
 
 if ($_SESSION['cart']->count_contents() > 0) {
-	$total_price = $_SESSION['cart']->show_total();
-	if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1' && $_SESSION['customers_status']['customers_status_ot_discount'] != '0.00') {
-		$box_smarty->assign('TOTAL', $xtPrice->xtcFormat($total_price, true));
-		$box_smarty->assign('DISCOUNT', $xtPrice->xtcFormat(xtc_recalculate_price(($total_price * (-1)), $_SESSION['customers_status']['customers_status_ot_discount']), $price_special = 1, $calculate_currencies = false));
+	
+	$total =$_SESSION['cart']->show_total();
+if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1' && $_SESSION['customers_status']['customers_status_ot_discount'] != '0.00') {
+	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+		$price = $total-$_SESSION['cart']->show_tax(false);
 	} else {
-		$box_smarty->assign('TOTAL', $xtPrice->xtcFormat($total_price, true));
+		$price = $total;
 	}
+	$discount = $xtPrice->xtcGetDC($price, $_SESSION['customers_status']['customers_status_ot_discount']);
+	$box_smarty->assign('DISCOUNT', $xtPrice->xtcFormat(($discount * (-1)), $price_special = 1, $calculate_currencies = false));
+	
+}
+
+
+if ($_SESSION['customers_status']['customers_status_show_price'] == '1') {
+	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 0) $total-=$discount;
+	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) $total-=$discount;
+	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 1) $total-=$discount;
+	$box_smarty->assign('TOTAL', $xtPrice->xtcFormat($total, true));
+} 
+	
+
 	$box_smarty->assign('UST', $_SESSION['cart']->show_tax());
 	
 	if (SHOW_SHIPPING=='true') { 

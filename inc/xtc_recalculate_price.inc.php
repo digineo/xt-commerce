@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_recalculate_price.inc.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: xtc_recalculate_price.inc.php 1281 2005-10-03 09:30:17Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,6 +17,7 @@
    
 function xtc_recalculate_price($price, $discount) 
 	{	  
+	
 	  $price=-100*$price/($discount-100)/100*$discount;
 	  return $price;
       

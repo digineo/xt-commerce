@@ -1,4 +1,4 @@
-﻿/*
+/*
  * FCKeditor - The text editor for internet
  * Copyright (C) 2003-2005 Frederico Caldeira Knabben
  * 
@@ -28,8 +28,6 @@ window.parent.AddTab( 'Info', FCKLang.DlgLnkInfoTab ) ;
 if ( !FCKConfig.LinkDlgHideTarget )
 	window.parent.AddTab( 'Target', FCKLang.DlgLnkTargetTab, true ) ;
 
-if ( FCKConfig.LinkUpload )
-	window.parent.AddTab( 'Upload', FCKLang.DlgLnkUpload, true ) ;
 
 if ( !FCKConfig.LinkDlgHideAdvanced )
 	window.parent.AddTab( 'Advanced', FCKLang.DlgAdvancedTag ) ;

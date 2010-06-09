@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: german.php 1260 2005-09-29 17:48:04Z gwinger $
+   $Id: german.php 1308 2005-10-15 14:22:18Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -62,7 +62,7 @@ define('BOX_TITLE_STATISTICS','Statistik:');
 define('BOX_ENTRY_CUSTOMERS','Kunden');
 define('BOX_ENTRY_PRODUCTS','Artikel');
 define('BOX_ENTRY_REVIEWS','Bewertungen');
-define('TEXT_VALIDATING','Nicht bestätigt');
+define('TEXT_VALIDATING','Nicht best&auml;tigt');
 
 // manufacturer box text
 define('BOX_MANUFACTURER_INFO_HOMEPAGE', '%s Homepage');

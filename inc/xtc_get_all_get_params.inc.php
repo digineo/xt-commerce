@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_all_get_params.inc.php 1237 2005-09-23 14:56:52Z mz $   
+   $Id: xtc_get_all_get_params.inc.php 1310 2005-10-17 10:06:32Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -25,7 +25,9 @@
       reset($_GET);
       while (list($key, $value) = each($_GET)) {
         if ( (strlen($value) > 0) && ($key != xtc_session_name()) && ($key != 'error') && ($key != 'cPath') && (!in_array($key, $exclude_array)) && ($key != 'x') && ($key != 'y') ) {
-          $get_url .= rawurlencode(stripslashes($key)) . '=' . rawurlencode(stripslashes($value)) . '&';
+          $key =rawurlencode(stripslashes($key));
+          $value=rawurlencode(stripslashes($value));          
+          $get_url .= $key . '=' . $value . '&';
         }
       }
     }

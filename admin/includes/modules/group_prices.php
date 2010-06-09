@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: group_prices.php 1125 2005-07-28 09:59:44Z novalis $   
+   $Id: group_prices.php 1307 2005-10-14 10:36:37Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -164,7 +164,7 @@ for ($col = 0, $n = sizeof($group_data); $col < $n +1; $col ++) {
 		echo TXT_PRICE;
 		echo xtc_draw_input_field('products_price_staffel_'.$group_data[$col]['STATUS_ID'], 0);
 		echo xtc_draw_separator('pixel_trans.gif', '10', '10');
-		echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_INSERT . '"/>';
+		echo '<input type="submit" class="button" onClick="return confirm(\''.SAVE_ENTRY.'\')" value="' . BUTTON_INSERT . '"/>';
 ?><br></td>
           </tr>
 <?php

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: shopping_cart.php 1173 2005-08-22 19:29:02Z mz $   
+   $Id: shopping_cart.php 1299 2005-10-09 18:54:29Z gwinger $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -75,7 +75,7 @@ if ($_SESSION['cart']->count_contents() > 0) {
 
 	$smarty->assign('HIDDEN_OPTIONS', $hidden_options);
 	require (DIR_WS_MODULES.'order_details_cart.php');
-
+$_SESSION['allow_checkout'] = 'true';
 	if (STOCK_CHECK == 'true') {
 		if ($_SESSION['any_out_of_stock'] == 1) {
 			if (STOCK_ALLOW_CHECKOUT == 'true') {

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: product_listing.php 1243 2005-09-25 09:33:02Z mz $
+   $Id: product_listing.php 1286 2005-10-07 10:10:18Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -84,8 +84,7 @@ if ($listing_split->number_of_rows > 0) {
 
 		if (ACTIVATE_SHIPPING_STATUS == 'true') {
 			$shipping_status_name = $main->getShippingStatusName($listing['products_shippingtime']);
-			if ($shipping_status['image'] != '')
-				$shipping_status_image = $main->getShippingStatusImage($listing['products_shippingtime']);
+			$shipping_status_image = $main->getShippingStatusImage($listing['products_shippingtime']);
 		}
 
 		

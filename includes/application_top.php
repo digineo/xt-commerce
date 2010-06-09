@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: application_top.php 1262 2005-09-30 10:00:32Z mz $
+   $Id: application_top.php 1323 2005-10-27 17:58:08Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -45,7 +45,7 @@ if (file_exists('includes/local/configure.php')) {
 $php4_3_10 = (0 == version_compare(phpversion(), "4.3.10"));
 define('PHP4_3_10', $php4_3_10);
 // define the project version
-define('PROJECT_VERSION', 'xt:Commerce v3.0.4');
+define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP1');
 
 // set the type of request (secure or not)
 $request_type = (getenv('HTTPS') == '1' || getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';

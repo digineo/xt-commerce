@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: filenames.php 1169 2005-08-22 16:07:09Z mz $   
+   $Id: filenames.php 1295 2005-10-08 16:59:56Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -37,6 +37,7 @@ define('FILENAME_CHECKOUT_SHIPPING', 'checkout_shipping.php');
 define('FILENAME_CHECKOUT_SHIPPING_ADDRESS', 'checkout_shipping_address.php');
 define('FILENAME_CHECKOUT_SUCCESS', 'checkout_success.php');
 define('FILENAME_COOKIE_USAGE', 'cookie_usage.php');
+define('FILENAME_CUSTOMERS','admin/customers.php');
 define('FILENAME_CREATE_ACCOUNT', 'create_account.php');
 define('FILENAME_CREATE_ACCOUNT_SUCCESS', 'create_account_success.php');
 define('FILENAME_DEFAULT', 'index.php');

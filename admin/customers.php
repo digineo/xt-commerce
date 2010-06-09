@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: customers.php 1224 2005-09-20 22:04:14Z matthias $   
+   $Id: customers.php 1296 2005-10-08 17:52:26Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -24,6 +24,8 @@
 require ('includes/application_top.php');
 require_once (DIR_FS_INC.'xtc_validate_vatid_status.inc.php');
 require_once (DIR_FS_INC.'xtc_get_geo_zone_code.inc.php');
+require_once (DIR_FS_INC.'xtc_encrypt_password.inc.php');
+require_once (DIR_FS_INC.'xtc_js_lang.php');
 
 $customers_statuses_array = xtc_get_customers_statuses();
 
@@ -135,6 +137,8 @@ if ($_GET['action']) {
 
 			$payment_unallowed = xtc_db_prepare_input($_POST['payment_unallowed']);
 			$shipping_unallowed = xtc_db_prepare_input($_POST['shipping_unallowed']);
+			$password = xtc_db_prepare_input($_POST['entry_password']);
+			
 
 			if ($memo_text != '' && $memo_title != '') {
 				$sql_data_array = array ('customers_id' => $_GET['cID'], 'memo_date' => date("Y-m-d"), 'memo_title' => $memo_title, 'memo_text' => $memo_text, 'poster_id' => $_SESSION['customer_id']);
@@ -274,6 +278,11 @@ if ($_GET['action']) {
 			if ($error == false) {
 				$sql_data_array = array ('customers_firstname' => $customers_firstname, 'customers_cid' => $customers_cid, 'customers_vat_id' => $customers_vat_id, 'customers_vat_id_status' => $customers_vat_id_status, 'customers_lastname' => $customers_lastname, 'customers_email_address' => $customers_email_address, 'customers_telephone' => $customers_telephone, 'customers_fax' => $customers_fax, 'payment_unallowed' => $payment_unallowed, 'shipping_unallowed' => $shipping_unallowed, 'customers_newsletter' => $customers_newsletter,'customers_last_modified' => 'now()');
 
+				// if new password is set
+				if ($password != "") {			
+					$sql_data_array=array_merge($sql_data_array,array('customers_password' => xtc_encrypt_password($password)));						
+				}
+
 				if (ACCOUNT_GENDER == 'true')
 					$sql_data_array['customers_gender'] = $customers_gender;
 				if (ACCOUNT_DOB == 'true')
@@ -287,7 +296,8 @@ if ($_GET['action']) {
 					$entry_state = '';
 
 				$sql_data_array = array ('entry_firstname' => $customers_firstname, 'entry_lastname' => $customers_lastname, 'entry_street_address' => $entry_street_address, 'entry_postcode' => $entry_postcode, 'entry_city' => $entry_city, 'entry_country_id' => $entry_country_id,'address_last_modified' => 'now()');
-
+				
+				
 				if (ACCOUNT_COMPANY == 'true')
 					$sql_data_array['entry_company'] = $entry_company;
 				if (ACCOUNT_SUBURB == 'true')
@@ -360,7 +370,7 @@ if ($_GET['action'] == 'edit' || $_GET['action'] == 'update') {
 <script type="text/javascript"><!--
 function check_form() {
   var error = 0;
-  var error_message = "<?php echo JS_ERROR; ?>";
+  var error_message = "<?php echo xtc_js_lang(JS_ERROR); ?>";
 
   var customers_firstname = document.customers.customers_firstname.value;
   var customers_lastname = document.customers.customers_lastname.value;
@@ -375,45 +385,45 @@ function check_form() {
 <?php if (ACCOUNT_GENDER == 'true') { ?>
   if (document.customers.customers_gender[0].checked || document.customers.customers_gender[1].checked) {
   } else {
-    error_message = error_message + "<?php echo JS_GENDER; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_GENDER); ?>";
     error = 1;
   }
 <?php } ?>
 
   if (customers_firstname == "" || customers_firstname.length < <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_FIRST_NAME; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_FIRST_NAME); ?>";
     error = 1;
   }
 
   if (customers_lastname == "" || customers_lastname.length < <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_LAST_NAME; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_LAST_NAME); ?>";
     error = 1;
   }
 
 <?php if (ACCOUNT_DOB == 'true') { ?>
   if (customers_dob == "" || customers_dob.length < <?php echo ENTRY_DOB_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_DOB; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_DOB); ?>";
     error = 1;
   }
 <?php } ?>
 
   if (customers_email_address == "" || customers_email_address.length < <?php echo ENTRY_EMAIL_ADDRESS_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_EMAIL_ADDRESS; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_EMAIL_ADDRESS); ?>";
     error = 1;
   }
 
   if (entry_street_address == "" || entry_street_address.length < <?php echo ENTRY_STREET_ADDRESS_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_ADDRESS; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_ADDRESS); ?>";
     error = 1;
   }
 
   if (entry_postcode == "" || entry_postcode.length < <?php echo ENTRY_POSTCODE_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_POST_CODE; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_POST_CODE); ?>";
     error = 1;
   }
 
   if (entry_city == "" || entry_city.length < <?php echo ENTRY_CITY_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_CITY; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_CITY); ?>";
     error = 1;
   }
 
@@ -423,7 +433,7 @@ function check_form() {
 ?>
   if (document.customers.elements['entry_state'].type != "hidden") {
     if (document.customers.entry_state.value == '' || document.customers.entry_state.value.length < <?php echo ENTRY_STATE_MIN_LENGTH; ?> ) {
-       error_message = error_message + "<?php echo JS_STATE; ?>";
+       error_message = error_message + "<?php echo xtc_js_lang(JS_STATE); ?>";
        error = 1;
     }
   }
@@ -434,18 +444,18 @@ function check_form() {
 
   if (document.customers.elements['entry_country_id'].type != "hidden") {
     if (document.customers.entry_country_id.value == 0) {
-      error_message = error_message + "<?php echo JS_COUNTRY; ?>";
+      error_message = error_message + "<?php echo xtc_js_lang(JS_COUNTRY); ?>";
       error = 1;
     }
   }
 
   if (customers_telephone == "" || customers_telephone.length < <?php echo ENTRY_TELEPHONE_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_TELEPHONE; ?>";
+    error_message = error_message + "<?php echo xtc_js_lang(JS_TELEPHONE); ?>";
     error = 1;
   }
 
   if (error == 1) {
-    alert(error_message);
+    alert(unescape(error_message));
     return false;
   } else {
     return true;
@@ -860,7 +870,20 @@ if ($_GET['action'] == 'edit' || $_GET['action'] == 'update') {
 		echo xtc_draw_input_field('shipping_unallowed', $cInfo->shipping_unallowed, 'maxlength="255"');
 	}
 ?></td>
-          </tr>      
+         </tr>
+            <td class="main" bgcolor="#FFCC33"><?php echo ENTRY_NEW_PASSWORD; ?></td>
+            <td class="main" bgcolor="#FFCC33"><?php
+
+if ($error == true) {
+	if ($entry_password_error == true) {
+		echo xtc_draw_input_field('entry_password', $customers_password).'&nbsp;'.ENTRY_PASSWORD_ERROR;
+	} else {
+		echo xtc_draw_input_field('entry_password');
+	}
+} else {
+	echo xtc_draw_input_field('entry_password');
+}
+?></td>      
         
           <tr>
             <td class="main"><?php echo ENTRY_NEWSLETTER; ?></td>

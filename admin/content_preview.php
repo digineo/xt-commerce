@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: content_preview.php 1169 2005-08-22 16:07:09Z mz $   
+   $Id: content_preview.php 1304 2005-10-12 18:04:43Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,6 +14,7 @@
    ---------------------------------------------------------------------------------------*/
    
 require('includes/application_top.php');
+
 
 if ($_GET['pID']=='media') {
 	$content_query=xtc_db_query("SELECT

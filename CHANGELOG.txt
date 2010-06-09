@@ -1,10 +1,29 @@
                                      CHANGELOG
 ###################################################################################
 
-xt:Commerce v3.0.4
-Release Datum: 1.10.2005
+xt:Commerce v3.0.4SP1
+Release Datum: 28.10.2005
 
 ###################################################################################
+
+
+#### 3.0.4 SP1 28.10.2005
+
+BUGFIX: Kundengruppenzuweisung bei Kunden aus dem Ausland
+BUGFIX: UST Berechnung in Warenkorb bei Attributen
+BUGFIX: VPE Anzeige
+BUGFIX: Shipping status image
+BUGFIX: Afterbuyschnittstelle, ISO Code uebergabe
+BUGFIX: FCK Editor, Bildupload
+BUGFIX: add cart problem on several servers
+BUGFIX: min/max Bestellwert
+BUGFIX: all bugs in bugtracker marked as fixed/closed before 28.10.2005
+
+BUGFIX: Bug bei geloeschten kundengruppen
+
+FEATURE: Import unterstuetzt nun mehrere Bilder
+
+#### Version 3.0.4 1.10.2005
 
 CLEANUP: Logik von admin/categories.php in eine Neue Kategorie Klasse admin/includes/classes/categories.php verschoben.
 CLEANUP: Neue Produktklasse includes/classes/product.php für Produktbezogene Informationen

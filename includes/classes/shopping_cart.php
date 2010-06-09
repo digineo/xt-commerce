@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: shopping_cart.php 1239 2005-09-24 20:09:56Z mz $
+   $Id: shopping_cart.php 1281 2005-10-03 09:30:17Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -248,41 +248,10 @@ class shoppingCart {
 				$products_price = $xtPrice->xtcGetPrice($product['products_id'], $format = false, $qty, $product['products_tax_class_id'], $product['products_price']);
 				$this->total += $products_price * $qty;
 				$this->weight += ($qty * $product['products_weight']);
-				if ($product['products_tax_class_id'] != 0) {
-					if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
-						$products_price_tax = $products_price - ($products_price / 100 * $_SESSION['customers_status']['customers_status_ot_discount']);
-					}
-					$products_tax = $xtPrice->TAX[$product['products_tax_class_id']];
-					$products_tax_description = xtc_get_tax_description($product['products_tax_class_id']);
-					
-					
-					// price incl tax
-					if ($_SESSION['customers_status']['customers_status_show_price_tax'] == '1') {
-						if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
-							$this->tax[$product['products_tax_class_id']]['value'] += (($products_price_tax / (100 + $products_tax)) * $products_tax)*$qty;
-							$this->tax[$product['products_tax_class_id']]['desc'] = TAX_ADD_TAX."$products_tax_description";
-						} else {
-							$this->tax[$product['products_tax_class_id']]['value'] += (($products_price / (100 + $products_tax)) * $products_tax)*$qty;
-							$this->tax[$product['products_tax_class_id']]['desc'] = TAX_ADD_TAX."$products_tax_description";
-						}
-						
-					}
-					// excl tax + tax at checkout
-					if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
-						if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
-							$this->tax[$product['products_tax_class_id']]['value'] += ($products_price_tax / 100) * ($products_tax)*$qty;
-							$this->total+=($products_price_tax / 100) * ($products_tax)*$qty;
-							$this->tax[$product['products_tax_class_id']]['desc'] = TAX_NO_TAX."$products_tax_description";
-						} else {
-							$this->tax[$product['products_tax_class_id']]['value'] += ($products_price / 100) * ($products_tax)*$qty;
-							$this->total+= ($products_price / 100) * ($products_tax)*$qty;
-							$this->tax[$product['products_tax_class_id']]['desc'] = TAX_NO_TAX."$products_tax_description";
-						}
-					}				
-				}
-			}
-
-			// attributes price
+				
+				
+							// attributes price
+				$attribute_price = 0;
 			if (isset ($this->contents[$products_id]['attributes'])) {
 				reset($this->contents[$products_id]['attributes']);
 				while (list ($option, $value) = each($this->contents[$products_id]['attributes'])) {
@@ -290,13 +259,56 @@ class shoppingCart {
 					$values = $xtPrice->xtcGetOptionPrice($product['products_id'], $option, $value);
 					$this->weight += $values['weight'] * $qty;
 					$this->total += $values['price'] * $qty;
-
+					$attribute_price+=$values['price'];
 				}
 			}
+				
+				
+				
+				if ($product['products_tax_class_id'] != 0) {
+					
+					if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
+						$products_price_tax = $products_price - ($products_price / 100 * $_SESSION['customers_status']['customers_status_ot_discount']);
+						$attribute_price_tax = $attribute_price - ($attribute_price / 100 * $_SESSION['customers_status']['customers_status_ot_discount']);
+					}
+						
+						
+					$products_tax = $xtPrice->TAX[$product['products_tax_class_id']];
+					$products_tax_description = xtc_get_tax_description($product['products_tax_class_id']);
+
+					
+					// price incl tax
+					if ($_SESSION['customers_status']['customers_status_show_price_tax'] == '1') {
+						if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
+							$this->tax[$product['products_tax_class_id']]['value'] += ((($products_price_tax+$attribute_price_tax) / (100 + $products_tax)) * $products_tax)*$qty;
+							$this->tax[$product['products_tax_class_id']]['desc'] = TAX_ADD_TAX."$products_tax_description";
+						} else {
+							$this->tax[$product['products_tax_class_id']]['value'] += ((($products_price+$attribute_price) / (100 + $products_tax)) * $products_tax)*$qty;
+							$this->tax[$product['products_tax_class_id']]['desc'] = TAX_ADD_TAX."$products_tax_description";
+						}
+						
+					}
+					// excl tax + tax at checkout
+					if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+						if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1) {
+							$this->tax[$product['products_tax_class_id']]['value'] += (($products_price_tax+$attribute_price_tax) / 100) * ($products_tax)*$qty;
+							$this->total+=(($products_price_tax+$attribute_price_tax) / 100) * ($products_tax)*$qty;
+							$this->tax[$product['products_tax_class_id']]['desc'] = TAX_NO_TAX."$products_tax_description";
+						} else {
+							$this->tax[$product['products_tax_class_id']]['value'] += (($products_price+$attribute_price) / 100) * ($products_tax)*$qty;
+							$this->total+= (($products_price+$attribute_price) / 100) * ($products_tax)*$qty;
+							$this->tax[$product['products_tax_class_id']]['desc'] = TAX_NO_TAX."$products_tax_description";
+						}
+					}				
+				}
+			}
+
 		}
+//		echo 'total_VOR'.$this->total;
 		if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] != 0) {
-			$this->total -= $this->total / 100 * $_SESSION['customers_status']['customers_status_ot_discount'];
+//			$this->total -= $this->total / 100 * $_SESSION['customers_status']['customers_status_ot_discount'];
 		}
+//		echo 'total_NACH'.$this->total;
 
 	}
 
@@ -347,16 +359,22 @@ class shoppingCart {
 		return $this->weight;
 	}
 
-	function show_tax() {
+	function show_tax($format = true) {
 		global $xtPrice;
 		$this->calculate();
 		$output = "";
+		$val=0;
 		foreach ($this->tax as $key => $value) {
 			if ($this->tax[$key]['value'] > 0 ) {
 			$output .= $this->tax[$key]['desc'].": ".$xtPrice->xtcFormat($this->tax[$key]['value'], true)."<br />";
+			$val = $this->tax[$key]['value'];
 			}
 		}
+		if ($format) {
 		return $output;
+		} else {
+			return $val;
+		}
 	}
 
 	function generate_cart_id($length = 5) {

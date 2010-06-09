@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: print_product_info.php 1238 2005-09-24 10:51:19Z mz $   
+   $Id: print_product_info.php 1282 2005-10-03 19:39:36Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -110,7 +110,7 @@ $smarty->assign('module_content', $module_content);
 
 //more images - by Novalis
 $mo_images = xtc_get_products_mo_images($product_info['products_id']);
-if (isset ($mo_images)) {
+if (is_array($mo_images)) {
 	foreach ($mo_images as $img) {
 		$mo_img = DIR_WS_CATALOG.DIR_WS_THUMBNAIL_IMAGES.$img['image_name'];
 		$smarty->assign('PRODUCTS_IMAGE_'.$img['image_nr'], $mo_img);

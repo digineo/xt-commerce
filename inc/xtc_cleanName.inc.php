@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_cleanName.inc.php 1206 2005-08-30 00:30:52Z hhgag $
+   $Id: xtc_cleanName.inc.php 1319 2005-10-23 10:35:15Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -12,8 +12,9 @@
 
 
  function xtc_cleanName($name) {
-     urlencode($name);
-     return str_replace('%2F','/',$name);
+     $replace_param='/[^a-zA-Z0-9]/';
+     $name=preg_replace($replace_param,'-',$name);    
+     return $name;
  }
 
 ?>

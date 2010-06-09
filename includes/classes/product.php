@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: product.php 1234 2005-09-21 16:25:21Z mz $ 
+   $Id: product.php 1316 2005-10-21 15:30:58Z mz $ 
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -31,7 +31,7 @@ class product {
 		// query for Product
 		$group_check = "";
 		if (GROUP_CHECK == 'true') {
-			$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+			$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 		}
 
 		$fsk_lock = "";
@@ -152,7 +152,7 @@ class product {
 		}
 		$group_check = "";
 		if (GROUP_CHECK == 'true') {
-			$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+			$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 		}
 
 		$orders_query = xtDBquery("select
@@ -332,7 +332,7 @@ class product {
 				                                     quantity,
 				                                     personal_offer
 				                                     FROM
-				                                     personal_offers_by_customers_status_".(int) $_SESSION['customers_status']['customers_status_id']."
+				                                     ".TABLE_PERSONAL_OFFERS_BY.(int) $_SESSION['customers_status']['customers_status_id']."
 				                                     WHERE
 				                                     products_id = '".$this->pID."'
 				                                     ORDER BY quantity ASC");

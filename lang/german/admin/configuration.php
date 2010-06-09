@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: configuration.php 1234 2005-09-21 16:25:21Z mz $   
+   $Id: configuration.php 1286 2005-10-07 10:10:18Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -82,8 +82,6 @@ define('ALLOW_ADD_TO_CART_TITLE' , 'Erlaubt, Artikel in den Einkaufswagen zu leg
 define('ALLOW_ADD_TO_CART_DESC' , 'Erlaubt das Einf&uuml;gen von Artikeln in den Warenkorb auch dann, wenn "Preise anzeigen" in der Kundengruppe auf "Nein" steht');
 define('ALLOW_DISCOUNT_ON_PRODUCTS_ATTRIBUTES_TITLE' , 'Rabatte auch auf die Artikelattribute verwenden?');
 define('ALLOW_DISCOUNT_ON_PRODUCTS_ATTRIBUTES_DESC' , 'Erlaubt, den eingestellten Rabatt der Kundengruppe auch auf die Artikelattribute anzuwenden (Nur wenn der Artikel nicht als "Sonderangebot" ausgewiesen ist)');
-define('ALLOW_CATEGORY_DESCRIPTIONS_TITLE' , 'Kategoriebeschreibungen verwenden');
-define('ALLOW_CATEGORY_DESCRIPTIONS_DESC' , 'Erlaubt das Einf&uuml;gen von Kategoriebeschreibungen');
 define('CURRENT_TEMPLATE_TITLE' , 'Templateset (Theme)');
 define('CURRENT_TEMPLATE_DESC' , 'W&auml;hlen Sie ein Templateset (Theme) aus. Das Theme muss sich im Ordner www.Ihre-Domain.com/templates/ befinden.<br /><br />Weiter Themes finden sie unter <a href="http://shop.xtcommerce.com">http://shop.xtcommerce.com</a>');
 define('CC_KEYCHAIN_TITLE','CC String');

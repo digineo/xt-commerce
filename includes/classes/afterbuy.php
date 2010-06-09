@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: afterbuy.php 1138 2005-08-09 13:20:22Z mz $ 
+   $Id: afterbuy.php 1287 2005-10-07 10:41:03Z mz $ 
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -66,7 +66,6 @@ class xtc_afterbuy_functions {
 		// customers Address
 		$customer['id'] = $oData['customers_id'];
 		$customer['firma'] = $oData['billing_company'];
-		//list($customer['vorname'],$customer['nachname']) = split(" ",ereg_replace("&","%38",$oData['customers_name']));
 		$customer['vorname'] = $oData['billing_firstname'];
 		$customer['nachname'] = $oData['billing_lastname'];
 		$customer['strasse'] = ereg_replace(" ", "%20", $oData['billing_street_address']);
@@ -75,7 +74,7 @@ class xtc_afterbuy_functions {
 		$customer['tel'] = $oData['billing_telephone'];
 		$customer['fax'] = "";
 		$customer['mail'] = $oData['customers_email_address'];
-		$customer['land'] = $oData['billing_countries_iso_code_2'];
+		$customer['land'] = $oData['billing_country_iso_code_2'];
 
 		// get gender
 		$c_query = xtc_db_query("SELECT customers_gender FROM ".TABLE_CUSTOMERS." WHERE customers_id='".$customer['id']."'");
@@ -91,13 +90,12 @@ class xtc_afterbuy_functions {
 
 		// Delivery Address
 		$customer['d_firma'] = $oData['delivery_company'];
-		//list($customer['d_vorname'],$customer['d_nachname']) = split(" ",ereg_replace("&","%38",$oData['delivery_name']));
 		$customer['d_vorname'] = $oData['delivery_firstname'];
 		$customer['d_nachname'] = $oData['delivery_lastname'];
 		$customer['d_strasse'] = ereg_replace(" ", "%20", $oData['delivery_street_address']);
 		$customer['d_plz'] = $oData['delivery_postcode'];
 		$customer['d_ort'] = ereg_replace(" ", "%20", $oData['delivery_city']);
-		$customer['d_land'] = $crt_data['delivery_countries_iso_code_2'];
+		$customer['d_land'] = $oData['delivery_country_iso_code_2'];
 
 		// get products related to order
 		$p_query = xtc_db_query("SELECT * FROM ".TABLE_ORDERS_PRODUCTS." WHERE orders_id='".$oID."'");
@@ -191,7 +189,7 @@ class xtc_afterbuy_functions {
 			// shippingcosts
 			if ($order_total_values['class'] == 'ot_shipping')
 				$shipping = $order_total_values['value'];
-			// nachnamegeb¸hr
+			// nachnamegebuer
 			if ($order_total_values['class'] == 'ot_cod_fee') {
 				$cod_flag = true;
 				$cod_fee = $order_total_values['value'];
@@ -321,7 +319,7 @@ class xtc_afterbuy_functions {
 		curl_close($ch);
 	}
 
-	// Funktion zum ‹berpr¸fen ob Bestellung bereits an Afterbuy gesendet.
+	// Funktion zum ueberpruefen ob Bestellung bereits an Afterbuy gesendet.
 	function order_send() {
 
 		$check_query = xtc_db_query("SELECT afterbuy_success FROM ".TABLE_ORDERS." WHERE orders_id='".$this->order_id."'");

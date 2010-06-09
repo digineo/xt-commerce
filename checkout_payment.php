@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: checkout_payment.php 1032 2005-07-15 14:43:13Z gwinger $   
+   $Id: checkout_payment.php 1325 2005-10-30 10:23:32Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -92,6 +92,8 @@ if (!isset ($_SESSION['billto'])) {
 			unset ($_SESSION['payment']);
 	}
 }
+
+if (!isset($_SESSION['sendto']) || $_SESSION['sendto']=="") $_SESSION['sendto'] = $_SESSION['billto'];
 
 require (DIR_WS_CLASSES.'order.php');
 $order = new order();

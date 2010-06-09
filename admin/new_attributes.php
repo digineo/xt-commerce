@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: new_attributes.php 1009 2005-07-11 16:19:29Z mz $   
+   $Id: new_attributes.php 1313 2005-10-18 15:49:15Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -63,9 +63,9 @@
   switch($_POST['action']) {
     case 'edit':
       if ($_POST['copy_product_id'] != 0) {
-          $attrib_query = xtc_db_query("SELECT products_id, options_id, options_values_id, options_values_price, price_prefix, attributes_model, attributes_stock, options_values_weight, weight_prefix FROM products_attributes WHERE products_id = " . $_POST['copy_product_id']);
+          $attrib_query = xtc_db_query("SELECT products_id, options_id, options_values_id, options_values_price, price_prefix, attributes_model, attributes_stock, options_values_weight, weight_prefix FROM ".TABLE_PRODUCTS_ATTRIBUTES." WHERE products_id = " . $_POST['copy_product_id']);
           while ($attrib_res = xtc_db_fetch_array($attrib_query)) {
-              xtc_db_query("INSERT into products_attributes (products_id, options_id, options_values_id, options_values_price, price_prefix, attributes_model, attributes_stock, options_values_weight, weight_prefix) VALUES ('" . $_POST['current_product_id'] . "', '" . $attrib_res['options_id'] . "', '" . $attrib_res['options_values_id'] . "', '" . $attrib_res['options_values_price'] . "', '" . $attrib_res['price_prefix'] . "', '" . $attrib_res['attributes_model'] . "', '" . $attrib_res['attributes_stock'] . "', '" . $attrib_res['options_values_weight'] . "', '" . $attrib_res['weight_prefix'] . "')");
+              xtc_db_query("INSERT into ".TABLE_PRODUCTS_ATTRIBUTES." (products_id, options_id, options_values_id, options_values_price, price_prefix, attributes_model, attributes_stock, options_values_weight, weight_prefix) VALUES ('" . $_POST['current_product_id'] . "', '" . $attrib_res['options_id'] . "', '" . $attrib_res['options_values_id'] . "', '" . $attrib_res['options_values_price'] . "', '" . $attrib_res['price_prefix'] . "', '" . $attrib_res['attributes_model'] . "', '" . $attrib_res['attributes_stock'] . "', '" . $attrib_res['options_values_weight'] . "', '" . $attrib_res['weight_prefix'] . "')");
           }
       }
       $pageTitle = TITLE_EDIT.': ' . xtc_findTitle($_POST['current_product_id'], $languageFilter);

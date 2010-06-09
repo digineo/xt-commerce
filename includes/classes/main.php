@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: main.php 1140 2005-08-10 10:16:00Z mz $ 
+   $Id: main.php 1286 2005-10-07 10:10:18Z mz $ 
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -40,7 +40,11 @@
  		return $this->SHIPPING[$id]['name'];
  	}
  	function getShippingStatusImage($id) {
+ 		if ($this->SHIPPING[$id]['image']) {
  		return 'admin/images/icons/'.$this->SHIPPING[$id]['image'];
+ 		} else {
+ 			return;
+ 		}
  	}
  	
  	

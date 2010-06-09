@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: index.php 1263 2005-09-30 10:14:08Z mz $   
+   $Id: index.php 1321 2005-10-26 20:55:07Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

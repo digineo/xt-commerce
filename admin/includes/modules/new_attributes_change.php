@@ -25,18 +25,18 @@
  //  require_once(DIR_FS_INC .'xtc_format_price.inc.php');
   // I found the easiest way to do this is just delete the current attributes & start over =)
   // download function start
-  $delete_sql = xtc_db_query("SELECT products_attributes_id FROM products_attributes WHERE products_id = '" . $_POST['current_product_id'] . "'");
+  $delete_sql = xtc_db_query("SELECT products_attributes_id FROM ".TABLE_PRODUCTS_ATTRIBUTES." WHERE products_id = '" . $_POST['current_product_id'] . "'");
   while($delete_res = xtc_db_fetch_array($delete_sql)) {
-      $delete_download_sql = xtc_db_query("SELECT products_attributes_filename FROM products_attributes_download WHERE products_attributes_id = '" . $delete_res['prducts_attributes_id'] . "'");
+      $delete_download_sql = xtc_db_query("SELECT products_attributes_filename FROM ".TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD." WHERE products_attributes_id = '" . $delete_res['prducts_attributes_id'] . "'");
       $delete_download_file = xtc_db_fetch_array($delete_download_sql);
-      xtc_db_query("DELETE FROM products_attributes_download WHERE products_attributes_id = '" . $delete_res['products_attributes_id'] . "'");
+      xtc_db_query("DELETE FROM ".TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD." WHERE products_attributes_id = '" . $delete_res['products_attributes_id'] . "'");
   }
   // download function end
-  xtc_db_query("DELETE FROM products_attributes WHERE products_id = '" . $_POST['current_product_id'] . "'" );
+  xtc_db_query("DELETE FROM ".TABLE_PRODUCTS_ATTRIBUTES." WHERE products_id = '" . $_POST['current_product_id'] . "'" );
 
   // Simple, yet effective.. loop through the selected Option Values.. find the proper price & prefix.. insert.. yadda yadda yadda.
   for ($i = 0; $i < sizeof($_POST['optionValues']); $i++) {
-    $query = "SELECT * FROM products_options_values_to_products_options where products_options_values_id = '" . $_POST['optionValues'][$i] . "'";
+    $query = "SELECT * FROM ".TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS." where products_options_values_id = '" . $_POST['optionValues'][$i] . "'";
     $result = xtc_db_query($query);
     $matches = xtc_db_num_rows($result);
     while ($line = xtc_db_fetch_array($result)) {
@@ -61,7 +61,7 @@
     $value_weight =  $_POST[$cv_id . '_weight'];
 
 
-      xtc_db_query("INSERT INTO products_attributes (products_id, options_id, options_values_id, options_values_price, price_prefix ,attributes_model, attributes_stock, options_values_weight, weight_prefix,sortorder) VALUES ('" . $_POST['current_product_id'] . "', '" . $optionsID . "', '" . $_POST['optionValues'][$i] . "', '" . $value_price . "', '" . $value_prefix . "', '" . $value_model . "', '" . $value_stock . "', '" . $value_weight . "', '" . $value_weight_prefix . "','".$value_sortorder."')") or die(mysql_error());
+      xtc_db_query("INSERT INTO ".TABLE_PRODUCTS_ATTRIBUTES." (products_id, options_id, options_values_id, options_values_price, price_prefix ,attributes_model, attributes_stock, options_values_weight, weight_prefix,sortorder) VALUES ('" . $_POST['current_product_id'] . "', '" . $optionsID . "', '" . $_POST['optionValues'][$i] . "', '" . $value_price . "', '" . $value_prefix . "', '" . $value_model . "', '" . $value_stock . "', '" . $value_weight . "', '" . $value_weight_prefix . "','".$value_sortorder."')") or die(mysql_error());
 
     $products_attributes_id = xtc_db_insert_id();
 
@@ -70,7 +70,7 @@
         $value_download_expire = $_POST[$cv_id . '_download_expire'];
         $value_download_count = $_POST[$cv_id . '_download_count'];
 
-        xtc_db_query("INSERT INTO products_attributes_download (products_attributes_id, products_attributes_filename, products_attributes_maxdays, products_attributes_maxcount) VALUES ('" . $products_attributes_id . "', '" . $value_download_file . "', '" . $value_download_expire . "', '" . $value_download_count . "')") or die(mysql_error());
+        xtc_db_query("INSERT INTO ".TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD." (products_attributes_id, products_attributes_filename, products_attributes_maxdays, products_attributes_maxcount) VALUES ('" . $products_attributes_id . "', '" . $value_download_file . "', '" . $value_download_expire . "', '" . $value_download_count . "')") or die(mysql_error());
     }
   }
 

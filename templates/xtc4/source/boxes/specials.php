@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: specials.php 1262 2005-09-30 10:00:32Z mz $   
+   $Id: specials.php 1292 2005-10-07 16:10:55Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -27,7 +27,7 @@ if ($_SESSION['customers_status']['customers_fsk18_display'] == '0') {
 	$fsk_lock = ' and p.products_fsk18!=1';
 }
 if (GROUP_CHECK == 'true') {
-	$group_check = "and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
+	$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 }
 if ($random_product = xtc_random_select("select
                                            p.products_id,

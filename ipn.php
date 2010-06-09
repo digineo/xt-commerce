@@ -84,23 +84,23 @@ elseif ($curl == true) {
 if(isset($_POST['invoice']) && is_numeric($_POST['invoice']) && ($_POST['invoice'] > 0)) {
   	$order_query = xtc_db_query("SELECT	currency, currency_value
   								 FROM " . TABLE_ORDERS . "
-  								 WHERE orders_ident_key = '" . $_POST['invoice'] . "' 
+  								 WHERE orders_ident_key = '" . xtc_db_prepare_input($_POST['invoice']) . "' 
 								 AND customers_id = '" . (int)$_POST['custom'] . "'");
 								 
 	if(xtc_db_num_rows($order_query) > 0) {
 		$order = xtc_db_fetch_array($order_query);
 		$total_query = xtc_db_query("SELECT value
 									 FROM " . TABLE_ORDERS_TOTAL . " 
-									 WHERE orders_ident_key = '" . $_POST['invoice'] . "' 
+									 WHERE orders_ident_key = '" . xtc_db_prepare_input($_POST['invoice']) . "' 
 									 AND class = 'ot_total' limit 1");
 		
 		$total = xtc_db_fetch_array($total_query);
 		
-		$comment_status = $_POST['payment_status'] . ' ' . $_POST['mc_gross'] . $_POST['mc_currency'] . '.';
-		$comment_status .= ' ' . $_POST['first_name'] . ' ' . $_POST['last_name'] . ' ' . $_POST['payer_email'];
+		$comment_status = xtc_db_prepare_input($_POST['payment_status']) . ' ' . xtc_db_prepare_input($_POST['mc_gross']) . xtc_db_prepare_input($_POST['mc_currency']) . '.';
+		$comment_status .= ' ' . xtc_db_prepare_input($_POST['first_name']) . ' ' . xtc_db_prepare_input($_POST['last_name']) . ' ' . xtc_db_prepare_input($_POST['payer_email']);
 		
 		if(isset($_POST['payer_status'])) {
-			$comment_status .= ' is ' . $_POST['payer_status'];
+			$comment_status .= ' is ' . xtc_db_prepare_input($_POST['payer_status']);
 		}
 		
 		$comment_status .= '.' . $crlf . $crlf . ' [';
@@ -109,31 +109,31 @@ if(isset($_POST['invoice']) && is_numeric($_POST['invoice']) && ($_POST['invoice
 			$debug = '(Sandbox-Test Mode) ';
 		}
 		
-		$comment_status .= $crlf . 'Fee=' . $_POST['mc_fee'] . $_POST['mc_currency'];
+		$comment_status .= $crlf . 'Fee=' . xtc_db_prepare_input($_POST['mc_fee']) . xtc_db_prepare_input($_POST['mc_currency']);
 		
 		if(isset($_POST['pending_reason'])) {
-			$comment_status .= $crlf . ' Pending Reason=' . $_POST['pending_reason'];
+			$comment_status .= $crlf . ' Pending Reason=' . xtc_db_prepare_input($_POST['pending_reason']);
 		}
 		
 		if(isset($_POST['reason_code'])) {
-			$comment_status .= $crlf . ' Reason Code=' . $_POST['reason_code'];
+			$comment_status .= $crlf . ' Reason Code=' . xtc_db_prepare_input($_POST['reason_code']);
 		}
 		
-		$comment_status .= $crlf . ' Payment=' . $_POST['payment_type'];
-		$comment_status .= $crlf . ' Date=' . $_POST['payment_date'];
+		$comment_status .= $crlf . ' Payment=' . xtc_db_prepare_input($_POST['payment_type']);
+		$comment_status .= $crlf . ' Date=' . xtc_db_prepare_input($_POST['payment_date']);
 		
 		if(isset($_POST['parent_txn_id'])) {
-			$comment_status .= $crlf . ' ParentID=' . $_POST['parent_txn_id'];
+			$comment_status .= $crlf . ' ParentID=' . xtc_db_prepare_input($_POST['parent_txn_id']);
 		}
 		
-		$comment_status .= $crlf . ' ID=' . $_POST['txn_id'];
+		$comment_status .= $crlf . ' ID=' . xtc_db_prepare_input($_POST['txn_id']);
 		
 		//Set status for default (Pending)
 		$order_status_id = MODULE_PAYMENT_PAYPAL_IPN_PREPARE_ORDER_STATUS_ID;
 		
 		if($result == 'VERIFIED') {
 			//Set status for Completed
-			if(($_POST['payment_status'] == 'Completed') AND ($_POST['business'] == MODULE_PAYMENT_PAYPAL_IPN_ID) AND ($_POST['mc_gross'] == number_format($total['value'] * $order['currency_value'], $currencies->get_decimal_places($order['currency'])))) {
+			if(($_POST['payment_status'] == 'Completed') AND ($_POST['business'] == MODULE_PAYMENT_PAYPAL_IPN_ID) AND ($_POST['mc_gross'] == number_format($total['value'] * $order['currency_value'], $xtPrice->get_decimal_places($order['currency'])))) {
 				if (MODULE_PAYMENT_PAYPAL_IPN_ORDER_STATUS_ID > 0) {
 					$order_status_id = MODULE_PAYMENT_PAYPAL_IPN_ORDER_STATUS_ID;
 				}
@@ -153,9 +153,9 @@ if(isset($_POST['invoice']) && is_numeric($_POST['invoice']) && ($_POST['invoice
 		xtc_db_query("UPDATE " . TABLE_ORDERS . " 
 					  SET orders_status = '" . $order_status_id . "', 
 						  last_modified = now() 
-					  WHERE orders_id = '" . $_POST['invoice'] . "'");
+					  WHERE orders_id = '" . xtc_db_prepare_input($_POST['invoice']) . "'");
 		
-		$sql_data_array = array('orders_id' => $_POST['invoice'],
+		$sql_data_array = array('orders_id' => xtc_db_prepare_input($_POST['invoice']),
 								'orders_status_id' => $order_status_id,
 								'date_added' => 'now()',
 								'customer_notified' => '0',
@@ -163,7 +163,7 @@ if(isset($_POST['invoice']) && is_numeric($_POST['invoice']) && ($_POST['invoice
 		
 		xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY, $sql_data_array);
 	}else{
-		$error_reason = 'No order found for invoice=' . $_POST['invoice'] . ' with customer=' . (int)$_POST['custom'] . '.' ;
+		$error_reason = 'No order found for invoice=' . xtc_db_prepare_input($_POST['invoice']) . ' with customer=' . (int)$_POST['custom'] . '.' ;
 	}
 }else{
 		$error_reason = 'No invoice id found on received data.' ;

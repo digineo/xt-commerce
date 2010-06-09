@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: freeamount.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: freeamount.php 1306 2005-10-14 10:32:31Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -22,27 +22,27 @@
 
     function freeamount() {
       $this->code = 'freeamount';
-      $this->title = MODULE_SHIPPING_FREECOUNT_TEXT_TITLE;
-      $this->description = MODULE_SHIPPING_FREECOUNT_TEXT_DESCRIPTION;
+      $this->title = MODULE_SHIPPING_FREEAMOUNT_TEXT_TITLE;
+      $this->description = MODULE_SHIPPING_FREEAMOUNT_TEXT_DESCRIPTION;
       $this->icon ='';   // change $this->icon =  DIR_WS_ICONS . 'shipping_ups.gif'; to some freeshipping icon
-      $this->sort_order = MODULE_SHIPPING_FREECOUNT_SORT_ORDER;
-      $this->enabled = MODULE_SHIPPING_FREECOUNT_STATUS;
+      $this->sort_order = MODULE_SHIPPING_FREEAMOUNT_SORT_ORDER;
+      $this->enabled = ((MODULE_SHIPPING_FREEAMOUNT_STATUS == 'True') ? true : false);
     }
 
     function quote($method = '') {
     	global $xtPrice;
 	
-	  if (( $xtPrice->xtcRemoveCurr($_SESSION['cart']->show_total()) < MODULE_SHIPPING_FREECOUNT_AMOUNT ) && MODULE_SHIPPING_FREECOUNT_DISPLAY == 'False')
+	  if (( $xtPrice->xtcRemoveCurr($_SESSION['cart']->show_total()) < MODULE_SHIPPING_FREEAMOUNT_AMOUNT ) && MODULE_SHIPPING_FREEAMOUNT_DISPLAY == 'False')
 	  return;
 
       $this->quotes = array('id' => $this->code,
-                            'module' => MODULE_SHIPPING_FREECOUNT_TEXT_TITLE);
+                            'module' => MODULE_SHIPPING_FREEAMOUNT_TEXT_TITLE);
 
-      if ( $xtPrice->xtcRemoveCurr($_SESSION['cart']->show_total()) < MODULE_SHIPPING_FREECOUNT_AMOUNT )
-        $this->quotes['error'] = sprintf(MODULE_SHIPPING_FREECOUNT_TEXT_WAY,$xtPrice->xtcFormat(MODULE_SHIPPING_FREECOUNT_AMOUNT,true,0,true));
+      if ( $xtPrice->xtcRemoveCurr($_SESSION['cart']->show_total()) < MODULE_SHIPPING_FREEAMOUNT_AMOUNT )
+        $this->quotes['error'] = sprintf(MODULE_SHIPPING_FREEAMOUNT_TEXT_WAY,$xtPrice->xtcFormat(MODULE_SHIPPING_FREEAMOUNT_AMOUNT,true,0,true));
       else
  	$this->quotes['methods'] = array(array('id'    => $this->code,
-                                               'title' => sprintf(MODULE_SHIPPING_FREECOUNT_TEXT_WAY,$xtPrice->xtcFormat(MODULE_SHIPPING_FREECOUNT_AMOUNT,true,0,true)),
+                                               'title' => sprintf(MODULE_SHIPPING_FREEAMOUNT_TEXT_WAY,$xtPrice->xtcFormat(MODULE_SHIPPING_FREEAMOUNT_AMOUNT,true,0,true)),
                                                'cost'  => 0));
 
       if (xtc_not_null($this->icon)) $this->quotes['icon'] = xtc_image($this->icon, $this->title);
@@ -51,18 +51,18 @@
     }
 
     function check() {
-      $check = xtc_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_SHIPPING_FREECOUNT_STATUS'");
+      $check = xtc_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_SHIPPING_FREEAMOUNT_STATUS'");
       $check = xtc_db_num_rows($check);
 
       return $check;
     }
 
     function install() {
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_SHIPPING_FREECOUNT_STATUS', 'True', '6', '7', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_SHIPPING_FREEAMOUNT_STATUS', 'True', '6', '7', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_FREEAMOUNT_ALLOWED', '', '6', '0', now())");
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_SHIPPING_FREECOUNT_DISPLAY', 'True', '6', '7', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_FREECOUNT_AMOUNT', '50.00', '6', '8', now())");
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_FREECOUNT_SORT_ORDER', '0', '6', '4', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_SHIPPING_FREEAMOUNT_DISPLAY', 'True', '6', '7', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_FREEAMOUNT_AMOUNT', '50.00', '6', '8', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_SHIPPING_FREEAMOUNT_SORT_ORDER', '0', '6', '4', now())");
     }
 
     function remove() {
@@ -70,7 +70,7 @@
     }
 
     function keys() {
-      return array('MODULE_SHIPPING_FREECOUNT_STATUS','MODULE_SHIPPING_FREEAMOUNT_ALLOWED', 'MODULE_SHIPPING_FREECOUNT_DISPLAY', 'MODULE_SHIPPING_FREECOUNT_AMOUNT','MODULE_SHIPPING_FREECOUNT_SORT_ORDER');
+      return array('MODULE_SHIPPING_FREEAMOUNT_STATUS','MODULE_SHIPPING_FREEAMOUNT_ALLOWED', 'MODULE_SHIPPING_FREEAMOUNT_DISPLAY', 'MODULE_SHIPPING_FREEAMOUNT_AMOUNT','MODULE_SHIPPING_FREEAMOUNT_SORT_ORDER');
     }
   }
 ?>

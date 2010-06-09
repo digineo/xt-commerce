@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: customers.php 985 2005-06-17 22:35:22Z mz $   
+   $Id: customers.php 1295 2005-10-08 16:59:56Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -53,4 +53,5 @@ define('TEXT_GUEST','No');
 define('NEW_ORDER','New order ?');
 define('ENTRY_PAYMENT_UNALLOWED','Unallowed paymentmodules:');
 define('ENTRY_SHIPPING_UNALLOWED','Unallowed shippingmodules:');
+define('ENTRY_NEW_PASSWORD','New Password:');
 ?>

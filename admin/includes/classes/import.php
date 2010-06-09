@@ -2,7 +2,7 @@
 
 
 /* --------------------------------------------------------------
-   $Id: import.php 1162 2005-08-17 18:24:11Z mz $
+   $Id: import.php 1319 2005-10-23 10:35:15Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -84,7 +84,7 @@ class xtcImport {
 
 		// add lang fields
 		for ($i = 0; $i < sizeof($this->languages); $i ++) {
-			$file_layout = array_merge($file_layout, array ('p_name.'.$this->languages[$i]['code'] => '', 'p_desc.'.$this->languages[$i]['code'] => '', 'p_shortdesc.'.$this->languages[$i]['code'] => '', 'p_meta_title.'.$this->languages[$i]['code'] => '', 'p_meta_desc.'.$this->languages[$i]['code'] => '', 'p_meta_key.'.$this->languages[$i]['code'] => '', 'p_url.'.$this->languages[$i]['code'] => ''));
+			$file_layout = array_merge($file_layout, array ('p_name.'.$this->languages[$i]['code'] => '', 'p_desc.'.$this->languages[$i]['code'] => '', 'p_shortdesc.'.$this->languages[$i]['code'] => '', 'p_meta_title.'.$this->languages[$i]['code'] => '', 'p_meta_desc.'.$this->languages[$i]['code'] => '', 'p_meta_key.'.$this->languages[$i]['code'] => '','p_keywords.'.$this->languages[$i]['code'] => '', 'p_url.'.$this->languages[$i]['code'] => ''));
 		}
 		// add categorie fields
 		for ($i = 0; $i < $this->catDepth; $i ++)
@@ -200,6 +200,18 @@ class xtcImport {
 			return false;
 		return true;
 	}
+	
+	/**
+	*   Check if a image exists
+	*   @param string $model products modelnumber
+	*   @return boolean
+	*/
+	function checkImage($imgID,$pID) {
+		$img_query = xtc_db_query("SELECT image_id FROM ".TABLE_PRODUCTS_IMAGES." WHERE products_id='".$pID."' and image_nr='".$imgID."'");
+		if (!xtc_db_num_rows($img_query))
+			return false;
+		return true;
+	}
 
 	/**
 	*   removing textnotes from a dataset
@@ -296,7 +308,7 @@ class xtcImport {
 		for ($i = 0; $i < count($this->Groups) - 1; $i ++) {
 			// seperate string ::
 			if (isset ($dataArray['p_priceNoTax.'.$this->Groups[$i +1]['id']])) {
-				$truncate_query = "TRUNCATE personal_offers_by_customers_status_".$this->Groups[$i +1]['id'];
+				$truncate_query = "DELETE FROM ".TABLE_PERSONAL_OFFERS_BY.$this->Groups[$i +1]['id']." WHERE products_id='".$prod_data['products_id']."'";
 				xtc_db_query($truncate_query);
 				$prices = $dataArray['p_priceNoTax.'.$this->Groups[$i +1]['id']];
 				$prices = explode('::', $prices);
@@ -304,7 +316,7 @@ class xtcImport {
 					$values = explode(':', $prices[$ii]);
 					$group_array = array ('products_id' => $prod_data['products_id'], 'quantity' => $values[0], 'personal_offer' => $values[1]);
 
-					xtc_db_perform('personal_offers_by_customers_status_'.$this->Groups[$i +1]['id'], $group_array);
+					xtc_db_perform(TABLE_PERSONAL_OFFERS_BY.$this->Groups[$i +1]['id'], $group_array);
 				}
 			}
 		}
@@ -316,6 +328,20 @@ class xtcImport {
 				$insert_array = array ('group_permission_'.$this->Groups[$i +1]['id'] => $dataArray['p_groupAcc.'.$this->Groups[$i +1]['id']]);
 				xtc_db_perform(TABLE_PRODUCTS, $insert_array, 'update', 'products_id = \''.$products_id.'\'');
 			}
+		}
+		
+		// insert images
+		for ($i = 1; $i < MO_PICS + 1; $i ++) {
+			if (isset($dataArray['p_image.'.$i]) && $dataArray['p_image.'.$i]!="") {		
+			// check if entry exists
+			if ($this->checkImage($i,$products_id)) {
+				$insert_array = array ('image_name' => $dataArray['p_image.'.$i]);
+				xtc_db_perform(TABLE_PRODUCTS_IMAGES, $insert_array, 'update', 'products_id = \''.$products_id.'\' and image_nr=\''.$i.'\'');	
+			} else {
+				$insert_array = array ('image_name' => $dataArray['p_image.'.$i],'image_nr'=>$i,'products_id'=>$products_id);
+				xtc_db_perform(TABLE_PRODUCTS_IMAGES, $insert_array);
+			}
+		}
 		}
 
 		$this->insertCategory($dataArray, $mode, $products_id);
@@ -334,6 +360,8 @@ class xtcImport {
 				$prod_desc_array = array_merge($prod_desc_array, array ('products_meta_description' => $dataArray['p_meta_desc.'.$this->languages[$i_insert]['code']]));
 			if ($this->FileSheme['p_meta_key.'.$this->languages[$i_insert]['code']] == 'Y')
 				$prod_desc_array = array_merge($prod_desc_array, array ('products_meta_keywords' => $dataArray['p_meta_key.'.$this->languages[$i_insert]['code']]));
+			if ($this->FileSheme['p_keywords.'.$this->languages[$i_insert]['code']] == 'Y')
+				$prod_desc_array = array_merge($prod_desc_array, array ('products_keywords' => $dataArray['p_keywords.'.$this->languages[$i_insert]['code']]));
 			if ($this->FileSheme['p_url.'.$this->languages[$i_insert]['code']] == 'Y')
 				$prod_desc_array = array_merge($prod_desc_array, array ('products_url' => $dataArray['p_url.'.$this->languages[$i_insert]['code']]));
 
@@ -598,6 +626,7 @@ class xtcExport {
 			$heading .= $this->TextSign.'p_meta_title.'.$this->languages[$i]['code'].$this->TextSign.$this->seperator;
 			$heading .= $this->TextSign.'p_meta_desc.'.$this->languages[$i]['code'].$this->TextSign.$this->seperator;
 			$heading .= $this->TextSign.'p_meta_key.'.$this->languages[$i]['code'].$this->TextSign.$this->seperator;
+			$heading .= $this->TextSign.'p_keywords.'.$this->languages[$i]['code'].$this->TextSign.$this->seperator;
 			$heading .= $this->TextSign.'p_url.'.$this->languages[$i]['code'].$this->TextSign;
 
 		}
@@ -628,7 +657,7 @@ class xtcExport {
 			$line .= $this->TextSign.$export_data['products_price'].$this->TextSign.$this->seperator;
 			// group prices  Qantity:Price::Quantity:Price
 			for ($i = 0; $i < count($this->Groups) - 1; $i ++) {
-				$price_query = "SELECT * FROM personal_offers_by_customers_status_".$this->Groups[$i +1]['id']." WHERE products_id = '".$export_data['products_id']."'ORDER BY quantity";
+				$price_query = "SELECT * FROM ".TABLE_PERSONAL_OFFERS_BY.$this->Groups[$i +1]['id']." WHERE products_id = '".$export_data['products_id']."'ORDER BY quantity";
 				$price_query = xtc_db_query($price_query);
 				$groupPrice = '';
 				while ($price_data = xtc_db_fetch_array($price_query)) {
@@ -697,6 +726,7 @@ class xtcExport {
 				$line .= $this->TextSign.$lang_data['products_meta_title'].$this->TextSign.$this->seperator;
 				$line .= $this->TextSign.$lang_data['products_meta_description'].$this->TextSign.$this->seperator;
 				$line .= $this->TextSign.$lang_data['products_meta_keywords'].$this->TextSign.$this->seperator;
+				$line .= $this->TextSign.$lang_data['products_keywords'].$this->TextSign.$this->seperator;
 				$line .= $this->TextSign.$lang_data['products_url'].$this->TextSign.$this->seperator;
 
 			}
