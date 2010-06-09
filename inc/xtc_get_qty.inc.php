@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_qty.inc.php,v 1.1 2003/11/07 20:27:01 fanta2k Exp $
+   $Id: xtc_get_qty.inc.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

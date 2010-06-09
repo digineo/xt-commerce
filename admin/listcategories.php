@@ -1,6 +1,6 @@
 <?php
    /* -----------------------------------------------------------------------------------------
-   $Id: listcategories.php,v 1.1 2004/02/17 21:13:26 fanta2k Exp $
+   $Id: listcategories.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

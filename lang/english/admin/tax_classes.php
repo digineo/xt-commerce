@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: tax_classes.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $   
+   $Id: tax_classes.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

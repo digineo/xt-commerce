@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_draw_input_field_installer.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_draw_input_field_installer.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -16,14 +16,14 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_draw_input_field_installer($name, $text = '', $type = 'text', $parameters = '', $reinsert_value = true) {
-    $field = '<div><input type="' . $type . '" name="' . $name . '"';
+    $field = '<input type="' . $type . '" name="' . $name . '"';
     if ( ($key = $GLOBALS[$name]) || ($key = $_GET[$name]) || ($key = $_POST[$name]) || ($key = $_SESSION[$name]) && ($reinsert_value) ) {
       $field .= ' value="' . $key . '"';
     } elseif ($text != '') {
       $field .= ' value="' . $text . '"';
     }
     if ($parameters) $field.= ' ' . $parameters;
-    $field .= ' /></div>';
+    $field .= ' />';
 
     return $field;
   }

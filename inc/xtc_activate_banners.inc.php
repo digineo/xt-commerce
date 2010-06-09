@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_activate_banners.inc.php,v 1.4 2004/05/29 18:32:29 fanta2k Exp $
+   $Id: xtc_activate_banners.inc.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

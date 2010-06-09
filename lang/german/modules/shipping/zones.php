@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: zones.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: zones.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,6 +14,9 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
+   
+// CUSTOMIZE THIS SETTING
+define('NUMBER_OF_ZONES',10);
 
 define('MODULE_SHIPPING_ZONES_TEXT_TITLE', 'Versandkosten nach Zonen');
 define('MODULE_SHIPPING_ZONES_TEXT_DESCRIPTION', 'Versandkosten Zonenbasierend');
@@ -30,10 +33,14 @@ define('MODULE_SHIPPING_ZONES_TAX_CLASS_TITLE' , 'Steuerklasse');
 define('MODULE_SHIPPING_ZONES_TAX_CLASS_DESC' , 'Folgende Steuerklasse an Versandkosten anwenden');
 define('MODULE_SHIPPING_ZONES_SORT_ORDER_TITLE' , 'Sortierreihenfolge');
 define('MODULE_SHIPPING_ZONES_SORT_ORDER_DESC' , 'Reihenfolge der Anzeige');
-define('MODULE_SHIPPING_ZONES_COUNTRIES_1_TITLE' , 'Zone 1 L&auml;nder');
-define('MODULE_SHIPPING_ZONES_COUNTRIES_1_DESC' , 'Durch Komma getrennte Liste von ISO L&auml;ndercodes (2 Zeichen), welche Teil von Zone 1 sind.');
-define('MODULE_SHIPPING_ZONES_COST_1_TITLE' , 'Zone 1 Versandkosten');
-define('MODULE_SHIPPING_ZONES_COST_1_DESC' , 'Versandkosten nach Zone 1 Bestimmungsorte, basierend auf einer Gruppe von max. Bestellgewichten. Beispiel: 3:8.50,7:10.50,... Gewicht von kleiner oder gleich 3 w&uuml;rde 8.50 für die Zone 1 Bestimmungsl&auml;nder kosten.');
-define('MODULE_SHIPPING_ZONES_HANDLING_1_TITLE' , 'Zone 1 Handling Geb&uuml;hr');
-define('MODULE_SHIPPING_ZONES_HANDLING_1_DESC' , 'Handling Geb&uuml;hr für diese Versandzone');
+
+for ($ii=0;$ii<NUMBER_OF_ZONES;$ii++) {
+define('MODULE_SHIPPING_ZONES_COUNTRIES_'.$ii.'_TITLE' , 'Zone '.$ii.' L&auml;nder');
+define('MODULE_SHIPPING_ZONES_COUNTRIES_'.$ii.'_DESC' , 'Durch Komma getrennte Liste von ISO L&auml;ndercodes (2 Zeichen), welche Teil von Zone '.$ii.' sind.');
+define('MODULE_SHIPPING_ZONES_COST_'.$ii.'_TITLE' , 'Zone '.$ii.' Versandkosten');
+define('MODULE_SHIPPING_ZONES_COST_'.$ii.'_DESC' , 'Versandkosten nach Zone '.$ii.' Bestimmungsorte, basierend auf einer Gruppe von max. Bestellgewichten. Beispiel: 3:8.50,7:10.50,... Gewicht von kleiner oder gleich 3 w&uuml;rde 8.50 für die Zone '.$ii.' Bestimmungsl&auml;nder kosten.');
+define('MODULE_SHIPPING_ZONES_HANDLING_'.$ii.'_TITLE' , 'Zone '.$ii.' Handling Geb&uuml;hr');
+define('MODULE_SHIPPING_ZONES_HANDLING_'.$ii.'_DESC' , 'Handling Geb&uuml;hr für diese Versandzone');
+}
+
 ?>

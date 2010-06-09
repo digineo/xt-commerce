@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: message_stack.php,v 1.1 2003/09/06 22:13:53 fanta2k Exp $   
+   $Id: message_stack.php 799 2005-02-23 18:08:06Z novalis $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_draw_input_field.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_draw_input_field.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
    
 // Output a form input field
   function xtc_draw_input_field($name, $value = '', $parameters = '', $type = 'text', $reinsert_value = true) {
-    $field = '<div><input type="' . xtc_parse_input_field_data($type, array('"' => '&quot;')) . '" name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '"';
+    $field = '<input type="' . xtc_parse_input_field_data($type, array('"' => '&quot;')) . '" name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '"';
 
     if ( (isset($GLOBALS[$name])) && ($reinsert_value == true) ) {
       $field .= ' value="' . xtc_parse_input_field_data($GLOBALS[$name], array('"' => '&quot;')) . '"';
@@ -27,13 +27,13 @@
 
     if (xtc_not_null($parameters)) $field .= ' ' . $parameters;
 
-    $field .= ' /></div>';
+    $field .= ' />';
 
     return $field;
   }
   
     function xtc_draw_input_fieldNote($data, $value = '', $parameters = '', $type = 'text', $reinsert_value = true) {
-    $field = '<div><input type="' . xtc_parse_input_field_data($type, array('"' => '&quot;')) . '" name="' . xtc_parse_input_field_data($data['name'], array('"' => '&quot;')) . '"';
+    $field = '<input type="' . xtc_parse_input_field_data($type, array('"' => '&quot;')) . '" name="' . xtc_parse_input_field_data($data['name'], array('"' => '&quot;')) . '"';
 
     if ( (isset($GLOBALS[$data['name']])) && ($reinsert_value == true) ) {
       $field .= ' value="' . xtc_parse_input_field_data($GLOBALS[$data['name']], array('"' => '&quot;')) . '"';
@@ -43,7 +43,7 @@
 
     if (xtc_not_null($parameters)) $field .= ' ' . $parameters;
 
-    $field .= ' />'.$data['text'].'</div>';
+    $field .= ' />'.$data['text'];
 
     return $field;
   }

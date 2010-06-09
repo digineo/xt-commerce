@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: categories.php,v 1.8 2004/05/08 18:13:41 fanta2k Exp $
+   $Id: categories.php 1249 2005-09-27 12:06:40Z gwinger $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,6 +14,7 @@
 
    Released under the GNU General Public License
    --------------------------------------------------------------*/
+ 
 define('TEXT_EDIT_STATUS', 'Status');
 define('HEADING_TITLE', 'Categories / Products');
 define('HEADING_TITLE_SEARCH', 'Search: ');
@@ -23,14 +24,19 @@ define('TABLE_HEADING_ID', 'ID');
 define('TABLE_HEADING_CATEGORIES_PRODUCTS', 'Categories / Products');
 define('TABLE_HEADING_ACTION', 'Action');
 define('TABLE_HEADING_STATUS', 'Status');
+define('TABLE_HEADING_STARTPAGE', 'TOP');
 define('TABLE_HEADING_STOCK','Stock Warning');
 define('TABLE_HEADING_SORT','Sort');
+define('TABLE_HEADING_EDIT','Edit');
+
+define('TEXT_ACTIVE_ELEMENT','Active Element');
+define('TEXT_INFORMATIONS','Informations');
+define('TEXT_MARKED_ELEMENTS','Marked Elements');
+define('TEXT_INSERT_ELEMENT','New Element');
 
 define('TEXT_WARN_MAIN','Main');
-define('TEXT_WARN_ATTRIBUTE','Attribute');
 define('TEXT_NEW_PRODUCT', 'New Product in &quot;%s&quot;');
 define('TEXT_CATEGORIES', 'Categories:');
-define('TEXT_SUBCATEGORIES', 'Subkategories:');
 define('TEXT_PRODUCTS', 'Products:');
 define('TEXT_PRODUCTS_PRICE_INFO', 'Price:');
 define('TEXT_PRODUCTS_TAX_CLASS', 'Tax Class:');
@@ -68,16 +74,22 @@ define('TEXT_INFO_HEADING_MOVE_CATEGORY', 'Move Category');
 define('TEXT_INFO_HEADING_DELETE_PRODUCT', 'Delete Product');
 define('TEXT_INFO_HEADING_MOVE_PRODUCT', 'Move Product');
 define('TEXT_INFO_HEADING_COPY_TO', 'Copy To');
+define('TEXT_INFO_HEADING_MOVE_ELEMENTS', 'Move Elements');
+define('TEXT_INFO_HEADING_DELETE_ELEMENTS', 'Delete Elements');
 
 define('TEXT_DELETE_CATEGORY_INTRO', 'Are you sure you want to delete this category?');
 define('TEXT_DELETE_PRODUCT_INTRO', 'Are you sure you want to permanently delete this product?');
 
-define('TEXT_DELETE_WARNING_CHILDS', '<b>WARNING:</b> There are %s (child-)Categories still linked to this category!');
+define('TEXT_DELETE_WARNING_CHILDS', '<b>WARNING:</b> There are %s (Child-)Categories still linked to this category!');
 define('TEXT_DELETE_WARNING_PRODUCTS', '<b>WARNING:</b> There are %s products still linked to this category!');
+
+define('TEXT_MOVE_WARNING_CHILDS', '<b>Info:</b> There are %s (Child-)Categories still linked to this category!');
+define('TEXT_MOVE_WARNING_PRODUCTS', '<b>Info:</b> There are %s products still linked to this category!');
 
 define('TEXT_MOVE_PRODUCTS_INTRO', 'Please select which category you wish <b>%s</b> to reside in');
 define('TEXT_MOVE_CATEGORIES_INTRO', 'Please select which category you wish <b>%s</b> to reside in');
 define('TEXT_MOVE', 'Move <b>%s</b> to:');
+define('TEXT_MOVE_ALL', 'Move all to:');
 
 define('TEXT_NEW_CATEGORY_INTRO', 'Please fill out the following information for the new category.');
 define('TEXT_CATEGORIES_NAME', 'Category Name:');
@@ -90,6 +102,10 @@ define('TEXT_META_KEYWORDS', 'Meta Keywords:');
 define('TEXT_SORT_ORDER', 'Sort Order:');
 
 define('TEXT_PRODUCTS_STATUS', 'Products Status:');
+define('TEXT_PRODUCTS_STARTPAGE', 'Show on startpage:');
+define('TEXT_PRODUCTS_STARTPAGE_YES', 'Yes');
+define('TEXT_PRODUCTS_STARTPAGE_NO', 'No');
+define('TEXT_PRODUCTS_STARTPAGE_SORT', 'Sort order (startpage):');
 define('TEXT_PRODUCTS_DATE_AVAILABLE', 'Date Available:');
 define('TEXT_PRODUCT_AVAILABLE', 'In Stock');
 define('TEXT_PRODUCT_NOT_AVAILABLE', 'Out of Stock');
@@ -103,7 +119,9 @@ define('TEXT_PRODUCTS_URL', 'Products URL:');
 define('TEXT_PRODUCTS_URL_WITHOUT_HTTP', '<small>(without http://)</small>');
 define('TEXT_PRODUCTS_PRICE', 'Products Price:');
 define('TEXT_PRODUCTS_WEIGHT', 'Products Weight:');
-define('TEXT_PRODUCTS_EAN','Barcode/EAN');  
+define('TEXT_PRODUCTS_EAN','Barcode/EAN');
+define('TEXT_PRODUCT_LINKED_TO','Linked to:');
+
 define('TEXT_DELETE', 'Delete');
 
 define('EMPTY_CATEGORY', 'Empty Category');
@@ -120,8 +138,9 @@ define('TEXT_PRODUCTS_DISCOUNT_ALLOWED','Discount allowed:');
 define('HEADING_PRICES_OPTIONS','<b>Price options</b>');
 define('HEADING_PRODUCT_IMAGES','<b>Products Images</b>');
 define('TEXT_PRODUCTS_WEIGHT_INFO','<small>(kg)</small>');
-define('TEXT_PRODUCTS_SHORT_DESCRIPTION','Shortdescription:');
-define('TXT_STK','Stk: ');
+define('TEXT_PRODUCTS_SHORT_DESCRIPTION','Short description:');
+define('TEXT_PRODUCTS_KEYWORDS', 'Extra words for Search:');
+define('TXT_STK','Pcs: ');
 define('TXT_PRICE','a :');
 define('TXT_NETTO','Net price: ');
 define('TEXT_NETTO','Net: ');
@@ -148,12 +167,24 @@ define('TXT_WEIGHT','Weight');
 define('TXT_QTY','On Stock');
 
 define('TEXT_MULTICOPY','Multiple');
-define('TEXT_MULTICOPY_DESC','Copy/link product into following categories (if 1 selected, Single settings are ignored)');
+define('TEXT_MULTICOPY_DESC','Copy elements into following categories (If one box selected, Single settings will be ignored.)');
 define('TEXT_SINGLECOPY','Single');
-define('TEXT_SINGLECOPY_DESC','Copy/link product into following categorie');
+define('TEXT_SINGLECOPY_DESC','Copy elements into following category');
+define('TEXT_SINGLECOPY_CATEGORY','Category:');
 
 define('TEXT_PRODUCTS_VPE','Unit');
 define('TEXT_PRODUCTS_VPE_VISIBLE','Show Unit Price:');
 define('TEXT_PRODUCTS_VPE_VALUE',' Value:');
+
+define('CROSS_SELLING','Cross selling for article');
+define('CROSS_SELLING_SEARCH','Search product:');
+define('BUTTON_EDIT_CROSS_SELLING','Cross selling');
+define('HEADING_DEL','delete');
+define('HEADING_SORTING','sorting');
+define('HEADING_MODEL','model');
+define('HEADING_NAME','article');
+define('HEADING_CATEGORY','category');
+define('HEADING_ADD','Add?');
+define('HEADING_GROUP','Group');
 
 ?>

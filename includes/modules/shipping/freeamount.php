@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: freeamount.php,v 1.1 2003/09/06 22:13:54 fanta2k Exp $   
+   $Id: freeamount.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -30,18 +30,19 @@
     }
 
     function quote($method = '') {
+    	global $xtPrice;
 	
-	  if (( $_SESSION['cart']->show_total() < MODULE_SHIPPING_FREECOUNT_AMOUNT ) && MODULE_SHIPPING_FREECOUNT_DISPLAY == 'False')
+	  if (( $xtPrice->xtcRemoveCurr($_SESSION['cart']->show_total()) < MODULE_SHIPPING_FREECOUNT_AMOUNT ) && MODULE_SHIPPING_FREECOUNT_DISPLAY == 'False')
 	  return;
 
       $this->quotes = array('id' => $this->code,
                             'module' => MODULE_SHIPPING_FREECOUNT_TEXT_TITLE);
 
-      if ( $_SESSION['cart']->show_total() < MODULE_SHIPPING_FREECOUNT_AMOUNT )
-        $this->quotes['error'] = MODULE_SHIPPING_FREECOUNT_TEXT_WAY;
+      if ( $xtPrice->xtcRemoveCurr($_SESSION['cart']->show_total()) < MODULE_SHIPPING_FREECOUNT_AMOUNT )
+        $this->quotes['error'] = sprintf(MODULE_SHIPPING_FREECOUNT_TEXT_WAY,$xtPrice->xtcFormat(MODULE_SHIPPING_FREECOUNT_AMOUNT,true,0,true));
       else
  	$this->quotes['methods'] = array(array('id'    => $this->code,
-                                               'title' => MODULE_SHIPPING_FREECOUNT_TEXT_WAY,
+                                               'title' => sprintf(MODULE_SHIPPING_FREECOUNT_TEXT_WAY,$xtPrice->xtcFormat(MODULE_SHIPPING_FREECOUNT_AMOUNT,true,0,true)),
                                                'cost'  => 0));
 
       if (xtc_not_null($this->icon)) $this->quotes['icon'] = xtc_image($this->icon, $this->title);

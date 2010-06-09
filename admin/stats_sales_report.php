@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: stats_sales_report.php,v 1.2 2004/02/29 17:05:18 fanta2k Exp $
+   $Id: stats_sales_report.php 1023 2005-07-14 11:41:37Z novalis $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -372,7 +372,7 @@ date("Y") - $i; ?></option><?php
                 </tr>
                 <tr>
                   <td colspan="5" class="menuBoxHeading" align="right">
-                  <?php echo xtc_image_submit('button_update.gif', IMAGE_BUTTON_UPDATE_CART); ?>
+                  <?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_UPDATE . '"/>'; ?>
                   </td>
               </table>
             </form>
@@ -442,7 +442,7 @@ while ($sr->actDate < $sr->endDate) {
 ?>
                     <tr class="dataTableRow" onmouseover="this.className='dataTableRowOver';this.style.cursor='hand'" onmouseout="this.className='dataTableRow'">
                     <td class="dataTableContent">&nbsp;</td>
-                    <td class="dataTableContent" align="left"><a href="<?php echo xtc_catalog_href_link("product_info.php?products_id=" . $info[$i]['pid']) ?>" target="_blank"><?php echo $info[$i]['pname']; ?></a>
+                    <td class="dataTableContent" align="left"><a href="<?php echo xtc_catalog_href_link("product_info.php?products_id=" . $info[$i]['pid']) ?>" target="_blank"><?php echo $info[$i]['pmodel'].' : '.$info[$i]['pname']; ?></a>
 <?php
   if (is_array($info[$i]['attr'])) {
     $attr_info = $info[$i]['attr'];
@@ -525,7 +525,7 @@ while ($sr->actDate < $sr->endDate) {
             }
           }
           if ($info[$i]['pquant'] > 0) {
-            echo $info[$i]['pname'] . SR_SEPARATOR2;
+            echo $info[$i]['pmodel'].SR_SEPARATOR2.$info[$i]['pname'] . SR_SEPARATOR2;
             if ($srDetail == 2) {
               echo $info[$i]['pquant'] . SR_SEPARATOR2;
               echo $currencies->format($info[$i]['pquant'] * $info[$i]['price']) . SR_NEWLINE;

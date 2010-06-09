@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: address_book_details.php,v 1.6 2004/04/25 13:58:08 fanta2k Exp $   
+   $Id: address_book_details.php 1239 2005-09-24 20:09:56Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,8 +21,7 @@
   include_once('inc/xtc_get_zone_name.inc.php');
   include_once('inc/xtc_get_country_list.inc.php');
   include_once('inc/xtc_get_countries.inc.php');
-  include_once('inc/xtc_draw_checkbox_field.inc.php'); 
-
+ 
   if (!isset($process)) $process = false;
 
 
@@ -31,8 +30,8 @@
     $female = ($entry['entry_gender'] == 'f') ? true : false;
 
   $module_smarty->assign('gender','1');
-  $module_smarty->assign('INPUT_MALE',xtc_draw_radio_field(array('name'=>'gender','suffix'=>MALE), 'm',$male));
-  $module_smarty->assign('INPUT_FEMALE',xtc_draw_radio_field(array('name'=>'gender','suffix'=>FEMALE,'text'=>(xtc_not_null(ENTRY_GENDER_TEXT) ? '<span class="inputRequirement">' . ENTRY_GENDER_TEXT . '</span>': '')), 'f',$female));
+  $module_smarty->assign('INPUT_MALE',xtc_draw_radio_field(array('name'=>'gender','suffix'=>MALE.'&nbsp;'), 'm',$male));
+  $module_smarty->assign('INPUT_FEMALE',xtc_draw_radio_field(array('name'=>'gender','suffix'=>FEMALE.'&nbsp;','text'=>(xtc_not_null(ENTRY_GENDER_TEXT) ? '<span class="inputRequirement">&nbsp;' . ENTRY_GENDER_TEXT . '</span>': '')), 'f',$female));
 
 
   }

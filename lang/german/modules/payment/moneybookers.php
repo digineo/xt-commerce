@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: moneybookers.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $
+   $Id: moneybookers.php 998 2005-07-07 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,8 +21,8 @@
 
   define('MODULE_PAYMENT_MONEYBOOKERS_TEXT_TITLE', 'Moneybookers.com');
   define('MODULE_PAYMENT_MONEYBOOKERS_TEXT_DESCRIPTION', 'Moneybookers.com');
-  define('MODULE_PAYMENT_MONEYBOOKERS_TEXT_EMAIL_FOOTER', 'Vielen Dank für Ihre Bestellung! Sie k&ouml;nnen Ihr moneybookers.com Konto auf http://www.moneybookers.com einsehen');
-  define('MODULE_PAYMENT_MONEYBOOKERS_NOCURRENCY_ERROR', 'Es ist keine von moneybookers.com akzeptierte Währung installiert!');
+    define('MODULE_PAYMENT_MONEYBOOKERS_TEXT_INFO','');
+   define('MODULE_PAYMENT_MONEYBOOKERS_NOCURRENCY_ERROR', 'Es ist keine von moneybookers.com akzeptierte Währung installiert!');
   define('MODULE_PAYMENT_MONEYBOOKERS_ERRORTEXT1', 'payment_error=');
   define('MODULE_PAYMENT_MONEYBOOKERS_ERRORTEXT2', '&error=Fehler w&auml;hrend Ihrer Bezahlung bei moneybookers.com!');
   define('MODULE_PAYMENT_MONEYBOOKERS_ORDER_TEXT', 'Bestelldatum: ');

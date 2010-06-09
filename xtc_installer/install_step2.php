@@ -1,6 +1,6 @@
 <?php
   /* --------------------------------------------------------------
-   $Id: install_step2.php,v 1.2 2003/09/07 22:38:56 fanta2k Exp $   
+   $Id: install_step2.php 1119 2005-07-25 22:19:50Z novalis $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -51,11 +51,10 @@
   }
   $dir_ws_www_root = implode('/', $dir_ws_www_root);
   
-if (xtc_in_array('database', $_POST['install'])) {
-
-  
+  if (xtc_in_array('database', $_POST['install'])) {
+   // do nothin  
   } else {
-  xtc_redirect('install_step4.php');
+   xtc_redirect('install_step4.php');
   }
   
 ?>
@@ -100,29 +99,32 @@ if (xtc_in_array('database', $_POST['install'])) {
                 <td>&nbsp;</td>
                 <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_DB_CONNECTION; ?></font></td>
                 <td>
-                                <?php
-                                
-                                  if (xtc_in_array('database', $_POST['install'])) {
-    $db = array();
-    $db['DB_SERVER'] = trim(stripslashes($_POST['DB_SERVER']));
-    $db['DB_SERVER_USERNAME'] = trim(stripslashes($_POST['DB_SERVER_USERNAME']));
-    $db['DB_SERVER_PASSWORD'] = trim(stripslashes($_POST['DB_SERVER_PASSWORD']));
-    $db['DB_DATABASE'] = trim(stripslashes($_POST['DB_DATABASE']));
-
-    $db_error = false;
-    xtc_db_connect_installer($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD']);
-
-    if (!$db_error) {
-      xtc_db_test_create_db_permission($db['DB_DATABASE']);
-    }
-
-    if ($db_error) {
-        echo ('<img src="images/icons/x.jpg">');        
-        } else {
-        echo ('<img src="images/icons/ok.gif">');
-        }}
-                                ?>
-                                </td>
+                <?php                
+                // test database connection and write permissions                                            
+                if (xtc_in_array('database', $_POST['install'])) {
+                                         
+                   $db = array();
+                   $db['DB_SERVER'] = trim(stripslashes($_POST['DB_SERVER']));
+                   $db['DB_SERVER_USERNAME'] = trim(stripslashes($_POST['DB_SERVER_USERNAME']));
+                   $db['DB_SERVER_PASSWORD'] = trim(stripslashes($_POST['DB_SERVER_PASSWORD']));
+                   $db['DB_DATABASE'] = trim(stripslashes($_POST['DB_DATABASE']));
+               
+                   $db_error = false;
+                   xtc_db_connect_installer($db['DB_SERVER'], $db['DB_SERVER_USERNAME'], $db['DB_SERVER_PASSWORD']);
+               
+                   if (!$db_error) {
+                     xtc_db_test_create_db_permission($db['DB_DATABASE']);
+                   }    
+                                  
+                   if ($db_error) {
+                        echo ('<img src="images/icons/x.jpg">');        
+                       } else {
+                        echo ('<img src="images/icons/ok.gif">');
+                       }
+                }
+                
+                ?>
+                </td>
               </tr>
               <tr> 
                 <td>&nbsp;</td>

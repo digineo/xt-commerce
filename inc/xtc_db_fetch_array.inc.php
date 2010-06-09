@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_db_fetch_array.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_db_fetch_array.inc.php 864 2005-04-16 12:05:41Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,7 +21,7 @@
   */
 
 
-  function xtc_db_fetch_array($db_query,$cq=false) {
+  function xtc_db_fetch_array(&$db_query,$cq=false) {
 
       if (DB_CACHE=='true' && $cq) {
         if (!count($db_query)) return false;

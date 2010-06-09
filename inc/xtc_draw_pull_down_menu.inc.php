@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_draw_pull_down_menu.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_draw_pull_down_menu.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
    
 // Output a form pull down menu
   function xtc_draw_pull_down_menu($name, $values, $default = '', $parameters = '', $required = false) {
-    $field = '<div><select name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '"';
+    $field = '<select name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '"';
 
     if (xtc_not_null($parameters)) $field .= ' ' . $parameters;
 
@@ -33,7 +33,7 @@
 
       $field .= '>' . xtc_parse_input_field_data($values[$i]['text'], array('"' => '&quot;', '\'' => '&#039;', '<' => '&lt;', '>' => '&gt;')) . '</option>';
     }
-    $field .= '</select></div>';
+    $field .= '</select>';
 
     if ($required == true) $field .= TEXT_FIELD_REQUIRED;
 
@@ -41,7 +41,7 @@
   }
   
     function xtc_draw_pull_down_menuNote($data, $values, $default = '', $parameters = '', $required = false) {
-    $field = '<div><select name="' . xtc_parse_input_field_data($data['name'], array('"' => '&quot;')) . '"';
+    $field = '<select name="' . xtc_parse_input_field_data($data['name'], array('"' => '&quot;')) . '"';
 
     if (xtc_not_null($parameters)) $field .= ' ' . $parameters;
 
@@ -57,7 +57,7 @@
 
       $field .= '>' . xtc_parse_input_field_data($values[$i]['text'], array('"' => '&quot;', '\'' => '&#039;', '<' => '&lt;', '>' => '&gt;')) . '</option>';
     }
-    $field .= '</select>'.$data['text'].'</div>';
+    $field .= '</select>'.$data['text'];
 
     if ($required == true) $field .= TEXT_FIELD_REQUIRED;
 

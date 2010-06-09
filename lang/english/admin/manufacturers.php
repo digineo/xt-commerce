@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: manufacturers.php,v 1.2 2004/06/05 10:14:08 fanta2k Exp $   
+   $Id: manufacturers.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

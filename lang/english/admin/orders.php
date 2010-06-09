@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: orders.php,v 1.3 2004/04/28 10:43:46 fanta2k Exp $   
+   $Id: orders.php 1193 2005-08-28 17:02:03Z matthias $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -76,6 +76,7 @@ define('ENTRY_PAYMENT_METHOD', 'Payment Method:');
 define('ENTRY_CREDIT_CARD_TYPE', 'Credit Card Type:');
 define('ENTRY_CREDIT_CARD_OWNER', 'Credit Card Owner:');
 define('ENTRY_CREDIT_CARD_NUMBER', 'Credit Card Number:');
+define('ENTRY_CREDIT_CARD_CVV', 'Security Code (CVV)):');
 define('ENTRY_CREDIT_CARD_EXPIRES', 'Credit Card Expires:');
 define('ENTRY_SUB_TOTAL', 'Sub-Total:');
 define('ENTRY_TAX', 'Tax:');
@@ -113,4 +114,5 @@ define('WARNING_ORDER_NOT_UPDATED', 'Warning: Nothing to change. The order was n
 define('TABLE_HEADING_DISCOUNT','Discount');
 define('ENTRY_CUSTOMERS_GROUP','Customers Group:');
 define('ENTRY_CUSTOMERS_VAT_ID','VAT-ID:');
+define('TEXT_VALIDATING','Not validated');
 ?>

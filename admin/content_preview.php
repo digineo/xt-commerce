@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: content_preview.php,v 1.2 2004/01/17 16:14:34 fanta2k Exp $   
+   $Id: content_preview.php 1169 2005-08-22 16:07:09Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -66,12 +66,5 @@ echo $content_data['content_text'];
 </td>
           </tr>
         </table>
-
-
-
-
-
-
-
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: moneyorder.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: moneyorder.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -18,7 +18,7 @@
   define('MODULE_PAYMENT_MONEYORDER_TEXT_TITLE', 'Scheck/Vorkasse');
   define('MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION', 'Zahlbar an:&nbsp;' . MODULE_PAYMENT_MONEYORDER_PAYTO . '<br />Adressat:<br /><br />' . nl2br(STORE_NAME_ADDRESS) . '<br /><br />' . 'Ihre Bestellung wird nicht versandt, bis wir das Geld erhalten haben!');
   define('MODULE_PAYMENT_MONEYORDER_TEXT_EMAIL_FOOTER', "Zahlbar an: ". MODULE_PAYMENT_MONEYORDER_PAYTO . "\n\nAdressat:\n" . STORE_NAME_ADDRESS . "\n\n" . 'Ihre Bestellung wir nicht versandt, bis wird das Geld erhalten haben!');
-  
+  define('MODULE_PAYMENT_MONEYORDER_TEXT_INFO','');
   define('MODULE_PAYMENT_MONEYORDER_STATUS_TITLE' , 'Check/Money Order Modul aktivieren');
 define('MODULE_PAYMENT_MONEYORDER_STATUS_DESC' , 'M&ouml;chten Sie Zahlungen per Check/Money Order akzeptieren?');
 define('MODULE_PAYMENT_MONEYORDER_ALLOWED_TITLE' , 'Erlaubte Zonen');

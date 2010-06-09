@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: shipping.php,v 1.3 2004/01/04 22:37:59 fanta2k Exp $   
+   $Id: shipping.php 985 2005-06-17 22:35:22Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,7 +21,7 @@
 
     // class constructor
     function shipping($module = '') {
-      global $PHP_SELF;
+      global $PHP_SELF,$order;
 
       if (defined('MODULE_SHIPPING_INSTALLED') && xtc_not_null(MODULE_SHIPPING_INSTALLED)) {
         $this->modules = explode(';', MODULE_SHIPPING_INSTALLED);
@@ -38,8 +38,7 @@
           }
         }
         // load unallowed modules into array
-        $unallowed_modules = explode(',',$_SESSION['customers_status']['customers_status_shipping_unallowed']);
-
+        $unallowed_modules = explode(',',$_SESSION['customers_status']['customers_status_shipping_unallowed'].','.$order->customer['shipping_unallowed']);
         for ($i = 0, $n = sizeof($include_modules); $i < $n; $i++) {
           if (xtc_in_array(str_replace('.php', '', $include_modules[$i]['file']), $unallowed_modules) != 'false') {
             // check if zone is alowed to see module

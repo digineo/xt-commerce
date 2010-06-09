@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_cod_fee.php,v 1.2 2004/05/02 16:34:08 fanta2k Exp $
+   $Id: ot_cod_fee.php 914 2005-04-30 02:54:02Z matthias $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -88,12 +88,19 @@
   no 00:9.99 is entered the COD shipping into foreign countries will not be calculated
   (not possible).');
 
-  define('MODULE_ORDER_TOTAL_COD_FEE_FREE_TITLE','Free Shipping');
+  define('MODULE_ORDER_TOTAL_COD_FEE_FREE_TITLE','Free Shipping (Order Total Modul Shipping)');
   define('MODULE_ORDER_TOTAL_COD_FEE_FREE_DESC','&lt;ISO2-Code&gt;:&lt;Price&gt;, ....<br />
   00 as ISO2-Code allows the COD shipping in all countries. If
   00 is used you have to enter it as last argument. If
   no 00:9.99 is entered the COD shipping into foreign countries will not be calculated
   (not possible).');
+  
+  define('MODULE_ORDER_TOTAL_FREEAMOUNT_FREE_TITLE','Free Shipping (Module Free Shipping)');
+  define('MODULE_ORDER_TOTAL_FREEAMOUNT_FREE_DESC','&lt;ISO2-Code&gt;:&lt;Price&gt;, ....<br />
+  00 as ISO2-Code allows the COD shipping in all countries. If
+  00 is used you have to enter it as last argument. If
+  no 00:9.99 is entered the COD shipping into foreign countries will not be calculated
+  (not possible).');  
 
   define('MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS_TITLE','Taxclass');
   define('MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS_DESC','Choose a taxclass.');

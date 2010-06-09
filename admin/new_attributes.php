@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: new_attributes.php,v 1.6 2004/02/29 17:05:18 fanta2k Exp $   
+   $Id: new_attributes.php 1009 2005-07-11 16:19:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,16 +21,14 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/ 
 
-  require('new_attributes_config.php');
+  
   require('includes/application_top.php');
+  require(DIR_WS_MODULES.'new_attributes_config.php');
   require(DIR_FS_INC .'xtc_findTitle.inc.php');
   require_once(DIR_FS_INC . 'xtc_format_filesize.inc.php');
 
-  $adminImages = DIR_WS_CATALOG . "lang/". $_SESSION['language'] ."/admin/images/buttons/";
-  $backLink = "<a href=\"javascript:history.back()\">";
-
   if ( isset($cPathID) && $_POST['action'] == 'change') {
-    include('new_attributes_change.php');
+    include(DIR_WS_MODULES.'new_attributes_change.php');
 
     xtc_redirect( './' . FILENAME_CATEGORIES . '?cPath=' . $cPathID . '&pID=' . $_POST['current_product_id'] );
   }
@@ -70,19 +68,19 @@
               xtc_db_query("INSERT into products_attributes (products_id, options_id, options_values_id, options_values_price, price_prefix, attributes_model, attributes_stock, options_values_weight, weight_prefix) VALUES ('" . $_POST['current_product_id'] . "', '" . $attrib_res['options_id'] . "', '" . $attrib_res['options_values_id'] . "', '" . $attrib_res['options_values_price'] . "', '" . $attrib_res['price_prefix'] . "', '" . $attrib_res['attributes_model'] . "', '" . $attrib_res['attributes_stock'] . "', '" . $attrib_res['options_values_weight'] . "', '" . $attrib_res['weight_prefix'] . "')");
           }
       }
-      $pageTitle = TITLE_EDIT . xtc_findTitle($_POST['current_product_id'], $languageFilter);
-      include('new_attributes_include.php');
+      $pageTitle = TITLE_EDIT.': ' . xtc_findTitle($_POST['current_product_id'], $languageFilter);
+      include(DIR_WS_MODULES.'new_attributes_include.php');
       break;
 
     case 'change':
       $pageTitle = TITLE_UPDATED;
-      include('new_attributes_change.php');
-      include('new_attributes_select.php');
+      include(DIR_WS_MODULES.'new_attributes_change.php');
+      include(DIR_WS_MODULES.'new_attributes_select.php');
       break;
 
     default:
       $pageTitle = TITLE_EDIT;
-      include('new_attributes_select.php');
+      include(DIR_WS_MODULES.'new_attributes_select.php');
       break;
   }
 ?>

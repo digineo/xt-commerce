@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: psigate.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $   
+   $Id: psigate.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -24,7 +24,7 @@
   define('MODULE_PAYMENT_PSIGATE_TEXT_JS_CC_NUMBER', '* The credit card number must be at least ' . CC_NUMBER_MIN_LENGTH . ' characters.\n');
   define('MODULE_PAYMENT_PSIGATE_TEXT_ERROR_MESSAGE', 'There has been an error processing your credit card. Please try again.');
   define('MODULE_PAYMENT_PSIGATE_TEXT_ERROR', 'Credit Card Error!');
-
+define('MODULE_PAYMENT_PSIGATE_TEXT_INFO','');
   define('MODULE_PAYMENT_PSIGATE_STATUS_TITLE' , 'Enable PSiGate Module');
 define('MODULE_PAYMENT_PSIGATE_STATUS_DESC' , 'Do you want to accept PSiGate payments?');
 define('MODULE_PAYMENT_PSIGATE_ALLOWED_TITLE' , 'Allowed Zones');

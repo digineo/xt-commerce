@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: german.php,v 1.17 2004/05/10 12:54:15 fanta2k Exp $   
+   $Id: german.php 905 2005-04-29 13:02:06Z novalis $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -24,7 +24,7 @@
 // on RedHat6.0 I used 'de_DE'
 // on FreeBSD 4.0 I use 'de_DE.ISO_8859-1'
 // this may not work under win32 environments..
-setlocale(LC_TIME, 'de_DE.ISO_8859-1');
+setlocale(LC_TIME, 'de_DE@euro', 'de_DE', 'de-DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German','de_DE.ISO_8859-15');
 define('DATE_FORMAT_SHORT', '%d.%m.%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A, %d. %B %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'd.m.Y');  // this is used for strftime()
@@ -96,7 +96,7 @@ define('BOX_CONFIGURATION_16', 'Meta-Tags/Suchmaschinen');
 define('BOX_CONFIGURATION_17', 'Zusatzmodule');
 define('BOX_CONFIGURATION_18', 'UST ID');
 define('BOX_CONFIGURATION_19', 'xt:C Partner');
-
+define('BOX_CONFIGURATION_22', 'Such-Optionen');
 
 define('BOX_MODULES', 'Zahlungs-/Versand-/Verrechnungs-Module');
 define('BOX_PAYMENT', 'Zahlungsoptionen');
@@ -106,6 +106,7 @@ define('BOX_CATEGORIES', 'Kategorien / Artikel');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Artikelmerkmale');
 define('BOX_MANUFACTURERS', 'Hersteller');
 define('BOX_REVIEWS', 'Artikelbewertungen');
+define('BOX_CAMPAIGNS', 'Kampagnen');
 define('BOX_XSELL_PRODUCTS', 'Cross Marketing');
 define('BOX_SPECIALS', 'Sonderangebote');
 define('BOX_PRODUCTS_EXPECTED', 'Erwartete Artikel');
@@ -151,6 +152,8 @@ define('BOX_COUPON_ADMIN','Kupon Admin');
 define('BOX_TOOLS_BLACKLIST','-CC-Blacklist');
 define('BOX_IMPORT','Import/Export');
 define('BOX_PRODUCTS_VPE','Verpackungseinheit');
+define('BOX_CAMPAIGNS_REPORT','Kampagnen Report');
+define('BOX_ORDERS_XSELL_GROUP','Cross-Marketing Gruppen');
 
 define('TXT_GROUPS','<b>Gruppen</b>:');
 define('TXT_SYSTEM','System');
@@ -253,64 +256,7 @@ define('TEXT_CHOOSE_INFO_TEMPLATE','Vorlage f&uuml;r Artikeldetails');
 define('TEXT_CHOOSE_OPTIONS_TEMPLATE','Vorlage f&uuml;r Artikeloptionen');
 define('TEXT_SELECT','-- Bitte w&auml;hlen Sie --');
 
-// images
-define('IMAGE_ANI_SEND_EMAIL', 'eMail versenden');
-define('IMAGE_BACK', 'Zur&uuml;ck');
-define('IMAGE_BACKUP', 'Datensicherung');
-define('IMAGE_CANCEL', 'Abbruch');
-define('IMAGE_CONFIRM', 'Best&auml;tigen');
-define('IMAGE_COPY', 'Kopieren');
-define('IMAGE_COPY_TO', 'Kopieren nach');
-define('IMAGE_DETAILS', 'Details');
-define('IMAGE_DELETE', 'L&ouml;schen');
-define('IMAGE_EDIT', 'Bearbeiten');
-define('IMAGE_EMAIL', 'eMail versenden');
-define('IMAGE_FILE_MANAGER', 'Datei-Manager');
-define('IMAGE_ICON_STATUS_GREEN', 'Aktiv');
-define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'aktivieren');
-define('IMAGE_ICON_STATUS_RED', 'Inaktiv');
-define('IMAGE_ICON_STATUS_RED_LIGHT', 'deaktivieren');
-define('IMAGE_ICON_INFO', 'Information');
-define('IMAGE_INSERT', 'Einf&uuml;gen');
-define('IMAGE_LOCK', 'Sperren');
-define('IMAGE_MODULE_INSTALL', 'Modul Installieren');
-define('IMAGE_MODULE_REMOVE', 'Modul Entfernen');
-define('IMAGE_MOVE', 'Verschieben');
-define('IMAGE_NEW_BANNER', 'Neuen Banner aufnehmen');
-define('IMAGE_NEW_CATEGORY', 'Neue Kategorie erstellen');
-define('IMAGE_NEW_COUNTRY', 'Neues Land aufnehmen');
-define('IMAGE_NEW_CURRENCY', 'Neue W&auml;hrung einf&uuml;gen');
-define('IMAGE_NEW_FILE', 'Neue Datei');
-define('IMAGE_NEW_FOLDER', 'Neues Verzeichnis');
-define('IMAGE_NEW_LANGUAGE', 'Neue Sprache anlegen');
-define('IMAGE_NEW_NEWSLETTER', 'Neues Rundschreiben');
-define('IMAGE_NEW_PRODUCT', 'Neuen Artikel aufnehmen');
-define('IMAGE_NEW_TAX_CLASS', 'Neue Steuerklasse erstellen');
-define('IMAGE_NEW_TAX_RATE', 'Neuen Steuersatz anlegen');
-define('IMAGE_NEW_TAX_ZONE', 'Neue Steuerzone erstellen');
-define('IMAGE_NEW_ZONE', 'Neues Bundesland einf&uuml;gen');
-define('IMAGE_ORDERS', 'Bestellungen');
-define('IMAGE_ORDERS_INVOICE', 'Rechnung');
-define('IMAGE_ORDERS_PACKINGSLIP', 'Lieferschein');
-define('IMAGE_PREVIEW', 'Vorschau');
-define('IMAGE_RESET', 'Zur&uuml;cksetzen');
-define('IMAGE_RESTORE', 'Zur&uuml;cksichern');
-define('IMAGE_SAVE', 'Speichern');
-define('IMAGE_SEARCH', 'Suchen');
-define('IMAGE_SELECT', 'Ausw&auml;hlen');
-define('IMAGE_SEND', 'Versenden');
-define('IMAGE_SEND_EMAIL', 'eMail versenden');
-define('IMAGE_UNLOCK', 'Entsperren');
-define('IMAGE_UPDATE', 'Aktualisieren');
-define('IMAGE_UPDATE_CURRENCIES', 'Wechselkurse aktualisieren');
-define('IMAGE_UPLOAD', 'Hochladen');
-define('IMAGE_ACCOUNTING','Accounting');
-define('IMAGE_STATUS','Kundengruppe');
-define('IMAGE_IPLOG','IP-Log');
-define('CREATE_ACCOUNT','Neuer Kunde');
-define('IMAGE_START','Modul Starten');
-define('IMAGE_AFTERBUY_SEND','Auftrag erneut senden');
-
+// Icons
 define('ICON_CROSS', 'Falsch');
 define('ICON_CURRENT_FOLDER', 'Aktueller Ordner');
 define('ICON_DELETE', 'L&ouml;schen');
@@ -338,6 +284,7 @@ define('TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS', 'Angezeigt werden <b>%d</b> bis <
 define('TEXT_DISPLAY_NUMBER_OF_NEWSLETTERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Rundschreiben)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bestellungen)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bestellstatus)');
+define('TEXT_DISPLAY_NUMBER_OF_XSELL_GROUP', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Cross-Marketing Gruppen)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_VPE', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Verpackungseinheiten)');
 define('TEXT_DISPLAY_NUMBER_OF_SHIPPING_STATUS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Lieferstatus)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Artikeln)');
@@ -440,4 +387,6 @@ define('ENTRY_VAT_ID_ERROR', '<font color="FF0000">* Die Eingegebene UST ID Numm
 
 define('ERROR_GIF_MERGE','Fehlender GDlib Gif Support, kein Wasserzeichen (Merge) m&ouml;glich');
 define('ERROR_GIF_UPLOAD','Fehlender GDlib Gif Support, kein Upload von GIF Bildern m&ouml;glich');
+
+define('TEXT_REFERER','Referer: ');
 ?>

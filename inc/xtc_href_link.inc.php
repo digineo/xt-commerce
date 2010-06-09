@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_href_link.inc.php,v 1.5 2004/04/21 17:55:00 fanta2k Exp $   
+   $Id: xtc_href_link.inc.php 804 2005-02-26 16:42:03Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
    
 // The HTML href link wrapper function
   function xtc_href_link($page = '', $parameters = '', $connection = 'NONSSL', $add_session_id = true, $search_engine_safe = true) {
-    global $request_type, $session_started, $http_domain, $https_domain;
+    global $request_type, $session_started, $http_domain, $https_domain,$truncate_session_id;
 
     if (!xtc_not_null($page)) {
       die('</td></tr></table></td></tr></table><br /><br /><font color="#ff0000"><b>Error!</b></font><br /><br /><b>Unable to determine the page link!<br /><br />');
@@ -55,12 +55,10 @@
         }
       }        
     }
+	
+	// remove session if useragent is a known Spider
+    if ($truncate_session_id) $sid=NULL;
 
-    if (xtc_check_agent()==1) {
-
-    $sid=NULL;
-
-    }
     if (isset($sid)) {
       $link .= $separator . $sid;
     }
@@ -117,11 +115,8 @@
       }
     }
 
-    if (xtc_check_agent()==1) {
+    if ($truncate_session_id) $sid=NULL;
 
-    $sid=NULL;
-
-    }
     if (isset($sid)) {
       $link .= $separator . $sid;
     }

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: sitemap.php,v 1.2 2004/06/06 16:05:24 novalis Exp $
+   $Id: sitemap.php 1278 2005-10-02 07:40:25Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -29,25 +29,21 @@ if ($parent_id == 0){ $cPath = ''; } else { $cPath .= $parent_id . '_'; }
    if ($include_itself) {
      $category_query = "select cd.categories_name from " . TABLE_CATEGORIES_DESCRIPTION . " cd where cd.language_id = '" . $_SESSION['languages_id'] . "' and c.categories_status = '1' and cd.categories_id = '" . $parent_id . "'";
      $category_query = xtDBquery($category_query);
-     $category = xtc_db_fetch_array(&$category_query,true);
+     $category = xtc_db_fetch_array($category_query,true);
      $category_tree_array[] = array('id' => $parent_id, 'text' => $category['categories_name']);
    }
 
    $categories_query = "select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_id = cd.categories_id and cd.language_id = '" . $_SESSION['languages_id'] . "' and c.parent_id = '" . $parent_id . "' and c.categories_status = '1' order by c.sort_order, cd.categories_name";
    $categories_query = xtDBquery($categories_query);
-   while ($categories = xtc_db_fetch_array(&$categories_query,true)) {
-     $SEF_parameter='';
-     if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
-     $SEF_parameter='&category='.xtc_cleanName($categories['categories_name']);
-        $SEF_link = xtc_href_link(FILENAME_DEFAULT, 'cPath=' . $cPath .$categories['categories_id'] . $SEF_parameter);
-    } else
- $SEF_link = DIR_WS_CATALOG . 'index.php?cPath=' . $cPath . $categories['categories_id'];
- 
+   while ($categories = xtc_db_fetch_array($categories_query,true)) {
+   
+     $SEF_link = xtc_href_link(FILENAME_DEFAULT, xtc_category_link($categories['categories_id'],$categories['categories_name']));
+    
      if ($exclude != $categories['categories_id'])
       $category_tree_array[] = array('id' => $categories['categories_id'],
-                     'text' => $spacing . $categories['categories_name'],
-            'link'  => $SEF_link);
-     $category_tree_array = get_category_tree($categories['categories_id'], $spacing . '&nbsp;&nbsp;&nbsp;', $exclude, $category_tree_array, false, $cPath);
+      				     'text' => $spacing . $categories['categories_name'],
+				     'link'  => $SEF_link);
+      $category_tree_array = get_category_tree($categories['categories_id'], $spacing . '&nbsp;&nbsp;&nbsp;', $exclude, $category_tree_array, false, $cPath);
    }
 
    return $category_tree_array;
@@ -58,7 +54,7 @@ if ($parent_id == 0){ $cPath = ''; } else { $cPath .= $parent_id . '_'; }
  
  
  if (GROUP_CHECK == 'true') {
-  $group_check="and c.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
+ 	$group_check = "and c.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
  }
  
  $categories_query = "select c.categories_image, c.categories_id, cd.categories_name FROM " . TABLE_CATEGORIES . " c left join "
@@ -68,20 +64,15 @@ if ($parent_id == 0){ $cPath = ''; } else { $cPath .= $parent_id . '_'; }
  // db Cache
  $categories_query = xtDBquery($categories_query);
  $module_content = array();
- while ($categories = xtc_db_fetch_array(&$categories_query,true)) {
-
-$SEF_parameter='';
-   if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
-   $SEF_parameter='&category='.xtc_cleanName($categories['categories_name']);
-      $SEF_link = xtc_href_link(FILENAME_DEFAULT, 'cPath=' . $categories['categories_id'] . $SEF_parameter);
-   } else $SEF_link = DIR_WS_CATALOG . 'index.php?cPath=' . $categories['categories_id'];
+ while ($categories = xtc_db_fetch_array($categories_query,true)) {
    
-   $module_content[]=array(
-                        'ID'  => $categories['categories_id'],
+   $SEF_link = xtc_href_link(FILENAME_DEFAULT, xtc_category_link($categories['categories_id'],$categories['categories_name']));
+ 
+   $module_content[]=array('ID'  => $categories['categories_id'],
                            'CAT_NAME'  => $categories['categories_name'],
                            'CAT_IMAGE' => DIR_WS_IMAGES . 'categories/' . $categories['categories_image'],
-                           'CAT_LINK'  => $SEF_link, //DIR_WS_CATALOG . 'index.php?cPath=' . $categories['categories_id'],
-      'SCATS'  => get_category_tree($categories['categories_id'], '',0));
+                           'CAT_LINK'  => $SEF_link,
+			   'SCATS'  => get_category_tree($categories['categories_id'], '',0));
  }
 
  // if there's sth -> assign it
@@ -90,7 +81,7 @@ $SEF_parameter='';
  $module_smarty->assign('language', $_SESSION['language']);
  $module_smarty->assign('module_content',$module_content);
  // set cache ID
- if (USE_CACHE=='false') {
+ if (!CacheCheck()) {
  $module_smarty->caching = 0;
  echo $module_smarty->fetch(CURRENT_TEMPLATE.'/module/sitemap.html');
  } else {

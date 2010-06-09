@@ -1,66 +1,81 @@
                                      CHANGELOG
 ###################################################################################
 
-XT-Commerce v3.0.3 | SVN 669 
-Release Datum: 19.01.2005
+xt:Commerce v3.0.4
+Release Datum: 1.10.2005
 
+###################################################################################
 
-3.0.3 (19.01.2005)
-*BUGFIX Default-Wert f¸r Produktsortierung = '0' gesetzt
-*UPDATE: PHP 3.4.10 ƒnderungen f¸r den string typecasting bug
-*BUGFIX breadcrumb top products
-*BUGFIX product navigator
-*BUGFIX edit product button in der adminbox
-*BUGFIX #0000186 - Banner Manager - ƒnderungen werden nicht gespeichert
-*BUGFIX #0000099 - Beim Lˆschen von Artikelmerkmalen wurden die Optionswerte nicht gelˆscht  
-*BUGFIX #0000401 - teilweise wurden einige Boxen (z.B. Warenkorb) auf deutsch angezeigt
-*BUGFIX Kleiner Fehler bei Rundungen behoben
-*BUGFIX #0000384 - Nachkomma Stellen wurden bei den Geschenkgutscheinen nicht ber¸cksichtigt
-*BUGFIX #0000355 - Nach ƒnderung von Kategorie-Einstellungen wurden beim Speichern alle enthaltenen Produkte auf aktiv gesetzt
-*BUGFIX categories_heading_title gefixt
-*BUGFIX manufacturers_info: Herstellerbild gefixt
-*BUGFIX Kupons funktionieren nun wieder
-*BUGFIX Steuer bei Mindermengenzuschlag gefixt, ust wird nun korrekt dazugez‰hlt
-*FEATURE: Kategoriebilder koennen nun auch ueber den Admin geloescht werden.
-*FEATURE: Zahlungsmodul Worldpay
-*FEATURE: js Validierung in der checkout_payment fuer die AGBS hinzugefuegt
-*BUGFIX Durch lˆschen einer Sprache gab es Probleme bei der Anzeige des Kundengruppendropdowns
-*BUGFIX #0000346 - Neue Produkte nicht verlinkt, wenn kein Bild vorhanden 
-*BUGFIX missing SELECT categories_description 
-*BUGFIX #0000344 - Falscher Pfad f¸r die Icons im cContent Manager 
-*BUGFIX #0000349 - Template "specials.html" zeigt keine Produktbeschreibung an: falsche Variable 
-*BUGFIX #0000392 - xml_export.php  bei CAO Import Abbruch wegen Staffelpreisen und wegen falscher Query
-*BUGFIX im Coupon-Admin (call to a member-function on non-object)
-*BUGFIX #0000390 - Bei Rundschreiben wurden manuell zugef¸gte Empf‰nger nicht gespeichert 
-*BUGFIX #0000388 - PCOUNT wird in sitemap.html verwendet aber in sitemap.php nicht zugewiesen.
-*BUGFIX http://www.xt-commerce.com/modules/ipboard...-post-8235.html
-*BUGFIX #0000386 - Falsche Variable f¸r Alt-Text in product_reviews.php 
-*BUGIFX: alle Umlaute in den Sprachfiles ersetzt
-*FEATURE: neues Modul f¸r Froogle.de
-*FEATURE: Standard Template jetzt in xhtml
-*BUGFIX http://www.xt-commerce.com/modules/ipboard...-post-7060.html  "gift in cart" Problem
-*FEATURE: import/export
-*FEATURE: ipaymentELV Modul
-*UPDATE: NEW SMARTY ENGINE 2.6.6
-*BUGFIX Kundengruppenzuordnung
-*BUGFIX kleiner Berechnungsfehlern bei Kommastellen und im Bruttoadmin.
-*BUGFIX bei netto mit Ust Ausweisung wird nur Netto-Preis ¸bergeben.
-*BUGFIX fix bei fehlendem Freetype Library
-*UPDATE: php 5.0.1 compatiblity
-*BUGFIX Check f¸r Italien gefixt
-*BUGFIX Berechnung f¸r Canada hinzugef¸gt
-*BUGFIX tpl selection in configuration
-*BUGFIX Wenn ein Kunde registriert ist wird nun auf die account.php redirected
-*BUGFIX htmlarea arbeitet nun unter Firefox mit deutscher Sprache
-*BUGFIX fehlende Funktion im Mindermengenzuschlag hinzugef¸gt
-*UPDATE: Sortierfunktion f¸r categories_view verbessert / erweitert
-*UPDATE: Sortierfunktion mit Switch ASC / DESC f¸r alle Punkte in categories_view im admin
-*FEATURE: Lˆsch-Option zum Hauptartikelbild hinzugef¸gt
-*UPDATE: Schˆnheitskorrekturen im Produkt-Editor
-*BUGFIX Bestellungsmodul/banktransfer
-*FEATURE: Import/Export Klasse
-*FEATURE: Suche jetzt auch in Attributen
-*FEATURE: Afterbuy Anbindung integriert
+CLEANUP: Logik von admin/categories.php in eine Neue Kategorie Klasse admin/includes/classes/categories.php verschoben.
+CLEANUP: Neue Produktklasse includes/classes/product.php für Produktbezogene Informationen
 
-  
-  
+PERFORMANCE: Optimierungen an DB Cache, und array Funktionen
+PERFORMANCE: Suche wurde gefixt und beschleunigt, konfiguration der durchsuchbaren Felder nun über Admininterface
+PERFORMANCE: Agent Check nicht bei jedem Aufruf der xtc_href_link
+PERFORMANCE: Kundengruppenrechtesystem in der Datenbank gewechselt (mehr performance)
+PERFORMANCE: Reduzierung der nötigen queries für Kategorienavigation 
+PERFORMANCE: Admininterface beschleunigt (Relevant für Artikelstämme > 20.000)
+
+BUGFIX: Bug im UST ID Check, Admin wurde zu Kunde beim Bearbeiten seiner Kundendaten
+BUGFIX: default order status für Afterbuy Bestellungen wurde falsch gesetzt.
+BUGFIX: register globals bugfix in CC Module
+BUGFIX: Verschwindende Artikelnummer bei langen Optionswertnamen
+BUGFIX: Kundengruppenpreise werden bei Anlegen eines Artikels nicht gespeichert
+BUGFIX: Session Timeout Probleme mit Cart Objekt
+BUGFIX: Fixed pm2Checkout Module
+BUGFIX: Google Conversion Modul gefixt
+BUGFIX: Bugfixes im Afterbuy Modul im Zusammenhang mit UST bei Händlerbestellungen
+BUGFIX: Bestellbearbeitung überarbeitet (Editieren von Zahlungsarten und versandarten nun Möglich).
+BUGFIX: Defaulteinstellung der Rundungsgenauigkeit auf 4 Stellen
+BUGFIX: CC Modul überarbeitet
+BUGFIX: Produktbilder werden nichtmehr gelöscht wenn Sie bei anderen Produkten verwendet werden.
+BUGFIX: Falsche Umlautdecodierung in JS-Fehlermeldungen behoben.
+BUGFIX: MWST Berechnung abhängig von Lieferadresse
+BUGFIX: Falsche Berechnung bei Gutscheinen in verschiedenen Währungen behoben
+BUGFIX: Kupon/Gutscheinmodul überarbeitet
+BUGFIX: 1&1 SSL Redirect Fehler 
+BUGFIX: Call by Reference inkompatiblitäten für aktuelle PHP-Versionen beseitigt.
+BUGFIX: Fehler bei Kupons mit Kategorie beschränkungen
+BUGFIX: Cache Bugfix für Randoom Products
+BGUFIX: Bugfix in Useragent Überprüfung (Admin Login nicht Möglich)
+BUGFIX: Charset Problem bei E-Mails (Anzeigefehler in Outlook)
+BUGFIX: Probleme beim Import mit HTML Systax
+BUGFIX: Löschung von Produktcontent bei Löschung des Artikels
+BUGFIX: Steuerberechnung erfolgt nun Anhand der Lieferadresse
+BUGFIX: korrekte Steuerberechnung wenn Lieferadresse in UST freier Zone
+
+FEATURE: Neue Templates für Payment und Shipping Modul Ansicht in checkout_payment.php und checkout_shipping.php
+FEATURE: htmlarea durch FCK Editor ersetzt
+FEATURE: Unerlaubte Zahlungsweisen/Versandarten nun für jeden Kunden einzeln sperrbar (Anpassung für Mention)
+FEATURE: Minstestbestellwert nun für jede Kundengruppe editierbar
+FEATURE: Cross Marketing Modul mit Gruppenfunktion und Reverse-Cross Marketing Option (Anpassung für Selle)
+FEATURE: Referer Tracking System zur Analyse verschiedener Marketingkanäle (Hits/Leads/Sells/Late Sells)
+FEATURE: Logik für automatische Konsistensprüfung der personal_offers_ Tabellen eingebaut
+FEATURE: Produktlinks/Kategorielinks auf Format: product_info.php/info/pID_productName.html umgestellt
+FEATURE: Anzeige incl/excl Ust zzgl versandkosten in der Produktansicht
+FEATURE: Berechnung/Anzeige der enthaltenen UST direkt im Warenkorb
+FEATURE: Admin Buttons durch CSS Images ersetzt
+FEATURE: Übergabe von Kupons an Afterbuy
+FEATURE: Newsletter abmelden Link integriert
+FEATURE: Status für Länder
+FEATURE: Import/export von VPE,Mehreren Bildern,Kundengruppenrechten, Kundengruppenpreisen nun Möglich
+FEATURE: Personal Shipping für FSK18 Artikel
+FEATURE: firstname/lastname werden nun bei Bestellungen getrennt gespeichert (Anpassung für Mention)
+FEATURE: Multicopy und Multimove (Multi-Actions) für Produkte und Kategorien im Admin
+FEATURE: Anzeige der Nachnahmekosten in der Checkout_payment.php
+FEATURE: Exportmodul für billiger.de
+FEATURE: Exportmodul für wein.cc
+FEATURE: Popup für Versandkosten in product_info.php
+FEATURE: Produkt kann direkt beim Editieren auf die Startseite gesetzt werden
+FEATURE: Altes paypal Modul durch neue PAYPAL IPN Integration ersetzt (verlorene Paypalbestellungen)
+FEATURE: Datenbankschema in Customers Tabelle an Selle Schnittstelle Angepasst
+FEATURE: Berechtigung zum Schreiben von Bewertungen nach Kundengruppen
+
+SECURITY: XSS vulnerability in shopping_cart.php
+SECURITY: password_double_opt.php attackable through Injection vulnerability with special formular to reset other passwords
+SECURITY: Response Splitting vulnerability in redirect.php & shop_content.php
+SECURITY: new class class.inputfilter.php to prevent XSS Attacks through GET/POST
+
+UPDATE: Smarty auf aktuelle Version
+UPDATE: php_mailer auf aktuelle Version
+UPDATE: RSS NEWSreader auf aktuelle Version

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: banktransfer.php,v 1.2 2004/01/02 00:08:25 fanta2k Exp $   
+   $Id: banktransfer.php 1122 2005-07-26 10:16:27Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -35,7 +35,7 @@
       $this->sort_order = MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER;
       $this->min_order = MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER;
       $this->enabled = ((MODULE_PAYMENT_BANKTRANSFER_STATUS == 'True') ? true : false);
-
+$this->info=MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO;
       if ((int)MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID > 0) {
         $this->order_status = MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID;
       }
@@ -79,19 +79,16 @@
         }
       }
 
-      if ($this->enabled == true) {
-        if ($order->content_type == 'virtual') {
-          $this->enabled = false;
-        }
-      }
     }
 
     function javascript_validation() {
       $js = 'if (payment_value == "' . $this->code . '") {' . "\n" .
-            '  var banktransfer_blz = document.checkout_payment.banktransfer_blz.value;' . "\n" .
-            '  var banktransfer_number = document.checkout_payment.banktransfer_number.value;' . "\n" .
-            '  var banktransfer_owner = document.checkout_payment.banktransfer_owner.value;' . "\n" .
-            '  var banktransfer_fax = document.checkout_payment.banktransfer_fax.checked;' . "\n" .
+            '  var banktransfer_blz = document.getElementById("checkout_payment").banktransfer_blz.value;' . "\n" .
+            '  var banktransfer_number = document.getElementById("checkout_payment").banktransfer_number.value;' . "\n" .
+            '  var banktransfer_owner = document.getElementById("checkout_payment").banktransfer_owner.value;' . "\n" .
+            '  if (document.getElementById("checkout_payment").banktransfer_fax) { ' . "\n" .
+            '    var banktransfer_fax = document.getElementById("checkout_payment").banktransfer_fax.checked;' . "\n" .
+            '  } else { var banktransfer_fax = false; } ' . "\n" .            
             '  if (banktransfer_fax == false) {' . "\n" .
             '    if (banktransfer_blz == "") {' . "\n" .
             '      error_message = error_message + "' . JS_BANK_BLZ . '";' . "\n" .
@@ -117,6 +114,7 @@
 
       $selection = array('id' => $this->code,
                          'module' => $this->title,
+                         'description'=>$this->info,
       	                 'fields' => array(array('title' => MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE,
       	                                         'field' => MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_INFO),
       	                                   array('title' => MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_OWNER,

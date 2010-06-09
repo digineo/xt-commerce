@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_cleanName.inc.php
+   $Id: xtc_cleanName.inc.php 1206 2005-08-30 00:30:52Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -11,16 +11,9 @@
    ---------------------------------------------------------------------------------------*/
 
 
- function xtc_cleanName($name,$prefix=true) {
-
-     // removing special Chars from products_name
-     $name=strtolower($name);
-     $name=str_replace('ä','ae',$name);
-     $name=str_replace('ü','ue',$name);
-     $name=str_replace('ö','oe',$name);
-     $name=str_replace(' ','-',$name);
-     if (!$prefix) return $name;
-     return $name.'.html';
+ function xtc_cleanName($name) {
+     urlencode($name);
+     return str_replace('%2F','/',$name);
  }
 
 ?>

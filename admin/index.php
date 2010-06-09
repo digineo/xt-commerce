@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: index.php,v 1.2 2004/01/17 16:14:34 fanta2k Exp $   
+   $Id: index.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

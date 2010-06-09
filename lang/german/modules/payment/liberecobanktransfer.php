@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: liberecobanktransfer.php,v 1.3 2004/06/04 19:52:54 fanta2k Exp $
+   $Id: liberecobanktransfer.php 998 2005-07-07 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -23,6 +23,7 @@
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_TITLE', 'Lastschriftverfahren');
   define('MODULE_PAYMENT_LIBERECOBANKTRANSFER_TEXT_TITLE', 'Lastschriftverfahren');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_DESCRIPTION', 'liberECO Lastschriftverfahren Modul<br />http://www.liberECO.net<br />');
+    define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_INFO','');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK', 'Bankeinzug');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_EMAIL_FOOTER', 'Hinweis: Sie können sich unser Faxformular unter ' . HTTP_SERVER . DIR_WS_CATALOG . MODULE_PAYMENT_BANKTRANSFER_URL_NOTE . ' herunterladen und es ausgefüllt an uns zurücksenden.');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_INFO', 'Bitte beachten Sie, dass das Lastschriftverfahren <b>nur</b> von einem <b>deutschen Girokonto</b> aus möglich ist');

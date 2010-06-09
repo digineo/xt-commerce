@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_gdlib_check.inc.php,v 1.1 2004/04/25 13:54:39 fanta2k Exp $
+   $Id: xtc_gdlib_check.inc.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

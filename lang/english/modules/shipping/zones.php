@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: zones.php,v 1.1 2003/12/19 13:19:08 fanta2k Exp $   
+   $Id: zones.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,6 +14,9 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
+   
+   // CUSTOMIZE THIS SETTING
+define('NUMBER_OF_ZONES',10);
 
 define('MODULE_SHIPPING_ZONES_TEXT_TITLE', 'Zone Rates');
 define('MODULE_SHIPPING_ZONES_TEXT_DESCRIPTION', 'Zone Based Rates');
@@ -30,10 +33,13 @@ define('MODULE_SHIPPING_ZONES_TAX_CLASS_TITLE' , 'Tax Class');
 define('MODULE_SHIPPING_ZONES_TAX_CLASS_DESC' , 'Use the following tax class on the shipping fee.');
 define('MODULE_SHIPPING_ZONES_SORT_ORDER_TITLE' , 'Sort Order');
 define('MODULE_SHIPPING_ZONES_SORT_ORDER_DESC' , 'Sort order of display.');
-define('MODULE_SHIPPING_ZONES_COUNTRIES_1_TITLE' , 'Zone 1 Countries');
-define('MODULE_SHIPPING_ZONES_COUNTRIES_1_DESC' , 'Comma separated list of two character ISO country codes that are part of Zone 1.');
-define('MODULE_SHIPPING_ZONES_COST_1_TITLE' , 'Zone 1 Shipping Table');
-define('MODULE_SHIPPING_ZONES_COST_1_DESC' , 'Shipping rates to Zone 1 destinations based on a group of maximum order weights. Example: 3:8.50,7:10.50,... Weights less than or equal to 3 would cost 8.50 for Zone 1 destinations.');
-define('MODULE_SHIPPING_ZONES_HANDLING_1_TITLE' , 'Zone 1 Handling Fee');
-define('MODULE_SHIPPING_ZONES_HANDLING_1_DESC' , 'Handling Fee for this shipping zone');
+
+for ($ii=0;$ii<NUMBER_OF_ZONES;$ii++) {
+define('MODULE_SHIPPING_ZONES_COUNTRIES_'.$ii.'_TITLE' , 'Zone '.$ii.' Countries');
+define('MODULE_SHIPPING_ZONES_COUNTRIES_'.$ii.'_DESC' , 'Comma separated list of two character ISO country codes that are part of Zone '.$ii.'.');
+define('MODULE_SHIPPING_ZONES_COST_'.$ii.'_TITLE' , 'Zone '.$ii.' Shipping Table');
+define('MODULE_SHIPPING_ZONES_COST_'.$ii.'_DESC' , 'Shipping rates to Zone '.$ii.' destinations based on a group of maximum order weights. Example: 3:8.50,7:10.50,... Weights less than or equal to 3 would cost 8.50 for Zone '.$ii.' destinations.');
+define('MODULE_SHIPPING_ZONES_HANDLING_'.$ii.'_TITLE' , 'Zone '.$ii.' Handling Fee');
+define('MODULE_SHIPPING_ZONES_HANDLING_'.$ii.'_DESC' , 'Handling Fee for this shipping zone');
+}
 ?>

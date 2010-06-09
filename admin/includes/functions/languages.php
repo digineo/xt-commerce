@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: languages.php,v 1.1 2003/09/06 22:05:29 fanta2k Exp $   
+   $Id: languages.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   function xtc_get_languages_directory($code) {
     $language_query = xtc_db_query("select languages_id, directory from " . TABLE_LANGUAGES . " where code = '" . $code . "'");
     if (xtc_db_num_rows($language_query)) {

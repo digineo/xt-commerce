@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: message_stack.php,v 1.1 2003/09/06 22:05:29 fanta2k Exp $   
+   $Id: message_stack.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -22,7 +22,7 @@
    if ($messageStack->size > 0) echo $messageStack->output();
   
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   class messageStack extends tableBlock {
     var $size = 0;
 

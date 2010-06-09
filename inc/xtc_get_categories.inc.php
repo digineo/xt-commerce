@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_categories.inc.php,v 1.2 2004/02/14 16:28:39 fanta2k Exp $   
+   $Id: xtc_get_categories.inc.php 1009 2005-07-11 16:19:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -34,7 +34,7 @@
 
     $categories_query  = xtDBquery($categories_query);
 
-    while ($categories = xtc_db_fetch_array(&$categories_query,true)) {
+    while ($categories = xtc_db_fetch_array($categories_query,true)) {
       $categories_array[] = array('id' => $categories['categories_id'],
                                   'text' => $indent . $categories['categories_name']);
 

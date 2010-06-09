@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_draw_hidden_field_installer.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_draw_hidden_field_installer.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -16,6 +16,6 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_draw_hidden_field_installer($name, $value) {
-    return '<div><input type="hidden" name="' . $name . '" value="' . $value . '" /></div>';
+    return '<input type="hidden" name="' . $name . '" value="' . $value . '" />';
   }
  ?>

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_collect_posts.inc.php,v 1.2 2004/05/25 17:09:01 fanta2k Exp $
+   $Id: xtc_collect_posts.inc.php 803 2005-02-26 15:32:50Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -72,7 +72,7 @@
             // no gv_amount so insert
             $gv_insert = xtc_db_query("insert into " . TABLE_COUPON_GV_CUSTOMER . " (customer_id, amount) values ('" . $_SESSION['customer_id'] . "', '" . $total_gv_amount . "')");
           }
-          xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART, 'info_message=' . urlencode(REDEEMED_AMOUNT. $xtPrice->xtcFormat($gv_amount,true)), 'SSL'));
+          xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART, 'info_message=' . urlencode(REDEEMED_AMOUNT. $xtPrice->xtcFormat($gv_amount,true,0,true)), 'SSL'));
 
 
 

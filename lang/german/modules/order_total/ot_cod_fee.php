@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_cod_fee.php,v 1.3 2004/05/02 16:34:08 fanta2k Exp $
+   $Id: ot_cod_fee.php 1003 2005-07-10 18:58:52Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -74,7 +74,7 @@
   kein 00:9.99 eingetragen ist, wird der Nachnahmeversand ins Ausland nicht berechnet
   (nicht m&ouml;glich).');
 
-  define('MODULE_ORDER_TOTAL_COD_FEE_DHL_TITLE','DHL Österreich');
+  define('MODULE_ORDER_TOTAL_COD_FEE_DHL_TITLE','DHL &Ouml;sterreich');
   define('MODULE_ORDER_TOTAL_COD_FEE_DHL_DESC','&lt;ISO2-Code&gt;:&lt;Preis&gt;, ....<br />
   00 als ISO2-Code erm&ouml;glicht den Nachnahmeversand in alle L&auml;nder. Wenn
   00 verwendet wird, muss dieses als letztes Argument eingetragen werden. Wenn
@@ -87,13 +87,35 @@
   00 verwendet wird, muss dieses als letztes Argument eingetragen werden. Wenn
   kein 00:9.99 eingetragen ist, wird der Nachnahmeversand ins Ausland nicht berechnet
   (nicht m&ouml;glich).');
+  
+  define('MODULE_ORDER_TOTAL_COD_FEE_UPS_TITLE','UPS');
+  define('MODULE_ORDER_TOTAL_COD_FEE_UPS_DESC','&lt;ISO2-Code&gt;:&lt;Preis&gt;, ....<br />
+  00 als ISO2-Code erm&ouml;glicht den Nachnahmeversand in alle L&auml;nder. Wenn
+  00 verwendet wird, muss dieses als letztes Argument eingetragen werden. Wenn
+  kein 00:9.99 eingetragen ist, wird der Nachnahmeversand ins Ausland nicht berechnet
+  (nicht m&ouml;glich).');
+  
+  define('MODULE_ORDER_TOTAL_COD_FEE_UPSE_TITLE','UPS Express');
+  define('MODULE_ORDER_TOTAL_COD_FEE_UPSE_DESC','&lt;ISO2-Code&gt;:&lt;Preis&gt;, ....<br />
+  00 als ISO2-Code erm&ouml;glicht den Nachnahmeversand in alle L&auml;nder. Wenn
+  00 verwendet wird, muss dieses als letztes Argument eingetragen werden. Wenn
+  kein 00:9.99 eingetragen ist, wird der Nachnahmeversand ins Ausland nicht berechnet
+  (nicht m&ouml;glich).');
+  
 
-  define('MODULE_ORDER_TOTAL_COD_FEE_FREE_TITLE','Versandkostenfrei');
+  define('MODULE_ORDER_TOTAL_COD_FEE_FREE_TITLE','Versandkostenfrei (Modul Versandkosten in Zusammenfassung)');
   define('MODULE_ORDER_TOTAL_COD_FEE_FREE_DESC','&lt;ISO2-Code&gt;:&lt;Preis&gt;, ....<br />
   00 als ISO2-Code erm&ouml;glicht den Nachnahmeversand in alle L&auml;nder. Wenn
   00 verwendet wird, muss dieses als letztes Argument eingetragen werden. Wenn
   kein 00:9.99 eingetragen ist, wird der Nachnahmeversand ins Ausland nicht berechnet
   (nicht m&ouml;glich).');
+  
+  define('MODULE_ORDER_TOTAL_FREEAMOUNT_FREE_TITLE','Versandkostenfrei (Modul Versankosten in Versandkosten)');
+  define('MODULE_ORDER_TOTAL_FREEAMOUNT_FREE_DESC','&lt;ISO2-Code&gt;:&lt;Preis&gt;, ....<br />
+  00 als ISO2-Code erm&ouml;glicht den Nachnahmeversand in alle L&auml;nder. Wenn
+  00 verwendet wird, muss dieses als letztes Argument eingetragen werden. Wenn
+  kein 00:9.99 eingetragen ist, wird der Nachnahmeversand ins Ausland nicht berechnet
+  (nicht m&ouml;glich).');  
 
   define('MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS_TITLE','Steuerklasse');
   define('MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS_DESC','W&auml;hlen Sie eine Steuerklasse.');

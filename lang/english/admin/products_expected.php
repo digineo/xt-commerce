@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: products_expected.php,v 1.1 2003/12/19 13:19:08 fanta2k Exp $   
+   $Id: products_expected.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,6 +1,6 @@
 <?
 /* -----------------------------------------------------------------------------------------
-   $Id: invoice.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $   
+   $Id: invoice.php 1101 2005-07-24 14:51:13Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
 
   define('MODULE_PAYMENT_INVOICE_TEXT_DESCRIPTION', 'Invoice');
   define('MODULE_PAYMENT_INVOICE_TEXT_TITLE', 'Invoice');
-
+define('MODULE_PAYMENT_INVOICE_TEXT_INFO','');
   define('MODULE_PAYMENT_INVOICE_STATUS_TITLE' , 'Enable Invoices Module');
 define('MODULE_PAYMENT_INVOICE_STATUS_DESC' , 'Do you want to accept Invoices as payments?');
 define('MODULE_PAYMENT_INVOICE_ORDER_STATUS_ID_TITLE' , 'Set Order Status');
@@ -28,6 +28,6 @@ define('MODULE_PAYMENT_INVOICE_ZONE_TITLE' , 'Payment Zone');
 define('MODULE_PAYMENT_INVOICE_ZONE_DESC' , 'If a zone is selected, only enable this payment method for that zone.');
 define('MODULE_PAYMENT_INVOICE_ALLOWED_TITLE' , 'Allowed zones');
 define('MODULE_PAYMENT_INVOICE_ALLOWED_DESC' , 'Please enter the zones <b>separately</b> which should be allowed to use this modul (e. g. AT,DE (leave empty if you want to allow all zones))');
-define('MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER_TITLE' , 'Minimum Orders');
-define('MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER_DESC' , 'Minimum orders for a Customer to view this Option.');
+define('MODULE_PAYMENT_INVOICE_MIN_ORDER_TITLE' , 'Minimum Orders');
+define('MODULE_PAYMENT_INVOICE_MIN_ORDER_DESC' , 'Minimum orders for a Customer to view this Option.');
 ?>

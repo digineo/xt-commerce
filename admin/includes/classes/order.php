@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: order.php,v 1.7 2004/06/05 10:53:44 fanta2k Exp $   
+   $Id: order.php 1037 2005-07-17 15:25:32Z gwinger $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -27,7 +27,7 @@
 
    Released under the GNU General Public License
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   class order {
     var $info, $totals, $products, $customer, $delivery;
 
@@ -75,24 +75,27 @@
                                    billing_country,
                                    billing_address_format_id,
                                    payment_method,
-                                   cc_type,
+                                   payment_class,
+				                  shipping_class,
+				                  cc_type,
                                    cc_owner,
                                    cc_number,
                                    cc_expires,
+                                   cc_cvv,
                                    comments,
                                    currency,
                                    currency_value,
                                    date_purchased,
                                    orders_status,
                                    last_modified,
-                                  customers_status,
-                                  customers_status_name,
-                                  customers_status_image,
-                                  customers_ip,
-                                  language,
-                                  customers_status_discount
-                                  from " . TABLE_ORDERS . " where
-                                  orders_id = '" . xtc_db_input($order_id) . "'");
+                                   customers_status,
+                                   customers_status_name,
+                                   customers_status_image,
+                                   customers_ip,
+                                   language,
+                                   customers_status_discount
+                                   from " . TABLE_ORDERS . " where
+                                   orders_id = '" . xtc_db_input($order_id) . "'");
 
       $order = xtc_db_fetch_array($order_query);
 
@@ -105,6 +108,8 @@
       $this->info = array('currency' => $order['currency'],
                           'currency_value' => $order['currency_value'],
                           'payment_method' => $order['payment_method'],
+                          'payment_class' => $order['payment_class'],
+                          'shipping_class' => $order['shipping_class'],
                           'status' => $order['customers_status'],
                           'status_name' => $order['customers_status_name'],
                           'status_image' => $order['customers_status_image'],
@@ -113,6 +118,7 @@
                           'cc_owner' => $order['cc_owner'],
                           'cc_number' => $order['cc_number'],
                           'cc_expires' => $order['cc_expires'],
+                          'cc_cvv' => $order['cc_cvv'],
                           'comments' => $order['comments'],
                           'language' => $order['language'],
                           'date_purchased' => $order['date_purchased'],
@@ -168,6 +174,7 @@
         $this->products[$index] = array('qty' => $orders_products['products_quantity'],
                                         'name' => $orders_products['products_name'],
                                         'id' => $orders_products['products_id'],
+                                        'opid' => $orders_products['orders_products_id'],                                        
                                         'model' => $orders_products['products_model'],
                                         'tax' => $orders_products['products_tax'],
                                         'price' => $orders_products['products_price'],

@@ -1,6 +1,7 @@
 <?php
+
 /* -----------------------------------------------------------------------------------------
-   $Id: logoff.php,v 1.6 2004/02/17 21:13:26 fanta2k Exp $   
+   $Id: logoff.php 1071 2005-07-22 16:36:53Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -27,51 +28,57 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-  include( 'includes/application_top.php');
-       // create smarty elements
-  $smarty = new Smarty;
-  // include boxes
-  require(DIR_FS_CATALOG .'templates/'.CURRENT_TEMPLATE. '/source/boxes.php'); 
-  // include needed functions
-  require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
+include ('includes/application_top.php');
+// create smarty elements
+$smarty = new Smarty;
+// include boxes
+require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
+$breadcrumb->add(NAVBAR_TITLE_LOGOFF);
 
-  $breadcrumb->add(NAVBAR_TITLE_LOGOFF);
+//delete Guests from Database   
 
-  xtc_session_destroy();
+if (($_SESSION['account_type'] == 1) && (DELETE_GUEST_ACCOUNT == 'true')) {
+	xtc_db_query("delete from ".TABLE_CUSTOMERS." where customers_id = '".$_SESSION['customer_id']."'");
+	xtc_db_query("delete from ".TABLE_ADDRESS_BOOK." where customers_id = '".$_SESSION['customer_id']."'");
+	xtc_db_query("delete from ".TABLE_CUSTOMERS_INFO." where customers_info_id = '".$_SESSION['customer_id']."'");
+}
 
-  unset($_SESSION['customer_id']);
-  unset($_SESSION['customer_default_address_id']);
-  unset($_SESSION['customer_first_name']);
-  unset($_SESSION['customer_country_id']);
-  unset($_SESSION['customer_zone_id']);
-  unset($_SESSION['comments']);
-  unset($_SESSION['user_info']);
-  unset($_SESSION['customers_status']);
-  unset($_SESSION['selected_box']);
-  unset($_SESSION['navigation']);
-  unset($_SESSION['shipping']);
-  unset($_SESSION['payment']);
-  // GV Code Start
-  unset($_SESSION['gv_id']);
-  unset($_SESSION['cc_id']);
-  // GV Code End
-  $_SESSION['cart']->reset();
-  // write customers status guest in session again
-  require(DIR_WS_INCLUDES . 'write_customers_status.php');
+xtc_session_destroy();
 
- require(DIR_WS_INCLUDES . 'header.php');
+unset ($_SESSION['customer_id']);
+unset ($_SESSION['customer_default_address_id']);
+unset ($_SESSION['customer_first_name']);
+unset ($_SESSION['customer_country_id']);
+unset ($_SESSION['customer_zone_id']);
+unset ($_SESSION['comments']);
+unset ($_SESSION['user_info']);
+unset ($_SESSION['customers_status']);
+unset ($_SESSION['selected_box']);
+unset ($_SESSION['navigation']);
+unset ($_SESSION['shipping']);
+unset ($_SESSION['payment']);
+unset ($_SESSION['ccard']);
+// GV Code Start
+unset ($_SESSION['gv_id']);
+unset ($_SESSION['cc_id']);
+// GV Code End
+$_SESSION['cart']->reset();
+// write customers status guest in session again
+require (DIR_WS_INCLUDES.'write_customers_status.php');
 
-  $smarty->assign('BUTTON_CONTINUE','<a href="' . xtc_href_link(FILENAME_DEFAULT) . '">' . xtc_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE) . '</a>');
-  $smarty->assign('language', $_SESSION['language']);
+require (DIR_WS_INCLUDES.'header.php');
 
+$smarty->assign('BUTTON_CONTINUE', '<a href="'.xtc_href_link(FILENAME_DEFAULT).'">'.xtc_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE).'</a>');
+$smarty->assign('language', $_SESSION['language']);
 
-  $smarty->caching = 0;
-  $main_content=$smarty->fetch(CURRENT_TEMPLATE . '/module/logoff.html');
+$smarty->caching = 0;
+$main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/logoff.html');
 
-  $smarty->assign('language', $_SESSION['language']);
-  $smarty->assign('main_content',$main_content);
-  $smarty->caching = 0;
-  if (!defined(RM)) $smarty->load_filter('output', 'note');
-  $smarty->display(CURRENT_TEMPLATE . '/index.html');
-  ?>
+$smarty->assign('language', $_SESSION['language']);
+$smarty->assign('main_content', $main_content);
+$smarty->caching = 0;
+if (!defined(RM))
+	$smarty->load_filter('output', 'note');
+$smarty->display(CURRENT_TEMPLATE.'/index.html');
+?>

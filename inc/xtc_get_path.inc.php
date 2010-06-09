@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_path.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_get_path.inc.php 1009 2005-07-11 16:19:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -26,11 +26,11 @@
         $cPath_new = '';
         $last_category_query = "select parent_id from " . TABLE_CATEGORIES . " where categories_id = '" . $cPath_array[($cp_size-1)] . "'";
         $last_category_query  = xtDBquery($last_category_query);
-        $last_category = xtc_db_fetch_array(&$last_category_query,true);
+        $last_category = xtc_db_fetch_array($last_category_query,true);
 
         $current_category_query = "select parent_id from " . TABLE_CATEGORIES . " where categories_id = '" . $current_category_id . "'";
         $current_category_query  = xtDBquery($current_category_query);
-        $current_category = xtc_db_fetch_array(&$current_category_query,true);
+        $current_category = xtc_db_fetch_array($current_category_query,true);
 
         if ($last_category['parent_id'] == $current_category['parent_id']) {
           for ($i=0; $i<($cp_size-1); $i++) {

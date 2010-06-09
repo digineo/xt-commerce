@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: eustandardtransfer.php,v 1.1 2004/06/04 19:52:54 fanta2k Exp $
+   $Id: eustandardtransfer.php 998 2005-07-07 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -29,7 +29,7 @@
 
     define('MODULE_PAYMENT_EUTRANSFER_STATUS_TITLE','Allow Bank Transfer Payment');
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_DESC','Do you want to accept bank transfer order payments?');
-
+define('MODULE_PAYMENT_EUTRANSFER_TEXT_INFO','');
   define('MODULE_PAYMENT_EUTRANSFER_BRANCH_TITLE','Branch Location');
   define('MODULE_PAYMENT_EUTRANSFER_BRANCH_DESC','The brach where you have your account.');
 

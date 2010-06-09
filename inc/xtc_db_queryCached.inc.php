@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_db_query.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $
+   $Id: xtc_db_queryCached.inc.php 782 2005-02-19 19:26:00Z khan_thep $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -40,7 +40,7 @@
 
         } else {
 
-         if (file_exists($file)) unlink($file);
+         if (file_exists($file)) @unlink($file);
 
         // get result from DB and create new file
         $result = mysql_query($query, $$link) or xtc_db_error($query, mysql_errno(), mysql_error());

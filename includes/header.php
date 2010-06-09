@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: header.php,v 1.26 2004/06/06 20:50:14 fanta2k Exp $   
+   $Id: header.php 1140 2005-08-10 10:16:00Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -29,7 +29,7 @@
 
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>" /> 
@@ -82,10 +82,10 @@ function selectRowEffect(object, buttonSelect) {
   selected = object;
 
 // one button is not an array
-  if (document.checkout_payment.payment[0]) {
-    document.checkout_payment.payment[buttonSelect].checked=true;
+  if (document.getElementById('payment'[0])) {
+    document.getElementById('payment'[buttonSelect]).checked=true;
   } else {
-    document.checkout_payment.payment.checked=true;
+    //document.getElementById('payment'[selected]).checked=true;
   }
 }
 
@@ -96,9 +96,7 @@ function rowOverEffect(object) {
 function rowOutEffect(object) {
   if (object.className == 'moduleRowOver') object.className = 'moduleRow';
 }
-function checkBox(object) {
-  document.account_newsletter.elements[object].checked = !document.account_newsletter.elements[object].checked;
-}
+
 function popupImageWindow(url) {
   window.open(url,'popupImageWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,width=100,height=100,screenX=150,screenY=150,top=150,left=150')
 }
@@ -125,7 +123,7 @@ require('includes/form_check.js.php');
 if (strstr($PHP_SELF, FILENAME_ACCOUNT_EDIT )) {
 require('includes/form_check.js.php');
 }
-if (strstr($PHP_SELF, FILENAME_ADDRESS_BOOK_PROCES )) {
+if (strstr($PHP_SELF, FILENAME_ADDRESS_BOOK_PROCESS )) {
   if (isset($_GET['delete']) == false) {
     include('includes/form_check.js.php');
   }
@@ -156,52 +154,26 @@ if (strstr($PHP_SELF, FILENAME_ADVANCED_SEARCH )) {
 <script type="text/javascript" src="includes/general.js"></script>
 <script type="text/javascript"><!--
 function check_form() {
-  var error_message = "<?php echo JS_ERROR; ?>";
+  var error_message = unescape("<?php echo xtc_js_lang(JS_ERROR); ?>");
   var error_found = false;
   var error_field;
-  var keywords = document.advanced_search.keywords.value;
-  var dfrom = document.advanced_search.dfrom.value;
-  var dto = document.advanced_search.dto.value;
-  var pfrom = document.advanced_search.pfrom.value;
-  var pto = document.advanced_search.pto.value;
+  var keywords = document.getElementById("advanced_search").keywords.value;
+  var pfrom = document.getElementById("advanced_search").pfrom.value;
+  var pto = document.getElementById("advanced_search").pto.value;
   var pfrom_float;
   var pto_float;
 
-  if ( ((keywords == '') || (keywords.length < 1)) && ((dfrom == '') || (dfrom == '<?php echo DOB_FORMAT_STRING; ?>') || (dfrom.length < 1)) && ((dto == '') || (dto == '<?php echo DOB_FORMAT_STRING; ?>') || (dto.length < 1)) && ((pfrom == '') || (pfrom.length < 1)) && ((pto == '') || (pto.length < 1)) ) {
-    error_message = error_message + "<?php echo JS_AT_LEAST_ONE_INPUT; ?>";
-    error_field = document.advanced_search.keywords;
+  if ( (keywords == '' || keywords.length < 1) && (pfrom == '' || pfrom.length < 1) && (pto == '' || pto.length < 1) ) {
+    error_message = error_message + unescape("<?php echo xtc_js_lang(JS_AT_LEAST_ONE_INPUT); ?>");
+    error_field = document.getElementById("advanced_search").keywords;
     error_found = true;
-  }
-
-  if ((dfrom.length > 0) && (dfrom != '<?php echo DOB_FORMAT_STRING; ?>')) {
-    if (!IsValidDate(dfrom, '<?php echo DOB_FORMAT_STRING; ?>')) {
-      error_message = error_message + "<?php echo JS_INVALID_FROM_DATE; ?>";
-      error_field = document.advanced_search.dfrom;
-      error_found = true;
-    }
-  }
-
-  if ((dto.length > 0) && (dto != '<?php echo DOB_FORMAT_STRING; ?>')) {
-    if (!IsValidDate(dto, '<?php echo DOB_FORMAT_STRING; ?>')) {
-      error_message = error_message + "<?php echo JS_INVALID_TO_DATE; ?>";
-      error_field = document.advanced_search.dto;
-      error_found = true;
-    }
-  }
-
-  if ((dfrom.length > 0) && (dfrom != '<?php echo DOB_FORMAT_STRING; ?>') && (IsValidDate(dfrom, '<?php echo DOB_FORMAT_STRING; ?>')) && (dto.length > 0) && (dto != '<?php echo DOB_FORMAT_STRING; ?>') && (IsValidDate(dto, '<?php echo DOB_FORMAT_STRING; ?>'))) {
-    if (!CheckDateRange(document.advanced_search.dfrom, document.advanced_search.dto)) {
-      error_message = error_message + "<?php echo JS_TO_DATE_LESS_THAN_FROM_DATE; ?>";
-      error_field = document.advanced_search.dto;
-      error_found = true;
-    }
   }
 
   if (pfrom.length > 0) {
     pfrom_float = parseFloat(pfrom);
     if (isNaN(pfrom_float)) {
-      error_message = error_message + "<?php echo JS_PRICE_FROM_MUST_BE_NUM; ?>";
-      error_field = document.advanced_search.pfrom;
+      error_message = error_message + unescape("<?php echo xtc_js_lang(JS_PRICE_FROM_MUST_BE_NUM); ?>");
+      error_field = document.getElementById("advanced_search").pfrom;
       error_found = true;
     }
   } else {
@@ -211,8 +183,8 @@ function check_form() {
   if (pto.length > 0) {
     pto_float = parseFloat(pto);
     if (isNaN(pto_float)) {
-      error_message = error_message + "<?php echo JS_PRICE_TO_MUST_BE_NUM; ?>";
-      error_field = document.advanced_search.pto;
+      error_message = error_message + unescape("<?php echo xtc_js_lang(JS_PRICE_TO_MUST_BE_NUM); ?>");
+      error_field = document.getElementById("advanced_search").pto;
       error_found = true;
     }
   } else {
@@ -221,8 +193,8 @@ function check_form() {
 
   if ( (pfrom.length > 0) && (pto.length > 0) ) {
     if ( (!isNaN(pfrom_float)) && (!isNaN(pto_float)) && (pto_float < pfrom_float) ) {
-      error_message = error_message + "<?php echo JS_PRICE_TO_LESS_THAN_PRICE_FROM; ?>";
-      error_field = document.advanced_search.pto;
+      error_message = error_message + unescape("<?php echo xtc_js_lang(JS_PRICE_TO_LESS_THAN_PRICE_FROM); ?>");
+      error_field = document.getElementById("advanced_search").pto;
       error_found = true;
     }
   }
@@ -231,10 +203,6 @@ function check_form() {
     alert(error_message);
     error_field.focus();
     return false;
-  } else {
-    RemoveFormatString(document.advanced_search.dfrom, "<?php echo DOB_FORMAT_STRING; ?>");
-    RemoveFormatString(document.advanced_search.dto, "<?php echo DOB_FORMAT_STRING; ?>");
-    return true;
   }
 }
 
@@ -248,22 +216,20 @@ function popupWindow(url) {
 if (strstr($PHP_SELF, FILENAME_PRODUCT_REVIEWS_WRITE )) {
 ?>
 
-
 <script type="text/javascript"><!--
 function checkForm() {
   var error = 0;
-  var error_message = "<?php echo JS_ERROR; ?>";
+  var error_message = unescape("<?php echo xtc_js_lang(JS_ERROR); ?>");
 
-  var review = document.product_reviews_write.review.value;
+  var review = document.getElementById("product_reviews_write").review.value;
 
   if (review.length < <?php echo REVIEW_TEXT_MIN_LENGTH; ?>) {
-    error_message = error_message + "<?php echo JS_REVIEW_TEXT; ?>";
+    error_message = error_message + unescape("<?php echo xtc_js_lang(JS_REVIEW_TEXT); ?>");
     error = 1;
   }
 
-  if ((document.product_reviews_write.rating[0].checked) || (document.product_reviews_write.rating[1].checked) || (document.product_reviews_write.rating[2].checked) || (document.product_reviews_write.rating[3].checked) || (document.product_reviews_write.rating[4].checked)) {
-  } else {
-    error_message = error_message + "<?php echo JS_REVIEW_RATING; ?>";
+  if (!((document.getElementById("product_reviews_write").rating[0].checked) || (document.getElementById("product_reviews_write").rating[1].checked) || (document.getElementById("product_reviews_write").rating[2].checked) || (document.getElementById("product_reviews_write").rating[3].checked) || (document.getElementById("product_reviews_write").rating[4].checked))) {
+    error_message = error_message + unescape("<?php echo xtc_js_lang(JS_REVIEW_RATING); ?>");
     error = 1;
   }
 

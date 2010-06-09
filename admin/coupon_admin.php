@@ -1,13 +1,32 @@
 <?php
 /*
-  $Id: coupon_admin.php,v 1.2 2004/02/29 17:05:18 fanta2k Exp $
+  $Id: coupon_admin.php 1084 2005-07-23 18:36:08Z matthias $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
-  Copyright (c) 2003 osCommerce
+   XT-Commerce - community made shopping
+   http://www.xt-commerce.com
 
-  Released under the GNU General Public License
-*/
+   Copyright (c) 2003 XT-Commerce
+   -----------------------------------------------------------------------------------------
+   based on:
+   (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
+   (c) 2002-2003 osCommerce(coupon_admin.php); www.oscommerce.com
+
+
+   Released under the GNU General Public License
+   -----------------------------------------------------------------------------------------
+   Third Party contribution:
+
+   Credit Class/Gift Vouchers/Discount Coupons (Version 5.10)
+   http://www.oscommerce.com/community/contributions,282
+   Copyright (c) Strider | Strider@oscworks.com
+   Copyright (c  Nick Stanko of UkiDev.com, nick@ukidev.com
+   Copyright (c) Andre ambidex@gmx.net
+   Copyright (c) 2001,2002 Ian C Wilson http://www.phesis.org
+
+
+   Released under the GNU General Public License
+   ---------------------------------------------------------------------------------------*/
+
 
   require('includes/application_top.php');
   require(DIR_WS_CLASSES . 'currencies.php');
@@ -356,7 +375,7 @@ $customer = xtc_db_fetch_array($customer_query);
                 <table border="0" width="100%" cellpadding="0" cellspacing="2">
                   <tr>
                     <td><?php ?>&nbsp;</td>
-                    <td align="right"><?php echo '<a href="' . xtc_href_link(FILENAME_COUPON_ADMIN) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . xtc_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+                    <td align="right"><?php echo '<a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_COUPON_ADMIN) . '">' . BUTTON_CANCEL . '</a> <input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SEND_EMAIL . '"/>'; ?></td>
                   </tr>
                 </table></td>
               </tr>
@@ -447,7 +466,7 @@ $customer = xtc_db_fetch_array($customer_query);
                 <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
-                <td colspan="2" align="right"><?php echo xtc_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+                <td colspan="2" align="right"><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SEND_EMAIL . '"/>'; ?></td>
               </tr>
             </table></td>
           </form></tr>
@@ -585,8 +604,8 @@ $customer = xtc_db_fetch_array($customer_query);
     echo xtc_draw_hidden_field('coupon_finishdate', date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_finishdate_month'],$_POST['coupon_finishdate_day'] ,$_POST['coupon_finishdate_year'] )));
 ?>
      <tr>
-        <td align="left"><?php echo xtc_image_submit('button_confirm.gif',COUPON_BUTTON_CONFIRM); ?></td>
-        <td align="left"><?php echo xtc_image_submit('button_back.gif',COUPON_BUTTON_BACK, 'name=back'); ?></td>
+        <td align="left"><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_CONFIRM . '"/>'; ?></td>
+        <td align="left"><?php echo '<input type="submit" name="back" class="button" onClick="this.blur();" value="' . BUTTON_BACK . '"/>'; ?></td>
       </td>
       </tr>
       
@@ -637,7 +656,7 @@ $customer = xtc_db_fetch_array($customer_query);
       <tr>
       <td>
 <?php 
-    echo xtc_draw_form('coupon', 'coupon_admin.php', 'action=update&oldaction='.$_GET['action'] . '&cid=' . $_GET['cid']);
+    echo xtc_draw_form('coupon', 'coupon_admin.php', 'action=update&oldaction='.$_GET['action'] . '&cid=' . $_GET['cid'],'post', 'enctype="multipart/form-data"');
 ?>
       <table border="0" width="100%" cellspacing="0" cellpadding="6">
 <?php
@@ -730,8 +749,8 @@ $customer = xtc_db_fetch_array($customer_query);
         <td align="left" class="main"><?php echo COUPON_FINISHDATE_HELP; ?></td>
       </tr>
       <tr>
-        <td align="left"><?php echo xtc_image_submit('button_preview.gif',COUPON_BUTTON_PREVIEW); ?></td>
-        <td align="left"><?php echo '&nbsp;&nbsp;<a href="' . xtc_href_link('coupon_admin.php', ''); ?>"><?php echo xtc_image_button('button_cancel.gif', IMAGE_CANCEL); ?></a>
+        <td align="left"><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_PREVIEW . '"/>'; ?></td>
+        <td align="left"><?php echo '&nbsp;&nbsp;<a class="button" onClick="this.blur();" href="' . xtc_href_link('coupon_admin.php', ''); ?>"><?php echo BUTTON_CANCEL; ?></a>
       </td>
       </tr>
       </td></table></form>
@@ -766,7 +785,7 @@ $customer = xtc_db_fetch_array($customer_query);
         </table></td>
       </tr>
       <tr>
-        <td><a href="<?php echo xtc_href_link('coupon_admin.php', 'action=new'); ?>"><?php echo xtc_image_button('button_insert.gif', IMAGE_INSERT); ?></a><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><a class="button" onClick="this.blur();" href="<?php echo xtc_href_link('coupon_admin.php', 'action=new'); ?>"><?php echo BUTTON_INSERT; ?></a><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
@@ -782,7 +801,7 @@ $customer = xtc_db_fetch_array($customer_query);
     } else {
       $cc_query_raw = "select coupon_id, coupon_code, coupon_amount, coupon_type, coupon_start_date,coupon_expire_date,uses_per_user,uses_per_coupon,restrict_to_products, restrict_to_categories, date_created,date_modified from " . TABLE_COUPONS . " where coupon_type != 'G'";
     }
-    //$cc_split = new splitPageResults($_GET['page'], '20', $cc_query_raw, $cc_query_numrows);
+    $cc_split = new splitPageResults($_GET['page'], '20', $cc_query_raw, $cc_query_numrows);
     $cc_query = xtc_db_query($cc_query_raw);
     while ($cc_list = xtc_db_fetch_array($cc_query)) {
       $rows++;
@@ -827,7 +846,7 @@ $customer = xtc_db_fetch_array($customer_query);
               </tr>
             <?php } ?>
               <tr>
-                <td align="right" colspan="2" class="smallText"><?php echo '<a href="' . xtc_href_link('coupon_admin.php', 'page=' . $_GET['page'] . '&cID=' . $cInfo->coupon_id . '&action=new') . '">' . xtc_image_button('button_insert.gif', IMAGE_INSERT) . '</a>'; ?></td>
+                <td align="right" colspan="2" class="smallText"><?php echo '<a class="button" onClick="this.blur();" href="' . xtc_href_link('coupon_admin.php', 'page=' . $_GET['page'] . '&cID=' . $cInfo->coupon_id . '&action=new') . '">' . BUTTON_INSERT . '</a>'; ?></td>
               </tr>
             </table></td>
           </tr>
@@ -863,8 +882,8 @@ $customer = xtc_db_fetch_array($customer_query);
       }
       if ($_GET['action'] == 'voucherdelete') {
         $contents[] = array('text'=> TEXT_CONFIRM_DELETE . '</br></br>' . 
-                '<a href="'.xtc_href_link('coupon_admin.php','action=confirmdelete&cid='.$_GET['cid'],'NONSSL').'">'.xtc_image_button('button_confirm.gif','Confirm Delete Voucher').'</a>' .
-                '<a href="'.xtc_href_link('coupon_admin.php','cid='.$cInfo->coupon_id,'NONSSL').'">'.xtc_image_button('button_cancel.gif','Cancel').'</a>'
+                '<a class="button" onClick="this.blur();" href="'.xtc_href_link('coupon_admin.php','action=confirmdelete&cid='.$_GET['cid'],'NONSSL').'">'.BUTTON_CONFIRM.'</a>' .
+                '<a class="button" onClick="this.blur();" href="'.xtc_href_link('coupon_admin.php','cid='.$cInfo->coupon_id,'NONSSL').'">'.BUTTON_CANCEL.'</a>'
                 );
       } else { 
         $prod_details = NONE;
@@ -887,10 +906,10 @@ $customer = xtc_db_fetch_array($customer_query);
                      COUPON_CATEGORIES . '&nbsp;::&nbsp; ' . $cat_details . '<br />' .
                      DATE_CREATED . '&nbsp;::&nbsp; ' . xtc_date_short($cInfo->date_created) . '<br />' .
                      DATE_MODIFIED . '&nbsp;::&nbsp; ' . xtc_date_short($cInfo->date_modified) . '<br /><br />' .
-                     '<center><a href="'.xtc_href_link('coupon_admin.php','action=email&cid='.$cInfo->coupon_id,'NONSSL').'">'.xtc_image_button('button_email.gif','Email Voucher').'</a>' .
-                     '<a href="'.xtc_href_link('coupon_admin.php','action=voucheredit&cid='.$cInfo->coupon_id,'NONSSL').'">'.xtc_image_button('button_edit.gif','Edit Voucher').'</a>' .
-                     '<a href="'.xtc_href_link('coupon_admin.php','action=voucherdelete&cid='.$cInfo->coupon_id,'NONSSL').'">'.xtc_image_button('button_delete.gif','Delete Voucher').'</a>' .
-                     '<br /><a href="'.xtc_href_link('coupon_admin.php','action=voucherreport&cid='.$cInfo->coupon_id,'NONSSL').'">'.xtc_image_button('button_report.gif','Voucher Report').'</a></center>'
+                     '<center><a class="button" onClick="this.blur();" href="'.xtc_href_link('coupon_admin.php','action=email&cid='.$cInfo->coupon_id,'NONSSL').'">'.BUTTON_EMAIL.'</a>' .
+                     '<a class="button" onClick="this.blur();" href="'.xtc_href_link('coupon_admin.php','action=voucheredit&cid='.$cInfo->coupon_id,'NONSSL').'">'.BUTTON_EDIT.'</a>' .
+                     '<a class="button" onClick="this.blur();" href="'.xtc_href_link('coupon_admin.php','action=voucherdelete&cid='.$cInfo->coupon_id,'NONSSL').'">'.BUTTON_DELETE.'</a>' .
+                     '<a class="button" onClick="this.blur();" href="'.xtc_href_link('coupon_admin.php','action=voucherreport&cid='.$cInfo->coupon_id,'NONSSL').'">'.BUTTON_REPORT.'</a></center>'
                      );
         }
         break;

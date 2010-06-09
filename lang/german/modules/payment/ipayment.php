@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ipayment.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: ipayment.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,6 +17,7 @@
 
   define('MODULE_PAYMENT_IPAYMENT_TEXT_TITLE', 'iPayment');
   define('MODULE_PAYMENT_IPAYMENT_TEXT_DESCRIPTION', 'Kreditkarten Test Info:<br /><br />CC#: 4111111111111111<br />G&uuml;ltig bis: Any');
+    define('MODULE_PAYMENT_IPAYMENT_TEXT_INFO','');
   define('IPAYMENT_ERROR_HEADING', 'Folgender Fehler wurde von iPayment w&auml;hrend des Prozesses gemeldet:');
   define('IPAYMENT_ERROR_MESSAGE', 'Bitte kontrollieren Sie die Daten Ihrer Kreditkarte!');
   define('MODULE_PAYMENT_IPAYMENT_TEXT_CREDIT_CARD_OWNER', 'Kreditkarteninhaber');

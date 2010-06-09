@@ -30,6 +30,7 @@ define('TEXT_PRODUCT', 'Article:');
 define('TEXT_TAX', 'Tax:');
 define('TEXT_PRICE', 'Price:');
 define('TEXT_FINAL', 'Total:');
+define('TEXT_CUSTOMER_GROUP', 'Customer Group:');
 
 define('TEXT_PRODUCT_SEARCH', 'Search Article:');
 
@@ -55,4 +56,16 @@ define('TEXT_STREET', 'Street');
 define('TEXT_ZIP', 'Postcode:');
 define('TEXT_CITY', 'City:');
 define('TEXT_COUNTRY', 'Country:');
+
+
+define('TEXT_PAYMENT', 'Payment:');
+define('TEXT_SHIPPING', 'Shipping:');
+define('TEXT_LANGUAGE', 'Language:');
+define('TEXT_CURRENCIES', 'Currency:');
+define('TEXT_ORDER_TOTAL', 'Total:');
+define('TEXT_SAVE', 'Save');
+
+define('TEXT_ACTUAL', 'actual:');
+define('TEXT_NEW', 'new:');
+
 ?>

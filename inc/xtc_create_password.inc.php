@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_create_password.inc.php,v 1.3 2004/02/08 16:18:03 fanta2k Exp $   
+   $Id: xtc_create_password.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

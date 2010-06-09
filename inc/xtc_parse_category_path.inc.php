@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_parse_category_path.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_parse_category_path.inc.php 784 2005-02-19 20:21:29Z khan_thep $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -16,20 +16,12 @@
    ---------------------------------------------------------------------------------------*/
  // include needed function
  require_once(DIR_FS_INC . 'xtc_string_to_int.inc.php');
-// Parse and secure the cPath parameter values
+ // Parse and secure the cPath parameter values
   function xtc_parse_category_path($cPath) {
-// make sure the category IDs are integers
+    // make sure the category IDs are integers
     $cPath_array = array_map('xtc_string_to_int', explode('_', $cPath));
 
-// make sure no duplicate category IDs exist which could lock the server in a loop
-    $tmp_array = array();
-    $n = sizeof($cPath_array);
-    for ($i=0; $i<$n; $i++) {
-      if (!in_array($cPath_array[$i], $tmp_array)) {
-        $tmp_array[] = $cPath_array[$i];
-      }
-    }
-
-    return $tmp_array;
+    // make sure no duplicate category IDs exist which could lock the server in a loop
+	return array_unique($cPath_array);
   }
  ?>

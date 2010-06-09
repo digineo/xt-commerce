@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: html_graphs.php,v 1.1 2003/09/06 22:05:29 fanta2k Exp $   
+   $Id: html_graphs.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -16,7 +16,7 @@
    
    HTML_Graphs (v1.5 1998/11/05 06:15:52) by Phil Davis, http://www.pobox.com/~pdavis/
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   ////
   // calls routines to initialize defaults, set up table
   // print data, and close table.

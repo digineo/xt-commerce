@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: whos_online.php,v 1.3 2004/02/29 17:05:18 fanta2k Exp $   
+   $Id: whos_online.php 1133 2005-08-07 07:47:07Z gwinger $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -67,7 +67,7 @@
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_LAST_PAGE_URL; ?>&nbsp;</td>
               </tr>
 <?php
-  $whos_online_query = xtc_db_query("select customer_id, full_name, ip_address, time_entry, time_last_click, last_page_url, session_id from " . TABLE_WHOS_ONLINE);
+  $whos_online_query = xtc_db_query("select customer_id, full_name, ip_address, time_entry, time_last_click, last_page_url, session_id from " . TABLE_WHOS_ONLINE ." order by time_last_click desc");
   while ($whos_online = xtc_db_fetch_array($whos_online_query)) {
     $time_online = (time() - $whos_online['time_entry']);
     if ( ((!$_GET['info']) || (@$_GET['info'] == $whos_online['session_id'])) && (!$info) ) {

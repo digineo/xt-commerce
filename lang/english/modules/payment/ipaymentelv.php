@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ipaymentelv.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $
+   $Id: ipaymentelv.php 998 2005-07-07 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -31,7 +31,7 @@
   define('MODULE_PAYMENT_IPAYMENTELV_TEXT_BANK_BLZ', 'BLZ:');
   define('MODULE_PAYMENT_IPAYMENTELV_TEXT_BANK_NAME', 'Bank:');
   define('MODULE_PAYMENT_IPAYMENTELV_TEXT_BANK_FAX', 'Einzugserm&auml;chtigung wird per Fax best&auml;tigt');
-
+  define('MODULE_PAYMENT_IPAYMENTELV_TEXT_INFO','');
   define('MODULE_PAYMENT_IPAYMENTELV_TEXT_BANK_ERROR', '<font color="#FF0000">FEHLER: </font>');
   define('MODULE_PAYMENT_IPAYMENTELV_TEXT_BANK_ERROR_1', 'Kontonummer und BLZ stimmen nicht &uuml;berein!<br />Bitte &uuml;berpr&uuml;fen Sie Ihre Angaben nochmals.');
   define('MODULE_PAYMENT_IPAYMENTELV_TEXT_BANK_ERROR_2', 'Für diese Kontonummer ist kein Pr&uuml;fziffernverfahren definiert!');

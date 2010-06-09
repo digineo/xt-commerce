@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: accounting.php,v 1.9 2004/05/01 17:32:44 fanta2k Exp $   
+   $Id: accounting.php 1167 2005-08-22 00:43:01Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -45,10 +45,8 @@
 
         xtc_db_query("UPDATE ".TABLE_ADMIN_ACCESS." SET ".$key."=1 where customers_id='".(int)$_GET['cID']."'");
 
-        //$shop_ids .= $b.",";
         }
 
-        //xtc_set_admin_access($_GET['id'], $_GET['flag'], $_GET['cID']);
         xtc_redirect(xtc_href_link(FILENAME_CUSTOMERS, 'cID=' . (int)$_GET['cID'], 'NONSSL'));
         break;
       }
@@ -187,7 +185,7 @@ for ($i = 0; $i < $columns; $i++) {
 }
 ?>
     </table>
-<?php echo xtc_image_submit('button_save.gif', IMAGE_SAVE,'style="cursor:hand" onClick="return confirm(\''.SAVE_ENTRY.'\')"'); ?>
+<input type="submit" class="button" onClick="return confirm('<?php echo SAVE_ENTRY; ?>')" value="<?php echo BUTTON_SAVE; ?>">
 </td>
 
 <!-- body_text_eof //-->

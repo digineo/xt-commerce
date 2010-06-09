@@ -1,6 +1,7 @@
 <?php
+
 /* -----------------------------------------------------------------------------------------
-   $Id: gift_cart.php,v 1.1 2004/02/17 21:13:26 fanta2k Exp $
+   $Id: gift_cart.php 842 2005-03-24 14:35:02Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -27,46 +28,42 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
+$gift_smarty = new Smarty;
+$gift_smarty->assign('tpl_path', 'templates/'.CURRENT_TEMPLATE.'/');
 
-$gift_smarty=new Smarty;
-$gift_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
-
-
-if (ACTIVATE_GIFT_SYSTEM=='true') {
-        $gift_smarty->assign('ACTIVATE_GIFT','true');
+if (ACTIVATE_GIFT_SYSTEM == 'true') {
+	$gift_smarty->assign('ACTIVATE_GIFT', 'true');
 }
 
-  if (isset($_SESSION['customer_id'])) {
-                $gv_query = xtc_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id = '" . $_SESSION['customer_id'] . "'");
-                $gv_result = xtc_db_fetch_array($gv_query);
-                if ($gv_result['amount'] > 0 ) {
-                    $gift_smarty->assign('GV_AMOUNT', $xtPrice->xtcFormat($gv_result['amount'],true,0,true));
-                    $gift_smarty->assign('GV_SEND_TO_FRIEND_LINK', xtc_href_link(FILENAME_GV_SEND));
-                } else {
-                $gift_smarty->assign('GV_AMOUNT',0);
-                }
-              }
-              if (isset($_SESSION['gv_id'])) {
-                $gv_query = xtc_db_query("select coupon_amount from " . TABLE_COUPONS . " where coupon_id = '" . $_SESSION['gv_id'] . "'");
-                $coupon = xtc_db_fetch_array($gv_query);
-                $gift_smarty->assign('COUPON_AMOUNT2', $xtPrice->xtcFormat($coupon['coupon_amount'],true,0,true));
-              }
-              if (isset($_SESSION['cc_id'])) {
-                $gift_smarty->assign('COUPON_HELP_LINK', '<a style="cursor:hand" onclick="javascript:window.open(\'' . xtc_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $_SESSION['cc_id']) . '\', \'popup\', \'toolbar=0,scrollbars=yes, width=350, height=350\')">');
+if (isset ($_SESSION['customer_id'])) {
+	$gv_query = xtc_db_query("select amount from ".TABLE_COUPON_GV_CUSTOMER." where customer_id = '".$_SESSION['customer_id']."'");
+	$gv_result = xtc_db_fetch_array($gv_query);
+	if ($gv_result['amount'] > 0) {
+		$gift_smarty->assign('GV_AMOUNT', $xtPrice->xtcFormat($gv_result['amount'], true, 0, true));
+		$gift_smarty->assign('GV_SEND_TO_FRIEND_LINK', xtc_href_link(FILENAME_GV_SEND));
+	} else {
+		$gift_smarty->assign('GV_AMOUNT', 0);
+	}
+}
+if (isset ($_SESSION['gv_id'])) {
+	$gv_query = xtc_db_query("select coupon_amount from ".TABLE_COUPONS." where coupon_id = '".$_SESSION['gv_id']."'");
+	$coupon = xtc_db_fetch_array($gv_query);
+	$gift_smarty->assign('COUPON_AMOUNT2', $xtPrice->xtcFormat($coupon['coupon_amount'], true, 0, true));
+}
+if (isset ($_SESSION['cc_id'])) {
+	$gift_smarty->assign('COUPON_HELP_LINK', '<a style="cursor:hand" onclick="javascript:window.open(\''.xtc_href_link(FILENAME_POPUP_COUPON_HELP, 'cID='.$_SESSION['cc_id']).'\', \'popup\', \'toolbar=0,scrollbars=yes, width=350, height=350\')">');
 
-              }
-  if (isset($_SESSION['customer_id'])) {
-  $gift_smarty->assign('C_FLAG','true');
-  }
-  $gift_smarty->assign('LINK_ACCOUNT',xtc_href_link(FILENAME_CREATE_ACCOUNT));
-  $gift_smarty->assign('FORM_ACTION',xtc_draw_form('gift_coupon', xtc_href_link(FILENAME_SHOPPING_CART, 'action=check_gift','NONSSL')));
-  $gift_smarty->assign('INPUT_CODE',xtc_draw_input_field('gv_redeem_code'));
-  $gift_smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_redeem.gif', IMAGE_REDEEM_GIFT));
-  $gift_smarty->assign('language', $_SESSION['language']);
-  $gift_smarty->assign('FORM_END','</form>');
-  $gift_smarty->caching = 0;
+}
+if (isset ($_SESSION['customer_id'])) {
+	$gift_smarty->assign('C_FLAG', 'true');
+}
+$gift_smarty->assign('LINK_ACCOUNT', xtc_href_link(FILENAME_CREATE_ACCOUNT));
+$gift_smarty->assign('FORM_ACTION', xtc_draw_form('gift_coupon', xtc_href_link(FILENAME_SHOPPING_CART, 'action=check_gift', 'NONSSL')));
+$gift_smarty->assign('INPUT_CODE', xtc_draw_input_field('gv_redeem_code'));
+$gift_smarty->assign('BUTTON_SUBMIT', xtc_image_submit('button_redeem.gif', IMAGE_REDEEM_GIFT));
+$gift_smarty->assign('language', $_SESSION['language']);
+$gift_smarty->assign('FORM_END', '</form>');
+$gift_smarty->caching = 0;
 
-  $smarty->assign('MODULE_gift_cart',$gift_smarty->fetch(CURRENT_TEMPLATE.'/module/gift_cart.html'));
-
-
+$smarty->assign('MODULE_gift_cart', $gift_smarty->fetch(CURRENT_TEMPLATE.'/module/gift_cart.html'));
 ?>

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: configuration.php,v 1.11 2004/06/05 11:38:17 matthias76 Exp $   
+   $Id: configuration.php 1234 2005-09-21 16:25:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -86,6 +86,9 @@ define('ALLOW_CATEGORY_DESCRIPTIONS_TITLE' , 'Use Category Descriptions');
 define('ALLOW_CATEGORY_DESCRIPTIONS_DESC' , 'Allows to add descriptions for categories');
 define('CURRENT_TEMPLATE_TITLE' , 'Templateset (Theme)');
 define('CURRENT_TEMPLATE_DESC' , 'Choose a Templateset (Theme). The Theme must be saved before in the following folder: www.Your-Domain.com/templates/');
+
+define('CC_KEYCHAIN_TITLE','CC String');
+define('CC_KEYCHAIN_DESC','String to encrypt CC number (please change!)');
 
 define('ENTRY_FIRST_NAME_MIN_LENGTH_TITLE' , 'First Name');
 define('ENTRY_FIRST_NAME_MIN_LENGTH_DESC' , 'Minimum length of first name');
@@ -294,6 +297,10 @@ define('SHIPPING_BOX_WEIGHT_TITLE' , 'Package Tare weight.');
 define('SHIPPING_BOX_WEIGHT_DESC' , 'What is the weight of typical packaging of small to medium packages?');
 define('SHIPPING_BOX_PADDING_TITLE' , 'Larger packages - percentage increase.');
 define('SHIPPING_BOX_PADDING_DESC' , 'For 10% enter 10');
+define('SHOW_SHIPPING_DESC' , 'Show shippingcosts link in product infos');
+define('SHOW_SHIPPING_TITLE' , 'Shippingcosts in product infos');
+define('SHIPPING_INFOS_DESC' , 'Group ID of shippingcosts content.');
+define('SHIPPING_INFOS_TITLE' , 'Group ID');
 
 define('PRODUCT_LIST_FILTER_TITLE' , 'Display Category/Manufacturer Filter (0=disable; 1=enable)');
 define('PRODUCT_LIST_FILTER_DESC' , 'Do you want to display the Category/Manufacturer Filter?');
@@ -474,14 +481,20 @@ define('CACHE_LIFETIME_DESC','This is the number of seconds cached content will 
 define('CACHE_CHECK_TITLE','Check if cache modified');
 define('CACHE_CHECK_DESC','If true, then If-Modified-Since headers are respected with cached content, and appropriate HTTP headers are sent. This way repeated hits to a cached page do not send the entire page to the client every time.');
 
+define('DB_CACHE_TITLE','DB Cache');
+define('DB_CACHE_DESC','Cache SELECT query results in files to gain more speed for slow databases.');
+
+define('DB_CACHE_EXPIRE_TITLE','DB Cache lifetime');
+define('DB_CACHE_EXPIRE_DESC','Time in seconds to rebuld cached resulst.');
+
 define('PRODUCT_REVIEWS_VIEW_TITLE','Reviews in Productdetails');
 define('PRODUCT_REVIEWS_VIEW_DESC','Number of displayed reviews in the productdetails page');
 
 define('DELETE_GUEST_ACCOUNT_TITLE','Deleting Guest Accounts');
 define('DELETE_GUEST_ACCOUNT_DESC','Shold guest accounts be deleted after placing orders ? (Order data will be saved)');
 
-define('USE_SPAW_TITLE','activate WYSIWYG Editor');
-define('USE_SPAW_DESC','activate WYSIWYG Editor for CMS and products');
+define('USE_WYSIWYG_TITLE','activate WYSIWYG Editor');
+define('USE_WYSIWYG_DESC','activate WYSIWYG Editor for CMS and products');
 
 define('PRICE_IS_BRUTTO_TITLE','Gross Admin');
 define('PRICE_IS_BRUTTO_DESC','Usage of prices with tax in Admin');
@@ -508,6 +521,9 @@ define('IMAGE_QUALITY_DESC','Image quality (0= highest compression, 100=best qua
 define('GROUP_CHECK_TITLE','Customerstatus Check');
 define('GROUP_CHECK_DESC','Only allow specified customergroups access to individual categories,products and Contentelements (after activation, input fields in categories, products and in Contentmanager will appear');
 
+define('ACTIVATE_REVERSE_CROSS_SELLING_TITLE','Reverse Cross-selling');
+define('ACTIVATE_REVERSE_CROSS_SELLING_DESC','Activate reverse Cross-selling?');
+
 define('ACTIVATE_NAVIGATOR_TITLE','activate productnavigator?');
 define('ACTIVATE_NAVIGATOR_DESC','activate/deactivate productnavigator in product_info, (deaktivate for better performance with lots of articles in system)');
 
@@ -520,24 +536,20 @@ define('DOWNLOAD_MIN_ORDERS_STATUS_TITLE', 'Min. Orderstatus');
 define('DOWNLOAD_MIN_ORDERS_STATUS_DESC', 'Min. orderstatus to allow download of files.');
 
 // Vat Check
-define('STORE_OWNER_VAT_ID_TITLE' , 'UST ID des Shopbetreibers');
-define('STORE_OWNER_VAT_ID_DESC' , 'Die UST ID des Shopbetreibers');
-define('STORE_OWNER_VAT_ID_TITLE' , 'Umsatzsteuer ID');
-define('STORE_OWNER_VAT_ID_DESC' , 'Die Umsatzsteuer ihres Unternehmens');
-define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_TITLE' , 'Kundenstatus f&uuml;r UST ID Gepr�fte Kunden');
-define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_DESC' , 'W&auml;hlen Sie den Kundenstatus(Gruppe) f&uuml;r UST ID gepr�fte Kunden aus!');
-define('ACCOUNT_COMPANY_VAT_TITLE' , 'Umsatzsteuer Id');
-define('ACCOUNT_COMPANY_VAT_DESC' , 'Die Abfrage f&uuml;r die Umsatzsteuer ID im Account benutzen');
-define('ACCOUNT_COMPANY_VAT_CHECK_TITLE' , 'Umsatzsteuer ID �berpr�fen');
-define('ACCOUNT_COMPANY_VAT_CHECK_DESC' , 'Die Umsatzsteuer ID auf Plausibilit�t �berpr�fen');
-define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_TITLE' , 'Umsatzsteuer ID Live �berpr�fen');
-define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_DESC' , 'Die Umsatzsteuer ID auf Live Plausibilit�t �berpr�fen falls keine Berechnungsgrundlage vorhanden?');
-define('ACCOUNT_COMPANY_VAT_GROUP_TITLE' , 'Kundengruppe nach UST ID Check anpassen?');
-define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'Durch einschalten dieser Option wird die Kundengruppe nach einen postiven UST ID Check ge�ndert');
-define('ACCOUNT_VAT_BLOCK_ERROR_TITLE' , 'Eintragung falscher oder ungepr�fter UstID Nummern sperren?');
-define('ACCOUNT_VAT_BLOCK_ERROR_DESC' , 'Durch einschalten dieser Option werden nur gepr�fte und richtige UstIDs eingetragen');
-define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_TITLE','Kundenstatus f&uuml;r UST ID Gepr�fte Kunden (Innland)');
-define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_DESC','W&auml;hlen Sie den Kundenstatus(Gruppe) f&uuml;r UST ID gepr�fte Kunden aus!');
+define('STORE_OWNER_VAT_ID_TITLE' , 'VAT ID of Shop Owner');
+define('STORE_OWNER_VAT_ID_DESC' , 'The VAT ID of the Shop Owner');
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_TITLE' , 'Customer-group - correct VAT ID (Foreign country)');
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_DESC' , 'Customers-group for customers with correct VAT ID, Shop country != customers country');
+define('ACCOUNT_COMPANY_VAT_CHECK_TITLE' , 'Validate VAT ID');
+define('ACCOUNT_COMPANY_VAT_CHECK_DESC' , 'Validate VAT ID (check correct syntax)');
+define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_TITLE' , 'Validate VAT ID Live');
+define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_DESC' , 'Validate VAT ID live (if no syntax check available for country), live check will use validation gateway of germans "Bundesamt f�r Finanzen"');
+define('ACCOUNT_COMPANY_VAT_GROUP_TITLE' , 'automatic pruning ?');
+define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'Set to true, the customer-group will be changed automatically if a correct VAT ID is used.');
+define('ACCOUNT_VAT_BLOCK_ERROR_TITLE' , 'Allow wrong UST ID?');
+define('ACCOUNT_VAT_BLOCK_ERROR_DESC' , 'Set to true, only validated VAT IDs are acceptet.');
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_TITLE','Customer-group - correct VAT ID (Shop country)');
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_DESC','Customers-group for customers with correct VAT ID, Shop country = customers country');
 // Google Conversion
 define('GOOGLE_CONVERSION_TITLE','Google Conversion-Tracking');
 define('GOOGLE_CONVERSION_DESC','Track the Conversion Keywords at orders');
@@ -559,5 +571,10 @@ define('AFTERBUY_ORDERSTATUS_TITLE','Orderstatus');
 define('AFTERBUY_ORDERSTATUS_DESC','Orderstatus for exported orders');
 define('AFTERBUY_URL','You will find a detailed Afterbuy info here: <a href="http://www.xt-commerce.com/modules/wfsection/dossier-65.html" target="new">http://www.xt-commerce.com/modules/wfsection/dossier-65.html</a>');
 
+// Search-Options
+define('SEARCH_IN_DESC_TITLE','Search in Products Descriptions');
+define('SEARCH_IN_DESC_DESC','Activate to enable search in Products Descriptions');
+define('SEARCH_IN_ATTR_TITLE','Search in Products Attributes');
+define('SEARCH_IN_ATTR_DESC','Activate to enable search in Products Attributes');
 
 ?>

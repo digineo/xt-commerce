@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: freeamount.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $   
+   $Id: freeamount.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -22,7 +22,7 @@
 
 define('MODULE_SHIPPING_FREECOUNT_TEXT_TITLE', 'Free Shipping');
 define('MODULE_SHIPPING_FREECOUNT_TEXT_DESCRIPTION', 'Free Shipping w/ Minimum Order Amount');
-define('MODULE_SHIPPING_FREECOUNT_TEXT_WAY', 'w/ $' . MODULE_SHIPPING_FREECOUNT_AMOUNT . ' minimum order');
+define('MODULE_SHIPPING_FREECOUNT_TEXT_WAY', 'Free Shipping minimum order: %s');
 define('MODULE_SHIPPING_FREECOUNT_SORT_ORDER', 'Sort Order');
 
 define('MODULE_SHIPPING_FREEAMOUNT_ALLOWED_TITLE' , 'Allowed Zones');

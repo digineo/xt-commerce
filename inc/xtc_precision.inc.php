@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_precision.inc.php,v 1.2 2003/11/10 20:42:36 fanta2k Exp $   
+   $Id: xtc_precision.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

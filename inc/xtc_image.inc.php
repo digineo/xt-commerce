@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_image.inc.php,v 1.2 2003/09/07 18:32:49 fanta2k Exp $   
+   $Id: xtc_image.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

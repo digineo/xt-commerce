@@ -23,7 +23,7 @@
   define('MODULE_PAYMENT_QENTA_TEXT_DESCRIPTION', 'qenta.at');
   define('MODULE_PAYMENT_QENTA_TEXT_ERROR', 'Zahlungsfehler!');
   define('MODULE_PAYMENT_QENTA_ERROR', 'Ihre Zahlung war leider ungültig!');
-
+define('MODULE_PAYMENT_QENTA_TEXT_INFO','');
   define('MODULE_PAYMENT_QENTA_STATUS_TITLE','Enable Qenta Module');
   define('MODULE_PAYMENT_QENTA_STATUS_DESC','Do you want to accept qenta.at payments?');
   define('MODULE_PAYMENT_QENTA_MERCHANTKEY_TITLE','Your MerchantKey');

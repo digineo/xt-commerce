@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: products_attributes.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $   
+   $Id: products_attributes.php 1101 2005-07-24 14:51:13Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -38,11 +38,4 @@ define('TEXT_OK_TO_DELETE', 'This option has no products and values linked to it
 define('TEXT_OPTION_ID', 'Option ID');
 define('TEXT_OPTION_NAME', 'Option Name');
 
-define('OPTIONS_DESCRIPTION','<b>Adding digital download products:</b><br /><br />
-
-1.  create new Option "downloads"<br />
-2.  add Optionsvalue eg. "unreal download"<br />
-3.  copy your files cia ftp in your download dir /download/.<br />
-4.  goto product attribute handling, and select file from dropdown.<br />
-');
 ?>

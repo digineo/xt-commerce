@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: modules.php,v 1.4 2004/02/29 17:05:18 fanta2k Exp $   
+   $Id: modules.php 1060 2005-07-21 18:32:58Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,7 +19,10 @@
 
   // include needed functions (for modules)
 
-
+	//Eingef�gt um Fehler in CC Modul zu unterdr�cken. 
+   require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'xtcPrice.php');
+   $xtPrice = new xtcPrice($_SESSION['currency'],''); 
+ 
   switch ($_GET['set']) {
     case 'shipping':
       $module_type = 'shipping';
@@ -139,7 +142,7 @@
 
     $class = substr($file, 0, strrpos($file, '.'));
     if (xtc_class_exists($class)) {
-      $module = new $class(&$xtPrice);
+      $module = new $class();
       if ($module->check() > 0) {
         if ($module->sort_order > 0) {
           $installed_modules[$module->sort_order] = $file;
@@ -230,7 +233,7 @@
 
       $contents = array('form' => xtc_draw_form('modules', FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module'] . '&action=save'));
       $contents[] = array('text' => $keys);
-      $contents[] = array('align' => 'center', 'text' => '<br />' . xtc_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module']) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_UPDATE . '"/> <a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module']) . '">' . BUTTON_CANCEL . '</a>');
       break;
 
     default:
@@ -264,11 +267,11 @@
         }
         $keys = substr($keys, 0, strrpos($keys, '<br /><br />'));
 
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $mInfo->code . '&action=remove') . '">' . xtc_image_button('button_module_remove.gif', IMAGE_MODULE_REMOVE) . '</a> <a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module'] . '&action=edit') . '">' . xtc_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $mInfo->code . '&action=remove') . '">' . BUTTON_MODULE_REMOVE . '</a> <a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module'] . '&action=edit') . '">' . BUTTON_EDIT . '</a>');
         $contents[] = array('text' => '<br />' . $mInfo->description);
         $contents[] = array('text' => '<br />' . $keys);
       } else {
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $mInfo->code . '&action=install') . '">' . xtc_image_button('button_module_install.gif', IMAGE_MODULE_INSTALL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $mInfo->code . '&action=install') . '">' . BUTTON_MODULE_INSTALL . '</a>');
         $contents[] = array('text' => '<br />' . $mInfo->description);
       }
       break;

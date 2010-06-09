@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: localization.php,v 1.3 2004/02/29 12:08:27 fanta2k Exp $
+   $Id: localization.php 950 2005-05-14 16:45:21Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   function quote_oanda_currency($code, $base = DEFAULT_CURRENCY) {
     $page = file('http://www.oanda.com/convert/fxdaily?value=1&redirected=1&exch=' . $code .  '&format=CSV&dest=Get+Table&sel_list=' . $base);
 

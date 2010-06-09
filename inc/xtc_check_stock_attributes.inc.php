@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_check_stock_attributes.inc.php,v 1.2 2003/09/21 22:57:19 fanta2k Exp $   
+   $Id: xtc_check_stock_attributes.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

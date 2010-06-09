@@ -1,6 +1,6 @@
 <?php
 /*------------------------------------------------------------------------------
-  $Id: cc.php,v 1.3 2004/04/01 14:19:25 fanta2k Exp $
+  $Id: cc.php 1003 2005-07-10 18:58:52Z mz $
 
   XTC-CC - Contribution for XT-Commerce http://www.xt-commerce.com
   modified by http://www.netz-designer.de
@@ -8,7 +8,7 @@
   Copyright (c) 2003 netz-designer
   -----------------------------------------------------------------------------
   based on:
-  $Id: cc.php,v 1.3 2004/04/01 14:19:25 fanta2k Exp $
+  $Id: cc.php 1003 2005-07-10 18:58:52Z mz $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -30,12 +30,14 @@
   define('MODULE_PAYMENT_CC_TEXT_JS_CC_OWNER', '* The owner\'s name of the credit card must be at least ' . CC_OWNER_MIN_LENGTH . ' characters.\n');
   define('MODULE_PAYMENT_CC_TEXT_JS_CC_NUMBER', '* The credit card number must be at least ' . CC_NUMBER_MIN_LENGTH . ' characters.\n');
   define('MODULE_PAYMENT_CC_TEXT_ERROR', 'Credit Card Error!');
-  define('MODULE_PAYMENT_CC_TEXT_JS_CC_CVV', 'The CVV number is a required field and must be included.\n Orders cannot be submitted without it.\n The CVV number is the final 3 digits printed on the signature strip on the reverse of your card.');
+  define('TEXT_CARD_NOT_ACZEPTED','Sorry, we do not accept <b>%s</b> cards, please use another card type!<br />We accept following credit cards: ');
+  define('MODULE_PAYMENT_CC_TEXT_JS_CC_CVV', 'The CVV number is a required field and must be included.\n Orders cannot be submitted without it.\n The CVV number is the final 3 or 4 (American Express) digits printed on the signature strip on the reverse of your card.');
   define('MODULE_PAYMENT_CC_TEXT_CVV_LINK', '<u>[help?]</u>');
   define('HEADING_CVV', 'Security Code Help Screen');
   define('TEXT_CVV', '<table align="center" cellspacing="2" cellpadding="5" width="400"><tr><td><span class="tableHeading"><b>Visa, Mastercard, Discover 3 Digit Card Verification Number</b></span></td></tr><tr><td><span class="boxText">For your safety and security, we require that you enter your card\'s verification number. The verification number is a 3-digit number printed on the back of your card. It appears after and to the right of your card number\'s last four digits.</span></td></tr><tr><td align="center"><IMG src="images/cv_card.gif"></td></tr></table><hr /><table align="center" cellspacing="2" cellpadding="5" width="400"><tr><td><span class="main"><b>American Express 4 Digit Card Verification Number</b> </span></td></tr><tr><td><span class="boxText">For your safety and security, we require that you enter your card\'s verification number. The American Express verification number is a 4-digit number printed on the front of your card. It appears after and to the right of your card number.</span></td></tr><tr><td align="center"><IMG src="images/cv_amex_card.gif"></td></tr></table>');
   define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
-  
+    define('MODULE_PAYMENT_CC_ACCEPTED_CARDS','We accept following cards:');
+  define('MODULE_PAYMENT_CC_TEXT_INFO','');
   define('MODULE_PAYMENT_CC_STATUS_TITLE', 'Enable Credit Card Module');
   define('MODULE_PAYMENT_CC_STATUS_DESC', 'Do you want to accept card payments?');
   define('MODULE_PAYMENT_CC_ALLOWED_TITLE' , 'Allowed zones');
@@ -62,6 +64,9 @@
   define('CC_CVV_MIN_LENGTH_DESC', 'Define CVV length. The default is 3 and should not be changed unless the industry standard changes.');
   define('MODULE_PAYMENT_CC_EMAIL_TITLE', 'Split Card eMail Address');
   define('MODULE_PAYMENT_CC_EMAIL_DESC', 'If an eMail address is entered, the middle digits of the card number will be sent to the eMail address (the outside digits are stored in the database with the middle digits censored');
+define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The "valid to" date ist invalid.<br />Please correct your information.');
+define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The "Credit card number", you entered, is invalid.<br />Please correct your information.');
+define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first 4 digits of your Credit Card are: %s<br />If this information is correct, your type of card is not accepted.<br />Please correct your information.');
 
   define('MODULE_PAYMENT_CC_ACCEPT_DINERSCLUB_TITLE', 'Accept DINERS CLUB cards');
   define('MODULE_PAYMENT_CC_ACCEPT_DINERSCLUB_DESC', 'Accept DINERS CLUB cards');

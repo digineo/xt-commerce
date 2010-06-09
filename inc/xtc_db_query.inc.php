@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_db_query.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $
+   $Id: xtc_db_query.inc.php 1195 2005-08-28 21:10:52Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -26,8 +26,12 @@
     if (STORE_DB_TRANSACTIONS == 'true') {
       error_log('QUERY ' . $query . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
     }
-
+//    $queryStartTime = array_sum(explode(" ",microtime()));
     $result = mysql_query($query, $$link) or xtc_db_error($query, mysql_errno(), mysql_error());
+//	$queryEndTime = array_sum(explode(" ",microtime())); 
+//	$processTime = $queryEndTime - $queryStartTime;
+//	echo 'time: '.$processTime.' Query: '.$query.'<br>';
+
 
     if (STORE_DB_TRANSACTIONS == 'true') {
        $result_error = mysql_error();

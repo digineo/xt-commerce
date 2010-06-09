@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: preistrend.php,v 1.7 2004/04/26 20:19:52 fanta2k Exp $
+   $Id: preistrend.php 1188 2005-08-28 14:24:34Z matthias $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
 define('MODULE_PREISTREND_TEXT_DESCRIPTION', 'Export - Preistrend.de (; getrennt)<br><b>Format:</b><br>Bestellnummer;Bezeichnung;Preis;Lieferzeit; ProduktLink;FotoLink;Beschreibung');
 define('MODULE_PREISTREND_TEXT_TITLE', 'Preistrend.de - TXT');
@@ -24,13 +24,14 @@ define('MODULE_PREISTREND_STATUS_DESC','Modulstatus');
 define('MODULE_PREISTREND_STATUS_TITLE','Status');
 define('EXPORT_YES','Nur Herunterladen');
 define('EXPORT_NO','Am Server Speichern');
-define('CURRENCY','<hr noshade><b>Währung:</b>');
-define('CURRENCY_DESC','Währung in der Exportdatei');
+define('CURRENCY','<hr noshade><b>W&auml;hrung:</b>');
+define('CURRENCY_DESC','W&auml;hrung in der Exportdatei');
 define('EXPORT','Bitte den Sicherungsprozess AUF KEINEN FALL unterbrechen. Dieser kann einige Minuten in Anspruch nehmen.');
 define('EXPORT_TYPE','<hr noshade><b>Speicherart:</b>');
 define('EXPORT_STATUS_TYPE','<hr noshade><b>Kundengruppe:</b>');
-define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exportierten Preis bildet. (Falls Sie keine Kundengruppenpreise haben, wählen Sie <i>Gast</i>):</b>');
-
+define('EXPORT_STATUS','Bitte w&auml;hlen Sie die Kundengruppe, die Basis f&uuml;r den Exportierten Preis bildet. (Falls Sie keine Kundengruppenpreise haben, w&auml;hlen Sie <i>Gast</i>):</b>');
+define('CAMPAIGNS','<hr noshade><b>Kampagnen:</b>');
+define('CAMPAIGNS_DESC','Mit Kampagne zur Nachverfolgung verbinden.');
 // include needed functions
 
   class preistrend {
@@ -112,7 +113,7 @@ define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exp
                        $products['products_name'] . ';' .
                        number_format($products_price,2,'.',''). ';' .
                        xtc_get_shipping_status_name($products['products_shippingtime']). ';' .
-                       HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $products['products_id'] . ';' .
+                       HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'product_info.php?'.$_POST['campaign'].xtc_product_link($products['products_id'], $products['products_name']) . ';' .
                        HTTP_CATALOG_SERVER . DIR_WS_CATALOG_THUMBNAIL_IMAGES . $products['products_image'] . ';' .
                        $products_description . "\n";
 
@@ -152,20 +153,27 @@ define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exp
      $curr.=xtc_draw_radio_field('currencies', $currencies_data['code'],true).$currencies_data['code'].'<br>';
     }
 
+    $campaign_array = array(array('id' => '', 'text' => TEXT_NONE));
+	$campaign_query = xtc_db_query("select campaigns_name, campaigns_refID from ".TABLE_CAMPAIGNS." order by campaigns_id");
+	while ($campaign = xtc_db_fetch_array($campaign_query)) {
+	$campaign_array[] = array ('id' => 'refID='.$campaign['campaigns_refID'].'&', 'text' => $campaign['campaigns_name'],);
+	}
+
     return array('text' =>  EXPORT_STATUS_TYPE.'<br>'.
                           	EXPORT_STATUS.'<br>'.
                           	xtc_draw_pull_down_menu('status',$customers_statuses_array, '1').'<br>'.
                             CURRENCY.'<br>'.
                             CURRENCY_DESC.'<br>'.
                             $curr.
+                            CAMPAIGNS.'<br>'.
+                            CAMPAIGNS_DESC.'<br>'.
+                          	xtc_draw_pull_down_menu('campaign',$campaign_array).'<br>'.                               
                             EXPORT_TYPE.'<br>'.
                             EXPORT.'<br>'.
                           	xtc_draw_radio_field('export', 'no',false).EXPORT_NO.'<br>'.
                             xtc_draw_radio_field('export', 'yes',true).EXPORT_YES.'<br>'.
-                            '<br>' . xtc_image_submit('button_export.gif', IMAGE_UPDATE) .
-
-                            '<a href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $_GET['set'] . '&module=preistrend') . '">' .
-                            xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+                            '<br>' . xtc_button(BUTTON_EXPORT) .
+                            xtc_button_link(BUTTON_CANCEL, xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $_GET['set'] . '&module=preistrend')));
 
 
     }

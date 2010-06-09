@@ -1,6 +1,6 @@
 <?php
 /* ----------------------------------------------------------------------------------------
-   $Id: image_manipulator.php,v 1.2 2003/12/15 21:20:51 gwinger Exp $   
+   $Id: image_manipulator_GD1.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 class image_manipulation
 	{
 	

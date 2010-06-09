@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: moneybookers.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $
+   $Id: moneybookers.php 998 2005-07-07 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -31,7 +31,7 @@
   define('MODULE_PAYMENT_MONEYBOOKERS_TRANSACTION_FAILED_TEXT', 'Your payment transaction at moneybookers.com has failed. Please try again, or select an other payment option!');
   define('MODULE_PAYMENT_MONEYBOOKERS_ORDER_COMMENT1', 'The transaction id for this order is: ');
   define('MODULE_PAYMENT_MONEYBOOKERS_ORDER_COMMENT2', 'Please note this transaction number for future reference, and mention it with the order number in all your support query. This allows us to help you more quickly and efficiently. Thank you! NB: You\'ll find always the transaction number at Your Account/Order history, in the comment part of the order.');
-
+define('MODULE_PAYMENT_MONEYBOOKERS_TEXT_INFO','');
   define('MODULE_PAYMENT_MONEYBOOKERS_STATUS_TITLE','Enable Moneybookers Module');
   define('MODULE_PAYMENT_MONEYBOOKERS_STATUS_DESC','Do you want to accept Moneybookers.com payments?');
   define('MODULE_PAYMENT_MONEYBOOKERS_EMAILID_TITLE','eMail Address');

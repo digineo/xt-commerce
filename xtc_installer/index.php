@@ -1,6 +1,6 @@
 <?php
   /* --------------------------------------------------------------
-   $Id: index.php,v 1.9 2004/04/25 13:58:08 fanta2k Exp $   
+   $Id: index.php 1220 2005-09-16 15:53:13Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -211,6 +211,11 @@
     $error_flag=true;
     $folder_flag=true;
     $message .= 'WRONG PERMISSION on '.DIR_FS_CATALOG . 'images/product_images/thumbnail_images/<br />';
+ }
+ 
+   if (!is_writeable(DIR_FS_CATALOG . 'admin/rss/xt-news.cache')) {
+    $error_flag=true;
+    $message .= 'WRONG PERMISSION on '.DIR_FS_CATALOG . 'admin/rss/xt-news.cache<br />';
  }
 
  $status='OK';

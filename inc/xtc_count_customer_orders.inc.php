@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_count_customer_orders.inc.php,v 1.2 2003/09/14 22:23:44 fanta2k Exp $   
+   $Id: xtc_count_customer_orders.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_check_agent.inc.php,v 1.3 2004/03/20 10:45:05 fanta2k Exp $
+   $Id: xtc_check_agent.inc.php 974 2005-06-07 12:40:29Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -315,11 +315,11 @@ if (CHECK_CLIENT_AGENT=='true') {
    "webcompass",
    "yandex",
    "robot",
+   "yahoo",
    "bot",
    "psbot",
    "crawl"
    );
-
 
 
    $botID = strtolower($_SERVER['HTTP_USER_AGENT']);

@@ -34,7 +34,7 @@
 
   define('MODULE_PAYMENT_WORLDPAY_TEXT_TITLE', 'Secure Credit Card Payment');
   define('MODULE_PAYMENT_WORLDPAY_TEXT_DESC', 'Worldpay Payment Module');
-
+define('MODULE_PAYMENT_WORLDPAY_TEXT_INFO','');
   define('MODULE_PAYMENT_WORLDPAY_STATUS_TITLE', 'Enable WorldPay Module');
   define('MODULE_PAYMENT_WORLDPAY_STATUS_DESC', 'Do you want to accept WorldPay payments?');
 

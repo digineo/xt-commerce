@@ -1,6 +1,6 @@
 <?
 /* --------------------------------------------------------------
-   $Id: footer.php,v 1.2 2004/05/30 08:23:12 fanta2k Exp $   
+   $Id: footer.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

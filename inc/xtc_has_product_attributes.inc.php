@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_has_product_attributes.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_has_product_attributes.inc.php 1009 2005-07-11 16:19:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,7 +19,7 @@
   function xtc_has_product_attributes($products_id) {
     $attributes_query = "select count(*) as count from " . TABLE_PRODUCTS_ATTRIBUTES . " where products_id = '" . $products_id . "'";
     $attributes_query  = xtDBquery($attributes_query);
-    $attributes = xtc_db_fetch_array(&$attributes_query,true);
+    $attributes = xtc_db_fetch_array($attributes_query,true);
 
     if ($attributes['count'] > 0) {
       return true;

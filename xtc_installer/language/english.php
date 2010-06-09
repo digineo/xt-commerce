@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: english.php,v 1.4 2004/02/08 17:57:16 fanta2k Exp $   
+   $Id: english.php 1213 2005-09-14 11:34:50Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -13,7 +13,7 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 // Global
-define('TEXT_FOOTER','Copyright  &copy; 2002 - 2003 <a href="http://www.xt-commerce.com">XT-Commerce</a><br />Powered by XT-Commerce'); 
+define('TEXT_FOOTER','Copyright  &copy; 2002 - 2005 <a href="http://www.xt-commerce.com">XT-Commerce</a><br />Powered by xt:Commerce'); 
    
 // Box names
 define('BOX_LANGUAGE','Language');

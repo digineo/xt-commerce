@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: module_newsletter.php,v 1.16 2004/06/06 11:56:22 fanta2k Exp $
+   $Id: module_newsletter.php 1142 2005-08-11 08:19:55Z matthias $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,6 +19,7 @@
 
   require_once(DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
   require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
+  require_once(DIR_FS_INC . 'xtc_wysiwyg.inc.php'); 
 
   switch ($_GET['action']) {  // actions for datahandling
 
@@ -226,7 +227,7 @@ $limit_up = $limits['1'];
 
  $link1 = chr(13).chr(10).chr(13).chr(10).TEXT_NEWSLETTER_REMOVE.chr(13).chr(10).chr(13).chr(10).HTTP_CATALOG_SERVER.DIR_WS_CATALOG.FILENAME_CATALOG_NEWSLETTER.'?action=remove&email='.$email_data[$i-1]['email'].'&key='.$email_data[$i-1]['key'];
 
- $link2 = '<br /><br />'.TEXT_NEWSLETTER_REMOVE.'<br /><a href="'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.FILENAME_CATALOG_NEWSLETTER.'?action=remove&email='.$email_data[$i-1]['email'].'&key='.$email_data[$i-1]['key'].'">Link</a>';
+ $link2 = $link2 = '<br /><br /><hr>'.TEXT_NEWSLETTER_REMOVE.'<br /><a href="'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.FILENAME_CATALOG_NEWSLETTER.'?action=remove&email='.$email_data[$i-1]['email'].'&key='.$email_data[$i-1]['key'].'">' . TEXT_REMOVE_LINK . '</a>';
 
 
   xtc_php_mail(EMAIL_SUPPORT_ADDRESS,
@@ -280,21 +281,11 @@ $limit_up = $limits['1'];
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>"> 
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<?php if (USE_SPAW=='true') {
+<?php if (USE_WYSIWYG=='true') {
  $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
  $data=xtc_db_fetch_array($query);
- ?>
-<script type="text/javascript">
-   _editor_url = "includes/htmlarea/";
-   _editor_lang = "<?php echo $data['code']; ?>";
-</script>
-    <!-- DWD Modify -> Add: HTMLArea v3.0 !-->
-    <!-- Load HTMLArea Core Files. !-->
-<script type="text/javascript" src="includes/htmlarea/htmlarea.js"></script>
-<script type="text/javascript" src="includes/htmlarea/dialog.js"></script>
-<script tyle="text/javascript" src="includes/htmlarea/lang/<?php echo $data['code']; ?>.js"></script>
-
-<?php } ?>
+ if ($_GET['action']!='') echo xtc_wysiwyg('newsletter',$data['code']);
+ } ?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -396,7 +387,7 @@ for ($i=0,$n=sizeof($customer_group); $i<$n; $i++) {
 ?>
       </table></td>
     <td width="30%" align="right" valign="top""><?php
-    echo '<a href="'.xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=new').'">'.xtc_image_button('button_new_newsletter.gif').'</a>';
+    echo '<a class="button" href="'.xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=new').'">'.BUTTON_NEW_NEWSLETTER.'</a>';
 
 
     ?></td>
@@ -450,18 +441,14 @@ $total_data=xtc_db_fetch_array($total_query);
 <td class="dataTableContent_products" style="border-bottom: 1px solid; border-color: #f1f1f1;" align="left"></td>
 <td colspan="2" class="dataTableContent_products" style="border-bottom: 1px solid; border-color: #f1f1f1;" align="left"><?php echo TEXT_SEND_TO.$total_data['count']; ?></td>
 </tr>
-<td class="dataTableContent" valign="top" style="border-bottom: 1px solid; border-color: #f1f1f1;" align="left">
-  <a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=delete&ID='.$news_data[$i]['id']); ?>" onClick="return confirm('<?php echo CONFIRM_DELETE; ?>')">
-  <?php
-  echo xtc_image_button('button_delete.gif','Delete','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'</a><br />';
-  ?>
-<a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=edit&ID='.$news_data[$i]['id']); ?>">
-<?php echo xtc_image_button('button_edit.gif','Edit','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'</a>'; ?>
-<a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=send&ID='.$news_data[$i]['id']); ?>"><br /><br /><hr noshade>
-<?php echo xtc_image_button('button_send.gif','Edit','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'</a>'; ?>
+<td class="dataTableContent" valign="top" style="border-bottom: 1px solid; border-color: #999999;" align="left">
+  <a class="button" href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=delete&ID='.$news_data[$i]['id']); ?>" onClick="return confirm('<?php echo CONFIRM_DELETE; ?>')"><?php echo BUTTON_DELETE.'</a><br />'; ?>
+  <a class="button" href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=edit&ID='.$news_data[$i]['id']); ?>"><?php echo BUTTON_EDIT.'</a>'; ?>
+  <br /><br /><div style="height: 1px; background: Black; margin: 3px 0;"></div>
+  <a class="button" href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=send&ID='.$news_data[$i]['id']); ?>"><?php echo BUTTON_SEND.'</a>'; ?>
 
 </td>
-<td colspan="2" class="dataTableContent" style="border-bottom: 1px solid; border-color: #f1f1f1;" align="left">
+<td colspan="2" class="dataTableContent" style="border-bottom: 1px solid; border-color: #999999; text-align: left;">
 <?php
 
  // get data
@@ -613,8 +600,8 @@ echo xtc_draw_textarea_field('newsletter_body', 'soft', '150', '45', stripslashe
         ?></td>
    </tr>
    </table>
-   <a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER); ?>"><?php echo xtc_image_button('button_back.gif', IMAGE_BACK); ?></a>
-   <right><?php echo xtc_image_submit('button_save.gif', IMAGE_SAVE); ?></right>
+   <a class="button" onClick="this.blur();" href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER); ?>"><?php echo BUTTON_BACK; ?></a>
+   <right><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?></right>
   </form>
   <?php
 
@@ -637,28 +624,6 @@ echo xtc_draw_textarea_field('newsletter_body', 'soft', '150', '45', stripslashe
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<?php if (USE_SPAW=='true') { ?>
-<script type="text/javascript">
-      HTMLArea.loadPlugin("SpellChecker");
-      HTMLArea.loadPlugin("TableOperations");
-      HTMLArea.loadPlugin("CharacterMap");
-      HTMLArea.loadPlugin("ContextMenu");
-      HTMLArea.loadPlugin("ImageManager");
-HTMLArea.onload = function() {
-
-
-var editor= new HTMLArea("newsletter_body");
-editor.registerPlugin(TableOperations);
-editor.registerPlugin(ContextMenu);
-editor.registerPlugin(CharacterMap);
-editor.registerPlugin(ImageManager);
-editor.generate();
-
-
-};
-HTMLArea.init();
-</script>
-<?php } ?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

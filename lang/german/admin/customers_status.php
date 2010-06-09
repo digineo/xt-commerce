@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: customers_status.php,v 1.5 2004/04/28 10:37:05 fanta2k Exp $   
+   $Id: customers_status.php 1062 2005-07-21 19:57:29Z gwinger $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -20,6 +20,8 @@ define('HEADING_TITLE', 'Kundengruppen');
 define('ENTRY_CUSTOMERS_FSK18','Kauf von FSK18 Artikel Sperren?');
 define('ENTRY_CUSTOMERS_FSK18_DISPLAY','Anzeige von FSK18 Artikeln?');
 define('ENTRY_CUSTOMERS_STATUS_ADD_TAX','UST in Rechnung ausweisen');
+define('ENTRY_CUSTOMERS_STATUS_MIN_ORDER','Mindestbestellwert:');
+define('ENTRY_CUSTOMERS_STATUS_MAX_ORDER','H&ouml;chstbestellwert:');
 define('ENTRY_CUSTOMERS_STATUS_BT_PERMISSION','Per Bankeinzug');
 define('ENTRY_CUSTOMERS_STATUS_CC_PERMISSION','Per Kreditkarte');
 define('ENTRY_CUSTOMERS_STATUS_COD_PERMISSION','Per Nachnahme');
@@ -29,6 +31,8 @@ define('ENTRY_CUSTOMERS_STATUS_PUBLIC','&Ouml;ffentlich');
 define('ENTRY_CUSTOMERS_STATUS_SHIPPING_UNALLOWED','Geben Sie unerlaubte Versandarten ein');
 define('ENTRY_CUSTOMERS_STATUS_SHOW_PRICE','Preis');
 define('ENTRY_CUSTOMERS_STATUS_SHOW_PRICE_TAX','Preise inkl. MwSt.');
+define('ENTRY_CUSTOMERS_STATUS_WRITE_REVIEWS','Kundengruppe darf Produkte bewerten?');
+define('ENTRY_CUSTOMERS_STATUS_READ_REVIEWS','Kundengruppe darf Produktbewertungen lesen?');
 define('ENTRY_GRADUATED_PRICES','Staffelpreise');
 define('ENTRY_NO','Nein');
 define('ENTRY_OT_XMEMBER', 'Kundenrabatt auf Gesamtbestellwert? :');
@@ -58,6 +62,8 @@ define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_STATUS', 'Vorhandene Kundengruppen:');
 define('TEXT_INFO_CUSTOMERS_FSK18_DISPLAY_INTRO','<b>FSK18 Artikel</b>');
 define('TEXT_INFO_CUSTOMERS_FSK18_INTRO','<b>FSK18 Sperre</b>');
 define('TEXT_INFO_CUSTOMERS_STATUS_ADD_TAX_INTRO','<b>Falls Preis inkl. Steuer = auf "Nein" setzen</b>');
+define('TEXT_INFO_CUSTOMERS_STATUS_MIN_ORDER_INTRO','Tragen Sie einen Mindestbestellwert ein oder lassen Sie dieses Feld leer.');
+define('TEXT_INFO_CUSTOMERS_STATUS_MAX_ORDER_INTRO','Tragen Sie einen H&ouml;chstbestellwert ein oder lassen Sie dieses Feld leer.');
 define('TEXT_INFO_CUSTOMERS_STATUS_BT_PERMISSION_INTRO', '<b>M&ouml;chten Sie erlauben, daﬂ diese Kundengruppe per Bankeinzug bezahlen darf?</b>');
 define('TEXT_INFO_CUSTOMERS_STATUS_CC_PERMISSION_INTRO', '<b>M&ouml;chten Sie erlauben, daﬂ diese Kundengruppe per Kreditkarte bezahlen darf?</b>');
 define('TEXT_INFO_CUSTOMERS_STATUS_COD_PERMISSION_INTRO', '<b>M&ouml;chten Sie erlauben, daﬂ diese Kundengruppe per Nachnahme bezahlen darf?</b>');
@@ -73,6 +79,8 @@ define('TEXT_INFO_CUSTOMERS_STATUS_PUBLIC_INTRO','<b>Gruppe &Ouml;ffentlich ?</b
 define('TEXT_INFO_CUSTOMERS_STATUS_SHIPPING_UNALLOWED_INTRO','<b>Nicht erlaubte Versandarten</b>');
 define('TEXT_INFO_CUSTOMERS_STATUS_SHOW_PRICE_INTRO','<b>Preisanzeige im Shop</b>');
 define('TEXT_INFO_CUSTOMERS_STATUS_SHOW_PRICE_TAX_INTRO', 'M&ouml;chten Sie die Preise inklusive oder exklusive Steuer anzeigen?');
+define('TEXT_INFO_CUSTOMERS_STATUS_WRITE_REVIEWS_INTRO','<b>Produktbewertungen schreiben</b>');
+define('TEXT_INFO_CUSTOMERS_STATUS_READ_REVIEWS_INTRO', '<b>Produktbewertungen lesen</b>');
 
 define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, daﬂ Sie diese Kundengruppe l&ouml;schen wollen?');
 define('TEXT_INFO_EDIT_INTRO', 'Bitte nehmen Sie alle n&ouml;tigen Einstellungen vor');
@@ -81,4 +89,7 @@ define('TEXT_INFO_INSERT_INTRO', 'Bitte erstellen Sie einen neue Kundengruppe mi
 define('TEXT_INFO_HEADING_DELETE_CUSTOMERS_STATUS', 'Kundengruppe l&ouml;schen');
 define('TEXT_INFO_HEADING_EDIT_CUSTOMERS_STATUS','Gruppendaten bearbeiten');
 define('TEXT_INFO_HEADING_NEW_CUSTOMERS_STATUS', 'Neue Kundengruppe');
+
+define('TEXT_INFO_CUSTOMERS_STATUS_BASE', '<b>Basis Kundengruppe f¸r Artikelpreise</b>');
+define('ENTRY_CUSTOMERS_STATUS_BASE', 'wird als Grundlage f¸r die Preise der neuen Kundengruppe gew‰hlt. Wenn Auswahl = Admin werden keine Preise f¸r die neue Kundengruppe angelegt.');
 ?>

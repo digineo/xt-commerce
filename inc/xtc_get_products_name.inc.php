@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_products_name.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_get_products_name.inc.php 1009 2005-07-11 16:19:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,7 +21,7 @@
 
     $product_query = "select products_name from " . TABLE_PRODUCTS_DESCRIPTION . " where products_id = '" . $product_id . "' and language_id = '" . $language . "'";
     $product_query  = xtDBquery($product_query);
-    $product = xtc_db_fetch_array(&$product_query,true);
+    $product = xtc_db_fetch_array($product_query,true);
 
     return $product['products_name'];
   }

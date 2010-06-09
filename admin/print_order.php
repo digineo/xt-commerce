@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: print_order.php,v 1.7 2004/02/20 15:35:38 fanta2k Exp $   
+   $Id: print_order.php 1166 2005-08-21 00:52:02Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -102,6 +102,7 @@
  	$payment_method=constant(strtoupper('MODULE_PAYMENT_'.$order->info['payment_method'].'_TEXT_TITLE'));
   	$smarty->assign('PAYMENT_METHOD',$payment_method);
     }
+    $smarty->assign('COMMENTS', $order->info['comments']);
   	$smarty->assign('DATE',xtc_date_long($order->info['date_purchased']));
   	$smarty->assign('order_data', $order_data);
   	$smarty->assign('order_total', $order_total);

@@ -1,6 +1,7 @@
 <?php
+
 /* --------------------------------------------------------------
-   $Id: start.php,v 1.5 2004/03/17 16:31:26 fanta2k Exp $
+   $Id: start.php 1235 2005-09-21 19:11:43Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -10,13 +11,14 @@
    based on: 
    (c) 2000-2001 The Exchange Project 
    (c) 2002-2003 osCommerce coding standards (a typical file) www.oscommerce.com
-   (c) 2003     nextcommerce (start.php,1.5 2004/03/17); www.nextcommerce.org
+   (c) 2003      nextcommerce (start.php,1.5 2004/03/17); www.nextcommerce.org
 
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 
-  require('includes/application_top.php');
-  require_once 'includes/classes/carp.php';
+require ('includes/application_top.php');
+require_once 'includes/modules/carp/carp.php';
+
 ?>
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
@@ -61,7 +63,7 @@
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XTC Central</td>
+    <td class="main" valign="top">xt:Commerce News</td>
   </tr>
 </table></td>
       </tr>
@@ -69,36 +71,38 @@
         <td>
         <?php include(DIR_WS_MODULES.FILENAME_SECURITY_CHECK); ?>
         </td>
-      <tr>
-      <td style="border: 1px solid; border-color: #ffffff;">
-        <table valign="top" width="100%" cellpadding="5" cellspacing="5">
+        </tr>
+                  
+
+     <tr>
+      <td style="border: 0px solid; border-color: #ffffff;">
+        <table valign="top" width="100%" cellpadding="0" cellspacing="0">
         
 <?php
-CarpConf('linkdiv', '<div class="main" style="background:#cccccc; padding:5px; font-weight: bold;">');
-CarpConf('linkstyle', 'text-decoration:none');
-CarpConf('linkclass', 'newslink');
-CarpConf('showdesc|showcdesc', 1);
-CarpConf('maxitems', 5);
-CarpConf('cclass', 'h2');
-CarpConf('postitem','');
-CarpConf('poweredby','');
-CarpShow('http://www.xt-commerce.com/backend.php', 'xt-news.cache');
-CarpConfReset();
 
+CarpConf('iorder','link,date,desc');
 
-CarpConf('linkdiv','<div style="background:#cccccc; width:185; padding:2px; border-width:1px; border-style:solid; border-color:#333333;">');
-CarpConf('linkstyle','text-decoration:none');
-CarpConf('linkclass','h3');
-CarpConf('showdesc|showctitle|showcdesc',1);
-CarpConf('maxitems',10);
-CarpConf('cclass','h2');
-CarpConf('postitems','');
-CarpConf('poweredby','');
-//CarpShow("http://www.xt-commerce.com/modules/xp_syndication/mods/mylinks_rss.php","xt-links.cache");
-CarpConfReset();
+        CarpConf('cborder','link,desc');
+        CarpConf('caorder','image');
+        CarpConf('bcb','<div style="font-size:110%; background:#fed; border:1px solid #999; padding:5px;">');
+        CarpConf('acb','</div>');
+        CarpConf('bca','<center>');
+        CarpConf('aca','</center>');
+CarpConf('maxitems',5);
+
+        
+        // before each item
+        CarpConf('bi','<br><div style="font-size:80%; font-family: verdana; background:#fed; border:1px solid #ff0000; padding:5px;">');
+        
+        // after each item
+        CarpConf('ai','</div>');
+CarpShow('http://www.xt-commerce.com/backend_304.php');
+
 ?>
         </table></td>
-      </tr>		
+      </tr>		 
+  
+  
     </table></td>
 <!-- body_text_eof //-->
   </tr>

@@ -1,6 +1,7 @@
 <?php
+
 /* -----------------------------------------------------------------------------------------
-   $Id: index.php,v 1.21 2004/05/25 17:09:01 fanta2k Exp $   
+   $Id: index.php 1263 2005-09-30 10:14:08Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,44 +22,44 @@
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
 
-  include( 'includes/application_top.php');
-  
- 
-  
-  // create smarty elements
-  $smarty = new Smarty;
-  // include boxes
-  require(DIR_FS_CATALOG .'templates/'.CURRENT_TEMPLATE. '/source/boxes.php');
+include ('includes/application_top.php');
 
-  // the following cPath references come from application_top.php
-  $category_depth = 'top';
-  if (isset($cPath) && xtc_not_null($cPath)) {
-    $categories_products_query = "select count(*) as total from " . TABLE_PRODUCTS_TO_CATEGORIES . " where categories_id = '" . $current_category_id . "'";
-    $categories_products_query = xtDBquery($categories_products_query);
-    $cateqories_products = xtc_db_fetch_array(&$categories_products_query,true);
-    if ($cateqories_products['total'] > 0) {
-      $category_depth = 'products'; // display products
-    } else {
-      $category_parent_query = "select count(*) as total from " . TABLE_CATEGORIES . " where parent_id = '" . $current_category_id . "'";
-      $category_parent_query = xtDBquery($category_parent_query);
-      $category_parent = xtc_db_fetch_array(&$category_parent_query,true);
-      if ($category_parent['total'] > 0) {
-        $category_depth = 'nested'; // navigate through the categories
-      } else {
-        $category_depth = 'products'; // category has no products, but display the 'no products' message
-      }
-    }
-  }
+// create smarty elements
 
+$smarty = new Smarty;
 
- require(DIR_WS_INCLUDES . 'header.php');
+// include boxes
+require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 
+// the following cPath references come from application_top.php
+$category_depth = 'top';
+if (isset ($cPath) && xtc_not_null($cPath)) {
+	$categories_products_query = "select count(*) as total from ".TABLE_PRODUCTS_TO_CATEGORIES." where categories_id = '".$current_category_id."'";
+	$categories_products_query = xtDBquery($categories_products_query);
+	$cateqories_products = xtc_db_fetch_array($categories_products_query, true);
+	if ($cateqories_products['total'] > 0) {
+		$category_depth = 'products'; // display products
+	} else {
+		$category_parent_query = "select count(*) as total from ".TABLE_CATEGORIES." where parent_id = '".$current_category_id."'";
+		$category_parent_query = xtDBquery($category_parent_query);
+		$category_parent = xtc_db_fetch_array($category_parent_query, true);
+		if ($category_parent['total'] > 0) {
+			$category_depth = 'nested'; // navigate through the categories
+		} else {
+			$category_depth = 'products'; // category has no products, but display the 'no products' message
+		}
+	}
+}
 
-  include (DIR_WS_MODULES . 'default.php');
-  $smarty->assign('language', $_SESSION['language']);
+require (DIR_WS_INCLUDES.'header.php');
 
-  $smarty->caching = 0;
-  if (!defined(RM)) $smarty->load_filter('output', 'note');
-  $smarty->display(CURRENT_TEMPLATE . '/index.html');
+include (DIR_WS_MODULES.'default.php');
+$smarty->assign('language', $_SESSION['language']);
 
- ?>
+$smarty->caching = 0;
+if (!defined(RM))
+	$smarty->load_filter('output', 'note');
+$smarty->display(CURRENT_TEMPLATE.'/index.html');
+
+include ('includes/application_bottom.php');  
+?>

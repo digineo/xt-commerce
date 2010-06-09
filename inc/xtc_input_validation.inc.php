@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_input_validation.inc.php,v 1.3 2004/06/12 23:21:27 fanta2k Exp $
+   $Id: xtc_input_validation.inc.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

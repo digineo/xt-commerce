@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: table_block.php,v 1.1 2003/09/06 22:05:29 fanta2k Exp $   
+   $Id: table_block.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   class tableBlock {
     var $table_border = '0';
     var $table_width = '100%';

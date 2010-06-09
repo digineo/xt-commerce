@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_draw_hidden_field.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_draw_hidden_field.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
    
 // Output a form hidden field
   function xtc_draw_hidden_field($name, $value = '', $parameters = '') {
-    $field = '<div><input type="hidden" name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '" value="';
+    $field = '<input type="hidden" name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '" value="';
 
     if (xtc_not_null($value)) {
       $field .= xtc_parse_input_field_data($value, array('"' => '&quot;'));
@@ -27,7 +27,7 @@
 
     if (xtc_not_null($parameters)) $field .= ' ' . $parameters;
 
-    $field .= '" /></div>';
+    $field .= '" />';
 
     return $field;
   }

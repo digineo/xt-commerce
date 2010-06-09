@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: order.php,v 1.11 2004/04/25 13:58:08 fanta2k Exp $   
+   $Id: order.php 1121 2005-07-26 09:22:46Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -42,13 +42,14 @@
   class order {
     var $info, $totals, $products, $customer, $delivery, $content_type;
 
-    function order($order_id = '',$Price) {
+    function order($order_id = '') {
+    	global $xtPrice;
       $this->info = array();
       $this->totals = array();
       $this->products = array();
       $this->customer = array();
       $this->delivery = array();
-      $this->Price=$Price;
+
 
       if (xtc_not_null($order_id)) {
         $this->query($order_id);
@@ -61,58 +62,14 @@
 
       $order_id = xtc_db_prepare_input($order_id);
 
-      $order_query = xtc_db_query("select
-                                   customers_id,
-                                   customers_cid,
-                                   customers_name,
-                                   customers_company,
-                                   customers_street_address,
-                                   customers_suburb,
-                                   customers_city,
-                                   customers_postcode,
-                                   customers_state,
-                                   customers_country,
-                                   customers_telephone,
-                                   customers_email_address,
-                                   customers_address_format_id,
-                                   delivery_name,
-                                   delivery_company,
-                                   delivery_street_address,
-                                   delivery_suburb,
-                                   delivery_city,
-                                   delivery_postcode,
-                                   delivery_state,
-                                   delivery_country,
-                                   delivery_address_format_id,
-                                   billing_name,
-                                   billing_company,
-                                   billing_street_address,
-                                   billing_suburb,
-                                   billing_city,
-                                   billing_postcode,
-                                   billing_state,
-                                   billing_country,
-                                   billing_address_format_id,
-                                   payment_method,
-                                   cc_type,
-                                   cc_owner,
-                                   cc_number,
-                                   cc_expires,
-                                   cc_cvv,
-                                   cc_start,
-                                   cc_issue,
-                                   currency,
-                                   comments,
-                                   currency_value,
-                                   date_purchased,
-                                   orders_status,
-                                   last_modified
-                                   from " . TABLE_ORDERS . " where
+      $order_query = xtc_db_query("SELECT
+                                   *
+                                   FROM " . TABLE_ORDERS . " WHERE
                                    orders_id = '" . xtc_db_input($order_id) . "'");
 
       $order = xtc_db_fetch_array($order_query);
 
-      $totals_query = xtc_db_query("select title, text,value from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . xtc_db_input($order_id) . "' order by sort_order");
+      $totals_query = xtc_db_query("SELECT * FROM " . TABLE_ORDERS_TOTAL . " where orders_id = '" . xtc_db_input($order_id) . "' order by sort_order");
       while ($totals = xtc_db_fetch_array($totals_query)) {
         $this->totals[] = array('title' => $totals['title'],
                                 'text' =>$totals['text'],
@@ -187,7 +144,7 @@
                              'format_id' => $order['billing_address_format_id']);
 
       $index = 0;
-      $orders_products_query = xtc_db_query("select orders_products_id, products_id, products_name, products_model, products_price, products_tax, products_quantity, final_price from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . xtc_db_input($order_id) . "'");
+      $orders_products_query = xtc_db_query("SELECT * FROM " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . xtc_db_input($order_id) . "'");
       while ($orders_products = xtc_db_fetch_array($orders_products_query)) {
         $this->products[$index] = array('qty' => $orders_products['products_quantity'],
 	                                	'id' => $orders_products['products_id'],
@@ -198,7 +155,7 @@
                                         'final_price' => $orders_products['final_price']);
 
         $subindex = 0;
-        $attributes_query = xtc_db_query("select products_options, products_options_values, options_values_price, price_prefix from " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " where orders_id = '" . xtc_db_input($order_id) . "' and orders_products_id = '" . $orders_products['orders_products_id'] . "'");
+        $attributes_query = xtc_db_query("SELECT * FROM " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " where orders_id = '" . xtc_db_input($order_id) . "' and orders_products_id = '" . $orders_products['orders_products_id'] . "'");
         if (xtc_db_num_rows($attributes_query)) {
           while ($attributes = xtc_db_fetch_array($attributes_query)) {
             $this->products[$index]['attributes'][$subindex] = array('option' => $attributes['products_options'],
@@ -217,11 +174,11 @@
     }
 
     function cart() {
-      global $currencies;
+      global $currencies,$xtPrice;
 
       $this->content_type = $_SESSION['cart']->get_content_type();
 
-      $customer_address_query = xtc_db_query("select c.customers_firstname,c.customers_cid, c.customers_gender,c.customers_lastname, c.customers_telephone, c.customers_email_address, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, co.countries_id, co.countries_name, co.countries_iso_code_2, co.countries_iso_code_3, co.address_format_id, ab.entry_state from " . TABLE_CUSTOMERS . " c, " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " co on (ab.entry_country_id = co.countries_id) where c.customers_id = '" . $_SESSION['customer_id'] . "' and ab.customers_id = '" . $_SESSION['customer_id'] . "' and c.customers_default_address_id = ab.address_book_id");
+      $customer_address_query = xtc_db_query("select c.payment_unallowed,c.shipping_unallowed,c.customers_firstname,c.customers_cid, c.customers_gender,c.customers_lastname, c.customers_telephone, c.customers_email_address, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, co.countries_id, co.countries_name, co.countries_iso_code_2, co.countries_iso_code_3, co.address_format_id, ab.entry_state from " . TABLE_CUSTOMERS . " c, " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " co on (ab.entry_country_id = co.countries_id) where c.customers_id = '" . $_SESSION['customer_id'] . "' and ab.customers_id = '" . $_SESSION['customer_id'] . "' and c.customers_default_address_id = ab.address_book_id");
       $customer_address = xtc_db_fetch_array($customer_address_query);
 
       $shipping_address_query = xtc_db_query("select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, ab.entry_country_id, c.countries_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format_id, ab.entry_state from " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " c on (ab.entry_country_id = c.countries_id) where ab.customers_id = '" . $_SESSION['customer_id'] . "' and ab.address_book_id = '" . $_SESSION['sendto'] . "'");
@@ -237,15 +194,13 @@
                           'currency' => $_SESSION['currency'],
                           'currency_value' => $currencies->currencies[$_SESSION['currency']]['value'],
                           'payment_method' => $_SESSION['payment'],
-                          'cc_type' => $GLOBALS['cc_type'],
-                          'cc_owner' => $GLOBALS['cc_owner'],
-                          'cc_number' => $GLOBALS['cc_number'],
-                          'cc_expires' => $GLOBALS['cc_expires'],
-// BMC CC Mod Start
-                          'cc_start' => (isset($GLOBALS['cc_start']) ? $GLOBALS['cc_start'] : ''),
-                          'cc_issue' => (isset($GLOBALS['cc_issue']) ? $GLOBALS['cc_issue'] : ''),
-                          'cc_cvv' => (isset($GLOBALS['cc_cvv']) ? $GLOBALS['cc_cvv'] : ''),
-// BMC CC Mod End
+                          'cc_type' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_type']) ? $_SESSION['ccard']['cc_type'] : ''),
+                          'cc_owner'=>(isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_owner']) ? $_SESSION['ccard']['cc_owner'] : ''),
+                          'cc_number' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_number']) ? $_SESSION['ccard']['cc_number'] : ''),
+                          'cc_expires' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_expires']) ? $_SESSION['ccard']['cc_expires'] : ''),
+                          'cc_start' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_start']) ? $_SESSION['ccard']['cc_start'] : ''),
+                          'cc_issue' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_issue']) ? $_SESSION['ccard']['cc_issue'] : ''),
+                          'cc_cvv' => (isset($_SESSION['payment'])=='cc' && isset($_SESSION['ccard']['cc_cvv']) ? $_SESSION['ccard']['cc_cvv'] : ''),
                           'shipping_method' => $_SESSION['shipping']['title'],
                           'shipping_cost' => $_SESSION['shipping']['cost'],
                           'comments' => $_SESSION['comments'],
@@ -275,6 +230,8 @@
                               'country' => array('id' => $customer_address['countries_id'], 'title' => $customer_address['countries_name'], 'iso_code_2' => $customer_address['countries_iso_code_2'], 'iso_code_3' => $customer_address['countries_iso_code_3']),
                               'format_id' => $customer_address['address_format_id'],
                               'telephone' => $customer_address['customers_telephone'],
+                              'payment_unallowed' => $customer_address['payment_unallowed'],
+                              'shipping_unallowed' => $customer_address['shipping_unallowed'],
                               'email_address' => $customer_address['customers_email_address']);
 
       $this->delivery = array('firstname' => $shipping_address['entry_firstname'],
@@ -307,11 +264,11 @@
       $products = $_SESSION['cart']->get_products();
       for ($i=0, $n=sizeof($products); $i<$n; $i++) {
 
-        $products_price=$this->Price->xtcGetPrice($products[$i]['id'],
+        $products_price=$xtPrice->xtcGetPrice($products[$i]['id'],
                                         $format=false,
                                         $products[$i]['quantity'],
                                         $products[$i]['tax_class_id'],
-                                        '')+$this->Price->xtcFormat($_SESSION['cart']->attributes_price($products[$i]['id']),false);
+                                        '')+$xtPrice->xtcFormat($_SESSION['cart']->attributes_price($products[$i]['id']),false);
 
         $this->products[$index] = array('qty' => $products[$i]['quantity'],
                                         'name' => $products[$i]['name'],
@@ -367,24 +324,24 @@
             $this->info['tax_groups'][TAX_NO_TAX . "$products_tax_description"] += ($shown_price/100) * ($products_tax);
           }
         }
-
         $index++;
       }
 
-
+ //$this->info['shipping_cost']=0;
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == '0') {
-
-        $this->info['total'] = $this->info['subtotal']  + $this->Price->xtcFormat($this->info['shipping_cost'], false,0,true);
+        $this->info['total'] = $this->info['subtotal']  + $xtPrice->xtcFormat($this->info['shipping_cost'], false,0,true);
         if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1') {
           $this->info['total'] -= ($this->info['subtotal'] /100 * $_SESSION['customers_status']['customers_status_ot_discount']);
         }
       } else {
-
-        $this->info['total'] = $this->info['subtotal']  + $this->Price->xtcFormat($this->info['shipping_cost'],false,0,true);
+		
+        $this->info['total'] = $this->info['subtotal']  + $xtPrice->xtcFormat($this->info['shipping_cost'],false,0,true);
         if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1') {
           $this->info['total'] -= ($this->info['subtotal'] /100 * $_SESSION['customers_status']['customers_status_ot_discount']);
         }
       }
+
     }
+
   }
 ?>

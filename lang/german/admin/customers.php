@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: customers.php,v 1.3 2004/04/01 14:19:25 fanta2k Exp $   
+   $Id: customers.php 985 2005-06-17 22:35:22Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -50,4 +50,7 @@ define('TEXT_SELECT','--Auswahl--');
 define('TABLE_HEADING_ACCOUNT_TYPE','Konto');
 define('TEXT_ACCOUNT','Ja');
 define('TEXT_GUEST','Nein');
+define('NEW_ORDER','Neue Bestellung ?');
+define('ENTRY_PAYMENT_UNALLOWED','Nicht erlaubte Zahlungsmodule:');
+define('ENTRY_SHIPPING_UNALLOWED','Nicht erlaubte Versandmodule:');
 ?>

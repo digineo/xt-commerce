@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: zones.php,v 1.1 2003/09/06 22:13:54 fanta2k Exp $   
+   $Id: zones.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -120,6 +120,8 @@
 
 /**
  * CUSTOMIZE THIS SETTING FOR THE NUMBER OF ZONES NEEDED
+ * 
+ * + CUSTOMIZE THE SETTING IN lang/LANGUAGE/modules/shipping/zones.php
  */
       $this->num_zones = 1;
     }

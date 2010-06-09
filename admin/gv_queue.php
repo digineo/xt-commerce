@@ -1,6 +1,6 @@
 <?php
    /* -----------------------------------------------------------------------------------------
-   $Id: gv_queue.php,v 1.2 2004/02/29 17:05:18 fanta2k Exp $
+   $Id: gv_queue.php 1030 2005-07-14 20:22:32Z novalis $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -170,12 +170,12 @@
     case 'release':
       $heading[] = array('text' => '[' . $gInfo->unique_id . '] ' . xtc_datetime_short($gInfo->date_created) . ' ' . $currencies->format($gInfo->amount));
 
-      $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link('gv_queue.php','action=confirmrelease&gid='.$gInfo->unique_id,'NONSSL').'">'.xtc_image_button('button_confirm_red.gif', IMAGE_CONFIRM) . '</a> <a href="' . xtc_href_link('gv_queue.php','action=cancel&gid=' . $gInfo->unique_id,'NONSSL') . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<a class="button" style="font-color: red;" onClick="this.blur();" href="' . xtc_href_link('gv_queue.php','action=confirmrelease&gid='.$gInfo->unique_id,'NONSSL').'">'. BUTTON_CONFIRM . '</a> <a class="button" onClick="this.blur();" href="' . xtc_href_link('gv_queue.php','action=cancel&gid=' . $gInfo->unique_id,'NONSSL') . '">' . BUTTON_CANCEL . '</a>');
       break;
     default:
       $heading[] = array('text' => '[' . $gInfo->unique_id . '] ' . xtc_datetime_short($gInfo->date_created) . ' ' . $currencies->format($gInfo->amount));
 
-      $contents[] = array('align' => 'center','text' => '<a href="' . xtc_href_link('gv_queue.php','action=release&gid=' . $gInfo->unique_id,'NONSSL'). '">' . xtc_image_button('button_release.gif', IMAGE_RELEASE) . '</a>');
+      $contents[] = array('align' => 'center','text' => '<a class="button" onClick="this.blur();" href="' . xtc_href_link('gv_queue.php','action=release&gid=' . $gInfo->unique_id,'NONSSL'). '">' . BUTTON_RELEASE . '</a>');
       break;
    }
 

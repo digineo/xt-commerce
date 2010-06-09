@@ -29,6 +29,7 @@
 #
 # 'All' with also work. (This configuration is in your
 # apache/conf/httpd.conf file)www
+#php_flag register_globals off
 <IfModule mod_setenvif.c>
   <IfDefine SSL>
     SetEnvIf User-Agent ".*MSIE.*" \

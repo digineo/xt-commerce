@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: image_processing.php,v 1.3 2004/04/25 13:58:08 fanta2k Exp $
+   $Id: image_processing.php 950 2005-05-14 16:45:21Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,13 +14,13 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
-
-define('MODULE_IMAGE_PROCESS_TEXT_DESCRIPTION', 'XT-Commerce Imageprocessing - Stapelverarbeitung f�r Bildbearbeitung');
+define('MODULE_IMAGE_PROCESS_TEXT_DESCRIPTION', 'XT-Commerce Imageprocessing - Stapelverarbeitung f&uuml;r Bildbearbeitung');
 define('MODULE_IMAGE_PROCESS_TEXT_TITLE', 'XT-Imageprocessing');
 define('MODULE_IMAGE_PROCESS_STATUS_DESC','Modulstatus');
 define('MODULE_IMAGE_PROCESS_STATUS_TITLE','Status');
-define('IMAGE_EXPORT','Dr�cken Sie Ok um die Stapelverarbeitung zu starten, dieser Vorgang kann einige Zeit dauern, auf keinen Fall unterbrechen!.');
+define('IMAGE_EXPORT','Dr&uuml;cken Sie Ok um die Stapelverarbeitung zu starten, dieser Vorgang kann einige Zeit dauern, auf keinen Fall unterbrechen!.');
 define('IMAGE_EXPORT_TYPE','<hr noshade><b>Stapelverarbeitung:</b>');
 
 
@@ -78,10 +78,8 @@ include ('includes/classes/'.FILENAME_IMAGEMANIPULATOR);
     return array('text' =>
                             IMAGE_EXPORT_TYPE.'<br>'.
                             IMAGE_EXPORT.'<br>'.
-                            '<br>' . xtc_image_submit('button_review_approve.gif', IMAGE_UPDATE) .
-
-                            '<a href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $_GET['set'] . '&module=image_processing') . '">' .
-                            xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+                            '<br>' . xtc_button(BUTTON_REVIEW_APPROVE) . '&nbsp;' .
+                            xtc_button_link(BUTTON_CANCEL, xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $_GET['set'] . '&module=image_processing')));
 
 
     }

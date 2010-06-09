@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_products_image.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_get_products_image.inc.php 1009 2005-07-11 16:19:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,7 +19,7 @@
 
     $product_query = "select products_image from " . TABLE_PRODUCTS . " where products_id = '" . $products_id . "'";
     $product_query  = xtDBquery($product_query);
-    $products_image = xtc_db_fetch_array(&$product_query,true);
+    $products_image = xtc_db_fetch_array($product_query,true);
 
     return $products_image['products_image'];
   }

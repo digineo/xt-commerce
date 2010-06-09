@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: secpay.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $   
+   $Id: secpay.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,7 +19,7 @@
   define('MODULE_PAYMENT_SECPAY_TEXT_DESCRIPTION', 'Credit Card Test Info:<br /><br />CC#: 4444333322221111<br />Expiry: Any');
   define('MODULE_PAYMENT_SECPAY_TEXT_ERROR', 'Credit Card Error!');
   define('MODULE_PAYMENT_SECPAY_TEXT_ERROR_MESSAGE', 'There has been an error processing your credit card. Please try again.');
-
+define('MODULE_PAYMENT_SECPAY_TEXT_INFO','');
   define('MODULE_PAYMENT_SECPAY_MERCHANT_ID_TITLE' , 'Merchant ID');
 define('MODULE_PAYMENT_SECPAY_MERCHANT_ID_DESC' , 'Merchant ID to use for the SECPay service');
 define('MODULE_PAYMENT_SECPAY_ALLOWED_TITLE' , 'Allowed Zones');

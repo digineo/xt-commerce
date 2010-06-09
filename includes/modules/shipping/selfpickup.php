@@ -1,6 +1,6 @@
 <?PHP
 /* -----------------------------------------------------------------------------------------
-   $Id: selfpickup.php,v 1.1 2004/02/21 16:43:36 fanta2k Exp $
+   $Id: selfpickup.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

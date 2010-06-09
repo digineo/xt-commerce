@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: box.php,v 1.1 2003/09/06 22:05:29 fanta2k Exp $   
+   $Id: box.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -28,6 +28,7 @@
    echo $box->infoBox($heading, $contents);   
    --------------------------------------------------------------
 */
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
   class box extends tableBlock {
     function box() {

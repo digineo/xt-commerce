@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: application_top_export.php,v 1.4 2004/05/02 16:34:34 fanta2k Exp $
+   $Id: application_top_export.php 1203 2005-08-29 18:28:51Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -40,7 +40,7 @@
   define('PROJECT_VERSION', 'xt:Commerce v3.0.3');
 
   // set the type of request (secure or not)
-  $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
+  $request_type = (getenv('HTTPS') == '1' || getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
 
   // set php_self in the local scope
   $PHP_SELF = $_SERVER['PHP_SELF'];
@@ -51,8 +51,6 @@
   // include the list of project database tables
   require(DIR_WS_INCLUDES . 'database_tables.php');
 
-  // customization for the design layout
-  define('BOX_WIDTH', 125); // how wide the boxes should be in pixels (default: 125)
 
   // Store DB-Querys in a Log File
   define('STORE_DB_TRANSACTIONS', 'false');
@@ -72,8 +70,6 @@
   require_once(DIR_FS_INC . 'xtc_db_output.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_input.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_prepare_input.inc.php');
-
-  //require_once(DIR_FS_INC . 'xtc_get_products_attribute_price.inc.php');
 
 
   // modification for new graduated system
@@ -98,7 +94,7 @@
   }
 
     // Include Template Engine
-  require(DIR_WS_CLASSES . 'Smarty_2.6.6/Smarty.class.php');
+  require(DIR_WS_CLASSES . 'Smarty_2.6.10/Smarty.class.php');
 
 
 ?>

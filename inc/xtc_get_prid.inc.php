@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_prid.inc.php,v 1.2 2004/03/01 19:16:18 fanta2k Exp $   
+   $Id: xtc_get_prid.inc.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

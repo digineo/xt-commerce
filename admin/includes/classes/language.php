@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: language.php,v 1.1 2003/09/06 22:05:29 fanta2k Exp $   
+   $Id: language.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
    Copyright phpMyAdmin (select_lang.lib.php3 v1.24 04/19/2002)
    Copyright Stephane Garin <sgarin@sgarin.com> (detect_language.php v0.1 04/02/2002)
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   class language {
     var $languages, $catalog_languages, $browser_languages, $language;
 

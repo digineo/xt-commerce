@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: export_functions.php,v 1.5 2004/04/14 19:20:25 fanta2k Exp $
+   $Id: export_functions.php 950 2005-05-14 16:45:21Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,9 +17,9 @@
 
    Released under the GNU General Public License
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
    require_once(DIR_FS_INC . 'xtc_precision.inc.php');
-  // require_once(DIR_FS_INC . 'xtc_get_products_special_price.inc.php');
+
    require_once(DIR_FS_INC . 'xtc_get_qty.inc.php');
 
 

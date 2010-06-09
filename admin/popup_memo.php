@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: popup_memo.php,v 1.3 2004/03/02 15:18:24 fanta2k Exp $
+   $Id: popup_memo.php 1125 2005-07-28 09:59:44Z novalis $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -57,7 +57,7 @@ switch ($_GET['action']) {
     <table width="100%">
       <tr>
       <form name="customers_memo" method="POST" action="popup_memo.php?action=save&ID=<?php echo (int)$_GET['ID'];?>">
-        <td class="main" style="border-top: 1px solid; border-color: #cccccc;"><b><?php echo TEXT_TITLE ?></b>:<?php echo xtc_draw_input_field('memo_title').xtc_draw_hidden_field('ID',(int)$_GET['ID']); ?><br /><?php echo xtc_draw_textarea_field('memo_text', 'soft', '73', '5'); ?><br /><?php echo xtc_image_submit('button_insert.gif', IMAGE_INSERT); ?></td>
+        <td class="main" style="border-top: 1px solid; border-color: #cccccc;"><b><?php echo TEXT_TITLE ?></b>:<?php echo xtc_draw_input_field('memo_title').xtc_draw_hidden_field('ID',(int)$_GET['ID']); ?><br /><?php echo xtc_draw_textarea_field('memo_text', 'soft', '73', '5'); ?><br /><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_INSERT . '"/>'; ?></td>
       </tr>
     </table></form>
 <table width="100%"  border="0" cellpadding="0" cellspacing="0">
@@ -87,7 +87,7 @@ switch ($_GET['action']) {
         <td width="142" class="main" style="border: 1px solid; border-color: #cccccc;"><?php echo $memo_values['memo_text']; ?></td>
       </tr>
       <tr>
-        <td><a href="<?php echo xtc_href_link('popup_memo.php', 'ID=' . $_GET['ID'] . '&action=remove&mID=' . $memo_values['memo_id']); ?>" onClick="return confirm('<?php echo DELETE_ENTRY; ?>')"><?php echo xtc_image_button('button_delete.gif', IMAGE_DELETE); ?></a></td>
+        <td><a class="button" onClick="this.blur();" href="<?php echo xtc_href_link('popup_memo.php', 'ID=' . $_GET['ID'] . '&action=remove&mID=' . $memo_values['memo_id']); ?>" onClick="return confirm('<?php echo DELETE_ENTRY; ?>')"><?php echo BUTTON_DELETE; ?></a></td>
       </tr>
     </table>
 <?php

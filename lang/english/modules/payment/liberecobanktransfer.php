@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: liberecobanktransfer.php,v 1.3 2004/06/04 19:52:54 fanta2k Exp $
+   $Id: liberecobanktransfer.php 998 2005-07-07 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -31,7 +31,7 @@
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_BLZ', 'Bank Code:');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_NAME', 'Bank:');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_FAX', 'Banktransfer Payment will be confirmed by fax');
-
+  define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_INFO','');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_ERROR', '<font color="#FF0000">FEHLER: </font>');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_ERROR_1', 'Accountnumber and Bank Code are not compatible!<br />Please try again.');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_ERROR_2', 'Sorry, we are unable to proof this account number!');

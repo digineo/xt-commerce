@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_subtotal.php,v 1.3 2004/02/21 22:38:22 fanta2k Exp $   
+   $Id: ot_subtotal.php 1002 2005-07-10 16:11:37Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -18,32 +18,33 @@
   class ot_subtotal {
     var $title, $output;
 
-    function ot_subtotal($price) {
+    function ot_subtotal() {
+    	global $xtPrice;
       $this->code = 'ot_subtotal';
       $this->title = MODULE_ORDER_TOTAL_SUBTOTAL_TITLE;
       $this->description = MODULE_ORDER_TOTAL_SUBTOTAL_DESCRIPTION;
       $this->enabled = ((MODULE_ORDER_TOTAL_SUBTOTAL_STATUS == 'true') ? true : false);
       $this->sort_order = MODULE_ORDER_TOTAL_SUBTOTAL_SORT_ORDER;
-      $this->Price=$price;
+ 
 
       $this->output = array();
     }
 
     function process() {
-      global $order, $currencies;
+      global $order, $xtPrice;
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 0) {
         $this->output[] = array('title' => MODULE_ORDER_TOTAL_SUBTOTAL_TITLE_NO_TAX . ':',
-                                'text' => $this->Price->xtcFormat($order->info['subtotal'],true),
+                                'text' => $xtPrice->xtcFormat($order->info['subtotal'],true),
                                 'value' => $order->info['subtotal']);
       }
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
         $this->output[] = array('title' => $this->title . ':',
-                                'text' => $this->Price->xtcFormat($order->info['subtotal'],true),
+                                'text' => $xtPrice->xtcFormat($order->info['subtotal'],true),
                                 'value' => $order->info['subtotal']);
       } 
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] != 0) {
         $this->output[] = array('title' => $this->title . ':',
-                                'text' => $this->Price->xtcFormat($order->info['subtotal'],true),
+                                'text' => $xtPrice->xtcFormat($order->info['subtotal'],true),
                                 'value' => $order->info['subtotal']);
       }
 

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: cod.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $   
+   $Id: cod.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
   define('MODULE_PAYMENT_TYPE_PERMISSION', 'cod');
   define('MODULE_PAYMENT_COD_TEXT_TITLE', 'Cash on Delivery');
   define('MODULE_PAYMENT_COD_TEXT_DESCRIPTION', 'Cash on Delivery');
-
+define('MODULE_PAYMENT_COD_TEXT_INFO','');
   define('MODULE_PAYMENT_COD_ZONE_TITLE' , 'Payment Zone');
 define('MODULE_PAYMENT_COD_ZONE_DESC' , 'If a zone is selected, only enable this payment method for that zone.');
 define('MODULE_PAYMENT_COD_ALLOWED_TITLE' , 'Allowed Zones');

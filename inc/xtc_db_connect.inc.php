@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_db_connect.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_db_connect.inc.php 1248 2005-09-27 10:27:23Z gwinger $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,15 +14,16 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-   
+ //  include(DIR_WS_CLASSES.'/adodb/adodb.inc.php');
   function xtc_db_connect($server = DB_SERVER, $username = DB_SERVER_USERNAME, $password = DB_SERVER_PASSWORD, $database = DB_DATABASE, $link = 'db_link') {
     global $$link;
 
     if (USE_PCONNECT == 'true') {
-      $$link = mysql_pconnect($server, $username, $password);
+     $$link = mysql_pconnect($server, $username, $password);
     } else {
-      $$link = mysql_connect($server, $username, $password);
-    }
+$$link = mysql_connect($server, $username, $password);
+    
+   }
 
     if ($$link) mysql_select_db($database);
 

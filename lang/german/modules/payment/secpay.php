@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: secpay.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: secpay.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,7 +19,7 @@
   define('MODULE_PAYMENT_SECPAY_TEXT_DESCRIPTION', 'Kreditkarten Test Info:<br /><br />CC#: 4444333322221111<br />G&uuml;ltig bis: Jederzeit');
   define('MODULE_PAYMENT_SECPAY_TEXT_ERROR', 'Fehler bei der &Uuml;berp&uuml;fung der Kreditkarte!');
   define('MODULE_PAYMENT_SECPAY_TEXT_ERROR_MESSAGE', 'Bei der &Uuml;berp&uuml;fung Ihrer Kreditkarte ist ein Fehler aufgetreten! Bitte versuchen Sie es nochmal.');
-  
+  define('MODULE_PAYMENT_SECPAY_TEXT_INFO','');
   define('MODULE_PAYMENT_SECPAY_MERCHANT_ID_TITLE' , 'Merchant ID');
 define('MODULE_PAYMENT_SECPAY_MERCHANT_ID_DESC' , 'Merchant ID f&uuml;r den SECPay Service');
 define('MODULE_PAYMENT_SECPAY_ALLOWED_TITLE' , 'Erlaubte Zonen');

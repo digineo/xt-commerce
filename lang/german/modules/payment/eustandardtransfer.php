@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: eustandardtransfer.php,v 1.1 2004/06/04 19:52:54 fanta2k Exp $
+   $Id: eustandardtransfer.php 998 2005-07-07 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,8 +17,8 @@
 
   define('MODULE_PAYMENT_EUTRANSFER_TEXT_TITLE', 'EU-Standard Bank Transfer');
   define('MODULE_PAYMENT_EUSTANDARDTRANSFER_TEXT_TITLE', 'EU-Standard Bank Transfer');
-  define('MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION', '<br />Die billigste und einfachste Zahlungsmethode innerhalb der EU ist die Überweisung mittels IBAN und BIC.' .
-													   '<br />Bitte verwenden Sie folgende Daten für die Überweisung des Gesamtbetrages:<br />' .
+  define('MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION', '<br />Die billigste und einfachste Zahlungsmethode innerhalb der EU ist die &Uuml;berweisung mittels IBAN und BIC.' .
+													   '<br />Bitte verwenden Sie folgende Daten f&uuml;r die &Uuml;berweisung des Gesamtbetrages:<br />' .
                                                        '<br />Name der Bank: ' . MODULE_PAYMENT_EUTRANSFER_BANKNAM .
                                                        '<br />Zweigstelle: ' . MODULE_PAYMENT_EUTRANSFER_BRANCH .
                                                        '<br />Kontoname: ' . MODULE_PAYMENT_EUTRANSFER_ACCNAM .
@@ -27,8 +27,8 @@
                                                        '<br />BIC/SWIFT: ' . MODULE_PAYMENT_EUTRANSFER_BANKBIC .
 //                                                     '<br />Sort Code: ' . MODULE_PAYMENT_EUTRANSFER_SORTCODE .
                                                        '<br /><br />Die Ware wird ausgeliefert wenn der Betrag auf unserem Konto eingegangen ist.<br />');
-  define('MODULE_PAYMENT_EUTRANSFER_TEXT_EMAIL_FOOTER', str_replace('<br />','\n',MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION));
 
+  define('MODULE_PAYMENT_EUTRANSFER_TEXT_INFO','&Uuml;berweisen Sie den Rechnungsbetrag auf unser Konto. Die Kontodaten erhalten Sie nach Bestellannahme per E-Mail');
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_TITLE','Allow Bank Transfer Payment');
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_DESC','Do you want to accept bank transfer order payments?');
 

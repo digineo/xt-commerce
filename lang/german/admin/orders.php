@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: orders.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: orders.php 1191 2005-08-28 17:01:38Z matthias $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -76,6 +76,7 @@ define('ENTRY_PAYMENT_METHOD', 'Zahlungsweise:');
 define('ENTRY_CREDIT_CARD_TYPE', 'Kreditkartentyp:');
 define('ENTRY_CREDIT_CARD_OWNER', 'Kreditkarteninhaber:');
 define('ENTRY_CREDIT_CARD_NUMBER', 'Kerditkartennnummer:');
+define('ENTRY_CREDIT_CARD_CVV', 'Sicherheitscode (CVV)):');
 define('ENTRY_CREDIT_CARD_EXPIRES', 'Kreditkarte l&auml;uft ab am:');
 define('ENTRY_SUB_TOTAL', 'Zwischensumme:');
 define('ENTRY_TAX', 'MwSt.:');
@@ -101,7 +102,7 @@ define('TEXT_NO_ORDER_HISTORY', 'Keine Bestellhistorie verf&uuml;gbar');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Status&auml;nderung Ihrer Bestellung');
 define('EMAIL_TEXT_ORDER_NUMBER', 'Bestell-Nr.:');
-define('EMAIL_TEXT_INVOICE_URL', 'Ihre Bestellung kï¿½nnen Sie unter folgender Adresse einsehen:');
+define('EMAIL_TEXT_INVOICE_URL', 'Ihre Bestellung k&ouml;nnen Sie unter folgender Adresse einsehen:');
 define('EMAIL_TEXT_DATE_ORDERED', 'Bestelldatum:');
 define('EMAIL_TEXT_STATUS_UPDATE', 'Der Status Ihrer Bestellung wurde aktualisiert.' . "\n\n" . 'Neuer Status: %s' . "\n\n" . 'Bei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese eMail.' . "\n\n" . 'Mit freundlichen Gr&uuml;ssen' . "\n");
 define('EMAIL_TEXT_COMMENTS_UPDATE', 'Anmerkungen und Kommentare zu Ihrer Bestellung:' . "\n\n%s\n\n");
@@ -112,4 +113,5 @@ define('WARNING_ORDER_NOT_UPDATED', 'Hinweis: Es wurde nichts ge&auml;ndert. Dah
 
 define('TABLE_HEADING_DISCOUNT','Rabatt');
 define('ENTRY_CUSTOMERS_GROUP','Kundengruppe:');
+define('TEXT_VALIDATING','Nicht bestätigt');
 ?>

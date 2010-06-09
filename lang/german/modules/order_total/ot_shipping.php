@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_shipping.php,v 1.3 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: ot_shipping.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -35,4 +35,7 @@
   
   define('MODULE_ORDER_TOTAL_SHIPPING_DESTINATION_TITLE','Versandkostenfrei nach Zonen');
   define('MODULE_ORDER_TOTAL_SHIPPING_DESTINATION_DESC','Versandkostenfrei nach Zonen berechnen.');
+  
+  define('MODULE_ORDER_TOTAL_SHIPPING_TAX_CLASS_TITLE','Steuerklasse');
+  define('MODULE_ORDER_TOTAL_SHIPPING_TAX_CLASS_DESC','Folgende Steuerklasse für die Versandkosten wählen (Nur für Bestellbearbeitung)');  
 ?>

@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: split_page_results.php,v 1.1 2003/09/06 22:05:29 fanta2k Exp $   
+   $Id: split_page_results.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   class splitPageResults {
     function splitPageResults(&$current_page_number, $max_rows_per_page, &$sql_query, &$query_num_rows) {
       if (empty($current_page_number)) $current_page_number = 1;

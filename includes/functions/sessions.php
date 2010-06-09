@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: sessions.php,v 1.1 2003/09/06 22:13:54 fanta2k Exp $   
+   $Id: sessions.php 1195 2005-08-28 21:10:52Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -56,6 +56,7 @@
       } else {
         return xtc_db_query("insert into " . TABLE_SESSIONS . " values ('" . $key . "', '" . $expiry . "', '" . $value . "')");
       }
+      
     }
 
     function _sess_destroy($key) {

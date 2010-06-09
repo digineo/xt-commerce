@@ -1,5 +1,5 @@
 /* --------------------------------------------------------------
-   $Id: general.js,v 1.2 2003/12/31 18:02:23 fanta2k Exp $   
+   $Id: general.js 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -39,36 +39,29 @@ function toggleBox(szDivID) {
 
   if (document.layers) { // NN4+
     if (document.layers[szDivID].visibility == 'visible') {
-      document.layers[szDivID].visibility = "hide";
-      document.layers[szDivID].display = "none";
-      document.layers[szDivID+"SD"].fontWeight = "normal";
+        document.layers[szDivID].visibility = "hide";
+        document.layers[szDivID].display = "none";
+        document.layers[szDivID+"SD"].fontWeight = "normal";
     } else {
-      document.layers[szDivID].visibility = "show";
-      document.layers[szDivID].display = "inline";
-//      document.layers[szDivID+"SD"].fontWeight = "bold";
+        document.layers[szDivID].visibility = "show";
+        document.layers[szDivID].display = "inline";
     }
   } else if (document.getElementById) { // gecko(NN6) + IE 5+
     var obj = document.getElementById(szDivID);
-//    var objSD = document.getElementById(szDivID+"SD");
-
     if (obj.style.visibility == 'visible') {
-      obj.style.visibility = "hidden";
-      obj.style.display = "none";
-      objSD.style.fontWeight = "normal";
+        obj.style.visibility = "hidden";
+        obj.style.display    = "none";
     } else {
-      obj.style.visibility = "visible";
-      obj.style.display = "inline";
-      objSD.style.fontWeight = "bold";
+        obj.style.visibility = "visible";
+        obj.style.display    = "inline";
     }
   } else if (document.all) { // IE 4
     if (document.all[szDivID].style.visibility == 'visible') {
-      document.all[szDivID].style.visibility = "hidden";
-      document.all[szDivID].style.display = "none";
-//      document.all[szDivID+"SD"].style.fontWeight = "normal";
+        document.all[szDivID].style.visibility = "hidden";
+        document.all[szDivID].style.display = "none";
     } else {
-      document.all[szDivID].style.visibility = "visible";
-      document.all[szDivID].style.display = "inline";
-//      document.all[szDivID+"SD"].style.fontWeight = "bold";
+        document.all[szDivID].style.visibility = "visible";
+        document.all[szDivID].style.display = "inline";
     }
   }
 }

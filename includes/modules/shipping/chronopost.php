@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: chronopost.php,v 1.1 2003/09/06 22:13:54 fanta2k Exp $   
+   $Id: chronopost.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

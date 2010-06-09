@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_shipping.php,v 1.2 2004/01/07 14:08:56 fanta2k Exp $   
+   $Id: ot_shipping.php 1002 2005-07-10 16:11:37Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -18,19 +18,20 @@
   class ot_shipping {
     var $title, $output;
 
-    function ot_shipping($price) {
+    function ot_shipping() {
+    	global $xtPrice;
       $this->code = 'ot_shipping';
       $this->title = MODULE_ORDER_TOTAL_SHIPPING_TITLE;
       $this->description = MODULE_ORDER_TOTAL_SHIPPING_DESCRIPTION;
       $this->enabled = ((MODULE_ORDER_TOTAL_SHIPPING_STATUS == 'true') ? true : false);
       $this->sort_order = MODULE_ORDER_TOTAL_SHIPPING_SORT_ORDER;
-      $this->Price=$price;
+
 
       $this->output = array();
     }
 
     function process() {
-      global $order, $currencies;
+      global $order, $xtPrice;
 
       if (MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING == 'true') {
         switch (MODULE_ORDER_TOTAL_SHIPPING_DESTINATION) {
@@ -44,7 +45,7 @@
             $pass = false; break;
         }
 
-        if ( ($pass == true) && ( ($order->info['total'] - $order->info['shipping_cost']) >= MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER) ) {
+        if ( ($pass == true) && ( ($order->info['total'] - $order->info['shipping_cost']) >= $xtPrice->xtcFormat(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER,false,0,true)) ) {
           $order->info['shipping_method'] = $this->title;
           $order->info['total'] -= $order->info['shipping_cost'];
           $order->info['shipping_cost'] = 0;
@@ -57,12 +58,10 @@
         if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 1) {
         // price with tax
 
-        $order->info['shipping_cost']=$this->Price->xtcFormat($order->info['shipping_cost'], false,0,true);
-
           $shipping_tax = xtc_get_tax_rate($GLOBALS[$module]->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
           $shipping_tax_description = xtc_get_tax_description($GLOBALS[$module]->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
-          $tax = xtc_add_tax($order->info['shipping_cost'], $shipping_tax)-$order->info['shipping_cost'];
-
+          $tax = $xtPrice->xtcFormat(xtc_add_tax($order->info['shipping_cost'], $shipping_tax),false,0,false)-$order->info['shipping_cost'];
+          $tax = $xtPrice->xtcFormat($tax,false,0,true);
           $order->info['shipping_cost'] = xtc_add_tax($order->info['shipping_cost'], $shipping_tax);
           $order->info['tax'] += $tax;
           $order->info['tax_groups'][TAX_ADD_TAX . "$shipping_tax_description"] += $tax;
@@ -71,21 +70,19 @@
         } else {
 
         if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
-        $order->info['shipping_cost']=$this->Price->xtcFormat($order->info['shipping_cost'], false);
+
           $shipping_tax = xtc_get_tax_rate($GLOBALS[$module]->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
           $shipping_tax_description = xtc_get_tax_description($GLOBALS[$module]->tax_class, $order->delivery['country']['id'], $order->delivery['zone_id']);
-          $tax = xtc_add_tax($order->info['shipping_cost'], $shipping_tax)-$order->info['shipping_cost'];
-
+          $tax = $xtPrice->xtcFormat(xtc_add_tax($order->info['shipping_cost'], $shipping_tax),false,0,false)-$order->info['shipping_cost'];
+		 $tax = $xtPrice->xtcFormat($tax,false,0,true);
 
           $order->info['tax'] = $order->info['tax'] += $tax;
           $order->info['tax_groups'][TAX_NO_TAX . "$shipping_tax_description"] = $order->info['tax_groups'][TAX_NO_TAX . "$shipping_tax_description"] += $tax;
-        } else {
-        $order->info['shipping_cost']=$this->Price->xtcFormat($order->info['shipping_cost'], false);
         }
         }
         $this->output[] = array('title' => $order->info['shipping_method'] . ':',
-                                'text' => $this->Price->xtcFormat($order->info['shipping_cost'], true),
-                                'value' => $this->Price->xtcFormat($order->info['shipping_cost'], false));
+                                'text' => $xtPrice->xtcFormat($order->info['shipping_cost'], true,0,true),
+                                'value' => $xtPrice->xtcFormat($order->info['shipping_cost'], false,0,true));
       }
     }
 
@@ -99,7 +96,7 @@
     }
 
     function keys() {
-      return array('MODULE_ORDER_TOTAL_SHIPPING_STATUS', 'MODULE_ORDER_TOTAL_SHIPPING_SORT_ORDER', 'MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING', 'MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER', 'MODULE_ORDER_TOTAL_SHIPPING_DESTINATION');
+      return array('MODULE_ORDER_TOTAL_SHIPPING_STATUS', 'MODULE_ORDER_TOTAL_SHIPPING_SORT_ORDER', 'MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING', 'MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER', 'MODULE_ORDER_TOTAL_SHIPPING_DESTINATION', 'MODULE_ORDER_TOTAL_SHIPPING_TAX_CLASS');
     }
 
     function install() {
@@ -108,6 +105,7 @@
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING', 'false','6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, use_function, date_added) values ('MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER', '50', '6', '4', 'currencies->format', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_ORDER_TOTAL_SHIPPING_DESTINATION', 'national','6', '5', 'xtc_cfg_select_option(array(\'national\', \'international\', \'both\'), ', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_ORDER_TOTAL_SHIPPING_TAX_CLASS', '0','6', '7', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', now())");      
     }
 
     function remove() {

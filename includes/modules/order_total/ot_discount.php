@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_discount.php,v 1.2 2003/10/01 18:17:10 fanta2k Exp $
+   $Id: ot_discount.php 1277 2005-10-01 17:02:59Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -18,24 +18,26 @@
   class ot_discount {
     var $title, $output;
 
-    function ot_discount($price) {
+    function ot_discount() {
+    	global $xtPrice;
       $this->code = 'ot_discount';
       $this->title = MODULE_ORDER_TOTAL_DISCOUNT_TITLE;
       $this->description = MODULE_ORDER_TOTAL_DISCOUNT_DESCRIPTION;
       $this->enabled = ((MODULE_ORDER_TOTAL_DISCOUNT_STATUS == 'true') ? true : false);
       $this->sort_order = MODULE_ORDER_TOTAL_DISCOUNT_SORT_ORDER;
-      $this->Price=$price;
+
 
       $this->output = array();
     }
 
     function process() {
-      global $order, $currencies;
+      global $order, $xtPrice;
+//      echo 'xx';
       $this->title = $_SESSION['customers_status']['customers_status_ot_discount'] . ' % ' . SUB_TITLE_OT_DISCOUNT;
       if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1' && $_SESSION['customers_status']['customers_status_ot_discount']!='0.00') {
-        $discount_price = $this->Price->xtcFormat($order->info['subtotal'], false) / 100 * $_SESSION['customers_status']['customers_status_ot_discount']*-1;
+        $discount_price = $xtPrice->xtcFormat($order->info['subtotal'], false) / 100 * $_SESSION['customers_status']['customers_status_ot_discount']*-1;
         $this->output[] = array('title' => $this->title . ':',
-                                'text' => '<font color="ff0000">'.$this->Price->xtcFormat($discount_price,true).'</font>',
+                                'text' => '<font color="ff0000">'.$xtPrice->xtcFormat($discount_price,true).'</font>',
                                 'value' => $discount_price);
       }
     }

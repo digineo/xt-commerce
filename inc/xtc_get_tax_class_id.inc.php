@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_tax_class_id.inc.php,v 1.1 2003/12/31 14:53:53 fanta2k Exp $
+   $Id: xtc_get_tax_class_id.inc.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

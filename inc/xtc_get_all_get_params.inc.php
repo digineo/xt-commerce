@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_all_get_params.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_get_all_get_params.inc.php 1237 2005-09-23 14:56:52Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -16,6 +16,7 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_get_all_get_params($exclude_array = '') {
+  	global $InputFilter;
 
     if (!is_array($exclude_array)) $exclude_array = array();
 
@@ -23,8 +24,8 @@
     if (is_array($_GET) && (sizeof($_GET) > 0)) {
       reset($_GET);
       while (list($key, $value) = each($_GET)) {
-        if ( (strlen($value) > 0) && ($key != xtc_session_name()) && ($key != 'error') && (!in_array($key, $exclude_array)) && ($key != 'x') && ($key != 'y') ) {
-          $get_url .= $key . '=' . rawurlencode(stripslashes($value)) . '&';
+        if ( (strlen($value) > 0) && ($key != xtc_session_name()) && ($key != 'error') && ($key != 'cPath') && (!in_array($key, $exclude_array)) && ($key != 'x') && ($key != 'y') ) {
+          $get_url .= rawurlencode(stripslashes($key)) . '=' . rawurlencode(stripslashes($value)) . '&';
         }
       }
     }

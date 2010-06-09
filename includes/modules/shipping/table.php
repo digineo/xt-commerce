@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: table.php,v 1.1 2003/09/06 22:13:54 fanta2k Exp $   
+   $Id: table.php 1002 2005-07-10 16:11:37Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -47,15 +47,16 @@
         if ($check_flag == false) {
           $this->enabled = false;
         }
+
       }
     }
 
 
     function quote($method = '') {
-      global $order, $shipping_weight, $shipping_num_boxes;
+      global $order, $shipping_weight, $shipping_num_boxes,$xtPrice;
 
       if (MODULE_SHIPPING_TABLE_MODE == 'price') {
-        $order_total = $_SESSION['cart']->show_total();
+        $order_total = $xtPrice->xtcRemoveCurr($_SESSION['cart']->show_total());
       } else {
         $order_total = $shipping_weight;
       }

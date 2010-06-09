@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: countries.php,v 1.1 2003/09/28 14:38:01 fanta2k Exp $   
+   $Id: countries.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -20,6 +20,7 @@ define('HEADING_TITLE', 'L&auml;nder');
 define('TABLE_HEADING_COUNTRY_NAME', 'Land');
 define('TABLE_HEADING_COUNTRY_CODES', 'ISO Codes');
 define('TABLE_HEADING_ACTION', 'Aktion');
+define('TABLE_HEADING_STATUS', 'Status');
 
 define('TEXT_INFO_EDIT_INTRO', 'Bitte f&uuml;hren Sie alle notwendigen &Auml;nderungen durch');
 define('TEXT_INFO_COUNTRY_NAME', 'Name:');

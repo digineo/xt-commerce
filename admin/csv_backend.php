@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: csv_backend.php,v 1.3 2004/02/29 17:05:18 fanta2k Exp $
+   $Id: csv_backend.php 1030 2005-07-14 20:22:32Z novalis $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -189,7 +189,7 @@
   }
 ?>
             </table>
-<?php echo xtc_image_submit('button_save.gif', IMAGE_SAVE); ?></form>
+<?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?></form>
 </div>
 <?php
 
@@ -253,7 +253,7 @@
 <?php
 echo xtc_draw_form('upload',FILENAME_CSV_BACKEND,'action=upload','POST','enctype="multipart/form-data"');
 echo xtc_draw_file_field('file_upload');
-echo '<br />'.xtc_image_submit('button_upload.gif',UPLOAD);
+echo '<br/><input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_UPLOAD . '"/>';
 ?>
 </form>
           </td>
@@ -281,7 +281,7 @@ echo '<br />'.xtc_image_submit('button_upload.gif',UPLOAD);
              closedir($dir);
             }
           echo xtc_draw_pull_down_menu('select_file',$files,'');
-          echo '<br />'.xtc_image_submit('button_import.gif',IMPORT);
+          echo '<br/><input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_IMPORT . '"/>';
 
           ?></form>
 </td>
@@ -306,7 +306,7 @@ echo xtc_draw_form('export',FILENAME_CSV_BACKEND,'action=export','POST','enctype
 $content=array();
 $content[]=array('id'=>'products','text'=>TEXT_PRODUCTS);
 echo xtc_draw_pull_down_menu('select_content',$content,'products');
-echo '<br />'.xtc_image_submit('button_export.gif',EXPORT);
+echo '<br/><input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_EXPORT . '"/>';
 ?>
 </form>
           </td>

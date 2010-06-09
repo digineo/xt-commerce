@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: banner_statistics.php,v 1.2 2004/02/29 17:05:18 fanta2k Exp $   
+   $Id: banner_statistics.php 1125 2005-07-28 09:59:44Z novalis $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -163,7 +163,7 @@
         <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
       </tr>
       <tr>
-        <td class="main" align="right"><?php echo '<a href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $_GET['bID']) . '">' . xtc_image_button('button_back.gif', IMAGE_BACK) . '</a>'; ?></td>
+        <td class="main" align="right"><?php echo '<a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_BANNER_MANAGER, 'page=' . $_GET['page'] . '&bID=' . $_GET['bID']) . '">' . BUTTON_BACK . '</a>'; ?></td>
       </tr>
     </table></td>
 <!-- body_text_eof //-->

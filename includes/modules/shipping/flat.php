@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: flat.php,v 1.1 2003/09/06 22:13:54 fanta2k Exp $   
+   $Id: flat.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -53,7 +53,6 @@
 
     function quote($method = '') {
       global $order;
-
       $this->quotes = array('id' => $this->code,
                             'module' => MODULE_SHIPPING_FLAT_TEXT_TITLE,
                             'methods' => array(array('id' => $this->code,

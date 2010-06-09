@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_customers_statuses.inc.php,v 1.2 2004/02/07 19:57:46 fanta2k Exp $   
+   $Id: xtc_get_customers_statuses.inc.php 808 2005-02-27 09:04:50Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -48,7 +48,6 @@
                                            'csa_cc_permission' => $customers_statuses['customers_status_cc_permission'],
                                            'csa_bt_permission' => $customers_statuses['customers_status_bt_permission'],
                                            );
-//       echo $customers_statuses_array[$i]['id'] . $customers_statuses_array[$i]['text'] . $customers_statuses_array[$i]['csa_image'] . $customers_statuses_array[$i]['csa_discount'] . $customers_statuses_array[$i]['csa_ot_discount_flag'] . $customers_statuses_array[$i]['csa_ot_discount'] . '<br>';
      }
     return $customers_statuses_array;
   }

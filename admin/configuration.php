@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: configuration.php,v 1.4 2004/02/29 17:05:18 fanta2k Exp $   
+   $Id: configuration.php 1125 2005-07-28 09:59:44Z novalis $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -185,7 +185,7 @@
   }
 ?>
             </table>
-<?php echo xtc_image_submit('button_save.gif', IMAGE_SAVE); ?></form>
+<?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?></form>
             </td>
 
           </tr>

@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: credits.php,v 1.3 2004/02/29 17:05:18 fanta2k Exp $   
+   $Id: credits.php 1263 2005-09-30 10:14:08Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -57,7 +57,7 @@
         <td class="main">
 <font color="D68000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo PROJECT_VERSION; ?></b></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><br />
 Release
-Datum: 08. Sept. 2004</strong><br />
+Datum: 1 Okt 2005</strong><br />
 Released under the GNU General Public License<br />
 <br />
  This program is distributed

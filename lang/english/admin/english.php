@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: english.php,v 1.16 2004/05/10 12:55:00 fanta2k Exp $   
+   $Id: english.php 1231 2005-09-21 13:05:36Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -24,7 +24,8 @@
 // on RedHat6.0 I used 'en_US'
 // on FreeBSD 4.0 I use 'en_US.ISO_8859-1'
 // this may not work under win32 environments..
-setlocale(LC_TIME, 'en_US.ISO_8859-1');
+
+setlocale(LC_TIME, 'en_US@euro', 'en_US', 'en-US', 'en', 'en_US.ISO_8859-1', 'English','en_US.ISO_8859-15');
 define('DATE_FORMAT_SHORT', '%m/%d/%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A %d %B, %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'm/d/Y');  // this is used for strftime()
@@ -95,6 +96,7 @@ define('BOX_CONFIGURATION_15', 'Sessions');
 define('BOX_CONFIGURATION_16', 'Meta-Tags/Searchengines');
 define('BOX_CONFIGURATION_17', 'Specialmodules');
 define('BOX_CONFIGURATION_19', 'xt:C Partner');
+define('BOX_CONFIGURATION_22', 'Search-Options');
  
 define('BOX_MODULES', 'Payment-/Shipping-/Billing-Modules');
 define('BOX_PAYMENT', 'Payment Systems');
@@ -104,6 +106,7 @@ define('BOX_CATEGORIES', 'Categories / Products');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Product Options');
 define('BOX_MANUFACTURERS', 'Manufacturers');
 define('BOX_REVIEWS', 'Product Reviews');
+define('BOX_CAMPAIGNS', 'Campaigns');
 define('BOX_XSELL_PRODUCTS', 'Cross Marketing');
 define('BOX_SPECIALS', 'Special Pricing');
 define('BOX_PRODUCTS_EXPECTED', 'Expected Offers');
@@ -149,6 +152,8 @@ define('BOX_COUPON_ADMIN','Coupon Admin');
 define('BOX_TOOLS_BLACKLIST','-CC-Blacklist');
 define('BOX_IMPORT','Import/Export'); 
 define('BOX_PRODUCTS_VPE','Packing unit');
+define('BOX_CAMPAIGNS_REPORT','Campaign report');
+define('BOX_ORDERS_XSELL_GROUP','Cross-sell groups');
 
 define('TXT_GROUPS','<b>Groups</b>:');
 define('TXT_SYSTEM','System');
@@ -251,64 +256,7 @@ define('TEXT_CHOOSE_INFO_TEMPLATE','Template for product details');
 define('TEXT_CHOOSE_OPTIONS_TEMPLATE','Template for product options');
 define('TEXT_SELECT','-- Please Select --');
 
-// images
-define('IMAGE_ANI_SEND_EMAIL', 'Sending eMail');
-define('IMAGE_BACK', 'Back');
-define('IMAGE_BACKUP', 'Database Backup');
-define('IMAGE_CANCEL', 'Cancel');
-define('IMAGE_CONFIRM', 'Confirm');
-define('IMAGE_COPY', 'Copy');
-define('IMAGE_COPY_TO', 'Copy to');
-define('IMAGE_DETAILS', 'Details');
-define('IMAGE_DELETE', 'Delete');
-define('IMAGE_EDIT', 'Edit');
-define('IMAGE_EMAIL', 'send eMail');
-define('IMAGE_FILE_MANAGER', 'File-Manager');
-define('IMAGE_ICON_STATUS_GREEN', 'Active');
-define('IMAGE_ICON_STATUS_GREEN_LIGHT', 'Set active');
-define('IMAGE_ICON_STATUS_RED', 'Inactive');
-define('IMAGE_ICON_STATUS_RED_LIGHT', 'Set inactive');
-define('IMAGE_ICON_INFO', 'Info');
-define('IMAGE_INSERT', 'Insert');
-define('IMAGE_LOCK', 'Lock');
-define('IMAGE_MODULE_INSTALL', 'Install Module');
-define('IMAGE_MODULE_REMOVE', 'Remove Module');
-define('IMAGE_MOVE', 'Move');
-define('IMAGE_NEW_BANNER', 'New Banner');
-define('IMAGE_NEW_CATEGORY', 'New Category');
-define('IMAGE_NEW_COUNTRY', 'New Country');
-define('IMAGE_NEW_CURRENCY', 'New Currency');
-define('IMAGE_NEW_FILE', 'New File');
-define('IMAGE_NEW_FOLDER', 'New Folder');
-define('IMAGE_NEW_LANGUAGE', 'New Language');
-define('IMAGE_NEW_NEWSLETTER', 'New Newsletter');
-define('IMAGE_NEW_PRODUCT', 'New Product');
-define('IMAGE_NEW_TAX_CLASS', 'New Tax Class');
-define('IMAGE_NEW_TAX_RATE', 'New Tax Rate');
-define('IMAGE_NEW_TAX_ZONE', 'New Tax Zone');
-define('IMAGE_NEW_ZONE', 'New Zone');
-define('IMAGE_ORDERS', 'Orders');
-define('IMAGE_ORDERS_INVOICE', 'Invoice');
-define('IMAGE_ORDERS_PACKINGSLIP', 'Packing Slip');
-define('IMAGE_PREVIEW', 'Preview');
-define('IMAGE_RESET', 'Reset');
-define('IMAGE_RESTORE', 'Restore');
-define('IMAGE_SAVE', 'Save');
-define('IMAGE_SEARCH', 'Search');
-define('IMAGE_SELECT', 'Select');
-define('IMAGE_SEND', 'Send');
-define('IMAGE_SEND_EMAIL', 'Send eMail');
-define('IMAGE_UNLOCK', 'Unlock');
-define('IMAGE_UPDATE', 'Update');
-define('IMAGE_UPDATE_CURRENCIES', 'Update Currencies');
-define('IMAGE_UPLOAD', 'Upload');
-define('IMAGE_ACCOUNTING','Accounting');
-define('IMAGE_STATUS','Customer status');
-define('IMAGE_IPLOG','IP-Log');
-define('CREATE_ACCOUNT','Create Account');
-define('IMAGE_START','Start module');
-define('IMAGE_AFTERBUY_SEND','Resend order to Afterbuy');
-
+// Icons
 define('ICON_CROSS', 'False');
 define('ICON_CURRENT_FOLDER', 'Current Folder');
 define('ICON_DELETE', 'Delete');
@@ -336,6 +284,7 @@ define('TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS', 'Displaying <b>%d</b> to <b>%d</b
 define('TEXT_DISPLAY_NUMBER_OF_NEWSLETTERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Newsletters)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Orders)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Orders Status)');
+define('TEXT_DISPLAY_NUMBER_OF_XSELL_GROUP', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Cross-sell groups)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_VPE', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Packing Units)');
 define('TEXT_DISPLAY_NUMBER_OF_SHIPPING_STATUS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Shippingstatus)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Products)');
@@ -434,5 +383,7 @@ define('ENTRY_VAT_ID_ERROR', '<font color="FF0000">* Your Vat ID is False!</font
 
 define('ERROR_GIF_MERGE','Missing GDlib Gif-Support, merge failed');
 define('ERROR_GIF_UPLOAD','Missing GDlib Gif-Support, processing of Gif image failed');
+
+define('TEXT_REFERER','Referer: ');
 
 ?>

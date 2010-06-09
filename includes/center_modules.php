@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: center_modules.php,v 1.3 2004/03/12 09:19:32 fanta2k Exp $   
+   $Id: center_modules.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

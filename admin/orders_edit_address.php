@@ -18,18 +18,12 @@
 
    Released under the GNU General Public License 
 
-   To do: Erweitern auf Artikelmerkmale, Rabatte und Gutscheine
-   --------------------------------------------------------------*/
+	--------------------------------------------------------------*/
 ?>
 
 
 <!-- Adressbearbeitung Anfang //-->
-<?php if ($_GET['edit_action']=='address'){?>
-<br />
-<?php
-
-   require(DIR_WS_CLASSES . 'order.php');
-   $order = new order($oID);
+<?php if ($_GET['edit_action']=='address'){
 
  echo xtc_draw_form('adress_edit', FILENAME_ORDERS_EDIT, 'action=address_edit', 'post');
  echo xtc_draw_hidden_field('oID', $_GET['oID']);
@@ -135,7 +129,56 @@
 
 <tr class="dataTableRow">
 <td class="dataTableContent" align="left" colspan="4">
-<?php echo xtc_image_submit('button_update.gif', TEXT_UPDATE,'style="cursor:hand" ');?>
+&nbsp;
+</td>
+</tr>
+
+<tr class="dataTableRow">
+<td class="dataTableContent" align="left">
+<?php echo TEXT_CUSTOMER_GROUP;?>
+</td>
+<td class="dataTableContent" align="left" colspan="3">
+<?php echo xtc_draw_pull_down_menu('customers_status', xtc_get_customers_statuses(), $order->info['status']);?>
+</td>
+</tr>
+
+<tr class="dataTableRow">
+<td class="dataTableContent" align="left">
+<?php echo TEXT_CUSTOMER_EMAIL;?>
+</td>
+<td class="dataTableContent" align="left" colspan="3">
+<?php echo xtc_draw_input_field('customers_email_address', $order->customer['email_address']);?>
+</td>
+</tr>
+
+<tr class="dataTableRow">
+<td class="dataTableContent" align="left">
+<?php echo TEXT_CUSTOMER_TELEPHONE;?>
+</td>
+<td class="dataTableContent" align="left" colspan="3">
+<?php echo xtc_draw_input_field('customers_telephone', $order->customer['telephone']);?>
+</td>
+</tr>
+
+<tr class="dataTableRow">
+<td class="dataTableContent" align="left">
+<?php echo TEXT_CUSTOMER_UST;?>
+</td>
+<td class="dataTableContent" align="left" colspan="3">
+<?php echo xtc_draw_input_field('customers_vat_id', $order->customer['vat_id']);?>
+</td>
+</tr>
+
+
+<tr class="dataTableRow">
+<td class="dataTableContent" align="left" colspan="4">
+&nbsp;
+</td>
+</tr>
+
+<tr class="dataTableRow">
+<td class="dataTableContent" align="left" colspan="4">
+<?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_UPDATE . '"/>'; ?>
 </td>
 </tr>
 
@@ -150,8 +193,6 @@
 <br /><br />
 <?php } ?>
 <!-- Adressbearbeitung Ende //-->
-
-
 
 
 

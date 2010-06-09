@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: application.php,v 1.5 2004/04/25 13:58:08 fanta2k Exp $   
+   $Id: application.php 1119 2005-07-25 22:19:50Z novalis $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -88,8 +88,8 @@
   function xtc_check_version($mini='4.1.2')
 {
    $dummy=phpversion();
-  sscanf($dummy,"%d.%d.%d%s",&$v1,&$v2,&$v3,&$v4);
-  sscanf($mini,"%d.%d.%d%s",&$m1,&$m2,&$m3,&$m4);
+  sscanf($dummy,"%d.%d.%d%s",$v1,$v2,$v3,$v4);
+  sscanf($mini,"%d.%d.%d%s",$m1,$m2,$m3,$m4);
   if($v1>$m1)
        return(1);
    elseif($v1<$m1)

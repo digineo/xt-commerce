@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_loworderfee.php,v 1.3 2004/04/21 17:54:46 fanta2k Exp $   
+   $Id: ot_loworderfee.php 1002 2005-07-10 16:11:37Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,19 +19,19 @@
   class ot_loworderfee {
     var $title, $output;
 
-    function ot_loworderfee($price) {
+    function ot_loworderfee() {
+    	global $xtPrice;
       $this->code = 'ot_loworderfee';
       $this->title = MODULE_ORDER_TOTAL_LOWORDERFEE_TITLE;
       $this->description = MODULE_ORDER_TOTAL_LOWORDERFEE_DESCRIPTION;
       $this->enabled = ((MODULE_ORDER_TOTAL_LOWORDERFEE_STATUS == 'true') ? true : false);
       $this->sort_order = MODULE_ORDER_TOTAL_LOWORDERFEE_SORT_ORDER;
-      $this->Price=$price;
 
       $this->output = array();
     }
 
     function process() {
-      global $order, $currencies;
+      global $order, $xtPrice;
       
       //include needed functions
       require_once(DIR_FS_INC . 'xtc_calculate_tax.inc.php');
@@ -80,7 +80,7 @@
 
 
           $this->output[] = array('title' => $this->title . ':',
-                                  'text' => $this->Price->xtcFormat($low_order_fee, true),
+                                  'text' => $xtPrice->xtcFormat($low_order_fee, true),
                                   'value' => $low_order_fee);
         }
       }

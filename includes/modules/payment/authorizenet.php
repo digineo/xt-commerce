@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: authorizenet.php,v 1.1 2003/09/06 22:13:54 fanta2k Exp $   
+   $Id: authorizenet.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -29,7 +29,8 @@
       $this->description = MODULE_PAYMENT_AUTHORIZENET_TEXT_DESCRIPTION;
       $this->enabled = ((MODULE_PAYMENT_AUTHORIZENET_STATUS == 'True') ? true : false);
       $this->sort_order = MODULE_PAYMENT_AUTHORIZENET_SORT_ORDER;
-
+	  $this->info=MODULE_PAYMENT_AUTHORIZENET_TEXT_INFO;
+	  
       if ((int)MODULE_PAYMENT_AUTHORIZENET_ORDER_STATUS_ID > 0) {
         $this->order_status = MODULE_PAYMENT_AUTHORIZENET_ORDER_STATUS_ID;
       }
@@ -137,8 +138,8 @@ function InsertFP ($loginid, $txnkey, $amount, $sequence, $currency = "") {
 
     function javascript_validation() {
       $js = '  if (payment_value == "' . $this->code . '") {' . "\n" .
-            '    var cc_owner = document.checkout_payment.authorizenet_cc_owner.value;' . "\n" .
-            '    var cc_number = document.checkout_payment.authorizenet_cc_number.value;' . "\n" .
+            '    var cc_owner = document.getElementById("checkout_payment").authorizenet_cc_owner.value;' . "\n" .
+            '    var cc_number = document.getElementById("checkout_payment").authorizenet_cc_number.value;' . "\n" .
             '    if (cc_owner == "" || cc_owner.length < ' . CC_OWNER_MIN_LENGTH . ') {' . "\n" .
             '      error_message = error_message + "' . MODULE_PAYMENT_AUTHORIZENET_TEXT_JS_CC_OWNER . '";' . "\n" .
             '      error = 1;' . "\n" .
@@ -165,6 +166,7 @@ function InsertFP ($loginid, $txnkey, $amount, $sequence, $currency = "") {
       }
       $selection = array('id' => $this->code,
                          'module' => $this->title,
+                         'description'=>$this->info,
                          'fields' => array(array('title' => MODULE_PAYMENT_AUTHORIZENET_TEXT_CREDIT_CARD_OWNER,
                                                  'field' => xtc_draw_input_field('authorizenet_cc_owner', $order->billing['firstname'] . ' ' . $order->billing['lastname'])),
                                            array('title' => MODULE_PAYMENT_AUTHORIZENET_TEXT_CREDIT_CARD_NUMBER,

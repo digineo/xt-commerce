@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: error_handler.php,v 1.1 2004/04/26 10:31:17 fanta2k Exp $
+   $Id: error_handler.php 949 2005-05-14 16:44:33Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -23,8 +23,9 @@
   // search field
   $module_smarty->assign('FORM_ACTION',xtc_draw_form('new_find', xtc_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'NONSSL', false), 'get').xtc_hide_session_id());
   $module_smarty->assign('INPUT_SEARCH',xtc_draw_input_field('keywords', '', 'size="30" maxlength="30"'));
-  $module_smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_add_quick.gif', BOX_HEADING_SEARCH).'</form>');
+  $module_smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_quick_find.gif', BOX_HEADING_SEARCH));
   $module_smarty->assign('LINK_ADVANCED',xtc_href_link(FILENAME_ADVANCED_SEARCH));
+  $module_smarty->assign('FORM_END', '</form>');
 
 
 

@@ -1,13 +1,12 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: customer_memo.php,v 1.3 2004/06/05 11:39:59 fanta2k Exp $
+   $Id: customer_memo.php 955 2005-05-19 09:58:02Z novalis $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
 
    Copyright (c) 2003 XT-Commerce
 
-   (c) programmed by Zanier Mario for neXTCommerce
 
    Released under the GNU General Public License 
    --------------------------------------------------------------
@@ -15,7 +14,7 @@
    (c) 2003	 nextcommerce (customer_memo.php,v 1.6 2003/08/18); www.nextcommerce.org
    
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
 ?>
     <td valign="top" class="main"><?php echo ENTRY_MEMO; ?></td>
@@ -39,7 +38,7 @@
         <td width="142" class="main" style="border: 1px solid; border-color: #cccccc;"><?php echo $memo_values['memo_text']; ?></td>
       </tr>
       <tr>
-        <td><a href="<?php echo xtc_href_link(FILENAME_CUSTOMERS, 'cID=' . $_GET['cID'] . '&action=edit&special=remove_memo&mID=' . $memo_values['memo_id']); ?>" onClick="return confirm('<?php echo DELETE_ENTRY; ?>')"><?php echo xtc_image_button('button_delete.gif', IMAGE_DELETE); ?></a></td>
+        <td><a href="<?php echo xtc_href_link(FILENAME_CUSTOMERS, 'cID=' . $_GET['cID'] . '&action=edit&special=remove_memo&mID=' . $memo_values['memo_id']); ?>" onClick="return confirm('<?php echo DELETE_ENTRY; ?>')"><input type="submit" class="button" value="<?php echo BUTTON_DELETE; ?>"></a></td>
       </tr>
     </table>
 <?php
@@ -47,6 +46,6 @@
 ?>
     <table width="100%">
       <tr>
-        <td class="main" style="border-top: 1px solid; border-color: #cccccc;"><b><?php echo TEXT_TITLE ?></b>:<?php echo xtc_draw_input_field('memo_title'); ?><br><?php echo xtc_draw_textarea_field('memo_text', 'soft', '80', '5'); ?><br><?php echo xtc_image_submit('button_insert.gif', IMAGE_INSERT); ?></td>
+        <td class="main" style="border-top: 1px solid; border-color: #cccccc;"><b><?php echo TEXT_TITLE ?></b>:<?php echo xtc_draw_input_field('memo_title'); ?><br><?php echo xtc_draw_textarea_field('memo_text', 'soft', '80', '5'); ?><br><input type="submit" class="button" value="<?php echo BUTTON_INSERT; ?>"></td>
       </tr>
     </table></td>

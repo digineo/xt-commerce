@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: application_top.php,v 1.29 2004/06/13 14:31:37 fanta2k Exp $
+   $Id: application_top.php 1263 2005-09-30 10:14:08Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -30,6 +30,9 @@
 
   // Start the clock for the page parse time log
   define('PAGE_PARSE_START_TIME', microtime());
+  
+  // security
+  define('_VALID_XTC',true);
 
   // Set the level of error reporting
   error_reporting(E_ALL & ~E_NOTICE);
@@ -49,7 +52,7 @@
   define('SQL_CACHEDIR',DIR_FS_CATALOG.'cache/');
 
   // Define the project version
-  define('PROJECT_VERSION', 'xt:Commerce v3.0.3');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.4');
 
   // Set the length of the redeem code, the longer the more secure
   define('SECURITY_CODE_LENGTH', '6');
@@ -66,6 +69,7 @@
   define('FILENAME_BANNER_MANAGER', 'banner_manager.php');
   define('FILENAME_BANNER_STATISTICS', 'banner_statistics.php');
   define('FILENAME_CACHE', 'cache.php');
+  define('FILENAME_CAMPAIGNS', 'campaigns.php');
   define('FILENAME_CATALOG_ACCOUNT_HISTORY_INFO', 'account_history_info.php');
   define('FILENAME_CATALOG_NEWSLETTER', 'newsletter.php');
   define('FILENAME_CATEGORIES', 'categories.php');
@@ -107,7 +111,6 @@
   define('FILENAME_TPL_BOXES','templates_boxes.php');
   define('FILENAME_TPL_MODULES','templates_modules.php');
   define('FILENAME_NEW_ATTRIBUTES','new_attributes.php');
-  define('FILENAME_XSELL_PRODUCTS', 'xsell_products.php');
   define('FILENAME_LOGOUT','../logoff.php');
   define('FILENAME_LOGIN','../login.php');
   define('FILENAME_CREATE_ACCOUNT','create_account.php');
@@ -131,6 +134,8 @@
   define('FILENAME_EASY_POPULATE','easypopulate.php');
   define('FILENAME_BLACKLIST', 'blacklist.php');
   define('FILENAME_PRODUCTS_VPE','products_vpe.php');
+  define('FILENAME_CAMPAIGNS_REPORT','stats_campaigns.php');
+  define('FILENAME_XSELL_GROUPS','cross_sell_groups.php');
 
   // define the database table names used in the project
   define('TABLE_ADDRESS_BOOK', 'address_book');
@@ -138,6 +143,7 @@
   define('TABLE_ADMIN_ACCESS', 'admin_access');
   define('TABLE_BANNERS', 'banners');
   define('TABLE_BANNERS_HISTORY', 'banners_history');
+  define('TABLE_CAMPAIGNS', 'campaigns');
   define('TABLE_CATEGORIES', 'categories');
   define('TABLE_CATEGORIES_DESCRIPTION', 'categories_description');
   define('TABLE_CONFIGURATION', 'configuration');
@@ -170,6 +176,7 @@
   define('TABLE_PRODUCTS', 'products');
   define('TABLE_PRODUCTS_ATTRIBUTES', 'products_attributes');
   define('TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD', 'products_attributes_download');
+  define('TABLE_PRODUCTS_CONTENT','products_content');
   define('TABLE_PRODUCTS_DESCRIPTION', 'products_description');
   define('TABLE_PRODUCTS_NOTIFICATIONS', 'products_notifications');
   define('TABLE_PRODUCTS_IMAGES', 'products_images');
@@ -178,6 +185,8 @@
   define('TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS', 'products_options_values_to_products_options');
   define('TABLE_PRODUCTS_TO_CATEGORIES', 'products_to_categories');
   define('TABLE_PRODUCTS_VPE','products_vpe');
+  define('TABLE_PRODUCTS_XSELL','products_xsell');
+  define('TABLE_PRODUCTS_XSELL_GROUPS','products_xsell_grp_name');
   define('TABLE_REVIEWS', 'reviews');
   define('TABLE_REVIEWS_DESCRIPTION', 'reviews_description');
   define('TABLE_SESSIONS', 'sessions');
@@ -190,10 +199,8 @@
   define('TABLE_WHOS_ONLINE', 'whos_online');
   define('TABLE_ZONES', 'zones');
   define('TABLE_BOX_ALIGN','box_align');
-  define('TABLE_PRODUCTS_XSELL', 'products_xsell');
   define('TABLE_CUSTOMERS_MEMO','customers_memo');
   define('TABLE_CONTENT_MANAGER','content_manager');
-  define('TABLE_PRODUCTS_CONTENT','products_content');
   define('TABLE_MEDIA_CONTENT','media_content');
   define('TABLE_MODULE_NEWSLETTER','module_newsletter');
   define('TABLE_CM_FILE_FLAGS', 'cm_file_flags');
@@ -203,9 +210,12 @@
   define('TABLE_COUPON_REDEEM_TRACK', 'coupon_redeem_track');
   define('TABLE_COUPONS', 'coupons');
   define('TABLE_COUPONS_DESCRIPTION', 'coupons_description');
+  define('TABLE_SERVER_TRACKING', 'server_tracking');
   define('TABLE_SHIPPING_STATUS', 'shipping_status');
   define('TABLE_BLACKLIST', 'card_blacklist'); 
-
+  define('TABLE_CAMPAIGNS_IP','campaigns_ip');
+  
+ 
   // include needed functions
   require_once(DIR_FS_INC . 'xtc_db_connect.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_close.inc.php');
@@ -219,7 +229,6 @@
   require_once(DIR_FS_INC . 'xtc_db_insert_id.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_free_result.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_fetch_fields.inc.php');
-  require_once(DIR_FS_INC . 'xtc_note.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_output.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_input.inc.php');
   require_once(DIR_FS_INC . 'xtc_db_prepare_input.inc.php');
@@ -230,14 +239,12 @@
   require_once(DIR_FS_INC . 'xtc_add_tax.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_tax_rate.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_qty.inc.php');
+  require_once(DIR_FS_INC . 'xtc_product_link.inc.php');
+  require_once(DIR_FS_INC . 'xtc_cleanName.inc.php');
 
 
   // customization for the design layout
   define('BOX_WIDTH', 125); // how wide the boxes should be in pixels (default: 125)
-
-  // Some definitions for Order Edit must move to db next time.  
-  define('ORDERS_EDIT_TAX_STATUS', 'true');
-  define('ORDERS_EDIT_TAX_VALUE', '16.0000');
 
   // Define how do we update currency exchange rates
   // Possible values are 'oanda' 'xe' or ''
@@ -345,17 +352,20 @@
   }
 
   // verify the browser user agent if the feature is enabled
-  if (SESSION_CHECK_USER_AGENT == 'True') {
-    $http_user_agent = getenv('HTTP_USER_AGENT');
-    if (!session_is_registered('SESSION_USER_AGENT')) {
-      $_SESSION['SESSION_USER_AGENT'] = $http_user_agent;
-    }
+if (SESSION_CHECK_USER_AGENT == 'True') {
+	$http_user_agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+	$http_user_agent2 = strtolower(getenv("HTTP_USER_AGENT"));
+	$http_user_agent = ($http_user_agent == $http_user_agent2) ? $http_user_agent : $http_user_agent.';'.$http_user_agent2;
+	if (!isset($_SESSION['SESSION_USER_AGENT'])) {
+		$_SESSION['SESSION_USER_AGENT'] = $http_user_agent;
+	}
 
-    if ($_SESSION['SESSION_USER_AGENT'] != $http_user_agent) {
-      session_destroy();
-      xtc_redirect(xtc_href_link(FILENAME_LOGIN));
-    }
-  }
+	if ($_SESSION['SESSION_USER_AGENT'] != $http_user_agent) {
+		session_destroy();
+		xtc_redirect(xtc_href_link(FILENAME_LOGIN));
+	} 
+}
+
 
   // verify the IP address if the feature is enabled
   if (SESSION_CHECK_IP_ADDRESS == 'True') {
@@ -384,6 +394,7 @@
 
   // include the language translations
   require(DIR_FS_LANGUAGES . $_SESSION['language'] . '/admin/'.$_SESSION['language'] . '.php');
+  require(DIR_FS_LANGUAGES . $_SESSION['language'] . '/admin/buttons.php');
   $current_page = split('\?', basename($_SERVER['PHP_SELF'])); $current_page = $current_page[0]; // for BadBlue(Win32) webserver compatibility
   if (file_exists(DIR_FS_LANGUAGES . $_SESSION['language'] . '/admin/'.$current_page)) {
     include(DIR_FS_LANGUAGES . $_SESSION['language'] . '/admin/'.  $current_page);
@@ -482,7 +493,7 @@
 
 
     // Include Template Engine
-  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.6/Smarty.class.php');
+  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.10/Smarty.class.php');
 
   
 ?>

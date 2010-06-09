@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: gv_mail.php,v 1.4 2004/04/25 13:58:08 fanta2k Exp $
+   $Id: gv_mail.php 1030 2005-07-14 20:22:32Z novalis $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -28,6 +28,7 @@
 
 
   require('includes/application_top.php');
+  require_once(DIR_FS_INC . 'xtc_wysiwyg.inc.php'); 
 
   require(DIR_WS_CLASSES . 'currencies.php');
   $currencies = new currencies();
@@ -160,24 +161,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>"> 
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<?php if (USE_SPAW=='true') {
+<?php if (USE_WYSIWYG=='true') {
  $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
  $data=xtc_db_fetch_array($query);
- ?>
-<script type="text/javascript">
-   _editor_url = "includes/htmlarea/";
-   _editor_lang = "<?php echo $data['code']; ?>";
-</script>
-    <!-- DWD Modify -> Add: HTMLArea v3.0 !-->
-    <!-- Load HTMLArea Core Files. !-->
-<script type="text/javascript" src="includes/htmlarea/htmlarea.js"></script>
-<script type="text/javascript" src="includes/htmlarea/dialog.js"></script>
-<script tyle="text/javascript" src="includes/htmlarea/lang/<?php echo $data['code']; ?>.js"></script>
-
-
-
-
-<?php } ?>
+ echo xtc_wysiwyg('gv_mail',$data['code']);
+ } ?>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
@@ -269,8 +257,8 @@
 ?>
                 <table border="0" width="100%" cellpadding="0" cellspacing="2">
                   <tr>
-                    <td><?php echo xtc_image_submit('button_back.gif', IMAGE_BACK, 'name="back"'); ?></td>
-                    <td align="right"><?php echo '<a href="' . xtc_href_link(FILENAME_GV_MAIL) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a> ' . xtc_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+                    <td><?php echo '<input type="submit" class="button" name="back" onClick="this.blur();" value="' . BUTTON_BACK . '"/>'; ?></td>
+                    <td align="right"><?php echo '<a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_GV_MAIL) . '">' . BUTTON_CANCEL . '</a> <input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SEND_EMAIL . '"/>'; ?></td>
                   </tr>
                 </table></td>
               </tr>
@@ -342,7 +330,7 @@
                 <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
               </tr>
               <tr>
-                <td colspan="2" align="right"><?php echo xtc_image_submit('button_send_mail.gif', IMAGE_SEND_EMAIL); ?></td>
+                <td colspan="2" align="right"><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SEND_EMAIL . '"/>'; ?></td>
               </tr>
             </table></td>
           </form></tr>
@@ -361,28 +349,6 @@
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
 <br />
-<?php if (USE_SPAW=='true') { ?>
-<script type="text/javascript">
-      HTMLArea.loadPlugin("SpellChecker");
-      HTMLArea.loadPlugin("TableOperations");
-      HTMLArea.loadPlugin("CharacterMap");
-      HTMLArea.loadPlugin("ContextMenu");
-      HTMLArea.loadPlugin("ImageManager");
-HTMLArea.onload = function() {
-
-
-var editor= new HTMLArea("message");
-editor.registerPlugin(TableOperations);
-editor.registerPlugin(ContextMenu);
-editor.registerPlugin(CharacterMap);
-editor.registerPlugin(ImageManager);
-editor.generate();
-
-
-};
-HTMLArea.init();
-</script>
-<?php } ?>
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

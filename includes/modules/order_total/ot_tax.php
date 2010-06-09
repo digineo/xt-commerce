@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_tax.php,v 1.2 2004/01/07 14:08:56 fanta2k Exp $   
+   $Id: ot_tax.php 1002 2005-07-10 16:11:37Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,33 +19,33 @@
   class ot_tax {
     var $title, $output;
 
-    function ot_tax($price) {
+    function ot_tax() {
+    	global $xtPrice;
       $this->code = 'ot_tax';
       $this->title = MODULE_ORDER_TOTAL_TAX_TITLE;
       $this->description = MODULE_ORDER_TOTAL_TAX_DESCRIPTION;
       $this->enabled = ((MODULE_ORDER_TOTAL_TAX_STATUS == 'true') ? true : false);
       $this->sort_order = MODULE_ORDER_TOTAL_TAX_SORT_ORDER;
-      $this->Price=$price;
 
       $this->output = array();
     }
 
     function process() {
-      global $order, $currencies;
-
+      global $order, $xtPrice;
+	//echo $order->info['total'];
       reset($order->info['tax_groups']);
       while (list($key, $value) = each($order->info['tax_groups'])) {
         if ($value > 0) {
 
           if ($_SESSION['customers_status']['customers_status_show_price_tax'] != 0) {
             $this->output[] = array('title' => $key . ':',
-                                    'text' =>$this->Price->xtcFormat($value,true),
-                                    'value' => $this->Price->xtcFormat($value, false));
+                                    'text' =>$xtPrice->xtcFormat($value,true),
+                                    'value' => $xtPrice->xtcFormat($value, false));
           }
           if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
             $this->output[] = array('title' => $key .':',
-                                    'text' =>$this->Price->xtcFormat($value,true),
-                                    'value' => $this->Price->xtcFormat($value, false));
+                                    'text' =>$xtPrice->xtcFormat($value,true),
+                                    'value' => $xtPrice->xtcFormat($value, false));
           }
         }
       }

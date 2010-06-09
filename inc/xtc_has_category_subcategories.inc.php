@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_has_category_subcategories.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_has_category_subcategories.inc.php 1009 2005-07-11 16:19:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -18,7 +18,7 @@
   function xtc_has_category_subcategories($category_id) {
     $child_category_query = "select count(*) as count from " . TABLE_CATEGORIES . " where parent_id = '" . $category_id . "'";
     $child_category_query = xtDBquery($child_category_query);
-    $child_category = xtc_db_fetch_array(&$child_category_query,true);
+    $child_category = xtc_db_fetch_array($child_category_query,true);
 
     if ($child_category['count'] > 0) {
       return true;

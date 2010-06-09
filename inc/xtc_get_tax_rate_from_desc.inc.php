@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_tax_rate_from_desc.inc.php,v 1.1 2004/02/17 21:13:27 fanta2k Exp $
+   $Id: xtc_get_tax_rate_from_desc.inc.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

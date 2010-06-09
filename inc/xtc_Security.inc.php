@@ -46,9 +46,11 @@ function xtc_Security()
     // Cross-Site Scripting attack defense - Sent by larsneo
     // some syntax checking against injected javascript
     // extended by Neo
-
     if (count($_GET) > 0) {
         //        Lets now sanitize the GET vars
+  //      echo '<pre>';
+ //print_r ($_GET);
+ //echo '</pre>';
         foreach ($_GET as $secvalue) {
             if (!is_array($secvalue)) {
                 if ((eregi("<[^>]*script.*\"?[^>]*>", $secvalue)) ||
@@ -63,8 +65,7 @@ function xtc_Security()
                         (eregi("<[^>]*alert.*\"?[^>]*>", $secvalue)) ||
                         (eregi("<[^>]*img.*\"?[^>]*>", $secvalue)) ||
                         (eregi("<[^>]*document.*\"?[^>]*>", $secvalue)) ||
-                        (eregi("<[^>]*cookie.*\"?[^>]*>", $secvalue)) ||
-                        (eregi("\"", $secvalue))) {
+                        (eregi("<[^>]*cookie.*\"?[^>]*>", $secvalue))) {
                         xtcMailHackAttempt(__FILE__,__LINE__,'xt:C Security Alert','Intrusion detection.');
                        xtc_redirect(FILENAME_DEFAULT);
                 }
@@ -251,7 +252,7 @@ function xtcMailHackAttempt($detecting_file        =        "(no filename availa
                     '',
                     '',
                     'Attempted hack on your site? (type: '.$message.')',
-                    str_replace('\n','<br>',$output),
+                    nl2br($output),
                     $output);
 
         return;

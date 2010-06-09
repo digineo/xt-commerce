@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_count_products_in_category.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $   
+   $Id: xtc_count_products_in_category.inc.php 1009 2005-07-11 16:19:29Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -25,14 +25,14 @@
 
     $products_query = xtDBquery($products_query);
 
-    $products = xtc_db_fetch_array(&$products_query,true);
+    $products = xtc_db_fetch_array($products_query,true);
     $products_count += $products['total'];
 
     $child_categories_query = "select categories_id from " . TABLE_CATEGORIES . " where parent_id = '" . $category_id . "'";
 
     $child_categories_query = xtDBquery($child_categories_query);
-    if (xtc_db_num_rows(&$child_categories_query,true)) {
-      while ($child_categories = xtc_db_fetch_array(&$child_categories_query,true)) {
+    if (xtc_db_num_rows($child_categories_query,true)) {
+      while ($child_categories = xtc_db_fetch_array($child_categories_query,true)) {
         $products_count += xtc_count_products_in_category($child_categories['categories_id'], $include_inactive);
       }
     }

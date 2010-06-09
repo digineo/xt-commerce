@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: print_packingslip.php,v 1.7 2004/02/20 15:35:38 fanta2k Exp $   
+   $Id: print_packingslip.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

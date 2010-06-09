@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: products_attributes.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: products_attributes.php 1101 2005-07-24 14:51:13Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -37,12 +37,4 @@ define('TEXT_WARNING_OF_DELETE', 'Mit dieser Option sind Artikel, sowie Optionsm
 define('TEXT_OK_TO_DELETE', 'Mit dieser Option sind keine Artikel, sowie Optionsmerkmale verbunden - Sie kann gel&ouml;scht werden.');
 define('TEXT_OPTION_ID', 'Options ID');
 define('TEXT_OPTION_NAME', 'Optionsname');
-
-define('OPTIONS_DESCRIPTION','<b>Einstellen von Downloadprodukten:</b><br /><br />
-
-1.  Artikelmerkmal "downloads" in allen Sprachen erstellen<br />
-2.  Optionswert zuweisen zb. "unreal download"<br />
-3.  Download-Produkte per FTP in das Verzeichnis download/ speichern.<br />
-4.  Bei der Attributeverwaltung des Produkts erscheint nun ein Dropdown Feld mit den Files welche zur Verfügung stehen.<br />
-');
 ?>

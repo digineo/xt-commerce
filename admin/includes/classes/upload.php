@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: upload.php,v 1.4 2004/03/16 19:24:49 fanta2k Exp $   
+   $Id: upload.php 950 2005-05-14 16:45:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   class upload {
     var $file, $filename, $destination, $permissions, $extensions, $tmp_filename;
 

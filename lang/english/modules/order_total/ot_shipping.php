@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_shipping.php,v 1.1 2003/12/19 13:19:08 fanta2k Exp $   
+   $Id: ot_shipping.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -35,4 +35,7 @@
 
   define('MODULE_ORDER_TOTAL_SHIPPING_DESTINATION_TITLE','Provide Free Shipping For Orders Made');
   define('MODULE_ORDER_TOTAL_SHIPPING_DESTINATION_DESC','Provide free shipping for orders sent to the set destination.');
+  
+  define('MODULE_ORDER_TOTAL_SHIPPING_TAX_CLASS_TITLE','Taxclass');
+  define('MODULE_ORDER_TOTAL_SHIPPING_TAX_CLASS_DESC','Select Taxclass (only Orders Edit)');   
 ?>

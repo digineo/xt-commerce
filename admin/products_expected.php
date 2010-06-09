@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: products_expected.php,v 1.2 2004/02/29 17:05:18 fanta2k Exp $   
+   $Id: products_expected.php 1125 2005-07-28 09:59:44Z novalis $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -96,7 +96,7 @@
   if (is_object($pInfo)) {
     $heading[] = array('text' => '<b>' . $pInfo->products_name . '</b>');
 
-    $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_CATEGORIES, 'pID=' . $pInfo->products_id . '&action=new_product') . '">' . xtc_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
+    $contents[] = array('align' => 'center', 'text' => '<a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_CATEGORIES, 'pID=' . $pInfo->products_id . '&action=new_product') . '">' . BUTTON_EDIT . '</a>');
     $contents[] = array('text' => '<br />' . TEXT_INFO_DATE_EXPECTED . ' ' . xtc_date_short($pInfo->products_date_available));
   }
 

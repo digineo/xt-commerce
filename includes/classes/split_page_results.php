@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: split_page_results.php,v 1.3 2004/04/26 12:28:47 fanta2k Exp $   
+   $Id: split_page_results.php 1166 2005-08-21 00:52:02Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -28,26 +28,26 @@
       $this->number_of_rows_per_page = $max_rows;
 
       $pos_to = strlen($this->sql_query);
-      $pos_from = strpos($this->sql_query, ' from', 0);
+      $pos_from = strpos($this->sql_query, ' FROM', 0);
 
-      $pos_group_by = strpos($this->sql_query, ' group by', $pos_from);
+      $pos_group_by = strpos($this->sql_query, ' GROUP BY', $pos_from);
       if (($pos_group_by < $pos_to) && ($pos_group_by != false)) $pos_to = $pos_group_by;
 
-      $pos_having = strpos($this->sql_query, ' having', $pos_from);
+      $pos_having = strpos($this->sql_query, ' HAVING', $pos_from);
       if (($pos_having < $pos_to) && ($pos_having != false)) $pos_to = $pos_having;
 
-      $pos_order_by = strpos($this->sql_query, ' order by', $pos_from);
+      $pos_order_by = strpos($this->sql_query, ' ORDER BY', $pos_from);
       if (($pos_order_by < $pos_to) && ($pos_order_by != false)) $pos_to = $pos_order_by;
 
-      if (strpos($this->sql_query, 'distinct') || strpos($this->sql_query, 'group by')) {
-        $count_string = 'distinct ' . xtc_db_input($count_key);
+      if (strpos($this->sql_query, 'DISTINCT') || strpos($this->sql_query, 'GROUP BY')) {
+        $count_string = 'DISTINCT ' . xtc_db_input($count_key);
         //$count_string = xtc_db_input($count_key);
       } else {
         $count_string = xtc_db_input($count_key);
       }
 
-      $count_query = xtc_db_query($query);
-      $count = xtc_db_num_rows($count_query);
+      $count_query = xtDBquery($query);
+      $count = xtc_db_num_rows($count_query,true);
 
       $this->number_of_rows = $count;
       $this->number_of_pages = ceil($this->number_of_rows / $this->number_of_rows_per_page);
@@ -58,7 +58,7 @@
 
       $offset = ($this->number_of_rows_per_page * ($this->current_page_number - 1));
 
-      $this->sql_query .= " limit " . $offset . ", " . $this->number_of_rows_per_page;
+      $this->sql_query .= " LIMIT " . $offset . ", " . $this->number_of_rows_per_page;
     }
 
     // class functions

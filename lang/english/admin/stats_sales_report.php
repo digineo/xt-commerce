@@ -1,14 +1,21 @@
 <?php
-/*
-  $Id: stats_sales_report.php,v 1.2 2004/04/01 14:19:25 fanta2k Exp $
 
-  osCommerce, Open Source E-Commerce Solutions
-  http://www.oscommerce.com
+/* --------------------------------------------------------------
+   $Id: stats_sales_report.php 1086 2005-07-23 21:38:43Z mz $   
 
-  Copyright (c) 2002 osCommerce
+   XT-Commerce - community made shopping
+   http://www.xt-commerce.com
 
-  Released under the GNU General Public License
-*/
+   Copyright (c) 2003 XT-Commerce
+   --------------------------------------------------------------
+   based on: 
+   (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
+   (c) 2002-2003 osCommerce(stats_sales_report.php,v 1.6 2002/03/30); www.oscommerce.com 
+   (c) 2003	 nextcommerce (stats_sales_report.php,v 1.4 2003/08/14); www.nextcommerce.org
+
+   Released under the GNU General Public License 
+   --------------------------------------------------------------*/
+  
 
 define('REPORT_DATE_FORMAT', 'm. d. Y');
 

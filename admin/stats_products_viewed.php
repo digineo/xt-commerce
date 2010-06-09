@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: stats_products_viewed.php,v 1.5 2004/02/29 17:05:18 fanta2k Exp $   
+   $Id: stats_products_viewed.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: freeamount.php,v 1.3 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: freeamount.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -22,7 +22,7 @@
 
 define('MODULE_SHIPPING_FREECOUNT_TEXT_TITLE', 'Versandkostenfrei');
 define('MODULE_SHIPPING_FREECOUNT_TEXT_DESCRIPTION', 'Versandkostenfreie Lieferung');
-define('MODULE_SHIPPING_FREECOUNT_TEXT_WAY', 'ab &euro; ' . MODULE_SHIPPING_FREECOUNT_AMOUNT . ' Bestellwert versenden wir Ihre Bestellung versandkostenfrei');
+define('MODULE_SHIPPING_FREECOUNT_TEXT_WAY', 'ab %s  Bestellwert versenden wir Ihre Bestellung versandkostenfrei');
 define('MODULE_SHIPPING_FREECOUNT_SORT_ORDER', 'Sortierreihenfolge');
 
 define('MODULE_SHIPPING_FREEAMOUNT_ALLOWED_TITLE' , 'Erlaubte Versandzonen');

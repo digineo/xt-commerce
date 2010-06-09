@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: content_manager.php,v 1.18 2004/04/21 17:53:43 fanta2k Exp $
+   $Id: content_manager.php 1023 2005-07-14 11:41:37Z novalis $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -23,6 +23,7 @@
   require('includes/application_top.php');
   require_once(DIR_FS_INC . 'xtc_format_filesize.inc.php');
   require_once(DIR_FS_INC . 'xtc_filesize.inc.php');
+  require_once(DIR_FS_INC . 'xtc_wysiwyg.inc.php');
   
   $languages = xtc_get_languages();
 
@@ -243,26 +244,18 @@ if ($select_file=='default') {
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<?php if (USE_SPAW=='true') {
+<?php if (USE_WYSIWYG=='true') {
  $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
  $data=xtc_db_fetch_array($query);
-?>
-<script type="text/javascript">
-   _editor_url = "includes/htmlarea/";
-   _editor_lang = "<?php echo $data['code']; ?>";
-</script>
-    <!-- DWD Modify -> Add: HTMLArea v3.0 !-->
-    <!-- Load HTMLArea Core Files. !-->
-<script type="text/javascript" src="includes/htmlarea/htmlarea.js"></script>
-<script type="text/javascript" src="includes/htmlarea/dialog.js"></script>
-<script tyle="text/javascript" src="includes/htmlarea/lang/<?php echo $data['code']; ?>.js"></script>
-
-<?php } ?>
+ if ($_GET['action']!='new_products_content' && $_GET['action']!='') echo xtc_wysiwyg('content_manager',$data['code']);
+ if ($_GET['action']=='new_products_content') echo xtc_wysiwyg('products_content',$data['code']);
+ } ?>
 
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
-<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
+<?php require(DIR_WS_INCLUDES . 'header.php');?>
+
 <!-- header_eof //-->
 
 <!-- body //-->
@@ -270,7 +263,7 @@ if ($select_file=='default') {
   <tr>
     <td class="columnLeft2" width="<?php echo BOX_WIDTH; ?>" valign="top"><table border="0" width="<?php echo BOX_WIDTH; ?>" cellspacing="1" cellpadding="1" class="columnLeft">
 <!-- left_navigation //-->
-<?php require(DIR_WS_INCLUDES . 'column_left.php'); ?>
+<?php require(DIR_WS_INCLUDES . 'column_left.php');?>
 <!-- left_navigation_eof //-->
     </table></td>
 <!-- body_text //-->
@@ -281,7 +274,7 @@ if ($select_file=='default') {
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
     <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_content.gif'); ?></td>
-    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE;?></td>
   </tr>
   <tr> 
     <td class="main" valign="top">XTC Tools</td>
@@ -390,12 +383,12 @@ for ($ii = 0, $nn = sizeof($content); $ii < $nn; $ii++) {
  if ($content[$ii]['CONTENT_DELETE']=='1'){
 ?>
  <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'special=delete&coID='.$content[$ii]['CONTENT_ID']); ?>" onClick="return confirm('<?php echo CONFIRM_DELETE; ?>')">
- <?php echo xtc_image(DIR_WS_ICONS.'delete.gif','Delete','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'  '.TEXT_DELETE.'</a>&nbsp;&nbsp;';
+ <?php echo xtc_image(DIR_WS_ICONS.'delete.gif','Delete','','','style="cursor:pointer" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'  '.TEXT_DELETE.'</a>&nbsp;&nbsp;';
 } // if content
 ?>
  <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=edit&coID='.$content[$ii]['CONTENT_ID']); ?>">
-<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:hand"').'  '.TEXT_EDIT.'</a>'; ?>
- <a style="cursor:hand" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'coID='.$content[$ii]['CONTENT_ID']); ?>', 'popup', 'toolbar=0, width=640, height=600')"><?php echo xtc_image(DIR_WS_ICONS.'preview.gif','Preview','','','style="cursor:hand"').'&nbsp;&nbsp;'.TEXT_PREVIEW.'</a>'; ?>
+<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
+ <a style="cursor:pointer" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'coID='.$content[$ii]['CONTENT_ID']); ?>', 'popup', 'toolbar=0, width=640, height=600')"><?php echo xtc_image(DIR_WS_ICONS.'preview.gif','Preview','','','style="cursor:pointer"').'&nbsp;&nbsp;'.TEXT_PREVIEW.'</a>'; ?>
  </td>
  </tr>
  
@@ -454,15 +447,15 @@ if ($content_1[$a]!='') {
  if ($content_1[$a]['CONTENT_DELETE']=='1'){
 ?>
  <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'special=delete&coID='.$content_1[$a]['CONTENT_ID']); ?>" onClick="return confirm('<?php echo CONFIRM_DELETE; ?>')">
- <?php echo xtc_image(DIR_WS_ICONS.'delete.gif','Delete','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'  '.TEXT_DELETE.'</a>&nbsp;&nbsp;';
+ <?php echo xtc_image(DIR_WS_ICONS.'delete.gif','Delete','','','style="cursor:pointer" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'  '.TEXT_DELETE.'</a>&nbsp;&nbsp;';
 } // if content
 ?>
  <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=edit&coID='.$content_1[$a]['CONTENT_ID']); ?>">
-<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:hand"').'  '.TEXT_EDIT.'</a>'; ?>
- <a style="cursor:hand" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'coID='.$content_1[$a]['CONTENT_ID']); ?>', 'popup', 'toolbar=0, width=640, height=600')"
+<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
+ <a style="cursor:pointer" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'coID='.$content_1[$a]['CONTENT_ID']); ?>', 'popup', 'toolbar=0, width=640, height=600')"
  
  
- ><?php echo xtc_image(DIR_WS_ICONS.'preview.gif','Preview','','','style="cursor:hand"').'&nbsp;&nbsp;'.TEXT_PREVIEW.'</a>'; ?>
+ ><?php echo xtc_image(DIR_WS_ICONS.'preview.gif','Preview','','','style="cursor:pointer"').'&nbsp;&nbsp;'.TEXT_PREVIEW.'</a>'; ?>
  </td>
  </tr> 
  
@@ -537,7 +530,7 @@ switch ($_GET['action']) {
  if ($_GET['action']!='new') {
 echo xtc_draw_form('edit_content',FILENAME_CONTENT_MANAGER,'action=edit&id=update&coID='.$_GET['coID'],'post','enctype="multipart/form-data"').xtc_draw_hidden_field('coID',$_GET['coID']);
 } else {
-echo xtc_draw_form('edit_content',FILENAME_CONTENT_MANAGER,'action=edit&id=insert&coID='.$_GET['coID'],'post','enctype="multipart/form-data"').xtc_draw_hidden_field('coID',$_GET['coID']);
+echo xtc_draw_form('edit_content',FILENAME_CONTENT_MANAGER,'action=edit&id=insert','post','enctype="multipart/form-data"').xtc_draw_hidden_field('coID',$_GET['coID']);
 } ?>
 <table class="main" width="100%" border="0">
    <tr> 
@@ -704,7 +697,7 @@ echo xtc_draw_textarea_field('cont','','100%','35',$content['content_text']);
  
  
     <tr>
-        <td colspan="2" align="right" class="main"><?php echo xtc_image_submit('button_save.gif', IMAGE_SAVE); ?><a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER); ?>"><?php echo xtc_image_button('button_back.gif', IMAGE_BACK); ?></a></td>
+        <td colspan="2" align="right" class="main"><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?><a class="button" onClick="this.blur();" href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER); ?>"><?php echo BUTTON_BACK; ?></a></td>
    </tr>
 </table>
 </form>
@@ -865,7 +858,7 @@ echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[
 }
 ?>
        <tr>
-        <td colspan="2" align="right" class="main"><?php echo xtc_image_submit('button_save.gif', IMAGE_SAVE); ?><a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER); ?>"><?php echo xtc_image_button('button_back.gif', IMAGE_BACK); ?></a></td>
+        <td colspan="2" align="right" class="main"><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SAVE . '"/>'; ?><a class="button" onClick="this.blur();" href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER); ?>"><?php echo BUTTON_BACK; ?></a></td>
    </tr>
    </form>
    </table>
@@ -881,7 +874,7 @@ echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[
 if (!$_GET['action']) {
 ?>
 
-<a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=new'); ?>"><?php echo xtc_image_button('button_new_content.gif'); ?></a>
+<a class="button" onClick="this.blur();" href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=new'); ?>"><?php echo BUTTON_NEW_CONTENT; ?></a>
 <?php
 }
 ?>
@@ -1020,11 +1013,11 @@ for ($xx=0,$zz=sizeof($languages); $xx<$zz;$xx++){
   <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'special=delete_product&coID='.$content_array[$ii]['id']).'&pID='.$products_ids[$i]['id']; ?>" onClick="return confirm('<?php echo CONFIRM_DELETE; ?>')">
  <?php
  
- echo xtc_image(DIR_WS_ICONS.'delete.gif','Delete','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'  '.TEXT_DELETE.'</a>&nbsp;&nbsp;';
+ echo xtc_image(DIR_WS_ICONS.'delete.gif','Delete','','','style="cursor:pointer" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'  '.TEXT_DELETE.'</a>&nbsp;&nbsp;';
 
 ?>
  <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=edit_products_content&coID='.$content_array[$ii]['id']); ?>">
-<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:hand"').'  '.TEXT_EDIT.'</a>'; ?>
+<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
 
 <?php
 // display preview button if filetype 
@@ -1044,10 +1037,10 @@ if (	eregi('.gif',$content_array[$ii]['file'])
 	eregi('.bmp',$content_array[$ii]['file'])
 	) {
 ?>
- <a style="cursor:hand" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'pID=media&coID='.$content_array[$ii]['id']); ?>', 'popup', 'toolbar=0, width=640, height=600')"
+ <a style="cursor:pointer" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'pID=media&coID='.$content_array[$ii]['id']); ?>', 'popup', 'toolbar=0, width=640, height=600')"
  
  
- ><?php echo xtc_image(DIR_WS_ICONS.'preview.gif','Preview','','','style="cursor:hand"').'&nbsp;&nbsp;'.TEXT_PREVIEW.'</a>'; ?> 
+ ><?php echo xtc_image(DIR_WS_ICONS.'preview.gif','Preview','','',' style="cursor:pointer"').'&nbsp;&nbsp;'.TEXT_PREVIEW.'</a>'; ?> 
 <?php
 }
 ?> 
@@ -1068,7 +1061,7 @@ echo '</table></td></tr>';
 
        
  </table>
- <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=new_products_content'); ?>"><?php echo xtc_image_button('button_new_content.gif'); ?></a>                 
+ <a class="button" onClick="this.blur();" href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=new_products_content'); ?>"><?php echo BUTTON_NEW_CONTENT; ?></a>                 
  <?php
 } // if !$_GET['action']
 ?>       
@@ -1084,42 +1077,7 @@ echo '</table></td></tr>';
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<?php if (USE_SPAW=='true') { ?>
-
-
-<script type="text/javascript">
-      HTMLArea.loadPlugin("SpellChecker");
-      HTMLArea.loadPlugin("TableOperations");
-      HTMLArea.loadPlugin("CharacterMap");
-      HTMLArea.loadPlugin("ContextMenu");
-      HTMLArea.loadPlugin("ImageManager");
-HTMLArea.onload = function() {
-
-<?php if ($_GET['action']!='new_products_content') { ?>
-var editor= new HTMLArea("cont");
-editor.registerPlugin(TableOperations);
-editor.registerPlugin(ContextMenu);
-editor.registerPlugin(CharacterMap);
-editor.registerPlugin(ImageManager);
-editor.generate();
-<?php } else { ?>
-var editor2= new HTMLArea("file_comment");
-editor2.registerPlugin(TableOperations);
-editor2.registerPlugin(ContextMenu);
-editor2.registerPlugin(CharacterMap);
-editor2.registerPlugin(ImageManager);
-editor2.generate();
-<?php } ?>
-
-};
-HTMLArea.init();
-</script>
-
-<?php } ?>
-
 </body>
-
-
 </html>
 
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

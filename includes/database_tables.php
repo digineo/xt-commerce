@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: database_tables.php,v 1.5 2004/03/25 08:31:50 fanta2k Exp $   
+   $Id: database_tables.php 1232 2005-09-21 15:29:07Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,6 +21,7 @@
   define('TABLE_ADDRESS_FORMAT', 'address_format');
   define('TABLE_BANNERS', 'banners');
   define('TABLE_BANNERS_HISTORY', 'banners_history');
+  define('TABLE_CAMPAIGNS', 'campaigns');
   define('TABLE_CATEGORIES', 'categories');
   define('TABLE_CATEGORIES_DESCRIPTION', 'categories_description');
   define('TABLE_CONFIGURATION', 'configuration');
@@ -70,6 +71,7 @@
   define('TABLE_WHOS_ONLINE', 'whos_online');
   define('TABLE_ZONES', 'zones');
   define('TABLE_PRODUCTS_XSELL', 'products_xsell');
+  define('TABLE_PRODUCTS_XSELL_GROUPS','products_xsell_grp_name');
   define('TABLE_CONTENT_MANAGER', 'content_manager');  
   define('TABLE_PRODUCTS_CONTENT','products_content');
   define('TABLE_COUPON_GV_CUSTOMER', 'coupon_gv_customer');
@@ -80,4 +82,6 @@
   define('TABLE_COUPONS_DESCRIPTION', 'coupons_description');
   define('TABLE_BLACKLIST', 'card_blacklist');
   define('TABLE_BOT_LOG', 'bot_log');
+  define('TABLE_SERVER_TRACKING', 'server_tracking');
+  define('TABLE_CAMPAIGNS_IP','campaigns_ip');
 ?>

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_customer_greeting.inc.php,v 1.1 2003/09/06 21:47:50 fanta2k Exp $
+   $Id: xtc_customer_greeting.inc.php 1009 2005-07-11 16:19:29Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -22,7 +22,7 @@
       if (!isset($_SESSION['customer_gender'])) {
       $check_customer_query = "select customers_gender FROM  " . TABLE_CUSTOMERS . " where customers_id = '" . $_SESSION['customer_id'] . "'";
       $check_customer_query = xtDBquery($check_customer_query);
-      $check_customer_data  = xtc_db_fetch_array(&$check_customer_query,true);
+      $check_customer_data  = xtc_db_fetch_array($check_customer_query,true);
       $_SESSION['customer_gender'] = $check_customer_data['customers_gender'];
       }
       if($_SESSION['customer_gender']=='f'){

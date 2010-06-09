@@ -1,6 +1,6 @@
 <?
 /* -----------------------------------------------------------------------------------------
-   $Id: invoice.php,v 1.3 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: invoice.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
 
   define('MODULE_PAYMENT_INVOICE_TEXT_DESCRIPTION', 'Rechnung');
   define('MODULE_PAYMENT_INVOICE_TEXT_TITLE', 'Rechnung');
-
+  define('MODULE_PAYMENT_INVOICE_TEXT_INFO','');
   define('MODULE_PAYMENT_INVOICE_STATUS_TITLE' , 'Rechnungsmodul aktivieren');
 define('MODULE_PAYMENT_INVOICE_STATUS_DESC' , 'M&ouml;chten Sie Zahlungen per Invoices akzeptieren?');
 define('MODULE_PAYMENT_INVOICE_ORDER_STATUS_ID_TITLE' , 'Bestellstatus festlegen');

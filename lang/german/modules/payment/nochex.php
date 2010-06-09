@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: nochex.php,v 1.2 2004/04/01 14:19:26 fanta2k Exp $   
+   $Id: nochex.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
 
   define('MODULE_PAYMENT_NOCHEX_TEXT_TITLE', 'NOCHEX');
   define('MODULE_PAYMENT_NOCHEX_TEXT_DESCRIPTION', 'NOCHEX<br>Erfordert die W&auml;hrung GBP.');
-  
+  define('MODULE_PAYMENT_NOCHEX_TEXT_INFO','');
   define('MODULE_PAYMENT_NOCHEX_STATUS_TITLE' , 'NOCHEX Modul aktivieren');
 define('MODULE_PAYMENT_NOCHEX_STATUS_DESC' , 'M&ouml;chten Sie Zahlungen per NOCHEX akzeptieren?');
 define('MODULE_PAYMENT_NOCHEX_ALLOWED_TITLE' , 'Erlaubte Zonen');

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_total.php,v 1.2 2004/01/07 14:08:56 fanta2k Exp $   
+   $Id: ot_total.php 1002 2005-07-10 16:11:37Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -19,35 +19,34 @@
   class ot_total {
     var $title, $output;
 
-    function ot_total($price) {
+    function ot_total() {
       $this->code = 'ot_total';
       $this->title = MODULE_ORDER_TOTAL_TOTAL_TITLE;
       $this->description = MODULE_ORDER_TOTAL_TOTAL_DESCRIPTION;
       $this->enabled = ((MODULE_ORDER_TOTAL_TOTAL_STATUS == 'true') ? true : false);
       $this->sort_order = MODULE_ORDER_TOTAL_TOTAL_SORT_ORDER;
-      $this->Price=$price;
 
       $this->output = array();
     }
 
     function process() {
-      global $order, $currencies;
+      global $order, $xtPrice;
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] != 0) {
 
         $this->output[] = array('title' => $this->title . ':',
-                                'text' => '<b>' . $this->Price->xtcFormat($order->info['total'],true) . '</b>',
-                                'value' => $this->Price->xtcFormat($order->info['total'],false));
+                                'text' => '<b>' . $xtPrice->xtcFormat($order->info['total'],true) . '</b>',
+                                'value' => $xtPrice->xtcFormat($order->info['total'],false));
       }
 
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
         $this->output[] = array('title' => MODULE_ORDER_TOTAL_TOTAL_TITLE_NO_TAX_BRUTTO . ':',                          
-                                'text' => '<b>' . $this->Price->xtcFormat($order->info['tax']+$order->info['total'],true) . '</b>',
-                                'value' => $this->Price->xtcFormat($order->info['total']+$order->info['tax'],false));
+                                'text' => '<b>' . $xtPrice->xtcFormat($order->info['tax']+$order->info['total'],true) . '</b>',
+                                'value' => $xtPrice->xtcFormat($order->info['total']+$order->info['tax'],false));
       }
       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 0) {
         $this->output[] = array('title' => MODULE_ORDER_TOTAL_TOTAL_TITLE_NO_TAX . ':',
-                                'text' => '<b>' . $this->Price->xtcFormat($order->info['total'],true) . '</b>',
-                                'value' => $this->Price->xtcFormat($order->info['total'], false));
+                                'text' => '<b>' . $xtPrice->xtcFormat($order->info['total'],true) . '</b>',
+                                'value' => $xtPrice->xtcFormat($order->info['total'], false));
       }
     }
 

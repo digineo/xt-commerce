@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: sales_report.php,v 1.3 2004/04/30 17:45:12 fanta2k Exp $
+   $Id: sales_report.php 987 2005-06-18 15:30:18Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -44,7 +44,7 @@
 
    Released under the GNU General Public License
    --------------------------------------------------------------*/
-   
+  defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' ); 
 
   class sales_report {
     var $mode, $globalStartDate, $startDate, $endDate, $actDate, $showDate, $showDateEnd, $sortString, $status, $outlet;
@@ -62,7 +62,7 @@
       $first = xtc_db_fetch_array($firstQuery);
       $this->globalStartDate = mktime(0, 0, 0, date("m", $first['first']), date("d", $first['first']), date("Y", $first['first']));
             
-      $statusQuery = xtc_db_query("select * from orders_status where language_id='".$_SESSION['languages_id']."'");
+      $statusQuery = xtc_db_query("select * from ".TABLE_ORDERS_STATUS." where language_id='".$_SESSION['languages_id']."'");
       $i = 0;
       while ($outResp = xtc_db_fetch_array($statusQuery)) {
         $status[$i] = $outResp;
@@ -97,7 +97,7 @@
       $this->queryOrderCnt = "SELECT count(o.orders_id) as order_cnt FROM " . TABLE_ORDERS . " o";
 
       // queries for item details count
-      $this->queryItemCnt = "SELECT o.orders_id, op.products_id as pid, op.orders_products_id, op.products_name as pname, sum(op.products_quantity) as pquant, sum(op.final_price) as psum, op.products_tax as ptax FROM " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op WHERE o.orders_id = op.orders_id";
+      $this->queryItemCnt = "SELECT o.orders_id, op.products_id as pid, op.orders_products_id, op.products_name as pname,op.products_model as pmodel, sum(op.products_quantity) as pquant, sum(op.final_price) as psum, op.products_tax as ptax FROM " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op WHERE o.orders_id = op.orders_id";
 
       // query for attributes
       $this->queryAttr = "SELECT count(op.products_id) as attr_cnt, o.orders_id, opa.orders_products_id, opa.products_options, opa.products_options_values, opa.options_values_price, opa.price_prefix from " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " opa, " . TABLE_ORDERS . " o, " . TABLE_ORDERS_PRODUCTS . " op WHERE o.orders_id = opa.orders_id AND op.orders_products_id = opa.orders_products_id";

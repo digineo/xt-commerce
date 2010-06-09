@@ -1,6 +1,6 @@
 <?php
 /*------------------------------------------------------------------------------
-  $Id: liberecocc.php,v 1.3 2004/04/01 14:19:25 fanta2k Exp $
+  $Id: liberecocc.php 998 2005-07-07 14:18:20Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -32,7 +32,7 @@
   define('HEADING_CVV', 'Security Code Help Screen');
   define('TEXT_CVV', '<table align="center" cellspacing="2" cellpadding="5" width="400"><tr><td><span class="fancyText"><b>Visa, Mastercard, Discover 3 Digit Card Verification Number</b></span></td></tr><tr><td><span class="fancyText">For your safety and security, we require that you enter your card\'s verification number. The verification number is a 3-digit number printed on the back of your card. It appears after and to the right of your card number\'s last four digits.</span></td></tr><tr><td align="center"><IMG src="images/cv_card.gif"></td></tr></table><hr /><table align="center" cellspacing="2" cellpadding="5" width="400"><tr><td><span class="fancyText"><b>American Express 4 Digit Card Verification Number</b> </span></td></tr><tr><td><span class="fancyText">For your safety and security, we require that you enter your card\'s verification number. The American Express verification number is a 4-digit number printed on the front of your card. It appears after and to the right of your card number.</span></td></tr><tr><td align="center"><IMG src="images/cv_amex_card.gif"></td></tr></table>');
   define('TEXT_CLOSE_WINDOW', '<u>Close Window</u> [x]');
-
+define('MODULE_PAYMENT_LIBERECCO_CC_TEXT_INFO','');
   define('MODULE_PAYMENT_LIBERECO_CC_TEXT_ERROR', 'Credit Card Error!');
 
   define('TEXT_LIBERECO_CCVAL_ERROR_INVALID_DATE','Wrong Expiry Date!');

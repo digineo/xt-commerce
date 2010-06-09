@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: configuration.php,v 1.20 2004/06/05 11:38:46 matthias76 Exp $   
+   $Id: configuration.php 1234 2005-09-21 16:25:21Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -86,6 +86,8 @@ define('ALLOW_CATEGORY_DESCRIPTIONS_TITLE' , 'Kategoriebeschreibungen verwenden'
 define('ALLOW_CATEGORY_DESCRIPTIONS_DESC' , 'Erlaubt das Einf&uuml;gen von Kategoriebeschreibungen');
 define('CURRENT_TEMPLATE_TITLE' , 'Templateset (Theme)');
 define('CURRENT_TEMPLATE_DESC' , 'W&auml;hlen Sie ein Templateset (Theme) aus. Das Theme muss sich im Ordner www.Ihre-Domain.com/templates/ befinden.<br /><br />Weiter Themes finden sie unter <a href="http://shop.xtcommerce.com">http://shop.xtcommerce.com</a>');
+define('CC_KEYCHAIN_TITLE','CC String');
+define('CC_KEYCHAIN_DESC','String zur verschl&uuml;sselung der CC Informationen (Bitte umbedingt &auml;ndern!)');
 
 define('ENTRY_FIRST_NAME_MIN_LENGTH_TITLE' , 'Vorname');
 define('ENTRY_FIRST_NAME_MIN_LENGTH_DESC' , 'Minimum L&auml;nge des Vornamens');
@@ -316,6 +318,10 @@ define('SHIPPING_BOX_WEIGHT_TITLE' , 'Paketleergewicht.');
 define('SHIPPING_BOX_WEIGHT_DESC' , 'Wie hoch ist das Gewicht eines durchschnittlichen kleinen bis mittleren Leerpaketes?');
 define('SHIPPING_BOX_PADDING_TITLE' , 'Bei gr&ouml;sseren Leerpaketen - Gewichtszuwachs in %.');
 define('SHIPPING_BOX_PADDING_DESC' , 'F&uuml;r etwa 10% geben Sie 10 ein');
+define('SHOW_SHIPPING_DESC' , 'Verlinkte Anzeige von "zzgl. Versandkosten" in den Produktinformationen.');
+define('SHOW_SHIPPING_TITLE' , 'Versandkosten in Produktinfos');
+define('SHIPPING_INFOS_DESC' , 'Sprachgruppen ID der Versandkosten (Default 1) f&uuml;r die Verlinkung.');
+define('SHIPPING_INFOS_TITLE' , 'Versandkosten ID');
 
 define('PRODUCT_LIST_FILTER_TITLE' , 'Anzeige der Sortierungsfilter in Artikellisten?');
 define('PRODUCT_LIST_FILTER_DESC' , 'Anzeige der Sortierungsfilter f&uuml;r Warengruppen/Hersteller etc Filter (0=inaktiv; 1=aktiv)');
@@ -352,7 +358,7 @@ define('USE_CACHE_TITLE' , 'Cache benutzen');
 define('USE_CACHE_DESC' , 'Die Cache Features verwenden');
 
 define('DB_CACHE_TITLE','DB Cache');
-define('DB_CACHE_DESC','SELECT Abfragen k&ouml;nnen von xt:Commerce gecached werden, um die Datenbankabfragen zu veringern, und die Geschwindigkeit zu erhï¿½hen');
+define('DB_CACHE_DESC','SELECT Abfragen k&ouml;nnen von xt:Commerce gecached werden, um die Datenbankabfragen zu veringern, und die Geschwindigkeit zu erh&ouml;hen');
 
 define('DB_CACHE_EXPIRE_TITLE','DB Cache Lebenszeit');
 define('DB_CACHE_EXPIRE_DESC','Zeit in Sekunden, bevor Cache Datein mit Daten aus der Datenbank automatisch &Uuml;berschrieben werden.');
@@ -505,8 +511,8 @@ define('PRODUCT_REVIEWS_VIEW_DESC','Anzahl der angezeigten Bewertungen in der Ar
 define('DELETE_GUEST_ACCOUNT_TITLE','L&ouml;schen von Gast-Konten');
 define('DELETE_GUEST_ACCOUNT_DESC','Sollen Gast-Konten nach erfolgter Bestellung gel&ouml;scht werden ? (Bestelldaten bleiben erhalten)');
 
-define('USE_SPAW_TITLE','WYSIWYG-Editor aktivieren');
-define('USE_SPAW_DESC','WYSIWYG-Editor f&uuml;r CMS und Artikel aktivieren ?');
+define('USE_WYSIWYG_TITLE','WYSIWYG-Editor aktivieren');
+define('USE_WYSIWYG_DESC','WYSIWYG-Editor f&uuml;r CMS und Artikel aktivieren ?');
 
 define('PRICE_IS_BRUTTO_TITLE','Brutto Admin');
 define('PRICE_IS_BRUTTO_DESC','Erm&ouml;glicht die Eingabe der Bruttopreise im Admin');
@@ -540,6 +546,9 @@ define('ACTIVATE_NAVIGATOR_DESC','Artikelnavigator in der Artikeldetailansicht a
 define('QUICKLINK_ACTIVATED_TITLE','Multilink/Kopierfunktion aktivieren');
 define('QUICKLINK_ACTIVATED_DESC','Die Multilink/Kopierfunktion erleichtert das Kopieren/Verlinken eines Artikels in mehrere Kategorien, durch die M&ouml;glichkeit einzelne Kategorien per Checkbox zu selektieren');
 
+define('ACTIVATE_REVERSE_CROSS_SELLING_TITLE','Reverse Cross-Marketing');
+define('ACTIVATE_REVERSE_CROSS_SELLING_DESC','Reverse Cross-Marketing Funktion aktivieren?');
+
 define('DOWNLOAD_UNALLOWED_PAYMENT_TITLE', 'Download Zahlungsmodule');
 define('DOWNLOAD_UNALLOWED_PAYMENT_DESC', 'Nicht Erlaubte Zahlungsweisen f&uuml;r Downloadprodukte durch Komma getrennt. Z.B. {banktransfer,cod,invoice,moneyorder}');
 define('DOWNLOAD_MIN_ORDERS_STATUS_TITLE', 'Min. Bestellstatus');
@@ -550,19 +559,17 @@ define('STORE_OWNER_VAT_ID_TITLE' , 'UST ID des Shopbetreibers');
 define('STORE_OWNER_VAT_ID_DESC' , 'Die UST ID des Shopbetreibers');
 define('STORE_OWNER_VAT_ID_TITLE' , 'Umsatzsteuer ID');
 define('STORE_OWNER_VAT_ID_DESC' , 'Die Umsatzsteuer ihres Unternehmens');
-define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_TITLE' , 'Kundenstatus f&uuml;r UST ID Geprï¿½fte Kunden (Ausland)');
-define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_DESC' , 'W&auml;hlen Sie den Kundenstatus(Gruppe) f&uuml;r UST ID geprï¿½fte Kunden aus!');
-define('ACCOUNT_COMPANY_VAT_TITLE' , 'Umsatzsteuer Id');
-define('ACCOUNT_COMPANY_VAT_DESC' , 'Die Abfrage f&uuml;r die Umsatzsteuer ID im Account benutzen');
-define('ACCOUNT_COMPANY_VAT_CHECK_TITLE' , 'Umsatzsteuer ID &U;berpr&uuml;fen');
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_TITLE' , 'Kundenstatus f&uuml;r UST ID gepr&uuml;fte Kunden (Ausland)');
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_DESC' , 'W&auml;hlen Sie den Kundenstatus(Gruppe) f&uuml;r UST ID gepr&uuml;fte Kunden aus!');
+define('ACCOUNT_COMPANY_VAT_CHECK_TITLE' , 'Umsatzsteuer ID &Uuml;berpr&uuml;fen');
 define('ACCOUNT_COMPANY_VAT_CHECK_DESC' , 'Die Umsatzsteuer ID auf Plausibilit&auml;t &Uuml;berpr&uuml;fen');
 define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_TITLE' , 'Umsatzsteuer ID Live &Uuml;berpr&uuml;fen');
-define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_DESC' , 'Die Umsatzsteuer ID auf Live Plausibilit&ouml;t &Uuml;berpr&uuml;fen falls keine Berechnungsgrundlage vorhanden?');
+define('ACCOUNT_COMPANY_VAT_LIVE_CHECK_DESC' , 'Die Umsatzsteuer ID auf Live Plausibilit&ouml;t &Uuml;berpr&uuml;fen falls keine Berechnungsgrundlage vorhanden? (Gateway des Bundesamt fï¿½r Finanzen)');
 define('ACCOUNT_COMPANY_VAT_GROUP_TITLE' , 'Kundengruppe nach UST ID Check anpassen?');
 define('ACCOUNT_COMPANY_VAT_GROUP_DESC' , 'Durch einschalten dieser Option wird die Kundengruppe nach einen postiven UST ID Check ge&auml;ndert');
 define('ACCOUNT_VAT_BLOCK_ERROR_TITLE' , 'Eintragung falscher oder ungepr&uuml;fter UstID Nummern sperren?');
 define('ACCOUNT_VAT_BLOCK_ERROR_DESC' , 'Durch einschalten dieser Option werden nur gepr&uuml;fte und richtige UstIDs eingetragen');
-define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_TITLE','Kundenstatus f&uuml;r UST ID Geprï&uuml;fte Kunden (Innland)');
+define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_TITLE','Kundenstatus f&uuml;r UST ID Geprï¿½&uuml;fte Kunden (Innland)');
 define('DEFAULT_CUSTOMERS_VAT_STATUS_ID_LOCAL_DESC','W&auml;hlen Sie den Kundenstatus(Gruppe) f&uuml;r UST ID gepr&uuml;fte Kunden aus!');
 // Google Conversion
 define('GOOGLE_CONVERSION_TITLE','Google Conversion-Tracking');
@@ -583,4 +590,11 @@ define('AFTERBUY_USERID_DESC','Ihre Afterbuy User ID');
 define('AFTERBUY_ORDERSTATUS_TITLE','Bestellstatus');
 define('AFTERBUY_ORDERSTATUS_DESC','Bestellstatus nach erfolgreicher &Uuml;betragung der Bestelldaten');
 define('AFTERBUY_URL','Eine Beschreibung von Afterbuy finden Sie hier: <a href="http://www.xt-commerce.com/modules/wfsection/dossier-65.html" target="new">http://www.xt-commerce.com/modules/wfsection/dossier-65.html</a>');
+
+// Search-Options
+define('SEARCH_IN_DESC_TITLE','Suche in Produktbeschreibungen');
+define('SEARCH_IN_DESC_DESC','Aktivieren um die Suche in den Produktbeschreibungen (Kurz + Lang) zu erm&ouml;glichen');
+define('SEARCH_IN_ATTR_TITLE','Suche in Produkt- Attributen');
+define('SEARCH_IN_ATTR_DESC','Aktivieren um die Suche in den Produktattributen (z.B. Farbe, L&auml;nge) zu erm&ouml;glichen');
+
 ?>

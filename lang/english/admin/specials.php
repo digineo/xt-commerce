@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: specials.php,v 1.2 2004/02/07 23:05:09 fanta2k Exp $   
+   $Id: specials.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

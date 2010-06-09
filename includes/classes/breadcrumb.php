@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: breadcrumb.php,v 1.1 2003/09/06 22:13:53 fanta2k Exp $   
+   $Id: breadcrumb.php 899 2005-04-29 02:40:57Z hhgag $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

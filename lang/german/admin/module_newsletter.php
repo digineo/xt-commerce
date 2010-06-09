@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: module_newsletter.php,v 1.3 2004/04/01 14:19:26 fanta2k Exp $
+   $Id: module_newsletter.php 899 2005-04-29 02:40:57Z hhgag $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -30,5 +30,6 @@
   define('TITLE_DATE','Datum');
   define('TEXT_SEND_TO','Empf&auml;nger:');
   define('TEXT_PREVIEW','<b>Vorschau:</b>');
+  define('TEXT_REMOVE_LINK', 'Newsletter abmelden');
 
 ?>

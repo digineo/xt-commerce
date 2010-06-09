@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: payment.php,v 1.3 2004/02/19 23:47:38 fanta2k Exp $   
+   $Id: payment.php 1136 2005-08-07 13:19:54Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -55,7 +55,7 @@
           }
         }
 	// load unallowed modules into array
-	$unallowed_modules = explode(',', $_SESSION['customers_status']['customers_status_payment_unallowed']);
+	$unallowed_modules = explode(',', $_SESSION['customers_status']['customers_status_payment_unallowed'].','.$order->customer['payment_unallowed']);
     // add unallowed modules/Download
     if ($order->content_type == 'virtual' || ($order->content_type == 'virtual_weight')) {
      $unallowed_modules = array_merge($unallowed_modules,explode(',',DOWNLOAD_UNALLOWED_PAYMENT));
@@ -123,18 +123,18 @@
         $js = '<script type="text/javascript"><!-- ' . "\n" .
               'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
-              '  var error_message = "' . JS_ERROR . '";' . "\n" .
+              '  var error_message = unescape("' . xtc_js_lang(JS_ERROR) . '");' . "\n" .
               '  var payment_value = null;' . "\n" .
-              '  if (document.checkout_payment.payment.length) {' . "\n" .
-              '    for (var i=0; i<document.checkout_payment.payment.length; i++) {' . "\n" .
-              '      if (document.checkout_payment.payment[i].checked) {' . "\n" .
-              '        payment_value = document.checkout_payment.payment[i].value;' . "\n" .
+              '  if (document.getElementById("checkout_payment").payment.length) {' . "\n" .
+              '    for (var i=0; i<document.getElementById("checkout_payment").payment.length; i++) {' . "\n" .
+              '      if (document.getElementById("checkout_payment").payment[i].checked) {' . "\n" .
+              '        payment_value = document.getElementById("checkout_payment").payment[i].value;' . "\n" .
               '      }' . "\n" .
               '    }' . "\n" .
-              '  } else if (document.checkout_payment.payment.checked) {' . "\n" .
-              '    payment_value = document.checkout_payment.payment.value;' . "\n" .
-              '  } else if (document.checkout_payment.payment.value) {' . "\n" .
-              '    payment_value = document.checkout_payment.payment.value;' . "\n" .
+              '  } else if (document.getElementById("checkout_payment").payment.checked) {' . "\n" .
+              '    payment_value = document.getElementById("checkout_payment").payment.value;' . "\n" .
+              '  } else if (document.getElementById("checkout_payment").payment.value) {' . "\n" .
+              '    payment_value = document.getElementById("checkout_payment").payment.value;' . "\n" .
               '  }' . "\n\n";
 
         reset($this->modules);
@@ -145,13 +145,13 @@
           }
         }
         if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
-        $js .= "\n" . '  if (!document.checkout_payment.conditions.checked) {' . "\n" .
-               '    error_message = error_message + "' . ERROR_CONDITIONS_NOT_ACCEPTED . '";' . "\n" .
+        $js .= "\n" . '  if (!document.getElementById("checkout_payment").conditions.checked) {' . "\n" .
+               '    error_message = error_message + unescape("' . xtc_js_lang(ERROR_CONDITIONS_NOT_ACCEPTED) . '");' . "\n" .
                '    error = 1;' . "\n" .
                '  }' . "\n\n";
         }
         $js .= "\n" . '  if (payment_value == null) {' . "\n" .
-               '    error_message = error_message + "' . JS_ERROR_NO_PAYMENT_MODULE_SELECTED . '";' . "\n" .
+               '    error_message = error_message + unescape("' . xtc_js_lang(JS_ERROR_NO_PAYMENT_MODULE_SELECTED) . '");' . "\n" .
                '    error = 1;' . "\n" .
                '  }' . "\n\n" .
                '  if (error == 1 && submitter != 1) {' . "\n" . // GV Code Start/End

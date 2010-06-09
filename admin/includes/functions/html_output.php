@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: html_output.php,v 1.2 2003/09/28 14:45:40 fanta2k Exp $   
+   $Id: html_output.php 1125 2005-07-28 09:59:44Z novalis $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
-
+defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
   ////
   // The HTML href link wrapper function
   function xtc_href_link($page = '', $parameters = '', $connection = 'NONSSL') {
@@ -88,14 +88,6 @@
   }
 
   ////
-  // The HTML form submit button wrapper function
-  // Outputs a button in the selected language
-  function xtc_image_submit($image, $alt, $params = '') {
-
-    return '<input type="image" src="' .DIR_WS_LANGUAGES . $_SESSION['language'] . '/admin/images/buttons/' . $image . '" border="0" alt="' . $alt . '"' . (($params) ? ' ' . $params : '') . '>';
-  }
-
-  ////
   // Draw a 1 pixel black line
   function xtc_black_line() {
     return xtc_image(DIR_WS_IMAGES . 'pixel_black.gif', '', '100%', '1');
@@ -105,13 +97,6 @@
   // Output a separator either through whitespace, or with an image
   function xtc_draw_separator($image = 'pixel_black.gif', $width = '100%', $height = '1') {
     return xtc_image(DIR_WS_IMAGES . $image, '', $width, $height);
-  }
-
-  ////
-  // Output a function button in the selected language
-  function xtc_image_button($image, $alt = '', $params = '') {
-
-    return xtc_image(DIR_WS_LANGUAGES. $_SESSION['language'] . '/admin/images/buttons/' . $image, $alt, '', '', $params);
   }
 
   ////
@@ -310,10 +295,10 @@
           
           case FILENAME_CATEGORIES:
 
-          $nav='<br><a href="'.xtc_href_link(FILENAME_CATEGORIES,'sorting='.$sort.'&'.xtc_get_all_get_params(array('action','sorting'))).'">';
+          $nav='<br><div><a href="'.xtc_href_link(FILENAME_CATEGORIES,'sorting='.$sort.'&'.xtc_get_all_get_params(array('action','sorting'))).'">';
           $nav.=xtc_image(DIR_WS_ICONS . 'sort_down.gif', '', '20' ,'20').'</a>';
           $nav.='<a href="'.xtc_href_link(FILENAME_CATEGORIES,'sorting='.$sort.'-desc&'.xtc_get_all_get_params(array('action','sorting'))).'">';
-          $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '', '20' ,'20').'</a>';
+          $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '', '20' ,'20').'</a></div>';
 
           break;          
 

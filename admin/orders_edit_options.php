@@ -19,28 +19,23 @@
    Released under the GNU General Public License 
 
    To do: Erweitern auf Artikelmerkmale, Rabatte und Gutscheine
-   --------------------------------------------------------------*/
-   require_once(DIR_FS_INC .'xtc_get_tax_rate.inc.php');
-   require_once(DIR_FS_INC .'xtc_get_tax_class_id.inc.php');
-// select Order Currencie
-$curr_query=xtc_db_query("SELECT currency FROM ".TABLE_ORDERS." WHERE orders_id='".(int)$_GET['oID']."'");
-$curr_data=xtc_db_fetch_array($curr_query);
+	--------------------------------------------------------------*/
 
-  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'xtcPrice.php');
-  $xtPrice = new xtcPrice($curr_data['currency'],$customers_status['customers_status_id']);
+ $products_query = xtc_db_query("select * from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $_GET['oID'] . "' and orders_products_id = '" . $_GET['opID'] . "'");
+ $products = xtc_db_fetch_array($products_query);
 
 ?>
-<!-- Artikelbearbeitung Anfang //-->
+<!-- Optionsbearbeitung Anfang //-->
 
 <?php
-  $products_query = xtc_db_query("select * from " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " where orders_id = '" . $_GET['oID'] . "' and orders_products_id = '" . $_GET['opID'] . "'");
+  $attributes_query = xtc_db_query("select * from " . TABLE_ORDERS_PRODUCTS_ATTRIBUTES . " where orders_id = '" . $_GET['oID'] . "' and orders_products_id = '" . $_GET['opID'] . "'");
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
 
 <tr class="dataTableHeadingRow">
 <td class="dataTableHeadingContent"><b><?php echo TEXT_PRODUCT_OPTION;?></b></td>
 <td class="dataTableHeadingContent"><b><?php echo TEXT_PRODUCT_OPTION_VALUE;?></b></td>
-<td class="dataTableHeadingContent"><b><?php echo TEXT_PRICE;?></b></td>
+<td class="dataTableHeadingContent"><b><?php echo TEXT_PRICE . TEXT_SMALL_NETTO;?></b></td>
 <td class="dataTableHeadingContent"><b><?php echo TEXT_PRICE_PREFIX;?></b></td>
 <td class="dataTableHeadingContent">&nbsp;</td>
 <td class="dataTableHeadingContent">&nbsp;</td>
@@ -48,32 +43,20 @@ $curr_data=xtc_db_fetch_array($curr_query);
 </tr>
 
 <?php
-while($products = xtc_db_fetch_array($products_query)) {
+while($attributes = xtc_db_fetch_array($attributes_query)) {
 ?>
 <tr class="dataTableRow">
 <?php
 echo xtc_draw_form('product_option_edit', FILENAME_ORDERS_EDIT, 'action=product_option_edit', 'post');
-echo xtc_draw_hidden_field('cID', $_GET['cID']);
 echo xtc_draw_hidden_field('oID', $_GET['oID']);
-echo xtc_draw_hidden_field('pID', $_GET['pID']);
-echo xtc_draw_hidden_field('pTX', $_GET['pTX']);
-echo xtc_draw_hidden_field('aTX', $_GET['aTX']);
-echo xtc_draw_hidden_field('qTY', $_GET['qTY']);
 echo xtc_draw_hidden_field('opID', $_GET['opID']);
-echo xtc_draw_hidden_field('opAID', $products['orders_products_attributes_id']);
-
-$brutto = PRICE_IS_BRUTTO;
-if($brutto == 'true'){
-$options_values_price = $xtPrice->xtcFormat($xtPrice->xtcCalculateCurr(($products['options_values_price']*(1+($_GET['pTX']/100)))),false);
-}else{
-$options_values_price = $xtPrice->xtcFormat($xtPrice->xtcCalculateCurr($products['options_values_price']), false);
-}
-
+echo xtc_draw_hidden_field('pID', $_GET['pID']);
+echo xtc_draw_hidden_field('opAID', $attributes['orders_products_attributes_id']);
 ?>
-<td class="dataTableContent"><?php echo xtc_draw_input_field('products_options', $products['products_options'], 'size="20"');?></td>
-<td class="dataTableContent"><?php echo xtc_draw_input_field('products_options_values', $products['products_options_values'], 'size="20"');?></td>
-<td class="dataTableContent"><?php echo xtc_draw_input_field('options_values_price',$options_values_price, 'size="10"');?></td>
-<td class="dataTableContent"><?php echo $products['price_prefix'];?></td>
+<td class="dataTableContent"><?php echo xtc_draw_input_field('products_options', $attributes['products_options'], 'size="20"');?></td>
+<td class="dataTableContent"><?php echo xtc_draw_input_field('products_options_values', $attributes['products_options_values'], 'size="20"');?></td>
+<td class="dataTableContent"><?php echo xtc_draw_input_field('options_values_price',$attributes['options_values_price'], 'size="10"');?></td>
+<td class="dataTableContent" align="center"><?php echo $attributes['price_prefix'];?></td>
 <td class="dataTableContent">
 <SELECT name="prefix">
 <OPTION value="+">+
@@ -82,7 +65,7 @@ $options_values_price = $xtPrice->xtcFormat($xtPrice->xtcCalculateCurr($products
 </td>
 <td class="dataTableContent">
 <?php
-echo xtc_image_submit('button_save.gif', TEXT_EDIT,'style="cursor:hand" ');
+echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_SAVE . '"/>';
 ?>
 </form>
 </td>
@@ -90,15 +73,10 @@ echo xtc_image_submit('button_save.gif', TEXT_EDIT,'style="cursor:hand" ');
 <td class="dataTableContent">
 <?php
 echo xtc_draw_form('product_option_delete', FILENAME_ORDERS_EDIT, 'action=product_option_delete', 'post');
-echo xtc_draw_hidden_field('cID', $_GET['cID']);
 echo xtc_draw_hidden_field('oID', $_GET['oID']);
-echo xtc_draw_hidden_field('pID', $_GET['pID']);
-echo xtc_draw_hidden_field('pTX', $_GET['pTX']);
-echo xtc_draw_hidden_field('aTX', $_GET['aTX']);
-echo xtc_draw_hidden_field('qTY', $_GET['qTY']);
 echo xtc_draw_hidden_field('opID', $_GET['opID']);
-echo xtc_draw_hidden_field('opAID', $products['orders_products_attributes_id']);
-echo xtc_image_submit('button_delete.gif', TEXT_DELETE,'style="cursor:hand" ');
+echo xtc_draw_hidden_field('opAID', $attributes['orders_products_attributes_id']);
+echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_DELETE . '"/>';
 ?>
 </form>
 </td>
@@ -108,11 +86,11 @@ echo xtc_image_submit('button_delete.gif', TEXT_DELETE,'style="cursor:hand" ');
 ?>
 </table>
 <br /><br />
-<!-- Artikelbearbeitung Ende //-->
+<!-- Optionsbearbeitung Ende //-->
 
 
 
-<!-- Artikel Einfügen Anfang //-->
+<!-- Artikel Einfï¿½gen Anfang //-->
 
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
@@ -147,13 +125,9 @@ while($products = xtc_db_fetch_array($products_query)) {
 <tr class="dataTableRow">
 <?php
 echo xtc_draw_form('product_option_ins', FILENAME_ORDERS_EDIT, 'action=product_option_ins', 'post');
-echo xtc_draw_hidden_field('cID', $_GET['cID']);
 echo xtc_draw_hidden_field('oID', $_GET['oID']);
-echo xtc_draw_hidden_field('pID', $_GET['pID']);
-echo xtc_draw_hidden_field('pTX', $_GET['pTX']);
-echo xtc_draw_hidden_field('aTX', $_GET['aTX']);
-echo xtc_draw_hidden_field('qTY', $_GET['qTY']);
 echo xtc_draw_hidden_field('opID', $_GET['opID']);
+echo xtc_draw_hidden_field('pID', $_GET['pID']);
 echo xtc_draw_hidden_field('aID', $products['products_attributes_id']);
 
 $brutto = PRICE_IS_BRUTTO;
@@ -173,7 +147,7 @@ $options_values_price = xtc_round($products['options_values_price'], PRICE_PRECI
 </td>
 <td class="dataTableContent">
 <?php
-echo xtc_image_submit('button_insert.gif', TEXT_EDIT,'style="cursor:hand" ');
+echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_EDIT . '"/>';
 ?>
 </form>
 </td>
@@ -184,8 +158,7 @@ echo xtc_image_submit('button_insert.gif', TEXT_EDIT,'style="cursor:hand" ');
 </table>
 
 <br /><br />
-<!-- Artikel Einfügen Ende //-->
-
+<!-- Artikel Einfï¿½gen Ende //-->
 
 
 

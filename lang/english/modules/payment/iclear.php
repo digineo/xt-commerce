@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: iclear.php,v 1.1 2004/06/04 11:46:29 matthias76 Exp $   
+   $Id: iclear.php 998 2005-07-07 14:18:20Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -44,7 +44,7 @@
   define('MODULE_PAYMENT_ICLEAR_TEXT_TITLE', 'iclear Rechnungskauf (Nur für iclear Mitglieder)');
   define('MODULE_PAYMENT_ICLEAR_TEXT_DESCRIPTION', 'iclear');
   define('MODULE_PAYMENT_ICLEAR_TEXT_ERROR_MESSAGE', 'Bei der &Uuml;berp&uuml;fung Ihres iclear Rechnungskaufes ist ein Fehler aufgetreten! Bitte versuchen Sie es nochmal oder wählen Sie eine andere Zahlungsweise.');
-
+define('MODULE_PAYMENT_ICLEAR_TEXT_INFO','');
 define('MODULE_PAYMENT_ICLEAR_ALLOWED_TITLE' , 'Erlaubte Zonen');
 define('MODULE_PAYMENT_ICLEAR_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, welche f&uuml;r dieses Modul erlaubt sein sollen. (z.B. AT,DE (wenn leer, werden alle Zonen erlaubt))');
 

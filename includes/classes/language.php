@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: language.php,v 1.1 2003/09/06 22:13:53 fanta2k Exp $   
+   $Id: language.php 962 2005-05-27 17:27:01Z mz $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -72,7 +72,8 @@
         $this->catalog_languages[$languages['code']] = array('id' => $languages['languages_id'],
                                                              'name' => $languages['name'],
                                                              'image' => $languages['image'],
-															 'language_charset' => $languages['language_charset'],
+                                                             'code' => $languages['code'],
+														  'language_charset' => $languages['language_charset'],
                                                              'directory' => $languages['directory']);
       }
 
