@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: coupon_admin.php 1084 2005-07-23 18:36:08Z matthias $
+  $Id: coupon_admin.php 229 2007-03-06 19:46:21Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -228,11 +228,14 @@
       <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'gift.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Vouchers</td>
+  </tr>
+</table></td>
       </tr>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -392,11 +395,14 @@ $customer = xtc_db_fetch_array($customer_query);
       <td  class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'gift.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Vouchers</td>
+  </tr>
+</table></td>
       </tr>
       <tr>
 
@@ -480,11 +486,14 @@ $customer = xtc_db_fetch_array($customer_query);
       <td  class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'gift.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Vouchers</td>
+  </tr>
+</table></td>
       </tr>
       <tr>
       <td>
@@ -496,8 +505,8 @@ $customer = xtc_db_fetch_array($customer_query);
             $language_id = $languages[$i]['id'];
 ?>
       <tr>
-        <td align="left"><?php echo COUPON_NAME; ?></td>
-        <td align="left"><?php echo $_POST['coupon_name'][$language_id]; ?></td>
+        <td align="left" class="main"><?php echo COUPON_NAME; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_name'][$language_id]; ?></td>
       </tr>
 <?php
 }
@@ -507,38 +516,38 @@ $customer = xtc_db_fetch_array($customer_query);
             $language_id = $languages[$i]['id'];
 ?>
       <tr>
-        <td align="left"><?php echo COUPON_DESC; ?></td>
-        <td align="left"><?php echo $_POST['coupon_desc'][$language_id]; ?></td>
+        <td align="left" class="main"><?php echo COUPON_DESC; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_desc'][$language_id]; ?></td>
       </tr>
 <?php
 }
 ?>
       <tr>
-        <td align="left"><?php echo COUPON_AMOUNT; ?></td>
-        <td align="left"><?php echo $_POST['coupon_amount']; ?></td>
+        <td align="left" class="main"><?php echo COUPON_AMOUNT; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_amount']; ?></td>
       </tr>
  
       <tr>
-        <td align="left"><?php echo COUPON_MIN_ORDER; ?></td>
-        <td align="left"><?php echo $_POST['coupon_min_order']; ?></td>
+        <td align="left" class="main"><?php echo COUPON_MIN_ORDER; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_min_order']; ?></td>
       </tr>
 
       <tr>
-        <td align="left"><?php echo COUPON_FREE_SHIP; ?></td>
+        <td align="left" class="main"><?php echo COUPON_FREE_SHIP; ?></td>
 <?php
     if ($_POST['coupon_free_ship']) {
 ?>
-        <td align="left"><?php echo TEXT_FREE_SHIPPING; ?></td>
+        <td align="left" class="main"><?php echo TEXT_FREE_SHIPPING; ?></td>
 <?php
     } else { 
 ?>
-        <td align="left"><?php echo TEXT_NO_FREE_SHIPPING; ?></td>
+        <td align="left" class="main"><?php echo TEXT_NO_FREE_SHIPPING; ?></td>
 <?php
     }
 ?>
       </tr>
       <tr>
-        <td align="left"><?php echo COUPON_CODE; ?></td>
+        <td align="left" class="main"><?php echo COUPON_CODE; ?></td>
 <?php
     if ($_POST['coupon_code']) {
       $c_code = $_POST['coupon_code'];
@@ -546,44 +555,44 @@ $customer = xtc_db_fetch_array($customer_query);
       $c_code = $coupon_code;
     }
 ?>
-        <td align="left"><?php echo $coupon_code; ?></td>
+        <td align="left" class="main"><?php echo $coupon_code; ?></td>
       </tr>
       
       <tr>
-        <td align="left"><?php echo COUPON_USES_COUPON; ?></td>
-        <td align="left"><?php echo $_POST['coupon_uses_coupon']; ?></td>
+        <td align="left" class="main"><?php echo COUPON_USES_COUPON; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_uses_coupon']; ?></td>
       </tr>
 
       <tr>
-        <td align="left"><?php echo COUPON_USES_USER; ?></td>
-        <td align="left"><?php echo $_POST['coupon_uses_user']; ?></td>
+        <td align="left" class="main"><?php echo COUPON_USES_USER; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_uses_user']; ?></td>
       </tr>
       
        <tr>
-        <td align="left"><?php echo COUPON_PRODUCTS; ?></td>
-        <td align="left"><?php echo $_POST['coupon_products']; ?></td>
+        <td align="left" class="main"><?php echo COUPON_PRODUCTS; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_products']; ?></td>
       </tr>
 
 
       <tr>
-        <td align="left"><?php echo COUPON_CATEGORIES; ?></td>
-        <td align="left"><?php echo $_POST['coupon_categories']; ?></td>
+        <td align="left" class="main"><?php echo COUPON_CATEGORIES; ?></td>
+        <td align="left" class="main"><?php echo $_POST['coupon_categories']; ?></td>
       </tr>
       <tr>
-        <td align="left"><?php echo COUPON_STARTDATE; ?></td>
+        <td align="left" class="main"><?php echo COUPON_STARTDATE; ?></td>
 <?php
     $start_date = date(DATE_FORMAT, mktime(0, 0, 0, $_POST['coupon_startdate_month'],$_POST['coupon_startdate_day'] ,$_POST['coupon_startdate_year'] ));
 ?>
-        <td align="left"><?php echo $start_date; ?></td>
+        <td align="left" class="main"><?php echo $start_date; ?></td>
       </tr>
       
       <tr>
-        <td align="left"><?php echo COUPON_FINISHDATE; ?></td>
+        <td align="left" class="main"><?php echo COUPON_FINISHDATE; ?></td>
 <?php
     $finish_date = date(DATE_FORMAT, mktime(0, 0, 0, $_POST['coupon_finishdate_month'],$_POST['coupon_finishdate_day'] ,$_POST['coupon_finishdate_year'] ));
     echo date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_startdate_month'],$_POST['coupon_startdate_day'] ,$_POST['coupon_startdate_year'] ));
 ?>
-        <td align="left"><?php echo $finish_date; ?></td>
+        <td align="left" class="main"><?php echo $finish_date; ?></td>
       </tr>
 <?php
         $languages = xtc_get_languages();
@@ -604,8 +613,8 @@ $customer = xtc_db_fetch_array($customer_query);
     echo xtc_draw_hidden_field('coupon_finishdate', date('Y-m-d', mktime(0, 0, 0, $_POST['coupon_finishdate_month'],$_POST['coupon_finishdate_day'] ,$_POST['coupon_finishdate_year'] )));
 ?>
      <tr>
-        <td align="left"><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_CONFIRM . '"/>'; ?></td>
-        <td align="left"><?php echo '<input type="submit" name="back" class="button" onClick="this.blur();" value="' . BUTTON_BACK . '"/>'; ?></td>
+        <td align="left" class="main"><?php echo '<input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_CONFIRM . '"/>'; ?></td>
+        <td align="left" class="main"><?php echo '<input type="submit" name="back" class="button" onClick="this.blur();" value="' . BUTTON_BACK . '"/>'; ?></td>
       </td>
       </tr>
       
@@ -647,11 +656,14 @@ $customer = xtc_db_fetch_array($customer_query);
       <td  class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'gift.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Vouchers</td>
+  </tr>
+</table></td>
       </tr>
       <tr>
       <td>
@@ -763,9 +775,20 @@ $customer = xtc_db_fetch_array($customer_query);
 ?>    
     <td  class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td width="100%">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'gift.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Vouchers</td>
+  </tr>
+</table>
+        
+        
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
             <td class="main"><?php echo xtc_draw_form('status', FILENAME_COUPON_ADMIN, '', 'get'); ?>
 <?php
     $status_array[] = array('id' => 'Y', 'text' => TEXT_COUPON_ACTIVE);
@@ -785,7 +808,7 @@ $customer = xtc_db_fetch_array($customer_query);
         </table></td>
       </tr>
       <tr>
-        <td><a class="button" onClick="this.blur();" href="<?php echo xtc_href_link('coupon_admin.php', 'action=new'); ?>"><?php echo BUTTON_INSERT; ?></a><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: dp.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: dp.php 194 2007-02-25 11:46:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -25,21 +25,12 @@ define('MODULE_SHIPPING_DP_TEXT_TITLE', 'Deutsche Post');
 define('MODULE_SHIPPING_DP_TEXT_DESCRIPTION', 'Deutsche Post - Weltweites Versandmodul');
 define('MODULE_SHIPPING_DP_TEXT_WAY', 'Versand nach');
 define('MODULE_SHIPPING_DP_TEXT_UNITS', 'kg');
-define('MODULE_SHIPPING_DP_INVALID_ZONE', 'Es ist leider kein Versand in dieses Land m&ouml;glich');
-define('MODULE_SHIPPING_DP_UNDEFINED_RATE', 'Die Versandkosten k&ouml;nnen im Moment nicht errechnet werden');
+
 
 define('MODULE_SHIPPING_DP_STATUS_TITLE' , 'Deutsche Post WorldNet');
 define('MODULE_SHIPPING_DP_STATUS_DESC' , 'Wollen Sie den Versand über die deutsche Post anbieten?');
 define('MODULE_SHIPPING_DP_HANDLING_TITLE' , 'Handling Fee');
 define('MODULE_SHIPPING_DP_HANDLING_DESC' , 'Bearbeitungsgebühr für diese Versandart in Euro');
-define('MODULE_SHIPPING_DP_TAX_CLASS_TITLE' , 'Steuersatz');
-define('MODULE_SHIPPING_DP_TAX_CLASS_DESC' , 'Wählen Sie den MwSt.-Satz für diese Versandart aus.');
-define('MODULE_SHIPPING_DP_ZONE_TITLE' , 'Versand Zone');
-define('MODULE_SHIPPING_DP_ZONE_DESC' , 'Wenn Sie eine Zone auswählen, wird diese Versandart nur in dieser Zone angeboten.');
-define('MODULE_SHIPPING_DP_SORT_ORDER_TITLE' , 'Reihenfolge der Anzeige');
-define('MODULE_SHIPPING_DP_SORT_ORDER_DESC' , 'Niedrigste wird zuerst angezeigt.');
-define('MODULE_SHIPPING_DP_ALLOWED_TITLE' , 'Einzelne Versandzonen');
-define('MODULE_SHIPPING_DP_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand möglich sein soll. zb AT,DE');
 define('MODULE_SHIPPING_DP_COUNTRIES_1_TITLE' , 'DP Zone 1 Countries');
 define('MODULE_SHIPPING_DP_COUNTRIES_1_DESC' , 'Comma separated list of two character ISO country codes that are part of Zone 1');
 define('MODULE_SHIPPING_DP_COST_1_TITLE' , 'DP Zone 1 Shipping Table');
@@ -64,4 +55,15 @@ define('MODULE_SHIPPING_DP_COUNTRIES_6_TITLE' , 'DP Zone 6 Countries');
 define('MODULE_SHIPPING_DP_COUNTRIES_6_DESC' , 'Comma separated list of two character ISO country codes that are part of Zone 6');
 define('MODULE_SHIPPING_DP_COST_6_TITLE' , 'DP Zone 6 Shipping Table');
 define('MODULE_SHIPPING_DP_COST_6_DESC' , 'Shipping rates to Zone 6 destinations based on a range of order weights. Example: 0-3:8.50,3-7:10.50,... Weights greater than 0 and less than or equal to 3 would cost 5.62 for Zone 6 destinations.');
+
+define('MODULE_SHIPPING_DP_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_DP_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_DP_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_DP_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_DP_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_DP_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_DP_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_DP_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_DP_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_DP_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

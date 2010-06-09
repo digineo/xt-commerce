@@ -2,7 +2,7 @@
 
 
 /* -----------------------------------------------------------------------------------------
-   $Id: login.php 1143 2005-08-11 11:58:59Z gwinger $   
+   $Id: login.php 97 2007-01-17 15:19:56Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -55,7 +55,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 		if (!xtc_validate_password($password, $check_customer['customers_password'])) {
 			$_GET['login'] = 'fail';
 			$info_message = TEXT_LOGIN_ERROR;
-		} else {
+		} else {			
 			if (SESSION_RECREATE == 'True') {
 				xtc_session_recreate();
 			}
@@ -71,6 +71,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 			$_SESSION['customer_default_address_id'] = $check_customer['customers_default_address_id'];
 			$_SESSION['customer_country_id'] = $check_country['entry_country_id'];
 			$_SESSION['customer_zone_id'] = $check_country['entry_zone_id'];
+			$_SESSION['customer_email_address'] = $check_customer['customers_email_address'];
 
 			$date_now = date('Ymd');
 
@@ -78,6 +79,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 			xtc_write_user_info((int) $_SESSION['customer_id']);
 			// restore cart contents
 			$_SESSION['cart']->restore_contents();
+
 			
 			if (is_object($econda)) $econda->_loginUser();
 

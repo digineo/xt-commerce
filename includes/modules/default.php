@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-  $Id: default.php 1292 2005-10-07 16:10:55Z mz $ 
+  $Id: default.php 249 2007-03-08 20:33:38Z mzanier $ 
 
   XT-Commerce - community made shopping
   http://www.xt-commerce.com
@@ -184,6 +184,7 @@ elseif ($category_depth == 'products' || $_GET['manufacturers_id']) {
                                   p.products_tax_class_id,
                                   m.manufacturers_name,
                                   p.products_quantity,
+                                  p.products_average_stock,
                                   p.products_image,
                                   p.products_weight,
                                   pd.products_short_description,
@@ -196,7 +197,7 @@ elseif ($category_depth == 'products' || $_GET['manufacturers_id']) {
                                   p.products_vpe_value,
                                   p.products_discount_allowed,
                                   p.products_tax_class_id
-                                  from ".TABLE_PRODUCTS_DESCRIPTION." pd, ".TABLE_MANUFACTURERS." m, ".TABLE_PRODUCTS_TO_CATEGORIES." p2c, ".TABLE_PRODUCTS." p left join ".TABLE_SPECIALS." s on p.products_id = s.products_id
+                                  from ".TABLE_PRODUCTS_DESCRIPTION." pd, ".TABLE_MANUFACTURERS." m, ".TABLE_PRODUCTS_TO_CATEGORIES." p2c, ".TABLE_PRODUCTS." p
                                   where p.products_status = '1'
                                   and p.manufacturers_id = m.manufacturers_id
                                   and m.manufacturers_id = '".(int) $_GET['manufacturers_id']."'
@@ -220,6 +221,7 @@ elseif ($category_depth == 'products' || $_GET['manufacturers_id']) {
                             p.products_price,
                             m.manufacturers_name,
                             p.products_quantity,
+                            p.products_average_stock,
                             p.products_image,
                             p.products_weight,
                             pd.products_short_description,
@@ -230,7 +232,7 @@ elseif ($category_depth == 'products' || $_GET['manufacturers_id']) {
                             p.products_vpe_value,     
                             p.products_discount_allowed,
                             p.products_tax_class_id
-                            from ".TABLE_PRODUCTS_DESCRIPTION." pd, ".TABLE_MANUFACTURERS." m, ".TABLE_PRODUCTS." p left join ".TABLE_SPECIALS." s on p.products_id = s.products_id
+                            from ".TABLE_PRODUCTS_DESCRIPTION." pd, ".TABLE_MANUFACTURERS." m, ".TABLE_PRODUCTS." p
                             where p.products_status = '1'
                             and pd.products_id = p.products_id
                             ".$group_check."
@@ -263,6 +265,7 @@ elseif ($category_depth == 'products' || $_GET['manufacturers_id']) {
                                   p.products_id,
                                   m.manufacturers_name,
                                   p.products_quantity,
+                                  p.products_average_stock,
                                   p.products_image,
                                   p.products_weight,
                                   pd.products_short_description,
@@ -274,7 +277,7 @@ elseif ($category_depth == 'products' || $_GET['manufacturers_id']) {
                                   p.products_vpe_value,                           
                                   p.products_discount_allowed,
                                   p.products_tax_class_id
-                                  from  ".TABLE_PRODUCTS_DESCRIPTION." pd, ".TABLE_MANUFACTURERS." m, ".TABLE_PRODUCTS_TO_CATEGORIES." p2c, ".TABLE_PRODUCTS." p left join ".TABLE_SPECIALS." s on p.products_id = s.products_id
+                                  from  ".TABLE_PRODUCTS_DESCRIPTION." pd, ".TABLE_MANUFACTURERS." m, ".TABLE_PRODUCTS_TO_CATEGORIES." p2c, ".TABLE_PRODUCTS." p
                                   where p.products_status = '1'
                                   and p.manufacturers_id = m.manufacturers_id
                                   and m.manufacturers_id = '".(int) $_GET['filter_id']."'
@@ -305,6 +308,7 @@ elseif ($category_depth == 'products' || $_GET['manufacturers_id']) {
                                   pd.products_name,
                                   m.manufacturers_name,
                                   p.products_quantity,
+                                  p.products_average_stock,
                                   p.products_image,
                                   p.products_weight,
                                   pd.products_short_description,
@@ -318,7 +322,6 @@ elseif ($category_depth == 'products' || $_GET['manufacturers_id']) {
                                   p.products_discount_allowed,
                                   p.products_tax_class_id
                                   from  ".TABLE_PRODUCTS_DESCRIPTION." pd, ".TABLE_PRODUCTS_TO_CATEGORIES." p2c, ".TABLE_PRODUCTS." p left join ".TABLE_MANUFACTURERS." m on p.manufacturers_id = m.manufacturers_id
-                                  left join ".TABLE_SPECIALS." s on p.products_id = s.products_id
                                   where p.products_status = '1'
                                   and p.products_id = p2c.products_id
                                   and pd.products_id = p2c.products_id

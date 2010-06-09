@@ -63,7 +63,7 @@ var $PRZ; //Enthält die Prüfziffer
 ////
 // Diese function gibt die Bankinformationen aus der Datenbank zurück*/
   function db_query($blz) {
-    $blz_query = xtc_db_query("SELECT * from banktransfer WHERE blz = '" . $blz . "'");
+    $blz_query = xtc_db_query("SELECT * from banktransfer_blz WHERE blz = '" . $blz . "'");
     if (xtc_db_num_rows($blz_query)){
       $data = xtc_db_fetch_array ($blz_query);
     }else
@@ -299,7 +299,7 @@ var $PRZ; //Enthält die Prüfziffer
   }  /* End of Mark08 */
 
   function Mark09($AccountNo) {
-    $Mark09 = 2;
+    $Mark09 = 0;
     return $Mark09;
   }  /* End of Mark09 */
 
@@ -1985,7 +1985,7 @@ function MarkB5($AccountNo) {
 /* --- Added FrankM 20060112 --- */
 function MarkB6($AccountNo,$BLZ) {
         $AccountNo = $this->ExpandAccount($AccountNo);
-        if (substr($AccountNo,0,1) <= "9"){
+        if (strlen($AccountNo) > 9){
                 $RetVal = $this->Mark20($AccountNo);
         } else {
                 $RetVal = $this->Mark53($AccountNo,$BLZ);
@@ -2081,6 +2081,40 @@ function MarkC0($AccountNo,$BLZ) {
         return $RetVal;
 }  /* End of MarkC0 */
 
+/* --- Added Raimund 20060703 --- */
+function MarkC1($AccountNo) {
+  $AccountNo = $this->ExpandAccount($AccountNo);
+  $markC1 = 1;
+  if($AccountNo{0} != '5') { // Variante 1
+    // Methode 17, Modulus 11, Gewichtung 1, 2, 1, 2, 1, 2
+    $markC1 = $this->Mark17($AccountNo);
+  } else { // Variante 2
+    $weights = '121212121';
+    $sum = 0;
+    for($i = 0; $i < 9; $i++) {
+      $sum += $this->CrossSum($AccountNo{$i} * $weights{$i});
+    }
+    $sum--;
+    $prz = $sum % 11;
+    if(0 < $prz) {
+      $prz = 10 - $prz;
+    }
+    if($prz == $AccountNo{9}) { // 10. Stelle ist PRZ
+      $markC1 = 0;
+    }
+  }
+  return $markC1;
+}
+
+/* --- Added Raimund 20060703 --- */
+function MarkC2($AccountNo) {
+  $AccountNo = $this->ExpandAccount($AccountNo);
+  $markC2 = $this->Mark22($AccountNo);
+  if(0 != $markC2) {
+    $markC2 = $this->Mark00($AccountNo);
+  }
+  return $markC2;
+}
 /*---------- END OF METHODS ---------- */
 
 /* -------- Dies ist die wichtigste function ---------- */

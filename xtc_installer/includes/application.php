@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: application.php 1119 2005-07-25 22:19:50Z novalis $   
+   $Id: application.php 270 2007-03-21 15:47:17Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -15,21 +15,25 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 // Some FileSystem Directories
-  if (!defined('DIR_FS_DOCUMENT_ROOT')) {
-      define('DIR_FS_DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
-      $local_install_path=str_replace('/xtc_installer','',$_SERVER['PHP_SELF']);
-      $local_install_path=str_replace('index.php','',$local_install_path);
-      $local_install_path=str_replace('install_step1.php','',$local_install_path);
-      $local_install_path=str_replace('install_step2.php','',$local_install_path);
-      $local_install_path=str_replace('install_step3.php','',$local_install_path);
-      $local_install_path=str_replace('install_step4.php','',$local_install_path);
-      $local_install_path=str_replace('install_step5.php','',$local_install_path);
-      $local_install_path=str_replace('install_step6.php','',$local_install_path);
-      $local_install_path=str_replace('install_step7.php','',$local_install_path);
-      $local_install_path=str_replace('install_finished.php','',$local_install_path);
-      define('DIR_FS_CATALOG', DIR_FS_DOCUMENT_ROOT . $local_install_path);
+
+  $_www_location = 'http://' . $_SERVER['HTTP_HOST'];
+
+  if (isset($_SERVER['REQUEST_URI']) && (empty($_SERVER['REQUEST_URI']) === false)) {
+    $_www_location .= $_SERVER['REQUEST_URI'];
+  } else {
+    $_www_location .= $_SERVER['SCRIPT_FILENAME'];
   }
-  if (!defined('DIR_FS_INC')) define('DIR_FS_INC', DIR_FS_CATALOG.'inc/');
+
+  $_www_location = substr($_www_location, 0, strpos($_www_location, 'xtc_installer'));
+
+  $dir = dirname(__FILE__) . '/../../';
+  $_dir_fs_www_root = str_replace('\\', '/', realpath($dir)).'/';
+
+  if (!defined('DIR_FS_CATALOG')) define('DIR_FS_CATALOG',$_dir_fs_www_root);
+  if (!defined('DIR_FS_INC')) define('DIR_FS_INC', $_dir_fs_www_root.'inc/');
+  
+
+
 
 // include
   //require('../includes/functions/validations.php');

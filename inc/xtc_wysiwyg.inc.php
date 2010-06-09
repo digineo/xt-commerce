@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-    $Id: fckconfig.inc.php 923 2005-05-08 03:32:43Z hhgag $   
+    $Id: xtc_wysiwyg.inc.php 86 2007-01-14 16:18:44Z mzanier $   
    
     XT-Commerce - community made shopping
     http://www.xt-commerce.com/
@@ -15,8 +15,8 @@
 
 function xtc_wysiwyg($type, $lang, $langID = '') {
 
-$js_src = DIR_WS_MODULES .'fckeditor/fckeditor.js';
-$path = DIR_WS_MODULES .'fckeditor/';
+$js_src = DIR_WS_MODULES .FCK_VERSION.'/fckeditor.js';
+$path = DIR_WS_MODULES.FCK_VERSION.'/';
 $filemanager = DIR_WS_ADMIN.'fck_wrapper.php?Connector='.DIR_WS_FILEMANAGER.'connectors/php/connector.php&ServerPath='. DIR_WS_CATALOG;
 $file_path = '&Type=media';
 $image_path = '&Type=images';

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_total.php 1002 2005-07-10 16:11:37Z mz $   
+   $Id: ot_total.php 8 2006-12-08 19:44:10Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

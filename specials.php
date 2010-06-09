@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: specials.php 1292 2005-10-07 16:10:55Z mz $   
+   $Id: specials.php 208 2007-02-27 08:03:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -35,7 +35,9 @@ if (GROUP_CHECK == 'true') {
 $specials_query_raw = "select p.products_id,
                                 pd.products_name,
                                 p.products_price,
-                                p.products_tax_class_id,p.products_shippingtime,
+                               	p.products_quantity,
+                                p.products_average_stock,
+                                p.products_tax_class_id,p.products_shippingtime,s.expires_date,
                                 p.products_image,p.products_vpe_status,p.products_vpe_value,p.products_vpe,p.products_fsk18,
                                 s.specials_new_products_price from ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." pd, ".TABLE_SPECIALS." s
                                 where p.products_status = '1'

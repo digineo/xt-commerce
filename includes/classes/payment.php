@@ -43,7 +43,7 @@
 
         $include_modules = array();
 
-        if ( (xtc_not_null($module)) && (in_array($module . '.' . substr($PHP_SELF, (strrpos($PHP_SELF, '.')+1)), $this->modules)) ) {
+        if ( (xtc_not_null($module)) && (in_array($module . '.php' , $this->modules))) {
           $this->selected_module = $module;
 
           $include_modules[] = array('class' => $module, 'file' => $module . '.php');
@@ -144,7 +144,7 @@
             $js .= $GLOBALS[$class]->javascript_validation();
           }
         }
-        if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
+        if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true' && $_GET['step']!='step2') {
         $js .= "\n" . '  if (!document.getElementById("checkout_payment").conditions.checked) {' . "\n" .
                '    error_message = error_message + unescape("' . xtc_js_lang(ERROR_CONDITIONS_NOT_ACCEPTED) . '");' . "\n" .
                '    error = 1;' . "\n" .

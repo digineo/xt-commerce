@@ -1,6 +1,6 @@
 <?php
     /*
-        $Id: uos_giropay_modul.php 2006-07-07 15:20:00a $
+        $Id: uos_giropay_modul.php 12 2006-12-16 18:59:00Z mzanier $
         
    xt:Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: account.php 1124 2005-07-28 08:50:04Z mz $
+   $Id: account.php 4 2006-11-28 14:38:03Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -45,10 +45,25 @@ while ($i < $max) {
 	
 	$product_history_query = xtDBquery("select * from ".TABLE_PRODUCTS." p, ".TABLE_PRODUCTS_DESCRIPTION." pd where p.products_id=pd.products_id and pd.language_id='".(int) $_SESSION['languages_id']."' and p.products_status = '1' and p.products_id = '".$_SESSION['tracking']['products_history'][$i]."'");
 	$history_product = xtc_db_fetch_array($product_history_query, true);
-$cpath = xtc_get_product_path($_SESSION['tracking']['products_history'][$i]);
+	$cpath = xtc_get_product_path($_SESSION['tracking']['products_history'][$i]);
+	
+	$cat = xtc_parse_category_path($cpath);
+	$cat = implode('_', $cat);
+	$cat_id = $cat[(sizeof($cat) - 1)];
+	$categories_query = "select
+				                                        cd.categories_name
+				                                        from ".TABLE_CATEGORIES_DESCRIPTION." cd,
+				                                        ".TABLE_CATEGORIES." c
+				                                        where cd.categories_id = '".$cat_id."'
+				                                        and c.categories_id=cd.categories_id
+				                                        and cd.language_id='".(int) $_SESSION['languages_id']."'";
+	
+	$categories_query=xtc_db_query($categories_query);
+	$categories = xtc_db_fetch_array($categories_query);
+	
 	if ($history_product['products_status'] != 0) {
 
-		$history_product = array_merge($history_product,array('cat_url' => xtc_href_link(FILENAME_DEFAULT, 'cPath='.$cpath)));
+		$history_product = array_merge($history_product,array('cat_url' => xtc_href_link(FILENAME_DEFAULT, xtc_category_link($cat_id,$categories['categories_name']))));
 		$products_history[] = $product->buildDataArray($history_product);
 	}
 	$i ++;

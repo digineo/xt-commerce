@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: create_guest_account.php 1311 2005-10-18 12:30:40Z mz $
+   $Id: create_guest_account.php 176 2007-02-15 09:01:43Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -17,7 +17,7 @@
    
    Guest account idea by Ingo T. <xIngox@web.de>
    ---------------------------------------------------------------------------------------*/
-
+define('DISPLAY_PRIVACY_CHECK','true');
 require ('includes/application_top.php');
 
 if (ACCOUNT_OPTIONS == 'account')
@@ -30,18 +30,18 @@ if (isset ($_SESSION['customer_id'])) {
 // create smarty elements
 $smarty = new Smarty;
 // include boxes
-require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
+require (DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/source/boxes.php');
 // include needed functions
-require_once (DIR_FS_INC.'xtc_draw_radio_field.inc.php');
-require_once (DIR_FS_INC.'xtc_get_country_list.inc.php');
-require_once (DIR_FS_INC.'xtc_draw_checkbox_field.inc.php');
-require_once (DIR_FS_INC.'xtc_draw_password_field.inc.php');
-require_once (DIR_FS_INC.'xtc_validate_email.inc.php');
-require_once (DIR_FS_INC.'xtc_encrypt_password.inc.php');
-require_once (DIR_FS_INC.'xtc_create_password.inc.php');
-require_once (DIR_FS_INC.'xtc_draw_hidden_field.inc.php');
-require_once (DIR_FS_INC.'xtc_draw_pull_down_menu.inc.php');
-require_once (DIR_FS_INC.'xtc_get_geo_zone_code.inc.php');
+require_once (DIR_FS_INC . 'xtc_draw_radio_field.inc.php');
+require_once (DIR_FS_INC . 'xtc_get_country_list.inc.php');
+require_once (DIR_FS_INC . 'xtc_draw_checkbox_field.inc.php');
+require_once (DIR_FS_INC . 'xtc_draw_password_field.inc.php');
+require_once (DIR_FS_INC . 'xtc_validate_email.inc.php');
+require_once (DIR_FS_INC . 'xtc_encrypt_password.inc.php');
+require_once (DIR_FS_INC . 'xtc_create_password.inc.php');
+require_once (DIR_FS_INC . 'xtc_draw_hidden_field.inc.php');
+require_once (DIR_FS_INC . 'xtc_draw_pull_down_menu.inc.php');
+require_once (DIR_FS_INC . 'xtc_get_geo_zone_code.inc.php');
 
 // needs to be included earlier to set the success message in the messageStack
 //  require(DIR_WS_LANGUAGES . $_SESSION['language'] . '/' . FILENAME_CREATE_ACCOUNT);
@@ -72,10 +72,11 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	$country = xtc_db_prepare_input($_POST['country']);
 	$telephone = xtc_db_prepare_input($_POST['telephone']);
 	$fax = xtc_db_prepare_input($_POST['fax']);
-	//    $newsletter = xtc_db_prepare_input($_POST['newsletter']);
+	$newsletter = xtc_db_prepare_input($_POST['newsletter']);
 	$newsletter = '0';
 	$password = xtc_db_prepare_input($_POST['password']);
 	$confirmation = xtc_db_prepare_input($_POST['confirmation']);
+	$privacy = xtc_db_prepare_input($_POST['privacy']);
 
 	$error = false;
 
@@ -107,19 +108,30 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 		}
 	}
 
-// New VAT Check
-	require_once(DIR_WS_CLASSES.'vat_validation.php');
-	$vatID = new vat_validation($vat, '', '', $country,true);
+	// New VAT Check
+	require_once (DIR_WS_CLASSES . 'vat_validation.php');
+	$vatID = new vat_validation($vat, '', '', $country, true);
 
 	$customers_status = $vatID->vat_info['status'];
 	$customers_vat_id_status = $vatID->vat_info['vat_id_status'];
 	$error = $vatID->vat_info['error'];
 
-	if($error==1){
-	$messageStack->add('create_account', ENTRY_VAT_ERROR);
-	$error = true;
-  }
-// New VAT CHECK END
+	if ($error == 1) {
+		$messageStack->add('create_account', ENTRY_VAT_ERROR);
+		$error = true;
+	}
+	// New VAT CHECK END
+
+	if (strlen($email_address) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
+		$error = true;
+
+		$messageStack->add('create_account', ENTRY_EMAIL_ADDRESS_ERROR);
+	}
+	if (xtc_validate_email($email_address) == false) {
+		$error = true;
+
+		$messageStack->add('create_account', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
+	}
 
 	if (strlen($street_address) < ENTRY_STREET_ADDRESS_MIN_LENGTH) {
 		$error = true;
@@ -147,13 +159,13 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 
 	if (ACCOUNT_STATE == 'true') {
 		$zone_id = 0;
-		$check_query = xtc_db_query("select count(*) as total from ".TABLE_ZONES." where zone_country_id = '".(int) $country."'");
+		$check_query = xtc_db_query("select count(*) as total from " . TABLE_ZONES . " where zone_country_id = '" . (int) $country . "'");
 		$check = xtc_db_fetch_array($check_query);
 		$entry_state_has_zones = ($check['total'] > 0);
 		if ($entry_state_has_zones == true) {
-			$zone_query = xtc_db_query("select distinct zone_id from ".TABLE_ZONES." where zone_country_id = '".(int) $country."' and (zone_name like '".xtc_db_input($state)."%' or zone_code like '%".xtc_db_input($state)."%')");
+			$zone_query = xtc_db_query("select distinct zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int) $country . "' and (zone_name like '" . xtc_db_input($state) . "%' or zone_code like '%" . xtc_db_input($state) . "%')");
 			if (xtc_db_num_rows($zone_query) > 1) {
-				$zone_query = xtc_db_query("select distinct zone_id from ".TABLE_ZONES." where zone_country_id = '".(int) $country."' and zone_name = '".xtc_db_input($state)."'");
+				$zone_query = xtc_db_query("select distinct zone_id from " . TABLE_ZONES . " where zone_country_id = '" . (int) $country . "' and zone_name = '" . xtc_db_input($state) . "'");
 			}
 			if (xtc_db_num_rows($zone_query) >= 1) {
 				$zone = xtc_db_fetch_array($zone_query);
@@ -177,6 +189,15 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 
 		$messageStack->add('create_account', ENTRY_TELEPHONE_NUMBER_ERROR);
 	}
+	
+	if (DISPLAY_PRIVACY_CHECK == 'true') {
+		if(!isset($privacy) || empty($privacy) || $privacy!='privacy') {
+		$error = true;
+		
+		$messageStack->add('create_account', ENTRY_PRIVACY_ERROR);
+		}
+	}
+	
 
 	if ($customers_status == 0 || !$customers_status)
 		$customers_status = DEFAULT_CUSTOMERS_STATUS_ID_GUEST;
@@ -185,7 +206,19 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	if (!$newsletter)
 		$newsletter = 0;
 	if ($error == false) {
-		$sql_data_array = array ('customers_vat_id' => $vat, 'customers_vat_id_status' => $customers_vat_id_status, 'customers_status' => $customers_status, 'customers_firstname' => $firstname, 'customers_lastname' => $lastname, 'customers_email_address' => $email_address, 'customers_telephone' => $telephone, 'customers_fax' => $fax, 'customers_newsletter' => $newsletter, 'account_type' => '1', 'customers_password' => xtc_encrypt_password($password));
+		$sql_data_array = array (
+			'customers_vat_id' => $vat,
+			'customers_vat_id_status' => $customers_vat_id_status,
+			'customers_status' => $customers_status,
+			'customers_firstname' => $firstname,
+			'customers_lastname' => $lastname,
+			'customers_email_address' => $email_address,
+			'customers_telephone' => $telephone,
+			'customers_fax' => $fax,
+			'customers_newsletter' => $newsletter,
+			'account_type' => '1',
+			'customers_password' => xtc_encrypt_password($password
+		), 'customers_date_added' => 'now()', 'customers_last_modified' => 'now()');
 
 		$_SESSION['account_type'] = '1';
 
@@ -198,7 +231,15 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 
 		$_SESSION['customer_id'] = xtc_db_insert_id();
 
-		$sql_data_array = array ('customers_id' => $_SESSION['customer_id'], 'entry_firstname' => $firstname, 'entry_lastname' => $lastname, 'entry_street_address' => $street_address, 'entry_postcode' => $postcode, 'entry_city' => $city, 'entry_country_id' => $country);
+		$sql_data_array = array (
+			'customers_id' => $_SESSION['customer_id'],
+			'entry_firstname' => $firstname,
+			'entry_lastname' => $lastname,
+			'entry_street_address' => $street_address,
+			'entry_postcode' => $postcode,
+			'entry_city' => $city,
+			'entry_country_id' => $country
+		);
 
 		if (ACCOUNT_GENDER == 'true')
 			$sql_data_array['entry_gender'] = $gender;
@@ -220,9 +261,9 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 
 		$address_id = xtc_db_insert_id();
 
-		xtc_db_query("update ".TABLE_CUSTOMERS." set customers_default_address_id = '".$address_id."' where customers_id = '".(int) $_SESSION['customer_id']."'");
+		xtc_db_query("update " . TABLE_CUSTOMERS . " set customers_default_address_id = '" . $address_id . "' where customers_id = '" . (int) $_SESSION['customer_id'] . "'");
 
-		xtc_db_query("insert into ".TABLE_CUSTOMERS_INFO." (customers_info_id, customers_info_number_of_logons, customers_info_date_account_created) values ('".(int) $_SESSION['customer_id']."', '0', now())");
+		xtc_db_query("insert into " . TABLE_CUSTOMERS_INFO . " (customers_info_id, customers_info_number_of_logons, customers_info_date_account_created) values ('" . (int) $_SESSION['customer_id'] . "', '0', now())");
 
 		if (SESSION_RECREATE == 'True') {
 			xtc_session_recreate();
@@ -238,27 +279,33 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 		// restore cart contents
 		$_SESSION['cart']->restore_contents();
 
-if (isset ($_SESSION[tracking]['refID'])){
-      $campaign_check_query_raw = "SELECT *
-			                            FROM ".TABLE_CAMPAIGNS." 
-			                            WHERE campaigns_refID = '".$_SESSION[tracking][refID]."'";
+		if (isset ($_SESSION[tracking]['refID'])) {
+			$campaign_check_query_raw = "SELECT *
+						                            FROM " . TABLE_CAMPAIGNS . " 
+						                            WHERE campaigns_refID = '" . $_SESSION[tracking][refID] . "'";
 			$campaign_check_query = xtc_db_query($campaign_check_query_raw);
-		if (xtc_db_num_rows($campaign_check_query) > 0) {
-			$campaign = xtc_db_fetch_array($campaign_check_query);
-			$refID = $campaign['campaigns_id'];
+			if (xtc_db_num_rows($campaign_check_query) > 0) {
+				$campaign = xtc_db_fetch_array($campaign_check_query);
+				$refID = $campaign['campaigns_id'];
 			} else {
-			$refID = 0;
-		            }
-			
-			 xtc_db_query("update " . TABLE_CUSTOMERS . " set
-                                 refferers_id = '".$refID."'
-                                 where customers_id = '".(int) $_SESSION['customer_id']."'");
-			
-			$leads = $campaign['campaigns_leads'] + 1 ;
-		     xtc_db_query("update " . TABLE_CAMPAIGNS . " set
-		                         campaigns_leads = '".$leads."'
-                                 where campaigns_id = '".$refID."'");		
-}
+				$refID = 0;
+			}
+
+			xtc_db_query("update " . TABLE_CUSTOMERS . " set
+			                                 refferers_id = '" . $refID . "'
+			                                 where customers_id = '" . (int) $_SESSION['customer_id'] . "'");
+
+			$leads = $campaign['campaigns_leads'] + 1;
+			xtc_db_query("update " . TABLE_CAMPAIGNS . " set
+					                         campaigns_leads = '" . $leads . "'
+			                                 where campaigns_id = '" . $refID . "'");
+		}
+
+		if ($newsletter == 1) {
+			require_once (DIR_WS_CLASSES . 'class.newsletter.php');
+			$newsletter = new newsletter;
+			$newsletter->AddUserAuto($email_address);
+		}
 
 		xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
 	}
@@ -266,64 +313,101 @@ if (isset ($_SESSION[tracking]['refID'])){
 
 $breadcrumb->add(NAVBAR_TITLE_CREATE_GUEST_ACCOUNT, xtc_href_link(FILENAME_CREATE_GUEST_ACCOUNT, '', 'SSL'));
 
-require (DIR_WS_INCLUDES.'header.php');
+require (DIR_WS_INCLUDES . 'header.php');
 
 if ($messageStack->size('create_account') > 0) {
 	$smarty->assign('error', $messageStack->output('create_account'));
 
 }
-$smarty->assign('FORM_ACTION', xtc_draw_form('create_account', xtc_href_link(FILENAME_CREATE_GUEST_ACCOUNT, '', 'SSL'), 'post', 'onsubmit="return check_form(create_account);"').xtc_draw_hidden_field('action', 'process'));
+$smarty->assign('FORM_ACTION', xtc_draw_form('create_account', xtc_href_link(FILENAME_CREATE_GUEST_ACCOUNT, '', 'SSL'), 'post', 'onsubmit="return check_form(create_account);"') . xtc_draw_hidden_field('action', 'process'));
 
 if (ACCOUNT_GENDER == 'true') {
 	$smarty->assign('gender', '1');
 
-	$smarty->assign('INPUT_MALE', xtc_draw_radio_field(array ('name' => 'gender', 'suffix' => MALE), 'm'));
-	$smarty->assign('INPUT_FEMALE', xtc_draw_radio_field(array ('name' => 'gender', 'suffix' => FEMALE, 'text' => (xtc_not_null(ENTRY_GENDER_TEXT) ? '<span class="inputRequirement">'.ENTRY_GENDER_TEXT.'</span>' : '')), 'f'));
+	$smarty->assign('INPUT_MALE', xtc_draw_radio_field(array (
+		'name' => 'gender',
+		'suffix' => MALE
+	), 'm'));
+	$smarty->assign('INPUT_FEMALE', xtc_draw_radio_field(array (
+		'name' => 'gender',
+		'suffix' => FEMALE,
+		'text' => (xtc_not_null(ENTRY_GENDER_TEXT
+	) ? '<span class="inputRequirement">' . ENTRY_GENDER_TEXT . '</span>' : '')), 'f'));
 
 } else {
 	$smarty->assign('gender', '0');
 }
 
-$smarty->assign('INPUT_FIRSTNAME', xtc_draw_input_fieldNote(array ('name' => 'firstname', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="inputRequirement">'.ENTRY_FIRST_NAME_TEXT.'</span>' : ''))));
-$smarty->assign('INPUT_LASTNAME', xtc_draw_input_fieldNote(array ('name' => 'lastname', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="inputRequirement">'.ENTRY_LAST_NAME_TEXT.'</span>' : ''))));
+$smarty->assign('INPUT_FIRSTNAME', xtc_draw_input_fieldNote(array (
+	'name' => 'firstname',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_FIRST_NAME_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT . '</span>' : ''))));
+$smarty->assign('INPUT_LASTNAME', xtc_draw_input_fieldNote(array (
+	'name' => 'lastname',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_LAST_NAME_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_LAST_NAME_TEXT . '</span>' : ''))));
 
 if (ACCOUNT_DOB == 'true') {
 	$smarty->assign('birthdate', '1');
 
-	$smarty->assign('INPUT_DOB', xtc_draw_input_fieldNote(array ('name' => 'dob', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_DATE_OF_BIRTH_TEXT) ? '<span class="inputRequirement">'.ENTRY_DATE_OF_BIRTH_TEXT.'</span>' : ''))));
+	$smarty->assign('INPUT_DOB', xtc_draw_input_fieldNote(array (
+		'name' => 'dob',
+		'text' => '&nbsp;' . (xtc_not_null(ENTRY_DATE_OF_BIRTH_TEXT
+	) ? '<span class="inputRequirement">' . ENTRY_DATE_OF_BIRTH_TEXT . '</span>' : ''))));
 
 } else {
 	$smarty->assign('birthdate', '0');
 }
 
-$smarty->assign('INPUT_EMAIL', xtc_draw_input_fieldNote(array ('name' => 'email_address', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_EMAIL_ADDRESS_TEXT) ? '<span class="inputRequirement">'.ENTRY_EMAIL_ADDRESS_TEXT.'</span>' : ''))));
+$smarty->assign('INPUT_EMAIL', xtc_draw_input_fieldNote(array (
+	'name' => 'email_address',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_EMAIL_ADDRESS_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_EMAIL_ADDRESS_TEXT . '</span>' : ''))));
 
 if (ACCOUNT_COMPANY == 'true') {
 	$smarty->assign('company', '1');
-	$smarty->assign('INPUT_COMPANY', xtc_draw_input_fieldNote(array ('name' => 'company', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_COMPANY_TEXT) ? '<span class="inputRequirement">'.ENTRY_COMPANY_TEXT.'</span>' : ''))));
+	$smarty->assign('INPUT_COMPANY', xtc_draw_input_fieldNote(array (
+		'name' => 'company',
+		'text' => '&nbsp;' . (xtc_not_null(ENTRY_COMPANY_TEXT
+	) ? '<span class="inputRequirement">' . ENTRY_COMPANY_TEXT . '</span>' : ''))));
 } else {
 	$smarty->assign('company', '0');
 }
 
 if (ACCOUNT_COMPANY_VAT_CHECK == 'true') {
 	$smarty->assign('vat', '1');
-	$smarty->assign('INPUT_VAT', xtc_draw_input_fieldNote(array ('name' => 'vat', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_VAT_TEXT) ? '<span class="inputRequirement">'.ENTRY_VAT_TEXT.'</span>' : ''))));
+	$smarty->assign('INPUT_VAT', xtc_draw_input_fieldNote(array (
+		'name' => 'vat',
+		'text' => '&nbsp;' . (xtc_not_null(ENTRY_VAT_TEXT
+	) ? '<span class="inputRequirement">' . ENTRY_VAT_TEXT . '</span>' : ''))));
 } else {
 	$smarty->assign('vat', '0');
 }
 
-$smarty->assign('INPUT_STREET', xtc_draw_input_fieldNote(array ('name' => 'street_address', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="inputRequirement">'.ENTRY_STREET_ADDRESS_TEXT.'</span>' : ''))));
+$smarty->assign('INPUT_STREET', xtc_draw_input_fieldNote(array (
+	'name' => 'street_address',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_STREET_ADDRESS_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_TEXT . '</span>' : ''))));
 
 if (ACCOUNT_SUBURB == 'true') {
 	$smarty->assign('suburb', '1');
-	$smarty->assign('INPUT_SUBURB', xtc_draw_input_fieldNote(array ('name' => 'suburb', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_SUBURB_TEXT) ? '<span class="inputRequirement">'.ENTRY_SUBURB_TEXT.'</span>' : ''))));
+	$smarty->assign('INPUT_SUBURB', xtc_draw_input_fieldNote(array (
+		'name' => 'suburb',
+		'text' => '&nbsp;' . (xtc_not_null(ENTRY_SUBURB_TEXT
+	) ? '<span class="inputRequirement">' . ENTRY_SUBURB_TEXT . '</span>' : ''))));
 
 } else {
 	$smarty->assign('suburb', '0');
 }
 
-$smarty->assign('INPUT_CODE', xtc_draw_input_fieldNote(array ('name' => 'postcode', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_POST_CODE_TEXT) ? '<span class="inputRequirement">'.ENTRY_POST_CODE_TEXT.'</span>' : ''))));
-$smarty->assign('INPUT_CITY', xtc_draw_input_fieldNote(array ('name' => 'city', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_CITY_TEXT) ? '<span class="inputRequirement">'.ENTRY_CITY_TEXT.'</span>' : ''))));
+$smarty->assign('INPUT_CODE', xtc_draw_input_fieldNote(array (
+	'name' => 'postcode',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_POST_CODE_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_POST_CODE_TEXT . '</span>' : ''))));
+$smarty->assign('INPUT_CITY', xtc_draw_input_fieldNote(array (
+	'name' => 'city',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_CITY_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_CITY_TEXT . '</span>' : ''))));
 
 if (ACCOUNT_STATE == 'true') {
 	$smarty->assign('state', '1');
@@ -331,16 +415,28 @@ if (ACCOUNT_STATE == 'true') {
 	if ($process == true) {
 		if ($entry_state_has_zones == true) {
 			$zones_array = array ();
-			$zones_query = xtc_db_query("select zone_name from ".TABLE_ZONES." where zone_country_id = '".(int) $country."' order by zone_name");
+			$zones_query = xtc_db_query("select zone_name from " . TABLE_ZONES . " where zone_country_id = '" . (int) $country . "' order by zone_name");
 			while ($zones_values = xtc_db_fetch_array($zones_query)) {
-				$zones_array[] = array ('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
+				$zones_array[] = array (
+					'id' => $zones_values['zone_name'],
+					'text' => $zones_values['zone_name']
+				);
 			}
-			$state_input = xtc_draw_pull_down_menuNote(array ('name' => 'state', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_STATE_TEXT) ? '<span class="inputRequirement">'.ENTRY_STATE_TEXT.'</span>' : '')), $zones_array);
+			$state_input = xtc_draw_pull_down_menuNote(array (
+				'name' => 'state',
+				'text' => '&nbsp;' . (xtc_not_null(ENTRY_STATE_TEXT
+			) ? '<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>' : '')), $zones_array);
 		} else {
-			$state_input = xtc_draw_input_fieldNote(array ('name' => 'state', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_STATE_TEXT) ? '<span class="inputRequirement">'.ENTRY_STATE_TEXT.'</span>' : '')));
+			$state_input = xtc_draw_input_fieldNote(array (
+				'name' => 'state',
+				'text' => '&nbsp;' . (xtc_not_null(ENTRY_STATE_TEXT
+			) ? '<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>' : '')));
 		}
 	} else {
-		$state_input = xtc_draw_input_fieldNote(array ('name' => 'state', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_STATE_TEXT) ? '<span class="inputRequirement">'.ENTRY_STATE_TEXT.'</span>' : '')));
+		$state_input = xtc_draw_input_fieldNote(array (
+			'name' => 'state',
+			'text' => '&nbsp;' . (xtc_not_null(ENTRY_STATE_TEXT
+		) ? '<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>' : '')));
 	}
 
 	$smarty->assign('INPUT_STATE', $state_input);
@@ -354,21 +450,35 @@ if ($_POST['country']) {
 	$selected = STORE_COUNTRY;
 }
 
-$smarty->assign('SELECT_COUNTRY', xtc_get_country_list(array ('name' => 'country', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">'.ENTRY_COUNTRY_TEXT.'</span>' : '')), $selected));
-$smarty->assign('INPUT_TEL', xtc_draw_input_fieldNote(array ('name' => 'telephone', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="inputRequirement">'.ENTRY_TELEPHONE_NUMBER_TEXT.'</span>' : ''))));
-$smarty->assign('INPUT_FAX', xtc_draw_input_fieldNote(array ('name' => 'fax', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="inputRequirement">'.ENTRY_FAX_NUMBER_TEXT.'</span>' : ''))));
-//  $smarty->assign('CHECKBOX_NEWSLETTER',xtc_draw_checkbox_field('newsletter', '1') . '&nbsp;' . (xtc_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">' . ENTRY_NEWSLETTER_TEXT . '</span>': ''));
+$smarty->assign('SELECT_COUNTRY', xtc_get_country_list(array (
+	'name' => 'country',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_COUNTRY_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>' : '')), $selected));
+$smarty->assign('INPUT_TEL', xtc_draw_input_fieldNote(array (
+	'name' => 'telephone',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_TELEPHONE_NUMBER_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_TELEPHONE_NUMBER_TEXT . '</span>' : ''))));
+$smarty->assign('INPUT_FAX', xtc_draw_input_fieldNote(array (
+	'name' => 'fax',
+	'text' => '&nbsp;' . (xtc_not_null(ENTRY_FAX_NUMBER_TEXT
+) ? '<span class="inputRequirement">' . ENTRY_FAX_NUMBER_TEXT . '</span>' : ''))));
+ 
+$smarty->assign('CHECKBOX_NEWSLETTER', xtc_draw_checkbox_field('newsletter', '1').'&nbsp;'. (xtc_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">'.ENTRY_NEWSLETTER_TEXT.'</span>' : ''));
+if (DISPLAY_PRIVACY_CHECK == 'true') {
+$smarty->assign('PRIVACY_CHECKBOX', '<input type="checkbox" value="privacy" name="privacy" />');
+$smarty->assign('PRIVACY_LINK', $main->getContentLink(2, MORE_INFO));
+}
 $smarty->assign('FORM_END', '</form>');
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;
 $smarty->assign('BUTTON_SUBMIT', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
-$main_content = $smarty->fetch(CURRENT_TEMPLATE.'/module/create_account_guest.html');
+$main_content = $smarty->fetch(CURRENT_TEMPLATE . '/module/create_account_guest.html');
 
 $smarty->assign('language', $_SESSION['language']);
 $smarty->assign('main_content', $main_content);
 $smarty->caching = 0;
 if (!defined(RM))
 	$smarty->load_filter('output', 'note');
-$smarty->display(CURRENT_TEMPLATE.'/index.html');
+$smarty->display(CURRENT_TEMPLATE . '/index.html');
 include ('includes/application_bottom.php');
 ?>

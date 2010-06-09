@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: print_order.php 1185 2005-08-26 15:16:31Z mz $   
+   $Id: print_order.php 300 2007-03-30 07:07:54Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -56,6 +56,7 @@ if ($_SESSION['customer_id'] == $order_check['customers_id']) {
 	$smarty->assign('DATE', xtc_date_long($order->info['date_purchased']));
 	$path = DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/';
 	$smarty->assign('tpl_path', $path);
+	$smarty->assign('charset',$_SESSION['language_charset']);
 
 	// dont allow cache
 	$smarty->caching = false;

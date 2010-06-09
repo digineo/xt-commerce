@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: campaigns.php 1176 2005-08-22 21:44:28Z mz $
+   $Id: campaigns.php 241 2007-03-08 13:33:48Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -192,7 +192,7 @@ class campaigns {
 		$status = "";
 		if ($this->status > 0)
 			$status = " and o.orders_status='".$this->status."'";
-		$sale_query = "SELECT count(*) as sells, SUM(ot.value) as Summe FROM ".TABLE_ORDERS." o, ".TABLE_ORDERS_TOTAL." ot WHERE o.orders_id=ot.orders_id and ot.class='ot_total'".$selection.$status;
+		$sale_query = "SELECT count(*) as sells, SUM(ot.value/o.currency_value) as Summe FROM ".TABLE_ORDERS." o, ".TABLE_ORDERS_TOTAL." ot WHERE o.orders_id=ot.orders_id and ot.class='ot_total'".$selection.$status;
 		$sale_query = xtc_db_query($sale_query);
 		$sale_data = xtc_db_fetch_array($sale_query);
 
@@ -223,11 +223,11 @@ class campaigns {
 		$status = "";
 		if ($this->status > 0)
 			$status = " and o.orders_status='".$this->status."'";
-		$sell_query = "SELECT count(*) as sells, SUM(ot.value) as Summe FROM ".TABLE_ORDERS." o, ".TABLE_ORDERS_TOTAL." ot WHERE o.orders_id=ot.orders_id and ot.class='ot_total' and o.conversion_type='1' and o.refferers_id='".$this->campaign."'".$selection.$status;
+		$sell_query = "SELECT count(*) as sells, SUM(ot.value/o.currency_value) as Summe FROM ".TABLE_ORDERS." o, ".TABLE_ORDERS_TOTAL." ot WHERE o.orders_id=ot.orders_id and ot.class='ot_total' and o.conversion_type='1' and o.refferers_id='".$this->campaign."'".$selection.$status;
 		$sell_query = xtc_db_query($sell_query);
 		$sell_data = xtc_db_fetch_array($sell_query);
 
-		$late_sell_query = "SELECT count(*) as sells, SUM(ot.value) as Summe FROM ".TABLE_ORDERS." o, ".TABLE_ORDERS_TOTAL." ot WHERE o.orders_id=ot.orders_id and ot.class='ot_total' and o.conversion_type='2' and o.refferers_id='".$this->campaign."'".$selection.$status;
+		$late_sell_query = "SELECT count(*) as sells, SUM(ot.value/o.currency_value) as Summe FROM ".TABLE_ORDERS." o, ".TABLE_ORDERS_TOTAL." ot WHERE o.orders_id=ot.orders_id and ot.class='ot_total' and o.conversion_type='2' and o.refferers_id='".$this->campaign."'".$selection.$status;
 		$late_sell_query = xtc_db_query($late_sell_query);
 		$late_sell_data = xtc_db_fetch_array($late_sell_query);
 
@@ -242,7 +242,7 @@ class campaigns {
 			$this->result[$this->counterCMP]['result'][$this->counter]['sum_p'] = 0;
 		} else {
 			$this->result[$this->counterCMP]['result'][$this->counter]['sells_p'] = $sell_data['sells'] / $this->total['sells'] * 100;
-			$this->result[$this->counterCMP]['result'][$this->counter]['late_sells_p'] = $late_sell_data['sells'] / $this->total['sells'] * 100;
+			$this->result[$this->counterCMP]['result'][$this->counter]['late_sells_p'] = round($late_sell_data['sells'] / $this->total['sells'] * 100,2);
 			$this->result[$this->counterCMP]['result'][$this->counter]['sum_p'] = round(($sell_data['Summe']+$late_sell_data['Summe'])/$this->total['sum']*100,2);
 		}
 		$this->result[$this->counterCMP]['result'][$this->counter]['late_sells'] = $late_sell_data['sells'];
@@ -338,7 +338,3 @@ class campaigns {
 
 }
 ?>
-
-
-
-

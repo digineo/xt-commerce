@@ -52,7 +52,7 @@
   define('SQL_CACHEDIR',DIR_FS_CATALOG.'cache/');
 
   // Define the project version
-  define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP2.1');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP2.2 BETA');
 
   // Set the length of the redeem code, the longer the more secure
   define('SECURITY_CODE_LENGTH', '6');
@@ -94,6 +94,7 @@
   define('FILENAME_ORDERS_EDIT', 'orders_edit.php');
   define('FILENAME_POPUP_IMAGE', 'popup_image.php');
   define('FILENAME_PRODUCTS_ATTRIBUTES', 'products_attributes.php');
+  define('FILENAME_PRODUCTS_OPTIONS','products_options.php');
   define('FILENAME_PRODUCTS_EXPECTED', 'products_expected.php');
   define('FILENAME_REVIEWS', 'reviews.php');
   define('FILENAME_SERVER_INFO', 'server_info.php');
@@ -136,6 +137,7 @@
   define('FILENAME_PRODUCTS_VPE','products_vpe.php');
   define('FILENAME_CAMPAIGNS_REPORT','stats_campaigns.php');
   define('FILENAME_XSELL_GROUPS','cross_sell_groups.php');
+  define('FILENAME_STOCKS_TRAFFIC','stocks_traffic.php');
 
   // define the database table names used in the project
   define('TABLE_ADDRESS_BOOK', 'address_book');
@@ -188,6 +190,7 @@
   define('TABLE_PRODUCTS_VPE','products_vpe');
   define('TABLE_PRODUCTS_XSELL','products_xsell');
   define('TABLE_PRODUCTS_XSELL_GROUPS','products_xsell_grp_name');
+  define('TABLE_PRODUCTS_OPTIONS_IMAGES','products_options_images');
   define('TABLE_REVIEWS', 'reviews');
   define('TABLE_REVIEWS_DESCRIPTION', 'reviews_description');
   define('TABLE_SESSIONS', 'sessions');
@@ -215,6 +218,10 @@
   define('TABLE_SHIPPING_STATUS', 'shipping_status');
   define('TABLE_BLACKLIST', 'card_blacklist'); 
   define('TABLE_CAMPAIGNS_IP','campaigns_ip');
+  define('TABLE_STOCKS_TRAFFIC','stocks_traffic');
+  
+  define('FCK_VERSION','fck_2.3.2');
+  define('FCK_LOCATION','includes/modules/'.FCK_VERSION);
   
  
   // include needed functions
@@ -245,7 +252,7 @@
 
 
   // customization for the design layout
-  define('BOX_WIDTH', 125); // how wide the boxes should be in pixels (default: 125)
+  define('BOX_WIDTH', 200); // how wide the boxes should be in pixels (default: 125)
 
   // Define how do we update currency exchange rates
   // Possible values are 'oanda' 'xe' or ''
@@ -267,7 +274,9 @@
     define($configuration['cfgKey'], $configuration['cfgValue']);
   }
 
-  define('FILENAME_IMAGEMANIPULATOR',IMAGE_MANIPULATOR);
+define('FILENAME_IMAGEMANIPULATOR',IMAGE_MANIPULATOR);
+  
+define('SQL_CACHEDIR', '../cache/');
     function xtDBquery($query) {
        if (DB_CACHE=='true') {
              $result=xtc_db_queryCached($query);
@@ -494,7 +503,7 @@ if (SESSION_CHECK_USER_AGENT == 'True') {
 
 
     // Include Template Engine
-  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.14/Smarty.class.php');
+  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.18/Smarty.class.php');
 
   
 ?>

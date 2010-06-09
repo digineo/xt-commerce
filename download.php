@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: download.php 831 2005-03-13 10:16:09Z mz $   
+   $Id: download.php 4 2006-11-28 14:38:03Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

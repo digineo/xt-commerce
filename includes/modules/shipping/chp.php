@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: chp.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: chp.php 9 2006-12-08 19:45:00Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

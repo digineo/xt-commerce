@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: iclear.php 998 2005-07-07 14:18:20Z mz $   
+   $Id: iclear.php 12 2006-12-16 18:59:00Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

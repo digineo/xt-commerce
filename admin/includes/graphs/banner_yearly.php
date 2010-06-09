@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: banner_yearly.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: banner_yearly.php 242 2007-03-08 13:34:57Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

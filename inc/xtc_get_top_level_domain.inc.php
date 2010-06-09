@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_top_level_domain.inc.php 1535 2006-08-20 21:38:20Z mz $   
+   $Id: xtc_get_top_level_domain.inc.php 70 2007-01-07 14:19:12Z mzanier $   
 
    xt:Commerce - community made shopping
    http://www.xt-commerce.com

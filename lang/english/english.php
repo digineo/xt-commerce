@@ -25,7 +25,7 @@ define('TITLE', STORE_NAME);
 define('HEADER_TITLE_TOP', 'Main page');     
 define('HEADER_TITLE_CATALOG', 'Catalogue');
 
-define('HTML_PARAMS','dir="ltr" lang="de"');
+define('HTML_PARAMS','dir="ltr" lang="en"');
 
 @setlocale(LC_TIME, 'en_EN@euro', 'en_US', 'en-US', 'en', 'en_US.ISO_8859-1', 'English','en_US.ISO_8859-15');
 
@@ -42,9 +42,6 @@ function xtc_date_raw($date, $reverse = false) {
     return substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
   }
 }
-
-// if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
-define('LANGUAGE_CURRENCY', 'EUR');
 
 define('MALE', 'Mr.');
 define('FEMALE', 'Miss/Ms./Mrs.');
@@ -453,4 +450,12 @@ define('SHIPPING_COSTS','Shipping costs');
 // changes 3.0.4 SP2
 define('SHIPPING_TIME','Shipping time: ');
 define('MORE_INFO','[More]');
+
+// changes 3.0.4 SP2.2
+define('ENTRY_PRIVACY_ERROR','Please accept our privacy policy!');
+define('TEXT_PAYMENT_FEE','Paymentfee');
+
+define('_MODULE_INVALID_SHIPPING_ZONE', 'Unfortunately it is not possible to dispatch into this country.');
+define('_MODULE_UNDEFINED_SHIPPING_RATE', 'Shipping costs cannot be calculated for this zone.');
+define('WARNING_BETA','Warning: This is a development version of xt:Commerce 3.0.4 SP2.2 - for testing purposes only!, please commit bugs in our bugtracker at http://www.xt-commerce.com/bugs/');
 ?>

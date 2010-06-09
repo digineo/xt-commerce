@@ -1,6 +1,6 @@
 <?php
     /*
-        $Id: uos_kreditkarte_modul.php 2006-07-12 15:20:00a $
+        $Id: uos_kreditkarte_modul.php 21 2006-12-25 14:31:15Z mzanier $
         
    xt:Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: google_conversiontracking.js.php 1116 2005-07-25 19:31:14Z mz $
+   $Id: google_conversiontracking.js.php 4 2006-11-28 14:38:03Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,12 +21,24 @@ var google_conversion_color = "666666";
 if (1) {
   var google_conversion_value = 1;
 }
-var google_conversion_label = "Purchase";
+var google_conversion_label = "PURCHASE";
 //-->
 </script>
+<?php
+if ($request_type=='NONSSL') { ?>
 <script language="JavaScript" src="http://www.googleadservices.com/pagead/conversion.js">
 </script>
 <noscript>
 <img height=1 width=1 border=0 src="http://www.googleadservices.com/pagead/conversion/<?php echo GOOGLE_CONVERSION_ID; ?>/?value=1&label=Purchase&script=0">
 </noscript>
-
+<?php
+}else{
+?>
+<script language="JavaScript" src="https://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<img height=1 width=1 border=0 src="https://www.googleadservices.com/pagead/conversion/<?php echo GOOGLE_CONVERSION_ID; ?>/?value=1.0&label=PURCHASE&script=0">
+</noscript>
+<?php
+}
+?>                

@@ -21,13 +21,13 @@
 // * DIR_WS_* = Webserver directories (virtual/URL)
   define('HTTP_SERVER', 'http://localhost'); // eg, http://localhost or - https://localhost should not be empty for productive servers
   define('HTTP_CATALOG_SERVER', 'http://localhost');
-  define('HTTPS_CATALOG_SERVER', 'https://localhost');
+  define('HTTPS_CATALOG_SERVER', 'http://localhost');
   define('ENABLE_SSL_CATALOG', 'false'); // secure webserver for catalog module
-  define('DIR_FS_DOCUMENT_ROOT', '/Users/mzanier/Sites/304SP2/xtcommerce/'); // where the pages are located on the server
-  define('DIR_WS_ADMIN', '/304SP2/xtcommerce/admin/'); // absolute path required
-  define('DIR_FS_ADMIN', '/Users/mzanier/Sites/304SP2/xtcommerce/admin/'); // absolute pate required
-  define('DIR_WS_CATALOG', '/304SP2/xtcommerce/'); // absolute path required
-  define('DIR_FS_CATALOG', '/Users/mzanier/Sites/304SP2/xtcommerce/'); // absolute path required
+  define('DIR_FS_DOCUMENT_ROOT', '/Volumes/Raid/webseiten/svn_3.0/xtc30/xtcommerce/'); // where the pages are located on the server
+  define('DIR_WS_ADMIN', '/svn_3.0/xtc30/xtcommerce/admin/'); // absolute path required
+  define('DIR_FS_ADMIN', '/Volumes/Raid/webseiten/svn_3.0/xtc30/xtcommerce/admin/'); // absolute pate required
+  define('DIR_WS_CATALOG', '/svn_3.0/xtc30/xtcommerce/'); // absolute path required
+  define('DIR_FS_CATALOG', '/Volumes/Raid/webseiten/svn_3.0/xtc30/xtcommerce/'); // absolute path required
   define('DIR_WS_IMAGES', 'images/');
   define('DIR_FS_CATALOG_IMAGES', DIR_FS_CATALOG . 'images/');
   define('DIR_FS_CATALOG_ORIGINAL_IMAGES', DIR_FS_CATALOG_IMAGES .'product_images/original_images/');
@@ -56,7 +56,7 @@
   define('DB_SERVER', 'localhost'); // eg, localhost - should not be empty for productive servers
   define('DB_SERVER_USERNAME', 'root');
   define('DB_SERVER_PASSWORD', 'root');
-  define('DB_DATABASE', 'xtc_sp2');
+  define('DB_DATABASE', 'xttest');
   define('USE_PCONNECT', 'false'); // use persisstent connections?
   define('STORE_SESSIONS', 'mysql'); // leave empty '' for default handler or set to 'mysql'
 

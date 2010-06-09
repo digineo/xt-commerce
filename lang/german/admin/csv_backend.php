@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: cvs_backend.php
+   $Id: csv_backend.php 230 2007-03-07 08:05:25Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -11,12 +11,12 @@
    --------------------------------------------------------------*/
 
 
-   define('TITLE','CSV Backend');
+   define('HEADING_TITLE','Import / Export');
 
    define('IMPORT','Import');
    define('EXPORT','Export');
    define('UPLOAD','Datei auf Server laden');
-   define('SELECT','Zu importierende Datei auswaehlen und Import durchfuehren (/import Verzeichnis)');
+   define('SELECT','Zu importierende Datei ausw&auml;hlen und Import durchf&uuml;hren (/import Verzeichnis)');
    define('SAVE','Auf Server Speichern (/export Verzeichnis)');
    define('LOAD','Datei an Browser senden');
    define('CSV_TEXTSIGN_TITLE','Texterkennungszeichen');
@@ -28,6 +28,13 @@
    define('CSV_SETUP','Einstellungen');
    define('TEXT_IMPORT','');
    define('TEXT_PRODUCTS','Produkte');
-   define('TEXT_EXPORT','Exportierte Datei wird im /export Verzeichnis gespeichert');
-
+   define('TEXT_EXPORT','Was soll exportiert werden ?');
+   define('TEXT_NEWSLETTER','Newsletter Empf&auml;nger');
+   define('EXPORT_YES','Nur Herunterladen');
+   define('EXPORT_NO','Am Server Speichern (verzeichnis /export)');
+   define('EXPORT_TYPE','<hr noshade><b>Speicherart:</b>');
+   define('FILENAME','Dateiname:');
+   define('CURRENCY','Währung:');
+   define('CUSTOMERS_GROUP','Kundengruppe:');
+   define('CAMPAIGN','Kampagne:');
 ?>

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: UPS.php,v 1.1 2003/09/06 21:54:34 fanta2k Exp $   
+   $Id: upse.php 194 2007-02-25 11:46:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -26,28 +26,11 @@ define('MODULE_SHIPPING_UPSE_TEXT_TITLE', 'United Parcel Service Express');
 define('MODULE_SHIPPING_UPSE_TEXT_DESCRIPTION', 'United Parcel Service Express - Versandmodul');
 define('MODULE_SHIPPING_UPSE_TEXT_WAY', 'Versand nach');
 define('MODULE_SHIPPING_UPSE_TEXT_UNITS', 'kg');
-define('MODULE_SHIPPING_UPSE_INVALID_ZONE', 'Es ist leider kein Versand in dieses Land m&ouml;glich.');
-define('MODULE_SHIPPING_UPSE_UNDEFINED_RATE', 'Die Versandkosten k&ouml;nnen im Moment nicht errechnet werden.');
 
 define('MODULE_SHIPPING_UPSE_STATUS_TITLE' , 'UPS Express');
 define('MODULE_SHIPPING_UPSE_STATUS_DESC' , 'Wollen Sie den Versand durch UPS Express anbieten?');
 define('MODULE_SHIPPING_UPSE_HANDLING_TITLE' , 'Zuschlag');
 define('MODULE_SHIPPING_UPSE_HANDLING_DESC' , 'Bearbeitungszuschlag f&uuml;r diese Versandart in Euro');
-define('MODULE_SHIPPING_UPSE_TAX_CLASS_TITLE' , 'Steuersatz');
-define('MODULE_SHIPPING_UPSE_TAX_CLASS_DESC' , 'W&auml;hlen Sie den MwSt.-Satz f&uuml;r diese Versandart aus.');
-define('MODULE_SHIPPING_UPSE_ZONE_TITLE' , 'Versand Zone');
-define('MODULE_SHIPPING_UPSE_ZONE_DESC' , 'Wenn Sie eine Zone ausw&auml;hlen, wird diese Versandart nur in dieser Zone angeboten.');
-define('MODULE_SHIPPING_UPSE_SORT_ORDER_TITLE' , 'Reihenfolge der Anzeige');
-define('MODULE_SHIPPING_UPSE_SORT_ORDER_DESC' , 'Niedrigste wird zuerst angezeigt.');
-define('MODULE_SHIPPING_UPSE_ALLOWED_TITLE' , 'Einzelne Versandzonen');
-define('MODULE_SHIPPING_UPSE_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand m&ouml;glich sein soll, z. B.: AT,DE.');
-
-
-
-
-/* UPS Express
-
-*/
 
 define('MODULE_SHIPPING_UPSE_COUNTRIES_1_TITLE' , 'Staaten f&uuml;r UPS Express Zone 1');
 define('MODULE_SHIPPING_UPSE_COUNTRIES_1_DESC' , 'Durch Komma getrennte ISO-K&uuml;rzel der Staaten f&uuml;r Zone 1:');
@@ -118,4 +101,15 @@ define('MODULE_SHIPPING_UPSE_COUNTRIES_14_TITLE' , 'Staaten f&uuml;r UPS Express
 define('MODULE_SHIPPING_UPSE_COUNTRIES_14_DESC' , 'Durch Komma getrennte ISO-K&uuml;rzel der Staaten f&uuml;r Zone 12:');
 define('MODULE_SHIPPING_UPSE_COST_14_TITLE' , 'Tarife f&uuml;r UPS Express Zone 12');
 define('MODULE_SHIPPING_UPSE_COST_14_DESC' , 'Gewichtsbasierte Versandkosten innerhalb Zone 12. Beispiel: Sendung zwischen 0 und 0,5kg kostet EUR 105,20 = 0.5:105.20,...');
+
+define('MODULE_SHIPPING_UPSE_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_UPSE_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_UPSE_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_UPSE_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_UPSE_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_UPSE_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_UPSE_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_UPSE_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_UPSE_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_UPSE_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: metatags.php 1140 2005-08-10 10:16:00Z mz $
+   $Id: metatags.php 245 2007-03-08 16:08:22Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -47,7 +47,8 @@ if (strstr($PHP_SELF, FILENAME_PRODUCT_INFO)) {
 	if ($_GET['cPath']) {
 		if (strpos($_GET['cPath'], '_') == '1') {
 			$arr = explode('_', xtc_input_validation($_GET['cPath'], 'cPath', ''));
-			$_cPath = $arr[1];
+			$size = count($arr);
+			$_cPath = $arr[$size-1];
 		} else {
 			//$_cPath=(int)$_GET['cPath'];
 			if (isset ($_GET['cat'])) {
@@ -56,6 +57,7 @@ if (strstr($PHP_SELF, FILENAME_PRODUCT_INFO)) {
 				$_cPath = str_replace('c', '', $cID);
 			}
 		}
+		
 		$categories_meta_query = xtDBquery("SELECT categories_meta_keywords,
 		                                            categories_meta_description,
 		                                            categories_meta_title,

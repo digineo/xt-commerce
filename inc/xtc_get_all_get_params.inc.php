@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_all_get_params.inc.php 1310 2005-10-17 10:06:32Z mz $   
+   $Id: xtc_get_all_get_params.inc.php 70 2007-01-07 14:19:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

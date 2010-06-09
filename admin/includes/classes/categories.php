@@ -1,8 +1,7 @@
-<?PHP
-
+<?php
 
 /* --------------------------------------------------------------
-   $Id: categories.php 1318 2005-10-21 19:40:59Z mz $
+   $Id: categories.php 241 2007-03-08 13:33:48Z mzanier $
   
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -296,7 +295,7 @@ class categories {
 			$_SESSION['copied'][] = $new_cat_id;
 
 			//copy / link products
-			$get_prod_query = xtDBquery("SELECT products_id FROM ".TABLE_PRODUCTS_TO_CATEGORIES." WHERE categories_id = '".$src_category_id."'");
+			$get_prod_query = xtc_db_query("SELECT products_id FROM ".TABLE_PRODUCTS_TO_CATEGORIES." WHERE categories_id = '".$src_category_id."'");
 			while ($product = xtc_db_fetch_array($get_prod_query)) {
 				if ($ctype == 'link') {
 					$this->link_product($product['products_id'], $new_cat_id);
@@ -315,16 +314,16 @@ class categories {
 				$suffix = array_pop($get_suffix);
 				$dest_pic = $new_cat_id.'.'.$suffix;
 				@ copy($src_pic, DIR_FS_CATALOG_IMAGES.'categories/'.$dest_pic);
-				xtDBquery("UPDATE categories SET categories_image = '".$dest_pic."' WHERE categories_id = '".$new_cat_id."'");
+				xtc_db_query("UPDATE categories SET categories_image = '".$dest_pic."' WHERE categories_id = '".$new_cat_id."'");
 			}
 
 			//copy descriptions
 			while ($cdcopy_values = xtc_db_fetch_array($cdcopy_query)) {
-				xtDBquery("INSERT INTO ".TABLE_CATEGORIES_DESCRIPTION." (categories_id, language_id, categories_name, categories_heading_title, categories_description, categories_meta_title, categories_meta_description, categories_meta_keywords) VALUES ('".$new_cat_id."' , '".$cdcopy_values['language_id']."' , '".addslashes($cdcopy_values['categories_name'])."' , '".addslashes($cdcopy_values['categories_heading_title'])."' , '".addslashes($cdcopy_values['categories_description'])."' , '".addslashes($cdcopy_values['categories_meta_title'])."' , '".addslashes($cdcopy_values['categories_meta_description'])."' , '".addslashes($cdcopy_values['categories_meta_keywords'])."')");
+				xtc_db_query("INSERT INTO ".TABLE_CATEGORIES_DESCRIPTION." (categories_id, language_id, categories_name, categories_heading_title, categories_description, categories_meta_title, categories_meta_description, categories_meta_keywords) VALUES ('".$new_cat_id."' , '".$cdcopy_values['language_id']."' , '".addslashes($cdcopy_values['categories_name'])."' , '".addslashes($cdcopy_values['categories_heading_title'])."' , '".addslashes($cdcopy_values['categories_description'])."' , '".addslashes($cdcopy_values['categories_meta_title'])."' , '".addslashes($cdcopy_values['categories_meta_description'])."' , '".addslashes($cdcopy_values['categories_meta_keywords'])."')");
 			}
 
 			//get child categories of current category
-			$crcopy_query = xtDBquery("SELECT categories_id FROM ".TABLE_CATEGORIES." WHERE parent_id = '".$src_category_id."'");
+			$crcopy_query = xtc_db_query("SELECT categories_id FROM ".TABLE_CATEGORIES." WHERE parent_id = '".$src_category_id."'");
 
 			//and go recursive
 			while ($crcopy_values = xtc_db_fetch_array($crcopy_query)) {
@@ -402,10 +401,8 @@ class categories {
 
 		xtc_db_query("delete from ".TABLE_REVIEWS." where products_id = '".xtc_db_input($product_id)."'");
 
-		if (USE_CACHE == 'true') {
-			xtc_reset_cache_block('categories');
-			xtc_reset_cache_block('also_purchased');
-		}
+		// rebuild Cache
+	  	xtc_rebuild_cache_file('manufacturer');
 
 	} // remove_product ends
 
@@ -499,7 +496,7 @@ class categories {
 			}
 		}
 		//
-		$sql_data_array = array ('products_quantity' => xtc_db_prepare_input($products_data['products_quantity']), 'products_model' => xtc_db_prepare_input($products_data['products_model']), 'products_ean' => xtc_db_prepare_input($products_data['products_ean']), 'products_price' => xtc_db_prepare_input($products_data['products_price']), 'products_sort' => xtc_db_prepare_input($products_data['products_sort']), 'products_shippingtime' => xtc_db_prepare_input($products_data['shipping_status']), 'products_discount_allowed' => xtc_db_prepare_input($products_data['products_discount_allowed']), 'products_date_available' => $products_date_available, 'products_weight' => xtc_db_prepare_input($products_data['products_weight']), 'products_status' => $products_status, 'products_startpage' => xtc_db_prepare_input($products_data['products_startpage']), 'products_startpage_sort' => xtc_db_prepare_input($products_data['products_startpage_sort']), 'products_tax_class_id' => xtc_db_prepare_input($products_data['products_tax_class_id']), 'product_template' => xtc_db_prepare_input($products_data['info_template']), 'options_template' => xtc_db_prepare_input($products_data['options_template']), 'manufacturers_id' => xtc_db_prepare_input($products_data['manufacturers_id']), 'products_fsk18' => xtc_db_prepare_input($products_data['fsk18']), 'products_vpe_value' => xtc_db_prepare_input($products_data['products_vpe_value']), 'products_vpe_status' => xtc_db_prepare_input($products_data['products_vpe_status']), 'products_vpe' => xtc_db_prepare_input($products_data['products_vpe']));
+		$sql_data_array = array ('products_quantity' => xtc_db_prepare_input($products_data['products_quantity']), 'products_model' => xtc_db_prepare_input($products_data['products_model']), 'products_ean' => xtc_db_prepare_input($products_data['products_ean']), 'products_price' => xtc_db_prepare_input($products_data['products_price']),'products_average_stock' => xtc_db_prepare_input($products_data['products_average_stock']), 'products_sort' => xtc_db_prepare_input($products_data['products_sort']), 'products_shippingtime' => xtc_db_prepare_input($products_data['shipping_status']), 'products_discount_allowed' => xtc_db_prepare_input($products_data['products_discount_allowed']), 'products_date_available' => $products_date_available, 'products_weight' => xtc_db_prepare_input($products_data['products_weight']), 'products_status' => $products_status, 'products_startpage' => xtc_db_prepare_input($products_data['products_startpage']), 'products_startpage_sort' => xtc_db_prepare_input($products_data['products_startpage_sort']), 'products_tax_class_id' => xtc_db_prepare_input($products_data['products_tax_class_id']), 'product_template' => xtc_db_prepare_input($products_data['info_template']), 'options_template' => xtc_db_prepare_input($products_data['options_template']), 'manufacturers_id' => xtc_db_prepare_input($products_data['manufacturers_id']), 'products_fsk18' => xtc_db_prepare_input($products_data['fsk18']), 'products_vpe_value' => xtc_db_prepare_input($products_data['products_vpe_value']), 'products_vpe_status' => xtc_db_prepare_input($products_data['products_vpe_status']), 'products_vpe' => xtc_db_prepare_input($products_data['products_vpe']));
 		$sql_data_array = array_merge($sql_data_array, $permission_array);
 		//get the next ai-value from table products if no products_id is set
 		if (!$products_id || $products_id == '') {
@@ -513,7 +510,7 @@ class categories {
 			$pname_arr = explode('.', $products_image->filename);
 			$nsuffix = array_pop($pname_arr);
 			$products_image_name = $products_id.'_0.'.$nsuffix;
-			$dup_check_query = xtDBquery("SELECT COUNT(*) AS total
+			$dup_check_query = xtc_db_query("SELECT COUNT(*) AS total
 								                                FROM ".TABLE_PRODUCTS."
 								                               WHERE products_image = '".$products_data['products_previous_image_0']."'");
 			$dup_check = xtc_db_fetch_array($dup_check_query);
@@ -521,7 +518,7 @@ class categories {
 				@ xtc_del_image_file($products_data['products_previous_image_0']);
 			}
 			//workaround if there are v2 images mixed with v3
-			$dup_check_query = xtDBquery("SELECT COUNT(*) AS total
+			$dup_check_query = xtc_db_query("SELECT COUNT(*) AS total
 								                                FROM ".TABLE_PRODUCTS."
 								                               WHERE products_image = '".$products_image->filename."'");
 			$dup_check = xtc_db_fetch_array($dup_check_query);
@@ -542,7 +539,7 @@ class categories {
 
 		//are we asked to delete some pics?
 		if ($products_data['del_pic'] != '') {
-			$dup_check_query = xtDBquery("SELECT COUNT(*) AS total
+			$dup_check_query = xtc_db_query("SELECT COUNT(*) AS total
 								                                FROM ".TABLE_PRODUCTS."
 								                               WHERE products_image = '".$products_data['del_pic']."'");
 			$dup_check = xtc_db_fetch_array($dup_check_query);
@@ -555,7 +552,7 @@ class categories {
 
 		if ($products_data['del_mo_pic'] != '') {
 			foreach ($products_data['del_mo_pic'] AS $dummy => $val) {
-				$dup_check_query = xtDBquery("SELECT COUNT(*) AS total
+				$dup_check_query = xtc_db_query("SELECT COUNT(*) AS total
 											                                FROM ".TABLE_PRODUCTS_IMAGES."
 											                               WHERE image_name = '".$val."'");
 				$dup_check = xtc_db_fetch_array($dup_check_query);
@@ -573,7 +570,7 @@ class categories {
 				$pname_arr = explode('.', $pIMG->filename);
 				$nsuffix = array_pop($pname_arr);
 				$products_image_name = $products_id.'_'. ($img +1).'.'.$nsuffix;
-				$dup_check_query = xtDBquery("SELECT COUNT(*) AS total
+				$dup_check_query = xtc_db_query("SELECT COUNT(*) AS total
 											                                FROM ".TABLE_PRODUCTS_IMAGES."
 											                               WHERE image_name = '".$products_data['products_previous_image_'. ($img +1)]."'");
 				$dup_check = xtc_db_fetch_array($dup_check_query);
@@ -723,6 +720,9 @@ class categories {
 				xtc_db_perform(TABLE_PRODUCTS_DESCRIPTION, $sql_data_array, 'update', 'products_id = \''.xtc_db_input($products_id).'\' and language_id = \''.$language_id.'\'');
 			}
 		}
+		// rebuild Cache
+	  xtc_rebuild_cache_file('manufacturer');
+	
 	} // insert_product ends
 
 	// ----------------------------------------------------------------------------------------------------- //   
@@ -731,7 +731,7 @@ class categories {
 
 	function duplicate_product($src_products_id, $dest_categories_id) {
 
-		$product_query = xtDBquery("SELECT *
+		$product_query = xtc_db_query("SELECT *
 				    	                                 FROM ".TABLE_PRODUCTS."
 				    	                                WHERE products_id = '".xtc_db_input($src_products_id)."'");
 
@@ -753,6 +753,7 @@ class categories {
 						'products_status'=>$products_status,
 						'products_tax_class_id'=>$product['products_tax_class_id'],
 						'manufacturers_id'=>$product['manufacturers_id'],
+						'products_average_stock'=>$product['products_average_stock'],
 						'product_template'=>$product['product_template'],
 						'options_template'=>$product['options_template'],
 						'products_fsk18'=>$product['products_fsk18'],
@@ -780,7 +781,7 @@ class categories {
 			$dup_products_image_name = $dup_products_id.'_0'.'.'.$nsuffix;
 
 			//write to DB
-			xtDBquery("UPDATE ".TABLE_PRODUCTS." SET products_image = '".$dup_products_image_name."' WHERE products_id = '".$dup_products_id."'");
+			xtc_db_query("UPDATE ".TABLE_PRODUCTS." SET products_image = '".$dup_products_image_name."' WHERE products_id = '".$dup_products_id."'");
 
 			@ copy(DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$product['products_image'], DIR_FS_CATALOG_ORIGINAL_IMAGES.'/'.$dup_products_image_name);
 			@ copy(DIR_FS_CATALOG_INFO_IMAGES.'/'.$product['products_image'], DIR_FS_CATALOG_INFO_IMAGES.'/'.$dup_products_image_name);

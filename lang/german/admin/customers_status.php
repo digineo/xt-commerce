@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: customers_status.php 1062 2005-07-21 19:57:29Z gwinger $   
+   $Id: customers_status.php 20 2006-12-25 13:38:37Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

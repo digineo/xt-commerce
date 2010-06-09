@@ -25,21 +25,11 @@ define('MODULE_SHIPPING_AP_TEXT_TITLE', 'Austrian Post AG');
 define('MODULE_SHIPPING_AP_TEXT_DESCRIPTION', 'Austrian Post AG - Worldwide Dispatch');
 define('MODULE_SHIPPING_AP_TEXT_WAY', 'Dispatch to');
 define('MODULE_SHIPPING_AP_TEXT_UNITS', 'kg');
-define('MODULE_SHIPPING_AP_INVALID_ZONE', 'Unfortunately it is not possible to dispatch into this country');
-define('MODULE_SHIPPING_AP_UNDEFINED_RATE', 'Forwarding expenses cannot be calculated for the moment');
 
 define('MODULE_SHIPPING_AP_STATUS_TITLE' , 'Österreichische Post AG');
 define('MODULE_SHIPPING_AP_STATUS_DESC' , 'Wollen Sie den Versand über die Österreichische Post AG anbieten?');
 define('MODULE_SHIPPING_AP_HANDLING_TITLE' , 'Handling Fee');
 define('MODULE_SHIPPING_AP_HANDLING_DESC' , 'Bearbeitungsgebühr für diese Versandart in Euro');
-define('MODULE_SHIPPING_AP_TAX_CLASS_TITLE' , 'Steuersatz');
-define('MODULE_SHIPPING_AP_TAX_CLASS_DESC' , 'Wählen Sie den MwSt.-Satz für diese Versandart aus.');
-define('MODULE_SHIPPING_AP_ZONE_TITLE' , 'Versand Zone');
-define('MODULE_SHIPPING_AP_ZONE_DESC' , 'Wenn Sie eine Zone auswählen, wird diese Versandart nur in dieser Zone angeboten.');
-define('MODULE_SHIPPING_AP_SORT_ORDER_TITLE' , 'Reihenfolge der Anzeige');
-define('MODULE_SHIPPING_AP_SORT_ORDER_DESC' , 'Niedrigste wird zuerst angezeigt.');
-define('MODULE_SHIPPING_AP_ALLOWED_TITLE' , 'Einzelne Versandzonen');
-define('MODULE_SHIPPING_AP_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand möglich sein soll. zb AT,DE');
 define('MODULE_SHIPPING_AP_COUNTRIES_1_TITLE' , 'Zone 1a Länder');
 define('MODULE_SHIPPING_AP_COUNTRIES_1_DESC' , 'Durch Komma getrennt Liste der Länder als zwei Zeichen ISO-Code Landeskennzahlen, die Teil der Zone 1a sind.');
 define('MODULE_SHIPPING_AP_COST_1_TITLE' , 'Zone 1a Tarif Tabelle bis 20 kg');
@@ -72,4 +62,15 @@ define('MODULE_SHIPPING_AP_COUNTRIES_8_TITLE' , 'Zone Inland');
 define('MODULE_SHIPPING_AP_COUNTRIES_8_DESC' , 'Inlandszone');
 define('MODULE_SHIPPING_AP_COST_8_TITLE' , 'Zone Tarif Tabelle bis 31.5 kg');
 define('MODULE_SHIPPING_AP_COST_8_DESC' , 'Tarif Tabelle für die Inlandszone, bis 31.5 kg Versandgewicht.');
+
+define('MODULE_SHIPPING_AP_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_AP_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_AP_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_AP_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_AP_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_AP_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_AP_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_AP_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_AP_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_AP_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

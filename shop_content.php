@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: shop_content.php 1303 2005-10-12 16:47:31Z mz $   
+   $Id: shop_content.php 148 2007-01-24 09:08:14Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -55,7 +55,7 @@ if ($_GET['coID'] == 7) {
 
 	$error = false;
 	if (isset ($_GET['action']) && ($_GET['action'] == 'send')) {
-		if (xtc_validate_email(trim($_POST['email']))) {
+		if (xtc_validate_email(trim($_POST['email'])) && ($_POST['vvcode'] == $_SESSION['vvcode']) && $_SESSION['vvcode']!='') {
 
 			xtc_php_mail($_POST['email'], $_POST['name'], CONTACT_US_EMAIL_ADDRESS, CONTACT_US_NAME, CONTACT_US_FORWARDING_STRING, $_POST['email'], $_POST['name'], '', '', CONTACT_US_EMAIL_SUBJECT, nl2br($_POST['message_body']), $_POST['message_body']);
 
@@ -92,11 +92,18 @@ if ($_GET['coID'] == 7) {
 			$contact_content = $shop_content_data['content_text'];
 		}
 		require (DIR_WS_INCLUDES.'header.php');
+		if (isset ($_SESSION['customer_id'])) {
+			$customers_name = $_SESSION['customer_first_name'].' '.$_SESSION['customer_last_name'];
+			$email_address = $_SESSION['customer_email_address'];
+		}
+
 		$smarty->assign('CONTACT_CONTENT', $contact_content);
 		$smarty->assign('FORM_ACTION', xtc_draw_form('contact_us', xtc_href_link(FILENAME_CONTENT, 'action=send&coID='.(int) $_GET['coID'])));
-		$smarty->assign('INPUT_NAME', xtc_draw_input_field('name', ($error ? $_POST['name'] : $first_name)));
-		$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ($error ? $_POST['email'] : $email_address)));
-		$smarty->assign('INPUT_TEXT', xtc_draw_textarea_field('message_body', 'soft', 50, 15, $_POST['']));
+		$smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES).'" alt="Captcha" />');
+		$smarty->assign('INPUT_CODE', xtc_draw_input_field('vvcode', '', 'size="8" maxlength="6"', 'text', false));
+		$smarty->assign('INPUT_NAME', xtc_draw_input_field('name', ($error ? xtc_db_input($_POST['name']) : $customers_name), 'size="30"'));
+		$smarty->assign('INPUT_EMAIL', xtc_draw_input_field('email', ($error ? xtc_db_input($_POST['email']) : $email_address), 'size="30"'));
+		$smarty->assign('INPUT_TEXT', xtc_draw_textarea_field('message_body', 'soft', 50, 15, ($error ? xtc_db_input($_POST['message_body']) : $first_name)));
 		$smarty->assign('BUTTON_SUBMIT', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
 		$smarty->assign('FORM_END', '</form>');
 	}

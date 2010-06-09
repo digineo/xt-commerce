@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: cod.php 1003 2005-07-10 18:58:52Z mz $   
+   $Id: cod.php 43 2007-01-02 14:40:36Z sun $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -106,6 +106,18 @@ class cod {
  
           if ($_SESSION['shipping']['id'] == 'free_free') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_FREE);
           if ($_SESSION['shipping']['id'] == 'freeamount_freeamount') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_FREEAMOUNT_FREE);
+		  
+		  // Taiwan
+		  if ($_SESSION['shipping']['id'] == 'post_TIME0') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_POST);	
+	      if ($_SESSION['shipping']['id'] == 'post_TIME1') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_POST);	
+		  
+		  if ($_SESSION['shipping']['id'] == 'ecan_TIME0') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_ECAN);
+		  if ($_SESSION['shipping']['id'] == 'ecan_TIME1') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_ECAN);
+		  if ($_SESSION['shipping']['id'] == 'ecan_TIME2') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_ECAN);	
+		  
+		  if ($_SESSION['shipping']['id'] == 'tcat_TIME0') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_TCAT);
+		  if ($_SESSION['shipping']['id'] == 'tcat_TIME1') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_TCAT);
+		  if ($_SESSION['shipping']['id'] == 'tcat_TIME2') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_TCAT);
 
 
             for ($i = 0; $i < count($cod_zones); $i++) {
@@ -172,6 +184,10 @@ class cod {
 		if ($this->order_status)
 			xtc_db_query("UPDATE ".TABLE_ORDERS." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
 
+	}
+	
+	function admin_order($oID) {
+		return false;
 	}
 
 	function get_error() {

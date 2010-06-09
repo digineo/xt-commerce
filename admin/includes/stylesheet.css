@@ -35,6 +35,8 @@ a.menuBoxContentLink:visited { font-family: Verdana, Arial, sans-serif; font-siz
 a.menuBoxContentLink:active { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
 a.menuBoxContentLink:hover { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #cccccc; font-weight: normal; text-decoration: none; }
 
+.dataTableHeadingContent a { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FFFFFF; font-weight: normal; text-decoration: none; }
+
 a.splitPageLink:link { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #0000FF; font-weight: normal; text-decoration: none; }
 a.splitPageLink:visited { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #0000FF; font-weight: normal; text-decoration: none; }
 a.splitPageLink:active { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #0000FF; font-weight: normal; text-decoration: none; }
@@ -46,11 +48,12 @@ a.splitPageLink:hover { font-family: Verdana, Arial, sans-serif; font-size: 10px
 .longDescription { visibility: hidden; display: none; }
 
 /* page */
-body { background-color: #ffffff; color: #000000; margin: 0px; }
+body { background-color: #ffffff; color: #000000; margin: 0px; font-family:"Trebuchet MS",Verdana,Arial,Sans-serif;}
 .headerBar {
     background-color: #cccccc; 
     border-color: #000000; 
-    border-bottom: 1px solid;  
+    border-bottom: 1px solid; 
+     
  }
 .headerBarContent { 
 font-family: Verdana, Arial, sans-serif; 
@@ -67,11 +70,7 @@ vertical-align: top;
 font-color: #000000;
  }
 
- .boxCenter {
- border: 1px solid;
- border-color: #cccccc;
- background: #F7F7F7;
- }
+ .boxCenter {padding: 15px; background-color:#FFF2CC; border: solid #E9D28F 1px}
 
 .pageHeading { font-family: Verdana, Arial, sans-serif; font-size: 18px; color: #000000; font-weight: bold; }
 
@@ -79,31 +78,31 @@ font-color: #000000;
 .dataTableHeadingRow {
 background-color: #F6F6F6;
 color: #000000;
-border-bottom: 1px solid;
-border-color: #000000;
-
 }
+
 .dataTableHeadingContent {
-
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 5px;
-    background-color: #f1f1f1;
-    border: 1px solid #CCCCCC;
+background-image:url(../images/bg_boxheader.gif);
+font-size:11px; 
+font-weight:bold; 
+color:#FFFFFF; 
+padding: 5px;
+line-height:20px; 
+vertical-align:middle;
+white-space:nowrap
 }
+
 .dataTableRow {
-background-color: #F9F0F1;
+background-color: #FFFFFF;
 
 }
 
 .dataTableRowSelected {
- background-color: #FFF9E9;
+ background-color: #DD9502;
  font-weight: bold;
 
  }
 .dataTableRowOver {
- background-color: #F6F6F6; 
+ background-color: #FFF2CC; 
 
  }
  
@@ -114,6 +113,15 @@ background-color: #F9F0F1;
  vertical-align: middle;
  border-bottom: 1px dashed #cccccc;
  }
+
+.dataTableContentConfig {
+ font-family: Verdana, Arial, sans-serif; 
+ font-size: 10px; 
+ color: #000000;
+ vertical-align: middle;
+ border: 1px solid #4E4E4F;
+ background-color:#ededed; 
+ } 
  
 td.categories_view_data {
  font-family: Verdana, Arial, sans-serif; 
@@ -149,8 +157,9 @@ border-color: #cccccc;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 10px;
     font-weight: bold;
+    line-height: 20px;
     padding: 5px;
-    background-color: #FFCC99;
+    background-image:url(../images/bg.gif);
 
 }
 .infoBoxContent { 
@@ -167,24 +176,35 @@ border-color: #cccccc;
 .button {
 	width: auto;
    border: 1px solid Black; 
-   background-color: #F1F1F1; 
+   background-image:url(../images/bg_button.gif);
    padding: 1px 0 2px 0;
    text-decoration: none;
-	font-size: 10px;
-	cursor: pointer;
-	line-height: 24px;
+   font-weight: bold;
+   color: #FFFFFF;
+   font-size: 10px;
+   cursor: pointer;
+   line-height: 24px;
 }
 
 /* IE Fix */
-* html .button { padding: 1px 0 1px 0; line-height: 14px; }
-* html button.button { padding: 1px 0 0 0; margin: -2px 1px; line-height: 14px; }
+* html .button { padding: 1px 0 1px 0; line-height: 20px; }
+* html button.button { padding: 1px 0 0 0; margin: -2px 1px; line-height: 20px; }
 
-a.button:link     { border: 1px solid Black; line-height: 24px; margin: 7px; padding: 3px 4px 3px 4px; background-color: #F1F1F1; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
-a.button:visited  { border: 1px solid Black; line-height: 24px; margin: 7px; padding: 3px 4px 3px 4px; background-color: #F1F1F1; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
-a.button:active   { border: 1px solid Black; line-height: 24px; margin: 7px; padding: 3px 4px 3px 4px; background-color: #F1F1F1; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
-a.button:hover    { border: 1px solid Black; line-height: 24px; margin: 7px; padding: 3px 4px 3px 4px; background-color: #F1F1F1; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
+a.button:link     { border: 1px solid Black; line-height: 24px; margin: 7px; padding: 3px 4px 3px 4px; background-image:url(../images/bg_button.gif);  font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FFFFFF; font-weight: bold; text-decoration: none; }
+a.button:visited  { border: 1px solid Black; line-height: 24px; margin: 7px; padding: 3px 4px 3px 4px; background-image:url(../images/bg_button.gif);  font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FFFFFF; font-weight: bold; text-decoration: none; }
+a.button:active   { border: 1px solid Black; line-height: 24px; margin: 7px; padding: 3px 4px 3px 4px; background-image:url(../images/bg_button.gif);  font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #FFFFFF; font-weight: bold; text-decoration: none; }
+a.button:hover    { border: 1px solid Black; line-height: 24px; margin: 7px; padding: 3px 4px 3px 4px; background-image:url(../images/bg_button_active.gif);  font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: bold; text-decoration: none; }
 
-span.button { border: 1px solid Black; line-height: 18px; padding: 3px 5px 3px 5px; background-color: #F1F1F1; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #000000; font-weight: normal; text-decoration: none; }
+span.button { 
+border: 1px solid Black; 
+line-height: 18px; 
+padding: 3px 5px 3px 5px; 
+font-family: Verdana, Arial, sans-serif; 
+font-size: 10px; 
+color: #000000; 
+font-weight: normal;
+background-image:url(../images/bg_button.gif); 
+text-decoration: none; }
 
 /* Admin Buttons EOF */
 
@@ -225,3 +245,21 @@ FORM { display: inline; }
 .smallText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
 .main { font-family: Verdana, Arial, sans-serif; font-size: 12px; }
 .errorText { font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #ff0000; }
+
+h2.boxheader {background-image:url(../images/bg_boxheader.gif);height:28px;font-size:11px; color:#FFFFFF; padding:2px 8px 0px 8px; margin:0; line-height:28px; vertical-align:middle;}
+/* HEADER WITH LOGO, SEARCH BOX AND LANGUAGE SELECTION */
+#header {height:115px;background: #666 url("../images/bg_header.gif") repeat-x; border-bottom: 3px solid #fff;}
+#header	#logo {padding-left:27px; float:left}
+#header #buttons {width: 650px; height:75px; float:right; background: url("../images/bg_search_breakline.gif") no-repeat; color:#fff; padding:40px 0px 0px 20px}
+#header #buttons a {color:#fff; font-size:11px;}
+#header td {padding-top:1px; padding-right:4px;}
+
+.boxbody {background-color:#ededed; border-style:solid; border-color:#4E4E4F; border-width:0px 1px 1px 1px; padding:2px; margin-bottom:1px}
+.boxbody a {font-size:11px;}
+.boxbody ul.contentlist {margin-left:5px; margin-right:0; margin-top:0; margin-bottom:0; padding:0;}
+.boxbody ul.contentlist li {margin-left:0px; padding:0; list-style-type:none}
+
+.navigationSelection a {font-size:10px;}
+.navigationSelection {font-size:10px;}
+.navigationSelection ul.navigationList {margin-left:0px; margin-right:0; margin-top:0; margin-bottom:0; padding:0;}
+.navigationSelection ul.navigationList li {margin-left:0px; margin-right:2px; list-style-type:none; float:left; padding:4 8 4 8px; background-color:#ededed; border-style:solid; border-color:#FFFFFF; border-style:solid;  border-width:1px;}

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_draw_selection_field.inc.php 812 2005-02-27 20:55:34Z mz $   
+   $Id: xtc_draw_selection_field.inc.php 70 2007-01-07 14:19:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

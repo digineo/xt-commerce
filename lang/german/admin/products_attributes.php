@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: products_attributes.php 1101 2005-07-24 14:51:13Z mz $   
+   $Id: products_attributes.php 162 2007-01-31 16:37:27Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -38,4 +38,10 @@ define('TEXT_OK_TO_DELETE', 'Mit dieser Option sind keine Artikel, sowie Options
 define('TEXT_SEARCH','Suche:');
 define('TEXT_OPTION_ID', 'Options ID');
 define('TEXT_OPTION_NAME', 'Optionsname');
+
+// SP2.2
+define('TABLE_HEADING_OPT_IMAGE','Bild');
+define('TABLE_HEADING_OPT_DESC','Beschreibung');
+define('TABLE_TEXT_DELETE','Bild l&ouml;schen');
+define('TEXT_OPTIONS_IMAGE','Optionsbild')
 ?>

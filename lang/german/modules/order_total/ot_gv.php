@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_gv.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: ot_gv.php 21 2006-12-25 14:31:15Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

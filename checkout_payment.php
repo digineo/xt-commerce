@@ -1,7 +1,8 @@
 <?php
 
+
 /* -----------------------------------------------------------------------------------------
-   $Id: checkout_payment.php 1325 2005-10-30 10:23:32Z mz $   
+   $Id: checkout_payment.php 288 2007-03-23 03:28:11Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -31,6 +32,7 @@
    ---------------------------------------------------------------------------------------*/
 
 include ('includes/application_top.php');
+
 // create smarty elements
 $smarty = new Smarty;
 // include boxes
@@ -95,6 +97,7 @@ if (!isset ($_SESSION['billto'])) {
 
 if (!isset ($_SESSION['sendto']) || $_SESSION['sendto'] == "")
 	$_SESSION['sendto'] = $_SESSION['billto'];
+ 
 
 require (DIR_WS_CLASSES . 'order.php');
 $order = new order();
@@ -107,8 +110,14 @@ $total_weight = $_SESSION['cart']->show_weight();
 //  $total_count = $_SESSION['cart']->count_contents();
 $total_count = $_SESSION['cart']->count_contents_virtual(); // GV Code ICW ADDED FOR CREDIT CLASS SYSTEM
 
-if ($order->billing['country']['iso_code_2'] != '')
+if ($order->billing['country']['iso_code_2'] != '' && $order->delivery['country']['iso_code_2'] == '') {
 	$_SESSION['delivery_zone'] = $order->billing['country']['iso_code_2'];
+} else {
+	$_SESSION['delivery_zone'] = $order->delivery['country']['iso_code_2']; 
+}
+
+//if ($order->delivery['country']['iso_code_2'] != '') 
+//    $_SESSION['delivery_zone'] = $order->delivery['country']['iso_code_2']; 
 
 // load all enabled payment modules
 require (DIR_WS_CLASSES . 'payment.php');
@@ -130,7 +139,6 @@ require (DIR_WS_INCLUDES . 'header.php');
 $module_smarty = new Smarty;
 if ($order->info['total'] > 0) {
 	if (isset ($_GET['payment_error']) && is_object(${ $_GET['payment_error'] }) && ($error = ${$_GET['payment_error']}->get_error())) {
-
 		$smarty->assign('error', htmlspecialchars($error['error']));
 
 	}
@@ -140,31 +148,40 @@ if ($order->info['total'] > 0) {
 	$radio_buttons = 0;
 	for ($i = 0, $n = sizeof($selection); $i < $n; $i++) {
 
-		$selection[$i]['radio_buttons'] = $radio_buttons;
-		if (($selection[$i]['id'] == $payment) || ($n == 1)) {
-			$selection[$i]['checked'] = 1;
-		}
+			$selection[$i]['radio_buttons'] = $radio_buttons;
+			if (($selection[$i]['id'] == $payment) || ($n == 1)) {
+				$selection[$i]['checked'] = 1;
+			}
 
-		if (sizeof($selection) > 1) {
-			$selection[$i]['selection'] = xtc_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['id'] == $_SESSION['payment']));
-		} else {
-			$selection[$i]['selection'] = xtc_draw_hidden_field('payment', $selection[$i]['id']);
-		}
+			if (sizeof($selection) > 1) {
+				$selection[$i]['selection'] = xtc_draw_radio_field('payment', $selection[$i]['id'], ($selection[$i]['id'] == $_SESSION['payment']));
+			} else {
+				$selection[$i]['selection'] = xtc_draw_hidden_field('payment', $selection[$i]['id']);
+			}
+			
+			// show only selected in step 2
+			$count = true;
+			if ($_GET['step']=='step2') {
+				if ($selection[$i]['id'] != $_SESSION['payment']) {
+					unset($selection[$i]);
+					$count=false;
+				}
+			}
 
-		if (isset ($selection[$i]['error'])) {
+			if (isset ($selection[$i]['error'])) {
 
-		} else {
+			} else {
 
-			$radio_buttons++;
-		}
+				if (!$count) $radio_buttons++;
+			}
+		
 	}
-
 	$module_smarty->assign('module_content', $selection);
 
 } else {
 	$smarty->assign('GV_COVER', 'true');
 }
-
+if ($_GET['step']=='step2') $smarty->assign('step2', 'true');
 if (ACTIVATE_GIFT_SYSTEM == 'true') {
 	$smarty->assign('module_gift', $order_total_modules->credit_selection());
 }
@@ -172,8 +189,11 @@ if (ACTIVATE_GIFT_SYSTEM == 'true') {
 $module_smarty->caching = 0;
 $payment_block = $module_smarty->fetch(CURRENT_TEMPLATE . '/module/checkout_payment_block.html');
 
+if (isset ($_GET['step']) && $_GET['step'] == 'step2') {
+		$smarty->assign('COMMENTS', xtc_draw_hidden_field('comments', $_SESSION['comments']).xtc_draw_hidden_field('comments_added', 'YES'));
+	} else {
 $smarty->assign('COMMENTS', xtc_draw_textarea_field('comments', 'soft', '60', '5', $_SESSION['comments']) . xtc_draw_hidden_field('comments_added', 'YES'));
-
+}
 //check if display conditions on checkout page is true
 if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
 
@@ -182,29 +202,29 @@ if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
 	}
 
 	$shop_content_query = xtc_db_query("SELECT
-	                                                content_title,
-	                                                content_heading,
-	                                                content_text,
-	                                                content_file
-	                                                FROM " . TABLE_CONTENT_MANAGER . "
-	                                                WHERE content_group='3' " . $group_check . "
-	                                                AND languages_id='" . $_SESSION['languages_id'] . "'");
+		                                                content_title,
+		                                                content_heading,
+		                                                content_text,
+		                                                content_file
+		                                                FROM " . TABLE_CONTENT_MANAGER . "
+		                                                WHERE content_group='3' " . $group_check . "
+		                                                AND languages_id='" . $_SESSION['languages_id'] . "'");
 	$shop_content_data = xtc_db_fetch_array($shop_content_query);
 
 	if ($shop_content_data['content_file'] != '') {
 
-		$conditions = '<iframe SRC="' . DIR_WS_CATALOG . 'media/content/' . $shop_content_data['content_file'] . '" width="100%" height="300">';
+		$conditions = '<iframe src="'.(($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG .'media/content/'.$shop_content_data['content_file'].'" width="100%" height="300">';
 		$conditions .= '</iframe>';
 	} else {
 
-		$conditions = '<textarea name="blabla" cols="60" rows="10" readonly="readonly">' . strip_tags(str_replace('<br />', "\n", $shop_content_data['content_text'])) . '</textarea>';
+		$conditions = '<textarea name="agb" cols="60" rows="10" readonly="readonly">' . strip_tags(str_replace('<br />', "\n", $shop_content_data['content_text'])) . '</textarea>';
 	}
 
 	$smarty->assign('AGB', $conditions);
 	$smarty->assign('AGB_LINK', $main->getContentLink(3, MORE_INFO));
 	// LUUPAY ZAHLUNGSMODUL
 	if (isset ($_GET['step']) && $_GET['step'] == 'step2') {
-		$smarty->assign('AGB_checkbox', '<input type="checkbox" value="conditions" name="conditions" checked />');
+		$smarty->assign('AGB_checkbox', xtc_draw_hidden_field('conditions', 'true'));
 	} else {
 		$smarty->assign('AGB_checkbox', '<input type="checkbox" value="conditions" name="conditions" />');
 	}

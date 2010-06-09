@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: popup_memo.php 1125 2005-07-28 09:59:44Z novalis $
+   $Id: popup_memo.php 4 2006-11-28 14:38:03Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

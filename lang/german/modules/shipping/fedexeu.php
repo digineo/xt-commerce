@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: fedexeu.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: fedexeu.php 194 2007-02-25 11:46:12Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -26,21 +26,12 @@ define('MODULE_SHIPPING_FEDEXEU_TEXT_TITLE', 'FedEx Express Europa');
 define('MODULE_SHIPPING_FEDEXEU_TEXT_DESCRIPTION', 'FedEx Express Europa');
 define('MODULE_SHIPPING_FEDEXEU_TEXT_WAY', 'Versand nach');
 define('MODULE_SHIPPING_FEDEXEU_TEXT_UNITS', 'kg');
-define('MODULE_SHIPPING_FEDEXEU_INVALID_ZONE', 'Es ist leider kein Versand in dieses Land m&ouml;glich');
-define('MODULE_SHIPPING_FEDEXEU_UNDEFINED_RATE', 'Die Versandkosten k&ouml;nnen im Moment nicht errechnet werden');
+
 
 define('MODULE_SHIPPING_FEDEXEU_STATUS_TITLE' , 'FedEx Express Europe');
 define('MODULE_SHIPPING_FEDEXEU_STATUS_DESC' , 'Wollen Sie den Versand durch FedEx Express Europa anbieten?');
 define('MODULE_SHIPPING_FEDEXEU_HANDLING_TITLE' , 'Handling Geb&uuml;hr');
 define('MODULE_SHIPPING_FEDEXEU_HANDLING_DESC' , 'Bearbeitungsgeb&uuml;hr f&ouuml;r diese Versandart in Euro');
-define('MODULE_SHIPPING_FEDEXEU_TAX_CLASS_TITLE' , 'Steuersatz');
-define('MODULE_SHIPPING_FEDEXEU_TAX_CLASS_DESC' , 'W&auuml;hlen Sie den MwSt.-Satz f&ouuml;r diese Versandart aus.');
-define('MODULE_SHIPPING_FEDEXEU_ZONE_TITLE' , 'Versand Zone');
-define('MODULE_SHIPPING_FEDEXEU_ZONE_DESC' , 'Wenn Sie eine Zone ausw&auuml;hlen, wird diese Versandart nur in dieser Zone angeboten.');
-define('MODULE_SHIPPING_FEDEXEU_SORT_ORDER_TITLE' , 'Reihenfolge der Anzeige');
-define('MODULE_SHIPPING_FEDEXEU_SORT_ORDER_DESC' , 'Niedrigste wird zuerst angezeigt.');
-define('MODULE_SHIPPING_FEDEXEU_ALLOWED_TITLE' , 'Einzelne Versandzonen');
-define('MODULE_SHIPPING_FEDEXEU_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand m&ouml;glich sein soll. zb AT,DE');
 define('MODULE_SHIPPING_FEDEXEU_COUNTRIES_1_TITLE' , 'Europazone 1 L&auuml;nder');
 define('MODULE_SHIPPING_FEDEXEU_COUNTRIES_1_DESC' , 'Durch Komma getrennt Liste der L&auuml;nder als zwei Zeichen ISO-Code Landeskennzahlen, die Teil der Zone 1 sind');
 define('MODULE_SHIPPING_FEDEXEU_COST_PAK_1_TITLE' , 'Tariftabelle f&ouuml;r Zone 1 bis 2.50 kg PAK');
@@ -137,4 +128,15 @@ define('MODULE_SHIPPING_FEDEXEU_STEP_BOX_40_8_TITLE' , 'Erh&ouml;hungszuschlag b
 define('MODULE_SHIPPING_FEDEXEU_STEP_BOX_40_8_DESC' , 'Erh&ouml;hungszuschlag pro &ouuml;bersteigende 0,50 kg in EUR');
 define('MODULE_SHIPPING_FEDEXEU_STEP_BOX_70_8_TITLE' , 'Erh&ouml;hungszuschlag bis 50 kg BOX');
 define('MODULE_SHIPPING_FEDEXEU_STEP_BOX_70_8_DESC' , 'Erh&ouml;hungszuschlag pro &ouuml;bersteigende 0,50 kg in EUR');
+
+define('MODULE_SHIPPING_FEDEXEU_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_FEDEXEU_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_FEDEXEU_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_FEDEXEU_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_FEDEXEU_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_FEDEXEU_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_FEDEXEU_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_FEDEXEU_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_FEDEXEU_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_FEDEXEU_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

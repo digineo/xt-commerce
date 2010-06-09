@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: flat.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: flat.php 194 2007-02-25 11:46:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,14 +21,18 @@ define('MODULE_SHIPPING_FLAT_TEXT_WAY', 'Bester Weg');
 
 define('MODULE_SHIPPING_FLAT_STATUS_TITLE' , 'Pauschale Versandkosten aktivieren');
 define('MODULE_SHIPPING_FLAT_STATUS_DESC' , 'M&ouml;chten Sie Pauschale Versandkosten anbieten?');
-define('MODULE_SHIPPING_FLAT_ALLOWED_TITLE' , 'Erlaubte Versandzonen');
-define('MODULE_SHIPPING_FLAT_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand möglich sein soll. (z.B. AT,DE (lassen Sie dieses Feld leer, wenn Sie alle Zonen erlauben wollen))');
 define('MODULE_SHIPPING_FLAT_COST_TITLE' , 'Versandkosten');
 define('MODULE_SHIPPING_FLAT_COST_DESC' , 'Versandkosten für alle Bestellungen unter dieser Versandmethode.');
-define('MODULE_SHIPPING_FLAT_TAX_CLASS_TITLE' , 'Steuerklasse');
-define('MODULE_SHIPPING_FLAT_TAX_CLASS_DESC' , 'Folgende Steuerklasse an Versandkosten anwenden.');
-define('MODULE_SHIPPING_FLAT_ZONE_TITLE' , 'Versandzone');
-define('MODULE_SHIPPING_FLAT_ZONE_DESC' , 'Wenn eine Zone ausgew&auml;hlt ist, wird diese Versandmethode ausschliseslich f&uuml;r diese Zone angewendet.');
-define('MODULE_SHIPPING_FLAT_SORT_ORDER_TITLE' , 'Sortierreihenfolge');
-define('MODULE_SHIPPING_FLAT_SORT_ORDER_DESC' , 'Reihenfolge der Anzeige');
+
+
+define('MODULE_SHIPPING_FLAT_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_FLAT_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_FLAT_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_FLAT_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_FLAT_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_FLAT_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_FLAT_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_FLAT_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_FLAT_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_FLAT_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: campaigns.php 1117 2005-07-25 21:02:11Z mz $   
+   $Id: campaigns.php 229 2007-03-06 19:46:21Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -84,12 +84,17 @@ switch ($_GET['action']) {
 <!-- body_text //-->
     <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
+        <td width="100%">
+       <table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'conf.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Configuration</td>
+  </tr>
+</table> 
+</td>
       </tr>
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">

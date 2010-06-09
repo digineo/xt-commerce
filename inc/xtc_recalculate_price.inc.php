@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_recalculate_price.inc.php 1281 2005-10-03 09:30:17Z mz $   
+   $Id: xtc_recalculate_price.inc.php 70 2007-01-07 14:19:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

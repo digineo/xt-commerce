@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_db_connect_installer.inc.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: xtc_db_connect_installer.inc.php 274 2007-03-22 09:00:34Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: print_product_info.php 1282 2005-10-03 19:39:36Z mz $   
+   $Id: print_product_info.php 300 2007-03-30 07:07:54Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,6 +21,7 @@ include ('includes/application_top.php');
 // include needed functions
 require_once (DIR_FS_INC.'xtc_get_products_mo_images.inc.php');
 require_once (DIR_FS_INC.'xtc_get_vpe_name.inc.php');
+require_once (DIR_FS_INC.'xtc_date_long.inc.php');
 
 $smarty = new Smarty;
 
@@ -61,61 +62,85 @@ $image = '';
 if ($product_info['products_image'] != '') {
 	$image = DIR_WS_CATALOG.DIR_WS_THUMBNAIL_IMAGES.$product_info['products_image'];
 }
-if ($_SESSION['customers_status']['customers_status_show_price'] != 0) {
-	$tax_rate = $xtPrice->TAX[$product_info['products_tax_class_id']];
-	// price incl tax
-	if ($tax_rate > 0 && $_SESSION['customers_status']['customers_status_show_price_tax'] != 0) {
-		$smarty->assign('PRODUCTS_TAX_INFO', sprintf(TAX_INFO_INCL, $tax_rate.' %'));
-	}
-	// excl tax + tax at checkout
-	if ($tax_rate > 0 && $_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
-		$smarty->assign('PRODUCTS_TAX_INFO', sprintf(TAX_INFO_ADD, $tax_rate.' %'));
-	}
-	// excl tax
-	if ($tax_rate > 0 && $_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 0) {
-		$smarty->assign('PRODUCTS_TAX_INFO', sprintf(TAX_INFO_EXCL, $tax_rate.' %'));
-	}
-}
-$smarty->assign('PRODUCTS_NAME', $product_info['products_name']);
-$smarty->assign('PRODUCTS_EAN', $product_info['products_ean']);
-$smarty->assign('PRODUCTS_QUANTITY', $product_info['products_quantity']);
-$smarty->assign('PRODUCTS_WEIGHT', $product_info['products_weight']);
-$smarty->assign('PRODUCTS_STATUS', $product_info['products_status']);
-$smarty->assign('PRODUCTS_ORDERED', $product_info['products_ordered']);
-$smarty->assign('PRODUCTS_MODEL', $product_info['products_model']);
-$smarty->assign('PRODUCTS_DESCRIPTION', $product_info['products_description']);
-$smarty->assign('PRODUCTS_IMAGE', $image);
-$smarty->assign('PRODUCTS_PRICE', $products_price['formated']);
-if (ACTIVATE_SHIPPING_STATUS == 'true') {
-	$smarty->assign('SHIPPING_NAME', $main->getShippingStatusName($product_info['products_shippingtime']));
-	if ($shipping_status['image'] != '')
-		$smarty->assign('SHIPPING_IMAGE', $main->getShippingStatusImage($product_info['products_shippingtime']));
-}
-if (SHOW_SHIPPING == 'true')
-	$smarty->assign('PRODUCTS_SHIPPING_LINK', ' '.SHIPPING_EXCL.'<a href="javascript:newWin=void(window.open(\''.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS).'\', \'popup\', \'toolbar=0, width=640, height=600\'))"> '.SHIPPING_COSTS.'</a>');	
+
+
+		if ($_SESSION['customers_status']['customers_status_show_price'] != 0) {
+			// price incl tax
+			$tax_rate = $xtPrice->TAX[$product->data['products_tax_class_id']];				
+			$tax_info = $main->getTaxInfo($tax_rate);
+			$smarty->assign('PRODUCTS_TAX_INFO', $tax_info);
+			$smarty->assign('PRODUCTS_SHIPPING_LINK',$main->getShippingLink());
+		}
 		
+		
+		if ($product->data['products_fsk18'] == '1') {
+			$smarty->assign('PRODUCTS_FSK18', 'true');
+		}
+		if (ACTIVATE_SHIPPING_STATUS == 'true') {
+			$smarty->assign('SHIPPING_NAME', $main->getShippingStatusName($product->data['products_shippingtime']));
+			$smarty->assign('SHIPPING_IMAGE', $main->getShippingStatusImage($product->data['products_shippingtime']));
+		}
 
-$discount = 0.00;
-if ($_SESSION['customers_status']['customers_status_public'] == 1 && $_SESSION['customers_status']['customers_status_discount'] != '0.00') {
-	$discount = $_SESSION['customers_status']['customers_status_discount'];
-	if ($product_info['products_discount_allowed'] < $_SESSION['customers_status']['customers_status_discount'])
-		$discount = $product_info['products_discount_allowed'];
-	if ($discount != '0.00')
-		$smarty->assign('PRODUCTS_DISCOUNT', $discount.'%');
-}
+		$smarty->assign('PRODUCTS_PRICE', $products_price['formated']);
+		if ($product->data['products_vpe_status'] == 1 && $product->data['products_vpe_value'] != 0.0 && $products_price['plain'] > 0)
+			$smarty->assign('PRODUCTS_VPE', $xtPrice->xtcFormat($products_price['plain'] * (1 / $product->data['products_vpe_value']), true).TXT_PER.xtc_get_vpe_name($product->data['products_vpe']));
+		$smarty->assign('PRODUCTS_ID', $product->data['products_id']);
+		$smarty->assign('PRODUCTS_NAME', $product->data['products_name']);		
+		$smarty->assign('PRODUCTS_MODEL', $product->data['products_model']);
+		$smarty->assign('PRODUCTS_EAN', $product->data['products_ean']);
+		$smarty->assign('PRODUCTS_QUANTITY', $product->data['products_quantity']);
+		$smarty->assign('PRODUCTS_WEIGHT', $product->data['products_weight']);
+		$smarty->assign('PRODUCTS_STATUS', $product->data['products_status']);
+		$smarty->assign('PRODUCTS_ORDERED', $product->data['products_ordered']);
+		$smarty->assign('PRODUCTS_PRINT', '<img src="templates/'.CURRENT_TEMPLATE.'/buttons/'.$_SESSION['language'].'/print.gif"  style="cursor:hand" onclick="javascript:window.open(\''.xtc_href_link(FILENAME_PRINT_PRODUCT_INFO, 'products_id='.$product->data['products_id']).'\', \'popup\', \'toolbar=0, width=640, height=600\')" alt="" />');
+		$smarty->assign('PRODUCTS_DESCRIPTION', stripslashes($product->data['products_description']));
+		$image = '';
+		if ($product->data['products_image'] != '')
+			$image = DIR_WS_INFO_IMAGES.$product->data['products_image'];
 
-if ($product_info['products_vpe_status'] == 1 && $product_info['products_vpe_value'] != 0.0 && $products_price['plain'] > 0)
-	$smarty->assign('PRODUCTS_VPE', $xtPrice->xtcFormat($products_price['plain'] * (1 / $product_info['products_vpe_value']), true).TXT_PER.xtc_get_vpe_name($product_info['products_vpe']));
+		$smarty->assign('PRODUCTS_IMAGE', $image);
+		
+			//mo_images - by Novalis@eXanto.de
+		if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') {
+			$connector = '/';
+		}else{
+			$connector = '&';
+		}
+		$smarty->assign('PRODUCTS_POPUP_LINK', 'javascript:popupWindow(\''.xtc_href_link(FILENAME_POPUP_IMAGE, 'pID='.$product->data['products_id'].$connector.'imgID=0').'\')');
+		$mo_images = xtc_get_products_mo_images($product->data['products_id']);
+		if ($mo_images != false) {
+			foreach ($mo_images as $img) {
+				$mo_img = DIR_WS_INFO_IMAGES.$img['image_name'];
+				$smarty->assign('PRODUCTS_IMAGE_'.$img['image_nr'], $mo_img);
+				$smarty->assign('PRODUCTS_POPUP_LINK_'.$img['image_nr'], 'javascript:popupWindow(\''.xtc_href_link(FILENAME_POPUP_IMAGE, 'pID='.$product->data['products_id'].$connector.'imgID='.$img['image_nr']).'\')');
+			}
+		}
+		//mo_images EOF
+
+		$discount = 0.00;
+		if ($_SESSION['customers_status']['customers_status_public'] == 1 && $_SESSION['customers_status']['customers_status_discount'] != '0.00') {
+			$discount = $_SESSION['customers_status']['customers_status_discount'];
+			if ($product->data['products_discount_allowed'] < $_SESSION['customers_status']['customers_status_discount'])
+				$discount = $product->data['products_discount_allowed'];
+			if ($discount != '0.00')
+				$smarty->assign('PRODUCTS_DISCOUNT', $discount.'%');
+		}
+
+		if (xtc_not_null($product->data['products_url']))
+			$smarty->assign('PRODUCTS_URL', sprintf(TEXT_MORE_INFORMATION, xtc_href_link(FILENAME_REDIRECT, 'action=product&id='.$product->data['products_id'], 'NONSSL', true, false)));
+
+		if ($product->data['products_date_available'] > date('Y-m-d H:i:s')) {
+			$smarty->assign('PRODUCTS_DATE_AVIABLE', sprintf(TEXT_DATE_AVAILABLE, xtc_date_long($product->data['products_date_available'])));
+
+		} else {
+			if ($product->data['products_date_added'] != '0000-00-00 00:00:00')
+				$smarty->assign('PRODUCTS_ADDED', sprintf(TEXT_DATE_ADDED, xtc_date_long($product->data['products_date_added'])));
+
+		}
+
 $smarty->assign('module_content', $module_content);
+$smarty->assign('charset',$_SESSION['language_charset']);
 
-//more images - by Novalis
-$mo_images = xtc_get_products_mo_images($product_info['products_id']);
-if (is_array($mo_images)) {
-	foreach ($mo_images as $img) {
-		$mo_img = DIR_WS_CATALOG.DIR_WS_THUMBNAIL_IMAGES.$img['image_name'];
-		$smarty->assign('PRODUCTS_IMAGE_'.$img['image_nr'], $mo_img);
-	}
-}
 
 // set cache ID
  if (!CacheCheck()) {

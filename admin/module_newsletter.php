@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: module_newsletter.php 1142 2005-08-11 08:19:55Z matthias $
+   $Id: module_newsletter.php 229 2007-03-06 19:46:21Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -301,15 +301,15 @@ $limit_up = $limits['1'];
 <!-- left_navigation_eof //-->
     </table></td>
 <!-- body_text //-->
-    <td width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_news.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'email.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XTC Tools</td>
+    <td class="main" valign="top">xt:Commerce Tools</td>
   </tr>
 </table></td>
       </tr>
@@ -516,7 +516,7 @@ if ($news_data[$i]['id']!='') {
   echo xtc_image(DIR_WS_ICONS.'delete.gif','Delete','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'  '.TEXT_DELETE.'</a>&nbsp;&nbsp;';
   ?>
 <a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=edit&ID='.$news_data[$i]['id']); ?>">
-<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','').'  '.TEXT_EDIT.'</a>'; ?>
+<?php echo xtc_image(DIR_WS_ICONS.'file_edit_16x16.png','Edit','','').'  '.TEXT_EDIT.'</a>'; ?>
 
 
 

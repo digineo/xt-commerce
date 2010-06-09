@@ -10,7 +10,7 @@
    --------------------------------------------------------------*/
 
 
-  define('HEADING_TITLE','XTC-Newsletter');
+  define('HEADING_TITLE','Newsletter');
   define('TITLE_CUSTOMERS','Customers Group');
   define('TITLE_STK','Subscribed');
   define('TEXT_TITLE','Subject:');

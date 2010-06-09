@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: credits.php 1263 2005-09-30 10:14:08Z mz $   
+   $Id: credits.php 71 2007-01-07 15:48:30Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -55,7 +55,7 @@
       </tr>
       <tr>
         <td class="main">
-<font color="D68000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo PROJECT_VERSION; ?></b></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><br />
+<font color="#D68000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo PROJECT_VERSION; ?></b></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><br />
 Release
 Datum: 17 Aug 2006</strong><br />
 Released under the GNU General Public License<br />
@@ -77,11 +77,11 @@ bitten wir um Entschuldigung. In diesem Fall bitten wir um einen Hinweis in unte
 <a href="mailto://team@xtcommerce.com">team@xtcommerce.com</a><br />
 <br />
 <br />
-<font color="D68000"><b>Programmierer
+<font color="#D68000"><b>Programmierer
 von XT-Commerce:</b></font><br />
 </font>
 <hr align="center" width="100%">
-<table width="100%" border="0" cellpadding="0" cellspacing="4" border-color: #ff0000;" bgcolor="FDAC00">
+<table width="100%" border="0" cellpadding="0" cellspacing="4" border-color: #ff0000;" bgcolor="#FDAC00">
   <tr>
     <td width="100"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Mario Zanier</b></font></td>
     <td width="80%"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"> <a href="mailto:mzanier@xtcommerce.com">mzanier@xtcommerce.com</a></font>
@@ -97,7 +97,7 @@ von XT-Commerce:</b></font><br />
 </table>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"> <br />
 <br />
-<font color="D68000"><b>Die
+<font color="#D68000"><b>Die
 Shopsoftware basiert auf:</b></font><br />
 </font>
 <hr align="center" width="100%">

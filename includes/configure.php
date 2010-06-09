@@ -1,10 +1,10 @@
 <?php
 /* --------------------------------------------------------------
 
-  XT-Commerce - community made shopping
+  xt:Commerce - community made shopping
   http://www.xt-commerce.com
 
-   Copyright (c) 2003 XT-Commerce
+   Copyright (c) 2007 xt:Commerce
   --------------------------------------------------------------
   based on:
   (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
@@ -17,11 +17,11 @@
 // * DIR_FS_* = Filesystem directories (local/physical)
 // * DIR_WS_* = Webserver directories (virtual/URL)
   define('HTTP_SERVER', 'http://localhost'); // eg, http://localhost - should not be empty for productive servers
-  define('HTTPS_SERVER', 'https://localhost'); // eg, https://localhost - should not be empty for productive servers
+  define('HTTPS_SERVER', 'http://localhost'); // eg, https://localhost - should not be empty for productive servers
   define('ENABLE_SSL', false); // secure webserver for checkout procedure?
-  define('DIR_WS_CATALOG', '/304SP2/xtcommerce/'); // absolute path required
-  define('DIR_FS_DOCUMENT_ROOT', '/Users/mzanier/Sites/304SP2/xtcommerce/');
-  define('DIR_FS_CATALOG', '/Users/mzanier/Sites/304SP2/xtcommerce/');
+  define('DIR_WS_CATALOG', '/svn_3.0/xtc30/xtcommerce/'); // absolute path required
+  define('DIR_FS_DOCUMENT_ROOT', '/Volumes/Raid/webseiten/svn_3.0/xtc30/xtcommerce/');
+  define('DIR_FS_CATALOG', '/Volumes/Raid/webseiten/svn_3.0/xtc30/xtcommerce/');
   define('DIR_WS_IMAGES', 'images/');
   define('DIR_WS_ORIGINAL_IMAGES', DIR_WS_IMAGES .'product_images/original_images/');
   define('DIR_WS_THUMBNAIL_IMAGES', DIR_WS_IMAGES .'product_images/thumbnail_images/');
@@ -43,7 +43,7 @@
   define('DB_SERVER', 'localhost'); // eg, localhost - should not be empty for productive servers
   define('DB_SERVER_USERNAME', 'root');
   define('DB_SERVER_PASSWORD', 'root');
-  define('DB_DATABASE', 'xtc_sp2');
+  define('DB_DATABASE', 'xttest');
   define('USE_PCONNECT', 'false'); // use persistent connections?
   define('STORE_SESSIONS', 'mysql'); // leave empty '' for default handler or set to 'mysql'
 ?>

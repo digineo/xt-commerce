@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_product_link.inc.php 779 2005-02-19 17:19:28Z novalis $
+   $Id: xtc_product_link.inc.php 70 2007-01-07 14:19:12Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

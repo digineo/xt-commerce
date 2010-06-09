@@ -2,7 +2,7 @@
 
 
 /* -----------------------------------------------------------------------------------------
-   $Id: redirect.php 1060 2005-07-21 18:32:58Z mz $   
+   $Id: redirect.php 4 2006-11-28 14:38:03Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

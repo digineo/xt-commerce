@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: cart_actions.php 1298 2005-10-09 13:14:44Z mz $
+   $Id: cart_actions.php 168 2007-02-06 14:11:42Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -102,6 +102,15 @@ if (isset ($_GET['action'])) {
 					$old_quantity = $_SESSION['cart']->get_quantity(xtc_get_uprid($_POST['products_id'], $_POST['id']));
 					$econda->_addProduct($_POST['products_id'], $_POST['products_qty'], $old_quantity);
 				}
+
+//echo (int) $_POST['products_id'].'<br>';
+//echo $_POST['products_id'].'<br>';
+//print_r($_POST['id']);
+
+//				echo '<pre>';
+//				print_r ($_POST['id']);
+//				echo '</pre>';
+//				break;
 
 				$_SESSION['cart']->add_cart((int) $_POST['products_id'], $_SESSION['cart']->get_quantity(xtc_get_uprid($_POST['products_id'], $_POST['id'])) + xtc_remove_non_numeric($_POST['products_qty']), $_POST['id']);
 			}

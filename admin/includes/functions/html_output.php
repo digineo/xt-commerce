@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: html_output.php 1125 2005-07-28 09:59:44Z novalis $   
+   $Id: html_output.php 208 2007-02-27 08:03:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -286,19 +286,19 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
       switch ($page) {
           case FILENAME_CUSTOMERS:
 
-          $nav='<br><a href="'.xtc_href_link(FILENAME_CUSTOMERS,'sorting='.$sort.'&'.xtc_get_all_get_params(array('action','sorting'))).'">';
-          $nav.=xtc_image(DIR_WS_ICONS . 'sort_down.gif', '', '20' ,'20').'</a>';
+          $nav='<a href="'.xtc_href_link(FILENAME_CUSTOMERS,'sorting='.$sort.'&'.xtc_get_all_get_params(array('action','sorting'))).'">';
+          $nav.=xtc_image(DIR_WS_ICONS . 'sort_down.gif', '').'</a>&nbsp;';
           $nav.='<a href="'.xtc_href_link(FILENAME_CUSTOMERS,'sorting='.$sort.'-desc&'.xtc_get_all_get_params(array('action','sorting'))).'">';
-          $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '', '20' ,'20').'</a>';
+          $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '').'</a>';
 
           break;
           
           case FILENAME_CATEGORIES:
 
-          $nav='<br><div><a href="'.xtc_href_link(FILENAME_CATEGORIES,'sorting='.$sort.'&'.xtc_get_all_get_params(array('action','sorting'))).'">';
-          $nav.=xtc_image(DIR_WS_ICONS . 'sort_down.gif', '', '20' ,'20').'</a>';
+          $nav='&nbsp;<a href="'.xtc_href_link(FILENAME_CATEGORIES,'sorting='.$sort.'&'.xtc_get_all_get_params(array('action','sorting'))).'">';
+          $nav.=xtc_image(DIR_WS_ICONS . 'sort_down.gif', '').'</a>&nbsp;';
           $nav.='<a href="'.xtc_href_link(FILENAME_CATEGORIES,'sorting='.$sort.'-desc&'.xtc_get_all_get_params(array('action','sorting'))).'">';
-          $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '', '20' ,'20').'</a></div>';
+          $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '').'</a>';
 
           break;          
 
@@ -306,5 +306,18 @@ defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.'
 
       return $nav;
 
+  }
+  
+  function xtcIndexNavigation($page) {
+  	
+  	$navigation = '';
+  	$navigation .='<li><a href="'.xtc_href_link(FILENAME_CUSTOMERS,'sorting_letter=all&'.xtc_get_all_get_params(array('action','sorting_letter'))).'">'.TXT_ALL.'</a></li>';
+  	foreach (range('A', 'Z') as  $val) {
+   		 $navigation.='<li><a href="'.xtc_href_link(FILENAME_CUSTOMERS,'sorting_letter='.$val.'&'.xtc_get_all_get_params(array('action','sorting_letter'))).'">'.$val.'</a></li>';
+	}
+  	return $navigation;
+  	
+  	
+  	
   }
 ?>

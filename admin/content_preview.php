@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: content_preview.php 1304 2005-10-12 18:04:43Z mz $   
+   $Id: content_preview.php 4 2006-11-28 14:38:03Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

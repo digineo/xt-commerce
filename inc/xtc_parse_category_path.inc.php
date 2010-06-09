@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_parse_category_path.inc.php 784 2005-02-19 20:21:29Z khan_thep $   
+   $Id: xtc_parse_category_path.inc.php 70 2007-01-07 14:19:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

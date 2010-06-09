@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: tracking.php 1151 2005-08-12 09:19:33Z gwinger $   
+   $Id: tracking.php 4 2006-11-28 14:38:03Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

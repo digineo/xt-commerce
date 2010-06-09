@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: categories.php 1249 2005-09-27 12:06:40Z gwinger $   
+   $Id: categories.php 199 2007-02-25 15:31:27Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -130,8 +130,8 @@ define('ERROR_CATALOG_IMAGE_DIRECTORY_NOT_WRITEABLE', 'Fehler: Das Verzeichnis \
 define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Verzeichnis \'images\' im Katalogverzeichnis ist nicht vorhanden: ' . DIR_FS_CATALOG_IMAGES);
 
 define('TEXT_PRODUCTS_DISCOUNT_ALLOWED','Rabatt erlaubt:');
-define('HEADING_PRICES_OPTIONS','<b>Preis-Optionen</b>');
-define('HEADING_PRODUCT_IMAGES','<b>Artikel-Bilder</b>');
+define('HEADING_PRICES_OPTIONS','Preise');
+define('HEADING_PRODUCT_IMAGES','Bilder');
 define('TEXT_PRODUCTS_WEIGHT_INFO','<small>(kg)</small>');
 define('TEXT_PRODUCTS_SHORT_DESCRIPTION','Kurzbeschreibung:');
 define('TEXT_PRODUCTS_KEYWORDS', 'Zusatz-Begriffe f&uuml;r Suche:');
@@ -184,4 +184,10 @@ define('HEADING_SORTING','Reihung');
 define('HEADING_MODEL','Artikelnummer');
 define('HEADING_NAME','Artikel');
 define('HEADING_CATEGORY','Kategorie');
+
+// sp2.2
+define('HEADING_GROUP_PERMISSIONS','Rechte');
+define('HEADING_GENERAL','Allgemeines');
+define('TEXT_AVERAGE_STOCK','Ampel-Stock:');
+
 ?>

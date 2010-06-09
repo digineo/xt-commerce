@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: get_cross_sell_name.inc.php 1232 2005-09-21 15:29:07Z mz $
+   $Id: get_cross_sell_name.inc.php 70 2007-01-07 14:19:12Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: shipping_status.php 1125 2005-07-28 09:59:44Z novalis $
+   $Id: shipping_status.php 229 2007-03-06 19:46:21Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -108,13 +108,14 @@
 <!-- body_text //-->
     <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td>  
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'conf.png'); ?></td>
     <td class="pageHeading"><?php echo BOX_SHIPPING_STATUS; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XT Configuration</td>
+    <td class="main" valign="top">xt:Commerce Configuration</td>
   </tr>
 </table></td>
       </tr>

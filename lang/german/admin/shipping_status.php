@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: shipping_status.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: shipping_status.php 20 2006-12-25 13:38:37Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

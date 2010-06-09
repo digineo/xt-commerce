@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: languages.php 950 2005-05-14 16:45:21Z mz $   
+   $Id: languages.php 82 2007-01-13 10:57:08Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: eustandardtransfer.php 998 2005-07-07 14:18:20Z mz $
+   $Id: eustandardtransfer.php 199 2007-02-25 15:31:27Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,11 +21,11 @@ class eustandardtransfer {
 	// class constructor
 	function eustandardtransfer() {
 		$this->code = 'eustandardtransfer';
-		$this->title = MODULE_PAYMENT_EUTRANSFER_TEXT_TITLE;
-		$this->description = MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION;
-		$this->sort_order = MODULE_PAYMENT_EUTRANSFER_SORT_ORDER;
-		$this->info = MODULE_PAYMENT_EUTRANSFER_TEXT_INFO;
-		$this->enabled = ((MODULE_PAYMENT_EUTRANSFER_STATUS == 'True') ? true : false);
+		$this->title = MODULE_PAYMENT_EUSTANDARDTRANSFER_TEXT_TITLE;
+		$this->description = MODULE_PAYMENT_EUSTANDARDTRANSFER_TEXT_DESCRIPTION;
+		$this->sort_order = MODULE_PAYMENT_EUSTANDARDTRANSFER_SORT_ORDER;
+		$this->info = MODULE_PAYMENT_EUSTANDARDTRANSFER_TEXT_INFO;
+		$this->enabled = ((MODULE_PAYMENT_EUSTANDARDTRANSFER_STATUS == 'True') ? true : false);
 	}
 	// class methods
 	function javascript_validation() {
@@ -33,7 +33,7 @@ class eustandardtransfer {
 	}
 
 	function selection() {
-		return array ('id' => $this->code, 'module' => $this->title, 'description' => $this->info);
+		return array ('id' => $this->code, 'module' => $this->title, 'description' => $this->info,'module_cost'=>$this->payment_cost());
 	}
 	//    function selection() {
 	//      return false;
@@ -48,7 +48,7 @@ class eustandardtransfer {
 	function confirmation() {
 		global $_POST;
 
-		$confirmation = array ('title' => $this->title.': '.$this->check, 'fields' => array (array ('title' => MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION)), 'description' => $this->info);
+		$confirmation = array ('title' => $this->title.': '.$this->check, 'fields' => array (array ('title' => MODULE_PAYMENT_EUSTANDARDTRANSFER_TEXT_DESCRIPTION)), 'description' => $this->info);
 
 		return $confirmation;
 	}
@@ -67,6 +67,10 @@ class eustandardtransfer {
 			xtc_db_query("UPDATE ".TABLE_ORDERS." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
 
 	}
+	
+	function admin_order($oID) {
+		return false;
+	}
 
 	function output_error() {
 		return false;
@@ -74,22 +78,38 @@ class eustandardtransfer {
 
 	function check() {
 		if (!isset ($this->check)) {
-			$check_query = xtc_db_query("select configuration_value from ".TABLE_CONFIGURATION." where configuration_key = 'MODULE_PAYMENT_EUTRANSFER_STATUS'");
+			$check_query = xtc_db_query("select configuration_value from ".TABLE_CONFIGURATION." where configuration_key = 'MODULE_PAYMENT_EUSTANDARDTRANSFER_STATUS'");
 			$this->check = xtc_db_num_rows($check_query);
 		}
 		return $this->check;
 	}
+	
+	function payment_cost() {
+		global $order;
+		$cost = constant(MODULE_PAYMENT_.strtoupper($this->code)._COST);
+
+        	$cost_table = split("[:,]" , $cost);
+        	for ($i=0; $i<sizeof($cost_table); $i+=2) {
+          	if ($order->info['total'] <= $cost_table[$i]) {
+            	$percentage = $cost_table[$i+1];
+            	break;
+          	}
+        	}
+		if ($percentage>0)
+			return '+'.$percentage.'% '.TEXT_PAYMENT_FEE;
+	}
 
 	function install() {
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_ALLOWED', '', '6', '0', now())");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_EUTRANSFER_STATUS', 'True', '6', '3', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now());");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_BANKNAM', '---',  '6', '1', now());");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_BRANCH', '---', '6', '1', now());");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_ACCNAM', '---',  '6', '1', now());");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_ACCNUM', '---',  '6', '1', now());");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_ACCIBAN', '---',  '6', '1', now());");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_BANKBIC', '---',  '6', '1', now());");
-		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUTRANSFER_SORT_ORDER', '0',  '6', '0', now())");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_STATUS', 'True', '6', '3', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now());");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_BANKNAM', '---',  '6', '1', now());");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_BRANCH', '---', '6', '1', now());");
+		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_COST', '', '6', '0', now())");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_ACCNAM', '---',  '6', '1', now());");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_ACCNUM', '---',  '6', '1', now());");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_ACCIBAN', '---',  '6', '1', now());");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_BANKBIC', '---',  '6', '1', now());");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_key, configuration_value,configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_EUSTANDARDTRANSFER_SORT_ORDER', '0',  '6', '0', now())");
 
 	}
 
@@ -98,7 +118,7 @@ class eustandardtransfer {
 	}
 
 	function keys() {
-		$keys = array ('MODULE_PAYMENT_EUTRANSFER_STATUS', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_ALLOWED', 'MODULE_PAYMENT_EUTRANSFER_BANKNAM', 'MODULE_PAYMENT_EUTRANSFER_BRANCH', 'MODULE_PAYMENT_EUTRANSFER_ACCNAM', 'MODULE_PAYMENT_EUTRANSFER_ACCNUM', 'MODULE_PAYMENT_EUTRANSFER_ACCIBAN', 'MODULE_PAYMENT_EUTRANSFER_BANKBIC', 'MODULE_PAYMENT_EUTRANSFER_SORT_ORDER');
+		$keys = array ('MODULE_PAYMENT_EUSTANDARDTRANSFER_STATUS', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_ALLOWED', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_BANKNAM', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_BRANCH', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_ACCNAM', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_ACCNUM', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_ACCIBAN', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_BANKBIC', 'MODULE_PAYMENT_EUSTANDARDTRANSFER_SORT_ORDER','MODULE_PAYMENT_EUSTANDARDTRANSFER_COST');
 
 		return $keys;
 	}

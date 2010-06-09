@@ -19,10 +19,17 @@
     echo $messageStack->output();
   }
 ?>
-<table border="0" width="100%" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="1"><?php echo xtc_image(DIR_WS_IMAGES . 'logo.gif', 'xt:Commerce', '185', '95'); ?></td>
-    <td valign="bottom" align="right" background="images/bg_top.jpg"><?php echo xtc_image(DIR_WS_IMAGES . 'img_spacer.jpg', '', '', ''); ?><?php echo '<a href="start.php"  class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_index.gif', '', '', '').'</a>'; ?><?php echo xtc_image(DIR_WS_IMAGES . 'img_spacer.jpg', '', '', ''); ?><?php echo '<a href="http://www.xt-commerce.com/de/support.html" target="_new" class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_support.gif', '', '', '').'</a>'; ?><?php echo xtc_image(DIR_WS_IMAGES . 'img_spacer.jpg', '', '', ''); ?><?php echo '<a href="../index.php" class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_shop.gif', '', '', '').'</a>'; ?><?php echo xtc_image(DIR_WS_IMAGES . 'img_spacer.jpg', '', '', ''); ?><?php echo '<a href="' . xtc_href_link(FILENAME_LOGOUT, '', 'NONSSL') . '" class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_logout.gif', '', '', '').'</a>'; ?><?php echo xtc_image(DIR_WS_IMAGES . 'img_spacer.jpg', '', '', ''); ?><?php echo '<a href="' . xtc_href_link(FILENAME_CREDITS, '', 'NONSSL') . '" class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_credits.gif', '', '', '').'</a>'; ?><?php echo xtc_image(DIR_WS_IMAGES . 'img_line.jpg', '', '', ''); ?></td>
-</td>
-  </tr>
-</table>
+<div id="header">
+		<div id="logo"><?php echo xtc_image(DIR_WS_IMAGES . 'logo_black.jpg', 'xt:Commerce'); ?></div>
+		<div id="buttons">
+		<?php echo '<a href="start.php"  class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_index.gif', '', '', '').'</a>'; ?>
+		<?php echo xtc_draw_separator('pixel_trans.gif', 5, 5); ?>
+		<?php echo '<a href="http://www.xt-commerce.com/de/support.html" target="_new" class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_support.gif', '', '', '').'</a>'; ?>
+		<?php echo xtc_draw_separator('pixel_trans.gif', 5, 5); ?>
+		<?php echo '<a href="../index.php" class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_shop.gif', '', '', '').'</a>'; ?>
+		<?php echo xtc_draw_separator('pixel_trans.gif', 5, 5); ?>
+		<?php echo '<a href="' . xtc_href_link(FILENAME_LOGOUT, '', 'NONSSL') . '" class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_logout.gif', '', '', '').'</a>'; ?>
+		<?php echo xtc_draw_separator('pixel_trans.gif', 5, 5); ?>
+		<?php echo '<a href="' . xtc_href_link(FILENAME_CREDITS, '', 'NONSSL') . '" class="headerLink">'. xtc_image(DIR_WS_IMAGES . 'top_credits.gif', '', '', '').'</a>'; ?>		
+		</div>
+</div>

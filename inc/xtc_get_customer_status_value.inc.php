@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_customer_status_value.inc.php 1031 2005-07-15 10:30:28Z gwinger $   
+   $Id: xtc_get_customer_status_value.inc.php 70 2007-01-07 14:19:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

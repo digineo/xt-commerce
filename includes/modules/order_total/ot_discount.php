@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_discount.php 1277 2005-10-01 17:02:59Z mz $
+   $Id: ot_discount.php 71 2007-01-07 15:48:30Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -37,7 +37,7 @@
       if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1' && $_SESSION['customers_status']['customers_status_ot_discount']!='0.00') {
         $discount_price = $xtPrice->xtcFormat($order->info['subtotal'], false) / 100 * $_SESSION['customers_status']['customers_status_ot_discount']*-1;
         $this->output[] = array('title' => $this->title . ':',
-                                'text' => '<font color="ff0000">'.$xtPrice->xtcFormat($discount_price,true).'</font>',
+                                'text' => '<font color="#ff0000">'.$xtPrice->xtcFormat($discount_price,true).'</font>',
                                 'value' => $discount_price);
       }
     }

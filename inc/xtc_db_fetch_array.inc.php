@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_db_fetch_array.inc.php 864 2005-04-16 12:05:41Z mz $   
+   $Id: xtc_db_fetch_array.inc.php 246 2007-03-08 18:14:20Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -36,6 +36,23 @@
           }
         return mysql_fetch_array($db_query, MYSQL_ASSOC);
       }
+  }
+  
+    function xtc_db_fetch_arrayNoCheck(&$db_query) {
+
+//      if (DB_CACHE=='true' && $cq) {
+        if (!count($db_query)) return false;
+        $curr = current($db_query);
+        next($db_query);
+        return $curr;
+//      } else {
+//          if (is_array($db_query)) {
+//          $curr = current($db_query);
+//          next($db_query);
+//          return $curr;
+//          }
+//        return mysql_fetch_array($db_query, MYSQL_ASSOC);
+//      }
   }
 
  ?>

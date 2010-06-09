@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_coupon.php 1322 2005-10-27 13:58:22Z mz $
+   $Id: ot_coupon.php 75 2007-01-07 17:21:21Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -63,7 +63,7 @@ class ot_coupon {
 		if ($od_amount > 0) {
 			$order->info['total'] = $order->info['total'] - $od_amount;
 			$order->info['deduction'] = $od_amount;
-			$this->output[] = array ('title' => $this->title.':'.$this->coupon_code.':', 'text' => '<b><font color="ff0000">-'.$xtPrice->xtcFormat($od_amount, true).'</font></b>', 'value' => $od_amount); //Fred added hyphen
+			$this->output[] = array ('title' => $this->title.':'.$this->coupon_code.':', 'text' => '<b><font color="#ff0000">-'.$xtPrice->xtcFormat($od_amount, true).'</font></b>', 'value' => $od_amount); //Fred added hyphen
 		}
 	}
 
@@ -151,7 +151,7 @@ class ot_coupon {
 
 	function calculate_credit($amount) {
 		global $order;
-
+//	echo 'start Amount:'.$amount;
 		$od_amount = 0;
 		if (isset ($_SESSION['cc_id'])) {
 			$coupon_query = xtc_db_query("select coupon_code from ".TABLE_COUPONS." where coupon_id = '".$_SESSION['cc_id']."'");
@@ -171,20 +171,22 @@ class ot_coupon {
 				if ($get_result['coupon_minimum_order'] <= $this->get_order_total()) {
 
 					if ($get_result['restrict_to_products'] || $get_result['restrict_to_categories']) {
-						
+//						echo '<pre>';
+//						print_r ($order->products);
+//						echo '</pre>';
 						for ($i = 0; $i < sizeof($order->products); $i ++) {
 							if ($get_result['restrict_to_products']) {
 								$pr_ids = split("[,]", $get_result['restrict_to_products']);
-								for ($ii = 0; $p < count($pr_ids); $ii ++) {
+								for ($ii = 0; $ii < count($pr_ids); $ii ++) {
+//									echo 'PID:'.xtc_get_prid($order->products[$i]['id']);
 									if ($pr_ids[$ii] == xtc_get_prid($order->products[$i]['id'])) {
 										if ($get_result['coupon_type'] == 'P') {
-											
 											$od_amount = $amount * $get_result['coupon_amount'] / 100;
 											$pr_c = $this->product_price($pr_ids[$ii]); //Fred 2003-10-28, fix for the row above, otherwise the discount is calc based on price excl VAT!
 											$pod_amount = round($pr_c*10)/10*$c_deduct/100;
-											$od_amount = $od_amount + $pod_amount;
-										
+//											$od_amount = $od_amount + $pod_amount; // fix for double count
 										} else {
+
 											$od_amount = $c_deduct;
 										}
 									}
@@ -214,16 +216,21 @@ class ot_coupon {
 						}
 					} else {
 						if ($get_result['coupon_type'] != 'P') {
+							
 							$od_amount = $c_deduct;
 						} else {
+							
 							$od_amount = $amount * $get_result['coupon_amount'] / 100;
 						}
 					}
 				}
 			}
+
 			if ($od_amount > $amount)
 				$od_amount = $amount;
+		
 		}
+		
 		return $od_amount;
 	}
 
@@ -451,8 +458,10 @@ $order->info['tax'] -= $tod_amount;
 
 				for ($i = 0; $i < sizeof($pr_ids); $i ++) {
 					for ($ii = 1; $ii <= sizeof($products_array); $ii ++) {
+
 						if (xtc_get_prid($products_array[$ii -1]['id']) == $pr_ids[$i]) {
 							$in_cart = true;
+
 							$total_price += $this->get_product_price($products_array[$ii -1]['id']);
 						}
 					}
@@ -460,6 +469,7 @@ $order->info['tax'] -= $tod_amount;
 				$order_total = $total_price;
 			}
 		}
+
 		return $order_total;
 	}
 
@@ -467,11 +477,10 @@ $order->info['tax'] -= $tod_amount;
 		global $order,$xtPrice;
 		$products_id = xtc_get_prid($product_id);
 		// products price
-		$qty = $_SESSION['cart']->contents[$products_id]['qty'];
+		$qty = $_SESSION['cart']->contents[$product_id]['qty'];
 		$product_query = xtc_db_query("select products_id, products_price, products_tax_class_id, products_weight from ".TABLE_PRODUCTS." where products_id='".$product_id."'");
 		if ($product = xtc_db_fetch_array($product_query)) {
 			$prid = $product['products_id'];
-
 
 			if ($this->include_tax == 'true') {
 $total_price += $qty * $xtPrice->xtcGetPrice($product['products_id'], $format = false, 1, $product['products_tax_class_id'], $product['products_price'], 1);
@@ -480,6 +489,7 @@ $_SESSION['total_price']=$total_price;
 $total_price += $qty * $xtPrice->xtcGetPrice($product['products_id'], $format = false, 1, 0, $product['products_price'], 1);
 			}
 
+			
 			// attributes price
 			if (isset ($_SESSION['cart']->contents[$product_id]['attributes'])) {
 				reset($_SESSION['cart']->contents[$product_id]['attributes']);

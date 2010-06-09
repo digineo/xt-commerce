@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: create_coupon_code.inc.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: create_coupon_code.inc.php 70 2007-01-07 14:19:12Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

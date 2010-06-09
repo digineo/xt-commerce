@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: content_manager.php 1304 2005-10-12 18:04:43Z mz $
+   $Id: content_manager.php 208 2007-02-27 08:03:49Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -136,11 +136,11 @@
         }
         $customers_statuses_array=xtc_get_customers_statuses();
         if (strstr($group_ids,'c_all_group')) {
-        $group_ids='c_all_group,';
-         for ($i=0;$n=sizeof($customers_statuses_array),$i<$n;$i++) {
-            $group_ids .='c_'.$customers_statuses_array[$i]['id'].'_group,';
-         }
-        }
+             $group_ids='c_all_group,';
+             foreach($customers_statuses_array as $customers_status) {
+                 $group_ids .='c_'.$customers_status['id'].'_group,';
+             }
+         }     
         
         $content_title=xtc_db_prepare_input($_POST['cont_title']);
         $content_link=xtc_db_prepare_input($_POST['cont_link']);
@@ -245,6 +245,8 @@ if ($select_file=='default') {
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>">
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+<link type="text/css" rel="stylesheet" href="includes/javascript/tabpane/css/luna/tab.css" />
+<script type="text/javascript" src="includes/javascript/tabpane/js/tabpane.js"></script>
 <?php if (USE_WYSIWYG=='true') {
  $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
  $data=xtc_db_fetch_array($query);
@@ -275,11 +277,11 @@ if ($select_file=='default') {
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_content.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'office.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE;?></td>
   </tr>
   <tr> 
-    <td class="main" valign="top">XTC Tools</td>
+    <td class="main" valign="top">xt:Commerce Tools</td>
   </tr>
 </table>
 </td>
@@ -297,7 +299,12 @@ if (!$_GET['action']) {
  <?php
  xtc_spaceUsed(DIR_FS_CATALOG.'media/content/');
 echo '<div class="main">'.USED_SPACE.xtc_format_filesize($total).'</div>';
+
 ?>
+<div class="tab-pane" id="mainTabPane">
+  <script type="text/javascript"><!--
+    var mainTabPane = new WebFXTabPane( document.getElementById( "mainTabPane" ) );
+  //--></script>
 <?php
 // Display Content
 for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
@@ -345,8 +352,11 @@ for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         
         
 ?>
-<br />
-<div class="main"><?php echo xtc_image(DIR_WS_LANGUAGES.$languages[$i]['directory'].'/admin/images/'.$languages[$i]['image']).'&nbsp;&nbsp;'.$languages[$i]['name']; ?></div>
+  <div class="tab-page" id="tabLanguage[<?php echo $languages[$i]['id']; ?>]">
+    <h2 class="tab"><?php echo xtc_image(DIR_WS_LANGUAGES.$languages[$i]['directory'].'/admin/images/'.$languages[$i]['image']).'&nbsp;&nbsp;'.$languages[$i]['name']; ?></h2>
+        <script type="text/javascript"><!--
+      mainTabPane.addTabPage( document.getElementById( "tabLanguage[<?php echo $languages[$i]['id']; ?>]" ) );
+    //--></script>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent" width="10" ><?php echo TABLE_HEADING_CONTENT_ID; ?></td>
@@ -367,11 +377,11 @@ for ($ii = 0, $nn = sizeof($content); $ii < $nn; $ii++) {
  if ($content[$ii]['CONTENT_FILE']=='') $content[$ii]['CONTENT_FILE']='database';
  ?>
  <td class="dataTableContent" align="left"><?php echo $content[$ii]['CONTENT_ID']; ?></td>
- <td bgcolor="<?php echo substr((6543216554/$content[$ii]['CONTENT_GROUP']),0,6); ?>" class="dataTableContent" align="left">&nbsp;</td>
+ <td bgcolor="#<?php echo substr((6543216554/$content[$ii]['CONTENT_GROUP']),0,6); ?>" class="dataTableContent" align="left">&nbsp;</td>
  <td class="dataTableContent" align="left"><?php echo $content[$ii]['CONTENT_TITLE']; ?>
  <?php
  if ($content[$ii]['CONTENT_DELETE']=='0'){
- echo '<font color="ff0000">*</font>';
+ echo '<font color="#ff0000">*</font>';
 } ?>
  </td>
  <td class="dataTableContent" align="middle"><?php echo $content[$ii]['CONTENT_GROUP']; ?></td>
@@ -389,7 +399,7 @@ for ($ii = 0, $nn = sizeof($content); $ii < $nn; $ii++) {
 } // if content
 ?>
  <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=edit&coID='.$content[$ii]['CONTENT_ID']); ?>">
-<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
+<?php echo xtc_image(DIR_WS_ICONS.'file_edit_16x16.png','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
  <a style="cursor:pointer" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'coID='.$content[$ii]['CONTENT_ID']); ?>', 'popup', 'toolbar=0, width=640, height=600')"><?php echo xtc_image(DIR_WS_ICONS.'preview.gif','Preview','','','style="cursor:pointer"').'&nbsp;&nbsp;'.TEXT_PREVIEW.'</a>'; ?>
  </td>
  </tr>
@@ -453,7 +463,7 @@ if ($content_1[$a]!='') {
 } // if content
 ?>
  <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=edit&coID='.$content_1[$a]['CONTENT_ID']); ?>">
-<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
+<?php echo xtc_image(DIR_WS_ICONS.'file_edit_16x16.png','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
  <a style="cursor:pointer" onClick="javascript:window.open('<?php echo xtc_href_link(FILENAME_CONTENT_PREVIEW,'coID='.$content_1[$a]['CONTENT_ID']); ?>', 'popup', 'toolbar=0, width=640, height=600')"
  
  
@@ -465,10 +475,12 @@ if ($content_1[$a]!='') {
 <?php
 }
 } // for content
+echo '</div>';
 } // for language
 ?>
-</table>
 
+</table>
+</div>
 
 <?php
 }
@@ -598,7 +610,7 @@ $customers_statuses_array=array_merge(array(array('id'=>'all','text'=>TXT_ALL)),
 ?>
 <tr>
 <td style="border-top: 1px solid; border-color: #ff0000;" valign="top" class="main" ><?php echo ENTRY_CUSTOMERS_STATUS; ?></td>
-<td style="border-top: 1px solid; border-left: 1px solid; border-color: #ff0000;" style="border-top: 1px solid; border-right: 1px solid; border-color: #ff0000;" style="border-top: 1px solid; border-bottom: 1px solid; border-color: #ff0000;" bgcolor="#FFCC33" class="main">
+<td style="border-top: 1px solid; border-bottom: 1px solid; border-color: #ff0000;" bgcolor="#FFCC33" class="main">
 <?php
 
 for ($i=0;$n=sizeof($customers_statuses_array),$i<$n;$i++) {
@@ -1019,7 +1031,7 @@ for ($xx=0,$zz=sizeof($languages); $xx<$zz;$xx++){
 
 ?>
  <a href="<?php echo xtc_href_link(FILENAME_CONTENT_MANAGER,'action=edit_products_content&coID='.$content_array[$ii]['id']); ?>">
-<?php echo xtc_image(DIR_WS_ICONS.'icon_edit.gif','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
+<?php echo xtc_image(DIR_WS_ICONS.'file_edit_16x16.png','Edit','','','style="cursor:pointer"').'  '.TEXT_EDIT.'</a>'; ?>
 
 <?php
 // display preview button if filetype 

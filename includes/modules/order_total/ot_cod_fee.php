@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_cod_fee.php 1002 2005-07-10 16:11:37Z mz $
+   $Id: ot_cod_fee.php 97 2007-01-17 15:19:56Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -83,6 +83,20 @@
           // Free Shipping
           if ($_SESSION['shipping']['id'] == 'free_free') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_FREE);
           if ($_SESSION['shipping']['id'] == 'freeamount_freeamount') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_FREEAMOUNT_FREE);
+		
+		  // module post (Taiwan)
+  		  if ($_SESSION['shipping']['id'] == 'post_TIME0') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_POST);
+		  if ($_SESSION['shipping']['id'] == 'post_TIME1') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_POST);
+		  
+		  // module ecan (Taiwan)
+  		  if ($_SESSION['shipping']['id'] == 'ecan_TIME0') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_ECAN);
+  		  if ($_SESSION['shipping']['id'] == 'ecan_TIME1') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_ECAN);
+  		  if ($_SESSION['shipping']['id'] == 'ecan_TIME2') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_ECAN);
+		  
+		  // module tcat (Taiwan)
+		  if ($_SESSION['shipping']['id'] == 'tcat_TIME0') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_TCAT);
+		  if ($_SESSION['shipping']['id'] == 'tcat_TIME1') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_TCAT);
+		  if ($_SESSION['shipping']['id'] == 'tcat_TIME2') $cod_zones = split("[:,]", MODULE_ORDER_TOTAL_COD_FEE_TCAT);		  		  
 
 
             for ($i = 0; $i < count($cod_zones); $i++) {
@@ -106,6 +120,7 @@
 
             $cod_tax = xtc_get_tax_rate(MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS, $order->delivery['country']['id'], $order->delivery['zone_id']);
             $cod_tax_description = xtc_get_tax_description(MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS, $order->delivery['country']['id'], $order->delivery['zone_id']);
+        	$cod_cost = $xtPrice->xtcFormat($cod_cost,false,0,true);
         if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 1) {
             $order->info['tax'] += xtc_add_tax($cod_cost, $cod_tax)-$cod_cost;
             $order->info['tax_groups'][TAX_ADD_TAX . "$cod_tax_description"] += xtc_add_tax($cod_cost, $cod_tax)-$cod_cost;
@@ -148,13 +163,19 @@
     }
 
     function keys() {
-      return array('MODULE_ORDER_TOTAL_COD_FEE_STATUS', 'MODULE_ORDER_TOTAL_COD_FEE_SORT_ORDER', 'MODULE_ORDER_TOTAL_COD_FEE_FLAT', 'MODULE_ORDER_TOTAL_COD_FEE_ITEM', 'MODULE_ORDER_TOTAL_COD_FEE_TABLE','MODULE_ORDER_TOTAL_COD_FEE_CHRONOPOST','MODULE_ORDER_TOTAL_COD_FEE_DHL','MODULE_ORDER_TOTAL_COD_FEE_CHP', 'MODULE_ORDER_TOTAL_COD_FEE_ZONES', 'MODULE_ORDER_TOTAL_COD_FEE_AP', 'MODULE_ORDER_TOTAL_COD_FEE_UPS', 'MODULE_ORDER_TOTAL_COD_FEE_UPSE', 'MODULE_ORDER_TOTAL_COD_FEE_DP', 'MODULE_ORDER_TOTAL_COD_FEE_FREE', 'MODULE_ORDER_TOTAL_FREEAMOUNT_FREE', 'MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS');
+      return array('MODULE_ORDER_TOTAL_COD_FEE_STATUS', 'MODULE_ORDER_TOTAL_COD_FEE_SORT_ORDER','MODULE_ORDER_TOTAL_COD_FEE_POST' ,'MODULE_ORDER_TOTAL_COD_FEE_ECAN' ,'MODULE_ORDER_TOTAL_COD_FEE_TCAT' ,'MODULE_ORDER_TOTAL_COD_FEE_FLAT', 'MODULE_ORDER_TOTAL_COD_FEE_ITEM', 'MODULE_ORDER_TOTAL_COD_FEE_TABLE','MODULE_ORDER_TOTAL_COD_FEE_CHRONOPOST','MODULE_ORDER_TOTAL_COD_FEE_DHL','MODULE_ORDER_TOTAL_COD_FEE_CHP', 'MODULE_ORDER_TOTAL_COD_FEE_ZONES', 'MODULE_ORDER_TOTAL_COD_FEE_AP', 'MODULE_ORDER_TOTAL_COD_FEE_UPS', 'MODULE_ORDER_TOTAL_COD_FEE_UPSE', 'MODULE_ORDER_TOTAL_COD_FEE_DP', 'MODULE_ORDER_TOTAL_COD_FEE_FREE', 'MODULE_ORDER_TOTAL_FREEAMOUNT_FREE', 'MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS');
     }
 
     function install() {
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_STATUS', 'true', '6', '0', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_SORT_ORDER', '35', '6', '0', now())");
+
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_POST', '', '6', '0', now())");
+	  
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_ECAN', '', '6', '0', now())");	  
+
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_TCAT', '', '6', '0', now())");	  	  
 
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_FLAT', 'AT:3.00,DE:3.58,00:9.99', '6', '0', now())");
 

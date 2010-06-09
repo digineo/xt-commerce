@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: stats_customers.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: stats_customers.php 208 2007-02-27 08:03:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -45,11 +45,11 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'sheet-statistics.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XT Statistics</td>
+    <td class="main" valign="top">xt:Commerce Statistics</td>
   </tr>
 </table></td>
       </tr>

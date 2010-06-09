@@ -131,7 +131,7 @@ switch ($case) {
 		break;
 	case code_error :
 
-		$smarty->assign('VVIMG', '<img src="'.FILENAME_DISPLAY_VVCODES.'">');
+		$smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES).'">');
 		$smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
 		$smarty->assign('info_message', $info_message);
 		$smarty->assign('message', TEXT_PASSWORD_FORGOTTEN);
@@ -147,7 +147,7 @@ switch ($case) {
 		break;
 	case wrong_mail :
 
-		$smarty->assign('VVIMG', '<img src="'.FILENAME_DISPLAY_VVCODES.'">');
+		$smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES).'">');
 		$smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
 		$smarty->assign('info_message', $info_message);
 		$smarty->assign('message', TEXT_PASSWORD_FORGOTTEN);
@@ -171,7 +171,7 @@ switch ($case) {
 		break;
 	case double_opt :
 
-		$smarty->assign('VVIMG', '<img src="'.FILENAME_DISPLAY_VVCODES.'">');
+		$smarty->assign('VVIMG', '<img src="'.xtc_href_link(FILENAME_DISPLAY_VVCODES).'">');
 		$smarty->assign('text_heading', HEADING_PASSWORD_FORGOTTEN);
 		//    $smarty->assign('info_message', $info_message);
 		$smarty->assign('message', TEXT_PASSWORD_FORGOTTEN);

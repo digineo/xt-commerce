@@ -67,13 +67,14 @@
 
 
       $this->catalog_languages = array();
-      $languages_query = xtc_db_query("select languages_id, name, code, image, directory,language_charset from " . TABLE_LANGUAGES . " order by sort_order");
-      while ($languages = xtc_db_fetch_array($languages_query)) {
+      $languages_query = xtDBquery("select languages_id, name, code, image, directory,language_charset,default_currency from " . TABLE_LANGUAGES . " order by sort_order");
+      while ($languages = xtc_db_fetch_array($languages_query,true)) {
         $this->catalog_languages[$languages['code']] = array('id' => $languages['languages_id'],
                                                              'name' => $languages['name'],
                                                              'image' => $languages['image'],
                                                              'code' => $languages['code'],
-														  'language_charset' => $languages['language_charset'],
+														  	  'language_charset' => $languages['language_charset'],
+														  	  'currency' => $languages['default_currency'],
                                                              'directory' => $languages['directory']);
       }
 

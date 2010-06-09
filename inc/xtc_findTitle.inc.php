@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_findTitle.inc.php 1313 2005-10-18 15:49:15Z mz $
+   $Id: xtc_findTitle.inc.php 70 2007-01-07 14:19:12Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: categories_view.php 901 2005-04-29 10:32:14Z novalis $
+   $Id: categories_view.php 242 2007-03-08 13:34:57Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -91,7 +91,15 @@
         <table border="0" width="100%" cellspacing="0" cellpadding="0">
         <tr>
          <td class="pageHeading">
-            <?php echo HEADING_TITLE; ?>
+            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'folder_grey.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr> 
+    <td class="main" valign="top">xt:Commerce Products</td>
+  </tr>
+</table>
          </td>
          <td class="pageHeading" align="right">
             <?php echo xtc_draw_separator('pixel_trans.gif', 1, HEADING_IMAGE_HEIGHT); ?>
@@ -210,7 +218,7 @@
              <td class="categories_view_data"><?php echo $categories['sort_order']; ?></td>
              <td class="categories_view_data" style="text-align: left; padding-left: 5px;">
              <?php 
-                echo '<a href="' . xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . xtc_get_path($categories['categories_id'])) . '">' . xtc_image(DIR_WS_ICONS . 'folder.gif', ICON_FOLDER) . '<a>&nbsp;<b><a href="'.xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'cPath=' . $cPath . '&cID=' . $categories['categories_id']) .'">' . $categories['categories_name'] . '</a></b>'; 
+                echo '<a href="' . xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . xtc_get_path($categories['categories_id'])) . '">' . xtc_image(DIR_WS_ICONS . 'folder_yellow.png', ICON_FOLDER) . '<a>&nbsp;<b><a href="'.xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'cPath=' . $cPath . '&cID=' . $categories['categories_id']) .'">' . $categories['categories_name'] . '</a></b>'; 
              ?>
              </td>
         
@@ -346,7 +354,7 @@
          ?>
       </td>
       <td class="categories_view_data" style="text-align: left; padding-left: 8px;">
-        <?php echo '<a href="' . xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'cPath=' . $cPath . '&pID=' . $products['products_id'] ) . '">' . xtc_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '&nbsp;</a><a href="'.xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'cPath=' . $cPath . '&pID=' . $products['products_id']) .'">' . $products['products_name']; ?></a>
+        <?php echo '<a href="' . xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'cPath=' . $cPath . '&pID=' . $products['products_id']. '&action=new_product') . '">' . xtc_image(DIR_WS_ICONS . 'zoom.png', ICON_PREVIEW) . '&nbsp;</a><a href="'.xtc_href_link(FILENAME_CATEGORIES, xtc_get_all_get_params(array('cPath', 'action', 'pID', 'cID')) . 'cPath=' . $cPath . '&pID=' . $products['products_id']) .'">' . $products['products_name']; ?></a>
       </td>          
       <?php
       // check product and attributes stock

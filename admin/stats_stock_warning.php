@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: stats_stock_warning.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: stats_stock_warning.php 208 2007-02-27 08:03:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -44,11 +44,11 @@
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'sheet-statistics.gif'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XT Statistics</td>
+    <td class="main" valign="top">xt:Commerce Statistics</td>
   </tr>
 </table></td>
       </tr>
@@ -61,7 +61,7 @@
   while ($products_values = xtc_db_fetch_array($products_query)) {
     echo '<tr><td width="50%" class="dataTableContent"><a href="' . xtc_href_link(FILENAME_CATEGORIES, 'pID=' . $products_values['products_id'] . '&action=new_product') . '"><b>' . $products_values['products_name'] . '</b></a></td><td width="50%" class="dataTableContent">';
     if ($products_values['products_quantity'] <='0') {
-      echo '<font color="ff0000"><b>'.$products_values['products_quantity'].'</b></font>';
+      echo '<font color="#ff0000"><b>'.$products_values['products_quantity'].'</b></font>';
     } else {
       echo $products_values['products_quantity'];
     }
@@ -78,7 +78,7 @@
     while ($products_attributes_values = xtc_db_fetch_array($products_attributes_query)) {
       echo '<tr><td width="50%" class="dataTableContent">&nbsp;&nbsp;&nbsp;&nbsp;-' . $products_attributes_values['products_options_values_name'] . '</td><td width="50%" class="dataTableContent">';
       if ($products_attributes_values['attributes_stock'] <= '0') {
-        echo '<font color="ff0000"><b>' . $products_attributes_values['attributes_stock'] . '</b></font>';
+        echo '<font color="#ff0000"><b>' . $products_attributes_values['attributes_stock'] . '</b></font>';
       } else {
         echo $products_attributes_values['attributes_stock'];
       }

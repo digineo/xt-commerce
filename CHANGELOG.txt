@@ -1,10 +1,91 @@
                                      CHANGELOG
 ###################################################################################
 
-xt:Commerce v3.0.4SP2.1
-Release Datum: 20.08.2006
+xt:Commerce v3.0.4SP2.2 BETA
+Release Datum: 30.03.2007
 
 ###################################################################################
+
+#### 3.0.4 SP2.2
+
+major fixes:
+BUGFIX: #0000218 force to enter password when editing customers
+BUGFIX: #0000224 Captcha Update for IE
+BUGFIX: #0000211 wrong modelnumber in print order, if different attributes with same name 
+BUGFIX: #0000234 cateogories metatags in sub-sub categories
+
+minor fixes:
+
+
+BUGFIX: #0000221 addressformat error in payment/shipping addresses
+BUFFIX: worlpay Url
+BUGFIX: wrong tax calculation on shipping costs with shipping zone in tax zone, and payment zone not in tax zone
+BUGFIX: #0000214 
+BUGFIX: #0000212 productname in reviews box
+BUGFIX: #0000216 VPE in search result
+BUGFIX: #0000213 short php literals
+BUGFIX: #0000223 SSL/NONSSL check for google conversiontracking
+BUGFIX: #0000222 typo in oders class
+BUGFIX: #0000225 cleanup in products_new.php
+BUGFIX: removed customers status selection from create_account in admin, added automatic check for vat id based groups
+BUGFIX: #0000226 special price bug when admin is used in brutto mode
+BUGFIX: #0000227 customers surname in reply address in orders mail to admin
+BUGFIX: #0000229 sort order in product navigator
+BUGFIX: #0000235 added french metropolitan to EU-Zone 
+BUGFIX: #0000233 added check for emails in account_edit
+BUGFIX: #0000236 LUUPAY curl bug
+BUGFIX: #0000237 wrong link to "found in this category" in account.php
+BUGFIX: #0000255
+BUGFIX: #0000241 password recovery bug in IE
+BUGFIX: #0000247 view orders query bug in admin
+BUGFIX: #0000279 removed products_graduated_prices table
+BUGFIX: #0000266 error when editing orders with freeamount shipping
+BUGFIX: #0000261 date added/last modification for csv import
+BUGFIX: #0000262 error when duplicating products with activated DB cache
+BUGFIX: #0000272 saving permissions in contentmanager
+BUGFIX: #0000262 gift vouchers for articles with attributes, bug when voucher is assigned to special product
+BUGFIX: #0000277
+BUGFIX: #0000124 general conditions display on SSL proxy 
+BUGFIX: #0000085 attributes stock when deleting orders
+BUGFIX: #0000250 prz method 09 deactivated (no check possible)
+BUGFIX: #0000281
+BUGFIX: #0000240
+BUGFIX: #0000282 currency calculation for cod fee
+BUGFIX: #0000243 addition bug when combining shopping cart contents during login process
+BUGFIX: #0000284 tpl_path in reverse cross sell template
+BUGFIX: #0000285 calculation error in campaign report with multiple currencies.
+BUGFIX: #0000292 error when removing manufacturer with "remove all products"
+BUGFIX: #0000293
+BUGFIX: #0000291
+BUGFIX: #0000289
+BUGFIX: #0000194 stock update when removing
+BUGFIX: #0000286 missing cc infos when suma url = true
+BUGFIX: #0000296 
+BUGFIX: #0000299
+BUGFIX:			 new orders now be saved with default language and default currency
+
+BUGFIX: typos
+BUGFIX: #0000271 back button in cross selling not workin on IE6/7
+BUGFIX: #0000264 specials not longer beeing deactivated when stock check = false
+
+FEATURE: #0000215 shipping time in admin print order/packingslip
+FEATURE: added more variables to print product_info
+FEATURE: #0000259 added PRODUCTS_EXPIRES variable to product_info, specials
+FEATURE: added C1,C2 check Methods to banktransfer validation
+FEATURE: updated FCK Editor to 2.3.2
+FEATURE: newsletter checkbox in create account/guest account with automated double-opt in mail
+FEATURE: changed VAT ID verification gateway due wdsl gateway will be closed on 31.03.2007
+FEATURE: new search navigation for customers
+FEATURE: new default Template XTC5
+
+GENERAL: LUUPAY module Update, due cooperation of xt:Commerce with Luupay
+GENERAL: added bulgaria/romania to EU zone
+GENERAL: Moneybookers Module update, due cooperation of xt:Commerce with Moneybookers
+GENERAL: 
+GENERAL: CHECK_CLIENT_AGENT removed
+GENERAL: moved language currency to language setup in admin
+
+
 
 #### 3.0.4 SP2.1
 

@@ -32,13 +32,23 @@
          while ($status_data=xtc_db_fetch_array($status_query,true)) {
          	$this->SHIPPING[$status_data['shipping_status_id']]=array('name'=>$status_data['shipping_status_name'],'image'=>$status_data['shipping_status_image']);
          }
+         if (ACTIVATE_STOCKS_TRAFFIC=='true') {
+         $this->STOCKS_TRAFFIC = array();
+         $status_query=xtDBquery("SELECT
+                                     *
+                                     FROM ".TABLE_STOCKS_TRAFFIC."
+                                     where language_id = '".(int)$_SESSION['languages_id']."' order by stocks_traffic_percentage ASC");
          
-         
+         while ($status_data=xtc_db_fetch_array($status_query,true)) {
+         	$this->STOCKS_TRAFFIC[]=array('percentage'=>$status_data['stocks_traffic_percentage'],'name'=>$status_data['stocks_traffic_name'],'image'=>$status_data['stocks_traffic_image']);
+         }
+         }
  	}
  	
  	function getShippingStatusName($id) {
  		return $this->SHIPPING[$id]['name'];
  	}
+ 	
  	function getShippingStatusImage($id) {
  		if ($this->SHIPPING[$id]['image']) {
  		return 'admin/images/icons/'.$this->SHIPPING[$id]['image'];
@@ -48,7 +58,7 @@
  	}
  	
  		function getShippingLink() {
-		return ' '.SHIPPING_EXCL.'<script language="javascript">document.write(\'<a href="javascript:newWin=void(window.open(\\\''.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS).'\\\', \\\'popup\\\', \\\'toolbar=0, scrollbars=yes, resizable=yes, height=400, width=400\\\'))">'.SHIPPING_COSTS.'</a>\');</script><noscript><a href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS).'"target=_blank">'.SHIPPING_COSTS.'</a></noscript>';
+		return ' '.SHIPPING_EXCL.'<script type="text/javascript">document.write(\'<a href="javascript:newWin=void(window.open(\\\''.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS).'\\\', \\\'popup\\\', \\\'toolbar=0, scrollbars=yes, resizable=yes, height=400, width=400\\\'))">'.SHIPPING_COSTS.'</a>\');</script><noscript><a href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS).'"target="_blank">'.SHIPPING_COSTS.'</a></noscript>';
 	}
 
 	function getTaxNotice() {
@@ -97,7 +107,7 @@
 	}
 	
 	function getContentLink($coID,$text) {
-		return '<script language="javascript">document.write(\'<a href="javascript:newWin=void(window.open(\\\''.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.$coID).'\\\', \\\'popup\\\', \\\'toolbar=0, scrollbars=yes, resizable=yes, height=400, width=400\\\'))"><font color="#ff0000">'.$text.'</font></a>\');</script><noscript><a href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.$coID).'"target=_blank"><font color="#ff0000">'.$text.'</font></a></noscript>';
+		return '<script type="text/javascript">document.write(\'<a href="javascript:newWin=void(window.open(\\\''.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.$coID).'\\\', \\\'popup\\\', \\\'toolbar=0, scrollbars=yes, resizable=yes, height=400, width=400\\\'))"><font color="#ff0000">'.$text.'</font></a>\');</script><noscript><a href="'.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.$coID).'" target="_blank"><font color="#ff0000">'.$text.'</font></a></noscript>';
 	}
  	
  }

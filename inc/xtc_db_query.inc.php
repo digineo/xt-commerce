@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_db_query.inc.php 1195 2005-08-28 21:10:52Z mz $
+   $Id: xtc_db_query.inc.php 255 2007-03-09 08:27:34Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,6 +21,7 @@
   function xtc_db_query($query, $link = 'db_link') {
     global $$link;
 
+	$start = microtime();
     //echo $query.'<br>';
 
     if (STORE_DB_TRANSACTIONS == 'true') {
@@ -37,6 +38,14 @@
        $result_error = mysql_error();
        error_log('RESULT ' . $result . ' ' . $result_error . "\n", 3, STORE_PAGE_PARSE_TIME_LOG);
     }
+    
+    $time_start = explode(' ', $start);
+	$time_end = explode(' ', microtime());
+	$parse_time = number_format(($time_end[1] + $time_end[0] - ($time_start[1] + $time_start[0])), 3);
+//	
+//	echo '<div class="parseTime">QUERY NORMAL:'.$query.'<div>';
+//	
+//	echo '<div class="parseTime">Parse Time: ' . $parse_time . 's</div>';
 
     return $result;
   }

@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: message_stack.php 950 2005-05-14 16:45:21Z mz $   
+   $Id: message_stack.php 241 2007-03-08 13:33:48Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: products_media.php 1259 2005-09-29 16:11:19Z mz $   
+   $Id: products_media.php 245 2007-03-08 16:08:22Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -77,7 +77,7 @@ if (xtc_in_array($product->data['products_id'], $check_data)) {
 
 			} else {
 
-				$button = '<a href="'.xtc_href_link('media/products/'.$content_data['content_file']).'">'.xtc_image_button('button_download.gif', TEXT_DOWNLOAD).'</a>';
+				$button = '<a href="'.xtc_href_link('media/products/'.$content_data['content_file'],'','NONSSL',false).'">'.xtc_image_button('button_download.gif', TEXT_DOWNLOAD).'</a>';
 
 			}
 		}

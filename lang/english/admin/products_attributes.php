@@ -39,4 +39,9 @@ define('TEXT_SEARCH','Search:');
 define('TEXT_OPTION_ID', 'Option ID');
 define('TEXT_OPTION_NAME', 'Option Name');
 
+// SP2.2
+define('TABLE_HEADING_OPT_IMAGE','Image');
+define('TABLE_HEADING_OPT_DESC','Description');
+define('TABLE_TEXT_DELETE','delete image');
+define('TEXT_OPTIONS_IMAGE','Option Image')
 ?>

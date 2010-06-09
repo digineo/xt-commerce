@@ -1,7 +1,7 @@
 <?php
 
 /*------------------------------------------------------------------------------
-  $Id: cc.php 1160 2005-08-16 22:25:01Z hhgag $
+  $Id: cc.php 187 2007-02-24 14:58:53Z mzanier $
 
   XTC-CC - Contribution for XT-Commerce http://www.xt-commerce.com
   modified by http://www.netz-designer.de
@@ -9,7 +9,7 @@
   Copyright (c) 2003 netz-designer
   -----------------------------------------------------------------------------
   based on:
-  $Id: cc.php 1160 2005-08-16 22:25:01Z hhgag $
+  $Id: cc.php 187 2007-02-24 14:58:53Z mzanier $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -240,7 +240,7 @@ class cc {
 		}
 		
 		
-		$confirmation = array ('title' => $this->title.': '.$this->cc_card_type, 'fields' => $form_array);
+		$confirmation = array ('title' => $this->title.': '.$this->cc_card_type, 'fields' => $form_array,'module_cost'=>$this->payment_cost());
 
 		return $confirmation;
 
@@ -279,6 +279,10 @@ class cc {
 			xtc_db_query("UPDATE ".TABLE_ORDERS." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
 
 	}
+	
+	function admin_order($oID) {
+		return false;
+	}
 
 	function get_error() {
 
@@ -293,6 +297,21 @@ class cc {
 			$this->_check = xtc_db_num_rows($check_query);
 		}
 		return $this->_check;
+	}
+	
+	function payment_cost() {
+		global $order;
+		$cost = constant(MODULE_PAYMENT_.strtoupper($this->code)._COST);
+
+        	$cost_table = split("[:,]" , $cost);
+        	for ($i=0; $i<sizeof($cost_table); $i+=2) {
+          	if ($order->info['total'] <= $cost_table[$i]) {
+            	$percentage = $cost_table[$i+1];
+            	break;
+          	}
+        	}
+		if ($percentage>0)
+			return '+'.$percentage.'% '.TEXT_PAYMENT_FEE;
 	}
 
 	function install() {
@@ -312,6 +331,7 @@ class cc {
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('', 'MODULE_PAYMENT_CC_EMAIL', '', '6', '0', now())");
 		// added new configuration keys
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('', 'MODULE_PAYMENT_CC_ACCEPT_DINERSCLUB','False', 6, 0, 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
+		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_CC_COST', '', '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('', 'MODULE_PAYMENT_CC_ACCEPT_AMERICANEXPRESS','False', 6, 0, 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('', 'MODULE_PAYMENT_CC_ACCEPT_CARTEBLANCHE','False', 6, 0, 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." (configuration_id, configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('', 'MODULE_PAYMENT_CC_ACCEPT_OZBANKCARD','False', 6, 0, 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
@@ -332,7 +352,7 @@ class cc {
 	}
 
 	function keys() {
-		return array ('MODULE_PAYMENT_CC_STATUS', 'MODULE_PAYMENT_CC_ALLOWED', 'USE_CC_CVV', 'USE_CC_ISS', 'USE_CC_START', 'CC_CVV_MIN_LENGTH', 'CC_ENC', 'CC_VAL', 'CC_BLACK', 'MODULE_PAYMENT_CC_EMAIL', 'MODULE_PAYMENT_CC_ZONE', 'MODULE_PAYMENT_CC_ORDER_STATUS_ID', 'MODULE_PAYMENT_CC_SORT_ORDER', 'MODULE_PAYMENT_CC_ACCEPT_DINERSCLUB', 'MODULE_PAYMENT_CC_ACCEPT_AMERICANEXPRESS', 'MODULE_PAYMENT_CC_ACCEPT_CARTEBLANCHE', 'MODULE_PAYMENT_CC_ACCEPT_OZBANKCARD', 'MODULE_PAYMENT_CC_ACCEPT_DISCOVERNOVUS', 'MODULE_PAYMENT_CC_ACCEPT_DELTA', 'MODULE_PAYMENT_CC_ACCEPT_ELECTRON', 'MODULE_PAYMENT_CC_ACCEPT_MASTERCARD', 'MODULE_PAYMENT_CC_ACCEPT_SWITCH', 'MODULE_PAYMENT_CC_ACCEPT_SOLO', 'MODULE_PAYMENT_CC_ACCEPT_JCB', 'MODULE_PAYMENT_CC_ACCEPT_MAESTRO', 'MODULE_PAYMENT_CC_ACCEPT_VISA');
+		return array ('MODULE_PAYMENT_CC_STATUS', 'MODULE_PAYMENT_CC_ALLOWED', 'USE_CC_CVV', 'USE_CC_ISS', 'USE_CC_START', 'CC_CVV_MIN_LENGTH', 'CC_ENC', 'CC_VAL', 'CC_BLACK', 'MODULE_PAYMENT_CC_EMAIL', 'MODULE_PAYMENT_CC_ZONE', 'MODULE_PAYMENT_CC_ORDER_STATUS_ID', 'MODULE_PAYMENT_CC_SORT_ORDER', 'MODULE_PAYMENT_CC_ACCEPT_DINERSCLUB', 'MODULE_PAYMENT_CC_ACCEPT_AMERICANEXPRESS', 'MODULE_PAYMENT_CC_ACCEPT_CARTEBLANCHE', 'MODULE_PAYMENT_CC_ACCEPT_OZBANKCARD', 'MODULE_PAYMENT_CC_ACCEPT_DISCOVERNOVUS', 'MODULE_PAYMENT_CC_ACCEPT_DELTA', 'MODULE_PAYMENT_CC_ACCEPT_ELECTRON', 'MODULE_PAYMENT_CC_ACCEPT_MASTERCARD', 'MODULE_PAYMENT_CC_ACCEPT_SWITCH', 'MODULE_PAYMENT_CC_ACCEPT_SOLO', 'MODULE_PAYMENT_CC_ACCEPT_JCB', 'MODULE_PAYMENT_CC_ACCEPT_MAESTRO', 'MODULE_PAYMENT_CC_ACCEPT_VISA','MODULE_PAYMENT_CC_COST');
 	}
 }
 ?>

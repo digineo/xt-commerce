@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: application_top.php 1323 2005-10-27 17:58:08Z mz $
+   $Id: application_top.php 302 2007-03-30 08:25:49Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -45,7 +45,7 @@ if (file_exists('includes/local/configure.php')) {
 $php4_3_10 = (0 == version_compare(phpversion(), "4.3.10"));
 define('PHP4_3_10', $php4_3_10);
 // define the project version
-define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP2.1');
+define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP2.2 BETA');
 
 // set the type of request (secure or not)
 $request_type = (getenv('HTTPS') == '1' || getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -246,6 +246,8 @@ require (DIR_WS_FUNCTIONS.'compatibility.php');
 require (DIR_WS_FUNCTIONS.'sessions.php');
 
 // set the session name and save path
+
+
 session_name('XTCsid');
 if (STORE_SESSIONS != 'mysql') session_save_path(SESSION_WRITE_DIRECTORY);
 
@@ -270,7 +272,8 @@ elseif (($request_type == 'SSL') && isset ($_GET[session_name()])) {
 // start the session
 $session_started = false;
 if (SESSION_FORCE_COOKIE_USE == 'True') {
-	xtc_setcookie('cookie_test', 'please_accept_for_session', time() + 60 * 60 * 24 * 30, '/', $current_domain);
+//	xtc_setcookie('cookie_test', 'please_accept_for_session', time() + 60 * 60 * 24 * 30, '/', $current_domain);
+	xtc_setcookie('cookie_test', 'please_accept_for_session', time()+60*60*24*90);
 
 	if (isset ($_COOKIE['cookie_test'])) {
 		session_start();
@@ -285,11 +288,10 @@ if (SESSION_FORCE_COOKIE_USE == 'True') {
 
 // check the Agent
 $truncate_session_id = false;
-if (CHECK_CLIENT_AGENT) {
-	if (xtc_check_agent() == 1) {
+if (xtc_check_agent() == 1) 
 		$truncate_session_id = true;
-	}
-}
+	
+
 
 // verify the ssl_session_id if the feature is enabled
 if (($request_type == 'SSL') && (SESSION_CHECK_SSL_SESSION_ID == 'True') && (ENABLE_SSL == true) && ($session_started == true)) {
@@ -304,7 +306,7 @@ if (($request_type == 'SSL') && (SESSION_CHECK_SSL_SESSION_ID == 'True') && (ENA
 	}
 }
 
-// verify the browser user agent if the feature is enabled
+
 if (SESSION_CHECK_USER_AGENT == 'True') {
 	$http_user_agent = strtolower($_SERVER['HTTP_USER_AGENT']);
 	$http_user_agent2 = strtolower(getenv("HTTP_USER_AGENT"));
@@ -333,7 +335,7 @@ if (SESSION_CHECK_IP_ADDRESS == 'True') {
 }
 
 // set the language
-if (!isset ($_SESSION['language']) || isset ($_GET['language'])) {
+if (!isset ($_SESSION['language']) || isset ($_GET['language']) || !isset ($_SESSION['language_currency'])) {
 
 	include (DIR_WS_CLASSES.'language.php');
 	$lng = new language(xtc_input_validation($_GET['language'], 'char', ''));
@@ -345,6 +347,7 @@ if (!isset ($_SESSION['language']) || isset ($_GET['language'])) {
 	$_SESSION['languages_id'] = $lng->language['id'];
 	$_SESSION['language_charset'] = $lng->language['language_charset'];
 	$_SESSION['language_code'] = $lng->language['code'];
+	$_SESSION['language_currency'] = $lng->language['currency'];
 }
 
 if (isset($_SESSION['language']) && !isset($_SESSION['language_charset'])) {
@@ -357,6 +360,7 @@ if (isset($_SESSION['language']) && !isset($_SESSION['language_charset'])) {
 	$_SESSION['languages_id'] = $lng->language['id'];
 	$_SESSION['language_charset'] = $lng->language['language_charset'];
 	$_SESSION['language_code'] = $lng->language['code'];
+	$_SESSION['language_currency'] = $lng->language['currency'];
 	
 }
 
@@ -364,13 +368,16 @@ if (isset($_SESSION['language']) && !isset($_SESSION['language_charset'])) {
 require (DIR_WS_LANGUAGES.$_SESSION['language'].'/'.$_SESSION['language'].'.php');
 
 // currency
-if (!isset ($_SESSION['currency']) || isset ($_GET['currency']) || ((USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && (LANGUAGE_CURRENCY != $_SESSION['currency']))) {
+$default_currency = $_SESSION['language_currency'];
+if (!isset ($_SESSION['currency']) || isset ($_GET['currency']) || ((USE_DEFAULT_LANGUAGE_CURRENCY == 'true') && ($default_currency != $_SESSION['currency']))) {
+
+
 
 	if (isset ($_GET['currency'])) {
 		if (!$_SESSION['currency'] = xtc_currency_exists($_GET['currency']))
-			$_SESSION['currency'] = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? LANGUAGE_CURRENCY : DEFAULT_CURRENCY;
+			$_SESSION['currency'] = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? $default_currency : DEFAULT_CURRENCY;
 	} else {
-		$_SESSION['currency'] = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? LANGUAGE_CURRENCY : DEFAULT_CURRENCY;
+		$_SESSION['currency'] = (USE_DEFAULT_LANGUAGE_CURRENCY == 'true') ? $default_currency : DEFAULT_CURRENCY;
 	}
 }
 if (isset ($_SESSION['currency']) && $_SESSION['currency'] == '') {
@@ -394,11 +401,12 @@ if (TRACKING_ECONDA_ACTIVE=='true') {
 	$econda = new econda();
 }
 
-require (DIR_WS_INCLUDES.FILENAME_CART_ACTIONS);
 // create the shopping cart & fix the cart if necesary
 if (!is_object($_SESSION['cart'])) {
 	$_SESSION['cart'] = new shoppingCart();
 }
+require (DIR_WS_INCLUDES.FILENAME_CART_ACTIONS);
+
 
 // include the who's online functions
 xtc_update_whos_online();
@@ -525,7 +533,7 @@ define('WARN_SESSION_AUTO_START', 'true');
 define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
 
 // Include Template Engine
-require (DIR_WS_CLASSES.'Smarty_2.6.14/Smarty.class.php');
+require (DIR_WS_CLASSES.'Smarty_2.6.18/Smarty.class.php');
 
 if (isset ($_SESSION['customer_id'])) {
 	$account_type_query = xtc_db_query("SELECT

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: paypal.php 998 2005-07-07 14:18:20Z mz $   
+   $Id: paypal.php 187 2007-02-24 14:58:53Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -68,7 +68,7 @@ class paypal {
 	}
 
 	function selection() {
-		return array ('id' => $this->code, 'module' => $this->title, 'description' => $this->info);
+		return array ('id' => $this->code, 'module' => $this->title, 'description' => $this->info,'module_cost'=>$this->payment_cost());
 	}
 
 	function pre_confirmation_check() {
@@ -104,9 +104,11 @@ class paypal {
 		} else {
 			$total = $order->info['total'];
 		}
+		$shipping=0;
 		if ($_SESSION['currency'] == $my_currency) {
 			$amount = round($total, $xtPrice->get_decimal_places($my_currency));
-			$shipping = round($order->info['shipping_cost'], $xtPrice->get_decimal_places($my_currency));
+			$shipping = $xtPrice->xtcFormat($order->info['shipping_cost'], false,0,true);		
+			
 		} else {
 			$amount = round($xtPrice->xtcCalculateCurrEx($total, $my_currency), $xtPrice->get_decimal_places($my_currency));
 			$shipping = round($xtPrice->xtcCalculateCurrEx($order->info['shipping_cost'], $my_currency), $xtPrice->get_decimal_places($my_currency));
@@ -134,6 +136,10 @@ class paypal {
 		if ($this->order_status)
 			xtc_db_query("UPDATE ".TABLE_ORDERS." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
 	}
+	
+	function admin_order($oID) {
+		return false;
+	}
 
 	function output_error() {
 		return false;
@@ -146,6 +152,21 @@ class paypal {
 		}
 		return $this->_check;
 	}
+	
+	function payment_cost() {
+		global $order;
+		$cost = constant(MODULE_PAYMENT_.strtoupper($this->code)._COST);
+
+        	$cost_table = split("[:,]" , $cost);
+        	for ($i=0; $i<sizeof($cost_table); $i+=2) {
+          	if ($order->info['total'] <= $cost_table[$i]) {
+            	$percentage = $cost_table[$i+1];
+            	break;
+          	}
+        	}
+		if ($percentage>0)
+			return '+'.$percentage.'% '.TEXT_PAYMENT_FEE;
+	}
 
 	function install() {
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_PAYPAL_STATUS', 'True', '6', '3', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
@@ -155,6 +176,7 @@ class paypal {
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_PAYPAL_SORT_ORDER', '0', '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_PAYPAL_ZONE', '0', '6', '2', 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID', '0',  '6', '0', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
+		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_PAYPAL_COST', '', '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID', '0',  '6', '8', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_PAYPAL_USE_CURL', 'True', '6', '9', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
 	}
@@ -164,7 +186,7 @@ class paypal {
 	}
 
 	function keys() {
-		return array ('MODULE_PAYMENT_PAYPAL_STATUS', 'MODULE_PAYMENT_PAYPAL_ALLOWED', 'MODULE_PAYMENT_PAYPAL_ID', 'MODULE_PAYMENT_PAYPAL_CURRENCY', 'MODULE_PAYMENT_PAYPAL_ZONE', 'MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID', 'MODULE_PAYMENT_PAYPAL_SORT_ORDER','MODULE_PAYMENT_PAYPAL_USE_CURL','MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID');
+		return array ('MODULE_PAYMENT_PAYPAL_STATUS', 'MODULE_PAYMENT_PAYPAL_ALLOWED', 'MODULE_PAYMENT_PAYPAL_ID', 'MODULE_PAYMENT_PAYPAL_CURRENCY', 'MODULE_PAYMENT_PAYPAL_ZONE', 'MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID', 'MODULE_PAYMENT_PAYPAL_SORT_ORDER','MODULE_PAYMENT_PAYPAL_USE_CURL','MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID','MODULE_PAYMENT_PAYPAL_COST','MODULE_PAYMENT_PAYPAL_COST');
 	}
 }
 ?>

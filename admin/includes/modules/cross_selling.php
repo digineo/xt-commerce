@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: cross_selling.php 799 2005-02-23 18:08:06Z novalis $
+   $Id: cross_selling.php 3 2006-11-28 11:53:22Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -52,7 +52,9 @@ function getParent($catID) {
             <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
           </tr>
           <tr>
-            <td colspan="2"><a href="<?php echo xtc_href_link(FILENAME_CATEGORIES,'cPath='.$_GET['cpath'].'&pID='.$_GET['current_product_id']); ?>"><input type="submit" class="button" value="<?php echo BUTTON_BACK; ?>"></a></td>
+            <td colspan="2">
+          	<a class="button" onClick="this.blur()" href="<?php echo xtc_href_link(FILENAME_CATEGORIES,'cPath='.$_GET['cpath'].'&pID='.$_GET['current_product_id']); ?>"><?php echo BUTTON_BACK; ?></a>           
+           </td>
           </tr>
         </table></td>
       </tr>

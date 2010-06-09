@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: module_newsletter.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: module_newsletter.php 230 2007-03-07 08:05:25Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -10,7 +10,7 @@
    --------------------------------------------------------------*/
 
 
-  define('HEADING_TITLE','XTC-Rundschreiben');
+  define('HEADING_TITLE','Newsletter');
   define('TITLE_CUSTOMERS','Kundengruppe');
   define('TITLE_STK','Abonniert');
   define('TEXT_TITLE','Betreff:');

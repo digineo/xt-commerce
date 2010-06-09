@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: checkout_new_address.php 1239 2005-09-24 20:09:56Z mz $   
+   $Id: checkout_new_address.php 245 2007-03-08 16:08:22Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

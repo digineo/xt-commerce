@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: form_check.js.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: form_check.js.php 73 2007-01-07 16:01:33Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

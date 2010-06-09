@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: error_handler.php 949 2005-05-14 16:44:33Z hhgag $
+   $Id: error_handler.php 245 2007-03-08 16:08:22Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_href_link.inc.php 804 2005-02-26 16:42:03Z mz $   
+   $Id: xtc_href_link.inc.php 293 2007-03-26 14:59:29Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -35,10 +35,12 @@
       die('</td></tr></table></td></tr></table><br /><br /><font color="#ff0000"><b>Error!</b></font><br /><br /><b>Unable to determine connection method on a link!<br /><br />Known methods: NONSSL SSL</b><br /><br />');
     }
 
+
+
     if (xtc_not_null($parameters)) {
       $link .= $page . '?' . $parameters;
       $separator = '&';
-    } else {
+    } else {;
       $link .= $page;
       $separator = '?';
     }
@@ -70,7 +72,7 @@
       $link = str_replace('&', '/', $link);
       $link = str_replace('=', '/', $link);
       $separator = '?';
-    }
+    } 
 
     return $link;
   }

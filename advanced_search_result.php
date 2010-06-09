@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: advanced_search_result.php 1141 2005-08-10 11:31:36Z novalis $   
+   $Id: advanced_search_result.php 221 2007-03-05 10:32:26Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -166,7 +166,11 @@ if ($error == 1 && $keyerror != 1) {
 	                  p.products_id,
 	                  p.products_price,
 	                  p.products_model,
+	                  p.products_vpe,
+					  p.products_vpe_status,
+					  p.products_vpe_value,
 	                  p.products_quantity,
+	                  p.products_average_stock,
 	                  p.products_shippingtime,
 	                  p.products_fsk18,
 	                  p.products_image,

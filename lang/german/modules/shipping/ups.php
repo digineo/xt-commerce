@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: UPS.php,v 1.1 2003/09/06 21:54:34 fanta2k Exp $   
+   $Id: ups.php 194 2007-02-25 11:46:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -29,21 +29,12 @@ define('MODULE_SHIPPING_UPS_TEXT_WAY', 'Versand nach');
 define('MODULE_SHIPPING_UPS_TEXT_UNITS', 'kg');
 define('MODULE_SHIPPING_UPS_TEXT_FREE', 'Ab EUR ' . MODULE_SHIPPING_UPS_FREEAMOUNT . ' Bestellwert versenden wir Ihre Bestellung versandkostenfrei!');
 define('MODULE_SHIPPING_UPS_TEXT_LOW', 'Ab EUR ' . MODULE_SHIPPING_UPS_FREEAMOUNT . ' Bestellwert versenden wir Ihre Bestellung zu erm&auml;&szlig;igten Versandkosten!');
-define('MODULE_SHIPPING_UPS_INVALID_ZONE', 'Es ist leider kein Versand in dieses Land m&ouml;glich.');
-define('MODULE_SHIPPING_UPS_UNDEFINED_RATE', 'Die Versandkosten k&ouml;nnen im Moment nicht errechnet werden.');
+
 
 define('MODULE_SHIPPING_UPS_STATUS_TITLE' , 'UPS Standard');
 define('MODULE_SHIPPING_UPS_STATUS_DESC' , 'Wollen Sie den Versand &uuml;ber UPS Standard anbieten?');
 define('MODULE_SHIPPING_UPS_HANDLING_TITLE' , 'Zuschlag');
 define('MODULE_SHIPPING_UPS_HANDLING_DESC' , 'Bearbeitungszuschlag f&uuml;r diese Versandart in Euro');
-define('MODULE_SHIPPING_UPS_TAX_CLASS_TITLE' , 'Steuersatz');
-define('MODULE_SHIPPING_UPS_TAX_CLASS_DESC' , 'W&auml;hlen Sie den MwSt.-Satz f&uuml;r diese Versandart aus.');
-define('MODULE_SHIPPING_UPS_ZONE_TITLE' , 'Versand Zone');
-define('MODULE_SHIPPING_UPS_ZONE_DESC' , 'Wenn Sie eine Zone ausw&auml;hlen, wird diese Versandart nur in dieser Zone angeboten.');
-define('MODULE_SHIPPING_UPS_SORT_ORDER_TITLE' , 'Reihenfolge der Anzeige');
-define('MODULE_SHIPPING_UPS_SORT_ORDER_DESC' , 'Niedrigste wird zuerst angezeigt.');
-define('MODULE_SHIPPING_UPS_ALLOWED_TITLE' , 'Einzelne Versandzonen');
-define('MODULE_SHIPPING_UPS_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand m&ouml;glich sein soll, z. B.: AT,DE.');
 define('MODULE_SHIPPING_UPS_FREEAMOUNT_TITLE' , 'Versandkostenfrei Inland');
 define('MODULE_SHIPPING_UPS_FREEAMOUNT_DESC' , 'Mindestbestellwert für den versandkostenfreien Versand im Inland und den erm&auml;&szlig;igten Versand ins Ausland.');
 
@@ -83,5 +74,14 @@ define('MODULE_SHIPPING_UPS_COST_7_TITLE' , 'Tarife f&uuml;r UPS Standard Zone 6
 define('MODULE_SHIPPING_UPS_COST_7_DESC' , 'Gewichtsbasierte Versandkosten innerhalb Zone 6. Beispiel: Sendung zwischen 0 und 4kg kostet EUR 37,10 = 4:37.10,...');
 
 
-
+define('MODULE_SHIPPING_UPS_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_UPS_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_UPS_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_UPS_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_UPS_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_UPS_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_UPS_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_UPS_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_UPS_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_UPS_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

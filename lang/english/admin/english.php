@@ -386,4 +386,18 @@ define('ERROR_GIF_UPLOAD','Missing GDlib Gif-Support, processing of Gif image fa
 
 define('TEXT_REFERER','Referer: ');
 
+// SP2.2
+define('_MODULES_SORT_ORDER_TITLE','Sort order of display.');
+define('_MODULES_SORT_ORDER_DESC','Sort order of display. Lowest is displayed first.');
+define('_MODULES_ZONE_TITLE','Module Zone');
+define('_MODULES_ZONE_DESC','If a zone is selected, only enable this module for that zone.');
+define('_MODULES_ZONE_ALLOWED_TITLE','Allowed zones');
+define('_MODULES_ZONE_ALLOWED_DESC','Please enter the zones <b>separately</b> which should be allowed to use this modul (e. g. AT,DE (leave empty if you want to allow all zones))');
+define('_MODULES_PAYMENT_FEE_TITLE','Paymentfee');
+define('_MODULES_PAYMENT_FEE_DESC','Fee for this paymentmethod');
+define('_MODULES_SET_ORDER_STATUS_TITLE','Set Order Status');
+define('_MODULES_SET_ORDER_STATUS_DESC','Set the status of orders made with this payment module to this value');
+define('_MODULES_TAX_ZONE_TITLE' , 'Tax Zone');
+define('_MODULES_TAX_ZONE_DESC' , 'Use the following tax class on the shipping fee');
+define('TEXT_INFO_DEFAULT_CURRENCY','Default Currency');
 ?>

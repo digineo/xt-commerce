@@ -25,8 +25,7 @@ define('MODULE_SHIPPING_CHP_TEXT_TITLE', 'The Swiss Post');
 define('MODULE_SHIPPING_CHP_TEXT_DESCRIPTION', 'The Swiss Post');
 define('MODULE_SHIPPING_CHP_TEXT_WAY', 'Dispatch to');
 define('MODULE_SHIPPING_CHP_TEXT_UNITS', 'kg');
-define('MODULE_SHIPPING_CHP_INVALID_ZONE', 'Unfortunately it is not possible to dispatch into this country');
-define('MODULE_SHIPPING_CHP_UNDEFINED_RATE', 'Forwarding expenses cannot be calculated for the moment');
+
 
 define('MODULE_SHIPPING_CHP_COST_PRI_5_TITLE' , 'Tariftabelle für Zone 4 bis 30 kg PRI');
 define('MODULE_SHIPPING_CHP_COST_PRI_5_DESC' , 'Tarif Tabelle für die Zone 4, basiered auf <b>\'PRI\'</b> bis 30 kg Versandgewicht.');
@@ -48,14 +47,6 @@ define('MODULE_SHIPPING_CHP_STATUS_TITLE' , 'Schweizerische Post');
 define('MODULE_SHIPPING_CHP_STATUS_DESC' , 'Wollen Sie den Versand über die schweizerische Post anbieten?');
 define('MODULE_SHIPPING_CHP_HANDLING_TITLE' , 'Handling Fee');
 define('MODULE_SHIPPING_CHP_HANDLING_DESC' , 'Bearbeitungsgebühr für diese Versandart in CHF');
-define('MODULE_SHIPPING_CHP_TAX_CLASS_TITLE' , 'Steuersatz');
-define('MODULE_SHIPPING_CHP_TAX_CLASS_DESC' , 'Wählen Sie den MwSt.-Satz für diese Versandart aus.');
-define('MODULE_SHIPPING_CHP_ZONE_TITLE' , 'Versand Zone');
-define('MODULE_SHIPPING_CHP_ZONE_DESC' , 'Wenn Sie eine Zone auswählen, wird diese Versandart nur in dieser Zone angeboten.');
-define('MODULE_SHIPPING_CHP_SORT_ORDER_TITLE' , 'Reihenfolge der Anzeige');
-define('MODULE_SHIPPING_CHP_SORT_ORDER_DESC' , 'Niedrigste wird zuerst angezeigt.');
-define('MODULE_SHIPPING_CHP_ALLOWED_TITLE' , 'Einzelne Versandzonen');
-define('MODULE_SHIPPING_CHP_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand möglich sein soll. zb AT,DE');
 define('MODULE_SHIPPING_CHP_COUNTRIES_1_TITLE' , 'Tarifzone 0 Länder');
 define('MODULE_SHIPPING_CHP_COUNTRIES_1_DESC' , 'Inlandszone');
 define('MODULE_SHIPPING_CHP_COST_ECO_1_TITLE' , 'Tariftabelle für Zone 0 bis 30 kg ECO');
@@ -94,4 +85,15 @@ define('MODULE_SHIPPING_CHP_COST_PRI_7_TITLE' , 'Tariftabelle für Zone 5 bis 30 
 define('MODULE_SHIPPING_CHP_COST_PRI_7_DESC' , 'Tarif Tabelle für die Zone 5, basiered auf <b>\'PRI\'</b> bis 30 kg Versandgewicht.');
 define('MODULE_SHIPPING_CHP_COST_URG_7_TITLE' , 'Tariftabelle für Zone 5 bis 30 kg URG');
 define('MODULE_SHIPPING_CHP_COST_URG_7_DESC' , 'Tarif Tabelle für die Zone 5, basiered auf <b>\'URG\'</b> bis 30 kg Versandgewicht.');
+
+define('MODULE_SHIPPING_CHP_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_CHP_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_CHP_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_CHP_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_CHP_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_CHP_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_CHP_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_CHP_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_CHP_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_CHP_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

@@ -440,9 +440,11 @@ class vat_validation {
 
 	// frankreich
 	function checkVatID_fr($vat_id) {
+	
+	//	echo $vat_id;
 		if (strlen($vat_id) != 13)
 			return 0;
-		if (!is_numeric(substr($vat_id), 4))
+		if (!is_numeric(substr($vat_id, 4)))
 			return 0;
 
 		if ($this->live_check = true) {
@@ -883,7 +885,7 @@ class vat_validation {
 			$sum += (int) $val[$i];
 		return $sum;
 	} // end function cross_summa((string) $val)
-	/*******************************************************************/
+
 
 	/********************************************************************
 	* Live Check                                     *
@@ -893,73 +895,73 @@ class vat_validation {
 
 		$eigene_nummer = STORE_OWNER_VAT_ID;
 
-		/* Hier wird der String für den POST per URL aufgebaut */
-		$ustid_post = "eigene_id=".$eigene_nummer."&abfrage_id=".$abfrage_nummer."";
+		$url = 'http://evatr.bff-online.de/evatrRPC?UstId_1='.$eigene_nummer.'&UstId_2='.$abfrage_nummer.'&Firmenname=&Ort=&PLZ=&Strasse=&Druck=';
 
-		/* Zur Verbindung mit dem Server wird CURL verwendet */
-		/* mit curl_init wird zunächst die URL festgelegt */
-
-		$ch = curl_init("http://wddx.bff-online.de//ustid.php?".$ustid_post."");
+		$ch = curl_init($url);
 
 		/* Hier werden noch einige Parameter für CURL gesetzt */
 		curl_setopt($ch, CURLOPT_HEADER, 0); /* Header nicht in die Ausgabe */
 		curl_setopt($ch, CURLOPT_NOBODY, 0); /* Ausgabe nicht in die HTML-Seite */
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); /* Umleitung der Ausgabe in eine Variable ermöglichen */
 
-		/* Aufruf von CURL und Ausgabe mit WDDX deserialisieren */
 
-		$des_out = wddx_deserialize(curl_exec($ch));
+
+		$des_out = (curl_exec($ch));
 		curl_close($ch);
 
-		/* Die deserialisierte Ausgabe in ein Array schreiben */
-
-		while (list ($key, $val) = each($des_out)) {
-			$ergebnis[$key] = $val;
+		$des_out = explode('<value><string>ErrorCode</string></value>',$des_out);
+		if (is_array($des_out)) {
+		$des_out = explode('</string></value>',$des_out[1]);
+		$error = str_replace('<value><string>','',$des_out[0]);
+		
+		
+		} else {
+			$error = '404';
 		}
 
-		if ($ergebnis[fehler_code] == '200') {
+		if ($error == '200') {
 			return 1;
 		}
-		elseif ($ergebnis[fehler_code] == '201') {
+		elseif ($error== '201') {
 			return 0;
 		}
-		elseif ($ergebnis[fehler_code] == '202') {
+		elseif ($error == '202') {
 			return 0;
 		}
-		elseif ($ergebnis[fehler_code] == '203') {
+		elseif ($error == '203') {
 			return 0;
 		}
-		elseif ($ergebnis[fehler_code] == '204') {
+		elseif ($error == '204') {
 			return 0;
 		}
-		elseif ($ergebnis[fehler_code] == '205') {
+		elseif ($error == '205') {
 			return 9;
 		}
-		elseif ($ergebnis[fehler_code] == '206') {
+		elseif ($error == '206') {
 			return 9;
 		}
-		elseif ($ergebnis[fehler_code] == '207') {
+		elseif ($error == '207') {
 			return 9;
 		}
-		elseif ($ergebnis[fehler_code] == '208') {
+		elseif ($error == '208') {
 			return 9;
 		}
-		elseif ($ergebnis[fehler_code] == '209') {
+		elseif ($error == '209') {
 			return 0;
 		}
-		elseif ($ergebnis[fehler_code] == '210') {
+		elseif ($error == '210') {
 			return 0;
 		}
-		elseif ($ergebnis[fehler_code] == '666') {
+		elseif ($error == '666') {
 			return 9;
 		}
-		elseif ($ergebnis[fehler_code] == '777') {
+		elseif ($error == '777') {
 			return 9;
 		}
-		elseif ($ergebnis[fehler_code] == '888') {
+		elseif ($error == '888') {
 			return 9;
 		}
-		elseif ($ergebnis[fehler_code] == '999') {
+		elseif ($error == '999') {
 			return 9;
 		} else {
 			return 9;

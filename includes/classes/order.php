@@ -1,15 +1,15 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: order.php 1533 2006-08-20 19:03:11Z mz $   
+   $Id: order.php 1533 2006-08-20 19:03:11Z mz $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
 
    Copyright (c) 2003 XT-Commerce
    -----------------------------------------------------------------------------------------
-   based on: 
+   based on:
    (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
-   (c) 2002-2003 osCommerce(order.php,v 1.32 2003/02/26); www.oscommerce.com 
+   (c) 2002-2003 osCommerce(order.php,v 1.32 2003/02/26); www.oscommerce.com
    (c) 2003	 nextcommerce (order.php,v 1.28 2003/08/18); www.nextcommerce.org
 
    Released under the GNU General Public License
@@ -107,7 +107,7 @@
       $this->customer = array('id' => $order['customers_id'],
                               'name' => $order['customers_name'],
                               'firstname' => $order['customers_firstname'],
-                              'lastname' => $order['customers_lastname'],                            
+                              'lastname' => $order['customers_lastname'],
                               'csID' => $order['customers_cid'],
                               'company' => $order['customers_company'],
                               'street_address' => $order['customers_street_address'],
@@ -178,12 +178,12 @@
         $index++;
       }
     }
-    
+
         function getOrderData($oID) {
     	global $xtPrice;
-    	
+
     	require_once(DIR_FS_INC . 'xtc_get_attributes_model.inc.php');
-    	
+
     	$order_query = "SELECT
 	        				products_id,
 	        				orders_products_id,
@@ -215,14 +215,14 @@
 		$order_data[] = array ('PRODUCTS_MODEL' => $order_data_values['products_model'], 'PRODUCTS_NAME' => $order_data_values['products_name'],'PRODUCTS_SHIPPING_TIME' => $order_data_values['products_shipping_time'], 'PRODUCTS_ATTRIBUTES' => $attributes_data, 'PRODUCTS_ATTRIBUTES_MODEL' => $attributes_model, 'PRODUCTS_PRICE' => $xtPrice->xtcFormat($order_data_values['final_price'], true),'PRODUCTS_SINGLE_PRICE' => $xtPrice->xtcFormat($order_data_values['final_price']/$order_data_values['products_quantity'], true), 'PRODUCTS_QTY' => $order_data_values['products_quantity']);
 
 	}
-	
+
 	return $order_data;
-    	
+
     }
-    
+
     function getTotalData($oID) {
     	global $xtPrice,$db;
-    	
+
     		// get order_total data
 	$oder_total_query = "SELECT
 	  					title,
@@ -240,13 +240,13 @@
 
 
 		$order_total[] = array ('TITLE' => $oder_total_values['title'], 'CLASS' => $oder_total_values['class'], 'VALUE' => $oder_total_values['value'], 'TEXT' => $oder_total_values['text']);
-		if ($oder_total_values['class'] = 'ot_total')
+		if ($oder_total_values['class'] == 'ot_total')
 			$total = $oder_total_values['value'];
 
 	}
-	
+
 	return array('data'=>$order_total,'total'=>$total);
-	
+
     }
 
     function cart() {
@@ -259,7 +259,7 @@
 
       $shipping_address_query = xtc_db_query("select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, ab.entry_country_id, c.countries_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format_id, ab.entry_state from " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " c on (ab.entry_country_id = c.countries_id) where ab.customers_id = '" . $_SESSION['customer_id'] . "' and ab.address_book_id = '" . $_SESSION['sendto'] . "'");
       $shipping_address = xtc_db_fetch_array($shipping_address_query);
-      
+
       $billing_address_query = xtc_db_query("select ab.entry_firstname, ab.entry_lastname, ab.entry_company, ab.entry_street_address, ab.entry_suburb, ab.entry_postcode, ab.entry_city, ab.entry_zone_id, z.zone_name, ab.entry_country_id, c.countries_id, c.countries_name, c.countries_iso_code_2, c.countries_iso_code_3, c.address_format_id, ab.entry_state from " . TABLE_ADDRESS_BOOK . " ab left join " . TABLE_ZONES . " z on (ab.entry_zone_id = z.zone_id) left join " . TABLE_COUNTRIES . " c on (ab.entry_country_id = c.countries_id) where ab.customers_id = '" . $_SESSION['customer_id'] . "' and ab.address_book_id = '" . $_SESSION['billto'] . "'");
       $billing_address = xtc_db_fetch_array($billing_address_query);
 
@@ -362,11 +362,17 @@
           $subindex = 0;
           reset($products[$i]['attributes']);
           while (list($option, $value) = each($products[$i]['attributes'])) {
-            $attributes_query = xtc_db_query("select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . $products[$i]['id'] . "' and pa.options_id = '" . $option . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $value . "' and pa.options_values_id = poval.products_options_values_id and popt.language_id = '" . $_SESSION['languages_id'] . "' and poval.language_id = '" . $_SESSION['languages_id'] . "'");
+            $attributes_query = xtc_db_query("select popt.products_options_name, popt.products_options_type, poval.products_options_values_name, pa.options_values_price, pa.price_prefix from " . TABLE_PRODUCTS_OPTIONS . " popt, " . TABLE_PRODUCTS_OPTIONS_VALUES . " poval, " . TABLE_PRODUCTS_ATTRIBUTES . " pa where pa.products_id = '" . $products[$i]['id'] . "' and pa.options_id = '" . $option . "' and pa.options_id = popt.products_options_id and pa.options_values_id = '" . $value . "' and pa.options_values_id = poval.products_options_values_id and popt.language_id = '" . $_SESSION['languages_id'] . "' and poval.language_id = '" . $_SESSION['languages_id'] . "'");
             $attributes = xtc_db_fetch_array($attributes_query);
 
+            if($attributes['products_options_type']=='2' || $attributes['products_options_type']=='3'){
+              $attr_value = $products[$i]['attributes_values'][$option];
+            } else {
+              $attr_value = $attributes['products_options_values_name'];
+            }
+
             $this->products[$index]['attributes'][$subindex] = array('option' => $attributes['products_options_name'],
-                                                                     'value' => $attributes['products_options_values_name'],
+                                                                     'value' => $attr_value,
                                                                      'option_id' => $option,
                                                                      'value_id' => $value,
                                                                      'prefix' => $attributes['price_prefix'],
@@ -411,7 +417,7 @@
           $this->info['total'] -= ($this->info['subtotal'] /100 * $_SESSION['customers_status']['customers_status_ot_discount']);
         }
       } else {
-		
+
         $this->info['total'] = $this->info['subtotal']  + $xtPrice->xtcFormat($this->info['shipping_cost'],false,0,true);
         if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1') {
           $this->info['total'] -= ($this->info['subtotal'] /100 * $_SESSION['customers_status']['customers_status_ot_discount']);

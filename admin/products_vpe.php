@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: products_vpe.php 1125 2005-07-28 09:59:44Z novalis $   
+   $Id: products_vpe.php 208 2007-02-27 08:03:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -106,11 +106,11 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'box_closed_48x48.png'); ?></td>
     <td class="pageHeading"><?php echo BOX_PRODUCTS_VPE; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XT Configuration</td>
+    <td class="main" valign="top">xt:Commerce Configuration</td>
   </tr>
 </table></td>
       </tr>

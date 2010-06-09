@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: database_tables.php 1316 2005-10-21 15:30:58Z mz $   
+   $Id: database_tables.php 199 2007-02-25 15:31:27Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -83,4 +83,5 @@
   define('TABLE_COUPONS_DESCRIPTION', 'coupons_description');
   define('TABLE_BLACKLIST', 'card_blacklist');
   define('TABLE_CAMPAIGNS_IP','campaigns_ip');
+  define('TABLE_STOCKS_TRAFFIC','stocks_traffic');
 ?>

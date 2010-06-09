@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: new_product.php 897 2005-04-28 21:36:55Z mz $
+   $Id: new_product.php 242 2007-03-08 13:34:57Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -88,6 +88,8 @@ if ($pInfo->products_startpage == '1') { $startpage_checked = true; } else { $st
 ?>
 <link rel="stylesheet" type="text/css" href="includes/javascript/spiffyCal/spiffyCal_v2_1.css">
 <script type="text/javascript" src="includes/javascript/spiffyCal/spiffyCal_v2_1.js"></script>
+<link type="text/css" rel="stylesheet" href="includes/javascript/tabpane/css/luna/tab.css" />
+<script type="text/javascript" src="includes/javascript/tabpane/js/tabpane.js"></script>
 <script type="text/javascript">
   var dateAvailable = new ctlSpiffyCalendarBox("dateAvailable", "new_product", "products_date_available","btnDate1","<?php echo $pInfo->products_date_available; ?>",scBTNMODE_CUSTOMBLUE);
 </script>
@@ -96,60 +98,64 @@ if ($pInfo->products_startpage == '1') { $startpage_checked = true; } else { $st
 <?php $form_action = ($_GET['pID']) ? 'update_product' : 'insert_product'; ?>
 <?php $fsk18_array=array(array('id'=>0,'text'=>NO),array('id'=>1,'text'=>YES)); ?>
 <?php echo xtc_draw_form('new_product', FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&pID=' . $_GET['pID'] . '&action='.$form_action, 'post', 'enctype="multipart/form-data"'); ?>
-<span class="pageHeading"><?php echo sprintf(TEXT_NEW_PRODUCT, xtc_output_generated_category_path($current_category_id)); ?></span><br />
-<table width="100%"  border="0">
-  <tr>
-    <td><span class="main"><?php echo TEXT_PRODUCTS_STATUS; ?> <?php echo xtc_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . xtc_draw_radio_field('products_status', '1', $status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . xtc_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE; ?><br />
-    </span>
-      <table width="100%" border="0">
-        <tr>
-          <td class="main" width="127"><?php echo TEXT_PRODUCTS_DATE_AVAILABLE; ?><br />
-              <small>(YYYY-MM-DD)</small></td>
-          <td class="main"><?php echo xtc_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?>
-              <script type="text/javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script></td>
-        </tr>
-      </table>
-      <span class="main"><br /></span>
-    </td><td>
-    <table bgcolor="f3f3f3" style="border: 1px solid; border-color: #cccccc;" "width="100%"  border="0">
-    <tr>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_STARTPAGE; ?> <?php echo TEXT_PRODUCTS_STARTPAGE_YES . xtc_draw_radio_field('products_startpage', '1', $startpage_checked) . '&nbsp;' . TEXT_PRODUCTS_STARTPAGE_NO . xtc_draw_radio_field('products_startpage', '0', !$startpage_checked) ?></span></td>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_STARTPAGE_SORT; ?>&nbsp;<?php echo  xtc_draw_input_field('products_startpage_sort', $pInfo->products_startpage_sort ,'size=3'); ?></span></td>
-    </tr>        
-    <tr>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_SORT; ?>&nbsp;<?php echo  xtc_draw_input_field('products_sort', $pInfo->products_sort,'size=3'); ?></span></td>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_QUANTITY; ?>&nbsp;<?php echo xtc_draw_input_field('products_quantity', $pInfo->products_quantity,'size=5'); ?></span></td>
-      </tr>
-              <tr>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_MODEL; ?></span></td>
-        <td><span class="main"><?php echo  xtc_draw_input_field('products_model', $pInfo->products_model); ?></span></td>
-      </tr>
-                    <tr>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_EAN; ?></span></td>
-        <td><span class="main"><?php echo  xtc_draw_input_field('products_ean', $pInfo->products_ean); ?></span></td>
-      </tr>
-      <tr>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_MANUFACTURER; ?></span></td>
-        <td><span class="main"><?php echo xtc_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id); ?></span></td>
-      </tr>
-      <tr>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_VPE_VISIBLE.xtc_draw_selection_field('products_vpe_status', 'checkbox', '1',$pInfo->products_vpe_status==1 ? true : false); ?>
-        <?php echo TEXT_PRODUCTS_VPE_VALUE.xtc_draw_input_field('products_vpe_value', $pInfo->products_vpe_value,'size=4'); ?></span></td>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_VPE. xtc_draw_pull_down_menu('products_vpe', $vpe_array, $pInfo->products_vpe='' ?  DEFAULT_PRODUCTS_VPE_ID : $pInfo->products_vpe); ?></span></td>
-      </tr>
-      <tr>
-        <td><span class="main"><?php echo TEXT_FSK18; ?>&nbsp;<?php echo xtc_draw_pull_down_menu('fsk18', $fsk18_array, $pInfo->products_fsk18); ?></span></td>
-        <td><span class="main"><?php echo TEXT_PRODUCTS_WEIGHT; ?><?php echo xtc_draw_input_field('products_weight', $pInfo->products_weight,'size=4'); ?><?php echo TEXT_PRODUCTS_WEIGHT_INFO; ?></span></td>
-      </tr>
-      <tr>
-<?php if (ACTIVATE_SHIPPING_STATUS=='true') { ?>
-        <td><span class="main"><?php echo BOX_SHIPPING_STATUS.':'; ?></span></td>
-        <td><span class="main"><?php echo xtc_draw_pull_down_menu('shipping_status', $shipping_statuses, $pInfo->products_shippingtime); ?></span></td>
-      </tr>
-<?php } ?>
-      <tr>
-          <?php
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'folder_grey.png'); ?></td>
+    <td class="pageHeading"><?php echo sprintf(TEXT_NEW_PRODUCT, xtc_output_generated_category_path($current_category_id)); ?></td>
+  </tr>
+  <tr> 
+    <td class="main" valign="top">xt:Commerce Products</td>
+  </tr>
+</table>
+<br />
+<div class="tab-pane" id="mainTabPane">
+  <script type="text/javascript"><!--
+    var mainTabPane = new WebFXTabPane( document.getElementById( "mainTabPane" ) );
+  //--></script>
 
+
+<div class="tab-page" id="tab_general">
+    <h2 class="tab"><?php echo HEADING_GENERAL; ?></h2>
+        <script type="text/javascript"><!--
+      mainTabPane.addTabPage( document.getElementById( "tab_general" ) );
+    //--></script>
+
+<table width="100%"  border="0" cellspacing="0" cellpadding="4">  
+    <tr class="dataTableRow">
+        <td class="dataTableContent" width="10%"><?php echo TEXT_PRODUCTS_DATE_AVAILABLE; ?><br /><small>(YYYY-MM-DD)</small></td>
+        <td class="dataTableContent" width="25%"><?php echo xtc_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;'; ?>
+             <script type="text/javascript">dateAvailable.writeControl(); dateAvailable.dateFormat="yyyy-MM-dd";</script> </td>
+    
+    	 <td class="dataTableContent">&nbsp;</td>   	 
+        <td class="dataTableContent" width="10%"><?php echo TEXT_PRODUCTS_STATUS; ?> </td>
+        <td class="dataTableContent" width="25%"><?php echo xtc_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . xtc_draw_radio_field('products_status', '1', $status) . '&nbsp;' . TEXT_PRODUCT_AVAILABLE . '&nbsp;' . xtc_draw_radio_field('products_status', '0', $out_status) . '&nbsp;' . TEXT_PRODUCT_NOT_AVAILABLE; ?></td>
+    </tr> 
+    <tr class="dataTableRow">
+        <td class="dataTableContent" width="10%"><?php echo TEXT_PRODUCTS_STARTPAGE; ?> <?php echo TEXT_PRODUCTS_STARTPAGE_YES . xtc_draw_radio_field('products_startpage', '1', $startpage_checked) . '&nbsp;' . TEXT_PRODUCTS_STARTPAGE_NO . xtc_draw_radio_field('products_startpage', '0', !$startpage_checked) ?></td>
+        <td class="dataTableContent" width="25%"><?php echo TEXT_PRODUCTS_STARTPAGE_SORT; ?>&nbsp;<?php echo  xtc_draw_input_field('products_startpage_sort', $pInfo->products_startpage_sort ,'size=3'); ?></td>
+    	<td class="dataTableContent">&nbsp;</td>
+        <td class="dataTableContent" width="10%"><?php echo TEXT_PRODUCTS_SORT; ?>&nbsp;<?php echo  xtc_draw_input_field('products_sort', $pInfo->products_sort,'size=3'); ?></td>
+        <td class="dataTableContent" width="25%"><?php echo TEXT_PRODUCTS_QUANTITY; ?>&nbsp;<?php echo xtc_draw_input_field('products_quantity', $pInfo->products_quantity,'size=5'); ?></td>
+	</tr> 
+    <tr class="dataTableRow">
+        <td class="dataTableContent" width="10%"><?php echo TEXT_PRODUCTS_MODEL; ?></span></td>
+        <td class="dataTableContent" width="25%"><?php echo  xtc_draw_input_field('products_model', $pInfo->products_model); ?></td>
+		<td class="dataTableContent">&nbsp;</td>
+        <td class="dataTableContent" width="10%"><?php echo TEXT_PRODUCTS_EAN; ?></td>
+        <td class="dataTableContent" width="25%"><?php echo  xtc_draw_input_field('products_ean', $pInfo->products_ean); ?></td>
+     </tr> 
+    <tr class="dataTableRow">
+        <td class="dataTableContent" width="10%"><?php echo TEXT_PRODUCTS_MANUFACTURER; ?></span></td>
+        <td class="dataTableContent" width="25%"><?php echo xtc_draw_pull_down_menu('manufacturers_id', $manufacturers_array, $pInfo->manufacturers_id); ?></td>
+      	<td class="dataTableContent">&nbsp;</td>
+        <td class="dataTableContent" width="10%"><?php echo TEXT_PRODUCTS_VPE_VISIBLE.xtc_draw_selection_field('products_vpe_status', 'checkbox', '1',$pInfo->products_vpe_status==1 ? true : false); ?></td>
+        <td class="dataTableContent" width="25%"><?php echo TEXT_PRODUCTS_VPE_VALUE.xtc_draw_input_field('products_vpe_value', $pInfo->products_vpe_value,'size=4'); ?><?php echo TEXT_PRODUCTS_VPE. xtc_draw_pull_down_menu('products_vpe', $vpe_array, $pInfo->products_vpe='' ?  DEFAULT_PRODUCTS_VPE_ID : $pInfo->products_vpe); ?></td>
+      </tr> 
+      <tr class="dataTableRow">
+        <td class="dataTableContent" width="10%"><?php echo TEXT_FSK18; ?>&nbsp;<?php echo xtc_draw_pull_down_menu('fsk18', $fsk18_array, $pInfo->products_fsk18); ?></td>
+        <td class="dataTableContent" width="25%"><?php echo TEXT_PRODUCTS_WEIGHT; ?><?php echo xtc_draw_input_field('products_weight', $pInfo->products_weight,'size=4'); ?><?php echo TEXT_PRODUCTS_WEIGHT_INFO; ?></td>
+        <td class="dataTableContent">&nbsp;</td>
+          <?php
 $files = array ();
 if ($dir = opendir(DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/module/product_info/')) {
 	while (($file = readdir($dir)) !== false) {
@@ -170,13 +176,11 @@ if ($content['content_file'] == '') {
 	$default_value = $pInfo->product_template;
 	$files = array_merge($default_array, $files);
 }
-echo '<td class="main">'.TEXT_CHOOSE_INFO_TEMPLATE.':</td>';
-echo '<td><span class="main">'.xtc_draw_pull_down_menu('info_template', $files, $default_value);
+echo '<td class="dataTableContent" width="10%">'.TEXT_CHOOSE_INFO_TEMPLATE.':</td>';
+echo '<td class="dataTableContent" width="25%">'.xtc_draw_pull_down_menu('info_template', $files, $default_value).'</dt>';
 ?>
-        </span></td>
-      </tr>
-      <tr>
-
+      </tr> 
+      <tr class="dataTableRow">
 
           <?php
 
@@ -200,14 +204,91 @@ if ($content['content_file'] == '') {
 	$default_value = $pInfo->options_template;
 	$files = array_merge($default_array, $files);
 }
-echo '<td class="main">'.TEXT_CHOOSE_OPTIONS_TEMPLATE.':'.'</td>';
-echo '<td><span class="main">'.xtc_draw_pull_down_menu('options_template', $files, $default_value);
+echo '<td class="dataTableContent" width="10%">'.TEXT_CHOOSE_OPTIONS_TEMPLATE.':'.'</td>';
+echo '<td class="dataTableContent" width="25%">'.xtc_draw_pull_down_menu('options_template', $files, $default_value).'</td>';
 ?>
-        </span></td>
+ 		<td class="dataTableContent">&nbsp;</td>
+		<td class="dataTableContent" width="10%"><?php echo TEXT_AVERAGE_STOCK; ?></td>
+    	<td class="dataTableContent" width="25%"><?php echo xtc_draw_input_field('products_average_stock', $pInfo->products_average_stock,'size=4'); ?></td>
+    </tr> 
+    <tr class="dataTableRow">    
+
+<?php if (ACTIVATE_SHIPPING_STATUS=='true') { ?>
+        <td class="dataTableContent" width="10%"><?php echo BOX_SHIPPING_STATUS.':'; ?></td>
+        <td class="dataTableContent" width="25%"><?php echo xtc_draw_pull_down_menu('shipping_status', $shipping_statuses, $pInfo->products_shippingtime); ?></td>
+		<td class="dataTableContent" colspan ="3">&nbsp;</td>
+<?php } ?>
       </tr>
-    </table></td>
-  </tr>
 </table>
+</div>
+
+<div class="tab-page" id="tab_price">
+    <h2 class="tab"><?php echo HEADING_PRICES_OPTIONS; ?></h2>
+        <script type="text/javascript"><!--
+      mainTabPane.addTabPage( document.getElementById( "tab_price" ) );
+    //--></script>
+<table width="100%" border="0">
+        <tr>
+          <td colspan="4"><?php include(DIR_WS_MODULES.'group_prices.php'); ?></td>
+        </tr>
+        <tr>
+          <td colspan="4"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
+        </tr>
+</table>
+</div>
+
+
+<div class="tab-page" id="tab_images">
+    <h2 class="tab"><?php echo HEADING_PRODUCT_IMAGES; ?></h2>
+        <script type="text/javascript"><!--
+      mainTabPane.addTabPage( document.getElementById( "tab_images" ) );
+    //--></script>
+    <table width="100%" border="0">
+<?php include (DIR_WS_MODULES.'products_images.php'); ?>
+</table>
+</div>
+
+<?php
+if (GROUP_CHECK == 'true') {
+	$customers_statuses_array = xtc_get_customers_statuses();
+	$customers_statuses_array = array_merge(array (array ('id' => 'all', 'text' => TXT_ALL)), $customers_statuses_array);
+?>
+<div class="tab-page" id="tab_group">
+    <h2 class="tab"><?php echo HEADING_GROUP_PERMISSIONS; ?></h2>
+        <script type="text/javascript"><!--
+      mainTabPane.addTabPage( document.getElementById( "tab_group" ) );
+    //--></script>
+    <table width="100%" border="0">
+<tr>
+<td style="border-top: 1px solid; border-color: #ff0000;" valign="top" class="main" ><?php echo ENTRY_CUSTOMERS_STATUS; ?></td>
+<td style="border-top: 1px solid; border-left: 1px solid; border-color: #ff0000;"  bgcolor="#FFCC33" class="main">
+<?php
+
+	for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
+		$code = '$id=$pInfo->group_permission_'.$customers_statuses_array[$i]['id'].';';
+		eval ($code);
+		
+		if ($id==1) {
+
+			$checked = 'checked ';
+			
+		} else {
+			$checked = '';
+		}
+		echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[$i]['id'].'"'.$checked.'> '.$customers_statuses_array[$i]['text'].'<br />';
+	}
+
+?>
+</td>
+</tr>
+</table>
+<?php
+}
+?>
+</div>
+
+</div>
+
   <br /><br />
   <?php for ($i = 0, $n = sizeof($languages); $i < $n; $i++) { ?>
   <table width="100%" border="0">
@@ -259,60 +340,7 @@ echo '<td><span class="main">'.xtc_draw_pull_down_menu('options_template', $file
 <?php } ?>
 <table width="100%"><tr><td style="border-bottom: thin dashed Gray;">&nbsp;</td></tr></table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
-<tr><td><span class="main" style="padding-left: 10px;"><?php echo HEADING_PRODUCT_IMAGES; ?></span></td></tr>
-<tr><td><br />
-<table width="100%" border="0" bgcolor="f3f3f3" style="border: 1px solid; border-color: #cccccc;">
 
-<?php
-
-include (DIR_WS_MODULES.'products_images.php');
-?>
-    <tr><td colspan="4"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td></tr>
-<?php
-
-if (GROUP_CHECK == 'true') {
-	$customers_statuses_array = xtc_get_customers_statuses();
-	$customers_statuses_array = array_merge(array (array ('id' => 'all', 'text' => TXT_ALL)), $customers_statuses_array);
-?>
-<tr>
-<td style="border-top: 1px solid; border-color: #ff0000;" valign="top" class="main" ><?php echo ENTRY_CUSTOMERS_STATUS; ?></td>
-<td style="border-top: 1px solid; border-left: 1px solid; border-color: #ff0000;"  bgcolor="#FFCC33" class="main">
-<?php
-
-	for ($i = 0; $n = sizeof($customers_statuses_array), $i < $n; $i ++) {
-		$code = '$id=$pInfo->group_permission_'.$customers_statuses_array[$i]['id'].';';
-		eval ($code);
-		
-		if ($id==1) {
-
-			$checked = 'checked ';
-			
-		} else {
-			$checked = '';
-		}
-		echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[$i]['id'].'"'.$checked.'> '.$customers_statuses_array[$i]['text'].'<br />';
-	}
-
-?>
-</td>
-</tr>
-<?php
-
-}
-?>
-</table>
-</td></tr>
-
-<tr><td>
-<table width="100%" border="0">
-        <tr>
-          <td colspan="4"><?php include(DIR_WS_MODULES.'group_prices.php'); ?></td>
-        </tr>
-        <tr>
-          <td colspan="4"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-        </tr>
-</table>
-</td></tr>
 
     <tr>
      <td class="main" align="right">

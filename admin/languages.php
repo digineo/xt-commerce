@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: languages.php 1180 2005-08-26 08:44:53Z novalis $   
+   $Id: languages.php 279 2007-03-22 13:49:17Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -25,20 +25,21 @@
       $directory = xtc_db_prepare_input($_POST['directory']);
       $sort_order = xtc_db_prepare_input($_POST['sort_order']);
       $charset = xtc_db_prepare_input($_POST['charset']);
+      $currency = xtc_db_prepare_input($_POST['currency']);
 
-      xtc_db_query("insert into " . TABLE_LANGUAGES . " (name, code, image, directory, sort_order,language_charset) values ('" . xtc_db_input($name) . "', '" . xtc_db_input($code) . "', '" . xtc_db_input($image) . "', '" . xtc_db_input($directory) . "', '" . xtc_db_input($sort_order) . "', '" . xtc_db_input($charset) . "')");
+      xtc_db_query("insert into " . TABLE_LANGUAGES . " (name, code, image, directory, sort_order,language_charset,default_currency) values ('" . xtc_db_input($name) . "', '" . xtc_db_input($code) . "', '" . xtc_db_input($image) . "', '" . xtc_db_input($directory) . "', '" . xtc_db_input($sort_order) . "', '" . xtc_db_input($charset) . "', '" . xtc_db_input($currency) . "')");
       $insert_id = xtc_db_insert_id();
 
       // create additional categories_description records
-      $categories_query = xtc_db_query("select c.categories_id, cd.categories_name from " . TABLE_CATEGORIES . " c left join " . TABLE_CATEGORIES_DESCRIPTION . " cd on c.categories_id = cd.categories_id where cd.language_id = '" . $_SESSION['languages_id'] . "'");
+      $categories_query = xtc_db_query("select c.categories_id, cd.categories_name, cd.categories_heading_title, cd.categories_description from " . TABLE_CATEGORIES . " c left join " . TABLE_CATEGORIES_DESCRIPTION . " cd on c.categories_id = cd.categories_id where cd.language_id = '" . $_SESSION['languages_id'] . "'");
       while ($categories = xtc_db_fetch_array($categories_query)) {
-        xtc_db_query("insert into " . TABLE_CATEGORIES_DESCRIPTION . " (categories_id, language_id, categories_name) values ('" . $categories['categories_id'] . "', '" . $insert_id . "', '" . xtc_db_input($categories['categories_name']) . "')");
+        xtc_db_query("insert into " . TABLE_CATEGORIES_DESCRIPTION . " (categories_id, language_id, categories_name, categories_heading_title, categories_description) values ('" . $categories['categories_id'] . "', '" . $insert_id . "', '" . xtc_db_input($categories['categories_name']) . "', '" . xtc_db_input($categories['categories_heading_title']) . "', '" . xtc_db_input($categories['categories_description']) . "')");
       }
 
       // create additional products_description records
-      $products_query = xtc_db_query("select p.products_id, pd.products_name, pd.products_description, pd.products_url from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id where pd.language_id = '" . $_SESSION['languages_id'] . "'");
+      $products_query = xtc_db_query("select p.products_id, pd.products_name, pd.products_description, pd.products_short_description, pd.products_url from " . TABLE_PRODUCTS . " p left join " . TABLE_PRODUCTS_DESCRIPTION . " pd on p.products_id = pd.products_id where pd.language_id = '" . $_SESSION['languages_id'] . "'");
       while ($products = xtc_db_fetch_array($products_query)) {
-        xtc_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_url) values ('" . $products['products_id'] . "', '" . $insert_id . "', '" . xtc_db_input($products['products_name']) . "', '" . xtc_db_input($products['products_description']) . "', '" . xtc_db_input($products['products_url']) . "')");
+        xtc_db_query("insert into " . TABLE_PRODUCTS_DESCRIPTION . " (products_id, language_id, products_name, products_description, products_short_description, products_url) values ('" . $products['products_id'] . "', '" . $insert_id . "', '" . xtc_db_input($products['products_name']) . "', '" . xtc_db_input($products['products_description']) . "',  '" . xtc_db_input($products['products_short_description']) . "','" . xtc_db_input($products['products_url']) . "')");
       }
 
       // create additional products_options records
@@ -69,6 +70,12 @@
       $shipping_status_query = xtc_db_query("select shipping_status_id, shipping_status_name from " . TABLE_SHIPPING_STATUS . " where language_id = '" . $_SESSION['languages_id'] . "'");
       while ($shipping_status = xtc_db_fetch_array($shipping_status_query)) {
         xtc_db_query("insert into " . TABLE_SHIPPING_STATUS . " (shipping_status_id, language_id, shipping_status_name) values ('" . $shipping_status['shipping_status_id'] . "', '" . $insert_id . "', '" . xtc_db_input($shipping_status['shipping_status_name']) . "')");
+      }
+      
+      // create additional stock records
+      $stock_status_query = xtc_db_query("select * from " . TABLE_STOCKS_TRAFFIC . " where language_id = '" . $_SESSION['languages_id'] . "'");
+      while ($stock_status = xtc_db_fetch_array($stock_status_query)) {
+        xtc_db_query("insert into " . TABLE_STOCKS_TRAFFIC . " (stocks_traffic_id, language_id, stocks_traffic_name,stocks_traffic_image,stocks_traffic_percentage) values ('" . $stock_status['stocks_traffic_id'] . "', '" . $insert_id . "', '" . xtc_db_input($stock_status['stocks_traffic_name']) . "', '" . xtc_db_input($stock_status['stocks_traffic_image']) . "', '" . xtc_db_input($stock_status['stocks_traffic_percentage']) . "')");
       }
       
       // create additional orders_status records
@@ -122,9 +129,10 @@
       $image = xtc_db_prepare_input($_POST['image']);
       $directory = xtc_db_prepare_input($_POST['directory']);
       $sort_order = xtc_db_prepare_input($_POST['sort_order']);
-     $charset = xtc_db_prepare_input($_POST['charset']);
+      $charset = xtc_db_prepare_input($_POST['charset']);
+      $currency = xtc_db_prepare_input($_POST['currency']);
 	  
-      xtc_db_query("update " . TABLE_LANGUAGES . " set name = '" . xtc_db_input($name) . "', code = '" . xtc_db_input($code) . "', image = '" . xtc_db_input($image) . "', directory = '" . xtc_db_input($directory) . "', sort_order = '" . xtc_db_input($sort_order) . "', language_charset = '" . xtc_db_input($charset) . "' where languages_id = '" . xtc_db_input($lID) . "'");
+      xtc_db_query("update " . TABLE_LANGUAGES . " set name = '" . xtc_db_input($name) . "', code = '" . xtc_db_input($code) . "', image = '" . xtc_db_input($image) . "', directory = '" . xtc_db_input($directory) . "', sort_order = '" . xtc_db_input($sort_order) . "', language_charset = '" . xtc_db_input($charset) . "', default_currency = '" . xtc_db_input($currency) . "' where languages_id = '" . xtc_db_input($lID) . "'");
 
       if ($_POST['default'] == 'on') {
         xtc_db_query("update " . TABLE_CONFIGURATION . " set configuration_value = '" . xtc_db_input($code) . "' where configuration_key = 'DEFAULT_LANGUAGE'");
@@ -196,11 +204,11 @@
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'world.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XT Configuration</td>
+    <td class="main" valign="top">xt:Commerce Localisation</td>
   </tr>
 </table></td>
       </tr>
@@ -214,7 +222,7 @@
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
-  $languages_query_raw = "select languages_id, name, code, image, directory, sort_order,language_charset from " . TABLE_LANGUAGES . " order by sort_order";
+  $languages_query_raw = "select languages_id, name, code, image, directory, sort_order,language_charset,default_currency from " . TABLE_LANGUAGES . " order by sort_order";
   $languages_split = new splitPageResults($_GET['page'], '20', $languages_query_raw, $languages_query_numrows);
   $languages_query = xtc_db_query($languages_query_raw);
 
@@ -266,6 +274,15 @@
 
   $heading = array();
   $contents = array();
+  require (DIR_WS_CLASSES.'currencies.php');
+  $currencies = new currencies();
+  
+  foreach ($currencies->currencies as $key => $arr) {
+  	
+  	 $currencies_array[] = array('id' => $key,
+               'text' => $arr['title']);
+  	
+  }
   switch ($_GET['action']) {
     case 'new':
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_NEW_LANGUAGE . '</b>');
@@ -278,6 +295,7 @@
       $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_IMAGE . '<br />' . xtc_draw_input_field('image', 'icon.gif'));
       $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_DIRECTORY . '<br />' . xtc_draw_input_field('directory'));
       $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_SORT_ORDER . '<br />' . xtc_draw_input_field('sort_order'));
+      $contents[] = array('text' => '<br />' . TEXT_INFO_DEFAULT_CURRENCY . '<br />' . xtc_draw_pull_down_menu('currency',$currencies_array));
       $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('default') . ' ' . TEXT_SET_DEFAULT);
       $contents[] = array('align' => 'center', 'text' => '<br /><button class="button" type="submit" />' . BUTTON_INSERT . '</button> <a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $_GET['lID']) . '">' . BUTTON_CANCEL . '</a>');
       break;
@@ -293,6 +311,7 @@
       $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_IMAGE . '<br />' . xtc_draw_input_field('image', $lInfo->image));
       $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_DIRECTORY . '<br />' . xtc_draw_input_field('directory', $lInfo->directory));
       $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_SORT_ORDER . '<br />' . xtc_draw_input_field('sort_order', $lInfo->sort_order));
+      $contents[] = array('text' => '<br />' . TEXT_INFO_DEFAULT_CURRENCY . '<br />' . xtc_draw_pull_down_menu('currency',$currencies_array,$lInfo->default_currency));
       if (DEFAULT_LANGUAGE != $lInfo->code) $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('default') . ' ' . TEXT_SET_DEFAULT);
       $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="button" onClick="this.blur();" value="' . BUTTON_UPDATE . '"/> <a class="button" onClick="this.blur();" href="' . xtc_href_link(FILENAME_LANGUAGES, 'page=' . $_GET['page'] . '&lID=' . $lInfo->languages_id) . '">' . BUTTON_CANCEL . '</a>');
       break;
@@ -317,6 +336,8 @@
         $contents[] = array('text' => '<br />' . xtc_image(DIR_WS_LANGUAGES . $lInfo->directory . '/' . $lInfo->image, $lInfo->name));
         $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_DIRECTORY . '<br />' . DIR_WS_LANGUAGES . '<b>' . $lInfo->directory . '</b>');
         $contents[] = array('text' => '<br />' . TEXT_INFO_LANGUAGE_SORT_ORDER . ' ' . $lInfo->sort_order);
+        $contents[] = array('text' => '<br />' . TEXT_INFO_DEFAULT_CURRENCY . ': ' . $lInfo->default_currency);
+      
       }
       break;
   }

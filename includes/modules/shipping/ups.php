@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: dp.php,v 1.1 2003/09/06 22:13:54 fanta2k Exp $   
+   $Id: ups.php 9 2006-12-08 19:45:00Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

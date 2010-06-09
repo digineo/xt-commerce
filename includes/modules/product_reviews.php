@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: product_reviews.php 1243 2005-09-25 09:33:02Z mz $   
+   $Id: product_reviews.php 245 2007-03-08 16:08:22Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

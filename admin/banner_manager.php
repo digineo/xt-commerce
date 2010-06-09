@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: banner_manager.php 1030 2005-07-14 20:22:32Z novalis $   
+   $Id: banner_manager.php 229 2007-03-06 19:46:21Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -208,11 +208,14 @@ function popupImageWindow(url) {
     <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'banner.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Tools</td>
+  </tr>
+</table></td>
       </tr>
 <?php
   if ($_GET['action'] == 'new') {

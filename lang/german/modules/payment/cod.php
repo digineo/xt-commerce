@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: cod.php 998 2005-07-07 14:18:20Z mz $   
+   $Id: cod.php 192 2007-02-24 16:24:52Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -20,14 +20,18 @@ define('MODULE_PAYMENT_COD_TEXT_TITLE', 'Nachnahme');
 define('MODULE_PAYMENT_COD_TEXT_DESCRIPTION', 'Nachnahme');
 
 define('MODULE_PAYMENT_COD_TEXT_INFO', '');
-define('MODULE_PAYMENT_COD_ZONE_TITLE', 'Zahlungszone');
-define('MODULE_PAYMENT_COD_ZONE_DESC', 'Wenn eine Zone ausgew&auml;hlt ist, gilt die Zahlungsmethode nur f&uuml;r diese Zone.');
-define('MODULE_PAYMENT_COD_ALLOWED_TITLE', 'Erlaubte Zonen');
-define('MODULE_PAYMENT_COD_ALLOWED_DESC', 'Geben Sie <b>einzeln</b> die Zonen an, welche f&uuml;r dieses Modul erlaubt sein sollen. (z.B. AT,DE (wenn leer, werden alle Zonen erlaubt))');
 define('MODULE_PAYMENT_COD_STATUS_TITLE', 'Nachnahme Modul aktivieren');
 define('MODULE_PAYMENT_COD_STATUS_DESC', 'M&ouml;chten Sie Zahlungen per Nachnahme akzeptieren?');
-define('MODULE_PAYMENT_COD_SORT_ORDER_TITLE', 'Anzeigereihenfolge');
-define('MODULE_PAYMENT_COD_SORT_ORDER_DESC', 'Reihenfolge der Anzeige. Kleinste Ziffer wird zuerst angezeigt.');
-define('MODULE_PAYMENT_COD_ORDER_STATUS_ID_TITLE', 'Bestellstatus festlegen');
-define('MODULE_PAYMENT_COD_ORDER_STATUS_ID_DESC', 'Bestellungen, welche mit diesem Modul gemacht werden, auf diesen Status setzen');
+
+
+define('MODULE_PAYMENT_COD_COST_TITLE', _MODULES_PAYMENT_FEE_TITLE);
+define('MODULE_PAYMENT_COD_COST_DESC', _MODULES_PAYMENT_FEE_DESC);
+define('MODULE_PAYMENT_COD_ZONE_TITLE', _MODULES_ZONE_TITLE);
+define('MODULE_PAYMENT_COD_ZONE_DESC', _MODULES_ZONE_DESC);
+define('MODULE_PAYMENT_COD_ALLOWED_TITLE', _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_PAYMENT_COD_ALLOWED_DESC', _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_PAYMENT_COD_SORT_ORDER_TITLE', _MODULES_SORT_ORDER_TITLE);
+define('MODULE_PAYMENT_COD_SORT_ORDER_DESC', _MODULES_SORT_ORDER_DESC);
+define('MODULE_PAYMENT_COD_ORDER_STATUS_ID_TITLE', _MODULES_SET_ORDER_STATUS_TITLE);
+define('MODULE_PAYMENT_COD_ORDER_STATUS_ID_DESC', _MODULES_SET_ORDER_STATUS_DESC);
 ?>

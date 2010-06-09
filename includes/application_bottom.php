@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: application_bottom.php 1239 2005-09-24 20:09:56Z mz $   
+   $Id: application_bottom.php 302 2007-03-30 08:25:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -38,5 +38,10 @@ if ((GZIP_COMPRESSION == 'true') && ($ext_zlib_loaded == true) && ($ini_zlib_out
 if (TRACKING_ECONDA_ACTIVE == 'true') {
 	require_once (DIR_WS_INCLUDES . 'econda/econda.php');
 }
+
+
+xtc_output_warning(WARNING_BETA);
+
+
 echo '</body></html>';
 ?>

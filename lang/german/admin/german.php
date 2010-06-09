@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: german.php 905 2005-04-29 13:02:06Z novalis $   
+   $Id: german.php 279 2007-03-22 13:49:17Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -48,7 +48,7 @@ define('HTML_PARAMS','dir="ltr" lang="de"');
 
 
 // page title
-define('TITLE', 'XT-Commerce');
+define('TITLE', 'xt:Commerce Webshop Software');
 
 // header text in includes/header.php
 define('HEADER_TITLE_TOP', 'Administration');
@@ -104,6 +104,7 @@ define('BOX_SHIPPING', 'Versandart');
 define('BOX_ORDER_TOTAL', 'Zusammenfassung');
 define('BOX_CATEGORIES', 'Kategorien / Artikel');
 define('BOX_PRODUCTS_ATTRIBUTES', 'Artikelmerkmale');
+define('BOX_PRODUCTS_OPTIONS','Artikeloptionen');
 define('BOX_MANUFACTURERS', 'Hersteller');
 define('BOX_REVIEWS', 'Artikelbewertungen');
 define('BOX_CAMPAIGNS', 'Kampagnen');
@@ -296,6 +297,7 @@ define('TEXT_DISPLAY_NUMBER_OF_TAX_ZONES', 'Angezeigt werden <b>%d</b> bis <b>%d
 define('TEXT_DISPLAY_NUMBER_OF_TAX_RATES', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Steuers&auml;tzen)');
 define('TEXT_DISPLAY_NUMBER_OF_ZONES', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bundesl&auml;ndern)');
 
+
 define('PREVNEXT_BUTTON_PREV', '&lt;&lt;');
 define('PREVNEXT_BUTTON_NEXT', '&gt;&gt;');
 
@@ -389,4 +391,21 @@ define('ERROR_GIF_MERGE','Fehlender GDlib Gif Support, kein Wasserzeichen (Merge
 define('ERROR_GIF_UPLOAD','Fehlender GDlib Gif Support, kein Upload von GIF Bildern m&ouml;glich');
 
 define('TEXT_REFERER','Referer: ');
+
+// SP2.2
+define('BOX_STOCKS_TRAFFIC','Ampel-Regel');
+define('TEXT_DISPLAY_NUMBER_OF_STOCKS_TRAFFIC','Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Ampel-Regeln)');
+define('_MODULES_SORT_ORDER_TITLE','Anzeigereihenfolge');
+define('_MODULES_SORT_ORDER_DESC','Reihenfolge der Anzeige. Kleinste Ziffer wird zuerst angezeigt.');
+define('_MODULES_ZONE_TITLE','Zone');
+define('_MODULES_ZONE_DESC','Wenn eine Zone ausgew&auml;hlt ist, wird das Modul nur f&uuml;r diese Zone angezeigt.');
+define('_MODULES_ZONE_ALLOWED_TITLE','Erlaubte Zonen');
+define('_MODULES_ZONE_ALLOWED_DESC','Geben Sie <b>einzeln</b> die Zonen an, welche f&uuml;r dieses Modul erlaubt sein sollen. (z.B. AT,DE (wenn leer, werden alle Zonen erlaubt))');
+define('_MODULES_PAYMENT_FEE_TITLE','Zahlungsgeb&uuml;hr');
+define('_MODULES_PAYMENT_FEE_DESC','Aufschlag f&uuml;r diese Zahlungsweise');
+define('_MODULES_SET_ORDER_STATUS_TITLE','Bestellstatus festlegen');
+define('_MODULES_SET_ORDER_STATUS_DESC','Bestellungen, welche mit diesem Modul gemacht werden, auf diesen Status setzen');
+define('_MODULES_TAX_ZONE_TITLE' , 'Steuersatz');
+define('_MODULES_TAX_ZONE_DESC' , 'Wählen Sie die UST Klasse für diese Versandart aus.');
+define('TEXT_INFO_DEFAULT_CURRENCY','Standard Währung');
 ?>

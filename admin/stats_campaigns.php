@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: stats_campaigns.php 1179 2005-08-25 12:37:13Z mz $
+   $Id: stats_campaigns.php 208 2007-02-27 08:03:49Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -136,11 +136,11 @@ require (DIR_WS_INCLUDES.'header.php');
           <td colspan=2>
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_statistic.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'sheet-statistics.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XT Statistics</td>
+    <td class="main" valign="top">xt:Commerce Statistics</td>
   </tr>
 </table>
           </td>
@@ -361,9 +361,9 @@ if (count($campaign->result)) {
     <td class="dataTableContent"><b><?php echo HEADING_SUM; ?></b></td>
     <td class="dataTableContent">&nbsp;</td>
     <td class="dataTableContent"><b><?php echo $campaign->result[$n]['hits_s']; ?></b></td>
-    <td class="dataTableContent"><b><?php echo $campaign->result[$n]['leads_s'].' ('.($campaign->total['leads']> 0 ? ($campaign->result[$n]['leads_s']/$campaign->total['leads']*100):'0').'%)'; ?></b></td>
-    <td class="dataTableContent"><b><?php echo $campaign->result[$n]['sells_s'].' ('.($campaign->total['sells']> 0 ? ($campaign->result[$n]['sells_s']/$campaign->total['sells']*100):'0').'%)'; ?></b></td>
-    <td class="dataTableContent"><b><?php echo $campaign->result[$n]['late_sells_s'].' ('.($campaign->total['sells']> 0 ? ($campaign->result[$n]['late_sells_s']/$campaign->total['sells']*100):'0').'%)'; ?></b></td>
+    <td class="dataTableContent"><b><?php echo $campaign->result[$n]['leads_s'].' ('.($campaign->total['leads']> 0 ? (round($campaign->result[$n]['leads_s']/$campaign->total['leads']*100,2)):'0').'%)'; ?></b></td>
+    <td class="dataTableContent"><b><?php echo $campaign->result[$n]['sells_s'].' ('.($campaign->total['sells']> 0 ? (round($campaign->result[$n]['sells_s']/$campaign->total['sells']*100,2)):'0').'%)'; ?></b></td>
+    <td class="dataTableContent"><b><?php echo $campaign->result[$n]['late_sells_s'].' ('.($campaign->total['sells']> 0 ? (round($campaign->result[$n]['late_sells_s']/$campaign->total['sells']*100,2)):'0').'%)'; ?></b></td>
     <td class="dataTableContent"><b><?php echo $campaign->result[$n]['sum_s'].' ('.($campaign->total['sum_plain']> 0 ? round(($campaign->result[$n]['sum_s']/$campaign->total['sum_plain']*100),0):'0').'%)'; ?></b></td>
   </tr>
   

@@ -1,7 +1,7 @@
 <?php
 
 /*------------------------------------------------------------------------------
-  $Id: cc.php 1136 2005-08-07 13:19:54Z mz $
+  $Id: cc.php 287 2007-03-23 02:07:58Z mzanier $
 
   XTC-CC - Contribution for XT-Commerce http://www.xt-commerce.com
   modified by http://www.netz-designer.de
@@ -9,7 +9,7 @@
   Copyright (c) 2003 netz-designer
   -----------------------------------------------------------------------------
   based on:
-  $Id: cc.php 1136 2005-08-07 13:19:54Z mz $
+  $Id: cc.php 287 2007-03-23 02:07:58Z mzanier $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -41,20 +41,12 @@ define('TEXT_CLOSE_WINDOW', '<u>Fenster schliessen</u> [x]');
 define('MODULE_PAYMENT_CC_ACCEPTED_CARDS', 'Wir akzeptieren folgende Kreditkarten:');
 define('MODULE_PAYMENT_CC_STATUS_TITLE', 'Kreditkartenmodul aktivieren');
 define('MODULE_PAYMENT_CC_STATUS_DESC', 'M&ouml;chten Sie Zahlungen per Kreditkarte akzeptieren?');
-define('MODULE_PAYMENT_CC_ALLOWED_TITLE', 'Erlaubte Zonen');
-define('MODULE_PAYMENT_CC_ALLOWED_DESC', 'Geben Sie <b>einzeln</b> die Zonen an, welche f&uuml;r dieses Modul erlaubt sein sollen. (z.B. AT,DE (wenn leer, werden alle Zonen erlaubt))');
 define('CC_VAL_TITLE', 'Karten&uuml;berpr&uuml;fung einschalten');
 define('CC_VAL_DESC', 'M&ouml;chten Sie die Kreditkartenangaben &uuml;berpr&uuml;fen und Karten identifizieren?');
 define('CC_BLACK_TITLE', 'KK-Blackliste aktivieren');
 define('CC_BLACK_DESC', 'M&ouml;chten Sie die KK-Blackliste aktivieren, um dort hinterlegte Kreditkarten abzulehnen?');
 define('CC_ENC_TITLE', 'Kreditkarteninfo verschl&uuml;sseln');
 define('CC_ENC_DESC', 'M&ouml;chten Sie Kreditkarteninfos verschl&uuml;sseln?');
-define('MODULE_PAYMENT_CC_SORT_ORDER_TITLE', 'Anzeigereihenfolge');
-define('MODULE_PAYMENT_CC_SORT_ORDER_DESC', 'Reihenfolge der Anzeige. Kleinste Ziffer wird zuerst angezeigt.');
-define('MODULE_PAYMENT_CC_ZONE_TITLE', 'Zahlungszone');
-define('MODULE_PAYMENT_CC_ZONE_DESC', 'Wenn eine Zone ausgew&auml;hlt ist, gilt die Zahlungsmethode nur f&uuml;r diese Zone.');
-define('MODULE_PAYMENT_CC_ORDER_STATUS_ID_TITLE', 'Bestellstatus festlegen');
-define('MODULE_PAYMENT_CC_ORDER_STATUS_ID_DESC', 'Bestellungen, welche mit diesem Modul gemacht werden, auf diesen Status setzen');
 define('USE_CC_CVV_TITLE', 'CVV Nummer hinterlegen');
 define('USE_CC_CVV_DESC', 'M&ouml;chten Sie die CVV Nummer aufnehmen?');
 define('USE_CC_ISS_TITLE', 'Vorgangsnummer hinterlegen');
@@ -68,6 +60,8 @@ define('MODULE_PAYMENT_CC_EMAIL_DESC', 'Wenn eine eMailadresse angegeben worden 
 define('TEXT_CCVAL_ERROR_INVALID_DATE', 'Das "G&uuml;ltig bis" Datum ist ung&uuml;ltig. Bitte korrigieren Sie Ihre Angaben.');
 define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'Die "Kreditkarten-Nummer", die Sie angegeben haben, ist ung&uuml;ltig. Bitte korrigieren Sie Ihre Angaben.');
 define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Die ersten 4 Ziffern Ihrer Kreditkarte sind: %s Wenn diese Angaben stimmen, wird dieser Kartentyp leider nicht akzeptiert. Bitte korrigieren Sie Ihre Angaben gegebenfalls.');
+
+
 
 define('MODULE_PAYMENT_CC_ACCEPT_DINERSCLUB_TITLE', 'DINERS CLUB akzeptieren');
 define('MODULE_PAYMENT_CC_ACCEPT_DINERSCLUB_DESC', 'DINERS CLUB akzeptieren');
@@ -95,4 +89,15 @@ define('MODULE_PAYMENT_CC_ACCEPT_MAESTRO_TITLE', 'MAESTRO akzeptieren');
 define('MODULE_PAYMENT_CC_ACCEPT_MAESTRO_DESC', 'MAESTRO akzeptieren');
 define('MODULE_PAYMENT_CC_ACCEPT_VISA_TITLE', 'VISA akzeptieren');
 define('MODULE_PAYMENT_CC_ACCEPT_VISA_DESC', 'VISA akzeptieren');
+
+define('MODULE_PAYMENT_CC_COST_TITLE', _MODULES_PAYMENT_FEE_TITLE);
+define('MODULE_PAYMENT_CC_COST_DESC', _MODULES_PAYMENT_FEE_DESC);
+define('MODULE_PAYMENT_CC_ZONE_TITLE', _MODULES_ZONE_TITLE);
+define('MODULE_PAYMENT_CC_ZONE_DESC', _MODULES_ZONE_DESC);
+define('MODULE_PAYMENT_CC_ALLOWED_TITLE', _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_PAYMENT_CC_ALLOWED_DESC', _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_PAYMENT_CC_SORT_ORDER_TITLE', _MODULES_SORT_ORDER_TITLE);
+define('MODULE_PAYMENT_CC_SORT_ORDER_DESC', _MODULES_SORT_ORDER_DESC);
+define('MODULE_PAYMENT_CC_ORDER_STATUS_ID_TITLE', _MODULES_SET_ORDER_STATUS_TITLE);
+define('MODULE_PAYMENT_CC_ORDER_STATUS_ID_DESC', _MODULES_SET_ORDER_STATUS_DESC);
 ?>

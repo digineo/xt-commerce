@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: geo_zones.php 1123 2005-07-27 09:00:31Z novalis $   
+   $Id: geo_zones.php 208 2007-02-27 08:03:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -137,11 +137,11 @@ function update_zone(theForm) {
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'world.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XT Configuration</td>
+    <td class="main" valign="top">xt:Commerce Localisation</td>
   </tr>
 </table></td>
       </tr>

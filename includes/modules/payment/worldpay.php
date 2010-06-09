@@ -113,8 +113,8 @@ class worldpay {
 		global $order, $xtPrice;
 
 		$worldpay_url = xtc_session_name().'='.xtc_session_id();
-		$total = number_format($xtPrice->xtcCalculateCurr($order->info['total']), $xtPrice->get_decimal_places($_SESSION['currency']), '.', '');
-
+		$total = number_format($order->info['total'], $xtPrice->get_decimal_places($_SESSION['currency']), '.', '');
+		
 		$process_button_string = xtc_draw_hidden_field('instId', MODULE_PAYMENT_WORLDPAY_ID).xtc_draw_hidden_field('currency', $_SESSION['currency']).xtc_draw_hidden_field('desc', 'Purchase from '.STORE_NAME).xtc_draw_hidden_field('cartId', $worldpay_url).xtc_draw_hidden_field('amount', $total);
 
 		// Pre Auth Mod 3/1/2002 - Graeme Conkie
@@ -131,7 +131,7 @@ class worldpay {
 		$process_button_string .= xtc_draw_hidden_field('testMode', MODULE_PAYMENT_WORLDPAY_MODE).xtc_draw_hidden_field('name', $order->customer['firstname'].' '.$order->customer['lastname']).xtc_draw_hidden_field('address', $address).xtc_draw_hidden_field('postcode', $order->customer['postcode']).xtc_draw_hidden_field('country', $order->customer['country']['iso_code_2']).xtc_draw_hidden_field('tel', $order->customer['telephone']).xtc_draw_hidden_field('myvar', 'Y').xtc_draw_hidden_field('fax', $order->customer['fax']).xtc_draw_hidden_field('email', $order->customer['email_address']).
 
 		// Ian-san: Added dynamic callback and languages link here 6/4/2003:
-		xtc_draw_hidden_field('lang', $language_code).xtc_draw_hidden_field('MC_callback', xtc_href_link(wpcallback).'.php').xtc_draw_hidden_field('MC_XTCsid', $XTCsid);
+		xtc_draw_hidden_field('lang', $language_code).xtc_draw_hidden_field('MC_callback', xtc_href_link('wpcallback.php')).xtc_draw_hidden_field('MC_XTCsid', $XTCsid);
 
 		// Ian-san: Added MD5 here 6/4/2003:
 		if (MODULE_PAYMENT_WORLDPAY_USEMD5 == '1') {
@@ -151,6 +151,10 @@ class worldpay {
 	function after_process() {
  	global $insert_id;
 	if ($this->order_status) xtc_db_query("UPDATE ". TABLE_ORDERS ." SET orders_status='".$this->order_status."' WHERE orders_id='".$insert_id."'");
+	}
+	
+	function admin_order($oID) {
+		return false;
 	}
 
 	function output_error() {

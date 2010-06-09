@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: account_edit.php 1314 2005-10-20 14:00:46Z mz $   
+   $Id: account_edit.php 4 2006-11-28 14:38:03Z mzanier $   
    
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -98,6 +98,14 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	if (xtc_validate_email($email_address) == false) {
 		$error = true;
 		$messageStack->add('account_edit', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
+	} else {
+		$check_email_query = xtc_db_query("select count(*) as total from ".TABLE_CUSTOMERS." where customers_email_address = '".xtc_db_input($email_address)."' and account_type = '0' and customers_id != '".$_SESSION['customer_id']."'");
+		$check_email = xtc_db_fetch_array($check_email_query);
+		if ($check_email['total'] > 0) {
+			$error = true;
+
+			$messageStack->add('account_edit', ENTRY_EMAIL_ADDRESS_ERROR_EXISTS);
+		}
 	}
 
 	if (strlen($telephone) < ENTRY_TELEPHONE_MIN_LENGTH) {

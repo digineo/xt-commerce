@@ -1,19 +1,19 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: shopping_cart.php 1299 2005-10-09 18:54:29Z gwinger $   
+   $Id: shopping_cart.php 224 2007-03-06 11:06:43Z matthias $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
 
    Copyright (c) 2003 XT-Commerce
    -----------------------------------------------------------------------------------------
-   based on: 
+   based on:
    (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
-   (c) 2002-2003 osCommerce(shopping_cart.php,v 1.71 2003/02/14); www.oscommerce.com 
+   (c) 2002-2003 osCommerce(shopping_cart.php,v 1.71 2003/02/14); www.oscommerce.com
    (c) 2003	 nextcommerce (shopping_cart.php,v 1.24 2003/08/17); www.nextcommerce.org
 
-   Released under the GNU General Public License 
+   Released under the GNU General Public License
    --------------------------------------------------------------
    Third Party contributions:
    Customers Status v3.x  (c) 2002-2003 Copyright Elari elari@free.fr | www.unlockgsm.com/dload-osc/ | CVS : http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/elari/?sortby=date#dirlist
@@ -43,12 +43,14 @@ if ($_SESSION['cart']->count_contents() > 0) {
 	$_SESSION['any_out_of_stock'] = 0;
 
 	$products = $_SESSION['cart']->get_products();
+
 	for ($i = 0, $n = sizeof($products); $i < $n; $i ++) {
 		// Push all attributes information in an array
 		if (isset ($products[$i]['attributes'])) {
+
 			while (list ($option, $value) = each($products[$i]['attributes'])) {
-				$hidden_options .= xtc_draw_hidden_field('id['.$products[$i]['id'].']['.$option.']', $value);
-				$attributes = xtc_db_query("select popt.products_options_name, poval.products_options_values_name, pa.options_values_price, pa.price_prefix,pa.attributes_stock,pa.products_attributes_id,pa.attributes_model
+				//$hidden_options .= xtc_draw_hidden_field('id['.$products[$i]['id'].']['.$option.']', $value);
+				$attributes = xtc_db_query("select popt.products_options_name, popt.products_options_type, poval.products_options_values_name, pa.options_values_price, pa.price_prefix,pa.attributes_stock,pa.products_attributes_id,pa.attributes_model
 				                                      from ".TABLE_PRODUCTS_OPTIONS." popt, ".TABLE_PRODUCTS_OPTIONS_VALUES." poval, ".TABLE_PRODUCTS_ATTRIBUTES." pa
 				                                      where pa.products_id = '".$products[$i]['id']."'
 				                                       and pa.options_id = '".$option."'
@@ -59,9 +61,17 @@ if ($_SESSION['cart']->count_contents() > 0) {
 				                                       and poval.language_id = '".(int) $_SESSION['languages_id']."'");
 				$attributes_values = xtc_db_fetch_array($attributes);
 
+				if($attributes_values['products_options_type']=='2' || $attributes_values['products_options_type']=='3'){
+					$hidden_options .= xtc_draw_hidden_field('id[' . $products[$i]['id'] . '][txt_' . $option . '_'.$value.']',  $products[$i]['attributes_values'][$option]);
+				    $attr_value = $products[$i]['attributes_values'][$option];
+				}else{
+					$hidden_options .= xtc_draw_hidden_field('id[' . $products[$i]['id'] . '][' . $option . ']', $value);
+				    $attr_value = $attributes_values['products_options_values_name'];
+				}
+
 				$products[$i][$option]['products_options_name'] = $attributes_values['products_options_name'];
 				$products[$i][$option]['options_values_id'] = $value;
-				$products[$i][$option]['products_options_values_name'] = $attributes_values['products_options_values_name'];
+				$products[$i][$option]['products_options_values_name'] = $attr_value;
 				$products[$i][$option]['options_values_price'] = $attributes_values['options_values_price'];
 				$products[$i][$option]['price_prefix'] = $attributes_values['price_prefix'];
 				$products[$i][$option]['weight_prefix'] = $attributes_values['weight_prefix'];
@@ -122,7 +132,7 @@ if ($_SESSION['cart']->show_total() > 0 ) {
 	if ($_GET['info_message'])
 		$smarty->assign('info_message', str_replace('+', ' ', htmlspecialchars($_GET['info_message'])));
 	$smarty->assign('BUTTON_RELOAD', xtc_image_submit('button_update_cart.gif', IMAGE_BUTTON_UPDATE_CART));
-	$smarty->assign('BUTTON_CHECKOUT', '<a href="'.xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL').'">'.xtc_image_button('button_checkout.gif', IMAGE_BUTTON_CHECKOUT).'</a>');		
+	$smarty->assign('BUTTON_CHECKOUT', '<a href="'.xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL').'">'.xtc_image_button('button_checkout.gif', IMAGE_BUTTON_CHECKOUT).'</a>');
 } else {
 
 	// empty cart

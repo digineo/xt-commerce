@@ -9,6 +9,7 @@
 	background-color: black;
 	position: absolute;
 	visibility: hidden;
+	z-index:100;
 }
 
 .cal-SymbolBtn {

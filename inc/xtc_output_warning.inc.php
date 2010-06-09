@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_output_warning.inc.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: xtc_output_warning.inc.php 302 2007-03-30 08:25:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -16,7 +16,7 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_output_warning($warning) {
-    new errorBox(array(array('text' => '<table style="width: 100%;"><tr><td style="vertical-align: center; padding-left: 5px;">' . xtc_image(DIR_WS_ICONS . 'output_warning.gif', ICON_WARNING) . ' </td><td style="vertical-align: center; text-align: center;"> ' . $warning . '</td></tr></table>')));
+    new errorBox(array(array('text' => '<p class="errormessage">' . xtc_image(DIR_WS_ICONS . 'output_warning.gif', ICON_WARNING) . '  ' . $warning . '</p>')));
   }
 
  ?>

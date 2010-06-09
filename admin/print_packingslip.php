@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: print_packingslip.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: print_packingslip.php 300 2007-03-30 07:07:54Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -44,7 +44,7 @@
         				orders_products_id,
         				products_model,
         				products_name,
-        				final_price,
+        				final_price,products_shipping_time,
         				products_quantity
         				FROM ".TABLE_ORDERS_PRODUCTS."
         				WHERE orders_id='".$_GET['oID']."'");
@@ -68,6 +68,7 @@
         		'PRODUCTS_NAME' => $order_data_values['products_name'],
         		'PRODUCTS_ATTRIBUTES' => $attributes_data,
         		'PRODUCTS_ATTRIBUTES_MODEL' => $attributes_model,
+        		'PRODUCTS_SHIPPING_TIME' => $order_data_values['products_shipping_time'],
         		'PRODUCTS_PRICE' =>  xtc_format_price_order($order_data_values['final_price'],1,$order->info['currency']),
         		'PRODUCTS_QTY' => $order_data_values['products_quantity']);
         }
@@ -105,6 +106,7 @@
       $smarty->assign('DATE',xtc_date_long($order->info['date_purchased']));
       $smarty->assign('order_data', $order_data);
       $smarty->assign('order_total', $order_total);
+      $smarty->assign('charset',$_SESSION['language_charset']);
 
   	// dont allow cache
   	$smarty->caching = false;

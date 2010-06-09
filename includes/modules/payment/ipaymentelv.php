@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: ipaymentelv.php 998 2005-07-07 14:18:20Z mz $
+   $Id: ipaymentelv.php 6 2006-11-29 13:31:39Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -142,6 +142,10 @@ class ipaymentelv {
 	}
 
 	function after_process() {
+		return false;
+	}
+	
+	function admin_order($oID) {
 		return false;
 	}
 

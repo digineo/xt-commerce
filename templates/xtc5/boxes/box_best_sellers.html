@@ -1,0 +1,11 @@
+{config_load file="$language/lang_$language.conf" section="boxes"}
+<h2 class="boxheader">{#heading_best_sellers#}</h2>
+<div class="boxbody">
+	{foreach name=aussen item=box_data from=$box_content}
+	<h3>{$box_data.COUNT}. <a href="{$box_data.PRODUCTS_LINK}">{$box_data.PRODUCTS_NAME}</a></h3>
+	<p>{$box_data.PRODUCTS_PRICE}<br />
+	{if $box_data.PRODUCTS_VPE}{$box_data.PRODUCTS_VPE}<br />{/if}
+	{$box_data.PRODUCTS_TAX_INFO}{$box_data.PRODUCTS_SHIPPING_LINK}</p>
+	<div class="hrlightgrey"></div>
+	{/foreach}
+</div>

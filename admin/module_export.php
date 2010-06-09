@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: module_export.php 1179 2005-08-25 12:37:13Z mz $   
+   $Id: module_export.php 226 2007-03-06 14:27:16Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -96,11 +96,11 @@
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr> 
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'module.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr> 
-    <td class="main" valign="top">XT Modules</td>
+    <td class="main" valign="top">xt:Commerce Modules</td>
   </tr>
 </table> </td>
       </tr>

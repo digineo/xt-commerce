@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: modules.php 1060 2005-07-21 18:32:58Z mz $   
+   $Id: modules.php 226 2007-03-06 14:27:16Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -100,11 +100,11 @@
       <tr>
         <td width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr> 
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_modules.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'module.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr> 
-    <td class="main" valign="top">XT Modules</td>
+    <td class="main" valign="top">xt:Commerce Modules</td>
   </tr>
 </table> </td>
       </tr>
@@ -136,6 +136,9 @@
   $installed_modules = array();
   for ($i = 0, $n = sizeof($directory_array); $i < $n; $i++) {
     $file = $directory_array[$i];
+
+// check if lang file exists
+if (file_exists(DIR_FS_LANGUAGES . $_SESSION['language'] . '/modules/' . $module_type . '/' . $file)) {
 
     include(DIR_FS_LANGUAGES . $_SESSION['language'] . '/modules/' . $module_type . '/' . $file);
     include($module_directory . $file);
@@ -185,13 +188,21 @@
         echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $class) . '\'">' . "\n";
       }
 ?>
-                <td class="dataTableContent"><?php echo $module->title; ?></td>
+                <td class="dataTableContent"><?php 
+                
+                echo $module->title; 
+                
+                if ($module->icons_available!='') 
+                	echo '<br />'.$module->icons_available;
+                
+                ?></td>
 				<td class="dataTableContent"><?php echo str_replace('.php','',$file); ?></td>
                 <td class="dataTableContent" align="right"><?php if (is_numeric($module->sort_order)) echo $module->sort_order; ?>&nbsp;</td>
                 <td class="dataTableContent" align="right"><?php if ( (is_object($mInfo)) && ($class == $mInfo->code) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif'); } else { echo '<a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $class) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
     }
+}
   }
 
   ksort($installed_modules);

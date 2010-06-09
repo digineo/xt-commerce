@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_cod_fee.php 1003 2005-07-10 18:58:52Z mz $
+   $Id: ot_cod_fee.php 21 2006-12-25 14:31:15Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

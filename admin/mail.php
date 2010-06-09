@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: mail.php 955 2005-05-19 09:58:02Z novalis $   
+   $Id: mail.php 4 2006-11-28 14:38:03Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: create_account.php 1311 2005-10-18 12:30:40Z mz $   
+   $Id: create_account.php 307 2007-03-30 16:30:58Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -27,7 +27,7 @@
 
    Released under the GNU General Public License
    ---------------------------------------------------------------------------------------*/
-
+define('DISPLAY_PRIVACY_CHECK','true');
 include ('includes/application_top.php');
 
 if (isset ($_SESSION['customer_id'])) {
@@ -74,7 +74,9 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 	$fax = xtc_db_prepare_input($_POST['fax']);
 	$newsletter = '0';
 	$password = xtc_db_prepare_input($_POST['password']);
+	$newsletter = xtc_db_input($_POST['newsletter']);
 	$confirmation = xtc_db_prepare_input($_POST['confirmation']);
+	$privacy = xtc_db_prepare_input($_POST['privacy']);
 
 	$error = false;
 
@@ -208,8 +210,15 @@ if (isset ($_POST['action']) && ($_POST['action'] == 'process')) {
 
 		$messageStack->add('create_account', ENTRY_PASSWORD_ERROR_NOT_MATCHING);
 	}
+	
+	if (DISPLAY_PRIVACY_CHECK == 'true') {
+		if(!isset($privacy) || empty($privacy) || $privacy!='privacy') {
+		$error = true;
+		
+		$messageStack->add('create_account', ENTRY_PRIVACY_ERROR);
+		}
+	}
 
-	//don't know why, but this happens sometimes and new user becomes admin
 	if ($customers_status == 0 || !$customers_status)
 		$customers_status = DEFAULT_CUSTOMERS_STATUS_ID;
 	if (!$newsletter)
@@ -342,6 +351,15 @@ if (isset ($_SESSION['tracking']['refID'])){
 
 		xtc_php_mail(EMAIL_SUPPORT_ADDRESS, EMAIL_SUPPORT_NAME, $email_address, $name, EMAIL_SUPPORT_FORWARDING_STRING, EMAIL_SUPPORT_REPLY_ADDRESS, EMAIL_SUPPORT_REPLY_ADDRESS_NAME, '', '', EMAIL_SUPPORT_SUBJECT, $html_mail, $txt_mail);
 
+		if ($newsletter == 1) {
+
+			require_once (DIR_WS_CLASSES.'class.newsletter.php');
+			$newsletter = new newsletter;
+
+			$newsletter->AddUserAuto($email_address);
+
+		}
+
 		if (!isset ($mail_error)) {
 			xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
 		} else {
@@ -444,7 +462,12 @@ $smarty->assign('SELECT_COUNTRY', xtc_get_country_list(array ('name' => 'country
 $smarty->assign('INPUT_TEL', xtc_draw_input_fieldNote(array ('name' => 'telephone', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_TELEPHONE_NUMBER_TEXT) ? '<span class="inputRequirement">'.ENTRY_TELEPHONE_NUMBER_TEXT.'</span>' : ''))));
 $smarty->assign('INPUT_FAX', xtc_draw_input_fieldNote(array ('name' => 'fax', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_FAX_NUMBER_TEXT) ? '<span class="inputRequirement">'.ENTRY_FAX_NUMBER_TEXT.'</span>' : ''))));
 $smarty->assign('INPUT_PASSWORD', xtc_draw_password_fieldNote(array ('name' => 'password', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_PASSWORD_TEXT) ? '<span class="inputRequirement">'.ENTRY_PASSWORD_TEXT.'</span>' : ''))));
+$smarty->assign('CHECKBOX_NEWSLETTER', xtc_draw_checkbox_field('newsletter', '1').'&nbsp;'. (xtc_not_null(ENTRY_NEWSLETTER_TEXT) ? '<span class="inputRequirement">'.ENTRY_NEWSLETTER_TEXT.'</span>' : ''));
 $smarty->assign('INPUT_CONFIRMATION', xtc_draw_password_fieldNote(array ('name' => 'confirmation', 'text' => '&nbsp;'. (xtc_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="inputRequirement">'.ENTRY_PASSWORD_CONFIRMATION_TEXT.'</span>' : ''))));
+if (DISPLAY_PRIVACY_CHECK == 'true') {
+$smarty->assign('PRIVACY_CHECKBOX', '<input type="checkbox" value="privacy" name="privacy" />');
+$smarty->assign('PRIVACY_LINK', $main->getContentLink(2, MORE_INFO));
+}
 $smarty->assign('FORM_END', '</form>');
 $smarty->assign('language', $_SESSION['language']);
 $smarty->caching = 0;

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: invoice.php 1122 2005-07-26 10:16:27Z mz $   
+   $Id: invoice.php 187 2007-02-24 14:58:53Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -78,7 +78,7 @@ class invoice {
 	}
 
 	function selection() {
-		return array ('id' => $this->code, 'module' => $this->title, 'description' => $this->info);
+		return array ('id' => $this->code, 'module' => $this->title, 'description' => $this->info,'module_cost'=>$this->payment_cost());
 	}
 
 	function pre_confirmation_check() {
@@ -104,6 +104,10 @@ class invoice {
 
 	}
 
+	function admin_order($oID) {
+		return false;
+	}
+	
 	function get_error() {
 		return false;
 	}
@@ -115,11 +119,27 @@ class invoice {
 		}
 		return $this->_check;
 	}
+	
+	function payment_cost() {
+		global $order;
+		$cost = constant(MODULE_PAYMENT_.strtoupper($this->code)._COST);
+
+        	$cost_table = split("[:,]" , $cost);
+        	for ($i=0; $i<sizeof($cost_table); $i+=2) {
+          	if ($order->info['total'] <= $cost_table[$i]) {
+            	$percentage = $cost_table[$i+1];
+            	break;
+          	}
+        	}
+		if ($percentage>0)
+			return '+'.$percentage.'% '.TEXT_PAYMENT_FEE;
+	}
 
 	function install() {
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_INVOICE_STATUS', 'True',  '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_INVOICE_ALLOWED', '', '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_INVOICE_ZONE', '0',  '6', '2', 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(', now())");
+		xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_INVOICE_COST', '', '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_INVOICE_SORT_ORDER', '0',  '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_INVOICE_MIN_ORDER', '0',  '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_INVOICE_ORDER_STATUS_ID', '0',  '6', '0', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
@@ -130,7 +150,7 @@ class invoice {
 	}
 
 	function keys() {
-		return array ('MODULE_PAYMENT_INVOICE_STATUS', 'MODULE_PAYMENT_INVOICE_ALLOWED', 'MODULE_PAYMENT_INVOICE_ZONE', 'MODULE_PAYMENT_INVOICE_ORDER_STATUS_ID', 'MODULE_PAYMENT_INVOICE_MIN_ORDER', 'MODULE_PAYMENT_INVOICE_SORT_ORDER');
+		return array ('MODULE_PAYMENT_INVOICE_STATUS', 'MODULE_PAYMENT_INVOICE_ALLOWED', 'MODULE_PAYMENT_INVOICE_ZONE', 'MODULE_PAYMENT_INVOICE_ORDER_STATUS_ID', 'MODULE_PAYMENT_INVOICE_MIN_ORDER', 'MODULE_PAYMENT_INVOICE_SORT_ORDER','MODULE_PAYMENT_INVOICE_COST');
 	}
 }
 ?>

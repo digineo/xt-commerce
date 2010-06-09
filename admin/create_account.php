@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: create_account.php 1296 2005-10-08 17:52:26Z mz $   
+   $Id: create_account.php 221 2007-03-05 10:32:26Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -46,7 +46,7 @@ if ($_GET['action'] == 'edit') {
 	$customers_email_address = xtc_db_prepare_input($_POST['customers_email_address']);
 	$customers_telephone = xtc_db_prepare_input($_POST['customers_telephone']);
 	$customers_fax = xtc_db_prepare_input($_POST['customers_fax']);
-	$customers_status_c = xtc_db_prepare_input($_POST['status']);
+
 
 	$customers_gender = xtc_db_prepare_input($_POST['customers_gender']);
 	$customers_dob = xtc_db_prepare_input($_POST['customers_dob']);
@@ -123,64 +123,19 @@ if ($_GET['action'] == 'edit') {
 		}
 	}
 
-	// Vat Check
-	if (xtc_get_geo_zone_code($entry_country_id) != '6') {
-
-		if ($customers_vat_id != '') {
-
-			if (ACCOUNT_COMPANY_VAT_CHECK == 'true') {
-
-				$validate_vatid = validate_vatid($customers_vat_id);
-
-				if ($validate_vatid == '0') {
-					if (ACCOUNT_VAT_BLOCK_ERROR == 'true') {
-						$entry_vat_error = true;
-						$error = true;
-					}
-					$customers_vat_id_status = '0';
-				}
-
-				if ($validate_vatid == '1') {
-					$customers_vat_id_status = '1';
-				}
-
-				if ($validate_vatid == '8') {
-					if (ACCOUNT_VAT_BLOCK_ERROR == 'true') {
-						$entry_vat_error = true;
-						$error = true;
-					}
-					$customers_vat_id_status = '8';
-				}
-
-				if ($validate_vatid == '9') {
-					if (ACCOUNT_VAT_BLOCK_ERROR == 'true') {
-						$entry_vat_error = true;
-						$error = true;
-					}
-					$customers_vat_id_status = '9';
-				}
-
-			}
-
-		}
-	}
-	// Vat Check
-
 // New VAT Check
-	if (xtc_get_geo_zone_code($entry_country_id) != '6') {
 	require_once(DIR_FS_CATALOG.DIR_WS_CLASSES.'vat_validation.php');
 	$vatID = new vat_validation($customers_vat_id, '', '', $entry_country_id);
-
+	
+	$customers_status = $vatID->vat_info['status'];
 	$customers_vat_id_status = $vatID->vat_info['vat_id_status'];
 	$error = $vatID->vat_info['error'];
-
+	
 	if($error==1){
 	$entry_vat_error = true;
 	$error = true;
   }
 
-  }
-// New VAT CHECK END
 
 	if (strlen($customers_email_address) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
 		$error = true;
@@ -272,8 +227,12 @@ if ($_GET['action'] == 'edit') {
 		$entry_email_address_exists = false;
 	}
 
+	//don't know why, but this happens sometimes and new user becomes admin
+	if ($customers_status == 0 || !$customers_status)
+		$customers_status = DEFAULT_CUSTOMERS_STATUS_ID;
+
 	if ($error == false) {
-		$sql_data_array = array ('customers_status' => $customers_status_c, 'customers_cid' => $customers_cid, 'customers_vat_id' => $customers_vat_id, 'customers_vat_id_status' => $customers_vat_id_status, 'customers_firstname' => $customers_firstname, 'customers_lastname' => $customers_lastname, 'customers_email_address' => $customers_email_address, 'customers_telephone' => $customers_telephone, 'customers_fax' => $customers_fax, 'payment_unallowed' => $payment_unallowed, 'shipping_unallowed' => $shipping_unallowed, 'customers_password' => $customers_password,'customers_date_added' => 'now()','customers_last_modified' => 'now()');
+		$sql_data_array = array ('customers_status' => $customers_status, 'customers_cid' => $customers_cid, 'customers_vat_id' => $customers_vat_id, 'customers_vat_id_status' => $customers_vat_id_status, 'customers_firstname' => $customers_firstname, 'customers_lastname' => $customers_lastname, 'customers_email_address' => $customers_email_address, 'customers_telephone' => $customers_telephone, 'customers_fax' => $customers_fax, 'payment_unallowed' => $payment_unallowed, 'shipping_unallowed' => $shipping_unallowed, 'customers_password' => $customers_password,'customers_date_added' => 'now()','customers_last_modified' => 'now()');
 
 		if (ACCOUNT_GENDER == 'true')
 			$sql_data_array['customers_gender'] = $customers_gender;
@@ -366,11 +325,15 @@ if ($_GET['action'] == 'edit') {
 <!-- body_text //-->
     <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td valign="middle" class="pageHeading"><?php echo HEADING_TITLE; ?></td>
-          </tr>
-        </table></td>
+        <td>        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'users.png'); ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
+  </tr>
+  <tr> 
+    <td class="main" valign="top">xt:Commerce Customers</td>
+  </tr>
+</table></td>
       </tr>
       <tr>
         <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
@@ -708,17 +671,6 @@ if ($error == true) {
       </tr>
       <tr>
         <td class="formArea"><table border="0" cellspacing="2" cellpadding="2">
-          <tr>
-            <td class="main"><?php echo ENTRY_CUSTOMERS_STATUS; ?></td>
-            <td class="main"><?php
-
-if ($processed == true) {
-	echo xtc_draw_hidden_field('status');
-} else {
-	echo xtc_draw_pull_down_menu('status', $customers_statuses_array);
-}
-?></td>
-          </tr>
           <tr>
             <td class="main"><?php echo ENTRY_MAIL; ?></td>
             <td class="main">

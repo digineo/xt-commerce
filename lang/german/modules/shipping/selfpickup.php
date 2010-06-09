@@ -1,6 +1,6 @@
-<?PHP
+<?php
 /* -----------------------------------------------------------------------------------------
-   $Id: selfpickup.php 899 2005-04-29 02:40:57Z hhgag $
+   $Id: selfpickup.php 194 2007-02-25 11:46:12Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -26,10 +26,18 @@ define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER', 'Sortierung');
 
 define('MODULE_SHIPPING_SELFPICKUP_TEXT_TITLE', 'Selbstabholung.');
 define('MODULE_SHIPPING_SELFPICKUP_TEXT_WAY', 'Selbstabholung der Ware in unserer Gesch&auml;ftsstelle.');
-define('MODULE_SHIPPING_SELFPICKUP_ALLOWED_TITLE' , 'Erlaubte Zonen');
-define('MODULE_SHIPPING_SELFPICKUP_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand möglich sein soll. (z.B. AT,DE (lassen Sie dieses Feld leer, wenn Sie alle Zonen erlauben wollen))');
 define('MODULE_SHIPPING_SELFPICKUP_STATUS_TITLE', 'Selbstabholung aktivieren');
 define('MODULE_SHIPPING_SELFPICKUP_STATUS_DESC', 'M&ouml;chten Sie Selbstabholung anbieten?');
-define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER_TITLE', 'Sortierreihenfolge');
-define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER_DESC', 'Reihenfolge der Anzeige');
+
+
+define('MODULE_SHIPPING_SELFPICKUP_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_SELFPICKUP_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_SELFPICKUP_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_SELFPICKUP_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_SELFPICKUP_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_SELFPICKUP_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_SELFPICKUP_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_SELFPICKUP_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_SELFPICKUP_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

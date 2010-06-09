@@ -1,6 +1,6 @@
 <?php
 /*------------------------------------------------------------------------------
-  $Id: uos_kreditkarte_modul.php 2006-07-07 12:30:01B mz $
+  $Id: uos_kreditkarte_modul.php 6 2006-11-29 13:31:39Z mzanier $
 
   XTC-CC - Contribution for XT-Commerce http://www.xt-commerce.com
   modified by UNITES-ONLINE-SERVICES Payment interface
@@ -10,7 +10,7 @@
 
   -----------------------------------------------------------------------------
   based on:
-  $Id: cc.php 1160 2005-08-16 22:25:01Z hhgag $
+  $Id: uos_kreditkarte_modul.php 6 2006-11-29 13:31:39Z mzanier $
 
   osCommerce, Open Source E-Commerce Solutions
   http://www.oscommerce.com
@@ -142,6 +142,10 @@
     function after_process() {
       return false;
     }
+    
+    function admin_order($oID) {
+		return false;
+	}
 
     function output_error() {
       return false;

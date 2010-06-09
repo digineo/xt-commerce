@@ -1,0 +1,30 @@
+/* -----------------------------------------------------------------------------------------
+   $Id: stylesheet.css 1262 2005-09-30 10:00:32Z mz $   
+
+   xt:Commerce - community made shopping
+   http://www.xt-commerce.com
+
+   Copyright (c) 2007 xt:Commerce 
+
+   Released under the GNU General Public License 
+   -----------------------------------------------------------------------------------------
+*/
+
+body { background-color: #ffffff; color: #000000; margin: 0px; font-family:"Trebuchet MS",Verdana,Arial,Sans-serif;}
+
+ .boxCenter {padding: 15px; background-color:#FFF2CC; border: solid #E9D28F 1px}
+
+/* HEADER WITH LOGO, SEARCH BOX AND LANGUAGE SELECTION */
+#header {height:115px;background: #666 url("../images/bg_header.gif") repeat-x; border-bottom: 3px solid #fff; width: 800px;}
+#header	#logo {padding-left:27px; float:left}
+#header #buttons {width: 150px; height:75px; float:right; background: url("../images/bg_search_breakline.gif") no-repeat; color:#fff; padding:40px 0px 0px 20px}
+#header #buttons a {color:#fff; font-size:11px;}
+#header td {padding-top:1px; padding-right:4px;}
+h2.boxheader {background-image:url(../images/bg_boxheader.gif);height:28px;font-size:11px; color:#FFFFFF; padding:2px 8px 0px 8px; margin:0; line-height:28px; vertical-align:middle;}
+
+.boxbody {background-color:#ededed; font-size:11px; border-style:solid; border-color:#4E4E4F; border-width:0px 1px 1px 1px; padding:2px; margin-bottom:1px}
+.boxbody ul.contentlist {margin-left:5px; margin-right:0; margin-top:0; margin-bottom:0; padding:0;}
+.boxbody ul.contentlist li {margin-left:0px; padding:0; list-style-type:none}
+   
+.smallText { font-family: Verdana, Arial, sans-serif; font-size: 10px; }
+.main { font-family: Verdana, Arial, sans-serif; font-size: 12px; }  

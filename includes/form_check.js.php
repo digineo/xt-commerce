@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: form_check.js.php 1296 2005-10-08 17:52:26Z mz $
+   $Id: form_check.js.php 176 2007-02-15 09:01:43Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -54,6 +54,23 @@ function check_radio(field_name, message) {
   }
 }
 
+function check_checkbox(field_name, message) {
+  var isChecked = false;
+
+  if (form.elements[field_name] && (form.elements[field_name].type != "hidden")) {
+    var checkbox = form.elements[field_name];
+
+      if (checkbox.checked == true) {
+        isChecked = true;     
+    }
+
+    if (isChecked == false) {
+      error_message = error_message + "* " + message + "\n";
+      error = true;
+    }
+  }
+}
+
 function check_select(field_name, field_default, message) {
   if (form.elements[field_name] && (form.elements[field_name].type != "hidden")) {
     var field_value = form.elements[field_name].value;
@@ -64,6 +81,7 @@ function check_select(field_name, field_default, message) {
     }
   }
 }
+
 
 function check_password(field_name_1, field_name_2, field_size, message_1, message_2) {
   if (form.elements[field_name_1] && (form.elements[field_name_1].type != "hidden")) {
@@ -111,7 +129,7 @@ function check_form(form_name) {
   form = form_name;
   error_message = unescape("<?php echo xtc_js_lang(JS_ERROR); ?>");
 
-<?php if (ACCOUNT_GENDER == 'true') echo '  check_radio("gender", "' . ENTRY_GENDER_ERROR . '");' . "\n"; ?>
+<?php if (ACCOUNT_GENDER == 'true') echo '  check_radio("gender", "' . xtc_js_lang(ENTRY_GENDER_ERROR) . '");' . "\n"; ?>
 
   check_input("firstname", <?php echo ENTRY_FIRST_NAME_MIN_LENGTH; ?>, "<?php echo xtc_js_lang(ENTRY_FIRST_NAME_ERROR); ?>");
   check_input("lastname", <?php echo ENTRY_LAST_NAME_MIN_LENGTH; ?>, "<?php echo xtc_js_lang(ENTRY_LAST_NAME_ERROR); ?>");
@@ -131,6 +149,10 @@ function check_form(form_name) {
 
   check_password("password", "confirmation", <?php echo ENTRY_PASSWORD_MIN_LENGTH; ?>, "<?php echo xtc_js_lang(ENTRY_PASSWORD_ERROR); ?>", "<?php echo xtc_js_lang(ENTRY_PASSWORD_ERROR_NOT_MATCHING); ?>");
   check_password_new("password_current", "password_new", "password_confirmation", <?php echo xtc_js_lang(ENTRY_PASSWORD_MIN_LENGTH); ?>, "<?php echo xtc_js_lang(ENTRY_PASSWORD_ERROR); ?>", "<?php echo xtc_js_lang(ENTRY_PASSWORD_NEW_ERROR); ?>", "<?php echo xtc_js_lang(ENTRY_PASSWORD_NEW_ERROR_NOT_MATCHING); ?>");
+
+<?php if (DISPLAY_PRIVACY_CHECK == 'true') { ?>
+check_checkbox("privacy", "<?php echo xtc_js_lang(ENTRY_PRIVACY_ERROR); ?>");
+<?php } ?>
 
   if (error == true) {
     alert(unescape(error_message));

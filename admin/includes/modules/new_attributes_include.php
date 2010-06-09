@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: new_attributes_include.php 901 2005-04-29 10:32:14Z novalis $   
+   $Id: new_attributes_include.php 242 2007-03-08 13:34:57Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -28,7 +28,17 @@ defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
    $xtPrice = new xtcPrice(DEFAULT_CURRENCY,$_SESSION['customers_status']['customers_status_id']);
 ?>
   <tr>
-    <td class="pageHeading" colspan="3"><?php echo $pageTitle; ?></td>
+    <td class="pageHeading" colspan="3">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'folder_grey.png'); ?></td>
+    <td class="pageHeading"><?php echo $pageTitle; ?></td>
+  </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Products</td>
+  </tr>
+</table>
+</td>
   </tr>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="SUBMIT_ATTRIBUTES" enctype="multipart/form-data"><input type="hidden" name="current_product_id" value="<?php echo $_POST['current_product_id']; ?>"><input type="hidden" name="action" value="change">
 <?php

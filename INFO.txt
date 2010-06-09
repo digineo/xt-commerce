@@ -1,8 +1,8 @@
                                      INFO
 ###################################################################################
 
-  XT-Commerce v3.0.4SP2.1
-  Release Datum: 20.08.2006
+  XT-Commerce v3.0.4SP2.2 BETA
+  Release Datum: 30.03.2007
   
   ------------------------------------------------------------------------
   Dieses Programm ist freie Software. Sie koennen es unter den Bedingungen
@@ -30,20 +30,8 @@
   (ab PHP 4.1.3) und mySQL zur Verfuegung stellt, wie zum Beispiel Linux, 
   Solaris, BSD, und Microsoft Windows.
  
-  Weiters sollte am Server installiert sein:
-
-  GDlib2+ 
-  PDFlib
 
 
-  Installation:
-  ------------------------------------------------------------------------
-
-  Installationsanleitung/Installguide:
-  http://www.xt-commerce.com/forum/showthread.php?t=35187
-
-
-  mfg,
   xt:Commerce Entwicklungsteam, http://www.xt-commerce.com
 
 

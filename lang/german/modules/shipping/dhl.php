@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: dhl.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: dhl.php 194 2007-02-25 11:46:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -25,21 +25,12 @@ define('MODULE_SHIPPING_DHL_TEXT_TITLE', 'DHL &Ouml;sterreich');
 define('MODULE_SHIPPING_DHL_TEXT_DESCRIPTION', 'DHL WORLDWIDE EXPRESS &Ouml;sterreich');
 define('MODULE_SHIPPING_DHL_TEXT_WAY', 'Versand nach');
 define('MODULE_SHIPPING_DHL_TEXT_UNITS', 'kg');
-define('MODULE_SHIPPING_DHL_INVALID_ZONE', 'Es ist leider kein Versand in dieses Land m&ouml;glich');
-define('MODULE_SHIPPING_DHL_UNDEFINED_RATE', 'Die Versandkosten k&ouml;nnen im Moment nicht errechnet werden');
+
 
 define('MODULE_SHIPPING_DHL_STATUS_TITLE' , 'DHL WORLDWIDE EXPRESS &Ouuml;sterreich');
 define('MODULE_SHIPPING_DHL_STATUS_DESC' , 'Wollen Sie den Versand &uuml;ber DHL WORLDWIDE EXPRESS &Ouml;sterreich anbieten?');
 define('MODULE_SHIPPING_DHL_HANDLING_TITLE' , 'Handling Fee');
 define('MODULE_SHIPPING_DHL_HANDLING_DESC' , 'Bearbeitungsgeb&uuml;hr f&uuml;r diese Versandart in Euro');
-define('MODULE_SHIPPING_DHL_TAX_CLASS_TITLE' , 'Steuersatz');
-define('MODULE_SHIPPING_DHL_TAX_CLASS_DESC' , 'W&auml;hlen Sie den MwSt.-Satz f&uuml;r diese Versandart aus.');
-define('MODULE_SHIPPING_DHL_ZONE_TITLE' , 'Versand Zone');
-define('MODULE_SHIPPING_DHL_ZONE_DESC' , 'Wenn Sie eine Zone ausw&auml;hlen, wird diese Versandart nur in dieser Zone angeboten.');
-define('MODULE_SHIPPING_DHL_SORT_ORDER_TITLE' , 'Reihenfolge der Anzeige');
-define('MODULE_SHIPPING_DHL_SORT_ORDER_DESC' , 'Niedrigste wird zuerst angezeigt.');
-define('MODULE_SHIPPING_DHL_ALLOWED_TITLE' , 'Einzelne Versandzonen');
-define('MODULE_SHIPPING_DHL_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand m&ouml;glich sein soll. zb AT,DE');
 define('MODULE_SHIPPING_DHL_COUNTRIES_1_TITLE' , 'Tarifzone 0 L&auml;nder');
 define('MODULE_SHIPPING_DHL_COUNTRIES_1_DESC' , 'Inlandszone');
 define('MODULE_SHIPPING_DHL_COST_ECX_1_TITLE' , 'Tariftabelle f&uuml;r Zone 0 bis 10 kg ECX');
@@ -390,4 +381,15 @@ define('MODULE_SHIPPING_DHL_STEP_SDX_50_10_TITLE' , 'Erh&ouml;hungszuschlag bis 
 define('MODULE_SHIPPING_DHL_STEP_SDX_50_10_DESC' , 'Erh&ouml;hungszuschlag pro &uuml;bersteigende 0,50 kg in EUR');
 define('MODULE_SHIPPING_DHL_STEP_SDX_51_10_TITLE' , 'Erh&ouml;hungszuschlag ab 50 kg SDX');
 define('MODULE_SHIPPING_DHL_STEP_SDX_51_10_DESC' , 'Erh&ouml;hungszuschlag pro &uuml;bersteigende 0,50 kg in EUR');
+
+define('MODULE_SHIPPING_DHL_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_DHL_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_DHL_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_DHL_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_DHL_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_DHL_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_DHL_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_DHL_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_DHL_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_DHL_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

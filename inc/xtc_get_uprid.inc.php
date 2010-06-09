@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_get_uprid.inc.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: xtc_get_uprid.inc.php 193 2007-02-25 09:45:22Z matthias $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -16,7 +16,7 @@
    ---------------------------------------------------------------------------------------*/
    
 // Return a product ID with attributes
-
+/*
   function xtc_get_uprid($prid, $params) {
   if (is_numeric($prid)) {
     $uprid = $prid;
@@ -71,4 +71,30 @@
 
   return $uprid;
 }
+*/
+
+  function xtc_get_uprid($prid, $params) {
+    $uprid = $prid;
+    if ( (is_array($params)) && (!strstr($prid, '{')) ) {
+      while (list($option, $value) = each($params)) {
+        //CLR 030714 Add processing around $value. This is needed for text attributes.
+        $uprid = $uprid . '{' . $option . '}' . htmlspecialchars(stripslashes(trim($value)), ENT_QUOTES);
+      }
+    //CLR 030228 Add else stmt to process product ids passed in by other routines.
+    } else {
+      $uprid = htmlspecialchars(stripslashes($uprid), ENT_QUOTES);
+    }
+
+
+
+    if ( (is_array($params)) && (!strstr($prid, '{')) ) {
+      while (list($option, $value) = each($params)) {
+        $uprid = $uprid . '{' . $option . '}' . $value;
+      }
+    }
+
+
+    return $uprid;
+  }
+
  ?>

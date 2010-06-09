@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: popup_image.php 859 2005-04-14 18:15:06Z novalis $   
+   $Id: popup_image.php 4 2006-11-28 14:38:03Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -65,7 +65,7 @@ if ($mo_images != false) {
 var i=0;
 function resize() {
   if (navigator.appName == 'Netscape') i=40;
-  window.resizeTo(<? echo $size[0] ?> +105, <? echo $size[1] + $bheight ?>+70+i);
+  window.resizeTo(<?php echo $size[0] ?> +105, <?php echo $size[1] + $bheight ?>+70+i);
   self.focus();
 }
 //--></script>

@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: new_attributes_select.php 901 2005-04-29 10:32:14Z novalis $
+   $Id: new_attributes_select.php 242 2007-03-08 13:34:57Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -23,9 +23,22 @@
 defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
 $adminImages = DIR_WS_CATALOG . "lang/". $_SESSION['language'] ."/admin/images/buttons/";
 ?>
+
   <tr>
-    <td class="pageHeading" colspan="3"><?php echo $pageTitle; ?></td>
+    <td class="pageHeading" colspan="3">
+    <table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'folder_grey.png'); ?></td>
+    <td class="pageHeading"><?php echo $pageTitle; ?></td>
   </tr>
+  <tr>
+    <td class="main" valign="top">xt:Commerce Products</td>
+  </tr>
+</table>
+</td>
+  </tr>
+  <tr>
+    <td class="pageHeading" colspan="3">
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" name="SELECT_PRODUCT" method="post"><input type="hidden" name="action" value="edit">
 <?php
 echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
@@ -90,3 +103,4 @@ echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
 
 ?>
 </form>
+</td></tr>

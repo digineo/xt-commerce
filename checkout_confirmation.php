@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: checkout_confirmation.php 1277 2005-10-01 17:02:59Z mz $   
+   $Id: checkout_confirmation.php 300 2007-03-30 07:07:54Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -60,6 +60,7 @@ if (!isset ($_SESSION['shipping']))
 	xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
 
 //check if display conditions on checkout page is true
+if (isset($_SESSION['tmp_oID'])) unset($_SESSION['tmp_oID']);
 
 if (isset ($_POST['payment']))
 	$_SESSION['payment'] = xtc_db_prepare_input($_POST['payment']);
@@ -162,26 +163,23 @@ if (sizeof($order->info['tax_groups']) > 1) {
 } else {
 
 }
-$data_products = '<table width="100%" border="0" cellspacing="0" cellpadding="0">';
+$data_products = '<table class="checkoutconfirmationorderdetails" width="100%" border="0" cellspacing="0" cellpadding="0">';
 for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
 
-	$data_products .= '<tr>' . "\n" . '            <td class="main" align="left" valign="top">' . $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . '</td>' . "\n" . '                <td class="main" align="right" valign="top">' . $xtPrice->xtcFormat($order->products[$i]['final_price'], true) . '</td></tr>' . "\n";
+	$data_products .= '<tr>' . "\n" . '            <td class="productname">' . $order->products[$i]['qty'] . ' x ' . $order->products[$i]['name'] . '</td>' . "\n" . '                <td class="productprice">' . $xtPrice->xtcFormat($order->products[$i]['final_price'], true) . '</td></tr>' . "\n";
 	if (ACTIVATE_SHIPPING_STATUS == 'true') {
 
 		$data_products .= '<tr>
-							<td class="main" align="left" valign="top">
-							<nobr><small>' . SHIPPING_TIME . $order->products[$i]['shipping_time'] . '
-							</small><nobr></td>
-							<td class="main" align="right" valign="top">&nbsp;</td></tr>';
+							<td class="shippingtime">' . SHIPPING_TIME . $order->products[$i]['shipping_time'] . '</td>
+							<td class="shippingtime">&nbsp;</td>
+						   </tr>';
 
 	}
 	if ((isset ($order->products[$i]['attributes'])) && (sizeof($order->products[$i]['attributes']) > 0)) {
 		for ($j = 0, $n2 = sizeof($order->products[$i]['attributes']); $j < $n2; $j++) {
 			$data_products .= '<tr>
-								<td class="main" align="left" valign="top">
-								<nobr><small>&nbsp;<i> - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] . '
-								</i></small><nobr></td>
-								<td class="main" align="right" valign="top">&nbsp;</td></tr>';
+								<td class="productattributes">&nbsp; - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] . '</td>
+								<td class="productattributes">&nbsp;</td></tr>';
 		}
 	}
 
@@ -202,7 +200,7 @@ if ($order->info['payment_method'] != 'no_payment' && $order->info['payment_meth
 }
 $smarty->assign('PAYMENT_EDIT', xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
 
-$total_block = '<table>';
+$total_block = '<table class="checkoutconfirmationorderdetailstotal">';
 if (MODULE_ORDER_TOTAL_INSTALLED) {
 	$order_total_modules->process();
 	$total_block .= $order_total_modules->output();
@@ -219,11 +217,12 @@ if (is_array($payment_modules->modules)) {
 			$payment_info .= '<table>
 								<tr>
 						                <td>' . xtc_draw_separator('pixel_trans.gif', '10', '1') . '</td>
-						                <td class="main">' . $confirmation['fields'][$i]['title'] . '</td>
+						                <td class="name">' . $confirmation['fields'][$i]['title'] . '</td>
 						                <td>' . xtc_draw_separator('pixel_trans.gif', '10', '1') . '</td>
-						                <td class="main">' . stripslashes($confirmation['fields'][$i]['field']) . '</td>
+						                <td class="value">' . stripslashes($confirmation['fields'][$i]['field']) . '</td>
 						              </tr></table>';
 
+			//$payment_info .= '<div
 		}
 		$smarty->assign('PAYMENT_INFORMATION', $payment_info);
 
@@ -242,11 +241,16 @@ if (isset ($$_SESSION['payment']->form_action_url) && !$$_SESSION['payment']->tm
 } else {
 	$form_action_url = xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL');
 }
+
+// debug
+//echo $payment_modules->process_button();
+
 $smarty->assign('CHECKOUT_FORM', xtc_draw_form('checkout_confirmation', $form_action_url, 'post'));
 $payment_button = '';
 if (is_array($payment_modules->modules)) {
 	$payment_button .= $payment_modules->process_button();
 }
+//echo '<textarea cols="50" rows="10">'.$payment_button.'</textarea>';
 $smarty->assign('MODULE_BUTTONS', $payment_button);
 $smarty->assign('CHECKOUT_BUTTON', xtc_image_submit('button_confirm_order.gif', IMAGE_BUTTON_CONFIRM_ORDER) . '</form>' . "\n");
 

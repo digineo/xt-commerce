@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: configuration.php 1286 2005-10-07 10:10:18Z mz $   
+   $Id: configuration.php 287 2007-03-23 02:07:58Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -518,8 +518,6 @@ define('PRICE_IS_BRUTTO_DESC','Erm&ouml;glicht die Eingabe der Bruttopreise im A
 define('PRICE_PRECISION_TITLE','Brutto/Netto Dezimalstellen');
 define('PRICE_PRECISION_DESC','Umrechnungsgenauigkeit');
 
-define('CHECK_CLIENT_AGENT_TITLE','Spider Sessions vermeiden?');
-define('CHECK_CLIENT_AGENT_DESC','Bekannte Suchmaschinen Spider ohne Session auf die Seite lassen.');
 define('SHOW_IP_LOG_TITLE','IP-Log im Checkout?');
 define('SHOW_IP_LOG_DESC','Text "Ihre IP wird aus Sicherheitsgr&uuml;nden gespeichert", beim Checkout anzeigen?');
 
@@ -600,4 +598,6 @@ define('REVOCATION_ID_TITLE','Widerrufsrecht ID');
 define('REVOCATION_ID_DESC','Content ID des Widerrufrechts');
 define('DISPLAY_REVOCATION_ON_CHECKOUT_TITLE','Anzeige Widerrufrecht?');
 define('DISPLAY_REVOCATION_ON_CHECKOUT_DESC','Widerrufrecht auf checkout_confirmation anzeigen?');
+define('ACTIVATE_STOCKS_TRAFFIC_TITLE','Lagerampel');
+define('ACTIVATE_STOCKS_TRAFFIC_DESC','Ampelsystem aktivieren?');
 ?>

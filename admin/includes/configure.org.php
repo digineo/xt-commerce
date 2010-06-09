@@ -1,6 +1,5 @@
 <?php
 /* --------------------------------------------------------------
-  ### Be careful, this is the backup of your original configuration data ###
 
   XT-Commerce - community made shopping
   http://www.xt-commerce.com
@@ -9,6 +8,9 @@
   --------------------------------------------------------------
   based on:
   (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
+   
+  
+
   (c) 2002-2003 osCommerce (configure.php,v 1.14 2003/02/21); www.oscommerce.com
 
   Released under the GNU General Public License
@@ -17,15 +19,15 @@
 // Define the webserver and path parameters
 // * DIR_FS_* = Filesystem directories (local/physical)
 // * DIR_WS_* = Webserver directories (virtual/URL)
-  define('HTTP_SERVER', 'http://localhost'); // eg, http://localhost or - https://localhost should not be empty for productive servers
-  define('HTTP_CATALOG_SERVER', 'http://localhost');
-  define('HTTPS_CATALOG_SERVER', 'https://localhost');
+  define('HTTP_SERVER', 'http://mzanier.dyndns.org'); // eg, http://localhost or - https://localhost should not be empty for productive servers
+  define('HTTP_CATALOG_SERVER', 'http://mzanier.dyndns.org');
+  define('HTTPS_CATALOG_SERVER', 'http://mzanier.dyndns.org');
   define('ENABLE_SSL_CATALOG', 'false'); // secure webserver for catalog module
-  define('DIR_FS_DOCUMENT_ROOT', '/Users/mzanier/Sites/304SP2/xtcommerce/'); // where the pages are located on the server
-  define('DIR_WS_ADMIN', '/304SP2/xtcommerce/admin/'); // absolute path required
-  define('DIR_FS_ADMIN', '/Users/mzanier/Sites/304SP2/xtcommerce/admin/'); // absolute pate required
-  define('DIR_WS_CATALOG', '/304SP2/xtcommerce/'); // absolute path required
-  define('DIR_FS_CATALOG', '/Users/mzanier/Sites/304SP2/xtcommerce/'); // absolute path required
+  define('DIR_FS_DOCUMENT_ROOT', 'C:/xamp/xampp/htdocs/svn_3.0/xtcommerce/'); // where the pages are located on the server
+  define('DIR_WS_ADMIN', '/svn_3.0/xtcommerce/admin/'); // absolute path required
+  define('DIR_FS_ADMIN', 'C:/xamp/xampp/htdocs/svn_3.0/xtcommerce/admin/'); // absolute pate required
+  define('DIR_WS_CATALOG', '/svn_3.0/xtcommerce/'); // absolute path required
+  define('DIR_FS_CATALOG', 'C:/xamp/xampp/htdocs/svn_3.0/xtcommerce/'); // absolute path required
   define('DIR_WS_IMAGES', 'images/');
   define('DIR_FS_CATALOG_IMAGES', DIR_FS_CATALOG . 'images/');
   define('DIR_FS_CATALOG_ORIGINAL_IMAGES', DIR_FS_CATALOG_IMAGES .'product_images/original_images/');
@@ -53,8 +55,8 @@
 // define our database connection
   define('DB_SERVER', 'localhost'); // eg, localhost - should not be empty for productive servers
   define('DB_SERVER_USERNAME', 'root');
-  define('DB_SERVER_PASSWORD', 'root');
-  define('DB_DATABASE', 'xtc_sp2');
+  define('DB_SERVER_PASSWORD', '');
+  define('DB_DATABASE', 'xtc_svn');
   define('USE_PCONNECT', 'false'); // use persisstent connections?
   define('STORE_SESSIONS', 'mysql'); // leave empty '' for default handler or set to 'mysql'
 

@@ -26,21 +26,11 @@ define('MODULE_SHIPPING_FEDEXEU_TEXT_TITLE', 'FedEx Express Europe');
 define('MODULE_SHIPPING_FEDEXEU_TEXT_DESCRIPTION', 'FedEx Express Europe');
 define('MODULE_SHIPPING_FEDEXEU_TEXT_WAY', 'Dispatch to');
 define('MODULE_SHIPPING_FEDEXEU_TEXT_UNITS', 'kg');
-define('MODULE_SHIPPING_FEDEXEU_INVALID_ZONE', 'Unfortunately it is not possible to dispatch into this country');
-define('MODULE_SHIPPING_FEDEXEU_UNDEFINED_RATE', 'Forwarding expenses cannot be calculated for the moment');
 
 define('MODULE_SHIPPING_FEDEXEU_STATUS_TITLE' , 'FedEx Express Europe');
 define('MODULE_SHIPPING_FEDEXEU_STATUS_DESC' , 'Do you want to offer FedEx Express Europe shipping?');
 define('MODULE_SHIPPING_FEDEXEU_HANDLING_TITLE' , 'Handling Fee');
 define('MODULE_SHIPPING_FEDEXEU_HANDLING_DESC' , 'Handlingfee for this shipping method in Euro');
-define('MODULE_SHIPPING_FEDEXEU_TAX_CLASS_TITLE' , 'Tax Rate');
-define('MODULE_SHIPPING_FEDEXEU_TAX_CLASS_DESC' , 'Use the following tax class on the shipping fee.');
-define('MODULE_SHIPPING_FEDEXEU_ZONE_TITLE' , 'Shipping Zone');
-define('MODULE_SHIPPING_FEDEXEU_ZONE_DESC' , 'If a zone is selected, only enable this shipping method for that zone.');
-define('MODULE_SHIPPING_FEDEXEU_SORT_ORDER_TITLE' , 'Sort Order');
-define('MODULE_SHIPPING_FEDEXEU_SORT_ORDER_DESC' , 'Sort order of display.');
-define('MODULE_SHIPPING_FEDEXEU_ALLOWED_TITLE' , 'Allowed Shipping Zones');
-define('MODULE_SHIPPING_FEDEXEU_ALLOWED_DESC' , 'Please enter the zones <b>separately</b> which should be allowed to use this modul (e. g. AT,DE (leave empty if you want to allow all zones))');
 define('MODULE_SHIPPING_FEDEXEU_COUNTRIES_1_TITLE' , 'Europe Zone 1 Countries');
 define('MODULE_SHIPPING_FEDEXEU_COUNTRIES_1_DESC' , 'Comma separated list of two character ISO country codes that are part of Zone 1');
 define('MODULE_SHIPPING_FEDEXEU_COST_PAK_1_TITLE' , 'Shipping Table for Zone 1 up to 2.50 kg PAK');
@@ -137,4 +127,15 @@ define('MODULE_SHIPPING_FEDEXEU_STEP_BOX_40_8_TITLE' , 'Extra charge up to 30 kg
 define('MODULE_SHIPPING_FEDEXEU_STEP_BOX_40_8_DESC' , 'Extra charge for each additional 0,50 kg in EUR');
 define('MODULE_SHIPPING_FEDEXEU_STEP_BOX_70_8_TITLE' , 'Extra charge up to 50 kg BOX');
 define('MODULE_SHIPPING_FEDEXEU_STEP_BOX_70_8_DESC' , 'Extra charge for each additional 0,50 kg in EUR');
+
+define('MODULE_SHIPPING_FEDEXEU_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_FEDEXEU_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_FEDEXEU_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_FEDEXEU_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_FEDEXEU_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_FEDEXEU_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_FEDEXEU_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_FEDEXEU_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_FEDEXEU_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_FEDEXEU_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

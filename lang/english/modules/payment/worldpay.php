@@ -56,16 +56,18 @@ define('MODULE_PAYMENT_WORLDPAY_TEXT_INFO','');
   define('MODULE_PAYMENT_WORLDPAY_USEPREAUTH_TITLE', 'Use Pre-Authorisation?');
   define('MODULE_PAYMENT_WORLDPAY_USEPREAUTH_DESC', 'Do you want to pre-authorise payments? Default=False. You need to request this from WorldPay before using it.');
 
-  define('MODULE_PAYMENT_WORLDPAY_ORDER_STATUS_ID_TITLE', 'Set Order Status');
-  define('MODULE_PAYMENT_WORLDPAY_ORDER_STATUS_ID_DESC', 'Set the status of orders made with this payment module to this value');
-
   define('MODULE_PAYMENT_WORLDPAY_PREAUTH_TITLE', 'Pre-Auth');
   define('MODULE_PAYMENT_WORLDPAY_PREAUTH_DESC', 'The mode you are working in (A = Pay Now, E = Pre Auth). Ignored if Use PreAuth is False.');
 
-  define('MODULE_PAYMENT_WORLDPAY_ZONE_TITLE', 'Payment Zone');
-  define('MODULE_PAYMENT_WORLDPAY_ZONE_DESC', 'If a zone is selected, only enable this payment method for that zone.');
 
-define('MODULE_PAYMENT_WORLDPAY_ALLOWED_TITLE' , 'Erlaubte Zonen');
-define('MODULE_PAYMENT_WORLDPAY_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, welche f&uuml;r dieses Modul erlaubt sein sollen. (z.B. AT,DE (wenn leer, werden alle Zonen erlaubt))');
-
+define('MODULE_PAYMENT_WORLDPAY_COST_TITLE', _MODULES_PAYMENT_FEE_TITLE);
+define('MODULE_PAYMENT_WORLDPAY_COST_DESC', _MODULES_PAYMENT_FEE_DESC);
+define('MODULE_PAYMENT_WORLDPAY_ZONE_TITLE', _MODULES_ZONE_TITLE);
+define('MODULE_PAYMENT_WORLDPAY_ZONE_DESC', _MODULES_ZONE_DESC);
+define('MODULE_PAYMENT_WORLDPAY_ALLOWED_TITLE', _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_PAYMENT_WORLDPAY_ALLOWED_DESC', _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_PAYMENT_WORLDPAY_SORT_ORDER_TITLE', _MODULES_SORT_ORDER_TITLE);
+define('MODULE_PAYMENT_WORLDPAY_SORT_ORDER_DESC', _MODULES_SORT_ORDER_DESC);
+define('MODULE_PAYMENT_WORLDPAY_ORDER_STATUS_ID_TITLE', _MODULES_SET_ORDER_STATUS_TITLE);
+define('MODULE_PAYMENT_WORLDPAY_ORDER_STATUS_ID_DESC', _MODULES_SET_ORDER_STATUS_DESC);
 ?>

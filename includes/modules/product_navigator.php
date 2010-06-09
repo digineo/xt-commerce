@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: product_navigator.php 1292 2005-10-07 16:10:55Z mz $
+   $Id: product_navigator.php 245 2007-03-08 16:08:22Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -24,6 +24,15 @@ $group_check = "";
 if (GROUP_CHECK == 'true') {
 	$group_check = " and p.group_permission_".$_SESSION['customers_status']['customers_status_id']."=1 ";
 }
+
+$sorting_query = xtDBquery("SELECT products_sorting,
+                                   products_sorting2 FROM ".TABLE_CATEGORIES."
+                                   where categories_id='".$current_category_id."'");
+$sorting_data = xtc_db_fetch_array($sorting_query,true);
+if (!$sorting_data['products_sorting'])
+	$sorting_data['products_sorting'] = 'pd.products_name';
+$sorting = ' ORDER BY '.$sorting_data['products_sorting'].' '.$sorting_data['products_sorting2'].' ';
+
 $products_query = xtDBquery("SELECT
                                  pc.products_id,
                                  pd.products_name
@@ -36,7 +45,7 @@ $products_query = xtDBquery("SELECT
                                  and p.products_id = pd.products_id
                                  and pd.language_id = '".(int) $_SESSION['languages_id']."'
                                  and p.products_status=1 
-                                 ".$fsk_lock.$group_check);
+                                 ".$fsk_lock.$group_check.$sorting);
 $i = 0;
 while ($products_data = xtc_db_fetch_array($products_query, true)) {
 	$p_data[$i] = array ('pID' => $products_data['products_id'], 'pName' => $products_data['products_name']);

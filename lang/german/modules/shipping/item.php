@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: item.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: item.php 194 2007-02-25 11:46:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -21,16 +21,20 @@ define('MODULE_SHIPPING_ITEM_TEXT_WAY', 'Bester Weg');
 
 define('MODULE_SHIPPING_ITEM_STATUS_TITLE' , 'Versandkosten pro St&uuml;ck aktivieren');
 define('MODULE_SHIPPING_ITEM_STATUS_DESC' , 'M&ouml;chten Sie Versandkosten pro St&uuml;ck anbieten?');
-define('MODULE_SHIPPING_ITEM_ALLOWED_TITLE' , 'Erlaubte Versandzonen');
-define('MODULE_SHIPPING_ITEM_ALLOWED_DESC' , 'Geben Sie <b>einzeln</b> die Zonen an, in welche ein Versand möglich sein soll. (z.B. AT,DE (lassen Sie dieses Feld leer, wenn Sie alle Zonen erlauben wollen))');
 define('MODULE_SHIPPING_ITEM_COST_TITLE' , 'Versandkosten');
 define('MODULE_SHIPPING_ITEM_COST_DESC' , 'Die Versandkosten werden mit der Anzahl an Artikel einer Bestellung multipliziert, wenn diese Versandart angegeben ist.');
 define('MODULE_SHIPPING_ITEM_HANDLING_TITLE' , 'Handling Geb&uuml;hr');
 define('MODULE_SHIPPING_ITEM_HANDLING_DESC' , 'Handling Geb&uuml;hr für diese Versandart.');
-define('MODULE_SHIPPING_ITEM_TAX_CLASS_TITLE' , 'Steuerklasse');
-define('MODULE_SHIPPING_ITEM_TAX_CLASS_DESC' , 'Folgende Steuerklasse an Versandkosten anwenden');
-define('MODULE_SHIPPING_ITEM_ZONE_TITLE' , 'Versandzone');
-define('MODULE_SHIPPING_ITEM_ZONE_DESC' , 'Wenn eine Zone ausgew&auml;hlt ist, wird diese Versandmethode ausschliseslich f&uuml;r diese Zone angewendet');
-define('MODULE_SHIPPING_ITEM_SORT_ORDER_TITLE' , 'Sortierreihenfolge');
-define('MODULE_SHIPPING_ITEM_SORT_ORDER_DESC' , 'Reihenfolge der Anzeige');
+
+
+define('MODULE_SHIPPING_ITEM_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_ITEM_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_ITEM_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_ITEM_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_ITEM_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_ITEM_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_ITEM_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_ITEM_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_ITEM_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_ITEM_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

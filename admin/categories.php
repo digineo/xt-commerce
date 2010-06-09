@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: categories.php 1249 2005-09-27 12:06:40Z gwinger $
+   $Id: categories.php 86 2007-01-14 16:18:44Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -290,7 +290,7 @@ if (USE_WYSIWYG == 'true') {
 	// generate editor for categories EDIT
 	$languages = xtc_get_languages();
 ?>
-<script type="text/javascript" src="includes/modules/fckeditor/fckeditor.js"></script>
+<script type="text/javascript" src="<?php echo FCK_LOCATION; ?>/fckeditor.js"></script>
 <script type="text/javascript">
 	window.onload = function()
 		{<?php

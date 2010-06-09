@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: new_category.php 799 2005-02-23 18:08:06Z novalis $
+   $Id: new_category.php 242 2007-03-08 13:34:57Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -49,12 +49,17 @@
     $text_new_or_edit = ($_GET['action']=='new_category_ACD') ? TEXT_INFO_HEADING_NEW_CATEGORY : TEXT_INFO_HEADING_EDIT_CATEGORY;
 ?>
       <tr>
-        <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr>
-            <td class="pageHeading"><?php echo sprintf($text_new_or_edit, xtc_output_generated_category_path($current_category_id)); ?></td>
-            <td class="pageHeading" align="right"><?php echo xtc_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
-          </tr>
-        </table></td>
+        <td>
+        
+ <table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'folder_grey.png'); ?></td>
+    <td class="pageHeading"><?php echo sprintf($text_new_or_edit, xtc_output_generated_category_path($current_category_id)); ?></td>
+  </tr>
+  <tr> 
+    <td class="main" valign="top">xt:Commerce Products</td>
+  </tr>
+</table>        </td>
       </tr>
       <tr>
         <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>

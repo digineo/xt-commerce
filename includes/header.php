@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: header.php 1140 2005-08-10 10:16:00Z mz $   
+   $Id: header.php 288 2007-03-23 03:28:11Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -34,7 +34,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>" /> 
 <meta http-equiv="Content-Style-Type" content="text/css" />
-
+<?php include(DIR_WS_MODULES.FILENAME_METATAGS); ?>
 <?php
 /*
   The following copyright announcement is in compliance
@@ -54,53 +54,8 @@
 	Information and contribution at http://www.xt-commerce.com
 -->
 <meta name="generator" content="(c) by <?php echo PROJECT_VERSION; ?> , http://www.xt-commerce.com" />
-<?php include(DIR_WS_MODULES.FILENAME_METATAGS); ?>
 <base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo 'templates/'.CURRENT_TEMPLATE.'/stylesheet.css'; ?>" />
-<script type="text/javascript"><!--
-var selected;
-var submitter = null;
-
-function submitFunction() {
-    submitter = 1;
-}
-function popupWindow(url) {
-  window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=100,height=100,screenX=150,screenY=150,top=150,left=150')
-}  
-
-function selectRowEffect(object, buttonSelect) {
-  if (!selected) {
-    if (document.getElementById) {
-      selected = document.getElementById('defaultSelected');
-    } else {
-      selected = document.all['defaultSelected'];
-    }
-  }
-
-  if (selected) selected.className = 'moduleRow';
-  object.className = 'moduleRowSelected';
-  selected = object;
-
-// one button is not an array
-  if (document.getElementById('payment'[0])) {
-    document.getElementById('payment'[buttonSelect]).checked=true;
-  } else {
-    //document.getElementById('payment'[selected]).checked=true;
-  }
-}
-
-function rowOverEffect(object) {
-  if (object.className == 'moduleRow') object.className = 'moduleRowOver';
-}
-
-function rowOutEffect(object) {
-  if (object.className == 'moduleRowOver') object.className = 'moduleRow';
-}
-
-function popupImageWindow(url) {
-  window.open(url,'popupImageWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,width=100,height=100,screenX=150,screenY=150,top=150,left=150')
-}
-//--></script>
 <?php
 // require theme based javascript
 require('templates/'.CURRENT_TEMPLATE.'/javascript/general.js.php');
@@ -350,12 +305,7 @@ $smarty->assign('store_name',TITLE);
 
   if (isset($_GET['error_message']) && xtc_not_null($_GET['error_message'])) {
 
-$smarty->assign('error','
-    <table border="0" width="100%" cellspacing="0" cellpadding="2">
-      <tr class="headerError">
-        <td class="headerError">'. htmlspecialchars(urldecode($_GET['error_message'])).'</td>
-      </tr>
-    </table>');
+$smarty->assign('error',htmlspecialchars(urldecode($_GET['error_message'])));
 
   }
 

@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: ot_gv.php 1185 2005-08-26 15:16:31Z mz $
+   $Id: ot_gv.php 71 2007-01-07 15:48:30Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -71,7 +71,7 @@ class ot_gv {
 			$order->info['total'] = $order->info['total'] - $od_amount;
 
 			if ($od_amount > 0) {
-				$this->output[] = array ('title' => $this->title.':', 'text' => '<b><font color="ff0000">-'.$xtPrice->xtcFormat($od_amount, true).'</font></b>', 'value' => $xtPrice->xtcFormat($od_amount, false));
+				$this->output[] = array ('title' => $this->title.':', 'text' => '<b><font color="#ff0000">-'.$xtPrice->xtcFormat($od_amount, true).'</font></b>', 'value' => $xtPrice->xtcFormat($od_amount, false));
 			}
 		}
 	}

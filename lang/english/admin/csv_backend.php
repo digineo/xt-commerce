@@ -11,7 +11,7 @@
    --------------------------------------------------------------*/
 
 
-   define('TITLE','CSV Backend');
+   define('HEADING_TITLE','Import / Export');
 
    define('IMPORT','Import');
    define('EXPORT','Export');
@@ -28,6 +28,10 @@
    define('CSV_SETUP','Config');
    define('TEXT_IMPORT','');
    define('TEXT_PRODUCTS','Products');
-   define('TEXT_EXPORT','Create exportfile and save in /export Folder');
-
+   define('TEXT_EXPORT','What you want to export ?');
+   define('TEXT_NEWSLETTER','Newsletter Recipients');
+   define('EXPORT_YES','Download only (do not store server side)');
+   define('EXPORT_NO','Save on Server (Folder /export)');
+   define('EXPORT_TYPE','<hr noshade><b>Type:</b>');
+   define('FILENAME','Filename:');
 ?>

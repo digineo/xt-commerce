@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: table.php 1002 2005-07-10 16:11:37Z mz $   
+   $Id: table.php 9 2006-12-08 19:45:00Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

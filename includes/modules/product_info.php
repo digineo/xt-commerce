@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: product_info.php 1317 2005-10-21 16:03:18Z mz $   
+   $Id: product_info.php 245 2007-03-08 16:08:22Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -44,7 +44,6 @@ if (!is_object($product) || !$product->isProduct()) { // product not found in da
 
 	xtc_db_query("update ".TABLE_PRODUCTS_DESCRIPTION." set products_viewed = products_viewed+1 where products_id = '".$product->data['products_id']."' and language_id = '".$_SESSION['languages_id']."'");
 
-
 		$products_price = $xtPrice->xtcGetPrice($product->data['products_id'], $format = true, 1, $product->data['products_tax_class_id'], $product->data['products_price'], 1);
 
 		// check if customer is allowed to add to cart
@@ -82,17 +81,23 @@ if (!is_object($product) || !$product->isProduct()) { // product not found in da
 			$info_smarty->assign('PRODUCTS_TAX_INFO', $tax_info);
 			$info_smarty->assign('PRODUCTS_SHIPPING_LINK',$main->getShippingLink());
 		}
+		$stocks_traffic_image = '';
+		$stocks_traffic_name = '';
+			if (ACTIVATE_STOCKS_TRAFFIC=='true') {
+				$stocks_traffic = $product->getStockTafficRule();
+				$info_smarty->assign('PRODUCTS_STOCKS_TRAFFIC_IMAGE',  $stocks_traffic['image']);
+				$info_smarty->assign('PRODUCTS_STOCKS_TRAFFIC_NAME', $stocks_traffic['name']);
+			}
 		$info_smarty->assign('PRODUCTS_MODEL', $product->data['products_model']);
 		$info_smarty->assign('PRODUCTS_EAN', $product->data['products_ean']);
+		$info_smarty->assign('PRODUCTS_EXPIRES', xtc_date_long($product->getExpireDate()));
 		$info_smarty->assign('PRODUCTS_QUANTITY', $product->data['products_quantity']);
 		$info_smarty->assign('PRODUCTS_WEIGHT', $product->data['products_weight']);
 		$info_smarty->assign('PRODUCTS_STATUS', $product->data['products_status']);
 		$info_smarty->assign('PRODUCTS_ORDERED', $product->data['products_ordered']);
 		$info_smarty->assign('PRODUCTS_PRINT', '<img src="templates/'.CURRENT_TEMPLATE.'/buttons/'.$_SESSION['language'].'/print.gif"  style="cursor:hand" onclick="javascript:window.open(\''.xtc_href_link(FILENAME_PRINT_PRODUCT_INFO, 'products_id='.$product->data['products_id']).'\', \'popup\', \'toolbar=0, width=640, height=600\')" alt="" />');
 		$info_smarty->assign('PRODUCTS_DESCRIPTION', stripslashes($product->data['products_description']));
-		$image = '';
-		if ($product->data['products_image'] != '')
-			$image = DIR_WS_INFO_IMAGES.$product->data['products_image'];
+		$image = $product->productImage($product->data['products_image'], 'info');
 
 		$info_smarty->assign('PRODUCTS_IMAGE', $image);
 

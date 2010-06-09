@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_remove_non_numeric.inc.php 829 2005-03-12 21:34:16Z mz $   
+   $Id: xtc_remove_non_numeric.inc.php 70 2007-01-07 14:19:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

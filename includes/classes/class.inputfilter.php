@@ -1,15 +1,19 @@
 <?php
-
-/** @class: InputFilter (PHP4 & PHP5, with comments)
-  * @project: PHP Input Filter
-  * @date: 10-05-2005
-  * @version: 1.2.2_php4/php5
-  * @author: Daniel Morris
-  * @contributors: Gianpaolo Racca, Ghislain Picard, Marco Wandschneider, Chris Tobin and Andrew Eddie.
-  * @copyright: Daniel Morris
-  * @email: dan@rootcube.com
-  * @license: GNU General Public License (GPL)
-  */
+/**
+ *  @class: InputFilter (PHP4 & PHP5, with comments)
+ * @project: PHP Input Filter
+ * @date: 10-05-2005
+ * @version: 1.2.2_php4/php5
+ * @author: Daniel Morris
+ * @contributors: Gianpaolo Racca, Ghislain Picard, Marco Wandschneider, Chris
+ * Tobin and Andrew Eddie.
+ * 
+ * Modification by Louis Landry
+ * 
+ * @copyright: Daniel Morris
+ * @email: dan@rootcube.com
+ * @license: GNU General Public License (GPL)
+ */
 class InputFilter {
 	var $tagsArray; // default = empty array
 	var $attrArray; // default = empty array

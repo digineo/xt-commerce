@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: banktransfer.php 998 2005-07-07 14:18:20Z mz $   
+   $Id: banktransfer.php 192 2007-02-24 16:24:52Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -47,6 +47,7 @@ define('MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO','');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE2', 'If you do not want to send your<br />account data over the internet you can download our ');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE3', 'Fax form');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE4', ' and sent it back to us.');
+  
 
   define('JS_BANK_BLZ', 'Please ente the BLZ or your bank!\n');
   define('JS_BANK_NAME', 'Please enter your name and bank!\n');
@@ -59,16 +60,19 @@ define('MODULE_PAYMENT_BANKTRANSFER_URL_NOTE_TITLE' , 'Fax-URL');
 define('MODULE_PAYMENT_BANKTRANSFER_URL_NOTE_DESC' , 'The fax-confirmation file. It must located in catalog-dir');
 define('MODULE_PAYMENT_BANKTRANSFER_FAX_CONFIRMATION_TITLE' , 'Allow Fax Confirmation');
 define('MODULE_PAYMENT_BANKTRANSFER_FAX_CONFIRMATION_DESC' , 'Do you want to allow fax confirmation?');
-define('MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER_TITLE' , 'Sort order of display');
-define('MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER_DESC' , 'Sort order of display. Lowest is displayed first.');
-define('MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID_TITLE' , 'Set Order Status');
-define('MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID_DESC' , 'Set the status of orders made with this payment module to this value');
-define('MODULE_PAYMENT_BANKTRANSFER_ZONE_TITLE' , 'Payment Zone');
-define('MODULE_PAYMENT_BANKTRANSFER_ZONE_DESC' , 'If a zone is selected, only enable this payment method for that zone.');
-define('MODULE_PAYMENT_BANKTRANSFER_ALLOWED_TITLE' , 'Allowed Zones');
-define('MODULE_PAYMENT_BANKTRANSFER_ALLOWED_DESC' , 'Please enter the zones <b>separately</b> which should be allowed to use this modul (e. g. AT,DE (leave empty if you want to allow all zones))');
 define('MODULE_PAYMENT_BANKTRANSFER_STATUS_TITLE' , 'Allow Banktransfer Payments');
 define('MODULE_PAYMENT_BANKTRANSFER_STATUS_DESC' , 'Do you want to accept banktransfer payments?');
 define('MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER_TITLE' , 'Minimum Orders');
 define('MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER_DESC' , 'Minimum orders for a Customer to view this Option.');
+
+define('MODULE_PAYMENT_BANKTRANSFER_COST_TITLE',_MODULES_PAYMENT_FEE_TITLE);
+define('MODULE_PAYMENT_BANKTRANSFER_COST_DESC',_MODULES_PAYMENT_FEE_DESC);
+define('MODULE_PAYMENT_BANKTRANSFER_ZONE_TITLE', _MODULES_ZONE_TITLE);
+define('MODULE_PAYMENT_BANKTRANSFER_ZONE_DESC', _MODULES_ZONE_DESC);
+define('MODULE_PAYMENT_BANKTRANSFER_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_PAYMENT_BANKTRANSFER_ALLOWED_DESC' ,_MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER_TITLE', _MODULES_SORT_ORDER_TITLE);
+define('MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER_DESC', _MODULES_SORT_ORDER_DESC);
+define('MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID_TITLE' , _MODULES_SET_ORDER_STATUS_TITLE);
+define('MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID_DESC' , _MODULES_SET_ORDER_STATUS_DESC);
 ?>

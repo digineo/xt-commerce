@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: checkout_process.php 1277 2005-10-01 17:02:59Z mz $   
+   $Id: checkout_process.php 181 2007-02-19 10:17:17Z matthias $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -76,14 +76,14 @@ $shipping_modules = new shipping($_SESSION['shipping']);
 require (DIR_WS_CLASSES.'order.php');
 $order = new order();
 
-// load the before_process function from the payment modules
-$payment_modules->before_process();
 
 require (DIR_WS_CLASSES.'order_total.php');
 $order_total_modules = new order_total();
 
 $order_totals = $order_total_modules->process();
 
+// load the before_process function from the payment modules
+$payment_modules->before_process();
 
 // check if tmp order id exists
 if (isset ($_SESSION['tmp_oID']) && is_int($_SESSION['tmp_oID'])) {
@@ -199,7 +199,8 @@ for ($i = 0, $n = sizeof($order->products); $i < $n; $i ++) {
 		if ($new_sp_quantity >= 1) {
 			xtc_db_query("update ".TABLE_SPECIALS." set specials_quantity = '".$new_sp_quantity."' where products_id = '".xtc_get_prid($order->products[$i]['id'])."' ");
 		} else {
-			xtc_db_query("update ".TABLE_SPECIALS." set status = '0', specials_quantity = '".$new_sp_quantity."' where products_id = '".xtc_get_prid($order->products[$i]['id'])."' ");
+			if (STOCK_LIMITED == 'true')
+				xtc_db_query("update ".TABLE_SPECIALS." set status = '0', specials_quantity = '".$new_sp_quantity."' where products_id = '".xtc_get_prid($order->products[$i]['id'])."' ");
 		}
 	}
 	// Aenderung Ende
@@ -255,7 +256,7 @@ for ($i = 0, $n = sizeof($order->products); $i < $n; $i ++) {
 
 			$attributes_values = xtc_db_fetch_array($attributes);
 
-			$sql_data_array = array ('orders_id' => $insert_id, 'orders_products_id' => $order_products_id, 'products_options' => $attributes_values['products_options_name'], 'products_options_values' => $attributes_values['products_options_values_name'], 'options_values_price' => $attributes_values['options_values_price'], 'price_prefix' => $attributes_values['price_prefix']);
+			$sql_data_array = array ('orders_id' => $insert_id, 'orders_products_id' => $order_products_id, 'products_options' => $attributes_values['products_options_name'], 'products_options_values' => $order->products[$i]['attributes'][$j]['value'], 'options_values_price' => $attributes_values['options_values_price'], 'price_prefix' => $attributes_values['price_prefix']);
 			xtc_db_perform(TABLE_ORDERS_PRODUCTS_ATTRIBUTES, $sql_data_array);
 
 			if ((DOWNLOAD_ENABLED == 'true') && isset ($attributes_values['products_attributes_filename']) && xtc_not_null($attributes_values['products_attributes_filename'])) {
@@ -277,9 +278,9 @@ if (isset ($_SESSION['tracking']['refID'])) {
 	                                 refferers_id = '".$_SESSION['tracking']['refID']."'
 	                                 where orders_id = '".$insert_id."'");
 
-	// check if late or direct sale                         
+	// check if late or direct sale
 	$customers_logon_query = "SELECT customers_info_number_of_logons
-				                            FROM ".TABLE_CUSTOMERS_INFO." 
+				                            FROM ".TABLE_CUSTOMERS_INFO."
 				                            WHERE customers_info_id  = '".$_SESSION['customer_id']."'";
 	$customers_logon_query = xtc_db_query($customers_logon_query);
 	$customers_logon = xtc_db_fetch_array($customers_logon_query);
@@ -306,9 +307,9 @@ if (isset ($_SESSION['tracking']['refID'])) {
 		xtc_db_query("update ".TABLE_ORDERS." set
 		                                 refferers_id = '".$customers_data['ref']."'
 		                                 where orders_id = '".$insert_id."'");
-		// check if late or direct sale                         
+		// check if late or direct sale
 		$customers_logon_query = "SELECT customers_info_number_of_logons
-					                            FROM ".TABLE_CUSTOMERS_INFO." 
+					                            FROM ".TABLE_CUSTOMERS_INFO."
 					                            WHERE customers_info_id  = '".$_SESSION['customer_id']."'";
 		$customers_logon_query = xtc_db_query($customers_logon_query);
 		$customers_logon = xtc_db_fetch_array($customers_logon_query);
@@ -343,6 +344,12 @@ if (!$tmp) {
 	// load the after_process function from the payment modules
 	$payment_modules->after_process();
 
+//echo '<pre>';
+//print_r ($_GET);
+//echo '</pre>';
+//
+//break;
+
 	$_SESSION['cart']->reset(true);
 
 	// unregister session variables used during checkout
@@ -360,8 +367,8 @@ if (!$tmp) {
 		unset ($_SESSION['credit_covers']);
 	$order_total_modules->clear_posts(); //ICW ADDED FOR CREDIT CLASS SYSTEM
 	// GV Code End
-	
+
 	xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SUCCESS, '', 'SSL'));
-	
+
 }
 ?>

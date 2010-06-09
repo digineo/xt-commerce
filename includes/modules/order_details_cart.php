@@ -1,7 +1,7 @@
 <?php
 
 /* -----------------------------------------------------------------------------------------
-   $Id: order_details_cart.php 1281 2005-10-03 09:30:17Z mz $   
+   $Id: order_details_cart.php 302 2007-03-30 08:25:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -56,7 +56,7 @@ for ($i = 0, $n = sizeof($products); $i < $n; $i ++) {
 		$image = DIR_WS_THUMBNAIL_IMAGES.$products[$i]['image'];
 	}
 	
-	$module_content[$i] = array ('PRODUCTS_NAME' => $products[$i]['name'].$mark_stock, 'PRODUCTS_QTY' => xtc_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="2"').xtc_draw_hidden_field('products_id[]', $products[$i]['id']).xtc_draw_hidden_field('old_qty[]', $products[$i]['quantity']), 'PRODUCTS_MODEL' => $products[$i]['model'],'PRODUCTS_SHIPPING_TIME'=>$products[$i]['shipping_time'], 'PRODUCTS_TAX' => number_format($products[$i]['tax'], TAX_DECIMAL_PLACES), 'PRODUCTS_IMAGE' => $image, 'IMAGE_ALT' => $products[$i]['name'], 'BOX_DELETE' => xtc_draw_checkbox_field('cart_delete[]', $products[$i]['id']), 'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, xtc_product_link($products[$i]['id'], $products[$i]['name'])), 'PRODUCTS_PRICE' => $xtPrice->xtcFormat($products[$i]['price'] * $products[$i]['quantity'], true), 'PRODUCTS_SINGLE_PRICE' =>$xtPrice->xtcFormat($products[$i]['price'], true), 'PRODUCTS_SHORT_DESCRIPTION' => xtc_get_short_description($products[$i]['id']), 'ATTRIBUTES' => '');
+	$module_content[$i] = array ('PRODUCTS_NAME' => $products[$i]['name'].$mark_stock, 'PRODUCTS_QTY' => xtc_draw_input_field('cart_quantity[]', $products[$i]['quantity'], 'size="2"').xtc_draw_hidden_field('products_id[]', $products[$i]['id']).xtc_draw_hidden_field('old_qty[]', $products[$i]['quantity']), 'PRODUCTS_MODEL' => $products[$i]['model'],'PRODUCTS_SHIPPING_TIME'=>$products[$i]['shipping_time'], 'PRODUCTS_TAX' => number_format($products[$i]['tax'], TAX_DECIMAL_PLACES), 'PRODUCTS_IMAGE' => $image, 'IMAGE_ALT' => $products[$i]['name'], 'BOX_DELETE' => xtc_draw_checkbox_field('cart_delete[]', $products[$i]['id']), 'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, xtc_product_link($products[$i]['id'], $products[$i]['name'])), 'PRODUCTS_PRICE' => $xtPrice->xtcFormat($products[$i]['price'] * $products[$i]['quantity'], true), 'PRODUCTS_SINGLE_PRICE' =>$xtPrice->xtcFormat($products[$i]['price'], true), 'ATTRIBUTES' => '');
 	// Product options names
 	$attributes_exist = ((isset ($products[$i]['attributes'])) ? 1 : 0);
 
@@ -103,7 +103,7 @@ if ($customer_status_value['customers_status_ot_discount'] != 0) {
 	$total_content .= TEXT_CART_OT_DISCOUNT.$customer_status_value['customers_status_ot_discount'].'%';
 }
 if (SHOW_SHIPPING == 'true') {
-	$module_smarty->assign('SHIPPING_INFO', ' '.SHIPPING_EXCL.'<a href="javascript:newWin=void(window.open(\''.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS).'\', \'popup\', \'toolbar=0, width=640, height=600\'))"> '.SHIPPING_COSTS.'</a>');
+	$module_smarty->assign('SHIPPING_INFO', $main->getShippingLink());
 }
 if ($_SESSION['customers_status']['customers_status_show_price'] == '1') {
 $module_smarty->assign('UST_CONTENT', $_SESSION['cart']->show_tax());

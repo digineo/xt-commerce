@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: buttons.php 1125 2005-07-28 09:59:44Z novalis $   
+   $Id: buttons.php 20 2006-12-25 13:38:37Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

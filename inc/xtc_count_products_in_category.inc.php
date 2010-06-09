@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_count_products_in_category.inc.php 1009 2005-07-11 16:19:29Z mz $   
+   $Id: xtc_count_products_in_category.inc.php 70 2007-01-07 14:19:12Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com

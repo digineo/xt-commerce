@@ -2158,7 +2158,7 @@ class soap_transport_http extends nusoap_base {
 		$hostURL .= $this->path;
 		curl_setopt($this->ch, CURLOPT_URL, $hostURL);
 		// follow location headers (re-directs)
-		curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, 1);
+//		curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, 1);
 		// ask for headers in the response output
 		curl_setopt($this->ch, CURLOPT_HEADER, 1);
 		// ask for the response output as the return value

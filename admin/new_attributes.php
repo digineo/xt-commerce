@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: new_attributes.php 1313 2005-10-18 15:49:15Z mz $   
+   $Id: new_attributes.php 226 2007-03-06 14:27:16Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -44,9 +44,7 @@
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF">
 <!-- header //-->
-<?php
-  require(DIR_WS_INCLUDES . 'header.php');
-?>
+<?php require(DIR_WS_INCLUDES . 'header.php'); ?>
 <!-- header_eof //-->
 
 <!-- body //-->
@@ -58,7 +56,7 @@
 <!-- left_navigation_eof //-->
     </table></td>
 <!-- body_text //-->
-    <td  class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+    <td class="boxCenter" width="100%" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
 <?php
   switch($_POST['action']) {
     case 'edit':

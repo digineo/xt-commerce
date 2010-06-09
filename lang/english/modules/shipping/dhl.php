@@ -25,21 +25,11 @@ define('MODULE_SHIPPING_DHL_TEXT_TITLE', 'DHL Austria');
 define('MODULE_SHIPPING_DHL_TEXT_DESCRIPTION', 'DHL WORLDWIDE EXPRESS Austria');
 define('MODULE_SHIPPING_DHL_TEXT_WAY', 'Dispatch to');
 define('MODULE_SHIPPING_DHL_TEXT_UNITS', 'kg');
-define('MODULE_SHIPPING_DHL_INVALID_ZONE', 'Unfortunately it is not possible to dispatch into this country');
-define('MODULE_SHIPPING_DHL_UNDEFINED_RATE', 'Forwarding expenses cannot be calculated for the moment');
 
 define('MODULE_SHIPPING_DHL_STATUS_TITLE' , 'DHL WORLDWIDE EXPRESS Austria');
 define('MODULE_SHIPPING_DHL_STATUS_DESC' , 'Do you want to offer DHL WORLDWIDE EXPRESS Austria shipping?');
 define('MODULE_SHIPPING_DHL_HANDLING_TITLE' , 'Handling Fee');
 define('MODULE_SHIPPING_DHL_HANDLING_DESC' , 'Handlingfee for this shipping method in Euro');
-define('MODULE_SHIPPING_DHL_TAX_CLASS_TITLE' , 'Tax Rate');
-define('MODULE_SHIPPING_DHL_TAX_CLASS_DESC' , 'Use the following tax class on the shipping fee');
-define('MODULE_SHIPPING_DHL_ZONE_TITLE' , 'Shipping Zone');
-define('MODULE_SHIPPING_DHL_ZONE_DESC' , 'If a zone is selected, only enable this shipping method for that zone');
-define('MODULE_SHIPPING_DHL_SORT_ORDER_TITLE' , 'Sort Order');
-define('MODULE_SHIPPING_DHL_SORT_ORDER_DESC' , 'Sort order of display');
-define('MODULE_SHIPPING_DHL_ALLOWED_TITLE' , 'Allowed Shipping Zones');
-define('MODULE_SHIPPING_DHL_ALLOWED_DESC' , 'Please enter the zones <b>separately</b> which should be allowed to use this modul (e. g. AT,DE (leave empty if you want to allow all zones))');
 define('MODULE_SHIPPING_DHL_COUNTRIES_1_TITLE' , 'Shipping Zone 0');
 define('MODULE_SHIPPING_DHL_COUNTRIES_1_DESC' , 'Domestic Zone');
 define('MODULE_SHIPPING_DHL_COST_ECX_1_TITLE' , 'Shipping Table Zone 0 up to 10 kg ECX');
@@ -390,4 +380,15 @@ define('MODULE_SHIPPING_DHL_STEP_SDX_50_10_TITLE' , 'Extra charge up to 50 kg SD
 define('MODULE_SHIPPING_DHL_STEP_SDX_50_10_DESC' , 'Extra charge each additional 0,50 kg in EUR');
 define('MODULE_SHIPPING_DHL_STEP_SDX_51_10_TITLE' , 'Extra charge up from 50 kg SDX');
 define('MODULE_SHIPPING_DHL_STEP_SDX_51_10_DESC' , 'Extra charge each additional 0,50 kg in EUR');
+
+define('MODULE_SHIPPING_DHL_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_DHL_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_DHL_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_DHL_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_DHL_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_DHL_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_DHL_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_DHL_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_DHL_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_DHL_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

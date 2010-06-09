@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: customers_status.php 1064 2005-07-21 20:05:41Z mz $   
+   $Id: customers_status.php 208 2007-02-27 08:03:49Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -185,11 +185,11 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr> 
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_customers.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'users.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
   </tr>
   <tr> 
-    <td class="main" valign="top">XT Customers</td>
+    <td class="main" valign="top">xt:Commerce Customers</td>
   </tr>
 </table></td>
       </tr>
@@ -273,7 +273,7 @@
       
     echo '<td nowrap class="dataTableContent" align="center">';
     if ($customers_status['customers_status_ot_discount_flag'] == 0){
-      echo '<font color="ff0000">'.$customers_status['customers_status_ot_discount'].' %</font>';
+      echo '<font color="#ff0000">'.$customers_status['customers_status_ot_discount'].' %</font>';
     } else {
       echo $customers_status['customers_status_ot_discount'].' %';
     }

@@ -252,7 +252,7 @@ class order_total {
 				if ($GLOBALS[$class]->enabled) {
 					$size = sizeof($GLOBALS[$class]->output);
 					for ($i = 0; $i < $size; $i ++) {
-						$output_string .= '              <tr>'."\n".'                <td align="right" class="main">'.$GLOBALS[$class]->output[$i]['title'].'</td>'."\n".'                <td align="right" class="main">'.$GLOBALS[$class]->output[$i]['text'].'</td>'."\n".'              </tr>';
+						$output_string .= '              <tr>'."\n".'                <td class="name">'.$GLOBALS[$class]->output[$i]['title'].'</td>'."\n".'                <td class="value">'.$GLOBALS[$class]->output[$i]['text'].'</td>'."\n".'              </tr>';
 					}
 				}
 			}

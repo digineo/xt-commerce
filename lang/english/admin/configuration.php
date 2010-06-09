@@ -499,8 +499,7 @@ define('PRICE_IS_BRUTTO_DESC','Usage of prices with tax in Admin');
 
 define('PRICE_PRECISION_TITLE','Gross/Net precision');
 define('PRICE_PRECISION_DESC','Gross/Net precision');
-define('CHECK_CLIENT_AGENT_TITLE','Prevent Spider Sessions');
-define('CHECK_CLIENT_AGENT_DESC','Prevent known spiders from starting a session.');
+
 define('SHOW_IP_LOG_TITLE','IP-Log in Checkout?');
 define('SHOW_IP_LOG_DESC','Show Text "Your IP will be saved", in checkout?');
 
@@ -580,4 +579,6 @@ define('REVOCATION_ID_TITLE','Revocation ID');
 define('REVOCATION_ID_DESC','Content ID of Revocation content');
 define('DISPLAY_REVOCATION_ON_CHECKOUT_TITLE','Display right of revocation?');
 define('DISPLAY_REVOCATION_ON_CHECKOUT_DESC','Display right of revocation on checkout_confirmation?');
+define('ACTIVATE_STOCKS_TRAFFIC_TITLE','Stock status');
+define('ACTIVATE_STOCKS_TRAFFIC_DESC','Display stock status images?');
 ?>

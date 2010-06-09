@@ -22,17 +22,9 @@ define('MODULE_SHIPPING_ZONES_TEXT_TITLE', 'Zone Rates');
 define('MODULE_SHIPPING_ZONES_TEXT_DESCRIPTION', 'Zone Based Rates');
 define('MODULE_SHIPPING_ZONES_TEXT_WAY', 'Shipping to:');
 define('MODULE_SHIPPING_ZONES_TEXT_UNITS', 'lb(s)');
-define('MODULE_SHIPPING_ZONES_INVALID_ZONE', 'No shipping available to the selected country!');
-define('MODULE_SHIPPING_ZONES_UNDEFINED_RATE', 'The shipping rate cannot be determined at this time.');
-
 define('MODULE_SHIPPING_ZONES_STATUS_TITLE' , 'Enable Zones Method');
 define('MODULE_SHIPPING_ZONES_STATUS_DESC' , 'Do you want to offer zone rate shipping?');
-define('MODULE_SHIPPING_ZONES_ALLOWED_TITLE' , 'Allowed Zones');
-define('MODULE_SHIPPING_ZONES_ALLOWED_DESC' , 'Please enter the zones <b>separately</b> which should be allowed to use this modul (e. g. AT,DE (leave empty if you want to allow all zones))');
-define('MODULE_SHIPPING_ZONES_TAX_CLASS_TITLE' , 'Tax Class');
-define('MODULE_SHIPPING_ZONES_TAX_CLASS_DESC' , 'Use the following tax class on the shipping fee.');
-define('MODULE_SHIPPING_ZONES_SORT_ORDER_TITLE' , 'Sort Order');
-define('MODULE_SHIPPING_ZONES_SORT_ORDER_DESC' , 'Sort order of display.');
+
 
 for ($ii=0;$ii<NUMBER_OF_ZONES;$ii++) {
 define('MODULE_SHIPPING_ZONES_COUNTRIES_'.$ii.'_TITLE' , 'Zone '.$ii.' Countries');
@@ -42,4 +34,15 @@ define('MODULE_SHIPPING_ZONES_COST_'.$ii.'_DESC' , 'Shipping rates to Zone '.$ii
 define('MODULE_SHIPPING_ZONES_HANDLING_'.$ii.'_TITLE' , 'Zone '.$ii.' Handling Fee');
 define('MODULE_SHIPPING_ZONES_HANDLING_'.$ii.'_DESC' , 'Handling Fee for this shipping zone');
 }
+
+define('MODULE_SHIPPING_ZONES_TAX_CLASS_TITLE' , _MODULES_TAX_ZONE_TITLE);
+define('MODULE_SHIPPING_ZONES_TAX_CLASS_DESC' ,_MODULES_TAX_ZONE_DESC);
+define('MODULE_SHIPPING_ZONES_ZONE_TITLE' , _MODULES_ZONE_TITLE);
+define('MODULE_SHIPPING_ZONES_ZONE_DESC' , _MODULES_ZONE_DESC);
+define('MODULE_SHIPPING_ZONES_SORT_ORDER_TITLE' , _MODULES_SORT_ORDER_TITLE);
+define('MODULE_SHIPPING_ZONES_SORT_ORDER_DESC' , _MODULES_SORT_ORDER_DESC);
+define('MODULE_SHIPPING_ZONES_ALLOWED_TITLE' , _MODULES_ZONE_ALLOWED_TITLE);
+define('MODULE_SHIPPING_ZONES_ALLOWED_DESC' , _MODULES_ZONE_ALLOWED_DESC);
+define('MODULE_SHIPPING_ZONES_INVALID_ZONE', _MODULE_INVALID_SHIPPING_ZONE);
+define('MODULE_SHIPPING_ZONES_UNDEFINED_RATE', _MODULE_UNDEFINED_SHIPPING_RATE);
 ?>

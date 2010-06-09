@@ -1,6 +1,6 @@
 <?php
   /* --------------------------------------------------------------
-   $Id: install_finished.php 899 2005-04-29 02:40:57Z hhgag $   
+   $Id: install_finished.php 272 2007-03-21 16:38:37Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -14,88 +14,88 @@
    --------------------------------------------------------------*/
   
   require('includes/application.php');
-  require('../admin/includes/configure.php'); 
+  require('../includes/configure.php'); 
+  require_once(DIR_FS_INC.'xtc_draw_separator.inc.php');
+ 
   
   include('language/'.$_SESSION['language'].'.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>XT-Commerce Installer - Finished</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<style type="text/css">
-<!--
-.messageStackError, .messageStackWarning { font-family: Verdana, Arial, sans-serif; font-weight: bold; font-size: 10px; background-color: #; }
--->
-</style>
+<title>xt:Commerce Installer - Finished</title>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo _CHARSET; ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo 'includes/style.css'; ?>" />
 </head>
-
 <body>
-<table width="800" height="80%" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr> 
-    <td height="95" colspan="2" ><table width="100%" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td width="1"><img src="images/logo.gif"></td>
-          <td background="images/bg_top.jpg">&nbsp;</td>
-        </tr>
-      </table>
-  </tr>
-  <tr> 
-    <td width="180" valign="top" bgcolor="F3F3F3" style="border-bottom: 1px solid; border-left: 1px solid; border-right: 1px solid; border-color: #6D6D6D;"> 
-      <table width="180" border="0" cellspacing="0" cellpadding="0">
-        <tr> 
-          <td height="17" background="images/bg_left_blocktitle.gif">
-<div align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="FFAF00">xtc:</font><font color="#999999">Install</font></b></font></div></td>
-        </tr>
-        <tr> 
-          <td bgcolor="F3F3F3" ><br /> 
+<img src='http://www.xt-commerce.com/_banner/adview.php?what=zone:25&amp;n=abc96f12' border='0' alt=''>
+<div id="header">
+		<div id="logo"><?php echo xtc_image('../admin/images/logo_black.jpg', 'xt:Commerce'); ?></div>
+		<div id="buttons">
+		<?php echo xtc_draw_separator('pixel_trans.gif', 5, 5); ?>
+		<?php echo '<a href="http://www.xt-commerce.com/index.php" target="_new" class="headerLink">'. xtc_image( '../admin/images/top_support.gif', '', '', '').'</a>'; ?>
+</div>
+</div>
+
+
+
+<table border="0" width="800" cellspacing="2" cellpadding="2">
+  <tr>
+    <td class="columnLeft2" width="250" valign="top">
+<!-- left_navigation //-->
+
+<h2 class="boxheader">xt:Commerce Installation</h2>
+<div class="boxbody">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
                 <td width="10">&nbsp;</td>
-                <td width="135"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_LANGUAGE; ?></font></td>
+                <td width="135" class="smallText"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_LANGUAGE; ?></td>
                 <td width="35"><img src="images/icons/ok.gif"></td>
               </tr>
               <tr> 
                 <td>&nbsp;</td>
-                <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_DB_CONNECTION; ?></font></td>
+                <td class="smallText"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_DB_CONNECTION; ?></td>
                 <td><img src="images/icons/ok.gif"></td>
               </tr>
               <tr> 
                 <td>&nbsp;</td>
-                <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> 
-                  &nbsp;&nbsp;&nbsp;<img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_DB_CONNECTION; ?></font></td>
+                <td class="smallText">
+                  &nbsp;&nbsp;&nbsp;<img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_DB_IMPORT; ?></td>
                 <td><img src="images/icons/ok.gif"></td>
               </tr>
               <tr> 
                 <td>&nbsp;</td>
-                <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_WEBSERVER_SETTINGS; ?></font></td>
+                <td class="smallText"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_WEBSERVER_SETTINGS; ?></td>
                 <td><img src="images/icons/ok.gif"></td>
               </tr>
               <tr> 
                 <td>&nbsp;</td>
-                <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp;<img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_WRITE_CONFIG; ?></font></td>
+                <td class="smallText">&nbsp;&nbsp;&nbsp;<img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_WRITE_CONFIG; ?></td>
                 <td><img src="images/icons/ok.gif"></td>
               </tr>
-              <tr> 
+              <tr>
                 <td>&nbsp;</td>
-                <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_ADMIN_CONFIG; ?></font></td>
+                <td class="smallText"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_ADMIN_CONFIG; ?></td>
                 <td><img src="images/icons/ok.gif"></td>
               </tr>
-                                                  <tr>
-                            <td>&nbsp;</td>
-                <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_USERS_CONFIG; ?></font></td>
-                <td><img src="images/icons/ok.gif"></td></tr>
             </table>
-            <br /></td>
-        </tr>
-      </table>
-    </td>
-    <td align="right" valign="top" style="border-top: 1px solid; border-bottom: 1px solid; border-right: 1px solid; border-color: #6D6D6D;"> 
-      <br />
+</div>
+
+<!-- body_text //-->
+    <td class="boxCenter" width="550" valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+
+<tr>
+<td>
+
+
+
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br />
-            <br />
+          <td><img src="images/title_index.gif" border="0"><br />
+
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="main">
             <br />
             <?php echo TEXT_WELCOME_FINISHED; ?></font></td>
         </tr>
@@ -107,9 +107,8 @@
         <tr>
           <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
               <tr> 
-                <td style="border-bottom: 1px solid; border-color: #CFCFCF"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><img src="images/icons/arrow-setup.jpg" width="16" height="16"> 
-                  <?php echo TITLE_SHOP_CONFIG; ?></b></font></td>
-                <td style="border-bottom: 1px solid; border-color: #CFCFCF">&nbsp;</td>
+                <td><h2 class="boxheader"><?php echo TITLE_SHOP_CONFIG; ?></td>
+                <td>&nbsp;</td>
               </tr>
             </table>
                         
@@ -121,7 +120,7 @@
               </font></p>
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr> 
-                <td align="center"><a href="<?php echo HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'index.php'; ?>" target="_blank"><img src="images/button_catalog.gif" border="0" alt="Catalog"></a></td>
+                <td align="center"><a href="<?php echo '../index.php'; ?>" target="_blank"><img src="images/button_catalog.gif" border="0" alt="Catalog"></a></td>
                 
               </tr>
             </table>
@@ -137,12 +136,39 @@
 
 
 
-<p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_FOOTER; ?><br />
-  </font></p>
-<p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> 
-  </font></p>
-</body>
-</html>
+      </td>
+</tr>
+    </table></td>
+  </tr>
+  <tr>
+  <td>
+  </td>
+  <td>
+<table border="0" cellspacing="0" cellpadding="2">
+  <tr>
+    <td align="center" class="smallText"><?php
+/*
+  The following copyright announcement is in compliance
+  to section 2c of the GNU General Public License, and
+  thus can not be removed, or can only be modified
+  appropriately.
 
+  Please leave this comment intact together with the
+  following copyright announcement.
+
+*/
+?>eCommerce Engine Copyright &copy; 2004-2007 <a href="http://www.xt-commerce.com" target="_blank">xt:Commerce GbR</a><br>
+xt:Commerce provides no warranty and is redistributable under the <a href="http://www.fsf.org/licenses/gpl.txt" target="_blank">GNU General Public License</a></td>
+  </tr>
+  <tr>
+    <td><?php echo xtc_image(DIR_WS_IMAGES . 'pixel_trans.gif', '', '1', '5'); ?></td>
+  </tr>
+  <tr>
+    <td align="center" class="smallText">Powered by <a href="http://www.xt-commerce.com" target="_blank">xt:Commerce eCommerce Engine</a></td>
+  </tr>
+</table>
+  </td>
+  </tr>
+</table>
 </body>
 </html>

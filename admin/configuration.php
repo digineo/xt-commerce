@@ -1,6 +1,6 @@
 <?php
 /* --------------------------------------------------------------
-   $Id: configuration.php 1125 2005-07-28 09:59:44Z novalis $   
+   $Id: configuration.php 229 2007-03-06 19:46:21Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -61,11 +61,11 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_configuration.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'conf.png'); ?></td>
     <td class="pageHeading"><?php echo $cfg_group['configuration_group_title']; ?></td>
   </tr>
   <tr>
-    <td class="main" valign="top">XT Configuration</td>
+    <td class="main" valign="top">xt:Commerce Configuration</td>
   </tr>
 </table> </td>
       </tr>
@@ -74,17 +74,21 @@
          <?php
          	switch ($_GET['gID']) {
          		case 21:
-         			echo AFTERBUY_URL;
          		case 19:
-         			echo '<table class="infoBoxHeading" width="100%">
-            				<tr>
+         			echo '<table width="100%">
+            				<tr class="dataTableHeadingRow">
                 			<td width="150" align="center">
-                			<a href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=21', 'NONSSL').'">Afterbuy</a>
+                			<a class="button" href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=21', 'NONSSL').'">Afterbuy</a>
                 			</td>
                 			<td width="1">|
                 			</td>
                 			<td width="150" align="center">
-                			<a href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=19', 'NONSSL').'">Google Conversion</a>
+                			<a class="button" href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=19', 'NONSSL').'">Google Conversion</a>
+                			</td>
+                			<td width="1">|
+                			</td>
+                			<td width="150" align="center">
+                			<a class="button" href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=24', 'NONSSL').'">x-check</a>
                 			</td>
                 			<td width="1">|
                 			</td>
@@ -175,7 +179,7 @@
     <td valign="top" class="dataTableContent">
     <table width="100%"  border="0" cellspacing="0" cellpadding="2">
       <tr>
-        <td style="background-color:#FCF2CF ; border: 1px solid; border-color: #CCCCCC;" class="dataTableContent">'.$value_field.'</td>
+        <td class="dataTableContentConfig">'.$value_field.'</td>
       </tr>
     </table>
     <br />'.constant(strtoupper( $configuration['configuration_key'].'_DESC')).'</td>

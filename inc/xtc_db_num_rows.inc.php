@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_db_num_rows.inc.php 1212 2005-09-12 07:46:37Z novalis $   
+   $Id: xtc_db_num_rows.inc.php 246 2007-03-08 18:14:20Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -24,6 +24,22 @@
          if (!is_array($db_query)) return mysql_num_rows($db_query);
 
       }
+      /*
+    if (!is_array($db_query)) return mysql_num_rows($db_query);
+    if (!count($db_query)) return false;
+     return count($db_query);
+     */
+  }
+  
+   function xtc_db_num_rowsNoCheck($db_query) {
+//      if (DB_CACHE=='true' && $cq) {
+         if (!count($db_query)) return false;
+     return count($db_query);
+//      } else {
+//
+//         if (!is_array($db_query)) return mysql_num_rows($db_query);
+//
+//      }
       /*
     if (!is_array($db_query)) return mysql_num_rows($db_query);
     if (!count($db_query)) return false;

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: banktransfer.php 1122 2005-07-26 10:16:27Z mz $   
+   $Id: banktransfer.php 187 2007-02-24 14:58:53Z mzanier $   
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -115,6 +115,7 @@ $this->info=MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO;
       $selection = array('id' => $this->code,
                          'module' => $this->title,
                          'description'=>$this->info,
+                         'module_cost'=>$this->payment_cost(),
       	                 'fields' => array(array('title' => MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE,
       	                                         'field' => MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_INFO),
       	                                   array('title' => MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_OWNER,
@@ -280,6 +281,100 @@ $this->info=MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO;
 
       return $error;
     }
+    
+    function admin_order($oID) {
+    	
+    	// begin modification for banktransfer
+	$banktransfer_query = xtc_db_query("select banktransfer_prz, banktransfer_status, banktransfer_owner, banktransfer_number, banktransfer_bankname, banktransfer_blz, banktransfer_fax from banktransfer where orders_id = '".xtc_db_input($oID)."'");
+	$banktransfer = xtc_db_fetch_array($banktransfer_query);
+	if (($banktransfer['banktransfer_bankname']) || ($banktransfer['banktransfer_blz']) || ($banktransfer['banktransfer_number'])) {
+
+	$html = '
+          <tr>
+            <td colspan="2">'. xtc_draw_separator('pixel_trans.gif', '1', '10').'</td>
+          </tr>
+          <tr>
+            <td class="main">'. TEXT_BANK_NAME.'</td>
+            <td class="main">'. $banktransfer['banktransfer_bankname'].'</td>
+          </tr>
+          <tr>
+            <td class="main">'. TEXT_BANK_BLZ.'</td>
+            <td class="main">'. $banktransfer['banktransfer_blz'].'</td>
+          </tr>
+          <tr>
+            <td class="main">'. TEXT_BANK_NUMBER.'</td>
+            <td class="main">'. $banktransfer['banktransfer_number'].'</td>
+          </tr>
+          <tr>
+            <td class="main">'. TEXT_BANK_OWNER.'</td>
+            <td class="main">'. $banktransfer['banktransfer_owner'].'</td>
+          </tr>';
+
+
+		if ($banktransfer['banktransfer_status'] == 0) {
+		$html.='
+          <tr>
+            <td class="main">'. TEXT_BANK_STATUS.'</td>
+            <td class="main">OK</td>
+          </tr>';
+
+
+		} else {
+		$html .='
+          <tr>
+            <td class="main">'. TEXT_BANK_STATUS.'</td>
+            <td class="main">'.$banktransfer['banktransfer_status'].'</td>
+          </tr>';
+
+
+			switch ($banktransfer['banktransfer_status']) {
+				case 1 :
+					$error_val = TEXT_BANK_ERROR_1;
+					break;
+				case 2 :
+					$error_val = TEXT_BANK_ERROR_2;
+					break;
+				case 3 :
+					$error_val = TEXT_BANK_ERROR_3;
+					break;
+				case 4 :
+					$error_val = TEXT_BANK_ERROR_4;
+					break;
+				case 5 :
+					$error_val = TEXT_BANK_ERROR_5;
+					break;
+				case 8 :
+					$error_val = TEXT_BANK_ERROR_8;
+					break;
+				case 9 :
+					$error_val = TEXT_BANK_ERROR_9;
+					break;
+			}
+		$html .='
+          <tr>
+            <td class="main">'. TEXT_BANK_ERRORCODE.'</td>
+            <td class="main">'. $error_val.'</td>
+          </tr>
+          <tr>
+            <td class="main">'. TEXT_BANK_PRZ.'</td>
+            <td class="main">'. $banktransfer['banktransfer_prz'].'</td>
+          </tr>';
+
+
+		}
+	}
+	if ($banktransfer['banktransfer_fax']) {
+	$html.='
+          <tr>
+            <td class="main">'. TEXT_BANK_FAX.'</td>
+            <td class="main">'. $banktransfer['banktransfer_fax'].'</td>
+          </tr>';
+
+
+	}
+	// end modification for banktransfer
+    echo $html;	
+    }
 
     function check() {
       if (!isset($this->_check)) {
@@ -288,6 +383,21 @@ $this->info=MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO;
       }
       return $this->_check;
     }
+
+	function payment_cost() {
+		global $order;
+		$cost = constant(MODULE_PAYMENT_.strtoupper($this->code)._COST);
+
+        	$cost_table = split("[:,]" , $cost);
+        	for ($i=0; $i<sizeof($cost_table); $i+=2) {
+          	if ($order->info['total'] <= $cost_table[$i]) {
+            	$percentage = $cost_table[$i+1];
+            	break;
+          	}
+        	}
+		if ($percentage>0)
+			return '+'.$percentage.'% '.TEXT_PAYMENT_FEE;
+	}
 
     function install() {
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_STATUS', 'True', '6', '1', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
@@ -298,6 +408,7 @@ $this->info=MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO;
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_FAX_CONFIRMATION', 'false',  '6', '2', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_DATABASE_BLZ', 'false', '6', '0', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_URL_NOTE', 'fax.html', '6', '0', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_COST', '', '6', '0', now())");
       xtc_db_query("CREATE TABLE IF NOT EXISTS banktransfer (orders_id int(11) NOT NULL default '0', banktransfer_owner varchar(64) default NULL, banktransfer_number varchar(24) default NULL, banktransfer_bankname varchar(255) default NULL, banktransfer_blz varchar(8) default NULL, banktransfer_status int(11) default NULL, banktransfer_prz char(2) default NULL, banktransfer_fax char(2) default NULL, KEY orders_id(orders_id))");
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER', '0',  '6', '0', now())");
     }
@@ -308,7 +419,7 @@ $this->info=MODULE_PAYMENT_BANKTRANSFER_TEXT_INFO;
     }
 
     function keys() {
-      return array('MODULE_PAYMENT_BANKTRANSFER_STATUS','MODULE_PAYMENT_BANKTRANSFER_ALLOWED', 'MODULE_PAYMENT_BANKTRANSFER_ZONE', 'MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID', 'MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER', 'MODULE_PAYMENT_BANKTRANSFER_DATABASE_BLZ', 'MODULE_PAYMENT_BANKTRANSFER_FAX_CONFIRMATION', 'MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER', 'MODULE_PAYMENT_BANKTRANSFER_URL_NOTE');
+      return array('MODULE_PAYMENT_BANKTRANSFER_STATUS','MODULE_PAYMENT_BANKTRANSFER_ALLOWED', 'MODULE_PAYMENT_BANKTRANSFER_ZONE', 'MODULE_PAYMENT_BANKTRANSFER_ORDER_STATUS_ID', 'MODULE_PAYMENT_BANKTRANSFER_SORT_ORDER', 'MODULE_PAYMENT_BANKTRANSFER_DATABASE_BLZ', 'MODULE_PAYMENT_BANKTRANSFER_FAX_CONFIRMATION', 'MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER', 'MODULE_PAYMENT_BANKTRANSFER_URL_NOTE','MODULE_PAYMENT_BANKTRANSFER_COST');
     }
   }
 ?>

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: xtc_check_agent.inc.php 974 2005-06-07 12:40:29Z mz $
+   $Id: xtc_check_agent.inc.php 88 2007-01-15 16:37:55Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -18,7 +18,7 @@
 
 function xtc_check_agent()
 {
-if (CHECK_CLIENT_AGENT=='true') {
+
    $Robots = array (
    "antibot",
    "appie",
@@ -334,9 +334,6 @@ if (CHECK_CLIENT_AGENT=='true') {
 
    }
    return 0;
-} else {
-return 0;
-}
 
 }
 

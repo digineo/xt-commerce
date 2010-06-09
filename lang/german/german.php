@@ -1,11 +1,11 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: german.php 1308 2005-10-15 14:22:18Z hhgag $
+   $Id: german.php 302 2007-03-30 08:25:49Z mzanier $
 
-   XT-Commerce - community made shopping
-   http://www.xt-commerce.com
+   xt:Commerce - community made shopping
+   http://www.xt-Commerce.com
 
-   Copyright (c) 2003 XT-Commerce
+   Copyright (c) 2003 xt:Commerce
    -----------------------------------------------------------------------------------------
    based on: 
    (c) 2000-2001 The Exchange Project  (earlier name of osCommerce)
@@ -42,9 +42,6 @@ function xtc_date_raw($date, $reverse = false) {
     return substr($date, 6, 4) . substr($date, 3, 2) . substr($date, 0, 2);
   }
 }
-
-// if USE_DEFAULT_LANGUAGE_CURRENCY is true, use the following currency, instead of the applications default currency (used when changing language)
-define('LANGUAGE_CURRENCY', 'EUR');
 
 define('MALE', 'Herr');
 define('FEMALE', 'Frau');
@@ -233,9 +230,9 @@ define('TEXT_UNKNOWN_TAX_RATE', 'Unbekannter Steuersatz');
  */
 
 define('WARNING_INSTALL_DIRECTORY_EXISTS', 'Warnung: Das Installationverzeichnis ist noch vorhanden auf: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/xtc_installer. Bitte l&ouml;schen Sie das Verzeichnis aus Gr&uuml;nden der Sicherheit!');
-define('WARNING_CONFIG_FILE_WRITEABLE', 'Warnung: XT-Commerce kann in die Konfigurationsdatei schreiben: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php. Das stellt ein m&ouml;gliches Sicherheitsrisiko dar - bitte korrigieren Sie die Benutzerberechtigungen zu dieser Datei!');
+define('WARNING_CONFIG_FILE_WRITEABLE', 'Warnung: xt:Commerce kann in die Konfigurationsdatei schreiben: ' . dirname($HTTP_SERVER_VARS['SCRIPT_FILENAME']) . '/includes/configure.php. Das stellt ein m&ouml;gliches Sicherheitsrisiko dar - bitte korrigieren Sie die Benutzerberechtigungen zu dieser Datei!');
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Warnung: Das Verzeichnis f&uuml;r die Sessions existiert nicht: ' . xtc_session_save_path() . '. Die Sessions werden nicht funktionieren bis das Verzeichnis erstellt wurde!');
-define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warnung: XT-Commerce kann nicht in das Sessions Verzeichnis schreiben: ' . xtc_session_save_path() . '. Die Sessions werden nicht funktionieren bis die richtigen Benutzerberechtigungen gesetzt wurden!');
+define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warnung: xt:Commerce kann nicht in das Sessions Verzeichnis schreiben: ' . xtc_session_save_path() . '. Die Sessions werden nicht funktionieren bis die richtigen Benutzerberechtigungen gesetzt wurden!');
 define('WARNING_SESSION_AUTO_START', 'Warnung: session.auto_start ist aktiviert (enabled) - Bitte deaktivieren (disabled) Sie dieses PHP Feature in der php.ini und starten Sie den WEB-Server neu!');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warnung: Das Verzeichnis f&uuml;r den Artikel Download existiert nicht: ' . DIR_FS_DOWNLOAD . '. Diese Funktion wird nicht funktionieren bis das Verzeichnis erstellt wurde!');
 
@@ -454,4 +451,12 @@ define('SHIPPING_COSTS','Versandkosten');
 // changes 3.0.4 SP2
 define('SHIPPING_TIME','Lieferzeit: ');
 define('MORE_INFO','[Mehr]');
+
+// changes 3.0.4 SP2.2
+define('ENTRY_PRIVACY_ERROR','Bitte akzeptieren Sie unsere Datenschutzrichtlinien!');
+define('TEXT_PAYMENT_FEE','Zahlungsgeb&uuml;hr');
+
+define('_MODULE_INVALID_SHIPPING_ZONE', 'Es ist leider kein Versand in dieses Land m&ouml;glich');
+define('_MODULE_UNDEFINED_SHIPPING_RATE', 'Die Versandkosten k&ouml;nnen im Moment nicht errechnet werden');
+define('WARNING_BETA','Warnung: Dies ist eine BETA Version von xt:Commerce 3.0.4 SP2.2 - nur f&uuml;r TESTZWECKE!, bitte melden Sie Bugs in unserem Bugtracker http://www.xt-commerce.com/bugs/');
 ?>

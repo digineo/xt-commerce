@@ -1,7 +1,7 @@
 <?php
 
 /* --------------------------------------------------------------
-   $Id: orders.php 1189 2005-08-28 15:27:00Z hhgag $
+   $Id: orders.php 222 2007-03-05 10:39:57Z mzanier $
 
    XT-Commerce - community made shopping
    http://www.xt-commerce.com
@@ -111,7 +111,7 @@ switch ($_GET['action']) {
 				$html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.html');
 				$txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/admin/mail/'.$order->info['language'].'/change_order_mail.txt');
 
-				xtc_php_mail(EMAIL_BILLING_ADDRESS, EMAIL_BILLING_NAME, $check_status['customers_email_address'], $check_status['customers_name'], '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', EMAIL_BILLING_SUBJECT, $html_mail, $txt_mail);
+				xtc_php_mail(EMAIL_BILLING_ADDRESS, EMAIL_BILLING_NAME, $check_status['customers_email_address'], $check_status['customers_name'], '', EMAIL_BILLING_REPLY_ADDRESS, EMAIL_BILLING_REPLY_ADDRESS_NAME, '', '', EMAIL_BILLING_SUBJECT, $html_mail, $txt_mail,$order->info['language']);
 				$customer_notified = '1';
 			}
 
@@ -195,11 +195,11 @@ if (($_GET['action'] == 'edit') && ($order_exists)) {
       <td width="100%">
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr> 
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_customers.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'users.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE . ' Nr : ' . $oID . ' - ' . $order->info['date_purchased'] ; ?></td>
   </tr>
   <tr> 
-    <td class="main" valign="top">XT Customers</td>
+    <td class="main" valign="top">xt:Commerce Customers</td>
   </tr>
 </table>
  <?php echo '<a class="button" href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('action'))) . '">' . BUTTON_BACK . '</a>'; ?>
@@ -327,96 +327,14 @@ if (($_GET['action'] == 'edit') && ($order_exists)) {
 
 	}
 
-	// begin modification for banktransfer
-	$banktransfer_query = xtc_db_query("select banktransfer_prz, banktransfer_status, banktransfer_owner, banktransfer_number, banktransfer_bankname, banktransfer_blz, banktransfer_fax from banktransfer where orders_id = '".xtc_db_input($_GET['oID'])."'");
-	$banktransfer = xtc_db_fetch_array($banktransfer_query);
-	if (($banktransfer['banktransfer_bankname']) || ($banktransfer['banktransfer_blz']) || ($banktransfer['banktransfer_number'])) {
-?>
-          <tr>
-            <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_NAME; ?></td>
-            <td class="main"><?php echo $banktransfer['banktransfer_bankname']; ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_BLZ; ?></td>
-            <td class="main"><?php echo $banktransfer['banktransfer_blz']; ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_NUMBER; ?></td>
-            <td class="main"><?php echo $banktransfer['banktransfer_number']; ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_OWNER; ?></td>
-            <td class="main"><?php echo $banktransfer['banktransfer_owner']; ?></td>
-          </tr>
-<?php
-
-		if ($banktransfer['banktransfer_status'] == 0) {
-?>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_STATUS; ?></td>
-            <td class="main"><?php echo "OK"; ?></td>
-          </tr>
-<?php
-
-		} else {
-?>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_STATUS; ?></td>
-            <td class="main"><?php echo $banktransfer['banktransfer_status']; ?></td>
-          </tr>
-<?php
-
-			switch ($banktransfer['banktransfer_status']) {
-				case 1 :
-					$error_val = TEXT_BANK_ERROR_1;
-					break;
-				case 2 :
-					$error_val = TEXT_BANK_ERROR_2;
-					break;
-				case 3 :
-					$error_val = TEXT_BANK_ERROR_3;
-					break;
-				case 4 :
-					$error_val = TEXT_BANK_ERROR_4;
-					break;
-				case 5 :
-					$error_val = TEXT_BANK_ERROR_5;
-					break;
-				case 8 :
-					$error_val = TEXT_BANK_ERROR_8;
-					break;
-				case 9 :
-					$error_val = TEXT_BANK_ERROR_9;
-					break;
-			}
-?>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_ERRORCODE; ?></td>
-            <td class="main"><?php echo $error_val; ?></td>
-          </tr>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_PRZ; ?></td>
-            <td class="main"><?php echo $banktransfer['banktransfer_prz']; ?></td>
-          </tr>
-<?php
-
-		}
-	}
-	if ($banktransfer['banktransfer_fax']) {
-?>
-          <tr>
-            <td class="main"><?php echo TEXT_BANK_FAX; ?></td>
-            <td class="main"><?php echo $banktransfer['banktransfer_fax']; ?></td>
-          </tr>
-<?php
-
-	}
-	// end modification for banktransfer
-
-if ($order->info['payment_method'] == 'luupws') include( DIR_FS_CATALOG.DIR_WS_INCLUDES.'nusoap/luup_orders.php' );
+// payment adminvie
+if (file_exists(DIR_FS_CATALOG.DIR_WS_MODULES.'payment/'.$order->info['payment_method'].'.php')) {
+include(DIR_FS_CATALOG.DIR_WS_MODULES.'payment/'.$order->info['payment_method'].'.php');
+include(DIR_FS_CATALOG.'lang/'.$order->info['language'].'/modules/payment/'.$order->info['payment_method'].'.php');
+$class = $order->info['payment_method'];
+$payment = new $class();
+$payment->admin_order($_GET['oID']);
+}
 
 ?>
         </table></td>
@@ -467,7 +385,7 @@ if ($order->info['payment_method'] == 'luupws') include( DIR_FS_CATALOG.DIR_WS_I
 		echo '            </td>'."\n".'            <td class="dataTableContent" valign="top">';
 
 		if ($order->products[$i]['model'] != '') {
-			echo $order->products[$i]['model'];
+			echo $order->products[$i]['model'].'<br />';
 		} else {
 			echo '<br />';
 		}
@@ -606,7 +524,7 @@ elseif ($_GET['action'] == 'custom_action') {
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr> 
-    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_customers.gif'); ?></td>
+    <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'users.png'); ?></td>
     <td class="pageHeading"><?php echo HEADING_TITLE; ?></td>
     <td class="pageHeading" align="right">
               <?php echo xtc_draw_form('orders', FILENAME_ORDERS, '', 'get'); ?>
@@ -615,7 +533,7 @@ elseif ($_GET['action'] == 'custom_action') {
 </td>
   </tr>
   <tr> 
-    <td class="main" valign="top">XT Customers</td>
+    <td class="main" valign="top">xt:Commerce Customers</td>
     <td class="main" valign="top" align="right"><?php echo xtc_draw_form('status', FILENAME_ORDERS, '', 'get'); ?>
                 <?php echo HEADING_TITLE_STATUS . ' ' . xtc_draw_pull_down_menu('status', array_merge(array(array('id' => '', 'text' => TEXT_ALL_ORDERS)),array(array('id' => '0', 'text' => TEXT_VALIDATING)), $orders_statuses), '', 'onChange="this.form.submit();"').xtc_draw_hidden_field(xtc_session_name(), xtc_session_id()); ?>
               </form></td>
@@ -646,7 +564,7 @@ elseif ($_GET['action'] == 'custom_action') {
 
 	if ($_GET['cID']) {
 		$cID = xtc_db_prepare_input($_GET['cID']);
-		$orders_query_raw = "select o.orders_id, o.afterbuy_success, o.afterbuy_id, o.customers_name, o.customers_id, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, o.orders_status, s.orders_status_name, ot.text as order_total from ".TABLE_ORDERS." o left join ".TABLE_ORDERS_TOTAL." ot on (o.orders_id = ot.orders_id), ".TABLE_ORDERS_STATUS." s where o.customers_id = '".xtc_db_input($cID)."' and (o.orders_status = s.orders_status_id and s.language_id = '".$_SESSION['languages_id']."' and ot.class = 'ot_total') or (o.orders_status = '0' and ot.class = 'ot_total' and  s.orders_status_id = '1' and s.language_id = '".$_SESSION['languages_id']."') order by orders_id DESC";
+		$orders_query_raw = "select o.orders_id, o.afterbuy_success, o.afterbuy_id, o.customers_name, o.customers_id, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, o.orders_status, s.orders_status_name, ot.text as order_total from ".TABLE_ORDERS." o left join ".TABLE_ORDERS_TOTAL." ot on (o.orders_id = ot.orders_id), ".TABLE_ORDERS_STATUS." s where o.customers_id = '".xtc_db_input($cID)."' and ((o.orders_status = s.orders_status_id) or (o.orders_status = '0' and  s.orders_status_id = '1')) and ot.class = 'ot_total' and s.language_id = '".$_SESSION['languages_id']."' order by orders_id DESC";
 	}
 	elseif ($_GET['status']=='0') {
 			$orders_query_raw = "select o.orders_id, o.afterbuy_success, o.afterbuy_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, o.orders_status, ot.text as order_total from ".TABLE_ORDERS." o left join ".TABLE_ORDERS_TOTAL." ot on (o.orders_id = ot.orders_id) where o.orders_status = '0' and ot.class = 'ot_total' order by o.orders_id DESC";
@@ -670,7 +588,7 @@ elseif ($_GET['action'] == 'custom_action') {
 			echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'hand\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\''.xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array ('oID')).'oID='.$orders['orders_id']).'\'">'."\n";
 		}
 ?>
-                <td class="dataTableContent"><?php echo '<a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders['orders_id'] . '&action=edit') . '">' . xtc_image(DIR_WS_ICONS . 'preview.gif', ICON_PREVIEW) . '</a>&nbsp;' . $orders['customers_name']; ?></td>
+                <td class="dataTableContent"><?php echo '<a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $orders['orders_id'] . '&action=edit') . '">' . xtc_image(DIR_WS_ICONS . 'zoom.png', ICON_PREVIEW) . '</a>&nbsp;' . $orders['customers_name']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo $orders['orders_id']; ?></td>
                 <td class="dataTableContent" align="right"><?php echo strip_tags($orders['order_total']); ?></td>
                 <td class="dataTableContent" align="center"><?php echo xtc_datetime_short($orders['date_purchased']); ?></td>
