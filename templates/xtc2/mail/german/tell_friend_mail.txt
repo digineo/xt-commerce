@@ -1,0 +1,4 @@
+
+{$message}
+
+Um das Produkt anzusehen, klicken Sie bitte auf den Link oder kopieren diesen und fügen Sie ihn in der Adress-Zeile Ihres Browsers ein:{$PRODUCTS_LINK}

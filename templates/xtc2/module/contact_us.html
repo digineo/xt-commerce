@@ -1,0 +1,62 @@
+{config_load file="$language/lang_$language.conf" section="contact_us"}
+<font size="3" face="Verdana, Arial, Helvetica, sans-serif"><strong>{$CONTACT_HEADING}</strong></font><br>
+<br>
+{if $error_message!=''}
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="main" style="border: 1px solid; border-color: #ff0000;" bgcolor="#FFCCCC"><div align="center">{$error_message}</div></td>
+  </tr>
+</table>
+<br>
+{/if}
+
+{if $success!='1'}
+{$FORM_ACTION}
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+    <td class="main">{$CONTACT_CONTENT}</td>
+  </tr>
+  <tr> 
+    <td><div align="right"><br>
+      </div></td>
+  </tr>
+  <tr> 
+    <td><table width="100%" border="0" cellspacing="2" cellpadding="0">
+        <tr> 
+          <td class="main" width="150">{#text_name#}</td>
+          <td>{$INPUT_NAME}</td>
+        </tr>
+        <tr> 
+          <td class="main">{#text_email#}</td>
+          <td>{$INPUT_EMAIL}</td>
+        </tr>
+        <tr>
+          <td class="main" valign="top">{#text_message#}</td>
+          <td>{$INPUT_TEXT}</td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><div align="right">{$BUTTON_SUBMIT}</div></td>
+  </tr>
+</table>
+</form>
+{else}
+<table width="100%" border="0" cellspacing="0" cellpadding="5">
+  <tr> 
+    <td><img src="{$tpl_path}img/checkout_success.gif"></td>
+    <td class="main"valign="top"><br>
+      {#text_success#}<br> <br>
+      <br> <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td><div align="right"><br>
+              {$BUTTON_CONTINUE}</div></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+{/if}

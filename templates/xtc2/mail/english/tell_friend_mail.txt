@@ -1,0 +1,4 @@
+
+{$message}
+
+To view the product, click on following Link:{$PRODUCTS_LINK}

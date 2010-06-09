@@ -1,0 +1,35 @@
+{if $options!=''}
+
+<table width="100%"  border="0" cellspacing="0" cellpadding="0">
+    {foreach name=outer item=options_data from=$options} 
+	  <tr>
+	    <td style="border-bottom: 1px solid;" colspan="4"><font color="#666666" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>{$options_data.NAME}:</strong></font></td>
+  </tr>
+  {php}
+  $count=0;
+  {/php}
+	{foreach key=key_data item=item_data from=$options_data.DATA}
+    <tr bgcolor="{cycle values="#eeeeee,#d0d0d0"}">
+	<td width="5" >
+      {php}
+	  $count++;
+	  if ($count==1) { 
+	  {/php}
+	  <input type="radio" name="id[{$options_data.ID}]" value="{$item_data.ID}" checked>
+	  {php}
+	  } else {
+	  {/php}
+	  <input type="radio" name="id[{$options_data.ID}]" value="{$item_data.ID}">
+	  {php}
+	  }
+	  {/php}
+	  </td>
+      <td width="200"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">
+      {$item_data.TEXT}</font><br><font size="1" face="Verdana, Arial, Helvetica, sans-serif">ArtNr.: {$item_data.MODEL}</font></td>
+      <td>&nbsp;</td>
+      <td width="140"><div align="right"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">{if $item_data.PRICE}{$item_data.PREFIX}{$item_data.PRICE}{/if}</font></div></td>
+</tr>
+	{/foreach}
+	{/foreach} 
+</table>
+{/if}

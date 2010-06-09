@@ -1,0 +1,49 @@
+{config_load file="$language/lang_$language.conf" section="newsletter"} <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong>{#heading_title#}</strong></font> 
+<table width="100%" border="0" cellpadding="0" cellspacing="0" background="{$tpl_path}img/product_box_background.jpg" style="border: 1px solid rgb(153,153,153)">
+  <tr> 
+    <td colspan="3"> <table width="100%" border="0" cellpadding="0" cellspacing="4" background="{$tpl_path}img/product_box_background.jpg">
+        <tr> 
+          <td height="176" valign=top bgcolor=#ffffff> {$FORM_ACTION}
+            <table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="#FFFFFF">
+              <tr> 
+                <td colspan="7" align="left" class=small><b>{$info_message}</b></td>
+              </tr>
+              <tr> 
+                <td width="5%" align="right" valign="top" nowrap class=small> 
+                  <img src="{$tpl_path}img/arrow_green.gif"></td>
+                <td align="right" nowrap class=small>&nbsp;</td>
+                <td colspan="2" align="right" nowrap class=small>{$CHECK_INP}{#text_in#}</td>
+                <td align="right" nowrap class=small>&nbsp;</td>
+                <td colspan="2" nowrap class=small>{$CHECK_DEL}{#text_out#}</td>
+              </tr>
+              <tr> 
+                <td colspan="2" rowspan="4" align="right" valign="top"> </td>
+                <td valign="top"><strong>{#text_sec_code#}</strong></td>
+                <td colspan="2" rowspan="2" valign="top"><strong>{#text_sec_code#}</strong><br> 
+                  <font size="1">{#text_inp_code#}</font></td>
+                <td colspan="2" rowspan="2" valign="top"><strong>{#text_email#}</strong><br> 
+                  <font size="1">{#text_inp_code#}</font></td>
+              </tr>
+              <tr> 
+                <td rowspan="2" align="center" valign="middle">{$VVIMG}</td>
+              </tr>
+              <tr valign="top"> 
+                <td width="3%" valign="bottom"><img src="{$tpl_path}img/arrow_south_east.gif"></td>
+                <td valign="bottom">{$INPUT_CODE}</td>
+                <td width="3%" valign="bottom"><img src="{$tpl_path}img/arrow_south_east.gif"></td>
+                <td valign="bottom">{$INPUT_EMAIL}</td>
+              </tr>
+              <tr valign="top"> 
+                <td colspan="5" valign="top">{#text_continue#}</td>
+              </tr>
+              <tr> 
+                <td colspan="6" align="right" valign="top">&nbsp;</td>
+                <td valign="middle"><span class=small>{$BUTTON_SEND}</span><span class=small><strong> 
+                  </strong></span><span class=small><strong>{#text_to_step2#}</strong></span></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<p>&nbsp;</p>

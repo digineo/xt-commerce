@@ -1,0 +1,23 @@
+                                     CHANGELOG
+###################################################################################
+
+  XT-Commerce v3.0.1
+  Release Datum: 14.09.2004
+  
+  ------------------------------------------------------------------------
+
+
+
+3.0.1 (14.09.2004)
+*gutschein/kupon wurde bei account aktivierung angehängt, obwohl deaktiviert
+*falsche umrechnung der versandkosten bei checkout mit meheren währungen
+*fehlerhafte steuerberechnung der versandkosten bei auswahl des versandmodules
+*fehlerhafter WYSIWYG editor (wurde gegen mozilla kombatiplen WYSIWYG editor ausgetauscht)
+*typo bei beschreibung für digitale download artikel
+*CAO-Faktura schnittstelle hinzugefügt
+*herstellerbox wurde nicht angezeigt
+*bugfix in FSK18 system
+*bugfix im imageproccessing modul
+
+  
+  
