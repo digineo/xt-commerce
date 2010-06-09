@@ -50,10 +50,8 @@
    $prev_id=$actual_key-1;
    $prev_link=xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $p_data[$prev_id]['pID']);
     // check if prev id = first
-    if ($prev_id!=0) {
-    $first_link=xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $p_data[0]['pID']);
+    if ($prev_id!=0) $first_link=xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $p_data[0]['pID']);
     }
-   }
 
    // check if key = last
    if ($actual_key==(sizeof($p_data)-1)) {
@@ -62,9 +60,8 @@
    $next_id=$actual_key+1;
    $next_link=xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' .$p_data[$next_id]['pID']);
     // check if next id = last
-    if ($next_id!=(sizeof($p_data)-1)) {
-     $last_link=xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' .$p_data[(sizeof($p_data)-1)]['pID']);
-    }
+    if ($next_id!=(sizeof($p_data)-1)) $last_link=xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' .$p_data[(sizeof($p_data)-1)]['pID']);
+    
    }
    $module_smarty->assign('FIRST',$first_link);
    $module_smarty->assign('PREVIOUS',$prev_link);

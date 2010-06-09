@@ -33,16 +33,16 @@
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_FAX', 'Einzugserm&auml;chtigung wird per Fax best&auml;tigt');
 
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR', '<font color="#FF0000">FEHLER: </font>');
-  define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_1', 'Kontonummer und BLZ stimmen nicht &uuml;berein!<br>Bitte &uuml;berpr&uuml;fen Sie Ihre Angaben nochmals.');
+  define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_1', 'Kontonummer und BLZ stimmen nicht &uuml;berein!<br />Bitte &uuml;berpr&uuml;fen Sie Ihre Angaben nochmals.');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_2', 'Für diese Kontonummer ist kein Pr&uuml;fziffernverfahren definiert!');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_3', 'Kontonummer nicht pr&uuml;fbar!');
-  define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_4', 'Kontonummer nicht pr&uuml;fbar!<br>Bitte &uuml;berpr&uuml;fen Sie Ihre Angaben nochmals.');
-  define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_5', 'Bankleitzahl nicht gefunden!<br>Bitte &uuml;berpr&uuml;fen Sie Ihre Angaben nochmals.');
+  define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_4', 'Kontonummer nicht pr&uuml;fbar!<br />Bitte &uuml;berpr&uuml;fen Sie Ihre Angaben nochmals.');
+  define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_5', 'Bankleitzahl nicht gefunden!<br />Bitte &uuml;berpr&uuml;fen Sie Ihre Angaben nochmals.');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_8', 'Fehler bei der Bankleitzahl oder keine Bankleitzahl angegeben!');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_BANK_ERROR_9', 'Keine Kontonummer angegeben!');
 
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE', 'Hinweis:');
-  define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE2', 'Wenn Sie aus Sicherheitsbedenken keine Bankdaten über das Internet<br>&uuml;bertragen wollen, k&ouml;nnen Sie sich unser ');
+  define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE2', 'Wenn Sie aus Sicherheitsbedenken keine Bankdaten über das Internet<br />&uuml;bertragen wollen, k&ouml;nnen Sie sich unser ');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE3', 'Faxformular');
   define('MODULE_PAYMENT_BANKTRANSFER_TEXT_NOTE4', ' herunterladen und uns ausgef&uuml;llt zusenden.');
 

@@ -50,7 +50,7 @@
 <div align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="FFAF00">xtc:</font><font color="#999999">Install</font></b></font></div></td>
         </tr>
         <tr> 
-          <td bgcolor="F3F3F3" ><br> 
+          <td bgcolor="F3F3F3" ><br /> 
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
                 <td width="10">&nbsp;</td>
@@ -79,17 +79,17 @@
                 <td>&nbsp;</td>
               </tr>
             </table>
-            <br></td>
+            <br /></td>
         </tr>
       </table>
     </td>
     <td align="right" valign="top" style="border-top: 1px solid; border-bottom: 1px solid; border-right: 1px solid; border-color: #6D6D6D;"> 
-      <br>
+      <br />
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br>
-            <br>
-            <br>
+          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br />
+            <br />
+            <br />
             <?php echo TEXT_WELCOME_STEP4; ?></font></td>
         </tr>
       </table>
@@ -165,12 +165,12 @@
 ?>
             </font>
             <form name="install" action="install_step5.php" method="post">
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_VALUES; ?><br>
-                <br>
-                includes/configure.php<br>
-                includes/configure.org.php<br>
-                admin/includes/configure.php<br>
-                admin/includes/configure.org.php<br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_VALUES; ?><br />
+                <br />
+                includes/configure.php<br />
+                includes/configure.org.php<br />
+                admin/includes/configure.php<br />
+                admin/includes/configure.org.php<br />
               </p>
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr> 
@@ -179,29 +179,29 @@
                   <td style="border-bottom: 1px solid; border-color: #CFCFCF">&nbsp;</td>
                 </tr>
               </table>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_HTTP; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('HTTP_SERVER', 'http://' . getenv('HTTP_HOST')); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_HTTP; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('HTTP_SERVER', 'http://' . getenv('HTTP_HOST')); ?><br />
                 <?php echo TEXT_HTTP_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_HTTPS; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('HTTPS_SERVER', 'https://' . getenv('HTTP_HOST')); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_HTTPS; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('HTTPS_SERVER', 'https://' . getenv('HTTP_HOST')); ?><br />
                 <?php echo TEXT_HTTPS_LONG; ?></font></p>
               <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo xtc_draw_checkbox_field_installer('ENABLE_SSL', 'true'); ?> 
-                <b><?php echo TEXT_SSL; ?>s</b><br>
+                <b><?php echo TEXT_SSL; ?>s</b><br />
                <?php echo TEXT_SSL_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ROOT; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_FS_DOCUMENT_ROOT'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ROOT; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_FS_DOCUMENT_ROOT'); ?><br />
                 <?php echo TEXT_WS_ROOT_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_XTC; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_FS_CATALOG'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_XTC; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_FS_CATALOG'); ?><br />
                 <?php echo TEXT_WS_XTC_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ADMIN; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_FS_ADMIN'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ADMIN; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_FS_ADMIN'); ?><br />
                 <?php echo TEXT_WS_ADMIN_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_CATALOG; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_WS_CATALOG'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_CATALOG; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_WS_CATALOG'); ?><br />
                 <?php echo TEXT_WS_CATALOG_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ADMINTOOL; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_WS_ADMIN'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ADMINTOOL; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_WS_ADMIN'); ?><br />
                 <?php echo TEXT_WS_ADMINTOOL_LONG; ?></font></p>
               <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr> 
@@ -210,25 +210,25 @@
                   <td style="border-bottom: 1px solid; border-color: #CFCFCF">&nbsp;</td>
                 </tr>
               </table>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_DATABASE_SERVER; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DB_SERVER'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_DATABASE_SERVER; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DB_SERVER'); ?><br />
                 <?php echo TEXT_DATABASE_SERVER_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_USERNAME; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DB_SERVER_USERNAME'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_USERNAME; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DB_SERVER_USERNAME'); ?><br />
                 <?php echo TEXT_USERNAME_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_PASSWORD; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DB_SERVER_PASSWORD'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_PASSWORD; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DB_SERVER_PASSWORD'); ?><br />
                 <?php echo TEXT_PASSWORD_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_DATABASE; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DB_DATABASE'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_DATABASE; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DB_DATABASE'); ?><br />
                 <?php echo TEXT_DATABASE_LONG; ?></font></p>
               <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo xtc_draw_checkbox_field_installer('USE_PCONNECT', 'true'); ?> 
-                <b><?php echo TEXT_PERSIST; ?></b><br>
+                <b><?php echo TEXT_PERSIST; ?></b><br />
                 <?php echo TEXT_PERSIST_LONG; ?></font></p>
               <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo xtc_draw_radio_field_installer('STORE_SESSIONS', 'files', true); ?> 
-                <b><?php echo TEXT_SESS_FILE; ?></b><br>
+                <b><?php echo TEXT_SESS_FILE; ?></b><br />
                 <?php echo xtc_draw_radio_field_installer('STORE_SESSIONS', 'mysql'); ?> 
-                <b><?php echo TEXT_SESS_DB; ?></b><br>
+                <b><?php echo TEXT_SESS_DB; ?></b><br />
                 <?php echo TEXT_SESS_LONG; ?></font></p>
 
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -254,7 +254,7 @@
 
 
 
-<p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_FOOTER; ?><br>
+<p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_FOOTER; ?><br />
   </font></p>
 <p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> 
   </font></p>

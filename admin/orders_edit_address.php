@@ -25,112 +25,131 @@
 
 <!-- Adressbearbeitung Anfang //-->
 <?php if ($_GET['edit_action']=='address'){?>
-<br>
+<br />
 <?php
-  $address_query = xtc_db_query("select * from " . TABLE_ORDERS . " where orders_id = '". $_GET['oID'] ."' ");
-  $address = xtc_db_fetch_array($address_query);
 
-echo xtc_draw_form('adress_edit', FILENAME_ORDERS_EDIT, 'action=address_edit', 'post');
+   require(DIR_WS_CLASSES . 'order.php');
+   $order = new order($oID);
+
+ echo xtc_draw_form('adress_edit', FILENAME_ORDERS_EDIT, 'action=address_edit', 'post');
  echo xtc_draw_hidden_field('oID', $_GET['oID']);
- echo xtc_draw_hidden_field('cID', $address['customers_id']);
+ echo xtc_draw_hidden_field('cID', $order->customer['ID']);
 ?>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <tr class="dataTableHeadingRow">
-<td class="dataTableHeadingContent" width="33%" align="left"><?php echo TEXT_INVOICE_ADDRESS;?></td>
-<td class="dataTableHeadingContent" width="33%" align="left"><?php echo TEXT_SHIPPING_ADDRESS;?></td>
-<td class="dataTableHeadingContent" width="33%" align="left"><?php echo TEXT_BILLING_ADDRESS;?></td>
+<td class="dataTableHeadingContent" width="10%" align="left">&nbsp;</td>
+<td class="dataTableHeadingContent" width="30%" align="left"><?php echo TEXT_INVOICE_ADDRESS;?></td>
+<td class="dataTableHeadingContent" width="30%" align="left"><?php echo TEXT_SHIPPING_ADDRESS;?></td>
+<td class="dataTableHeadingContent" width="30%" align="left"><?php echo TEXT_BILLING_ADDRESS;?></td>
 </tr>
 
 <tr class="dataTableRow">
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('customers_company', $address[customers_company]);?>
+<?php echo TEXT_COMPANY;?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('delivery_company', $address[delivery_company]);?>
+<?php echo xtc_draw_input_field('customers_company', $order->customer['company']);?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('billing_company', $address[billing_company]);?>
-</td>
-</tr>
-
-<tr class="dataTableRow">
-<td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('customers_name', $address[customers_name]);?>
+<?php echo xtc_draw_input_field('delivery_company', $order->delivery['company']);?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('delivery_name', $address[delivery_name]);?>
-</td>
-<td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('billing_name', $address[billing_name]);?>
+<?php echo xtc_draw_input_field('billing_company', $order->billing['company']);?>
 </td>
 </tr>
 
 <tr class="dataTableRow">
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('customers_street_address', $address[customers_street_address]);?>
+<?php echo TEXT_NAME;?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('delivery_street_address', $address[delivery_street_address]);?>
+<?php echo xtc_draw_input_field('customers_name', $order->customer['name']);?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('billing_street_address', $address[billing_street_address]);?>
+<?php echo xtc_draw_input_field('delivery_name', $order->delivery['name']);?>
+</td>
+<td class="dataTableContent" align="left">
+<?php echo xtc_draw_input_field('billing_name', $order->billing['name']);?>
 </td>
 </tr>
 
 <tr class="dataTableRow">
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('customers_postcode', $address[customers_postcode]);?>
+<?php echo TEXT_STREET;?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('delivery_postcode', $address[delivery_postcode]);?>
+<?php echo xtc_draw_input_field('customers_street_address', $order->customer['street_address']);?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('billing_postcode', $address[billing_postcode]);?>
+<?php echo xtc_draw_input_field('delivery_street_address', $order->delivery['street_address']);?>
+</td>
+<td class="dataTableContent" align="left">
+<?php echo xtc_draw_input_field('billing_street_address', $order->billing['street_address']);?>
 </td>
 </tr>
 
 <tr class="dataTableRow">
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('customers_city', $address[customers_city]);?>
+<?php echo TEXT_ZIP;?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('delivery_city', $address[delivery_city]);?>
+<?php echo xtc_draw_input_field('customers_postcode', $order->customer['postcode']);?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('billing_city', $address[billing_city]);?>
+<?php echo xtc_draw_input_field('delivery_postcode', $order->delivery['postcode']);?>
+</td>
+<td class="dataTableContent" align="left">
+<?php echo xtc_draw_input_field('billing_postcode', $order->billing['postcode']);?>
 </td>
 </tr>
 
 <tr class="dataTableRow">
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('customers_country', $address[customers_country]);?>
+<?php echo TEXT_CITY;?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('delivery_country', $address[delivery_country]);?>
+<?php echo xtc_draw_input_field('customers_city', $order->customer['city']);?>
 </td>
 <td class="dataTableContent" align="left">
-<?php echo xtc_draw_input_field('billing_country', $address[billing_country]);?>
+<?php echo xtc_draw_input_field('delivery_city', $order->delivery['city']);?>
+</td>
+<td class="dataTableContent" align="left">
+<?php echo xtc_draw_input_field('billing_city', $order->billing['city']);?>
 </td>
 </tr>
 
 <tr class="dataTableRow">
-<td class="dataTableContent" align="left" colspan="3">
+<td class="dataTableContent" align="left">
+<?php echo TEXT_COUNTRY;?>
+</td>
+<td class="dataTableContent" align="left">
+<?php echo xtc_draw_input_field('customers_country', $order->customer['country']);?>
+</td>
+<td class="dataTableContent" align="left">
+<?php echo xtc_draw_input_field('delivery_country', $order->delivery['country']);?>
+</td>
+<td class="dataTableContent" align="left">
+<?php echo xtc_draw_input_field('billing_country', $order->billing['country']);?>
+</td>
+</tr>
+
+<tr class="dataTableRow">
+<td class="dataTableContent" align="left" colspan="4">
 <?php echo xtc_image_submit('button_update.gif', TEXT_UPDATE,'style="cursor:hand" ');?>
 </td>
 </tr>
 
 <tr>
-<td class="dataTableHeadingContent" width="33%" align="left">&nbsp;</td>
-<td class="dataTableHeadingContent" width="33%" align="left">&nbsp;</td>
-<td class="dataTableHeadingContent" width="33%" align="left">&nbsp;</td>
+<td class="dataTableHeadingContent" width="10%" align="left">&nbsp;</td>
+<td class="dataTableHeadingContent" width="30%" align="left">&nbsp;</td>
+<td class="dataTableHeadingContent" width="30%" align="left">&nbsp;</td>
+<td class="dataTableHeadingContent" width="30%" align="left">&nbsp;</td>
 </tr>
 </table>
 </form>
-<br><br>
+<br /><br />
 <?php } ?>
 <!-- Adressbearbeitung Ende //-->
-
-
 
 
 

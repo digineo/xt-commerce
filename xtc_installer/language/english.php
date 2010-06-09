@@ -13,7 +13,7 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 // Global
-define('TEXT_FOOTER','Copyright  &copy; 2002 - 2003 <a href="http://www.xt-commerce.com">XT-Commerce</a><br>Powered by XT-Commerce'); 
+define('TEXT_FOOTER','Copyright  &copy; 2002 - 2003 <a href="http://www.xt-commerce.com">XT-Commerce</a><br />Powered by XT-Commerce'); 
    
 // Box names
 define('BOX_LANGUAGE','Language');
@@ -75,27 +75,27 @@ define('PULL_DOWN_DEFAULT','Please select a Country!');
 // index.php
 define('TITLE_SELECT_LANGUAGE','Select your language!');
 
-define('TEXT_WELCOME_INDEX','<b>Welcome to XT-Commerce</b><br><br>XT-Commerce is an open source e-commerce solution under on going development by the XT-Commerce Team and its community.<br> Its feature packed out-of-the-box installation allows store owners to setup, run, and maintain their online stores with minimum effort and with no costs involved.<br> XT-Commerce combines open source solutions to provide a free and open development platform, which includes the powerful PHP web scripting language, the stable Apache web server, and the fast MySQL database server.<br><br>With no restrictions or special requirements, XT-Commerce can be installed on any PHP4 enabled web server, on any environment that PHP and MySQL supports, which includes Linux, Solaris, BSD, and Microsoft Windows environments.<br><br><b>Willkommen zu XT-Commerce</b><br><br>XT-Commerce ist eine Open-Source e-commerce Lösung, die ständig vom XT-Commerce Team und einer grossen Gemeinschaft weiterentwickelt wird.<br> Seine out-of-the-box Installation erlaubt es dem Shop-Besitzer seinen Online-Shop mit einem Minimum an Aufwand und Kosten zu installieren, zu betreiben und zu verwalten.<br><br>XT-Commerce ist auf jedem System lauffähig, welches eine PHP Umgebung (ab PHP 4.1) und mySQL zur Verfügung stellt, wie zum Beispiel Linux, Solaris, BSD, und Microsoft Windows.');
-define('TEXT_WELCOME_STEP1','<b>Main database and webserver settings</b><br><br>Please enter your Database and webserver settings.<br>');
-define('TEXT_WELCOME_STEP2','<b>Install database</b><br><br>The XT-Commerce installer will automatically install the XT-Commerce database.');
-define('TEXT_WELCOME_STEP3','<b>Database import.</b><br><br>');
-define('TEXT_WELCOME_STEP4','<b>Configure XT-Commerce main files</b><br><br><b>If there are old configure files from a further installation, XT-Commerce wiill delete them</b><br><br>The installer will set up the configuration files with the main parameters for database and file structur.<br><br>You can choose between different session handling systems.');
-define('TEXT_WELCOME_STEP5','<b>Webserver Configuration</b><br><br>');
-define('TEXT_WELCOME_STEP6','<b>Basic shop configuration</b><br><br>The installer will create the admin account and will perform some db actions.<br> The given informations for <b>Country</b> and <b>Post Code</b> are used for shipping and tax callculations.<br><br>If you wish, xtcommerce can automatically setup the zones,tax-rates and tax-classes for delivering/selling within the European Union.<br>Just set <b>setup zones for EU</b> to <b>YES</b>.');
-define('TEXT_WELCOME_STEP7','<b>Guest and default customers setup</b><br><br>The XT-Commerce group- and pricesystem got nearly infinite possibilities of different prices.<br><br>
-<b>% discount on single product</b><br>
-%max can be set for every single product, and single customers group<br>
-if %max at product = 10.00% and %max for group = 5% -> 5% discount on product<br>
-if %max at product = 10.00% and %max for group = 15% -> 10% discount on product<br><br>
-<b>% discount on order total</b><br>
-% discount on total order sum (after tax and currencies calculations)<br><br>
-<b>Graduated price</b><br>
-You also can set infinite graduated prices for a single product and single customers group.<br>
-you also are able to combine any of those systems, like:<br>
-user group 1 -> graduated prices on product Y<br>
-user group 2 -> 10% discount on product Y<br>
-user group 3 -> a special group price on product Y<br>
-user group 4 -> netto price on product Y<br>
+define('TEXT_WELCOME_INDEX','<b>Welcome to XT-Commerce</b><br /><br />XT-Commerce is an open source e-commerce solution under on going development by the XT-Commerce Team and its community.<br /> Its feature packed out-of-the-box installation allows store owners to setup, run, and maintain their online stores with minimum effort and with no costs involved.<br /> XT-Commerce combines open source solutions to provide a free and open development platform, which includes the powerful PHP web scripting language, the stable Apache web server, and the fast MySQL database server.<br /><br />With no restrictions or special requirements, XT-Commerce can be installed on any PHP4 enabled web server, on any environment that PHP and MySQL supports, which includes Linux, Solaris, BSD, and Microsoft Windows environments.<br /><br /><b>Willkommen zu XT-Commerce</b><br /><br />XT-Commerce ist eine Open-Source e-commerce Lösung, die ständig vom XT-Commerce Team und einer grossen Gemeinschaft weiterentwickelt wird.<br /> Seine out-of-the-box Installation erlaubt es dem Shop-Besitzer seinen Online-Shop mit einem Minimum an Aufwand und Kosten zu installieren, zu betreiben und zu verwalten.<br /><br />XT-Commerce ist auf jedem System lauffähig, welches eine PHP Umgebung (ab PHP 4.1) und mySQL zur Verfügung stellt, wie zum Beispiel Linux, Solaris, BSD, und Microsoft Windows.');
+define('TEXT_WELCOME_STEP1','<b>Main database and webserver settings</b><br /><br />Please enter your Database and webserver settings.<br />');
+define('TEXT_WELCOME_STEP2','<b>Install database</b><br /><br />The XT-Commerce installer will automatically install the XT-Commerce database.');
+define('TEXT_WELCOME_STEP3','<b>Database import.</b><br /><br />');
+define('TEXT_WELCOME_STEP4','<b>Configure XT-Commerce main files</b><br /><br /><b>If there are old configure files from a further installation, XT-Commerce wiill delete them</b><br /><br />The installer will set up the configuration files with the main parameters for database and file structur.<br /><br />You can choose between different session handling systems.');
+define('TEXT_WELCOME_STEP5','<b>Webserver Configuration</b><br /><br />');
+define('TEXT_WELCOME_STEP6','<b>Basic shop configuration</b><br /><br />The installer will create the admin account and will perform some db actions.<br /> The given informations for <b>Country</b> and <b>Post Code</b> are used for shipping and tax callculations.<br /><br />If you wish, xtcommerce can automatically setup the zones,tax-rates and tax-classes for delivering/selling within the European Union.<br />Just set <b>setup zones for EU</b> to <b>YES</b>.');
+define('TEXT_WELCOME_STEP7','<b>Guest and default customers setup</b><br /><br />The XT-Commerce group- and pricesystem got nearly infinite possibilities of different prices.<br /><br />
+<b>% discount on single product</b><br />
+%max can be set for every single product, and single customers group<br />
+if %max at product = 10.00% and %max for group = 5% -> 5% discount on product<br />
+if %max at product = 10.00% and %max for group = 15% -> 10% discount on product<br /><br />
+<b>% discount on order total</b><br />
+% discount on total order sum (after tax and currencies calculations)<br /><br />
+<b>Graduated price</b><br />
+You also can set infinite graduated prices for a single product and single customers group.<br />
+you also are able to combine any of those systems, like:<br />
+user group 1 -> graduated prices on product Y<br />
+user group 2 -> 10% discount on product Y<br />
+user group 3 -> a special group price on product Y<br />
+user group 4 -> netto price on product Y<br />
 ');
 define('TEXT_WELCOME_FINISHED','<b>XT-Commerce installation successful!</b>');
 // install_step1.php
@@ -109,11 +109,11 @@ define('TITLE_DATABASE_SETTINGS','Database Settings');
 define('TEXT_DATABASE_SERVER','Database Server');
 define('TEXT_DATABASE_SERVER_LONG','The database server can be in the form of a hostname, such as <i>db1.myserver.com</i>, or as an IP address, such as <i>192.168.0.1</i>.');
 define('TEXT_USERNAME','Username');
-define('TEXT_USERNAME_LONG','The username is used to connect to the database server. An example username is <i>mysql_10</i>.<br><br>Note: If the xtcommerce Database is to be imported (selected above), the account used to connect to the database server needs to have Create and Drop permissions.');
+define('TEXT_USERNAME_LONG','The username is used to connect to the database server. An example username is <i>mysql_10</i>.<br /><br />Note: If the xtcommerce Database is to be imported (selected above), the account used to connect to the database server needs to have Create and Drop permissions.');
 define('TEXT_PASSWORD','Password');
 define('TEXT_PASSWORD_LONG','The password is used together with the username, which forms the database user account.');
 define('TEXT_DATABASE','Database');
-define('TEXT_DATABASE_LONG','The database used to hold the catalog data. An example database name is <i>xtcommerce</i>.<br><b>ATTENTION:</b> XT-Commerce need an empty Database to perform Installation.');
+define('TEXT_DATABASE_LONG','The database used to hold the catalog data. An example database name is <i>xtcommerce</i>.<br /><b>ATTENTION:</b> XT-Commerce need an empty Database to perform Installation.');
 define('TITLE_WEBSERVER_SETTINGS','Webserver Settings');
 define('TEXT_WS_ROOT','Webserver Root Directory');
 define('TEXT_WS_ROOT_LONG','The directory where your web pages are being served from, usually <i>/home/myname/public_html</i>.');
@@ -141,7 +141,7 @@ define('TEXT_TITLE_SUCCESS','The database import was successful!');
 // install_step4.php
 define('TITLE_WEBSERVER_CONFIGURATION','Webserver Configuration:');
 define('TITLE_STEP4_ERROR','The following error has occurred:');
-define('TEXT_STEP4_ERROR','<b>The configuration files do not exist, or permission levels are not set.</b><br><br>Please perform the following actions: ');
+define('TEXT_STEP4_ERROR','<b>The configuration files do not exist, or permission levels are not set.</b><br /><br />Please perform the following actions: ');
 define('TEXT_STEP4_ERROR_1','If <i>chmod 706</i> does not work, please try <i>chmod 777</i>.');
 define('TEXT_STEP4_ERROR_2','If you are running this installation procedure under a Microsoft Windows environment, try renaming the existing configuration file so a new file can be created.');
 define('TEXT_VALUES','The following configuration values will be written to:');
@@ -219,6 +219,6 @@ define('TITLE_CHMOD','Setting rights on files');
 // install_fnished.php
 
 define('TEXT_SHOP_CONFIG_SUCCESS','<strong>XT-Commerce</strong> Shop configuration was successful.');
-define('TEXT_TEAM','The XT-Commerce dev Team.<br><a href="http://www.xt-commerce.com">XT-Commerce support site</a>');
+define('TEXT_TEAM','The XT-Commerce dev Team.<br /><a href="http://www.xt-commerce.com">XT-Commerce support site</a>');
    
  ?>

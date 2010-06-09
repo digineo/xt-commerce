@@ -1,8 +1,8 @@
                                      INFO
 ###################################################################################
 
-  XT-Commerce v3.0.2
-  Release Datum: 09.10.2004
+  XT-Commerce v3.0.3
+  Release Datum: 19.01.2004
   
   ------------------------------------------------------------------------
   Dieses Programm ist freie Software. Sie können es unter den Bedingungen
@@ -39,11 +39,11 @@
   Installation:
   ------------------------------------------------------------------------
 
-  Eine Update Anleitung für Ihren Shop und templates finden Sie hier:
-  http://www.xt-commerce.com/modules/ipboard/forum-post-6277.html
+  Eine Installations-Anleitung für Ihren Shop und templates finden Sie hier:
+  http://www.xt-commerce.com/modules/wfsection/dossiers-cat-14.html
 
-  You will find an update guide for your shopsystem an templates here:
-  http://www.xt-commerce.com/modules/ipboard/forum-post-6277.html
+  You will find an install guide for your shopsystem an templates here:
+  http://www.xt-commerce.com/modules/wfsection/dossiers-cat-14.html
 
 
 

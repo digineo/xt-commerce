@@ -34,30 +34,23 @@ require('includes/application_top.php');
 <html>
 <head>
 <title>Valid Categories/Products List</title>
-<style type="text/css">
-<!--
-h4 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: x-small; text-align: center}
-p {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
-th {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
-td {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
--->
-</style>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <head>
 <body>
-<table width="550" border="1" cellspacing="1" bordercolor="gray">
+<table width="550" cellspacing="1">
 <tr>
-<td colspan="3">
-<h4><?php echo TEXT_VALID_PRODUCTS_LIST; ?></h4>
+<td class="pageHeading" colspan="3">
+<?php echo TEXT_VALID_PRODUCTS_LIST; ?>
 </td>
 </tr>
 <?
-    echo "<tr><th>". TEXT_VALID_PRODUCTS_ID . "</th><th>" . TEXT_VALID_PRODUCTS_NAME . "</th><th>" . TEXT_VALID_PRODUCTS_MODEL . "</th></tr><tr>";
+    echo "<tr><th class=\"dataTableHeadingContent\">". TEXT_VALID_PRODUCTS_ID . "</th><th class=\"dataTableHeadingContent\">" . TEXT_VALID_PRODUCTS_NAME . "</th><th class=\"dataTableHeadingContent\">" . TEXT_VALID_PRODUCTS_MODEL . "</th></tr><tr>";
     $result = xtc_db_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $_SESSION['languages_id'] . "' ORDER BY products_description.products_name");
     if ($row = xtc_db_fetch_array($result)) {
         do {
-            echo "<td>".$row["products_id"]."</td>\n";
-            echo "<td>".$row["products_name"]."</td>\n";
-            echo "<td>".$row["products_model"]."</td>\n";
+            echo "<td class=\"dataTableHeadingContent\">".$row["products_id"]."</td>\n";
+            echo "<td class=\"dataTableHeadingContent\">".$row["products_name"]."</td>\n";
+            echo "<td class=\"dataTableHeadingContent\">".$row["products_model"]."</td>\n";
             echo "</tr>\n";
         }
         while($row = xtc_db_fetch_array($result));

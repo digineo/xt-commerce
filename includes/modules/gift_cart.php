@@ -41,7 +41,7 @@ if (ACTIVATE_GIFT_SYSTEM=='true') {
                 $gv_result = xtc_db_fetch_array($gv_query);
                 if ($gv_result['amount'] > 0 ) {
                     $gift_smarty->assign('GV_AMOUNT', $xtPrice->xtcFormat($gv_result['amount'],true,0,true));
-                    $gift_smarty->assign('GV_SEND_TO_FRIEND_LINK', '<a href="'. xtc_href_link(FILENAME_GV_SEND) . '">');
+                    $gift_smarty->assign('GV_SEND_TO_FRIEND_LINK', xtc_href_link(FILENAME_GV_SEND));
                 } else {
                 $gift_smarty->assign('GV_AMOUNT',0);
                 }
@@ -52,7 +52,7 @@ if (ACTIVATE_GIFT_SYSTEM=='true') {
                 $gift_smarty->assign('COUPON_AMOUNT2', $xtPrice->xtcFormat($coupon['coupon_amount'],true,0,true));
               }
               if (isset($_SESSION['cc_id'])) {
-                $gift_smarty->assign('COUPON_HELP_LINK', '<a style="cursor:hand" onClick="javascript:window.open(\'' . xtc_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $_SESSION['cc_id']) . '\', \'popup\', \'toolbar=0,scrollbars=yes, width=350, height=350\')">');
+                $gift_smarty->assign('COUPON_HELP_LINK', '<a style="cursor:hand" onclick="javascript:window.open(\'' . xtc_href_link(FILENAME_POPUP_COUPON_HELP, 'cID=' . $_SESSION['cc_id']) . '\', \'popup\', \'toolbar=0,scrollbars=yes, width=350, height=350\')">');
 
               }
   if (isset($_SESSION['customer_id'])) {

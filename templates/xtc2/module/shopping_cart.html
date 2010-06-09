@@ -1,30 +1,43 @@
-{config_load file="$language/lang_$language.conf" section="shopping_cart"} <font size="3" face="Verdana, Arial, Helvetica, sans-serif"><strong>{#heading_cart#}</strong></font><br>
-{$MODULE_gift_cart}  
-{if $info_message!=''}
-<br>
+{config_load file="$language/lang_$language.conf" section="shopping_cart"}
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr valign="top"> 
+    	<td class="contentsTopics">{#heading_cart#}</td>
+	</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr valign="top"> 
+    	<td align="center">{$MODULE_gift_cart}</td>
+	</tr>
+</table>
+{if $info_message!=''}
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="main">&nbsp;</td>
+        </tr>
   <tr>
-    <td class="main" style="border: 1px solid; border-color: #ff0000;" bgcolor="#FFCCCC"><div align="center">{$info_message}</div></td>
+    <td class="errorBox" align="center">{$info_message}</td>
   </tr>
 </table>
-<br>
 {/if}
-
-  {if $cart_empty==true}
-  
-<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+{if $cart_empty==true}
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="main">&nbsp;</td>
+        </tr>
   <tr> 
-    <td class="main"><div align="center">{#text_empty#}</div></td>
+    <td class="main" align="center">{#text_empty#}</td>
   </tr>
   <tr>
-    <td class="main"><div align="right">{$BUTTON_CONTINUE}</div></td>
+    <td class="main" align="right">{$BUTTON_CONTINUE}</td>
   </tr>
 </table>
 {else}
 {$FORM_ACTION}
 {$HIDDEN_OPTIONS}
-  <br>
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td class="main">&nbsp;</td>
+        </tr>
     <tr> 
       <td>{$MODULE_order_details}</td>
     </tr>
@@ -32,14 +45,11 @@
       <td class="main"></td>
     </tr>
   </table>
-
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
-    <td><div align="left">{$BUTTON_RELOAD}</div></td>
-	<td><div align="right">{$BUTTON_CHECKOUT}</div></td>
+    <td align="left">{$BUTTON_RELOAD}</td>
+	<td align="right">{$BUTTON_CHECKOUT}</td>
   </tr>
 </table>
-
 {$FORM_END}
-<div align="center" class="main"></div>
-<p>{/if} </p>
+{/if}

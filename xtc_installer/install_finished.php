@@ -48,7 +48,7 @@
 <div align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="FFAF00">xtc:</font><font color="#999999">Install</font></b></font></div></td>
         </tr>
         <tr> 
-          <td bgcolor="F3F3F3" ><br> 
+          <td bgcolor="F3F3F3" ><br /> 
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
                 <td width="10">&nbsp;</td>
@@ -86,17 +86,17 @@
                 <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><img src="images/icons/arrow02.gif" width="13" height="6"><?php echo BOX_USERS_CONFIG; ?></font></td>
                 <td><img src="images/icons/ok.gif"></td></tr>
             </table>
-            <br></td>
+            <br /></td>
         </tr>
       </table>
     </td>
     <td align="right" valign="top" style="border-top: 1px solid; border-bottom: 1px solid; border-right: 1px solid; border-color: #6D6D6D;"> 
-      <br>
+      <br />
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br>
-            <br>
-            <br>
+          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br />
+            <br />
+            <br />
             <?php echo TEXT_WELCOME_FINISHED; ?></font></td>
         </tr>
       </table>
@@ -114,10 +114,10 @@
             </table>
                         
                         <p>&nbsp;</p>
-            <p align="center"><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><img src="images/logo.gif" width="185" height="95"><br>
-              </strong></font><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_SHOP_CONFIG_SUCCESS; ?><br>
-              <br>
-              <?php echo TEXT_TEAM; ?><br>
+            <p align="center"><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><img src="images/logo.gif" width="185" height="95"><br />
+              </strong></font><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_SHOP_CONFIG_SUCCESS; ?><br />
+              <br />
+              <?php echo TEXT_TEAM; ?><br />
               </font></p>
             <table border="0" width="100%" cellspacing="0" cellpadding="0">
               <tr> 
@@ -125,7 +125,7 @@
                 
               </tr>
             </table>
-            <p align="center"><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+            <p align="center"><font color="#000000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
               </font></p></td>
         </tr>
       </table>
@@ -137,7 +137,7 @@
 
 
 
-<p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_FOOTER; ?><br>
+<p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_FOOTER; ?><br />
   </font></p>
 <p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> 
   </font></p>

@@ -74,7 +74,8 @@
                                     ".$days."
                                     order
                                     by
-                                    p.products_date_added DESC";
+                                    p.products_date_added DESC ";
+                                    
                                     
   $products_new_split = new splitPageResults($products_new_query_raw, $_GET['page'], MAX_DISPLAY_PRODUCTS_NEW,'p.products_id');
 
@@ -105,9 +106,9 @@ $module_content='';
     $products_new['products_short_description'] = xtc_get_short_description($products_new['products_id']);
     $buy_now='';
     if ($_SESSION['customers_status']['customers_fsk18']=='1') {
-    if ($products_new['products_fsk18']=='0') $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $products_new['products_id'], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $products_new['products_name'] . TEXT_NOW);
+    if ($products_new['products_fsk18']=='0') $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $products_new['products_id'], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $products_new['products_name'] . TEXT_NOW).'</a>';
     } else {
-    $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $products_new['products_id'], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $products_new['products_name'] . TEXT_NOW);
+    $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $products_new['products_id'], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $products_new['products_name'] . TEXT_NOW).'</a>';
     }
     if ($products_new['products_image']!='') {
     $products_image=DIR_WS_THUMBNAIL_IMAGES . $products_new['products_image'];

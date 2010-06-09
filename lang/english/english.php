@@ -44,7 +44,7 @@ function xtc_date_raw($date, $reverse = false) {
 define('LANGUAGE_CURRENCY', 'EUR');
 
 // Global entries for the <html> tag
-define('HTML_PARAMS','dir="LTR" lang="de"');
+define('HTML_PARAMS','dir="ltr" lang="de"');
 
 define('HEADER_TITLE_TOP', 'Main page');
 define('HEADER_TITLE_CATALOG', 'Catalogue');
@@ -228,6 +228,7 @@ define('IMAGE_BUTTON_UPDATE', 'Update');
 define('IMAGE_BUTTON_UPDATE_CART', 'Update shopping cart');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Write Evaluation');
 define('IMAGE_BUTTON_ADMIN', 'Admin');
+define('IMAGE_BUTTON_PRODUCT_EDIT', 'Edit product');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'Delete');
 define('SMALL_IMAGE_BUTTON_EDIT', 'Edit');
@@ -238,9 +239,9 @@ define('ICON_CART', 'Into the cart');
 define('ICON_SUCCESS', 'Success');
 define('ICON_WARNING', 'Warning');
 
-define('TEXT_GREETING_PERSONAL', 'Nice to see you again <span class="greetUser">%s!</span> Would you like to view our <a href="%s"><u>new products</u></a> ?');
-define('TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s , please  <a href="%s"><u>login</u></a>  with your account.</small>');
-define('TEXT_GREETING_GUEST', 'Welcome  <span class="greetUser">visitor!</span> Would you like to <a href="%s"><u>login</u></a>? Or would you like to create a new <a href="%s"><u>account</u></a> ?');
+define('TEXT_GREETING_PERSONAL', 'Nice to see you again <span class="greetUser">%s!</span> Would you like to view our <a style="text-decoration:underline;" href="%s">new products</a> ?');
+define('TEXT_GREETING_PERSONAL_RELOGON', '<small>If you are not %s , please  <a style="text-decoration:underline;" href="%s">login</a>  with your account.</small>');
+define('TEXT_GREETING_GUEST', 'Welcome  <span class="greetUser">visitor!</span> Would you like to <a style="text-decoration:underline;" href="%s">login</a>? Or would you like to create a new <a style="text-decoration:underline;" href="%s">account</a> ?');
 
 define('TEXT_SORT_PRODUCTS', 'Sorting of the items is ');
 define('TEXT_DESCENDINGLY', 'descending');
@@ -267,9 +268,9 @@ define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warning: XT-Commerce is not a
 define('WARNING_SESSION_AUTO_START', 'Warning: session.auto_start is activated (enabled) - Please deactivate (disable) this PHP feature in php.ini and restart your web server!');
 define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warning: Directory for article download does not exist: ' . DIR_FS_DOWNLOAD . '. This feature will not work until this directory has been created!');
 
-define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The "valid to" date ist invalid.<br>Please correct your information.');
-define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The "Credit card number", you entered, is invalid.<br>Please correct your information.');
-define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first 4 digits of your Credit Card are: %s<br>If this information is correct, your type of card is not accepted.<br>Please correct your information.');
+define('TEXT_CCVAL_ERROR_INVALID_DATE', 'The "valid to" date ist invalid.<br />Please correct your information.');
+define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'The "Credit card number", you entered, is invalid.<br />Please correct your information.');
+define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first 4 digits of your Credit Card are: %s<br />If this information is correct, your type of card is not accepted.<br />Please correct your information.');
 
 /*
   The following copyright announcement can only be
@@ -284,7 +285,7 @@ define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'The first 4 digits of your Credit Card 
   Copyright announcement changed due to the permissions
   from LG Hamburg from 28th February 2003 / AZ 308 O 70/03
 */
-define('FOOTER_TEXT_BODY', 'Copyright &copy; 2003 <a href="http://www.xt-commerce.com" target="_blank">XT-Commerce</a><br>Powered by <a href="http://www.xt-commerce.com" target="_blank">XT-Commerce</a>');
+define('FOOTER_TEXT_BODY', 'Copyright &copy; 2003 <a href="http://www.xt-commerce.com" onclick="window.open(this.href); return false;">XT-Commerce</a><br />Powered by <a href="http://www.xt-commerce.com" onclick="window.open(this.href); return false;">XT-Commerce</a>');
 
 //  conditions check
 
@@ -352,21 +353,21 @@ define('JS_PRICE_TO_MUST_BE_NUM', '* Price up to, must be a number\n');
 define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Price up to must be larger or same size as Price over.\n');
 define('JS_INVALID_KEYWORDS', '* Invalid search key\n');
 define('TEXT_NO_PRODUCTS', 'No items which correspond to the search criteria were found.');
-define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>WARNING:</b></font></small> If you already have an account, please login <a href="%s"><u><b>here</b></u></a>.');
+define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>WARNING:</b></font></small> If you already have an account, please login <a style="text-decoration:underline;" href="%s"><b>here</b></a>.');
 define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>ERROR:</b></font> The entered \'eMail-address\' and/or the \'password\' do not match.');
 define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>WARNING:</b></font> Your inputs as visitor will be automatically linked to your account. <a href="javascript:session_win();">[More Information]</a>');
 define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><b>WARNING:</b></font> The entered e-mail address is not registered. Please try again.');
 define('TEXT_PASSWORD_SENT', 'A new password was sent by e-mail.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Product not found!');
-define('TEXT_MORE_INFORMATION', 'For further information, please visit the <a href="%s" target="_blank"><u>homepage</u></a> of this product.');
+define('TEXT_MORE_INFORMATION', 'For further information, please visit the <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">homepage</a> of this product.');
 define('TEXT_DATE_ADDED', 'This Product was added to our catalogue on %s.');
 define('TEXT_DATE_AVAILABLE', '<font color="#ff0000">This Product is expected to be on stock again on %s </font>');
 define('TEXT_CART_EMPTY', 'Your cart is empty.');
 define('SUB_TITLE_SUB_TOTAL', 'Sub-total:');
 define('SUB_TITLE_TOTAL', 'Total:');
 
-define('OUT_OF_STOCK_CANT_CHECKOUT', 'The products marked with ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' , are not on stock in the quantity you requested.<br>Please reduce your purchase order quantity for the marked products. Thank you');
-define('OUT_OF_STOCK_CAN_CHECKOUT', 'The products marked with ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' , are not on stock in the quantity you requested.<br>The entered quantity will be supplied in a short period of time by us. On request, we can do part delivery.');
+define('OUT_OF_STOCK_CANT_CHECKOUT', 'The products marked with ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' , are not on stock in the quantity you requested.<br />Please reduce your purchase order quantity for the marked products. Thank you');
+define('OUT_OF_STOCK_CAN_CHECKOUT', 'The products marked with ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' , are not on stock in the quantity you requested.<br />The entered quantity will be supplied in a short period of time by us. On request, we can do part delivery.');
 
 define('HEADING_TITLE_TELL_A_FRIEND', 'Recommend \'%s\'');
 define('HEADING_TITLE_ERROR_TELL_A_FRIEND', 'Recommend product');
@@ -435,10 +436,10 @@ define('NAVBAR_TITLE_PASSWORD_DOUBLE_OPT','Password forgotten?');
 // Newsletter
 define('NAVBAR_TITLE_NEWSLETTER','Newsletter');
 define('TEXT_INFO_START','Please receive our free Newsletter!');
-define('TEXT_NEWSLETTER','You want to stay up to date?<br>No problem, receiveour Newsletter and we can inform you always up to date.');
-define('TEXT_EMAIL_INPUT','Your e-Mail adress has been registered by our system.<br>Therefore you will receive an E-Mail with your personally confirmation-code-link.  Please click after the receipt of the Mail on the Hyperlink inside. Otherwise no Newsletter will be send to you!');
+define('TEXT_NEWSLETTER','You want to stay up to date?<br />No problem, receiveour Newsletter and we can inform you always up to date.');
+define('TEXT_EMAIL_INPUT','Your e-Mail adress has been registered by our system.<br />Therefore you will receive an E-Mail with your personally confirmation-code-link.  Please click after the receipt of the Mail on the Hyperlink inside. Otherwise no Newsletter will be send to you!');
 
-define('TEXT_WRONG_CODE','<font color="FF0000">Please fill out the e-Mail field and the Security-Code again. <br>Be aware of Typos!</font>');
+define('TEXT_WRONG_CODE','<font color="FF0000">Please fill out the e-Mail field and the Security-Code again. <br />Be aware of Typos!</font>');
 define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="FF0000">This e-Mail address is registered but not yet activated!</font>');
 define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="FF0000">This e-Mail address is registered is also activated for the newsletter!</font>');
 define('TEXT_EMAIL_NOT_EXIST','<font color="FF0000">This e-Mail address is not registered for Newsletters!</font>');
@@ -448,11 +449,11 @@ define('TEXT_EMAIL_ACTIVE','<font color="FF0000">Your e-Mail address was success
 define('TEXT_EMAIL_ACTIVE_ERROR','<font color="FF0000">An error occured, your e-Mail address has not been activated for Newsletter!</font>');
 define('TEXT_EMAIL_SUBJECT','Your Newsletter Account');
 
-define('TEXT_LINK_MAIL_SENDED','Your inquiry for a new password must be confirmed by you peronally.<br>Therefore you will receive an E-Mail with your personally confirmation-code-link.  Please click after the receipt of the Mail on the Hyperlink inside. A further Mail with your new Login password will receive you afterwards.  Otherwise no new password will be set or sended to you!');
-define('TEXT_PASSWORD_MAIL_SENDED','You will receive an e-Mail with your new password in between minutes.<br>Please change your password after your first login like you want.');
-define('TEXT_CODE_ERROR','Please fill out the e-Mail field and the Security-Code again. <br>Be aware of Typos!');
-define('TEXT_EMAIL_ERROR','Please fill out the e-Mail field and the Security-Code again. <br>Be aware of Typos!');
-define('TEXT_NO_ACCOUNT','Unfortunately we must communicate to you that your inquiry for a new Login password was either invalid or run out off time.<br>Please try it again.');
+define('TEXT_LINK_MAIL_SENDED','Your inquiry for a new password must be confirmed by you peronally.<br />Therefore you will receive an E-Mail with your personally confirmation-code-link.  Please click after the receipt of the Mail on the Hyperlink inside. A further Mail with your new Login password will receive you afterwards.  Otherwise no new password will be set or sended to you!');
+define('TEXT_PASSWORD_MAIL_SENDED','You will receive an e-Mail with your new password in between minutes.<br />Please change your password after your first login like you want.');
+define('TEXT_CODE_ERROR','Please fill out the e-Mail field and the Security-Code again. <br />Be aware of Typos!');
+define('TEXT_EMAIL_ERROR','Please fill out the e-Mail field and the Security-Code again. <br />Be aware of Typos!');
+define('TEXT_NO_ACCOUNT','Unfortunately we must communicate to you that your inquiry for a new Login password was either invalid or run out off time.<br />Please try it again.');
 define('HEADING_PASSWORD_FORGOTTEN','Password renewal?');
 define('TEXT_PASSWORD_FORGOTTEN','Change your password in three easy steps.');
 define('TEXT_EMAIL_PASSWORD_FORGOTTEN','Confirmation Mail for password renewal');
@@ -485,7 +486,7 @@ define('EMAIL_GV_ENTER', ' and enter the code ');
 define('EMAIL_GV_FIXED_FOOTER', 'If you are have problems redeeming the Gift Voucher using the automated link above, ' . "\n" .
                                 'you can also enter the Gift Voucher code during the checkout process at our store.' . "\n\n");
 define('EMAIL_GV_SHOP_FOOTER', '');
-define('MAIN_MESSAGE', 'You have decided to send a gift voucher worth %s to %s who\'s eMail address is %s<br><br>The text accompanying the eMail will read<br><br>Dear %s<br><br>
+define('MAIN_MESSAGE', 'You have decided to send a gift voucher worth %s to %s who\'s eMail address is %s<br /><br />The text accompanying the eMail will read<br /><br />Dear %s<br /><br />
                         You have been sent a Gift Voucher worth %s by %s');
 
 define('REDEEMED_AMOUNT','Your gift voucher was successfully added to your account. Gift voucher ammount:');
@@ -511,4 +512,5 @@ define('ONLY',' only ');
 define('FROM','from ');
 define('YOU_SAVE','you save ');
 define('INSTEAD','instead ');
+define('TXT_PER',' per ');
 ?>

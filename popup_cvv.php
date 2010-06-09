@@ -25,7 +25,7 @@
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
-<SCRIPT LANGUAGE="JavaScript" type="text/javascript" >
+<SCRIPT type="text/javascript">
 <!-- 
 // prevent click click
 document.oncontextmenu = function(){return false}

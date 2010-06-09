@@ -78,10 +78,14 @@ function vvcode_render_code($code) {
     } else {
        $angle = $rand;
     }
-        
-        imagettftext($imgh, $size, $angle, 15+(36*$i) , 38, $fonts, $font, substr($code, $i, 1));
-    }
-    
+      if (function_exists('imagettftext')) {                   
+              imagettftext($imgh, $size, $angle, 15+(36*$i) , 38, $fonts, $font, substr($code, $i, 1));  
+      } else {                                            
+        $tc = ImageColorAllocate ($imgh, 0, 0, 0); //Schriftfarbe - schwarz         
+              ImageString($imgh, $size, 26+(36*$i),20, substr($code, $i, 1), $tc);  
+        }
+    }                                                                              
+                                                                                   
     header('Content-Type: image/jpeg');
     imagejpeg($imgh);
     imagedestroy($imgh);

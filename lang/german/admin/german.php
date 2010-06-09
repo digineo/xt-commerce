@@ -95,7 +95,8 @@ define('BOX_CONFIGURATION_15', 'Sessions');
 define('BOX_CONFIGURATION_16', 'Meta-Tags/Suchmaschinen');
 define('BOX_CONFIGURATION_17', 'Zusatzmodule');
 define('BOX_CONFIGURATION_18', 'UST ID');
-define('BOX_CONFIGURATION_19', 'Google Conversion');
+define('BOX_CONFIGURATION_19', 'xt:C Partner');
+
 
 define('BOX_MODULES', 'Zahlungs-/Versand-/Verrechnungs-Module');
 define('BOX_PAYMENT', 'Zahlungsoptionen');
@@ -121,7 +122,7 @@ define('BOX_HEADING_REPORTS', 'Berichte');
 define('BOX_PRODUCTS_VIEWED', 'Besuchte Artikel');
 define('BOX_STOCK_WARNING','Lager Bericht');
 define('BOX_PRODUCTS_PURCHASED', 'Verkaufte Artikel');
-define('BOX_STATS_CUSTOMERS', 'Kunden-<br>&nbsp;Bestellstatistik');
+define('BOX_STATS_CUSTOMERS', 'Kunden-<br />&nbsp;Bestellstatistik');
 define('BOX_BACKUP', 'Datenbank Manager');
 define('BOX_BANNER_MANAGER', 'Banner Manager');
 define('BOX_CACHE', 'Cache Steuerung');
@@ -148,6 +149,8 @@ define('BOX_GV_ADMIN_SENT', 'Gutscheine versandt');
 define('BOX_HEADING_COUPON_ADMIN','Rabattkupons');
 define('BOX_COUPON_ADMIN','Kupon Admin');
 define('BOX_TOOLS_BLACKLIST','-CC-Blacklist');
+define('BOX_IMPORT','Import/Export');
+define('BOX_PRODUCTS_VPE','Verpackungseinheit');
 
 define('TXT_GROUPS','<b>Gruppen</b>:');
 define('TXT_SYSTEM','System');
@@ -172,7 +175,7 @@ define('BOX_MODULE_NEWSLETTER','Rundschreiben');
 define('JS_ERROR', 'W&auml;hrend der Eingabe sind Fehler aufgetreten!\nBitte korrigieren Sie folgendes:\n\n');
 
 define('JS_OPTIONS_VALUE_PRICE', '* Sie m&uuml;ssen diesem Wert einen Preis zuordnen\n');
-define('JS_OPTIONS_VALUE_PRICE_PREFIX', '* Sie m&uuml;ssen ein Vorzeichen für den Preis angeben (+/-)\n');
+define('JS_OPTIONS_VALUE_PRICE_PREFIX', '* Sie m&uuml;ssen ein Vorzeichen f&uuml;r den Preis angeben (+/-)\n');
 
 define('JS_PRODUCTS_NAME', '* Der neue Artikel muss einen Namen haben\n');
 define('JS_PRODUCTS_DESCRIPTION', '* Der neue Artikel muss eine Beschreibung haben\n');
@@ -182,7 +185,7 @@ define('JS_PRODUCTS_QUANTITY', '* Sie m&uuml;ssen dem neuen Artikel eine verf&uu
 define('JS_PRODUCTS_MODEL', '* Sie m&uuml;ssen dem neuen Artikel eine Artikel-Nr. zuordnen\n');
 define('JS_PRODUCTS_IMAGE', '* Sie m&uuml;ssen dem Artikel ein Bild zuordnen\n');
 
-define('JS_SPECIALS_PRODUCTS_PRICE', '* Es muss ein neuer Preis für diesen Artikel festgelegt werden\n');
+define('JS_SPECIALS_PRODUCTS_PRICE', '* Es muss ein neuer Preis f&uuml;r diesen Artikel festgelegt werden\n');
 
 define('JS_GENDER', '* Die \'Anrede\' muss ausgew&auml;hlt werden.\n');
 define('JS_FIRST_NAME', '* Der \'Vorname\' muss mindestens aus ' . ENTRY_FIRST_NAME_MIN_LENGTH . ' Zeichen bestehen.\n');
@@ -192,9 +195,9 @@ define('JS_EMAIL_ADDRESS', '* Die \'eMail-Adresse\' muss mindestens aus ' . ENTR
 define('JS_ADDRESS', '* Die \'Strasse\' muss mindestens aus ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' Zeichen bestehen.\n');
 define('JS_POST_CODE', '* Die \'Postleitzahl\' muss mindestens aus ' . ENTRY_POSTCODE_MIN_LENGTH . ' Zeichen bestehen.\n');
 define('JS_CITY', '* Die \'Stadt\' muss mindestens aus ' . ENTRY_CITY_MIN_LENGTH . ' Zeichen bestehen.\n');
-define('JS_STATE', '* Das \'Bundesland\' muss ausgewählt werden.\n');
-define('JS_STATE_SELECT', '-- Wählen Sie oberhalb --');
-define('JS_ZONE', '* Das \'Bundesland\' muss aus der Liste für dieses Land ausgewählt werden.');
+define('JS_STATE', '* Das \'Bundesland\' muss ausgew&uuml;hlt werden.\n');
+define('JS_STATE_SELECT', '-- W&auml;hlen Sie oberhalb --');
+define('JS_ZONE', '* Das \'Bundesland\' muss aus der Liste f&uuml;r dieses Land ausgew&auml;hlt werden.');
 define('JS_COUNTRY', '* Das \'Land\' muss ausgew&auml;hlt werden.\n');
 define('JS_TELEPHONE', '* Die \'Telefonnummer\' muss aus mindestens ' . ENTRY_TELEPHONE_MIN_LENGTH . ' Zeichen bestehen.\n');
 define('JS_PASSWORD', '* Das \'Passwort\' sowie die \'Passwortbest&auml;tigung\' m&uuml;ssen &uuml;bereinstimmen und aus mindestens ' . ENTRY_PASSWORD_MIN_LENGTH . ' Zeichen bestehen.\n');
@@ -248,7 +251,7 @@ define('NO','nein');
 define('SAVE_ENTRY','&Auml;nderungen Speichern?');
 define('TEXT_CHOOSE_INFO_TEMPLATE','Vorlage f&uuml;r Artikeldetails');
 define('TEXT_CHOOSE_OPTIONS_TEMPLATE','Vorlage f&uuml;r Artikeloptionen');
-define('TEXT_SELECT','-- Bitte wählen Sie --');
+define('TEXT_SELECT','-- Bitte w&auml;hlen Sie --');
 
 // images
 define('IMAGE_ANI_SEND_EMAIL', 'eMail versenden');
@@ -306,6 +309,7 @@ define('IMAGE_STATUS','Kundengruppe');
 define('IMAGE_IPLOG','IP-Log');
 define('CREATE_ACCOUNT','Neuer Kunde');
 define('IMAGE_START','Modul Starten');
+define('IMAGE_AFTERBUY_SEND','Auftrag erneut senden');
 
 define('ICON_CROSS', 'Falsch');
 define('ICON_CURRENT_FOLDER', 'Aktueller Ordner');
@@ -334,6 +338,7 @@ define('TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS', 'Angezeigt werden <b>%d</b> bis <
 define('TEXT_DISPLAY_NUMBER_OF_NEWSLETTERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Rundschreiben)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bestellungen)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Bestellstatus)');
+define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_VPE', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Verpackungseinheiten)');
 define('TEXT_DISPLAY_NUMBER_OF_SHIPPING_STATUS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Lieferstatus)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Artikeln)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_EXPECTED', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> erwarteten Artikeln)');
@@ -368,8 +373,8 @@ define('SUCCESS_FILE_SAVED_SUCCESSFULLY', 'Erfolg: Hochgeladene Datei wurde erfo
 define('WARNING_NO_FILE_UPLOADED', 'Warnung: Es wurde keine Datei hochgeladen.');
 
 define('DELETE_ENTRY','Eintrag l&ouml;schen?');
-define('TEXT_PAYMENT_ERROR','<b>WARNUNG:</b><br>Bitte Aktivieren Sie ein Zahlungsmodul!');
-define('TEXT_SHIPPING_ERROR','<b>WARNUNG:</b><br>Bitte Aktivieren Sie ein Versandmodul!');
+define('TEXT_PAYMENT_ERROR','<b>WARNUNG:</b><br />Bitte Aktivieren Sie ein Zahlungsmodul!');
+define('TEXT_SHIPPING_ERROR','<b>WARNUNG:</b><br />Bitte Aktivieren Sie ein Versandmodul!');
 
 define('TEXT_NETTO','Netto: ');
 
@@ -385,7 +390,7 @@ define('IMAGE_RELEASE', 'Gutschein einl&ouml;sen');
 
 define('_JANUARY', 'Januar');
 define('_FEBRUARY', 'Februar');
-define('_MARCH', 'Mï¿½z');
+define('_MARCH', 'M&auml;rz');
 define('_APRIL', 'April');
 define('_MAY', 'Mai');
 define('_JUNE', 'Juni');
@@ -396,7 +401,7 @@ define('_OCTOBER', 'Oktober');
 define('_NOVEMBER', 'November');
 define('_DECEMBER', 'Dezember');
 
-// Beschreibung für Abmeldelink im Newsletter
+// Beschreibung f&uuml;r Abmeldelink im Newsletter
 define('TEXT_NEWSLETTER_REMOVE', 'Um sich von unserem Newsletter abzumelden klicken Sie hier:');
 
 
@@ -413,7 +418,7 @@ define('TEXT_VALID_CATEGORIES_ID', 'Kategorienummer');
 define('TEXT_VALID_CATEGORIES_NAME', 'Kategoriename');
 
 define('SECURITY_CODE_LENGTH_TITLE', 'L&auml;nge des Gutscheincodes');
-define('SECURITY_CODE_LENGTH_DESC', 'Geben Sie hier die Länge des Gutscheincode ein. (max. 16 Zeichen)');
+define('SECURITY_CODE_LENGTH_DESC', 'Geben Sie hier die L&auml;nge des Gutscheincode ein. (max. 16 Zeichen)');
 
 define('NEW_SIGNUP_GIFT_VOUCHER_AMOUNT_TITLE', 'Willkommens-Geschenk Gutschein Wert');
 define('NEW_SIGNUP_GIFT_VOUCHER_AMOUNT_DESC', 'Willkommens-Geschenk Gutschein Wert: Wenn Sie keinen Gutschein in Ihrer Willkommens-eMail versenden wollen, tragen Sie hier 0 ein, ansonsten geben Sie den Wert des Gutscheins an, zB. 10.00 oder 50.00, aber keine W&auml;hrungszeichen');
@@ -427,12 +432,12 @@ define('HEADING_TITLE_VAT','Ust-ID');
 define('HEADING_TITLE_VAT','Ust-ID');
 define('ENTRY_VAT_ID','Ust-ID:');
 define('ENTRY_CUSTOMERS_VAT_ID', 'UstID:');
-define('TEXT_VAT_FALSE','<font color="FF0000">Geprüft/Falsch!</font>');
-define('TEXT_VAT_TRUE','<font color="FF0000">Geprüft/OK!</font>');
-define('TEXT_VAT_UNKNOWN_COUNTRY','<font color="FF0000">Nicht Geprüft/Land unbekannt!</font>');
-define('TEXT_VAT_UNKNOWN_ALGORITHM','<font color="FF0000">Nicht Geprüft/Keine Überprüfung möglich!</font>');
-define('ENTRY_VAT_ID_ERROR', '<font color="FF0000">* Die Eingegebene UST ID Nummer ist Falsch oder kann derzeit nicht geprüft werden!</font>');
+define('TEXT_VAT_FALSE','<font color="FF0000">Gepr&uuml;ft/Falsch!</font>');
+define('TEXT_VAT_TRUE','<font color="FF0000">Gepr&uuml;ft/OK!</font>');
+define('TEXT_VAT_UNKNOWN_COUNTRY','<font color="FF0000">Nicht Gepr&uuml;ft/Land unbekannt!</font>');
+define('TEXT_VAT_UNKNOWN_ALGORITHM','<font color="FF0000">Nicht Gepr&uuml;ft/Keine &Uuml;berpr&uuml;fung m&ouml;glich!</font>');
+define('ENTRY_VAT_ID_ERROR', '<font color="FF0000">* Die Eingegebene UST ID Nummer ist Falsch oder kann derzeit nicht gepr&uuml;ft werden!</font>');
 
-define('ERROR_GIF_MERGE','Fehlender GDlib Gif Support, kein Wasserzeichen (Merge) möglich');
-define('ERROR_GIF_UPLOAD','Fehlender GDlib Gif Support, kein Upload von GIF Bildern möglich');
+define('ERROR_GIF_MERGE','Fehlender GDlib Gif Support, kein Wasserzeichen (Merge) m&ouml;glich');
+define('ERROR_GIF_UPLOAD','Fehlender GDlib Gif Support, kein Upload von GIF Bildern m&ouml;glich');
 ?>

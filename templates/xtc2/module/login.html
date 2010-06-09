@@ -1,25 +1,29 @@
-{config_load file="$language/lang_$language.conf" section="login"}<font size="3" face="Verdana, Arial, Helvetica, sans-serif"><strong>{#heading_login#} 
-</strong></font><br>
-<br>
+{config_load file="$language/lang_$language.conf" section="login"}
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr valign="top"> 
+		<td class="contentsTopics">{#heading_login#}</td>
+	</tr>
+</table>
+<br />
 {if $info_message!=''}
 <table width="100%"  border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td bgcolor="#00CC33"><div align="center"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">{$info_message}</font></div></td>
+  <tr class="headerMessage">
+    <td align="center">{$info_message}</td>
   </tr>
 </table>
-<br>
+<br />
 {/if}
 {if $account_option=='account' or $account_option=='both'} 
 <table width="100%" border="0" cellspacing="0" cellpadding="5">
   <tr>
-    <td width="50%" valign="top">
+    <td valign="top">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr> 
           <td style="border-bottom: 1px solid; border-color: #cccccc;" class="main"><strong>{#title_new#}</strong></td>
         </tr>
         <tr> 
-          <td style="border-right: 1px solid; border-color: #cccccc;" class="main">{#text_new#}<br>
-            <br>
+          <td style="border-right: 1px solid; border-color: #cccccc;" class="main">{#text_new#}<br />
+            <br />
             {$BUTTON_NEW_ACCOUNT} </td>
         </tr>
       </table>
@@ -31,30 +35,28 @@
             <td style="border-bottom: 1px solid; border-color: #cccccc;"  class="main"><strong>{#title_returning#}</strong></td>
           </tr>
           <tr>
-            <td class="main"><p>{#text_returning#}<br>
-              </p>
+            <td class="main"><p>{#text_returning#}<br /></p>
               <table width="100" border="0" cellspacing="2" cellpadding="0">
                 <tr>
-                  <td class="main" nowrap><strong>{#text_email#}</strong> </td>
-                  <td> {$INPUT_MAIL}</td>
+                  <td class="main"><strong>{#text_email#}</strong> </td>
+                  <td>{$INPUT_MAIL}</td>
                 </tr>
                 <tr>
-                  <td class="main"  nowrap> <strong>{#text_password#}</strong></td>
-                  <td><strong>{$INPUT_PASSWORD}</strong></td>
+                  <td class="main"><strong>{#text_password#}</strong></td>
+                  <td>{$INPUT_PASSWORD}</td>
                 </tr>
               </table>
-              <p><br>
-                <a href="{$LINK_LOST_PASSWORD}">{#text_lost_password#}</a></p>
-              <p>{$BUTTON_LOGIN} </p></td>
+              <p><br /><a href="{$LINK_LOST_PASSWORD}">{#text_lost_password#}</a></p>
+              <p>{$BUTTON_LOGIN}</p></td>
           </tr>
         </table>
-        <br>
       {$FORM_END}	
 	</td>
   </tr>
 </table>
 {/if}
-{if $account_option=='both' or $account_option=='guest'}<br>
+<br />
+{if $account_option=='both' or $account_option=='guest'}<br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td align="center">
@@ -63,8 +65,8 @@
           <td style="border-bottom: 1px solid; border-color: #cccccc;" class="main"><strong>{#title_guest#}</strong></td>
         </tr>
         <tr>
-          <td style="border-right: 1px solid; border-color: #cccccc;" class="main">{#text_guest#}<br>
-            <br>
+          <td style="border-right: 1px solid; border-color: #cccccc;" class="main">{#text_guest#}<br />
+            <br />
             {$BUTTON_GUEST}</td>
         </tr>
       </table>

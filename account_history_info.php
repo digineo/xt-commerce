@@ -27,20 +27,16 @@
   require_once(DIR_FS_INC . 'xtc_display_tax_value.inc.php');
   require_once(DIR_FS_INC . 'xtc_format_price_order.inc.php');
 
-  if (!isset($_SESSION['customer_id'])) {
-    
-    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-  }
+  if (!isset($_SESSION['customer_id'])) xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+  
 
-  if (!isset($_GET['order_id']) || (isset($_GET['order_id']) && !is_numeric($_GET['order_id']))) {
-    xtc_redirect(xtc_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL'));
-  }
+  if (!isset($_GET['order_id']) || (isset($_GET['order_id']) && !is_numeric($_GET['order_id']))) xtc_redirect(xtc_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL'));
+  
   
   $customer_info_query = xtc_db_query("select customers_id from " . TABLE_ORDERS . " where orders_id = '". (int)$_GET['order_id'] . "'");
   $customer_info = xtc_db_fetch_array($customer_info_query);
-  if ($customer_info['customers_id'] != $_SESSION['customer_id']) {
-    xtc_redirect(xtc_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL'));
-  }
+  if ($customer_info['customers_id'] != $_SESSION['customer_id'])  xtc_redirect(xtc_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL'));
+  
 
 
   $breadcrumb->add(NAVBAR_TITLE_1_ACCOUNT_HISTORY_INFO, xtc_href_link(FILENAME_ACCOUNT, '', 'SSL'));
@@ -54,7 +50,7 @@
  $smarty->assign('ORDER_NUMBER',$_GET['order_id']);
  $smarty->assign('ORDER_DATE',xtc_date_long($order->info['date_purchased']));
  $smarty->assign('ORDER_STATUS',$order->info['orders_status']);
- $smarty->assign('BILLING_LABEL',xtc_address_format($order->billing['format_id'], $order->billing, 1, ' ', '<br>'));
+ $smarty->assign('BILLING_LABEL',xtc_address_format($order->billing['format_id'], $order->billing, 1, ' ', '<br />'));
  $smarty->assign('PRODUCTS_EDIT',xtc_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
  $smarty->assign('SHIPPING_ADDRESS_EDIT',xtc_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'));
  $smarty->assign('BILLING_ADDRESS_EDIT',xtc_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL'));
@@ -63,13 +59,11 @@
 
   if ($order->delivery != false) {
 
- $smarty->assign('DELIVERY_LABEL',xtc_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br>'));
+ $smarty->assign('DELIVERY_LABEL',xtc_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br />'));
 
-    if ($order->info['shipping_method']) {
-    $smarty->assign('SHIPPING_METHOD',$order->info['shipping_method']);
+    if ($order->info['shipping_method']) $smarty->assign('SHIPPING_METHOD',$order->info['shipping_method']);
 
-    }
-
+  
   }
 
   if (sizeof($order->info['tax_groups']) > 1) {

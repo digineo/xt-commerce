@@ -15,7 +15,7 @@
    Released under the GNU General Public License 
    -----------------------------------------------------------------------------------------
    Third Party contributions:
-   agree_conditions_1.01        	Autor:	Thomas Plänkers (webmaster@oscommerce.at)
+   agree_conditions_1.01        	Autor:	Thomas Plï¿½nkers (webmaster@oscommerce.at)
 
    Customers Status v3.x  (c) 2002-2003 Copyright Elari elari@free.fr | www.unlockgsm.com/dload-osc/ | CVS : http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/elari/?sortby=date#dirlist
 
@@ -41,42 +41,34 @@
 
   // if the customer is not logged on, redirect them to the login page
 
-  if (!isset($_SESSION['customer_id'])) {
-    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-  }
+  if (!isset($_SESSION['customer_id'])) xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+  
 
 // if there is nothing in the customers cart, redirect them to the shopping cart page
-  if ($_SESSION['cart']->count_contents() < 1) {
-    xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
-  }
+  if ($_SESSION['cart']->count_contents() < 1) xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
+  
 
 // avoid hack attempts during the checkout procedure by checking the internal cartID
   if (isset($_SESSION['cart']->cartID) && isset($_SESSION['cartID'])) {
-    if ($_SESSION['cart']->cartID != $_SESSION['cartID']) {
-      xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
-    }
+    if ($_SESSION['cart']->cartID != $_SESSION['cartID']) xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));  
   }
 
 // if no shipping method has been selected, redirect the customer to the shipping method selection page
-  if (!isset($_SESSION['shipping'])) {
-    xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
-  }
+  if (!isset($_SESSION['shipping'])) xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+  
 
 //check if display conditions on checkout page is true
 
   if (isset($_POST['payment'])) $_SESSION['payment'] = $_POST['payment'];
 
-  if ($_POST['comments_added'] != '') {
-    $_SESSION['comments'] = xtc_db_prepare_input($_POST['comments']);
-  }
+  if ($_POST['comments_added'] != '') $_SESSION['comments'] = xtc_db_prepare_input($_POST['comments']);
+  
   
 //-- TheMedia Begin check if display conditions on checkout page is true
 if (isset($_POST['cot_gv'])) $_SESSION['cot_gv'] = true;
 // if conditions are not accepted, redirect the customer to the payment method selection page
   if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
-    if ($_POST['conditions'] == false) {
-      xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_CONDITIONS_NOT_ACCEPTED), 'SSL', true, false));
-    }
+    if ($_POST['conditions'] == false) xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_CONDITIONS_NOT_ACCEPTED), 'SSL', true, false));  
   }
 
 // load the selected payment module
@@ -102,9 +94,8 @@ if (isset($_POST['cot_gv'])) $_SESSION['cot_gv'] = true;
     xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'error_message=' . urlencode(ERROR_NO_PAYMENT_MODULE_SELECTED), 'SSL'));
   }
 
-  if (is_array($payment_modules->modules)) {
-    $payment_modules->pre_confirmation_check();
-  }
+  if (is_array($payment_modules->modules)) $payment_modules->pre_confirmation_check();
+  
 
 // load the selected shipping module
   require(DIR_WS_CLASSES . 'shipping.php');
@@ -114,14 +105,10 @@ if (isset($_POST['cot_gv'])) $_SESSION['cot_gv'] = true;
   $any_out_of_stock = false;
   if (STOCK_CHECK == 'true') {
     for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
-      if (xtc_check_stock($order->products[$i]['id'], $order->products[$i]['qty'])) {
-        $any_out_of_stock = true;
-      }
+      if (xtc_check_stock($order->products[$i]['id'], $order->products[$i]['qty'])) $any_out_of_stock = true;     
     }
     // Out of Stock
-    if ( (STOCK_ALLOW_CHECKOUT != 'true') && ($any_out_of_stock == true) ) {
-      xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
-    }
+    if ( (STOCK_ALLOW_CHECKOUT != 'true') && ($any_out_of_stock == true) ) xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
   }
 
 
@@ -132,11 +119,16 @@ if (isset($_POST['cot_gv'])) $_SESSION['cot_gv'] = true;
  require(DIR_WS_INCLUDES . 'header.php'); 
  if (SHOW_IP_LOG=='true') {
  $smarty->assign('IP_LOG','true');
- $smarty->assign('CUSTOMERS_IP',$_SERVER['REMOTE_ADDR']);
+  if($_SERVER["HTTP_X_FORWARDED_FOR"]){
+		$customers_ip=$_SERVER["HTTP_X_FORWARDED_FOR"];
+	} else {
+		$customers_ip=$_SERVER["REMOTE_ADDR"];
+	}
+ $smarty->assign('CUSTOMERS_IP',$customers_ip);
  }
- $smarty->assign('DELIVERY_LABEL',xtc_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br>'));
+ $smarty->assign('DELIVERY_LABEL',xtc_address_format($order->delivery['format_id'], $order->delivery, 1, ' ', '<br />'));
  if ($_SESSION['credit_covers']!='1') {
- $smarty->assign('BILLING_LABEL',xtc_address_format($order->billing['format_id'], $order->billing, 1, ' ', '<br>'));
+ $smarty->assign('BILLING_LABEL',xtc_address_format($order->billing['format_id'], $order->billing, 1, ' ', '<br />'));
  }
  $smarty->assign('PRODUCTS_EDIT',xtc_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
  $smarty->assign('SHIPPING_ADDRESS_EDIT',xtc_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'));
@@ -167,9 +159,8 @@ $data_products = '<table width="100%" border="0" cellspacing="0" cellpadding="0"
   for ($i=0, $n=sizeof($order->products); $i<$n; $i++) {
 
 
-    $data_products .= '          <tr>' . "\n" .
-         '            <td class="main" nowrap align="left" valign="top" width="">' . $order->products[$i]['qty'] .' x '.$order->products[$i]['name']. '</td>' . "\n" .
-	 //'				<td class="main" align="right" valign="top">' .xtc_get_products_price($order->products[$i]['id'],$price_special=1,$quantity=$order->products[$i]['qty']). '</td></tr>' . "\n" ;
+    $data_products .= '<tr>' . "\n" .
+         '            <td class="main" align="left" valign="top">' . $order->products[$i]['qty'] .' x '.$order->products[$i]['name']. '</td>' . "\n" .
      '                <td class="main" align="right" valign="top">' .$xtPrice->xtcFormat($order->products[$i]['final_price'],true). '</td></tr>' . "\n" ;
 
 
@@ -179,8 +170,8 @@ $data_products = '<table width="100%" border="0" cellspacing="0" cellpadding="0"
 		<td class="main" align="left" valign="top">
 		<nobr><small>&nbsp;<i> - ' 
 		. $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] .'
-		</i></small></td>
-		<td class="main" align="right" valign="top"><i><small></i></small></nobr></td></tr>';
+		</i></small><nobr></td>
+		<td class="main" align="right" valign="top">&nbsp;</td></tr>';
       }
     }
 
@@ -189,7 +180,7 @@ $data_products = '<table width="100%" border="0" cellspacing="0" cellpadding="0"
     if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
       if (sizeof($order->info['tax_groups']) > 1) $data_products .= '            <td class="main" valign="top" align="right">' . xtc_display_tax_value($order->products[$i]['tax']) . '%</td>' . "\n";
     }
-	 $data_products .=    '          </tr>' . "\n";
+	 $data_products .=    '</tr>' . "\n";
   }
   $data_products .= '</table>';
   	$smarty->assign('PRODUCTS_BLOCK',$data_products);
@@ -221,9 +212,9 @@ $payment_info=$confirmation['title'];
 $payment_info .=
 	      '<table>
 		<tr>
-                <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                 <td class="main">'. $confirmation['fields'][$i]['title'].'</td>
-                <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                 <td class="main">'. stripslashes($confirmation['fields'][$i]['field']).'</td>
               </tr></table>';
 

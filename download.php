@@ -52,6 +52,7 @@
   header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache");
   header("Content-Type: Application/octet-stream");
+  header("Content-Length: ".filesize(DIR_FS_DOWNLOAD . $downloads['orders_products_filename']));
   header("Content-disposition: attachment; filename=" . $downloads['orders_products_filename']);
 
   if (DOWNLOAD_BY_REDIRECT == 'true') {

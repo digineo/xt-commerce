@@ -23,13 +23,11 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
 
     //fsk18 lock
   $fsk_lock='';
-  if ($_SESSION['customers_status']['customers_fsk18_display']=='0') {
-  $fsk_lock=' and p.products_fsk18!=1';
-  }   
+  if ($_SESSION['customers_status']['customers_fsk18_display']=='0') $fsk_lock=' and p.products_fsk18!=1';
+     
 
-     if (GROUP_CHECK=='true') {
-   $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
-  }
+  if (GROUP_CHECK=='true') $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
+  
   $expected_query = xtc_db_query("select p.products_id,
                                   pd.products_name,
                                   products_date_available as date_expected from " .

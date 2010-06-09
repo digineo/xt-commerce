@@ -29,13 +29,11 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
 
   //fsk18 lock
   $fsk_lock='';
-  if ($_SESSION['customers_status']['customers_fsk18_display']=='0') {
-  $fsk_lock=' and p.products_fsk18!=1';
-  }
+  if ($_SESSION['customers_status']['customers_fsk18_display']=='0') $fsk_lock=' and p.products_fsk18!=1';
+  
   if ( (!isset($new_products_category_id)) || ($new_products_category_id == '0') ) {
-    if (GROUP_CHECK=='true') {
-   $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
-  }
+  if (GROUP_CHECK=='true') $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
+ 
     $new_products_query = "select distinct p.products_fsk18,
                                          p.products_id,
                                          p.products_image,
@@ -50,13 +48,12 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
                                           ".$group_check."
                                           ".$fsk_lock."
                                           and p.products_status = '1'
-                                          order by p.products_date_added
-                                          DESC limit " . MAX_DISPLAY_NEW_PRODUCTS;
+                                          order by p.products_date_added DESC limit " . MAX_DISPLAY_NEW_PRODUCTS;
   } else {
-    if (GROUP_CHECK=='true') {
-   $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
-  }
-        if (MAX_DISPLAY_NEW_PRODUCTS_DAYS !='0') {
+  
+  if (GROUP_CHECK=='true') $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
+
+  if (MAX_DISPLAY_NEW_PRODUCTS_DAYS !='0') {
   $date_new_products = date("Y.m.d", mktime(1,1,1, date(m),date(d)-MAX_DISPLAY_NEW_PRODUCTS_DAYS, date(Y)));
   $days = " and p.products_date_added > '".$date_new_products."' ";
   }
@@ -82,37 +79,38 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
   while ($new_products = xtc_db_fetch_array(&$new_products_query,true)) {
     $new_products['products_name'] = xtc_get_products_name($new_products['products_id']);
 	$new_products['products_short_description'] = xtc_get_short_description($new_products['products_id']);
+	$SEF_parameter='';
+    if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&product='.xtc_cleanName($new_products['products_name']); 
+      
     if ($_SESSION['customers_status']['customers_status_show_price']!='0') {
     $buy_now='';
     if ($_SESSION['customers_status']['customers_fsk18']=='1') {
-        if ($new_products['products_fsk18']=='0') $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $new_products['products_id'], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $new_products['products_name'] . TEXT_NOW);
+        if ($new_products['products_fsk18']=='0') $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $new_products['products_id'], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $new_products['products_name'] . TEXT_NOW) . '</a>';
     } else {
-        $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $new_products['products_id'], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $new_products['products_name'] . TEXT_NOW);
+        $buy_now='<a href="' . xtc_href_link(basename($PHP_SELF), xtc_get_all_get_params(array('action')) . 'action=buy_now&BUYproducts_id=' . $new_products['products_id'], 'NONSSL') . '">' . xtc_image_button('button_buy_now.gif', TEXT_BUY . $new_products['products_name'] . TEXT_NOW) . '</a>';
     }
     $image='';
-    if ($new_products['products_image']!='') {
-    $image=DIR_WS_THUMBNAIL_IMAGES . $new_products['products_image'];
-    }
+    if ($new_products['products_image']!='') $image=DIR_WS_THUMBNAIL_IMAGES . $new_products['products_image'];
+    
 
     $module_content[]=array(
                             'PRODUCTS_NAME' => $new_products['products_name'],
                             'PRODUCTS_DESCRIPTION' => $new_products['products_short_description'],
                             'PRODUCTS_PRICE' => $xtPrice->xtcGetPrice($new_products['products_id'],$format=true,1,$new_products['products_tax_class_id'],$new_products['products_price']),
-                            'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']),
+                            'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id'].$SEF_parameter),
                             'PRODUCTS_IMAGE' => $image,
                             'BUTTON_BUY_NOW'=>$buy_now);
 
     } else {
 
     $image='';
-    if ($new_products['products_image']!='') {
-    $image=DIR_WS_THUMBNAIL_IMAGES . $new_products['products_image'];
-    }
+    if ($new_products['products_image']!='') $image=DIR_WS_THUMBNAIL_IMAGES . $new_products['products_image'];
+    
 	$module_content[]=array(
 							'PRODUCTS_NAME' => $new_products['products_name'],
 							'PRODUCTS_DESCRIPTION' => $new_products['products_short_description'],
 							'PRODUCTS_PRICE' =>$xtPrice->xtcGetPrice($new_products['products_id'],$format=true,1,$new_products['products_tax_class_id'],$new_products['products_price']),
-							'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id']),
+							'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $new_products['products_id'].$SEF_parameter),
 							'PRODUCTS_IMAGE' => $image);
   }
     $row ++;

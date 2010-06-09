@@ -251,7 +251,7 @@ function xtcMailHackAttempt($detecting_file        =        "(no filename availa
                     '',
                     '',
                     'Attempted hack on your site? (type: '.$message.')',
-                    $output,
+                    str_replace('\n','<br>',$output),
                     $output);
 
         return;

@@ -29,9 +29,9 @@ $box_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
   while ($orders_status = xtc_db_fetch_array($orders_status_query)) {
     $orders_pending_query = xtc_db_query("select count(*) as count from " . TABLE_ORDERS . " where orders_status = '" . $orders_status['orders_status_id'] . "'");
     $orders_pending = xtc_db_fetch_array($orders_pending_query);
-    $orders_contents .= '<a href="' . xtc_href_link_admin(FILENAME_ORDERS, 'selected_box=customers&status=' . $orders_status['orders_status_id'], 'SSL') . '">' . $orders_status['orders_status_name'] . '</a>: ' . $orders_pending['count'] . '<br>';
+    $orders_contents .= '<a href="' . xtc_href_link_admin(FILENAME_ORDERS, 'selected_box=customers&status=' . $orders_status['orders_status_id'], 'SSL') . '">' . $orders_status['orders_status_name'] . '</a>: ' . $orders_pending['count'] . '<br />';
   }
-  $orders_contents = substr($orders_contents, 0, -4);
+  $orders_contents = substr($orders_contents, 0, -6);
 
   $customers_query = xtc_db_query("select count(*) as count from " . TABLE_CUSTOMERS);
   $customers = xtc_db_fetch_array($customers_query);
@@ -40,15 +40,15 @@ $box_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
   $reviews_query = xtc_db_query("select count(*) as count from " . TABLE_REVIEWS);
   $reviews = xtc_db_fetch_array($reviews_query);
   $admin_image = '<a href="' . xtc_href_link_admin(FILENAME_START,'', 'SSL').'">'.xtc_image_button('button_admin.gif', IMAGE_BUTTON_ADMIN).'</a>';
-  if ($cPath != '' && $product_info['products_id'] != '') {
-    $admin_link='<a href="' . xtc_href_link_admin(FILENAME_EDIT_PRODUCTS, 'cPath=' . $cPath . '&pID=' . $product_info['products_id']) . '&action=new_product' . '" target="_blank">' . xtc_image(DIR_WS_ICONS . 'edit_product.gif') . '</a>';
+  if ($_GET['products_id'] != '') {
+    $admin_link='<a href="' . xtc_href_link_admin(FILENAME_EDIT_PRODUCTS, 'cPath=' . $cPath . '&pID=' . $_GET['products_id']) . '&action=new_product' . '" onclick="window.open(this.href); return false;">' . xtc_image_button('edit_product.gif', IMAGE_BUTTON_PRODUCT_EDIT) . '</a>';
   }
 
-  $box_content= '<b>' . BOX_TITLE_STATISTICS . '</b><br>' . $orders_contents . '<br>' .
-                                         BOX_ENTRY_CUSTOMERS . ' ' . $customers['count'] . '<br>' .
-                                         BOX_ENTRY_PRODUCTS . ' ' . $products['count'] . '<br>' .
-                                         BOX_ENTRY_REVIEWS . ' ' . $reviews['count'] .'<br>' .
-                                         $admin_image . '<br>' .$admin_link;
+  $box_content= '<b>' . BOX_TITLE_STATISTICS . '</b><br />' . $orders_contents . '<br />' .
+                                         BOX_ENTRY_CUSTOMERS . ' ' . $customers['count'] . '<br />' .
+                                         BOX_ENTRY_PRODUCTS . ' ' . $products['count'] . '<br />' .
+                                         BOX_ENTRY_REVIEWS . ' ' . $reviews['count'] .'<br />' .
+                                         $admin_image . '<br />' .$admin_link;
 
     if ($flag==true) define('SEARCH_ENGINE_FRIENDLY_URLS',true);
     $box_smarty->assign('BOX_CONTENT', $box_content);

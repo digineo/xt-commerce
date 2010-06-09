@@ -56,7 +56,7 @@
  define('TEXT_NO_FILE','Delete Selection');
  define('TEXT_CHOOSE_FILE_SERVER','(If you uploaded your files already via FTP to <i>(media/content)</i>, you can select the file here.');
  define('TEXT_CURRENT_FILE','Current File:');
- define('TEXT_FILE_DESCRIPTION','<b>Info:</b><br>You also got the opportunity to upload a <b>.html</b> or <b>.htm</b> file and display it as shop content.<br> If you select or upload a file, the text in the box will be ignored.<br><br>');
+ define('TEXT_FILE_DESCRIPTION','<b>Info:</b><br />You also got the opportunity to upload a <b>.html</b> or <b>.htm</b> file and display it as shop content.<br /> If you select or upload a file, the text in the box will be ignored.<br /><br />');
  define('ERROR_FILE','Wrong file format (only .html or .htm)');
  define('ERROR_TITLE','Please enter a title');
  define('ERROR_COMMENT','Please enter a file description!');
@@ -69,7 +69,7 @@
  define('TEXT_GROUP','Language Group:');
  define('TEXT_GROUP_DESC','With this ID you link togehther similar subjects from different languages.');
 
- define('TEXT_CONTENT_DESCRIPTION','With this Content Manager you can add any filetype to a product, like technical sheets, productdetails, videos. These elements will be displayed on the products detailpage.<br><br>');
+ define('TEXT_CONTENT_DESCRIPTION','With this Content Manager you can add any filetype to a product, like technical sheets, productdetails, videos. These elements will be displayed on the products detailpage.<br /><br />');
  define('TEXT_FILENAME','Used File:');
  define('TEXT_FILE_DESC','Description:');
  define('USED_SPACE','Used Space:');

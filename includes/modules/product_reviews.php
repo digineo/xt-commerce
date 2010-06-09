@@ -32,9 +32,8 @@
 
       //fsk18 lock
   $fsk_lock='';
-  if ($_SESSION['customers_status']['customers_fsk18_display']=='0') {
-  $fsk_lock=' and p.products_fsk18!=1';
-  }
+  if ($_SESSION['customers_status']['customers_fsk18_display']=='0') $fsk_lock=' and p.products_fsk18!=1';
+  
   $product_info_reviews_query = xtc_db_query("select pd.products_name from " . TABLE_PRODUCTS_DESCRIPTION . " pd left join " . TABLE_PRODUCTS . " p on pd.products_id = p.products_id where pd.language_id = '" . (int)$_SESSION['languages_id'] . "' and p.products_status = '1' ".$fsk_lock." and pd.products_id = '" . (int)$_GET['products_id'] . "'");
   if (!xtc_db_num_rows($product_info_reviews_query)) xtc_redirect(xtc_href_link(FILENAME_REVIEWS));
   $product_info_reviews = xtc_db_fetch_array($product_info_reviews_query);

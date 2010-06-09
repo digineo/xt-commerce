@@ -19,4 +19,8 @@
   function xtc_draw_password_field($name, $value = '', $parameters = 'maxlength="40"') {
     return xtc_draw_input_field($name, $value, $parameters, 'password', false);
   }
+  
+    function xtc_draw_password_fieldNote($name, $value = '', $parameters = 'maxlength="40"') {
+    return xtc_draw_input_fieldNote($name, $value, $parameters, 'password', false);
+  }
  ?>

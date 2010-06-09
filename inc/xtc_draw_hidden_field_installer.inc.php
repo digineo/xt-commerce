@@ -16,6 +16,6 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_draw_hidden_field_installer($name, $value) {
-    return '<input type="hidden" name="' . $name . '" value="' . $value . '">';
+    return '<div><input type="hidden" name="' . $name . '" value="' . $value . '" /></div>';
   }
  ?>

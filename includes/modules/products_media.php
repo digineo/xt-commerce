@@ -38,9 +38,8 @@ if (xtc_in_array($_GET['products_id'],$check_data)) {
 
 require_once(DIR_FS_INC.'xtc_filesize.inc.php');
 
-  if (GROUP_CHECK=='true') {
-   $group_check="group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%' AND";
-  }
+  if (GROUP_CHECK=='true') $group_check="group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%' AND";
+  
 
 //get download
 $content_query=xtc_db_query("SELECT

@@ -21,7 +21,9 @@
 
   require_once(DIR_WS_FUNCTIONS . 'export_functions.php');
 
-
+      if (!is_writeable(DIR_FS_CATALOG . 'export/')) {
+      		$messageStack->add(ERROR_EXPORT_FOLDER_NOT_WRITEABLE, 'error');
+      }
       $module_type = 'export';
       $module_directory = DIR_WS_MODULES . 'export/';
       $module_key = 'MODULE_EXPORT_INSTALLED';
@@ -207,16 +209,16 @@
       reset($mInfo->keys);
       while (list($key, $value) = each($mInfo->keys)) {
 	 // if($value['description']!='_DESC' && $value['title']!='_TITLE'){ 
-        $keys .= '<b>' . $value['title'] . '</b><br>' .  $value['description'].'<br>';
+        $keys .= '<b>' . $value['title'] . '</b><br />' .  $value['description'].'<br />';
 	//	}
         if ($value['set_function']) {
           eval('$keys .= ' . $value['set_function'] . "'" . $value['value'] . "', '" . $key . "');");
         } else {
           $keys .= xtc_draw_input_field('configuration[' . $key . ']', $value['value']);
         }
-        $keys .= '<br><br>';
+        $keys .= '<br /><br />';
       }
-      $keys = substr($keys, 0, strrpos($keys, '<br><br>'));
+      $keys = substr($keys, 0, strrpos($keys, '<br /><br />'));
 
       $heading[] = array('text' => '<b>' . $mInfo->title . '</b>');
       $class = substr($file, 0, strrpos($file, '.'));
@@ -235,7 +237,7 @@
         $keys = '';
         reset($mInfo->keys);
         while (list(, $value) = each($mInfo->keys)) {
-          $keys .= '<b>' . $value['title'] . '</b><br>';
+          $keys .= '<b>' . $value['title'] . '</b><br />';
           if ($value['use_function']) {
             $use_function = $value['use_function'];
             if (ereg('->', $use_function)) {
@@ -255,16 +257,16 @@
             $keys .=  $value['value'];
 			}
           }
-          $keys .= '<br><br>';
+          $keys .= '<br /><br />';
         }
-        $keys = substr($keys, 0, strrpos($keys, '<br><br>'));
+        $keys = substr($keys, 0, strrpos($keys, '<br /><br />'));
 
         $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $_GET['set'] . '&module=' . $mInfo->code . '&action=remove') . '">' . xtc_image_button('button_module_remove.gif', IMAGE_MODULE_REMOVE) . '</a> <a href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $_GET['set'] . '&module=' . $_GET['module'] . '&action=edit') . '">' . xtc_image_button('button_start.gif', IMAGE_START) . '</a>');
-        $contents[] = array('text' => '<br>' . $mInfo->description);
-        $contents[] = array('text' => '<br>' . $keys);
+        $contents[] = array('text' => '<br />' . $mInfo->description);
+        $contents[] = array('text' => '<br />' . $keys);
       } else {
         $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=' . $_GET['set'] . '&module=' . $mInfo->code . '&action=install') . '">' . xtc_image_button('button_module_install.gif', IMAGE_MODULE_INSTALL) . '</a>');
-        $contents[] = array('text' => '<br>' . $mInfo->description);
+        $contents[] = array('text' => '<br />' . $mInfo->description);
       }
       break;
   }
@@ -290,7 +292,7 @@
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<br>
+<br />
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

@@ -17,7 +17,7 @@
    
 // Output a form hidden field
   function xtc_draw_hidden_field($name, $value = '', $parameters = '') {
-    $field = '<input type="hidden" name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '" value="';
+    $field = '<div><input type="hidden" name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '" value="';
 
     if (xtc_not_null($value)) {
       $field .= xtc_parse_input_field_data($value, array('"' => '&quot;'));
@@ -27,7 +27,7 @@
 
     if (xtc_not_null($parameters)) $field .= ' ' . $parameters;
 
-    $field .= '">';
+    $field .= '" /></div>';
 
     return $field;
   }

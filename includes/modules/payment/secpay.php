@@ -103,10 +103,14 @@
           $test_status = 'true';
           break;
       }
-
+       if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
       $process_button_string = xtc_draw_hidden_field('merchant', MODULE_PAYMENT_SECPAY_MERCHANT_ID) .
                                xtc_draw_hidden_field('trans_id', STORE_NAME . date('Ymdhis')) .
-                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($order->info['total'] ,$sec_currency), $xtPrice->get_decimal_places($sec_currency))) .
+                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($total ,$sec_currency), $xtPrice->get_decimal_places($sec_currency))) .
                                xtc_draw_hidden_field('bill_name', $order->billing['firstname'] . ' ' . $order->billing['lastname']) .
                                xtc_draw_hidden_field('bill_addr_1', $order->billing['street_address']) .
                                xtc_draw_hidden_field('bill_addr_2', $order->billing['suburb']) .

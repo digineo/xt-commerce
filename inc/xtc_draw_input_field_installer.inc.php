@@ -16,14 +16,14 @@
    ---------------------------------------------------------------------------------------*/
    
   function xtc_draw_input_field_installer($name, $text = '', $type = 'text', $parameters = '', $reinsert_value = true) {
-    $field = '<input type="' . $type . '" name="' . $name . '"';
+    $field = '<div><input type="' . $type . '" name="' . $name . '"';
     if ( ($key = $GLOBALS[$name]) || ($key = $_GET[$name]) || ($key = $_POST[$name]) || ($key = $_SESSION[$name]) && ($reinsert_value) ) {
       $field .= ' value="' . $key . '"';
     } elseif ($text != '') {
       $field .= ' value="' . $text . '"';
     }
     if ($parameters) $field.= ' ' . $parameters;
-    $field .= '>';
+    $field .= ' /></div>';
 
     return $field;
   }

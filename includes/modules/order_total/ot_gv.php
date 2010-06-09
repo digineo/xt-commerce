@@ -184,6 +184,8 @@
         $gv_result = xtc_db_fetch_array($gv_query);
         $gv_payment_amount = $this->deduction;
         $gv_amount = $gv_result['amount'] - $this->Price->xtcRemoveCurr($gv_payment_amount);
+        //prepare for DB insert
+        $gv_amount = str_replace(",", ".", $gv_amount);
         $gv_update = xtc_db_query("update " . TABLE_COUPON_GV_CUSTOMER . " set amount = '" . $gv_amount . "' where customer_id = '" . $_SESSION['customer_id'] . "'");
       }
       return $gv_payment_amount;
@@ -294,10 +296,11 @@
 
     function get_order_total() {
       global $order;
-      $order_total = $order->info['total'];
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] != 0) $order_total = $order->info['total'];
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) $order_total = $order->info['tax']+$order->info['total'];
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 0) $order_total = $order->info['total'];
       if ($this->include_tax == 'false') $order_total = $order_total - $order->info['tax'];
       if ($this->include_shipping == 'false') $order_total = $order_total - $order->info['shipping_cost'];
-
       return $order_total;
     }
 

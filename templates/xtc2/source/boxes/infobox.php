@@ -25,22 +25,22 @@ $box_content='';
 
 
   if ($_SESSION['customers_status']['customers_status_image']!='') {
-    $loginboxcontent = '<center>' . xtc_image('admin/images/icons/' . $_SESSION['customers_status']['customers_status_image']) . '</center>';
+    $loginboxcontent = xtc_image('admin/images/icons/' . $_SESSION['customers_status']['customers_status_image']) . '<br />';
   }
-  $loginboxcontent .= BOX_LOGINBOX_STATUS . '<b>' . $_SESSION['customers_status']['customers_status_name'] . '</b><br>';
+  $loginboxcontent .= BOX_LOGINBOX_STATUS . '<b>' . $_SESSION['customers_status']['customers_status_name'] . '</b><br />';
   if ($_SESSION['customers_status']['customers_status_show_price'] == 0) {
     $loginboxcontent .= NOT_ALLOWED_TO_SEE_PRICES_TEXT;
   } else  {
     if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 1) {
-      $loginboxcontent .= BOX_LOGINBOX_INCL . '<br>';
+      $loginboxcontent .= BOX_LOGINBOX_INCL . '<br />';
     } else {
-      $loginboxcontent .= BOX_LOGINBOX_EXCL . '<br>';
+      $loginboxcontent .= BOX_LOGINBOX_EXCL . '<br />';
     }
     if ($_SESSION['customers_status']['customers_status_discount'] != '0.00') {
-      $loginboxcontent.=BOX_LOGINBOX_DISCOUNT . ' ' . $_SESSION['customers_status']['customers_status_discount'] . '%<br>';
+      $loginboxcontent.=BOX_LOGINBOX_DISCOUNT . ' ' . $_SESSION['customers_status']['customers_status_discount'] . '%<br />';
     }
     if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == 1  && $_SESSION['customers_status']['customers_status_ot_discount'] != '0.00') {
-      $loginboxcontent .= BOX_LOGINBOX_DISCOUNT_TEXT . ' '  . $_SESSION['customers_status']['customers_status_ot_discount'] . ' % ' . BOX_LOGINBOX_DISCOUNT_OT . '<br>';
+      $loginboxcontent .= BOX_LOGINBOX_DISCOUNT_TEXT . ' '  . $_SESSION['customers_status']['customers_status_ot_discount'] . ' % ' . BOX_LOGINBOX_DISCOUNT_OT . '<br />';
     }
   }
 

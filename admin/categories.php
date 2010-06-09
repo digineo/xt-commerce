@@ -148,6 +148,11 @@
             rename(DIR_FS_CATALOG_IMAGES.'categories/'.$categories_image->filename, DIR_FS_CATALOG_IMAGES.'categories/'.$categories_image_name);            	
             xtc_db_query("update " . TABLE_CATEGORIES . " set categories_image = '" . xtc_db_input($categories_image_name) . "' where categories_id = '" . (int)$categories_id . "'");
             }
+            
+            if ($_POST['del_cat_pic'] == 'yes') {
+			@unlink(DIR_FS_CATALOG_IMAGES.'categories/'.$_POST['categories_previous_image']);
+          	xtc_db_query("update " . TABLE_CATEGORIES . " set categories_image = '' where categories_id = '" . (int)$categories_id . "'");
+          	}
           
           xtc_redirect(xtc_href_link(FILENAME_CATEGORIES, 'cPath=' . $_GET['cPath'] . '&cID=' . $categories_id));
         }
@@ -241,7 +246,7 @@
 
 
         if (PRICE_IS_BRUTTO=='true' && $_POST['products_price']){
-                $_POST['products_price'] = ($_POST['products_price']/(xtc_get_tax_rate($_POST['products_tax_class_id'])+100)*100);
+                $_POST['products_price'] = round(($_POST['products_price']/(xtc_get_tax_rate($_POST['products_tax_class_id'])+100)*100),PRICE_PRECISION);
          }
 
 
@@ -266,22 +271,25 @@
          }
         }
 
-          $sql_data_array = array('products_quantity' => xtc_db_prepare_input($_POST['products_quantity']),
-                                  'products_model' => xtc_db_prepare_input($_POST['products_model']),
-                                  'products_ean'=>xtc_db_prepare_input($_POST['products_ean']),
-                                  'products_price' => xtc_db_prepare_input($_POST['products_price']),
-                                  'products_sort' => xtc_db_prepare_input($_POST['products_sort']),
-                                  'group_ids'=>$group_ids,
-                                  'products_shippingtime' => xtc_db_prepare_input($_POST['shipping_status']),
-                                  'products_discount_allowed' => xtc_db_prepare_input($_POST['products_discount_allowed']),
-                                  'products_date_available' => $products_date_available,
-                                  'products_weight' => xtc_db_prepare_input($_POST['products_weight']),
-                                  'products_status' => xtc_db_prepare_input($_POST['products_status']),
-                                  'products_tax_class_id' => xtc_db_prepare_input($_POST['products_tax_class_id']),
-                                  'product_template' => xtc_db_prepare_input($_POST['info_template']),
-                                  'options_template' => xtc_db_prepare_input($_POST['options_template']),
-                                  'manufacturers_id' => xtc_db_prepare_input($_POST['manufacturers_id']),
-                                  'products_fsk18' => xtc_db_prepare_input($_POST['fsk18']));
+$sql_data_array = array('products_quantity' => xtc_db_prepare_input($_POST['products_quantity']),
+                                 'products_model' => xtc_db_prepare_input($_POST['products_model']),
+                                 'products_ean'=>xtc_db_prepare_input($_POST['products_ean']),
+                                 'products_price' => xtc_db_prepare_input($_POST['products_price']),
+                                 'products_sort' => xtc_db_prepare_input($_POST['products_sort']),
+                                 'group_ids'=>$group_ids,
+                                 'products_shippingtime' => xtc_db_prepare_input($_POST['shipping_status']),
+                                 'products_discount_allowed' => xtc_db_prepare_input($_POST['products_discount_allowed']),
+                                 'products_date_available' => $products_date_available,
+                                 'products_weight' => xtc_db_prepare_input($_POST['products_weight']),
+                                 'products_status' => xtc_db_prepare_input($_POST['products_status']),
+                                 'products_tax_class_id' => xtc_db_prepare_input($_POST['products_tax_class_id']),
+                                 'product_template' => xtc_db_prepare_input($_POST['info_template']),
+                                 'options_template' => xtc_db_prepare_input($_POST['options_template']),
+                                 'manufacturers_id' => xtc_db_prepare_input($_POST['manufacturers_id']),
+                                 'products_fsk18' => xtc_db_prepare_input($_POST['fsk18']),
+                                 'products_vpe_value' => xtc_db_prepare_input($_POST['products_vpe_value']),
+                                 'products_vpe_status' => xtc_db_prepare_input($_POST['products_vpe_status']),
+                                 'products_vpe' => xtc_db_prepare_input($_POST['products_vpe']));
 
           //get the next ai-value from table products if no products_id is set
           if(!$products_id || $products_id == '') {
@@ -298,7 +306,14 @@
           $dup_check_query = xtDBquery("SELECT count(*) as total FROM ".TABLE_PRODUCTS." WHERE products_image = '".$_POST['products_previous_image_0']."'");
           $dup_check = xtc_db_fetch_array($dup_check_query);
           if ($dup_check['total'] < 2) { @xtc_del_image_file($_POST['products_previous_image_0']); }
-          rename(DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image->filename, DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image_name);
+          //workaround if there are v2 images mixed with v3
+          $dup_check_query = xtDBquery("SELECT count(*) as total FROM ".TABLE_PRODUCTS." WHERE products_image = '".$products_image->filename."'");
+          $dup_check = xtc_db_fetch_array($dup_check_query);          
+          if ($dup_check['total'] == 0) { 
+              rename (DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image->filename, DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image_name);
+          } else {
+              copy (DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image->filename, DIR_FS_CATALOG_ORIGINAL_IMAGES.$products_image_name);
+          }
           $sql_data_array['products_image'] = xtc_db_prepare_input($products_image_name);
 
 		  require(DIR_WS_INCLUDES . 'product_thumbnail_images.php');
@@ -309,7 +324,14 @@
           $products_image_name = $_POST['products_previous_image_0'];
           }
           
-          //are we asked to delete some mo_pics?
+          //are we asked to delete some pics?
+          if ($_POST['del_pic'] != '') {
+          	$dup_check_query = xtDBquery("SELECT count(*) as total FROM ".TABLE_PRODUCTS." WHERE products_image = '".$_POST['del_pic']."'");
+          	$dup_check = xtc_db_fetch_array($dup_check_query);
+          	if ($dup_check['total'] < 2) @xtc_del_image_file($_POST['del_pic']);
+          	xtc_db_query("UPDATE " . TABLE_PRODUCTS . " SET products_image = '' where products_id = '" . xtc_db_input($products_id) . "'");              
+          }
+          
           if ($_POST['del_mo_pic'] != '') {
           	foreach ($_POST['del_mo_pic'] as $val){
           	$dup_check_query = xtDBquery("SELECT count(*) as total FROM ".TABLE_PRODUCTS_IMAGES." WHERE image_name = '".$val."'");
@@ -658,7 +680,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>"> 
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 <?php if (USE_SPAW=='true') {
  $query=xtc_db_query("SELECT code FROM ". TABLE_LANGUAGES ." WHERE languages_id='".$_SESSION['languages_id']."'");
  $data=xtc_db_fetch_array($query);
@@ -724,7 +746,6 @@
 <script type="text/javascript">
       HTMLArea.loadPlugin("SpellChecker");
       HTMLArea.loadPlugin("TableOperations");
-      HTMLArea.loadPlugin("FullPage");
       HTMLArea.loadPlugin("CharacterMap");
       HTMLArea.loadPlugin("ContextMenu");
       HTMLArea.loadPlugin("ImageManager");
@@ -738,7 +759,6 @@ for ($i=0; $i<sizeof($languages); $i++) {
 ?>
 var editor<?php echo $languages[$i]['id']; ?> = new HTMLArea("categories_description[<?php echo $languages[$i]['id']; ?>]");
 editor<?php echo $languages[$i]['id']; ?>.registerPlugin(TableOperations);
-editor<?php echo $languages[$i]['id']; ?>.registerPlugin(FullPage);
 editor<?php echo $languages[$i]['id']; ?>.registerPlugin(ContextMenu);
 editor<?php echo $languages[$i]['id']; ?>.registerPlugin(CharacterMap);
 editor<?php echo $languages[$i]['id']; ?>.registerPlugin(ImageManager);
@@ -756,7 +776,6 @@ for ($i=0; $i<sizeof($languages); $i++) {
 ?>
 var editor<?php echo $languages[$i]['id']; ?> = new HTMLArea("products_description_<?php echo $languages[$i]['id']; ?>");
 editor<?php echo $languages[$i]['id']; ?>.registerPlugin(TableOperations);
-editor<?php echo $languages[$i]['id']; ?>.registerPlugin(FullPage);
 editor<?php echo $languages[$i]['id']; ?>.registerPlugin(ContextMenu);
 editor<?php echo $languages[$i]['id']; ?>.registerPlugin(CharacterMap);
 editor<?php echo $languages[$i]['id']; ?>.registerPlugin(ImageManager);
@@ -764,7 +783,6 @@ editor<?php echo $languages[$i]['id']; ?>.generate();
 
 var editorshort<?php echo $languages[$i]['id']; ?> = new HTMLArea("products_short_description_<?php echo $languages[$i]['id']; ?>");
 editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(TableOperations);
-editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(FullPage);
 editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(ContextMenu);
 editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(CharacterMap);
 editorshort<?php echo $languages[$i]['id']; ?>.registerPlugin(ImageManager);

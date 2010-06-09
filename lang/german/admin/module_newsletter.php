@@ -14,9 +14,9 @@
   define('TITLE_CUSTOMERS','Kundengruppe');
   define('TITLE_STK','Abonniert');
   define('TEXT_TITLE','Betreff:');
-  define('TEXT_TO','An...:');
-  define('TEXT_CC','Cc...:');
-  define('TEXT_BODY','Inhalt:');
+  define('TEXT_TO','An: ');
+  define('TEXT_CC','Cc: ');
+  define('TEXT_BODY','Inhalt: ');
   define('TITLE_NOT_SEND','Titel');
   define('TITLE_ACTION','Aktion');
   define('TEXT_EDIT','Bearbeiten');

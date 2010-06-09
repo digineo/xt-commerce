@@ -89,7 +89,7 @@ if (xtc_in_array('database', $_POST['install'])) {
 <div align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="FFAF00">xtc:</font><font color="#999999">Install</font></b></font></div></td>
         </tr>
         <tr> 
-          <td bgcolor="F3F3F3" ><br> 
+          <td bgcolor="F3F3F3" ><br /> 
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
                 <td width="10">&nbsp;</td>
@@ -136,17 +136,17 @@ if (xtc_in_array('database', $_POST['install'])) {
                 <td>&nbsp;</td>
               </tr>
             </table>
-            <br></td>
+            <br /></td>
         </tr>
       </table>
     </td>
     <td align="center" valign="top" style="border-top: 1px solid; border-bottom: 1px solid; border-right: 1px solid; border-color: #6D6D6D;"> 
-      <br>
+      <br />
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br>
-            <br>
-            <br>
+          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br />
+            <br />
+            <br />
             <?php echo TEXT_WELCOME_STEP2; ?></font></td>
         </tr>
       </table>
@@ -173,7 +173,7 @@ if (xtc_in_array('database', $_POST['install'])) {
 
     if ($db_error) {
 ?>
-      <br>
+      <br />
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr> 
           <td style="border-bottom: 1px solid; border-color: #CFCFCF"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><img src="images/icons/error.gif" width="16" height="16"><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><?php echo TEXT_CONNECTION_ERROR; ?></strong></font></font></td>
@@ -267,11 +267,11 @@ if (xtc_in_array('database', $_POST['install'])) {
               </td>
   </tr>
 </table>
-        <br>
+        <br />
         <img src="images/break-el.gif" width="100%" height="1">
-                <br>
-        <br>
-        <br>
+                <br />
+        <br />
+        <br />
  
       <p>&nbsp;</p>
       <p>&nbsp;</p>

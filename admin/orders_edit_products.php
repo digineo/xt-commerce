@@ -104,7 +104,7 @@ echo xtc_image_submit('button_edit_attributes.gif', TEXT_EDIT_PRODUCTS,'style="c
 }
 ?>
 </table>
-<br><br>
+<br /><br />
 <!-- Artikelbearbeitung Ende //-->
 
 <!-- Artikel Einfügen Anfang //-->
@@ -131,7 +131,7 @@ echo xtc_image_submit('button_search.gif', TEXT_EDIT,'style="cursor:hand" ');
 </form>
 </tr>
 </table>
-<br><br>
+<br /><br />
 <?php
 if ($_GET['action'] =='product_search') {
 
@@ -186,7 +186,7 @@ echo xtc_image_submit('button_insert.gif', TEXT_EDIT,'style="cursor:hand" ');
 ?>
 </table>
 <?php } ?>
-<br><br>
+<br /><br />
 <!-- Artikel Einfügen Ende //-->
 
 

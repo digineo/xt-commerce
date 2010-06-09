@@ -193,9 +193,13 @@
           $transaction_type = '1';
           break;
       }
-
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
       $process_button_string = xtc_draw_hidden_field('MerchantID', MODULE_PAYMENT_PSIGATE_MERCHANT_ID) .
-                               xtc_draw_hidden_field('FullTotal', round($xtPrice->xtcCalculateCurrEx($order->info['total'],MODULE_PAYMENT_PSIGATE_CURRENCY), $xtPrice->get_decimal_places(MODULE_PAYMENT_PSIGATE_CURRENCY))) .
+                               xtc_draw_hidden_field('FullTotal', round($xtPrice->xtcCalculateCurrEx($total,MODULE_PAYMENT_PSIGATE_CURRENCY), $xtPrice->get_decimal_places(MODULE_PAYMENT_PSIGATE_CURRENCY))) .
                                xtc_draw_hidden_field('ThanksURL', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL', true)) .
                                xtc_draw_hidden_field('NoThanksURL', xtc_href_link(FILENAME_CHECKOUT_PAYMENT, 'payment_error=' . $this->code, 'NONSSL', true)) . 
                                xtc_draw_hidden_field('Bname', $order->billing['firstname'] . ' ' . $order->billing['lastname']) .

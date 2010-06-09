@@ -26,4 +26,5 @@ define('TABLE_HEADING_ACTION', 'Aktion');
 define('TEXT_MODULE_DIRECTORY', 'Modul Verzeichnis:');
 
 define('TABLE_HEADING_FILENAME','Modulname (f&uuml;r internen Gebrauch)');
+define('ERROR_EXPORT_FOLDER_NOT_WRITEABLE','export/ Verzeichniss nicht beschreibbar!');
 ?>

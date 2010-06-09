@@ -38,7 +38,7 @@ switch ($_GET['action']) {
         break;
 
         case 'remove':
-        xtc_db_query("DELETE FROM ".TABLE_CUSTOMERS_MEMO." where memo_id='".$mID."'");
+        xtc_db_query("DELETE FROM ".TABLE_CUSTOMERS_MEMO." where memo_id='".$_GET['mID']."'");
         break;
 
 }
@@ -57,7 +57,7 @@ switch ($_GET['action']) {
     <table width="100%">
       <tr>
       <form name="customers_memo" method="POST" action="popup_memo.php?action=save&ID=<?php echo (int)$_GET['ID'];?>">
-        <td class="main" style="border-top: 1px solid; border-color: #cccccc;"><b><?php echo TEXT_TITLE ?></b>:<?php echo xtc_draw_input_field('memo_title').xtc_draw_hidden_field('ID',(int)$_GET['ID']); ?><br><?php echo xtc_draw_textarea_field('memo_text', 'soft', '73', '5'); ?><br><?php echo xtc_image_submit('button_insert.gif', IMAGE_INSERT); ?></td>
+        <td class="main" style="border-top: 1px solid; border-color: #cccccc;"><b><?php echo TEXT_TITLE ?></b>:<?php echo xtc_draw_input_field('memo_title').xtc_draw_hidden_field('ID',(int)$_GET['ID']); ?><br /><?php echo xtc_draw_textarea_field('memo_text', 'soft', '73', '5'); ?><br /><?php echo xtc_image_submit('button_insert.gif', IMAGE_INSERT); ?></td>
       </tr>
     </table></form>
 <table width="100%"  border="0" cellpadding="0" cellspacing="0">
@@ -81,7 +81,7 @@ switch ($_GET['action']) {
     $poster_values = xtc_db_fetch_array($poster_query);
 ?><table width="100%">
       <tr>
-        <td class="main"><hr noshade><b><?php echo TEXT_DATE; ?></b>:<i><?php echo $memo_values['memo_date']; ?><br></i><b><?php echo TEXT_TITLE; ?></b>:<?php echo $memo_values['memo_title']; ?><br><b>  <?php echo TEXT_POSTER; ?></b>:<?php echo $poster_values['customers_lastname']; ?> <?php echo $poster_values['customers_firstname']; ?></td>
+        <td class="main"><hr noshade><b><?php echo TEXT_DATE; ?></b>:<i><?php echo $memo_values['memo_date']; ?><br /></i><b><?php echo TEXT_TITLE; ?></b>:<?php echo $memo_values['memo_title']; ?><br /><b>  <?php echo TEXT_POSTER; ?></b>:<?php echo $poster_values['customers_lastname']; ?> <?php echo $poster_values['customers_firstname']; ?></td>
       </tr>
       <tr>
         <td width="142" class="main" style="border: 1px solid; border-color: #cccccc;"><?php echo $memo_values['memo_text']; ?></td>

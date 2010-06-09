@@ -139,8 +139,8 @@ define('CHARSET','iso-8859-1');
             $schema .= '<prices>' . "\n";
                     $schema .= '<price>' . "\n";
                         $schema .= '<currency>' . $_POST['currencies'] . '</currency>' . "\n";
-                        $schema .= '<extax>' .round(($products_price/($tax_rate+100)*100),2) . '</extax>' . "\n";
-                        $schema .= '<inctax>' . $products_price . '</inctax>' . "\n";
+                        $schema .= '<extax>' .number_format(($products_price/($tax_rate+100)*100),2,'.','') . '</extax>' . "\n";
+                        $schema .= '<inctax>' . number_format($products_price,2,'.','') . '</inctax>' . "\n";
             		$schema .= '</price>' . "\n";
             $schema .= '</prices>' . "\n";
 

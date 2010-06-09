@@ -84,6 +84,13 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
             						'PRICE' =>$xtPrice->xtcFormat($price,true),
                                     'FULL_PRICE'=>$xtPrice->xtcFormat($products_price+$price,true),
             						'PREFIX' =>$products_options['price_prefix']);
+            						
+            //if PRICE for option is 0 we don't need to display it
+            if ($price == 0) { 
+                unset($products_options_data[$row]['DATA'][$col]['PRICE']);
+                unset($products_options_data[$row]['DATA'][$col]['PREFIX']);
+            } 
+                        						
           }
         $col++;
         }

@@ -140,7 +140,7 @@ $kelkoo_image=HTTP_CATALOG_SERVER . DIR_WS_CATALOG_THUMBNAIL_IMAGES . $products[
                        HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $products['products_id']."\t".
                        $products['products_name'] . "\t".
                        $products_description ."\t".
-                       $products_price. "\t" .
+                       number_format($products_price,2,'.',''). "\t" .
                        $products['products_id'] . "\t" .
                        $categorie_data['categories_name'] . "\t".
                        // '001'."\t".

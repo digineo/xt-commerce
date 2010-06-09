@@ -29,10 +29,12 @@
 
 
 ?>
-<!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html <?php echo HTML_PARAMS; ?>>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>"> 
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>" /> 
+<meta http-equiv="Content-Style-Type" content="text/css" />
+
 <?php
 /*
   The following copyright announcement is in compliance
@@ -51,21 +53,17 @@
 	created by Mario Zanier & Guido Winger and licensed under GNU/GPL.
 	Information and contribution at http://www.xt-commerce.com
 -->
-<meta name="generator" content="(c) by <?php echo PROJECT_VERSION; ?> , http://www.xt-commerce.com">
+<meta name="generator" content="(c) by <?php echo PROJECT_VERSION; ?> , http://www.xt-commerce.com" />
 <?php include(DIR_WS_MODULES.FILENAME_METATAGS); ?>
-<base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo 'templates/'.CURRENT_TEMPLATE.'/stylesheet.css'; ?>">
-<script language="javascript"><!--
+<base href="<?php echo (($request_type == 'SSL') ? HTTPS_SERVER : HTTP_SERVER) . DIR_WS_CATALOG; ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo 'templates/'.CURRENT_TEMPLATE.'/stylesheet.css'; ?>" />
+<script type="text/javascript"><!--
 var selected;
-<?php // GV Code Start following jscript function ICW ADDED FOR CREDIT CLASS SYSTEM
-?>
 var submitter = null;
 
 function submitFunction() {
     submitter = 1;
 }
-<?php // GV Code End END OF ICW ADDED FOR ORDER_TOTAL CREDIT SYSTEM
-?>
 function popupWindow(url) {
   window.open(url,'popupWindow','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,copyhistory=no,width=100,height=100,screenX=150,screenY=150,top=150,left=150')
 }  
@@ -135,7 +133,7 @@ if (strstr($PHP_SELF, FILENAME_ADDRESS_BOOK_PROCES )) {
 if (strstr($PHP_SELF, FILENAME_CHECKOUT_SHIPPING_ADDRESS )or strstr($PHP_SELF,FILENAME_CHECKOUT_PAYMENT_ADDRESS)) {
 require('includes/form_check.js.php');
 ?>
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 function check_form_optional(form_name) {
   var form = form_name;
 
@@ -155,8 +153,8 @@ function check_form_optional(form_name) {
 
 if (strstr($PHP_SELF, FILENAME_ADVANCED_SEARCH )) {
 ?>
-<script language="javascript" src="includes/general.js"></script>
-<script language="javascript"><!--
+<script type="text/javascript" src="includes/general.js"></script>
+<script type="text/javascript"><!--
 function check_form() {
   var error_message = "<?php echo JS_ERROR; ?>";
   var error_found = false;
@@ -251,7 +249,7 @@ if (strstr($PHP_SELF, FILENAME_PRODUCT_REVIEWS_WRITE )) {
 ?>
 
 
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 function checkForm() {
   var error = 0;
   var error_message = "<?php echo JS_ERROR; ?>";
@@ -282,7 +280,7 @@ function checkForm() {
 if (strstr($PHP_SELF, FILENAME_POPUP_IMAGE )) {
 ?>
 
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 var i=0;
 function resize() {
   if (navigator.appName == 'Netscape') i=40;
@@ -364,6 +362,7 @@ $smarty->assign('account',xtc_href_link(FILENAME_ACCOUNT, '', 'SSL'));
 }
 $smarty->assign('cart',xtc_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));
 $smarty->assign('checkout',xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+$smarty->assign('store_name',TITLE);
 
     
 

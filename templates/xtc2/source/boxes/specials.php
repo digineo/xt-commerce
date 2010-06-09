@@ -52,11 +52,14 @@ $box_content='';
   }
   $image='';
   if ($random_product['products_image']!='') $image=DIR_WS_THUMBNAIL_IMAGES . $random_product['products_image'];
-    $box_smarty->assign('LINK',xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $random_product["products_id"]));
+  $SEF_parameter='';
+    if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&product='.xtc_cleanName($random_product['categories_name']); 
+    
+    $box_smarty->assign('LINK',xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $random_product["products_id"].$SEF_parameter));
     $box_smarty->assign('IMAGE',$image);
     $box_smarty->assign('NAME',$random_product['products_name']);
     $box_smarty->assign('PRICE',$xtPrice->xtcGetPrice($random_product['products_id'],$format=true,1,$random_product['products_tax_class_id'],$random_product['products_price']));
-    $box_smarty->assign('EXPIRES',$new_values['expires_date']);
+    $box_smarty->assign('EXPIRES',$random_product['expires_date']);
     $box_smarty->assign('SPECIALS_LINK',xtc_href_link(FILENAME_SPECIALS));
 
 

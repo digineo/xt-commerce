@@ -67,7 +67,7 @@ function vvcode_render_code($code) {
         //echo $xtc_random_font;
         $xtc_random_size = xtc_rand(25, 35);
         $xtc_random_angle = xtc_rand(-30, 30);
-        
+
         imagettftext($imgh, $xtc_random_size, $xtc_random_angle, 40*$i+10 , 30, $fonts, $xtc_random_font, substr($code, $i, 1));
     }
     

@@ -113,7 +113,7 @@ define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exp
             //create content
             $schema .= $products['products_name'] .';'.
                        $products['products_model'] . ';' .
-                       $products_price. ';' .
+                       number_format($products_price,2,'.',''). ';' .
                        $products_description .';'.
                        HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $products['products_id'] . ';' .
                        HTTP_CATALOG_SERVER . DIR_WS_CATALOG_THUMBNAIL_IMAGES .$products['products_image'].';'.

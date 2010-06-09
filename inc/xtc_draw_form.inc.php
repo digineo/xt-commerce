@@ -17,7 +17,7 @@
    
 // Output a form
   function xtc_draw_form($name, $action, $method = 'post', $parameters = '') {
-    $form = '<form name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '" action="' . xtc_parse_input_field_data($action, array('"' => '&quot;')) . '" method="' . xtc_parse_input_field_data($method, array('"' => '&quot;')) . '"';
+    $form = '<form id="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '" action="' . xtc_parse_input_field_data($action, array('"' => '&quot;')) . '" method="' . xtc_parse_input_field_data($method, array('"' => '&quot;')) . '"';
 
     if (xtc_not_null($parameters)) $form .= ' ' . $parameters;
 

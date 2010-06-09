@@ -56,7 +56,7 @@
  define('TEXT_NO_FILE','Auswahl L&ouml;schen');
  define('TEXT_CHOOSE_FILE_SERVER','(Falls Sie ihre Dateien selbst via FTP auf ihren Server gespeichert haben <i>(media/content)</i>, k&ouml;nnen Sie hier die Datei ausw&auml;hlen.');
  define('TEXT_CURRENT_FILE','Aktuelle Datei:');
- define('TEXT_FILE_DESCRIPTION','<b>Info:</b><br>Sie haben ebenfalls die M&ouml;glichkeit eine <b>.html</b> oder <b>.htm</b> Datei als Content einzubinden.<br> Falls Sie eine Datei ausw&auml;hlen oder hochladen, wird der Text im Textfeld ignoriert.<br><br>');
+ define('TEXT_FILE_DESCRIPTION','<b>Info:</b><br />Sie haben ebenfalls die M&ouml;glichkeit eine <b>.html</b> oder <b>.htm</b> Datei als Content einzubinden.<br /> Falls Sie eine Datei ausw&auml;hlen oder hochladen, wird der Text im Textfeld ignoriert.<br /><br />');
  define('ERROR_FILE','Falsches Dateiformat (nur .html od .htm)');
  define('ERROR_TITLE','Bitte geben Sie einen Titel ein');
  define('ERROR_COMMENT','Bitte geben Sie eine Dateibeschreibung ein!');
@@ -69,7 +69,7 @@
  define('TEXT_GROUP','Sprachgruppe:');
  define('TEXT_GROUP_DESC','Mit dieser ID verkn&uuml;pfen sie gleiche Themen unterschiedlicher Sprachen miteinander.');
  
- define('TEXT_CONTENT_DESCRIPTION','Mit diesem Content Manager haben Sie die M&ouml;glichkeit, jeden beliebige Dateityp einem Artikel hinzuzuf&uuml;gen.<br>Zb. Artikelbeschreibungen, Handb&uuml;cher, technische Datenbl&auml;tter, H&ouml;rproben, usw...<br>Diese Elemente werden In der Artikel-Detailansicht angezeigt.<br><br>');
+ define('TEXT_CONTENT_DESCRIPTION','Mit diesem Content Manager haben Sie die M&ouml;glichkeit, jeden beliebige Dateityp einem Artikel hinzuzuf&uuml;gen.<br />Zb. Artikelbeschreibungen, Handb&uuml;cher, technische Datenbl&auml;tter, H&ouml;rproben, usw...<br />Diese Elemente werden In der Artikel-Detailansicht angezeigt.<br /><br />');
  define('TEXT_FILENAME','Benutze Datei:');
  define('TEXT_FILE_DESC','Beschreibung:');
  define('USED_SPACE','Verwendeter Speicherplatz:');

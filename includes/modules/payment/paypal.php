@@ -89,17 +89,23 @@
       if (!in_array($my_currency, array('CAD', 'EUR', 'GBP', 'JPY', 'USD'))) {
         $my_currency = 'EUR';
       }
+
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
       if ($_SESSION['currency']==$my_currency) {
-      $amount=round($order->info['total'], $xtPrice->get_decimal_places($my_currency));
+      $amount=round($total, $xtPrice->get_decimal_places($my_currency));
       $shipping=round($order->info['shipping_cost'], $xtPrice->get_decimal_places($my_currency));
       } else {
-      $amount=round($xtPrice->xtcCalculateCurrEx($order->info['total'],$my_currency) , $xtPrice->get_decimal_places($my_currency));
+      $amount=round($xtPrice->xtcCalculateCurrEx($total,$my_currency) , $xtPrice->get_decimal_places($my_currency));
       $shipping=round($xtPrice->xtcCalculateCurrEx($order->info['shipping_cost'],$my_currency) , $xtPrice->get_decimal_places($my_currency));
       }
       $process_button_string = xtc_draw_hidden_field('cmd', '_xclick') .
                                xtc_draw_hidden_field('business', MODULE_PAYMENT_PAYPAL_ID) .
                                xtc_draw_hidden_field('item_name', STORE_NAME) .
-                               xtc_draw_hidden_field('amount', $amount) .
+                               xtc_draw_hidden_field('amount', $amount-$shipping) .
                                xtc_draw_hidden_field('shipping', $shipping) .
                                xtc_draw_hidden_field('currency_code', $my_currency) .
                                xtc_draw_hidden_field('return', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL')) .

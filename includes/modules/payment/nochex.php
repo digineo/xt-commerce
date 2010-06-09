@@ -80,10 +80,14 @@
 
     function process_button() {
       global $order, $xtPrice;
-
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
       $process_button_string = xtc_draw_hidden_field('cmd', '_xclick') .
                                xtc_draw_hidden_field('email', MODULE_PAYMENT_NOCHEX_ID) .
-                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($order->info['total'],'GBP'), $xtPrice->get_decimal_places('GBP'))) .
+                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($total,'GBP'), $xtPrice->get_decimal_places('GBP'))) .
                                xtc_draw_hidden_field('ordernumber', $_SESSION['customer_id'] . '-' . date('Ymdhis')) .
                                xtc_draw_hidden_field('returnurl', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL')) .
                                xtc_draw_hidden_field('cancel_return', xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));

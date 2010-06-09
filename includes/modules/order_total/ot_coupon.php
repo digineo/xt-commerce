@@ -383,7 +383,7 @@ global $insert_id, $REMOTE_ADDR;
 }
 
 function get_order_total() {
-global $order;
+global $order,$xtPrice;
 	
 	$order_total = $order->info['total'];
 	// Check if gift voucher is in cart and adjust total
@@ -398,7 +398,7 @@ global $order;
 			if ($this->include_tax =='false') {
 				$gv_amount = $gv_result['products_price'] * $qty;
 			} else {
-				$gv_amount = ($gv_result['products_price'] + xtc_calculate_tax($gv_result['products_price'],$products_tax)) * $qty;
+				$gv_amount = ($gv_result['products_price'] + $xtPrice->calcTax($gv_result['products_price'],$products_tax)) * $qty;
 			}
 			$order_total=$order_total - $gv_amount;
 		}

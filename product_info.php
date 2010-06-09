@@ -47,19 +47,15 @@
   require_once(DIR_FS_INC . 'xtc_draw_form.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_input_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_image_submit.inc.php');
-  require_once(DIR_FS_INC . 'xtc_draw_input_field.inc.php');
-  require_once(DIR_FS_INC . 'xtc_draw_input_field.inc.php');
 
   
-        if ($_GET['action']=='get_download') {
-        xtc_get_download($_GET['cID']); 
-        
-        }
+   if ($_GET['action']=='get_download') {
+      xtc_get_download($_GET['cID']); 
+    }
 
 
   include(DIR_WS_MODULES . 'product_info.php');
   
- // require(DIR_WS_LANGUAGES . $_SESSION['language'] . '/' . FILENAME_PRODUCT_INFO);
   require(DIR_WS_INCLUDES . 'header.php');
   $smarty->assign('language', $_SESSION['language']);
   $smarty->caching = 0;

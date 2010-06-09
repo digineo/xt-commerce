@@ -52,6 +52,7 @@ define('TABLE_HEADING_PRICE_EXCLUDING_TAX', 'Preis (exkl.)');
 define('TABLE_HEADING_PRICE_INCLUDING_TAX', 'Preis (inkl.)');
 define('TABLE_HEADING_TOTAL_EXCLUDING_TAX', 'Total (exkl.)');
 define('TABLE_HEADING_TOTAL_INCLUDING_TAX', 'Total');
+define('TABLE_HEADING_AFTERBUY','Afterbuy');
 
 define('TABLE_HEADING_STATUS', 'Status');
 define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Kunde benachrichtigt');
@@ -100,7 +101,7 @@ define('TEXT_NO_ORDER_HISTORY', 'Keine Bestellhistorie verf&uuml;gbar');
 define('EMAIL_SEPARATOR', '------------------------------------------------------');
 define('EMAIL_TEXT_SUBJECT', 'Status&auml;nderung Ihrer Bestellung');
 define('EMAIL_TEXT_ORDER_NUMBER', 'Bestell-Nr.:');
-define('EMAIL_TEXT_INVOICE_URL', 'Ihre Bestellung können Sie unter folgender Adresse einsehen:');
+define('EMAIL_TEXT_INVOICE_URL', 'Ihre Bestellung kï¿½nnen Sie unter folgender Adresse einsehen:');
 define('EMAIL_TEXT_DATE_ORDERED', 'Bestelldatum:');
 define('EMAIL_TEXT_STATUS_UPDATE', 'Der Status Ihrer Bestellung wurde aktualisiert.' . "\n\n" . 'Neuer Status: %s' . "\n\n" . 'Bei Fragen zu Ihrer Bestellung antworten Sie bitte auf diese eMail.' . "\n\n" . 'Mit freundlichen Gr&uuml;ssen' . "\n");
 define('EMAIL_TEXT_COMMENTS_UPDATE', 'Anmerkungen und Kommentare zu Ihrer Bestellung:' . "\n\n%s\n\n");

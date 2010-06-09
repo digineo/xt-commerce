@@ -20,7 +20,7 @@ function xtc_draw_box_contents($box_contents, $box_shadow_color = BOX_SHADOW, $b
                  '  <tr>' . CR .
                  '    <td><table border="0" width="100%" cellspacing="0" cellpadding="4" bgcolor="' . $box_background_color . '">' . CR .
                  '      <tr>' . CR .
-                 '        <td><img src="images/pixel_trans.gif" border="0" width="100%" height="5"></td>' . CR .
+                 '        <td><img src="images/pixel_trans.gif" alt="" width="100%" height="5" /></td>' . CR .
                  '      </tr>';
 
     if (is_array($box_contents)) {
@@ -34,7 +34,7 @@ function xtc_draw_box_contents($box_contents, $box_shadow_color = BOX_SHADOW, $b
     }
 
     $contents .= '      <tr>' . CR .
-                 '        <td><img src="images/pixel_trans.gif" border="0" width="100%" height="5"></td>' . CR .
+                 '        <td><img src="images/pixel_trans.gif" alt="" width="100%" height="5" /></td>' . CR .
                  '      </tr>' . CR .
                  '    </table></td>' . CR .
                  '  </tr>' . CR .

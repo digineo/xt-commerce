@@ -49,4 +49,10 @@ define('TEXT_COD_COSTS', 'Cash on delivery costs');
 define('TEXT_VALUE', 'Price');
 define('TEXT_DESC', 'insert');
 
+define('TEXT_COMPANY', 'Company:');
+define('TEXT_NAME', 'Name:');
+define('TEXT_STREET', 'Street');
+define('TEXT_ZIP', 'Postcode:');
+define('TEXT_CITY', 'City:');
+define('TEXT_COUNTRY', 'Country:');
 ?>

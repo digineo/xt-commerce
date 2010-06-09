@@ -78,7 +78,7 @@
                    );
 
       if (!isset($mail_error)) {
-          xtc_redirect(xtc_href_link(FILENAME_CONTENT, 'action=success&coID='.$_GET['coID']));
+          xtc_redirect(xtc_href_link(FILENAME_CONTENT, 'action=success&coID='.(int)$_GET['coID']));
       }
       else {
           $smarty->assign('error_message',$mail_error);
@@ -108,7 +108,7 @@ $contact_content= $shop_content_data['content_text'];
 }
 require(DIR_WS_INCLUDES . 'header.php');
 $smarty->assign('CONTACT_CONTENT',$contact_content);
-$smarty->assign('FORM_ACTION',xtc_draw_form('contact_us', xtc_href_link(FILENAME_CONTENT, 'action=send&coID='.$_GET['coID'])));
+$smarty->assign('FORM_ACTION',xtc_draw_form('contact_us', xtc_href_link(FILENAME_CONTENT, 'action=send&coID='.(int)$_GET['coID'])));
 $smarty->assign('INPUT_NAME',xtc_draw_input_field('name', ($error ? $_POST['name'] : $first_name)));
 $smarty->assign('INPUT_EMAIL',xtc_draw_input_field('email', ($error ? $_POST['email'] : $email_address)));
 $smarty->assign('INPUT_TEXT',xtc_draw_textarea_field('message_body', 'soft', 50, 15, $_POST['']));

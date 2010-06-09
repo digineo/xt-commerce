@@ -29,13 +29,13 @@
 define('HEADING_COUPON_HELP', 'Gutschein Information');
 define('TEXT_CLOSE_WINDOW', 'Fenster schliessen [x]');
 define('TEXT_COUPON_HELP_HEADER', 'Ihr Gutschein wurde erfolgreich verbucht.');
-define('TEXT_COUPON_HELP_NAME', '<br><br>Gutscheinbezeichnung : %s');
-define('TEXT_COUPON_HELP_FIXED', '<br><br>Der Gutscheinwert beträgt %s ');
-define('TEXT_COUPON_HELP_MINORDER', '<br><br>Der Mindestbestellwert beträgt %s ');
-define('TEXT_COUPON_HELP_FREESHIP', '<br><br>Gutschein für kostenlosen Versand');
-define('TEXT_COUPON_HELP_DESC', '<br><br>Kuponbeschreibung : %s');
-define('TEXT_COUPON_HELP_DATE', '<br><br>Dieser Kupon ist g&uuml;ltig vom %s bis %s');
-define('TEXT_COUPON_HELP_RESTRICT', '<br><br>Artikel / Kategorie Einschr&auml;nkungen');
+define('TEXT_COUPON_HELP_NAME', '<br /><br />Gutscheinbezeichnung: %s');
+define('TEXT_COUPON_HELP_FIXED', '<br /><br />Der Gutscheinwert betr&auml;gt %s ');
+define('TEXT_COUPON_HELP_MINORDER', '<br /><br />Der Mindestbestellwert betr&auml;gt %s ');
+define('TEXT_COUPON_HELP_FREESHIP', '<br /><br />Gutschein f&uuml;r kostenlosen Versand');
+define('TEXT_COUPON_HELP_DESC', '<br /><br />Kuponbeschreibung: %s');
+define('TEXT_COUPON_HELP_DATE', '<br /><br />Dieser Kupon ist g&uuml;ltig vom %s bis %s');
+define('TEXT_COUPON_HELP_RESTRICT', '<br /><br />Artikel / Kategorie Einschr&auml;nkungen');
 define('TEXT_COUPON_HELP_CATEGORIES', 'Kategorie');
 define('TEXT_COUPON_HELP_PRODUCTS', 'Artikel');
 ?>

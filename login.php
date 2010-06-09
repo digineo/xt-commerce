@@ -20,6 +20,10 @@
    ---------------------------------------------------------------------------------------*/
 
   include( 'includes/application_top.php');
+
+  if (isset($_SESSION['customer_id'])) {
+    xtc_redirect(xtc_href_link(FILENAME_ACCOUNT, '', 'SSL'));
+  }
    // create smarty elements
   $smarty = new Smarty;
   // include boxes

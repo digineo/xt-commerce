@@ -48,6 +48,7 @@ $main_content = '';
     $category_query = "select
                                     cd.categories_description,
                                     cd.categories_name,
+				    cd.categories_heading_title,				    
                                     c.categories_template,
                                     c.categories_image from " .
                                     TABLE_CATEGORIES . " c, " .
@@ -69,9 +70,10 @@ $main_content = '';
         if (GROUP_CHECK=='true') {
    $group_check="and c.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
   }
-        $categories_query = "select
+        $categories_query = "select       cd.categories_description,
                                           c.categories_id,
                                           cd.categories_name,
+					  cd.categories_heading_title,
                                           c.categories_image,
                                           c.parent_id from " .
                                           TABLE_CATEGORIES . " c, " .
@@ -94,9 +96,10 @@ $main_content = '';
       if (GROUP_CHECK=='true') {
    $group_check="and c.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
   }
-      $categories_query = "select
+      $categories_query = "select       cd.categories_description,
                                         c.categories_id,
                                         cd.categories_name,
+					cd.categories_heading_title,
                                         c.categories_image,
                                         c.parent_id from " .
                                         TABLE_CATEGORIES . " c, " .
@@ -119,10 +122,14 @@ $main_content = '';
       if ($categories['categories_image']!='') {
       $image=DIR_WS_IMAGES.'categories/'.$categories['categories_image'];
       }
+      $SEF_parameter='';
+    	  if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&category='.xtc_cleanName($categories['categories_name']); 
+     
       $categories_content[]=array(
                   'CATEGORIES_NAME' => $categories['categories_name'],
+                  'CATEGORIES_HEADING_TITLE' => $categories['categories_heading_title'],		  
                   'CATEGORIES_IMAGE' => $image,
-                  'CATEGORIES_LINK' => xtc_href_link(FILENAME_DEFAULT, $cPath_new),
+                  'CATEGORIES_LINK' => xtc_href_link(FILENAME_DEFAULT, $cPath_new.$SEF_parameter),
                   'CATEGORIES_DESCRIPTION' => $categories['categories_description']);
 
 
@@ -135,6 +142,7 @@ $new_products_category_id = $current_category_id;
     $image=DIR_WS_IMAGES.'categories/'.$category['categories_image'];
     }
     $default_smarty->assign('CATEGORIES_NAME',$category['categories_name']);
+    $default_smarty->assign('CATEGORIES_HEADING_TITLE',$category['categories_heading_title']);    
     $default_smarty->assign('CATEGORIES_IMAGE',$image);
     $default_smarty->assign('CATEGORIES_DESCRIPTION',$category['categories_description']);
 
@@ -350,7 +358,7 @@ $new_products_category_id = $current_category_id;
       }
       $filterlist_query = xtDBquery($filterlist_sql);
       if (xtc_db_num_rows(&$filterlist_query,true) > 1) {
-        $manufacturer_dropdown= xtc_draw_form('filter', FILENAME_DEFAULT, 'GET') .'&nbsp;';
+        $manufacturer_dropdown= xtc_draw_form('filter', FILENAME_DEFAULT, 'get');
         if (isset($_GET['manufacturers_id'])) {
           $manufacturer_dropdown.= xtc_draw_hidden_field('manufacturers_id', $_GET['manufacturers_id']);
           $options = array(array('text' => TEXT_ALL_CATEGORIES));

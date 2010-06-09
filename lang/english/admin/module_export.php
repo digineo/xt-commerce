@@ -26,4 +26,5 @@ define('TABLE_HEADING_ACTION', 'Action');
 define('TEXT_MODULE_DIRECTORY', 'Module Directory:');
 
 define('TABLE_HEADING_FILENAME','Modulname (for internal usage)');
+define('ERROR_EXPORT_FOLDER_NOT_WRITEABLE','export/ Folder not writeable!');
 ?>

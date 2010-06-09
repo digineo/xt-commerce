@@ -16,7 +16,7 @@
    -----------------------------------------------------------------------------------------*/
   define('MODULE_PAYMENT_TYPE_PERMISSION', 'cod');
   define('MODULE_PAYMENT_AUTHORIZENET_TEXT_TITLE', 'Authorize.net');
-  define('MODULE_PAYMENT_AUTHORIZENET_TEXT_DESCRIPTION', 'Kreditkarten Test Info:<br><br>CC#: 4111111111111111<br>G&uuml;ltig bis: Jederzeit');
+  define('MODULE_PAYMENT_AUTHORIZENET_TEXT_DESCRIPTION', 'Kreditkarten Test Info:<br /><br />CC#: 4111111111111111<br />G&uuml;ltig bis: Jederzeit');
   define('MODULE_PAYMENT_AUTHORIZENET_TEXT_TYPE', 'Typ:');
   define('MODULE_PAYMENT_AUTHORIZENET_TEXT_CREDIT_CARD_OWNER', 'Kreditkarteninhaber:');
   define('MODULE_PAYMENT_AUTHORIZENET_TEXT_CREDIT_CARD_NUMBER', 'Kreditkarten-Nr.:');

@@ -35,9 +35,9 @@
     if (xtc_db_num_rows($customer_gv_query) > 0) {
       $customer_gv = xtc_db_fetch_array($customer_gv_query);
       $new_gv_amount = $customer_gv['amount'] + $coupon_gv['coupon_amount'];
-   // new code bugfix
-   $gv_query = xtc_db_query("update " . TABLE_COUPON_GV_CUSTOMER . " set amount = '" . $new_gv_amount . "' where customer_id = '" . $customer_id . "'");
-     // original code $gv_query = tep_db_query("update " . TABLE_COUPON_GV_CUSTOMER . " set amount = '" . $new_gv_amount . "'");
+      //prepare for DB insert
+      $new_gv_amount = str_replace(",", ".", $new_gv_amount);
+      $gv_query = xtc_db_query("update " . TABLE_COUPON_GV_CUSTOMER . " set amount = '" . $new_gv_amount . "' where customer_id = '" . $customer_id . "'");
     } else {
       $gv_query = xtc_db_query("insert into " . TABLE_COUPON_GV_CUSTOMER . " (customer_id, amount) values ('" . $customer_id . "', '" . $coupon_gv['coupon_amount'] . "')");
     }

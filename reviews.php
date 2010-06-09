@@ -55,7 +55,7 @@ $module_data=array();
                          'PRODUCTS_NAME' => $reviews['products_name'],
                          'AUTHOR' => $reviews['customers_name'],
                          'TEXT' => '('.sprintf(TEXT_REVIEW_WORD_COUNT, xtc_word_count($reviews['reviews_text'], ' ')) . ')<br>' . htmlspecialchars($reviews['reviews_text']) . '..',
-                         'RATING' => xtc_image(DIR_WS_IMAGES . 'stars_' . $reviews['reviews_rating'] . '.gif', sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])));
+                         'RATING' => xtc_image('templates/' . CURRENT_TEMPLATE . '/img/stars_' .$reviews['reviews_rating'] . '.gif', sprintf(TEXT_OF_5_STARS, $reviews['reviews_rating'])));
 
 
     }

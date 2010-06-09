@@ -40,7 +40,6 @@
   define('FILENAME_CREATE_ACCOUNT', 'create_account.php');
   define('FILENAME_CREATE_ACCOUNT_SUCCESS', 'create_account_success.php');
   define('FILENAME_DEFAULT', 'index.php');
-  define('FILENAME_MY_SHOP', 'my_shop.php');
   define('FILENAME_DOWNLOAD', 'download.php');
   define('FILENAME_NEW_PRODUCTS','new_products.php');
   define('FILENAME_INFO_SHOPPING_CART', 'info_shopping_cart.php');
@@ -63,7 +62,6 @@
   define('FILENAME_START', 'admin/start.php');
   define('FILENAME_SPECIALS', 'specials.php');
   define('FILENAME_SSL_CHECK', 'ssl_check.php');
-  define('FILENAME_TELL_A_FRIEND', 'tell_a_friend.php');
   define('FILENAME_UPCOMING_PRODUCTS', 'upcoming_products.php');
   define('FILENAME_CENTER_MODULES','center_modules.php');
   define('FILENAME_ORDERS','admin/orders.php');

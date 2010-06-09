@@ -350,6 +350,7 @@
     function get_content_type() {
       $this->content_type = false;
 
+
       if ( (DOWNLOAD_ENABLED == 'true') && ($this->count_contents() > 0) ) {
         reset($this->contents);
         while (list($products_id, ) = each($this->contents)) {
@@ -399,7 +400,6 @@
       } else {
         $this->content_type = 'physical';
       }
-
       return $this->content_type;
     }
 

@@ -20,16 +20,16 @@ function xtc_draw_box_heading($heading_title, $left_corner = false, $right_corne
                '  <tr valign="middle" bgcolor="' . BOX_BGCOLOR_HEADING . '">' . CR .
                '    <td>';
     if ($left_corner) {
-      $heading .= '<img src="images/main_page/box_corner_left.gif" border="0">';
+      $heading .= '<img src="images/main_page/box_corner_left.gif" alt="" />';
     } else {
-      $heading .= '<img src="images/main_page/box_corner_right_left.gif" border="0">';
+      $heading .= '<img src="images/main_page/box_corner_right_left.gif" alt="" />';
     }
 
     $heading .= '</td>' . CR .
-                '    <td width="100%" height="14" class="infoBoxHeading">' . $heading_title . '</td>' . CR;
+                '    <td class="infoBoxHeading">' . $heading_title . '</td>' . CR;
 
     if ($right_corner) {
-      $heading .= '    <td height="14" class="infoBoxHeading"><img src="images/main_page/box_corner_right.gif" border="0"></td>' . CR;
+      $heading .= '    <td class="infoBoxHeading"><img src="images/main_page/box_corner_right.gif" alt="" /></td>' . CR;
     }
 
     $heading .= '  </tr>' . CR .

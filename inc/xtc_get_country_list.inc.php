@@ -27,7 +27,9 @@
     for ($i=0, $n=sizeof($countries); $i<$n; $i++) {
       $countries_array[] = array('id' => $countries[$i]['countries_id'], 'text' => $countries[$i]['countries_name']);
     }
-
+	if (is_array($name)) return xtc_draw_pull_down_menuNote($name, $countries_array, $selected, $parameters);
     return xtc_draw_pull_down_menu($name, $countries_array, $selected, $parameters);
   }
+  
+  
  ?>

@@ -149,6 +149,18 @@ function validate_vatid($uistid)
 		case 'cy': // zypern
 			return $results[9];
 
+        case 'r0': // canadian LUHN-10 code checking
+        case 'r1':
+        case 'r2':
+        case 'r3':
+        case 'r4':
+        case 'r5':
+        case 'r6':
+        case 'r7':
+        case 'r8':
+        case 'r9':
+            return $results[checkUstId_c($uistid)];
+
 		default:
 			return $results[8];
 	} // end switch($country)
@@ -158,6 +170,33 @@ function validate_vatid($uistid)
 /********************************************************************
 * landesabhaengige Hilfsfunktionen zur Berechnung                   *
 ********************************************************************/
+
+// Canada
+function checkUstID_c($uistid)
+{
+    if(strlen($uistid) != 10)
+        return 0;
+
+    // LUHN-10 code http://www.ee.unb.ca/tervo/ee4253/luhn.html
+
+    $id=substr($uistid,1);
+    $checksum=0;
+    for ($i=9;$i>0;$i--)
+    {
+      $digit=$uistid{$i};
+      if ($i%2==1) $digit*=2;
+      if ($digit>=10)
+      {
+       $checksum+=$digit-10+1;
+      } else {
+        $checksum+=$digit;
+      }
+    }
+    if(modulo($checksum,10) == 0)
+        return 1;
+
+    return 0;
+} // Canada
 
 // belgien
 function checkUstID_be($uistid)
@@ -370,19 +409,10 @@ function checkUstID_it($uistid)
 	if(strlen($uistid) != 13)
 		return 0;
 	
-	if(substr($uistid, 2, 7) == '0000000')
-		return 0;
-	
-	$checkval = (int) substr($uistid, -4, 3);
-	if($checkval < 1 || $checkval > 100)
-	{
-		if($checkval != 120 && $checkval != 121)
-			return 0;
-	}
-	
 	$checksum = (int) substr($uistid, -1);
 	$checkval = 0;
-	for($i = 0; $i < 9 ; $i++)
+	for($i = 0; $i <= 9 ; $i++)
+		//echo $uistid[11-$i];
 		$checkval += (int) $uistid[11-$i] * (is_even($i) ? 2 : 1);
 	if($checksum != modulo($checkval, 10))
 		return 0;

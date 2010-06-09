@@ -66,7 +66,10 @@ $box_content='<a href="' . xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' .
     if ($random_product['products_image']!='') {
     $image=DIR_WS_THUMBNAIL_IMAGES . $random_product['products_image'];
     }
-    $box_smarty->assign('LINK',xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $random_product["products_id"]));
+    $SEF_parameter='';
+    if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&product='.xtc_cleanName($random_product['products_name']); 
+     
+    $box_smarty->assign('LINK',xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $random_product["products_id"].$SEF_parameter));
     $box_smarty->assign('IMAGE',$image);
     $box_smarty->assign('NAME',$random_product['products_name']);
     $box_smarty->assign('PRICE',$whats_new_price);

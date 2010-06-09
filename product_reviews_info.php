@@ -38,7 +38,7 @@
 
   xtc_db_query("update " . TABLE_REVIEWS . " set reviews_read = reviews_read+1 where reviews_id = '" . $reviews['reviews_id'] . "'");
 
-  $reviews_text = xtc_break_string(htmlspecialchars($reviews['reviews_text']), 60, '-<br>');
+  $reviews_text = xtc_break_string(htmlspecialchars($reviews['reviews_text']), 60, '-<br />');
 
 
  require(DIR_WS_INCLUDES . 'header.php');
@@ -51,7 +51,7 @@
  $smarty->assign('PRODUCTS_LINK',xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $reviews['products_id']));
  $smarty->assign('BUTTON_BACK','<a href="' . xtc_href_link(FILENAME_PRODUCT_REVIEWS, $get_params) . '">' . xtc_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>');
  $smarty->assign('BUTTON_BUY_NOW','<a href="' . xtc_href_link(FILENAME_DEFAULT, 'action=buy_now&BUYproducts_id=' . $reviews['products_id']) . '">' . xtc_image_button('button_in_cart.gif', IMAGE_BUTTON_IN_CART));
- $smarty->assign('IMAGE','<a href="javascript:popupImageWindow(\''. xtc_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $reviews['products_id']).'\')">'. xtc_image(DIR_WS_THUMBNAIL_IMAGES . $reviews['products_image'], $reviews['products_name'], '', '', 'align="center" hspace="5" vspace="5"').'<br></a>');
+ $smarty->assign('IMAGE','<a href="javascript:popupImageWindow(\''. xtc_href_link(FILENAME_POPUP_IMAGE, 'pID=' . $reviews['products_id']).'\')">'. xtc_image(DIR_WS_THUMBNAIL_IMAGES . $reviews['products_image'], $reviews['products_name'], '', '', 'align="center" hspace="5" vspace="5"').'<br /></a>');
 
   $smarty->assign('language', $_SESSION['language']);
 

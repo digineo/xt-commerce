@@ -85,8 +85,17 @@
         <td><table border="0" cellspacing="0" cellpadding="2"><tr><td  colspan="2">
  <table "width="100%"  border="0">
 <tr>
-            <td class="main" width="200"><?php echo TEXT_EDIT_CATEGORIES_IMAGE; ?></td>
-            <td class="main"><?php echo xtc_draw_file_field('categories_image') . '<br>' . xtc_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $cInfo->categories_image . xtc_draw_hidden_field('categories_previous_image', $cInfo->categories_image); ?></td>
+            <td class="main" width="200" valign="top"><?php echo TEXT_EDIT_CATEGORIES_IMAGE; ?></td>
+            <td class="main"><?php echo xtc_draw_file_field('categories_image') . '<br />' . xtc_draw_separator('pixel_trans.gif', '24', '15') . xtc_draw_hidden_field('categories_previous_image', $cInfo->categories_image); ?>
+            <?php
+            if ($cInfo->categories_image) {
+            	?>
+            <br><img src="<?php echo DIR_WS_CATALOG.'images/categories/'.$cInfo->categories_image; ?>">
+            <br><?php echo '&nbsp;' .$cInfo->categories_image;
+            echo xtc_draw_selection_field('del_cat_pic', 'checkbox', 'yes').TEXT_DELETE;
+            
+            } ?>
+            </td>
           </tr>
           <tr><td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '10'); ?></td></tr>
                 <tr>
@@ -192,7 +201,7 @@ $checked='checked ';
 } else {
 $checked='';
 }
-echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[$i]['id'].'"'.$checked.'> '.$customers_statuses_array[$i]['text'].'<br>';
+echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[$i]['id'].'"'.$checked.'> '.$customers_statuses_array[$i]['text'].'<br />';
 }
 ?>
 </td>

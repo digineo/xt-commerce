@@ -27,6 +27,6 @@ Um den Gutschein einzul&ouml;sen verwenden Sie bitte den folgenden link {$GIFT_L
  Als kleines Willkommensgeschenk senden wir Ihnen einen Kupon.
  Kuponbeschreibung: {$COUPON_DESC}
  
-Geben Sie einfach Ihren persönlichen Code b9a671 während des Bezahlvorganges ein
+Geben Sie einfach Ihren persönlichen Code {$COUPON_CODE} während des Bezahlvorganges ein
 
 {/if}

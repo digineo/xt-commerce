@@ -27,27 +27,31 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
     $male = ($gender == 'm') ? true : false;
     $female = ($gender == 'f') ? true : false;
     $module_smarty->assign('gender','1');
-    $module_smarty->assign('INPUT_MALE',xtc_draw_radio_field('gender', 'm', $male));
-    $module_smarty->assign('INPUT_FEMALE',xtc_draw_radio_field('gender', 'f', $female)  . (xtc_not_null(ENTRY_GENDER_TEXT) ? '<span class="inputRequirement">' . ENTRY_GENDER_TEXT . '</span>': ''));
+    $module_smarty->assign('INPUT_MALE',xtc_draw_radio_field(array('name'=>'gender','suffix'=>MALE), 'm'));
+    $module_smarty->assign('INPUT_FEMALE',xtc_draw_radio_field(array('name'=>'gender','suffix'=>FEMALE,'text'=>(xtc_not_null(ENTRY_GENDER_TEXT) ? '<span class="inputRequirement">' . ENTRY_GENDER_TEXT . '</span>': '')), 'f'));
 
   }
-  $module_smarty->assign('INPUT_FIRSTNAME',xtc_draw_input_field('firstname') . '&nbsp;' . (xtc_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT . '</span>': ''));
-  $module_smarty->assign('INPUT_LASTNAME',xtc_draw_input_field('lastname') . '&nbsp;' . (xtc_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_LAST_NAME_TEXT . '</span>': ''));
+  	$module_smarty->assign('INPUT_FIRSTNAME',xtc_draw_input_fieldNote(array('name'=>'firstname','text'=>'&nbsp;' . (xtc_not_null(ENTRY_FIRST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_FIRST_NAME_TEXT . '</span>': ''))));
+  	$module_smarty->assign('INPUT_LASTNAME',xtc_draw_input_fieldNote(array('name'=>'lastname','text'=>'&nbsp;' . (xtc_not_null(ENTRY_LAST_NAME_TEXT) ? '<span class="inputRequirement">' . ENTRY_LAST_NAME_TEXT . '</span>': ''))));
 
   if (ACCOUNT_COMPANY == 'true') {
   $module_smarty->assign('company','1');
-  $module_smarty->assign('INPUT_COMPANY',xtc_draw_input_field('company') . '&nbsp;' . (xtc_not_null(ENTRY_COMPANY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COMPANY_TEXT . '</span>': ''));
+  $module_smarty->assign('INPUT_COMPANY',xtc_draw_input_fieldNote(array('name'=>'company','text'=>'&nbsp;' . (xtc_not_null(ENTRY_COMPANY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COMPANY_TEXT . '</span>': ''))));
+  }  else {
+  $module_smarty->assign('company','0');
+//  }
+
 
   }
-  $module_smarty->assign('INPUT_STREET',xtc_draw_input_field('street_address') . '&nbsp;' . (xtc_not_null(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_TEXT . '</span>': ''));
+  $module_smarty->assign('INPUT_STREET',xtc_draw_input_fieldNote(array('name'=>'street_address','text'=>'&nbsp;' . (xtc_not_null(ENTRY_STREET_ADDRESS_TEXT) ? '<span class="inputRequirement">' . ENTRY_STREET_ADDRESS_TEXT . '</span>': ''))));
 
   if (ACCOUNT_SUBURB == 'true') {
   $module_smarty->assign('suburb','1');
-  $module_smarty->assign('INPUT_SUBURB',xtc_draw_input_field('suburb') . '&nbsp;' . (xtc_not_null(ENTRY_SUBURB_TEXT) ? '<span class="inputRequirement">' . ENTRY_SUBURB_TEXT . '</span>': ''));
+  $module_smarty->assign('INPUT_SUBURB',xtc_draw_input_fieldNote(array('name'=>'suburb','text'=>'&nbsp;' . (xtc_not_null(ENTRY_SUBURB_TEXT) ? '<span class="inputRequirement">' . ENTRY_SUBURB_TEXT . '</span>': ''))));
 
   }
-  $module_smarty->assign('INPUT_CODE',xtc_draw_input_field('postcode') . '&nbsp;' . (xtc_not_null(ENTRY_POST_CODE_TEXT) ? '<span class="inputRequirement">' . ENTRY_POST_CODE_TEXT . '</span>': ''));
-  $module_smarty->assign('INPUT_CITY',xtc_draw_input_field('city') . '&nbsp;' . (xtc_not_null(ENTRY_CITY_TEXT) ? '<span class="inputRequirement">' . ENTRY_CITY_TEXT . '</span>': ''));
+  $module_smarty->assign('INPUT_CODE',xtc_draw_input_fieldNote(array('name'=>'postcode','text'=>'&nbsp;' . (xtc_not_null(ENTRY_POST_CODE_TEXT) ? '<span class="inputRequirement">' . ENTRY_POST_CODE_TEXT . '</span>': ''))));
+  $module_smarty->assign('INPUT_CITY',xtc_draw_input_fieldNote(array('name'=>'city','text'=>'&nbsp;' . (xtc_not_null(ENTRY_CITY_TEXT) ? '<span class="inputRequirement">' . ENTRY_CITY_TEXT . '</span>': ''))));
 
   if (ACCOUNT_STATE == 'true') {
   $module_smarty->assign('state','1');
@@ -59,17 +63,19 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
         while ($zones_values = xtc_db_fetch_array($zones_query)) {
           $zones_array[] = array('id' => $zones_values['zone_name'], 'text' => $zones_values['zone_name']);
         }
-        $entry_state = xtc_draw_pull_down_menu('state', $zones_array);
+        $entry_state= xtc_draw_pull_down_menuNote(array('name'=>'state','text'=>'&nbsp;' . (xtc_not_null(ENTRY_STATE_TEXT) ? '<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>': '')), $zones_array);
       } else {
-        $entry_state =  xtc_draw_input_field('state');
+        $entry_state= xtc_draw_input_fieldNote(array('name'=>'state','text'=>'&nbsp;' . (xtc_not_null(ENTRY_STATE_TEXT) ? '<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>': '')));
       }
     } else {
-      $entry_state =  xtc_draw_input_field('state');
+      $entry_state= xtc_draw_input_fieldNote(array('name'=>'state','text'=>'&nbsp;' . (xtc_not_null(ENTRY_STATE_TEXT) ? '<span class="inputRequirement">' . ENTRY_STATE_TEXT . '</span>': '')));
     }
 
-    if (xtc_not_null(ENTRY_STATE_TEXT)) $entry_state.=  '&nbsp;<span class="inputRequirement">' . ENTRY_STATE_TEXT;
 
-$module_smarty->assign('INPUT_STATE',$entry_state);
+
+   $module_smarty->assign('INPUT_STATE',$entry_state);
+  } else {
+  $module_smarty->assign('state','0');
   }
   $module_smarty->assign('SELECT_COUNTRY',xtc_get_country_list('country',STORE_COUNTRY) . '&nbsp;' . (xtc_not_null(ENTRY_COUNTRY_TEXT) ? '<span class="inputRequirement">' . ENTRY_COUNTRY_TEXT . '</span>': ''));
 
@@ -77,6 +83,7 @@ $module_smarty->assign('INPUT_STATE',$entry_state);
 
   $module_smarty->caching = 0;
   $module= $module_smarty->fetch(CURRENT_TEMPLATE.'/module/checkout_new_address.html');
+
 
   $smarty->assign('MODULE_new_address',$module);
 ?>

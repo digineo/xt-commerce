@@ -86,13 +86,15 @@ $box_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
       $rows++;
       $image='';
       if ($best_sellers['products_image']) $image=DIR_WS_INFO_IMAGES . $best_sellers['products_image'];
-
+	  $SEF_parameter='';
+      if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&product='.xtc_cleanName($best_sellers['products_name']); 
+    
       $box_content[]=array(
                            'ID'=> xtc_row_number_format($rows),
                            'NAME'=> $best_sellers['products_name'],
                            'IMAGE' => $image,
                            'PRICE'=>$xtPrice->xtcGetPrice($best_sellers['products_id'],$format=true,1,$best_sellers['products_tax_class_id'],$best_sellers['products_price']),
-                           'LINK'=> xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $best_sellers['products_id']));
+                           'LINK'=> xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $best_sellers['products_id'].$SEF_parameter));
 
     }
 

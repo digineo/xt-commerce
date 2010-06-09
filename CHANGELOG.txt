@@ -1,51 +1,66 @@
                                      CHANGELOG
 ###################################################################################
 
-  XT-Commerce v3.0.2
-  Release Datum: 09.10.2004
-  
-  ------------------------------------------------------------------------
-3.0.1 (09.10.2004)
-*fonts for vvcodes loaded autoamtically
-*fixed content query in index file to display group related content
-*fixed content query in checkout_payment to display group related content
-*fixed content query in shop_content to display group related content
-*BUGFIX 0000357 not active products got shown in view history
-*updated HTML area to new Version and added some plugins
-*new Style for Configuration in admin area
-*fixed bug in create account, sometimes user got pruned into admin group (but without access)
-*fixed some caluclation bugs in payment modules with different currencies
-*BUGFIX 0000354  calculationbug in order edit
-*fixed displaybug in admin-orderview, deletet products attributes price
-*fixed bug in priceclass, activating graduated prices now not necessary to display group prices
-*fixed whos_online
-*fixed buy in priceclass, dont show attribute prices if group isn't allowed to see prices
-*added new EU countries to EU zone
-*fixed coupon module
-*fixed FSK18 system, not possible to buy FSK18 products via direct link
-*fixed dowloadsystem, not permitet paymentmodules wont appear now anymore
-*added new option to VAT-ID processing, admin can setup new rule to perform customers with correct vat id in different groups
-*added new SQL injection and cross-site scripting dedection and guarding, admin will get noticed if anyone tried to hack the system
-*added new feature to payment modules, setting order to a defined status is not possible for each module
-*fixed mailfunction im admin/mail.php
-*fixed specialprice system in admin, percentages didnt worked correctly
-*fixed bug in shipping/payment addresses with country Sachsen
-*added nwe Tag to templates with forms, use {$FORM_END} instead of </form>
-*box_cart template cleaned up
-*fixed bug in breadcrumb, categories name didnt got displayed at products linked to top
-*fixed performance bug in customers search in admin area
+XT-Commerce v3.0.3 | SVN 669 
+Release Datum: 19.01.2005
 
 
-3.0.1 (14.09.2004)
-*gutschein/kupon wurde bei account aktivierung angehängt, obwohl deaktiviert
-*falsche umrechnung der versandkosten bei checkout mit meheren währungen
-*fehlerhafte steuerberechnung der versandkosten bei auswahl des versandmodules
-*fehlerhafter WYSIWYG editor (wurde gegen mozilla kombatiplen WYSIWYG editor ausgetauscht)
-*typo bei beschreibung für digitale download artikel
-*CAO-Faktura schnittstelle hinzugefügt
-*herstellerbox wurde nicht angezeigt
-*bugfix in FSK18 system
-*bugfix im imageproccessing modul
+3.0.3 (19.01.2005)
+*BUGFIX Default-Wert für Produktsortierung = '0' gesetzt
+*UPDATE: PHP 3.4.10 Änderungen für den string typecasting bug
+*BUGFIX breadcrumb top products
+*BUGFIX product navigator
+*BUGFIX edit product button in der adminbox
+*BUGFIX #0000186 - Banner Manager - Änderungen werden nicht gespeichert
+*BUGFIX #0000099 - Beim Löschen von Artikelmerkmalen wurden die Optionswerte nicht gelöscht  
+*BUGFIX #0000401 - teilweise wurden einige Boxen (z.B. Warenkorb) auf deutsch angezeigt
+*BUGFIX Kleiner Fehler bei Rundungen behoben
+*BUGFIX #0000384 - Nachkomma Stellen wurden bei den Geschenkgutscheinen nicht berücksichtigt
+*BUGFIX #0000355 - Nach Änderung von Kategorie-Einstellungen wurden beim Speichern alle enthaltenen Produkte auf aktiv gesetzt
+*BUGFIX categories_heading_title gefixt
+*BUGFIX manufacturers_info: Herstellerbild gefixt
+*BUGFIX Kupons funktionieren nun wieder
+*BUGFIX Steuer bei Mindermengenzuschlag gefixt, ust wird nun korrekt dazugezählt
+*FEATURE: Kategoriebilder koennen nun auch ueber den Admin geloescht werden.
+*FEATURE: Zahlungsmodul Worldpay
+*FEATURE: js Validierung in der checkout_payment fuer die AGBS hinzugefuegt
+*BUGFIX Durch löschen einer Sprache gab es Probleme bei der Anzeige des Kundengruppendropdowns
+*BUGFIX #0000346 - Neue Produkte nicht verlinkt, wenn kein Bild vorhanden 
+*BUGFIX missing SELECT categories_description 
+*BUGFIX #0000344 - Falscher Pfad für die Icons im cContent Manager 
+*BUGFIX #0000349 - Template "specials.html" zeigt keine Produktbeschreibung an: falsche Variable 
+*BUGFIX #0000392 - xml_export.php  bei CAO Import Abbruch wegen Staffelpreisen und wegen falscher Query
+*BUGFIX im Coupon-Admin (call to a member-function on non-object)
+*BUGFIX #0000390 - Bei Rundschreiben wurden manuell zugefügte Empfänger nicht gespeichert 
+*BUGFIX #0000388 - PCOUNT wird in sitemap.html verwendet aber in sitemap.php nicht zugewiesen.
+*BUGFIX http://www.xt-commerce.com/modules/ipboard...-post-8235.html
+*BUGFIX #0000386 - Falsche Variable für Alt-Text in product_reviews.php 
+*BUGIFX: alle Umlaute in den Sprachfiles ersetzt
+*FEATURE: neues Modul für Froogle.de
+*FEATURE: Standard Template jetzt in xhtml
+*BUGFIX http://www.xt-commerce.com/modules/ipboard...-post-7060.html  "gift in cart" Problem
+*FEATURE: import/export
+*FEATURE: ipaymentELV Modul
+*UPDATE: NEW SMARTY ENGINE 2.6.6
+*BUGFIX Kundengruppenzuordnung
+*BUGFIX kleiner Berechnungsfehlern bei Kommastellen und im Bruttoadmin.
+*BUGFIX bei netto mit Ust Ausweisung wird nur Netto-Preis übergeben.
+*BUGFIX fix bei fehlendem Freetype Library
+*UPDATE: php 5.0.1 compatiblity
+*BUGFIX Check für Italien gefixt
+*BUGFIX Berechnung für Canada hinzugefügt
+*BUGFIX tpl selection in configuration
+*BUGFIX Wenn ein Kunde registriert ist wird nun auf die account.php redirected
+*BUGFIX htmlarea arbeitet nun unter Firefox mit deutscher Sprache
+*BUGFIX fehlende Funktion im Mindermengenzuschlag hinzugefügt
+*UPDATE: Sortierfunktion für categories_view verbessert / erweitert
+*UPDATE: Sortierfunktion mit Switch ASC / DESC für alle Punkte in categories_view im admin
+*FEATURE: Lösch-Option zum Hauptartikelbild hinzugefügt
+*UPDATE: Schönheitskorrekturen im Produkt-Editor
+*BUGFIX Bestellungsmodul/banktransfer
+*FEATURE: Import/Export Klasse
+*FEATURE: Suche jetzt auch in Attributen
+*FEATURE: Afterbuy Anbindung integriert
 
   
   

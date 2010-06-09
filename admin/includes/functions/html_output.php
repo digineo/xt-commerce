@@ -278,13 +278,16 @@
     $field = '<select name="' . $name . '"';
     if ($params) $field .= ' ' . $params;
     $field .= '>';
-    for ($i=0; $i<sizeof($values); $i++) {
-      $field .= '<option value="' . $values[$i]['id'] . '"';
-      if ( ((strlen($values[$i]['id']) > 0) && ($GLOBALS[$name] == $values[$i]['id'])) || ($default == $values[$i]['id']) ) {
-        $field .= ' SELECTED';
-      }
-      $field .= '>' . $values[$i]['text'] . '</option>';
-    }
+ 	if(is_array($values))
+   	{
+         foreach ($values as $key=>$val) {
+             $field .= '<option value="' .$val['id'] . '"';
+             if ( ((strlen($val['id']) > 0) && ($GLOBALS[$name] == $val['id'])) || ($default == $val['id']) ) {
+               $field .= ' SELECTED';    
+             }    
+             $field .= '>' . $val['text'] . '</option>';
+         }
+   	} 
     $field .= '</select>';
 
     if ($required) $field .= TEXT_FIELD_REQUIRED;
@@ -304,6 +307,15 @@
           $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '', '20' ,'20').'</a>';
 
           break;
+          
+          case FILENAME_CATEGORIES:
+
+          $nav='<br><a href="'.xtc_href_link(FILENAME_CATEGORIES,'sorting='.$sort.'&'.xtc_get_all_get_params(array('action','sorting'))).'">';
+          $nav.=xtc_image(DIR_WS_ICONS . 'sort_down.gif', '', '20' ,'20').'</a>';
+          $nav.='<a href="'.xtc_href_link(FILENAME_CATEGORIES,'sorting='.$sort.'-desc&'.xtc_get_all_get_params(array('action','sorting'))).'">';
+          $nav.= xtc_image(DIR_WS_ICONS . 'sort_up.gif', '', '20' ,'20').'</a>';
+
+          break;          
 
       }
 

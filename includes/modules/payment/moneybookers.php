@@ -133,11 +133,15 @@
 
       $this->transaction_id = $this->generate_trid();
       $result = xtc_db_query("INSERT INTO payment_moneybookers (mb_TRID, mb_DATE) VALUES ('{$this->transaction_id}', NOW())");
-
-      if ($_SESSION['currency']==$mbCurrency) {
-      $amount=round($order->info['total'], $xtPrice->get_decimal_places($mbCurrency));
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
       } else {
-      $amount=round($xtPrice->xtcCalculateCurrEx($order->info['total'],$mbCurrency) , $xtPrice->get_decimal_places($mbCurrency));
+          $total=$order->info['total'];
+      }
+      if ($_SESSION['currency']==$mbCurrency) {
+      $amount=round($total, $xtPrice->get_decimal_places($mbCurrency));
+      } else {
+      $amount=round($xtPrice->xtcCalculateCurrEx($total,$mbCurrency) , $xtPrice->get_decimal_places($mbCurrency));
       }
 
 

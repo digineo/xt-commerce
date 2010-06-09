@@ -28,8 +28,9 @@ $adminImages = DIR_WS_CATALOG . "lang/". $_SESSION['language'] ."/admin/images/b
   </tr>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" name="SELECT_PRODUCT" method="post"><input type="hidden" name="action" value="edit">
 <?php
+echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
   echo "<TR>";
-  echo "<TD class=\"main\"><BR><B>".SELECT_PRODUCT."<BR></TD>";
+  echo "<TD class=\"main\"><br /><B>".SELECT_PRODUCT."<br /></TD>";
   echo "</TR>";
   echo "<TR>";
   echo "<TD class=\"main\"><SELECT NAME=\"current_product_id\">";
@@ -62,10 +63,10 @@ $adminImages = DIR_WS_CATALOG . "lang/". $_SESSION['language'] ."/admin/images/b
   echo "</TR>";
   // start change for Attribute Copy
 ?>
-<br><br>
+<br /><br />
 <?php
   echo "<TR>";
-  echo "<TD class=\"main\"><BR><B>".SELECT_COPY."<BR></TD>";
+  echo "<TD class=\"main\"><br /><B>".SELECT_COPY."<br /></TD>";
   echo "</TR>";
   echo "<TR>";
   echo "<TD class=\"main\"><SELECT NAME=\"copy_product_id\">";

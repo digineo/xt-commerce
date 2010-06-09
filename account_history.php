@@ -26,10 +26,8 @@
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_all_get_params.inc.php');
 
-  if (!isset($_SESSION['customer_id'])) {
-    
-    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-  }
+  if (!isset($_SESSION['customer_id'])) xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+  
 
 
   $breadcrumb->add(NAVBAR_TITLE_1_ACCOUNT_HISTORY, xtc_href_link(FILENAME_ACCOUNT, '', 'SSL'));

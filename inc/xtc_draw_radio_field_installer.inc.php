@@ -14,7 +14,9 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-   
+  
+  require_once(DIR_FS_INC . 'xtc_draw_selection_field_installer.inc.php');
+    
   function xtc_draw_radio_field_installer($name, $value = '', $checked = false) {
     return xtc_draw_selection_field_installer($name, 'radio', $value, $checked);
   }

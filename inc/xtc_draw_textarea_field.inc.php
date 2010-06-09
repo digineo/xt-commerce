@@ -17,7 +17,7 @@
    
 // Output a form textarea field
   function xtc_draw_textarea_field($name, $wrap, $width, $height, $text = '', $parameters = '', $reinsert_value = true) {
-    $field = '<textarea name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '" wrap="' . xtc_parse_input_field_data($wrap, array('"' => '&quot;')) . '" cols="' . xtc_parse_input_field_data($width, array('"' => '&quot;')) . '" rows="' . xtc_parse_input_field_data($height, array('"' => '&quot;')) . '"';
+    $field = '<textarea name="' . xtc_parse_input_field_data($name, array('"' => '&quot;')) . '" cols="' . xtc_parse_input_field_data($width, array('"' => '&quot;')) . '" rows="' . xtc_parse_input_field_data($height, array('"' => '&quot;')) . '"';
 
     if (xtc_not_null($parameters)) $field .= ' ' . $parameters;
 

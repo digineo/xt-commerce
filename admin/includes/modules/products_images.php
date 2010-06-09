@@ -21,7 +21,8 @@
         echo '<tr><td colspan="4">'. xtc_draw_separator('pixel_trans.gif', '1', '10').'</td></tr>';
         if ($pInfo->products_image){ echo '<tr><td colspan="4"><table><tr><td align="center" class="main" width="'.(PRODUCT_IMAGE_THUMBNAIL_WIDTH+15).'">' . xtc_image(DIR_WS_CATALOG_THUMBNAIL_IMAGES.$pInfo->products_image, 'Standard Image') . '</td>';}
         echo '<td class="main">'.TEXT_PRODUCTS_IMAGE.'<br>'.xtc_draw_file_field('products_image') . '<br>' . xtc_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $pInfo->products_image . xtc_draw_hidden_field('products_previous_image_0', $pInfo->products_image);
-        if ($pInfo->products_image){ echo '</td></tr></table>'; } else { echo '</td></tr>';}           
+        //if ($pInfo->products_image){ echo '</td></tr></table>'; } else { echo '</td></tr>';}
+        if ($pInfo->products_image != ''){ echo '</tr><tr><td align="center" valign="middle">' . xtc_draw_selection_field('del_pic', 'checkbox', $pInfo->products_image) .' '. TEXT_DELETE . '</td></tr></table>'; } else { echo '</td></tr>';} 
 
         // display MO PICS
         if (MO_PICS > 0){

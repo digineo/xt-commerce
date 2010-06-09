@@ -218,7 +218,11 @@
         $dvd_cdob = explode(" ",$dvd_cdob_result['customers_dob']);
         $dvd_cdob_parts = explode("-",$dvd_cdob[0]);
 
-
+    if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
 	$process_button_string = xtc_draw_hidden_field('PAGENUMBER', MODULE_PAYMENT_LIBERECO_BANKTRANSFER_PAGENUMBER) .
 //			       xtc_draw_hidden_field('TESTSIGNUP', 'true') .
                                xtc_draw_hidden_field('USERNR', $customer_id) .
@@ -226,7 +230,7 @@
                                xtc_draw_hidden_field('LANGUAGE', $dvd_lang) .
                                xtc_draw_hidden_field('PAYMENTTYPE', 'DD') .
                                xtc_draw_hidden_field('CURRENCY', $currency) .
-                               xtc_draw_hidden_field('AMOUNT', sprintf("%0.2f", $order->info['total'])) .
+                               xtc_draw_hidden_field('AMOUNT', sprintf("%0.2f", $total='')) .
                                xtc_draw_hidden_field('INFO_FIELD', 'Bestellung bei FutureJam Media BV') .
 
                                xtc_draw_hidden_field('FIRSTNAME', $order->customer['firstname']) .
@@ -239,8 +243,8 @@
                                xtc_draw_hidden_field('ZIPCODE', $order->customer['postcode']) .
                                xtc_draw_hidden_field('CITY', $order->customer['city']) .
                                xtc_draw_hidden_field('COUNTRY', $order->customer['country']['iso_code_2']) .
-			       xtc_draw_hidden_field('INTERNAL_INFORMATION', xtc_session_id()) .
-   			       xtc_draw_hidden_field('BANKCODE', $this->banktransfer_blz) .
+			                   xtc_draw_hidden_field('INTERNAL_INFORMATION', xtc_session_id()) .
+   			                   xtc_draw_hidden_field('BANKCODE', $this->banktransfer_blz) .
                                xtc_draw_hidden_field('banktransfer_bankname', $this->banktransfer_bankname).
                                xtc_draw_hidden_field('ACCOUNTNUMBER', $this->banktransfer_number) .
                                xtc_draw_hidden_field('ACCOUNTHOLDER', $this->banktransfer_owner) .

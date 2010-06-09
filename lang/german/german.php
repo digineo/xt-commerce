@@ -19,7 +19,7 @@
 // on RedHat try 'de_DE'
 // on FreeBSD try 'de_DE.ISO_8859-15'
 // on Windows try 'de' or 'German'
-@setlocale(LC_TIME, 'de_DE.ISO_8859-15');
+setlocale(LC_TIME, 'de_DE@euro', 'de_DE', 'de-DE', 'de', 'ge', 'de_DE.ISO_8859-1', 'German','de_DE.ISO_8859-15');
 define('DATE_FORMAT_SHORT', '%d.%m.%Y');  // this is used for strftime()
 define('DATE_FORMAT_LONG', '%A, %d. %B %Y'); // this is used for strftime()
 define('DATE_FORMAT', 'd.m.Y');  // this is used for strftime()
@@ -44,7 +44,7 @@ function xtc_date_raw($date, $reverse = false) {
 define('LANGUAGE_CURRENCY', 'EUR');
 
 // Global entries for the <html> tag
-define('HTML_PARAMS','dir="LTR" lang="de"');
+define('HTML_PARAMS','dir="ltr" lang="de"');
 
 define('HEADER_TITLE_TOP', 'Startseite');
 define('HEADER_TITLE_CATALOG', 'Katalog');
@@ -95,22 +95,19 @@ define('BOX_HEADING_SEARCH','Suchen!');
 
 define('BOX_INFORMATION_CONTACT', 'Kontakt');
 
-// tell a friend box text in includes/boxes/tell_a_friend.php
-define('BOX_HEADING_TELL_A_FRIEND', 'An einen Freund weiterempfehlen');
-define('BOX_TELL_A_FRIEND_TEXT', 'Empfehlen Sie diesen Artikel einfach per eMail weiter.');
 
 // pull down default text
 define('PULL_DOWN_DEFAULT', 'Bitte w&auml;hlen');
 define('TYPE_BELOW', 'Bitte unten eingeben');
 
 // javascript messages
-define('JS_ERROR', 'Notwendige Angaben fehlen!\nBitte richtig ausf&uuml;llen.\n\n');
+define('JS_ERROR', 'Notwendige Angaben fehlen!\n Bitte richtig ausf&uuml;llen.\n\n');
 
 define('JS_REVIEW_TEXT', '* Der Text muss mindestens aus ' . REVIEW_TEXT_MIN_LENGTH . ' Buchstaben bestehen.\n');
 define('JS_REVIEW_RATING', '* Geben Sie Ihre Bewertung ein.\n');
-define('JS_ERROR_NO_PAYMENT_MODULE_SELECTED', '* Bitte wählen Sie eine Zahlungsweise für Ihre Bestellung.\n');
-define('JS_ERROR_SUBMITTED', 'Diese Seite wurde bereits best&auml;tigt. Betätigen Sie bitte OK und warten bis der Prozess durchgef&uuml;hrt wurde.');
-define('ERROR_NO_PAYMENT_MODULE_SELECTED', 'Bitte w&auml;hlen Sie eine Zahlungsweise für Ihre Bestellung.');
+define('JS_ERROR_NO_PAYMENT_MODULE_SELECTED', '* Bitte w&auml;hlen Sie eine Zahlungsweise f&uuml;r Ihre Bestellung.\n');
+define('JS_ERROR_SUBMITTED', 'Diese Seite wurde bereits best&auml;tigt. Klicken Sie bitte OK und warten bis der Prozess durchgef&uuml;hrt wurde.');
+define('ERROR_NO_PAYMENT_MODULE_SELECTED', 'Bitte w&auml;hlen Sie eine Zahlungsweise f&uuml;r Ihre Bestellung.');
 define('CATEGORY_COMPANY', 'Firmendaten');
 define('CATEGORY_PERSONAL', 'Ihre pers&ouml;nlichen Daten');
 define('CATEGORY_ADDRESS', 'Ihre Adresse');
@@ -134,9 +131,9 @@ define('ENTRY_DATE_OF_BIRTH', 'Geburtsdatum:');
 define('ENTRY_DATE_OF_BIRTH_ERROR', 'Ihr Geburtsdatum muss im Format TT.MM.JJJJ (zB. 21.05.1970) eingeben werden');
 define('ENTRY_DATE_OF_BIRTH_TEXT', '* (zB. 21.05.1970)');
 define('ENTRY_EMAIL_ADDRESS', 'eMail-Adresse:');
-define('ENTRY_EMAIL_ADDRESS_ERROR', 'Ihre eMail Adresse muss aus mindestens ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' Zeichen bestehen.');
-define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Ihre eingegebene eMail Adresse ist fehlerhaft - bitte &uuml;berpr&uuml;fen Sie diese.');
-define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', 'Ihre eingegebene eMail Adresse existiert bereits in unserer Datenbank - bitte loggen Sie mit dieser ein, oder erstellen Sie ein neues Konto mit einer neuen eMail Adresse.');
+define('ENTRY_EMAIL_ADDRESS_ERROR', 'Ihre eMail-Adresse muss aus mindestens ' . ENTRY_EMAIL_ADDRESS_MIN_LENGTH . ' Zeichen bestehen.');
+define('ENTRY_EMAIL_ADDRESS_CHECK_ERROR', 'Ihre eingegebene eMail-Adresse ist fehlerhaft - bitte &uuml;berpr&uuml;fen Sie diese.');
+define('ENTRY_EMAIL_ADDRESS_ERROR_EXISTS', 'Ihre eingegebene eMail-Adresse existiert bereits in unserer Datenbank - bitte melden Sie sich mit dieser an, oder erstellen Sie ein neues Konto mit einer neuen eMail-Adresse.');
 define('ENTRY_EMAIL_ADDRESS_TEXT', '*');
 define('ENTRY_STREET_ADDRESS', 'Strasse/Nr.:');
 define('ENTRY_STREET_ADDRESS_ERROR', 'Strasse/Nr muss aus mindestens ' . ENTRY_STREET_ADDRESS_MIN_LENGTH . ' Zeichen bestehen.');
@@ -228,6 +225,7 @@ define('IMAGE_BUTTON_UPDATE', 'Aktualisieren');
 define('IMAGE_BUTTON_UPDATE_CART', 'Warenkorb aktualisieren');
 define('IMAGE_BUTTON_WRITE_REVIEW', 'Bewertung schreiben');
 define('IMAGE_BUTTON_ADMIN', 'Admin'); 
+define('IMAGE_BUTTON_PRODUCT_EDIT', 'Produkt bearbeiten');
 
 define('SMALL_IMAGE_BUTTON_DELETE', 'L&ouml;schen');
 define('SMALL_IMAGE_BUTTON_EDIT', '&Auml;ndern');
@@ -238,9 +236,9 @@ define('ICON_CART', 'In den Warenkorb');
 define('ICON_SUCCESS', 'Erfolg');
 define('ICON_WARNING', 'Warnung');
 
-define('TEXT_GREETING_PERSONAL', 'Sch&ouml;n da&szlig; Sie wieder da sind <span class="greetUser">%s!</span> M&ouml;chten Sie sich unsere <a href="%s"><u>neuen Artikel</u></a> ansehen?');
-define('TEXT_GREETING_PERSONAL_RELOGON', '<small>Wenn Sie nicht %s sind, melden Sie sich bitte <a href="%s"><u>hier</u></a> mit Ihrem Kundenkonto an.</small>');
-define('TEXT_GREETING_GUEST', 'Herzlich Willkommen <span class="greetUser">Gast!</span> M&ouml;chten Sie sich <a href="%s"><u>anmelden</u></a>? Oder wollen Sie ein <a href="%s"><u>Kundenkonto</u></a> er&ouml;ffnen?');
+define('TEXT_GREETING_PERSONAL', 'Sch&ouml;n, dass Sie wieder da sind, <span class="greetUser">%s!</span> M&ouml;chten Sie sich unsere <a style="text-decoration:underline;" href="%s">neuen Artikel</a> ansehen?');
+define('TEXT_GREETING_PERSONAL_RELOGON', '<small>Wenn Sie nicht %s sind, melden Sie sich bitte <a style="text-decoration:underline;" href="%s">hier</a> mit Ihren Anmeldedaten an.</small>');
+define('TEXT_GREETING_GUEST', 'Herzlich Willkommen <span class="greetUser">Gast!</span> M&ouml;chten Sie sich <a style="text-decoration:underline;" href="%s">anmelden</a>? Oder wollen Sie ein <a style="text-decoration:underline;" href="%s">Kundenkonto</a> er&ouml;ffnen?');
 
 define('TEXT_SORT_PRODUCTS', 'Sortierung der Artikel ist ');
 define('TEXT_DESCENDINGLY', 'absteigend');
@@ -265,15 +263,14 @@ define('WARNING_CONFIG_FILE_WRITEABLE', 'Warnung: XT-Commerce kann in die Konfig
 define('WARNING_SESSION_DIRECTORY_NON_EXISTENT', 'Warnung: Das Verzeichnis f&uuml;r die Sessions existiert nicht: ' . xtc_session_save_path() . '. Die Sessions werden nicht funktionieren bis das Verzeichnis erstellt wurde!');
 define('WARNING_SESSION_DIRECTORY_NOT_WRITEABLE', 'Warnung: XT-Commerce kann nicht in das Sessions Verzeichnis schreiben: ' . xtc_session_save_path() . '. Die Sessions werden nicht funktionieren bis die richtigen Benutzerberechtigungen gesetzt wurden!');
 define('WARNING_SESSION_AUTO_START', 'Warnung: session.auto_start ist aktiviert (enabled) - Bitte deaktivieren (disabled) Sie dieses PHP Feature in der php.ini und starten Sie den WEB-Server neu!');
-define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warnung: Das Verzeichnis für den Artikel Download existiert nicht: ' . DIR_FS_DOWNLOAD . '. Diese Funktion wird nicht funktionieren bis das Verzeichnis erstellt wurde!');
+define('WARNING_DOWNLOAD_DIRECTORY_NON_EXISTENT', 'Warnung: Das Verzeichnis f&uuml;r den Artikel Download existiert nicht: ' . DIR_FS_DOWNLOAD . '. Diese Funktion wird nicht funktionieren bis das Verzeichnis erstellt wurde!');
 
-define('TEXT_CCVAL_ERROR_INVALID_DATE', 'Das "G&uuml;ltig bis" Datum ist ung&uuml;ltig.<br>Bitte korrigieren Sie Ihre Angaben.');
-define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'Die "KreditkarteNummer", die Sie angegeben haben, ist ung&uuml;ltig.<br>Bitte korrigieren Sie Ihre Angaben.');
-define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Die ersten 4 Ziffern Ihrer Kreditkarte sind: %s<br>Wenn diese Angaben stimmen, wird dieser Kartentyp leider nicht akzeptiert.<br>Bitte korrigieren Sie Ihre Angaben gegebenfalls.');
+define('TEXT_CCVAL_ERROR_INVALID_DATE', 'Das "G&uuml;ltig bis" Datum ist ung&uuml;ltig. Bitte korrigieren Sie Ihre Angaben.');
+define('TEXT_CCVAL_ERROR_INVALID_NUMBER', 'Die "Kreditkarten-Nummer", die Sie angegeben haben, ist ung&uuml;ltig. Bitte korrigieren Sie Ihre Angaben.');
+define('TEXT_CCVAL_ERROR_UNKNOWN_CARD', 'Die ersten 4 Ziffern Ihrer Kreditkarte sind: %s Wenn diese Angaben stimmen, wird dieser Kartentyp leider nicht akzeptiert. Bitte korrigieren Sie Ihre Angaben gegebenfalls.');
 
 //  conditions check
-
-define('ERROR_CONDITIONS_NOT_ACCEPTED', 'Sofern Sie unsere Allgemeinen Geschäftsbedingungen nicht akzeptieren, können wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!');
+define('ERROR_CONDITIONS_NOT_ACCEPTED', 'Sofern Sie unsere Allgemeinen Gesch&auml;ftsbedingungen nicht akzeptieren, k&ouml;nnen wir Ihre Bestellung bedauerlicherweise nicht entgegennehmen!');
 
 define('SUB_TITLE_OT_DISCOUNT','Rabatt:');
 define('SUB_TITLE_SUB_NEW','Summe:');
@@ -281,12 +278,12 @@ define('SUB_TITLE_SUB_NEW','Summe:');
 define('NOT_ALLOWED_TO_SEE_PRICES','Sie k&ouml;nnen als Gast (bzw mit Ihrem derzeitigen Status) keine Preise sehen');
 define('NOT_ALLOWED_TO_ADD_TO_CART','Sie k&ouml;nnen als Gast (bzw mit Ihrem derzeitigen Status) keine Artikel in den Warenkorb legen');
 
-define('BOX_LOGINBOX_HEADING', 'Willkommen zurück!');
-define('BOX_LOGINBOX_EMAIL', 'eMail Adresse:');
+define('BOX_LOGINBOX_HEADING', 'Willkommen zur&uuml;ck!');
+define('BOX_LOGINBOX_EMAIL', 'eMail-Adresse:');
 define('BOX_LOGINBOX_PASSWORD', 'Passwort:');
 define('IMAGE_BUTTON_LOGIN', 'Anmelden');
 define('BOX_ACCOUNTINFORMATION_HEADING','Information');
-define('BOX_NEWSLETTER_EMAIL', 'eMail Adresse:');
+define('BOX_NEWSLETTER_EMAIL', 'eMail-Adresse:');
 define('BOX_LOGINBOX_STATUS','Kundengruppe:');
 define('BOX_LOGINBOX_INCL','Alle Preise inkl. UST');
 define('BOX_LOGINBOX_EXCL','Alle Preise exkl. UST');
@@ -313,8 +310,8 @@ define('SUCCESS_NEWSLETTER_UPDATED', 'Ihre Newsletter Abonnements wurden erfolgr
 define('SUCCESS_NOTIFICATIONS_UPDATED', 'Ihre Artikelbenachrichtigungen wurden erfolgreich aktualisiert!');
 define('SUCCESS_PASSWORD_UPDATED', 'Ihr Passwort wurde erfolgreich ge&auml;ndert!');
 define('ERROR_CURRENT_PASSWORD_NOT_MATCHING', 'Das eingegebene Passwort stimmt nicht mit dem gespeichertem Passwort &uuml;berein. Bitte versuchen Sie es noch einmal.');
-define('TEXT_MAXIMUM_ENTRIES', '<font color="#ff0000"><b>Hinweis:</b></font> Ihnen stehen %s Adressbucheintr&auml;ge zur Verf&uuml;gung!');
-define('SUCCESS_ADDRESS_BOOK_ENTRY_DELETED', 'Der ausgew&auml;hlte Eintrag wurde erflogreich gel&ouml;scht.');
+define('TEXT_MAXIMUM_ENTRIES', '<span class="errorText"><b>Hinweis:</b></span> Ihnen stehen %s Adressbucheintr&auml;ge zur Verf&uuml;gung!');
+define('SUCCESS_ADDRESS_BOOK_ENTRY_DELETED', 'Der ausgew&auml;hlte Eintrag wurde erfolgreich gel&ouml;scht.');
 define('SUCCESS_ADDRESS_BOOK_ENTRY_UPDATED', 'Ihr Adressbuch wurde erfolgreich aktualisiert!');
 define('WARNING_PRIMARY_ADDRESS_DELETION', 'Die Standardadresse kann nicht gel&ouml;scht werden. Bitte erst eine andere Standardadresse w&auml;hlen. Danach kann der Eintrag gel&ouml;scht werden.');
 define('ERROR_NONEXISTING_ADDRESS_BOOK_ENTRY', 'Dieser Adressbucheintrag ist nicht vorhanden.');
@@ -328,30 +325,30 @@ define('ENTRY_PRICE_FROM', 'Preis ab:');
 define('ENTRY_PRICE_TO', 'Preis bis:');
 define('TEXT_ALL_CATEGORIES', 'Alle Kategorien');
 define('TEXT_ALL_MANUFACTURERS', 'Alle Hersteller');
-define('JS_AT_LEAST_ONE_INPUT', '* Eines der folgenden Felder muss ausgefüllt werden:\n    Stichworte\n    Datum hinzugefügt von\n    Datum hinzugefügt bis\n    Preis ab\n    Preis bis\n');
-define('JS_INVALID_FROM_DATE', '* Unzulässiges von Datum\n');
-define('JS_INVALID_TO_DATE', '* Unzulässiges bis Datum\n');
-define('JS_TO_DATE_LESS_THAN_FROM_DATE', '* Das von Datum muss grösser oder gleich bis jetzt sein\n');
+define('JS_AT_LEAST_ONE_INPUT', '* Eines der folgenden Felder muss ausgef&uuml;llt werden:\n    Stichworte\n    Datum hinzugef&uuml;gt von\n    Datum hinzugef&uuml;gt bis\n    Preis ab\n    Preis bis\n');
+define('JS_INVALID_FROM_DATE', '* Unzul&auml;ssiges von Datum\n');
+define('JS_INVALID_TO_DATE', '* Unzul&auml;ssiges bis Datum\n');
+define('JS_TO_DATE_LESS_THAN_FROM_DATE', '* Das von Datum muss gr&ouml;sser oder gleich bis jetzt sein\n');
 define('JS_PRICE_FROM_MUST_BE_NUM', '* Preis ab, muss eine Zahl sein\n');
 define('JS_PRICE_TO_MUST_BE_NUM', '* Preis bis, muss eine Zahl sein\n');
-define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Preis bis muss größer oder gleich Preis ab sein.\n');
-define('JS_INVALID_KEYWORDS', '* Suchbegriff unzulässig\n');
+define('JS_PRICE_TO_LESS_THAN_PRICE_FROM', '* Preis bis muss gr&ouml;sser oder gleich Preis ab sein.\n');
+define('JS_INVALID_KEYWORDS', '* Suchbegriff unzul&auml;ssig\n');
 define('TEXT_NO_PRODUCTS', 'Es wurden keine Artikel gefunden, die den Suchkriterien entsprechen.');
-define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>ACHTUNG:</b></font></small> Wenn Sie bereits ein Konto besitzen, melden Sie sich bitte <a href="%s"><u><b>hier</b></u></a> an.');
+define('TEXT_ORIGIN_LOGIN', '<font color="#FF0000"><small><b>ACHTUNG:</b></font></small> Wenn Sie bereits ein Konto besitzen, melden Sie sich bitte <a style="text-decoration:underline;" href="%s"><b>hier</b></a> an.');
 define('TEXT_LOGIN_ERROR', '<font color="#ff0000"><b>FEHLER:</b></font> Keine &Uuml;bereinstimmung der eingebenen \'eMail-Adresse\' und/oder dem \'Passwort\'.');
 define('TEXT_VISITORS_CART', '<font color="#ff0000"><b>ACHTUNG:</b></font> Ihre Eingaben werden automatisch mit Ihrem Kundenkonto verkn&uuml;pft. <a href="javascript:session_win();">[Mehr Information]</a>');
 define('TEXT_NO_EMAIL_ADDRESS_FOUND', '<font color="#ff0000"><b>ACHTUNG:</b></font> Die eingegebene eMail-Adresse ist nicht registriert. Bitte versuchen Sie es noch einmal.');
 define('TEXT_PASSWORD_SENT', 'Ein neues Passwort wurde per eMail verschickt.');
 define('TEXT_PRODUCT_NOT_FOUND', 'Artikel wurde nicht gefunden!');
-define('TEXT_MORE_INFORMATION', 'F&uuml;r weitere Informationen, besuchen Sie bitte die <a href="%s" target="_blank"><u>Homepage</u></a> zu diesem Artikel.');
+define('TEXT_MORE_INFORMATION', 'F&uuml;r weitere Informationen, besuchen Sie bitte die <a style="text-decoration:underline;" href="%s" onclick="window.open(this.href); return false;">Homepage</a> zu diesem Artikel.');
 define('TEXT_DATE_ADDED', 'Diesen Artikel haben wir am %s in unseren Katalog aufgenommen.');
 define('TEXT_DATE_AVAILABLE', '<font color="#ff0000">Dieser Artikel wird voraussichtlich ab dem %s wieder vorr&auml;tig sein.</font>');
 define('TEXT_CART_EMPTY', 'Sie haben noch nichts in Ihrem Warenkorb.');
 define('SUB_TITLE_SUB_TOTAL', 'Zwischensumme:');
 define('SUB_TITLE_TOTAL', 'Summe:');
 
-define('OUT_OF_STOCK_CANT_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Artikel sind leider nicht in der von Ihnen gew&uuml;nschten Menge auf Lager.<br>Bitte reduzieren Sie Ihre Bestellmenge f&uuml;r die gekennzeichneten Artikel. Vielen Dank');
-define('OUT_OF_STOCK_CAN_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Artikel sind leider nicht in der von Ihnen gew&uuml;nschten Menge auf Lager.<br>Die bestellte Menge wird kurzfristig von uns geliefert, wenn Sie es w&uuml;nschen nehmen wir auch eine Teillieferung vor.');
+define('OUT_OF_STOCK_CANT_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Artikel sind leider nicht in der von Ihnen gew&uuml;nschten Menge auf Lager.<br />Bitte reduzieren Sie Ihre Bestellmenge f&uuml;r die gekennzeichneten Artikel. Vielen Dank');
+define('OUT_OF_STOCK_CAN_CHECKOUT', 'Die mit ' . STOCK_MARK_PRODUCT_OUT_OF_STOCK . ' markierten Artikel sind leider nicht in der von Ihnen gew&uuml;nschten Menge auf Lager.<br />Die bestellte Menge wird kurzfristig von uns geliefert, wenn Sie es w&uuml;nschen nehmen wir auch eine Teillieferung vor.');
 
 define('HEADING_TITLE_TELL_A_FRIEND', 'Empfehlen Sie \'%s\' weiter');
 define('HEADING_TITLE_ERROR_TELL_A_FRIEND', 'Artikel weiterempfehlen');
@@ -419,32 +416,32 @@ define('NAVBAR_TITLE_PASSWORD_DOUBLE_OPT','Passwort vergessen?');
 // Newsletter
 define('NAVBAR_TITLE_NEWSLETTER','Newsletter');
 define('TEXT_INFO_START','Tragen Sie sich in unseren kostenlosen Newsletter ein!');
-define('TEXT_NEWSLETTER','Sie möchten immer auf dem Laufenden bleiben?<br>Kein Problem, tragen Sie sich in unseren Newsletter ein und Sie sind immer auf dem neuesten Stand.');
-define('TEXT_EMAIL_INPUT','Ihre E-Mailadresse wurde in unser System eingetragen.<br>Gleichzeitig wurde Ihnen vom System eine E-Mail mit einem Aktivierungslink geschickt. Bitte klicken Sie nach dem Erhalt der Mail auf den Link um Ihre Eintragung zu bestätigen. Ansonsten bekommen Sie keinen Newsletter von uns zugestellt!');
+define('TEXT_NEWSLETTER','Sie m&ouml;chten immer auf dem Laufenden bleiben?<br />Kein Problem, tragen Sie sich in unseren Newsletter ein und Sie sind immer auf dem neuesten Stand.');
+define('TEXT_EMAIL_INPUT','Ihre eMail-Adresse wurde in unser System eingetragen.<br />Gleichzeitig wurde Ihnen vom System eine eMail mit einem Aktivierungslink geschickt. Bitte klicken Sie nach dem Erhalt der eMail auf den Link um Ihre Eintragung zu best&auml;tigen. Ansonsten bekommen Sie keinen Newsletter von uns zugestellt!');
 
-define('TEXT_WRONG_CODE','<font color="FF0000">Ihr eingegebener Sicherheitscode stimmte nicht mit dem angezeigten Code überein. Bitte versuchen Sie es erneut.</font>');
-define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="FF0000">Diese E-Mailadresse existiert bereits in unserer Datenbank ist aber noch nicht für den Empfang des Newsletters freigeschalten!</font>');
-define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="FF0000">Diese E-Mailadresse existiert bereits in unserer Datenbank und ist für den Newsletterempfang bereits freigeschalten!</font>');
-define('TEXT_EMAIL_NOT_EXIST','<font color="FF0000">Diese E-Mailadresse existiert nicht in unserer Datenbank!</font>');
-define('TEXT_EMAIL_DEL','Ihre E-Mailadresse wurde aus unserer Newsletterdatenbank gelöscht.');
-define('TEXT_EMAIL_DEL_ERROR','<font color="FF0000">Es ist ein Fehler aufgetreten, Ihre Mailadresse wurde nicht gelöscht!</font>');
-define('TEXT_EMAIL_ACTIVE','<font color="FF0000">Ihre E-Mailadresse wurde erfolgreich für den Newsletterempfang freigeschalten!</font>');
-define('TEXT_EMAIL_ACTIVE_ERROR','<font color="FF0000">Es ist ein Fehler aufgetreten, Ihre Mailadresse wurde nicht freigeschalten!</font>');
+define('TEXT_WRONG_CODE','<font color="FF0000">Ihr eingegebener Sicherheitscode stimmte nicht mit dem angezeigten Code &Uuml;berein. Bitte versuchen Sie es erneut.</font>');
+define('TEXT_EMAIL_EXIST_NO_NEWSLETTER','<font color="FF0000">Diese eMail-Adresse existiert bereits in unserer Datenbank ist aber noch nicht f&uuml;r den Empfang des Newsletters freigeschalten!</font>');
+define('TEXT_EMAIL_EXIST_NEWSLETTER','<font color="FF0000">Diese eMail-Adresse existiert bereits in unserer Datenbank und ist f&uuml;r den Newsletterempfang bereits freigeschalten!</font>');
+define('TEXT_EMAIL_NOT_EXIST','<font color="FF0000">Diese eMail-Adresse existiert nicht in unserer Datenbank!</font>');
+define('TEXT_EMAIL_DEL','Ihre eMail-Adresse wurde aus unserer Newsletterdatenbank gel&ouml;scht.');
+define('TEXT_EMAIL_DEL_ERROR','<font color="FF0000">Es ist ein Fehler aufgetreten, Ihre eMail-Adresse wurde nicht gel&ouml;scht!</font>');
+define('TEXT_EMAIL_ACTIVE','<font color="FF0000">Ihre eMail-Adresse wurde erfolgreich f&uuml;r den Newsletterempfang freigeschalten!</font>');
+define('TEXT_EMAIL_ACTIVE_ERROR','<font color="FF0000">Es ist ein Fehler aufgetreten, Ihre eMail-Adresse wurde nicht freigeschalten!</font>');
 define('TEXT_EMAIL_SUBJECT','Ihre Newsletteranmeldung');
 define('TEXT_CUSTOMER_GUEST','Gast');
 
-define('TEXT_EMAIL_SUCCESSFUL_SENT','Ihre e-mail wurde erfolgreich versendet!');
-define('TEXT_LINK_MAIL_SENDED','Ihre Anfrage nach einem neuen Passwort muß von Ihnen erst bestätigt werden.<br>Deshalb wurde Ihnen vom System eine E-Mail mit einem Bestätigungslink geschickt. Bitte klicken Sie nach dem Erhalt der Mail auf den Link und eine weitere Mail mit Ihrem neuen Login Paßwort zu erhalten. Ansonsten wird Ihnen kein neues Passwort zugestellt oder eingerichtet!');
-define('TEXT_PASSWORD_MAIL_SENDED','Eine E-Mail mit einem neuen Login Passwort wurde Ihnen soeben zugestellt.<br>Bitte ändern Sie nach Ihrem nächsten Login Ihr Passwort wie gewünscht.');
-define('TEXT_CODE_ERROR','Bitte geben Sie Ihre E-mail Adresse und den Sicherheitscode erneut ein. <br>Achten Sie dabei auf Tippfehler!');
-define('TEXT_EMAIL_ERROR','Bitte geben Sie Ihre E-mail Adresse und den Sicherheitscode erneut ein. <br>Achten Sie dabei auf Tippfehler!');
-define('TEXT_NO_ACCOUNT','Leider müssen wir Ihnen mitteilen, daß Ihre Anfrage für ein neues Login Passwort entweder ungültig war oder abgelaufen ist.<br>Bitte versuchen Sie es erneut.');
-define('HEADING_PASSWORD_FORGOTTEN','Paßwort erneuern?');
-define('TEXT_PASSWORD_FORGOTTEN','Ändern Sie Ihr Passwort in drei leichten Schritten.');
-define('TEXT_EMAIL_PASSWORD_FORGOTTEN','Bestätigungsmail für Paßwortänderung');
-define('TEXT_EMAIL_PASSWORD_NEW_PASSWORD','Ihr neues Paßwort');
 define('TEXT_EMAIL_SUCCESSFUL_SENT','Ihre eMail wurde erfolgreich versandt!');
-define('ERROR_MAIL','Bitte Überprüfen Sie Ihre eingegebenen Daten im Formular');
+define('TEXT_LINK_MAIL_SENDED','Ihre Anfrage nach einem neuen Passwort muss von Ihnen erst best&auml;tigt werden.<br />Deshalb wurde Ihnen vom System eine eMail mit einem Best&auml;tigungslink geschickt. Bitte klicken Sie nach dem Erhalt der eMail auf den Link und eine weitere eMail mit Ihrem neuen Anmelde-Passwort zu erhalten. Andernfalls wird Ihnen das neue Passwort nicht zugestellt oder eingerichtet!');
+define('TEXT_PASSWORD_MAIL_SENDED','Eine eMail mit einem neuen Anmelde-Passwort wurde Ihnen soeben zugestellt.<br />Bitte &auml;ndern Sie nach Ihrer n&auml;chsten Anmeldung Ihr Passwort wie gew&uuml;nscht.');
+define('TEXT_CODE_ERROR','Bitte geben Sie Ihre eMail-Adresse und den Sicherheitscode erneut ein. <br />Achten Sie dabei auf Tippfehler!');
+define('TEXT_EMAIL_ERROR','Bitte geben Sie Ihre eMail-Adresse und den Sicherheitscode erneut ein. <br />Achten Sie dabei auf Tippfehler!');
+define('TEXT_NO_ACCOUNT','Leider m&uuml;ssen wir Ihnen mitteilen, dass Ihre Anfrage f&uuml;r ein neues Anmelde-Passwort entweder ung&uuml;ltig war oder abgelaufen ist.<br />Bitte versuchen Sie es erneut.');
+define('HEADING_PASSWORD_FORGOTTEN','Passwort erneuern?');
+define('TEXT_PASSWORD_FORGOTTEN','&Auml;ndern Sie Ihr Passwort in drei leichten Schritten.');
+define('TEXT_EMAIL_PASSWORD_FORGOTTEN','Best&auml;tigungs-eMail f&uuml;r Passwort&auml;nderung');
+define('TEXT_EMAIL_PASSWORD_NEW_PASSWORD','Ihr neues Passwort');
+
+define('ERROR_MAIL','Bitte &uuml;berpr&uuml;fen Sie Ihre eingegebenen Daten im Formular');
 define('CATEGORIE_NOT_FOUND','Kategorie wurde nicht gefunden');
 
 define('BOX_INFORMATION_GV', 'Gutschein FAQ');
@@ -454,7 +451,7 @@ define('ERROR_REEDEEMED_AMOUNT', 'Gl&uuml;ckwunsch, Sie haben eingel&ouml;st ');
 define('ERROR_NO_REDEEM_CODE', 'Sie haben leider keinen Code eingegeben.');
 define('ERROR_NO_INVALID_REDEEM_GV', 'Ung&uuml;ltiger Gutscheincode');
 define('TABLE_HEADING_CREDIT', 'Guthaben');
-define('ENTRY_AMOUNT_CHECK_ERROR', 'Sie verf&uuml;gen nicht über ein entsprechendes Guthaben.');
+define('ENTRY_AMOUNT_CHECK_ERROR', 'Sie verf&uuml;gen nicht &uuml;ber ein entsprechendes Guthaben.');
 
 
 define('EMAIL_SUBJECT', 'Nachricht von ' . STORE_NAME);
@@ -470,20 +467,20 @@ define('EMAIL_GV_LINK', 'Um den Gutschein einzul&ouml;sen klichen Sie bitte auf 
 define('EMAIL_GV_VISIT', ' oder besuchen Sie ');
 define('EMAIL_GV_ENTER', ' und geben den Code am Ende Ihrer Bestellung ein. ');
 define('EMAIL_GV_FIXED_FOOTER', 'Falls es mit dem obigen Link Probleme beim Einl&ouml;sen kommen sollte, ' . "\n" .
-                                'können Sie den Betrag während des Bestellvorganges verbuchen.' . "\n\n");
+                                'k&ouml;nnen Sie den Betrag w&auml;hrend des Bestellvorganges verbuchen.' . "\n\n");
 define('EMAIL_GV_SHOP_FOOTER', '');
-define('MAIN_MESSAGE', 'Sie haben sich dazu entschieden, einen Gutschein im Wert von %s an %s versenden, dessen eMail Adresse %s lautet.<br><br>Folgender Text erscheint in Ihrer eMail :<br><br>Hallo %s<br><br>
+define('MAIN_MESSAGE', 'Sie haben sich dazu entschieden, einen Gutschein im Wert von %s an %s versenden, dessen eMail-Adresse %s lautet.<br /><br />Folgender Text erscheint in Ihrer eMail:<br /><br />Hallo %s<br /><br />
                         Ihnen wurde ein Gutschein im Wert von %s durch %s geschickt.');
 
 define('REDEEMED_AMOUNT','Ihr Gutschein wurde erfolgreich auf Ihr Konto verbucht. Gutscheinwert:');
-define('REDEEMED_COUPON','Ihr Coupon wurde erfolgreich eingelöst und wird bei Ihrer nächsten Bestellung automatisch eingelöst.');
+define('REDEEMED_COUPON','Ihr Coupon wurde erfolgreich eingebucht und wird bei Ihrer n&auml;chsten Bestellung automatisch eingel&ouml;st.');
 
-define('ERROR_INVALID_USES_USER_COUPON','Sie können den Kupon nur ');
+define('ERROR_INVALID_USES_USER_COUPON','Sie k&ouml;nnen den Kupon nur ');
 
-define('ERROR_INVALID_USES_COUPON','Dieser Kupon können Kunden nur ');
+define('ERROR_INVALID_USES_COUPON','Dieser Kupon k&ouml;nnen Kunden nur ');
 
-define('TIMES',' mal einlösen.');
-define('ERROR_INVALID_STARTDATE_COUPON','Ihr Kupon ist noch nicht verfügbar.');
+define('TIMES',' mal einl&ouml;sen.');
+define('ERROR_INVALID_STARTDATE_COUPON','Ihr Kupon ist noch nicht verf&uuml;gbar.');
 define('ERROR_INVALID_FINISDATE_COUPON','Ihr Kupon ist bereits abgelaufen.');
 
 define('PERSONAL_MESSAGE', '%s schreibt: ');
@@ -493,11 +490,11 @@ define('NAVBAR_GV_REDEEM', 'Gutschein einl&ouml;sen');
 define('NAVBAR_GV_SEND', 'Gutschein versenden');
 
 //Popup Window
-define('TEXT_CLOSE_WINDOW', 'Fenster schließen.');
+define('TEXT_CLOSE_WINDOW', 'Fenster schliessen.');
 
 // VAT ID
-define('ENTRY_VAT_TEXT', 'Nur für Deutschland und EU!');
-define('ENTRY_VAT_ERROR', 'Die Eingegebene UstID ist ungültig oder kann derzeit nicht Überprüft werden! Bitte geben Sie eine gültige ID ein oder lassen Sie das Feld leer.');
+define('ENTRY_VAT_TEXT', 'Nur f&uuml;r Deutschland und EU!');
+define('ENTRY_VAT_ERROR', 'Die Eingegebene UstID ist ung&uuml;ltig oder kann derzeit nicht &uuml;berpr&uuml;ft werden! Bitte geben Sie eine g&uuml;ltige ID ein oder lassen Sie das Feld leer.');
 
 define('MSRP','UVP');
 define('YOUR_PRICE','Ihr Preis ');
@@ -505,4 +502,5 @@ define('ONLY',' Nur ');
 define('FROM','Ab ');
 define('YOU_SAVE','Sie Sparen ');
 define('INSTEAD','Statt ');
+define('TXT_PER',' pro ');
 ?>

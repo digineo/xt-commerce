@@ -5,8 +5,8 @@
   </tr>
   {foreach name=aussen item=module_data from=$module_content} 
   <tr> 
-    <td class="main" nowrap>{$module_data.QUANTITY} {#unit#}</td>
-    <td class="main" nowrap>{#pieces#} {$module_data.PRICE}</td>
+    <td class="main" nowrap="nowrap">{$module_data.QUANTITY} {#unit#}</td>
+    <td class="main" nowrap="nowrap">{#pieces#} {$module_data.PRICE}</td>
   </tr>
   {/foreach}
 </table>

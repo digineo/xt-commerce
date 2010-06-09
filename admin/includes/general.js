@@ -13,7 +13,30 @@
 
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
+
+function showLayer(Name) {
+
+        switch (Name) {
+        case 'config':
+        document.layers.l_export.visibility = "hide";
+        document.layers.l_config.visibility = "show";
+        document.layers.l_import.visibility = "show";
+        break;
+
+        case 'export':
+
+        break;
+
+        case 'import':
+
+        break;
+    }
+
+}
+
+
 function toggleBox(szDivID) {
+
   if (document.layers) { // NN4+
     if (document.layers[szDivID].visibility == 'visible') {
       document.layers[szDivID].visibility = "hide";

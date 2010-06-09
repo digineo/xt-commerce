@@ -107,7 +107,7 @@ echo xtc_image_submit('button_delete.gif', TEXT_DELETE,'style="cursor:hand" ');
 }
 ?>
 </table>
-<br><br>
+<br /><br />
 <!-- Artikelbearbeitung Ende //-->
 
 
@@ -183,7 +183,7 @@ echo xtc_image_submit('button_insert.gif', TEXT_EDIT,'style="cursor:hand" ');
 ?>
 </table>
 
-<br><br>
+<br /><br />
 <!-- Artikel Einfügen Ende //-->
 
 

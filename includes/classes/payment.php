@@ -120,7 +120,7 @@
     function javascript_validation() {
       $js = '';
       if (is_array($this->modules)) {
-        $js = '<script language="javascript"><!-- ' . "\n" .
+        $js = '<script type="text/javascript"><!-- ' . "\n" .
               'function check_form() {' . "\n" .
               '  var error = 0;' . "\n" .
               '  var error_message = "' . JS_ERROR . '";' . "\n" .
@@ -144,7 +144,12 @@
             $js .= $GLOBALS[$class]->javascript_validation();
           }
         }
-
+        if (DISPLAY_CONDITIONS_ON_CHECKOUT == 'true') {
+        $js .= "\n" . '  if (!document.checkout_payment.conditions.checked) {' . "\n" .
+               '    error_message = error_message + "' . ERROR_CONDITIONS_NOT_ACCEPTED . '";' . "\n" .
+               '    error = 1;' . "\n" .
+               '  }' . "\n\n";
+        }
         $js .= "\n" . '  if (payment_value == null) {' . "\n" .
                '    error_message = error_message + "' . JS_ERROR_NO_PAYMENT_MODULE_SELECTED . '";' . "\n" .
                '    error = 1;' . "\n" .

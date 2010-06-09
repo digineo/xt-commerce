@@ -22,11 +22,11 @@
   $smarty = new Smarty;
 
   include( 'includes/header.php');
-  require(DIR_WS_LANGUAGES . $language . '/' . FILENAME_POPUP_COUPON_HELP);
+  require(DIR_WS_LANGUAGES . $_SESSION['language'] . '/' . FILENAME_POPUP_COUPON_HELP);
 
-  $coupon_query = xtc_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . $HTTP_GET_VARS['cID'] . "'");
+  $coupon_query = xtc_db_query("select * from " . TABLE_COUPONS . " where coupon_id = '" . $_GET['cID'] . "'");
   $coupon = xtc_db_fetch_array($coupon_query);
-  $coupon_desc_query = xtc_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $HTTP_GET_VARS['cID'] . "' and language_id = '" . $languages_id . "'");
+  $coupon_desc_query = xtc_db_query("select * from " . TABLE_COUPONS_DESCRIPTION . " where coupon_id = '" . $_GET['cID'] . "' and language_id = '" . $_SESSION['language'] . "'");
   $coupon_desc = xtc_db_fetch_array($coupon_desc_query);
   $text_coupon_help = TEXT_COUPON_HELP_HEADER;
   $text_coupon_help .= sprintf(TEXT_COUPON_HELP_NAME, $coupon_desc['coupon_name']);
@@ -48,31 +48,31 @@
   if ($coupon['coupon_minimum_order'] > 0 ) $text_coupon_help .= sprintf(TEXT_COUPON_HELP_MINORDER, $xtPrice->xtcFormat($coupon['coupon_minimum_order'],true));
   $text_coupon_help .= sprintf(TEXT_COUPON_HELP_DATE, xtc_date_short($coupon['coupon_start_date']),xtc_date_short($coupon['coupon_expire_date']));
   $text_coupon_help .= '<b>' . TEXT_COUPON_HELP_RESTRICT . '</b>';
-  $text_coupon_help .= '<br><br>' .  TEXT_COUPON_HELP_CATEGORIES;
-  $coupon_get=xtc_db_query("select restrict_to_categories from " . TABLE_COUPONS . " where coupon_id='".$HTTP_GET_VARS['cID']."'");
+  $text_coupon_help .= '<br /><br />' .  TEXT_COUPON_HELP_CATEGORIES;
+  $coupon_get=xtc_db_query("select restrict_to_categories from " . TABLE_COUPONS . " where coupon_id='".$_GET['cID']."'");
   $get_result=xtc_db_fetch_array($coupon_get);
 
   $cat_ids = split("[,]", $get_result['restrict_to_categories']);
   for ($i = 0; $i < count($cat_ids); $i++) {
-    $result = mysql_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $languages_id . "' and categories.categories_id='" . $cat_ids[$i] . "'");
+    $result = mysql_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $_SESSION['language'] . "' and categories.categories_id='" . $cat_ids[$i] . "'");
     if ($row = mysql_fetch_array($result)) {
-    $cats .= '<br>' . $row["categories_name"];
+    $cats .= '<br />' . $row["categories_name"];
     } 
   }
-  if ($cats=='') $cats = '<br>NONE';
+  if ($cats=='') $cats = '<br />NONE';
   $text_coupon_help .= $cats;
-  $text_coupon_help .= '<br><br>' .  TEXT_COUPON_HELP_PRODUCTS;
-  $coupon_get=xtc_db_query("select restrict_to_products from " . TABLE_COUPONS . "  where coupon_id='".$HTTP_GET_VARS['cID']."'");
+  $text_coupon_help .= '<br /><br />' .  TEXT_COUPON_HELP_PRODUCTS;
+  $coupon_get=xtc_db_query("select restrict_to_products from " . TABLE_COUPONS . "  where coupon_id='".$_GET['cID']."'");
   $get_result=xtc_db_fetch_array($coupon_get);
 
   $pr_ids = split("[,]", $get_result['restrict_to_products']);
   for ($i = 0; $i < count($pr_ids); $i++) {
-    $result = mysql_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" . $languages_id . "'and products.products_id = '" . $pr_ids[$i] . "'");
+    $result = mysql_query("SELECT * FROM products, products_description WHERE products.products_id = products_description.products_id and products_description.language_id = '" .$_SESSION['language'] . "'and products.products_id = '" . $pr_ids[$i] . "'");
     if ($row = mysql_fetch_array($result)) {
-      $prods .= '<br>' . $row["products_name"];
+      $prods .= '<br />' . $row["products_name"];
     }
   }
-  if ($prods=='') $prods = '<br>NONE';
+  if ($prods=='') $prods = '<br />NONE';
   $text_coupon_help .= $prods;
 
   $smarty->assign('TEXT_HELP',$text_coupon_help);

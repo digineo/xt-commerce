@@ -68,7 +68,7 @@ echo xtc_image_submit('button_delete.gif', TEXT_DELETE,'style="cursor:hand" ');
 </td>
 </tr>
 </table>
-<br><br>
+<br /><br />
 <?php } ?>
 
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
@@ -97,7 +97,7 @@ echo xtc_image_submit('button_save.gif', TEXT_EDIT,'style="cursor:hand" ');
 </form>
 </tr>
 </table>
-<br><br>
+<br /><br />
 <!-- Versandkostenbearbeitung Ende //-->
 
 
@@ -147,7 +147,7 @@ echo xtc_image_submit('button_delete.gif', TEXT_DELETE,'style="cursor:hand" ');
 </td>
 </tr>
 </table>
-<br><br>
+<br /><br />
 <?php } ?>
 
 
@@ -178,7 +178,7 @@ echo xtc_image_submit('button_save.gif', TEXT_EDIT,'style="cursor:hand" ');
 </form>
 </tr>
 </table>
-<br><br>
+<br /><br />
 <?php } ?>
 <!-- Nachnahmebearbeitung Ende //-->
 

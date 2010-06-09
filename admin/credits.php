@@ -55,30 +55,30 @@
       </tr>
       <tr>
         <td class="main">
-<font color="D68000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo PROJECT_VERSION; ?></b></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><br>
+<font color="D68000" size="2" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo PROJECT_VERSION; ?></b></font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><strong><br />
 Release
-Datum: 08. Sept. 2004</strong><br>
-Released under the GNU General Public License<br>
-<br>
+Datum: 08. Sept. 2004</strong><br />
+Released under the GNU General Public License<br />
+<br />
  This program is distributed
-in the hope that it will be useful, but <b>WITHOUT ANY WARRANTY</b>;<br>
+in the hope that it will be useful, but <b>WITHOUT ANY WARRANTY</b>;<br />
 without even the implied warranty of <b>MERCHANTABILITY</b> or <b>FITNESS FOR
-A PARTICULAR PURPOSE</b>.<br>
+A PARTICULAR PURPOSE</b>.<br />
 See the GNU General Public License for more details. You should have received
-a copy of the<br>
-GNU General Public License along with this program; if not, write to the<br>
-Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.<br>
+a copy of the<br />
+GNU General Public License along with this program; if not, write to the<br />
+Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.<br />
 See <a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a>
-for details. <br>
-<br>
-<b>Das XT-Commerce-Team dankt allen Programmierern und Entwicklern die Ihre Software<br>
-zur Verf&uuml;gung gestellt haben. Sollten wir jemanden vergessen haben hier zu nennen,<br>
-bitten wir um Entschuldigung. In diesem Fall bitten wir um einen Hinweis in unter:</b><br>
-<a href="mailto://team@xtcommerce.com">team@xtcommerce.com</a><br>
-<br>
-<br>
+for details. <br />
+<br />
+<b>Das XT-Commerce-Team dankt allen Programmierern und Entwicklern die Ihre Software<br />
+zur Verf&uuml;gung gestellt haben. Sollten wir jemanden vergessen haben hier zu nennen,<br />
+bitten wir um Entschuldigung. In diesem Fall bitten wir um einen Hinweis in unter:</b><br />
+<a href="mailto://team@xtcommerce.com">team@xtcommerce.com</a><br />
+<br />
+<br />
 <font color="D68000"><b>Programmierer
-von XT-Commerce:</b></font><br>
+von XT-Commerce:</b></font><br />
 </font>
 <hr align="center" width="100%">
 <table width="100%" border="0" cellpadding="0" cellspacing="4" border-color: #ff0000;" bgcolor="FDAC00">
@@ -95,96 +95,96 @@ von XT-Commerce:</b></font><br>
       <font size="2" face="Verdana, Arial, Helvetica, sans-serif">Donations: <a href="http://www.amazon.de/exec/obidos/wishlist/3S5KFCG2166KD/302-5779377-6867251" target="new">Amazon (DE)</a></font></td>
   </tr>
 </table>
-<font size="2" face="Verdana, Arial, Helvetica, sans-serif"> <br>
-<br>
+<font size="2" face="Verdana, Arial, Helvetica, sans-serif"> <br />
+<br />
 <font color="D68000"><b>Die
-Shopsoftware basiert auf:</b></font><br>
+Shopsoftware basiert auf:</b></font><br />
 </font>
 <hr align="center" width="100%">
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>© 2000-2001 The Exchange Project</b></font>
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif">© Harald Ponce de Leon | http://www.oscommerce.com</font>
-<font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+<font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
 <b>© 2002-2003 osCommerce (Milestone2)</b></font>
-<font size="2" face="Verdana, Arial, Helvetica, sans-serif">© Harald Ponce de Leon | http://www.oscommerce.com<br>
+<font size="2" face="Verdana, Arial, Helvetica, sans-serif">© Harald Ponce de Leon | http://www.oscommerce.com<br />
 Released under the GNU General
 Public License - die exakten Versionsnummern der Originalfiles entnehmen Sie den
-Copyright-Headern der einzelnen Dateien<br>
-<br>
+Copyright-Headern der einzelnen Dateien<br />
+<br />
 <b>© neXTCommerce
-(XTC 0.9 RC3 CVS)</b> © 2003 neXTCommerce | http://www.nextcommerce.org ( code-modifications &amp; redesign by Guido Winger/Mario Zanier/Andreas Oberzier)<br>
-Mario Zanier <a href="mailto:mzanier@xtcommerce.com">mzanier@xtcommerce.com</a> / Guido Winger <a href="mailto:gwinger@xtcommerce.com">gwinger@xtcommerce.com</a> / Andreas Oberzier <a href="mailto:aoberzier@nextcommerce.org">aoberzier@nextcommerce.org</a><br>
+(XTC 0.9 RC3 CVS)</b> © 2003 neXTCommerce | http://www.nextcommerce.org ( code-modifications &amp; redesign by Guido Winger/Mario Zanier/Andreas Oberzier)<br />
+Mario Zanier <a href="mailto:mzanier@xtcommerce.com">mzanier@xtcommerce.com</a> / Guido Winger <a href="mailto:gwinger@xtcommerce.com">gwinger@xtcommerce.com</a> / Andreas Oberzier <a href="mailto:aoberzier@nextcommerce.org">aoberzier@nextcommerce.org</a><br />
 Released under the GNU General Public License - die exakten Versionsnummern
-der Originaldateien entnehmen Sie den Copyright-Headern der einzelnen Dateien<br>
-<br>
-<br>
+der Originaldateien entnehmen Sie den Copyright-Headern der einzelnen Dateien<br />
+<br />
+<br />
 <font color="D68000"> <b>XT-Commerce
-nutzt die folgende Software</b></font><br>
+nutzt die folgende Software</b></font><br />
 </font>
 <hr align="center" width="100%">
 
 <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Enable_Disable_Categories 1.3 </b> -Autor:
-Mikel Williams | mikel@ladykatcostumes.com<br>
+Mikel Williams | mikel@ladykatcostumes.com<br />
 Released under the
-GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
 <b>New Attribute Manager v4b</b> -Autor:
-Mike G | mp3man@internetwork.net | http://downloads.ephing.com<br>
+Mike G | mp3man@internetwork.net | http://downloads.ephing.com<br />
 Released under the
-GNU General Public License <br>
-<b>Customers Status v3.x </b>-© 2002-2003 Copyright Elari elari@free.fr | www.unlockgsm.com/dload-osc/<br>
-CVS : http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/elari/?sortby=date#dirlist<br>
+GNU General Public License <br />
+<b>Customers Status v3.x </b>-© 2002-2003 Copyright Elari elari@free.fr | www.unlockgsm.com/dload-osc/<br />
+CVS : http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/elari/?sortby=date#dirlist<br />
 Released under the
-GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
 <b>agree_conditions_1.01</b> -Autor:
-Thomas Pl&auml;nkers (webmaster@oscommerce.at)<br>
+Thomas Pl&auml;nkers (webmaster@oscommerce.at)<br />
 Released under the
-GNU General Public License<br>
+GNU General Public License<br />
 <b>Category Descriptions (Version: 1.5 MS2)</b> -Autor:
-Brian Lowe (blowe@wpcusrgrp.org) | Editor: Lord Illicious (shaolin-venoms@illicious.net)<br>
+Brian Lowe (blowe@wpcusrgrp.org) | Editor: Lord Illicious (shaolin-venoms@illicious.net)<br />
 Released under the
-GNU General Public License<br>
+GNU General Public License<br />
 <b>austrian_post_1.05</b> -Autor:
 Copyright © 2002 - 2003 TheMedia, Dipl.-Ing Thomas Pl&auml;nkers | http://www.themedia.at
-& http://www.oscommerce.at<br>
+& http://www.oscommerce.at<br />
 Released under the
-GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
 <b>swiss_post_1.02</b> -Autor:
 Copyright © 2002 - 2003 TheMedia, Dipl.-Ing Thomas Pl&auml;nkers | http://www.themedia.at
-& http://www.oscommerce.at<br>
+& http://www.oscommerce.at<br />
 Released under the
-GNU General Public License <br>
+GNU General Public License <br />
 <b>chronopost-1.0.1 </b>-Autor:
-devteam@e-network.fr | www.oscommerce-fr.info</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+devteam@e-network.fr | www.oscommerce-fr.info</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
 Released under the
-GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
 <b>dhl_austria_1.02</b> -Autor:
 Copyright © 2002 - 2003 TheMedia, Dipl.-Ing Thomas Pl&auml;nkers | http://www.themedia.at
-& http://www.oscommerce.at<br>
+& http://www.oscommerce.at<br />
 Released under the
-GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
 <b>German Post (Deutsche Post WorldNet)</b> -Autor:
 Copyright © 2002 - 2003 TheMedia, Dipl.-Ing Thomas Pl&auml;nkers | http://www.themedia.at
-& http://www.oscommerce.at<br>
+& http://www.oscommerce.at<br />
 Released under the
-GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
+GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
 <b>fedex_europe_1.02</b> -Autor:
 Copyright © 2002 - 2003 TheMedia, Dipl.-Ing Thomas Pl&auml;nkers | http://www.themedia.at
-& http://www.oscommerce.at<br>
+& http://www.oscommerce.at<br />
 Released under the
-GNU General Public License <br>
+GNU General Public License <br />
 <b>freeamountv2-p1</b> -Autor:
-dwk<br>
+dwk<br />
 Released under the
-GNU General Public License<br>
-<b>phpMailer Library for PHP4</b> -Autor: © Brent R. Matzelle bmatzelle@yahoo.com | http://phpmailer.sourceforge.net<br>
+GNU General Public License<br />
+<b>phpMailer Library for PHP4</b> -Autor: © Brent R. Matzelle bmatzelle@yahoo.com | http://phpmailer.sourceforge.net<br />
 Released under GNU
-Lesser GPL library license.<br>
-<b>CaRP v2.7.5 </b>-Autor: © 2002-3 Antone Roundy | http://www.mouken.com/rss/<br>
+Lesser GPL library license.<br />
+<b>CaRP v2.7.5 </b>-Autor: © 2002-3 Antone Roundy | http://www.mouken.com/rss/<br />
 Released under the
-GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
-<font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Smarty Templateengine</b> | version 2.6.3 | http://smarty.php.net <br>
-Released under the GNU General Public License</font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br>
-<br>
-<b>Ps: Wir weisen darauf hin, dass wir keine Garantie auf Vollst&auml;ndigkeit dieser Liste geben.</b><br>
+GNU General Public License</font> <font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
+<font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b>Smarty Templateengine</b> | version 2.6.3 | http://smarty.php.net <br />
+Released under the GNU General Public License</font><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><br />
+<br />
+<b>Ps: Wir weisen darauf hin, dass wir keine Garantie auf Vollst&auml;ndigkeit dieser Liste geben.</b><br />
   </font>
 </td>
       </tr>		

@@ -211,7 +211,7 @@
   $addresses_count = xtc_count_customer_address_book_entries();
 
    require(DIR_WS_INCLUDES . 'header.php');
-  $smarty->assign('FORM_ACTION',xtc_draw_form('checkout_address', xtc_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'), 'post', 'onSubmit="return check_form_optional(checkout_address);"'));
+  $smarty->assign('FORM_ACTION',xtc_draw_form('checkout_address', xtc_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL'), 'post', 'onsubmit="return check_form_optional(checkout_address);"'));
 
   if ($messageStack->size('checkout_address') > 0) {
   $smarty->assign('error',$messageStack->output('checkout_address'));
@@ -220,7 +220,7 @@
   }
 
   if ($process == false) {
-  $smarty->assign('ADDRESS_LABEL',xtc_address_label($_SESSION['customer_id'], $_SESSION['sendto'], true, ' ', '<br>'));
+  $smarty->assign('ADDRESS_LABEL',xtc_address_label($_SESSION['customer_id'], $_SESSION['sendto'], true, ' ', '<br />'));
 
     if ($addresses_count > 1) {
 
@@ -242,21 +242,21 @@ $address_content='<table border="0" width="100%" cellspacing="0" cellpadding="0"
           $address_content.= '                  <tr class="moduleRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
         }
 $address_content.= '
-                    <td width="10">'.xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
-                    <td class="main" colspan="2"><b>'. $addresses['firstname'] . ' ' . $addresses['lastname'].'</b></td>
+                    <td>'.xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="main" colspan="2"><strong>'. $addresses['firstname'] . ' ' . $addresses['lastname'].'</strong></td>
                     <td class="main" align="right">'. xtc_draw_radio_field('address', $addresses['address_book_id'], ($addresses['address_book_id'] == $_SESSION['sendto'])).'</td>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>
                   <tr>
-                    <td width="10">'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td>'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                     <td colspan="3"><table border="0" cellspacing="0" cellpadding="2">
                       <tr>
-                        <td width="10">'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                        <td>'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                         <td class="main">'.  xtc_address_format($format_id, $addresses, true, ' ', ', ').'</td>
-                        <td width="10">'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                        <td>'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                       </tr>
                     </table></td>
-                    <td width="10">'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td>'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>
                 </table></td>
                 <td>'.  xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>

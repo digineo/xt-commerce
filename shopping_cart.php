@@ -96,7 +96,7 @@ if (STOCK_CHECK == 'true') {
     }
 }
 
-if ($_GET['info_message']) $smarty->assign('info_message',$_GET['info_message']);
+if ($_GET['info_message']) $smarty->assign('info_message',str_replace('+',' ',$_GET['info_message']));
 $smarty->assign('BUTTON_RELOAD',xtc_image_submit('button_update_cart.gif', IMAGE_BUTTON_UPDATE_CART));
 $smarty->assign('BUTTON_CHECKOUT','<a href="'.xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL').'">'.xtc_image_button('button_checkout.gif', IMAGE_BUTTON_CHECKOUT).'</a>');
 
@@ -104,9 +104,9 @@ $smarty->assign('BUTTON_CHECKOUT','<a href="'.xtc_href_link(FILENAME_CHECKOUT_SH
   
   // empty cart
   $cart_empty=true;
-  if ($_GET['info_message']) $smarty->assign('info_message',$_GET['info_message']); 
+  if ($_GET['info_message']) $smarty->assign('info_message',str_replace('+',' ',$_GET['info_message'])); 
   $smarty->assign('cart_empty',$cart_empty);
-  $smarty->assign('BUTTON_CONTINUE','<a href="'.xtc_href_link(FILENAME_DEFAULT).'">'. xtc_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE));
+  $smarty->assign('BUTTON_CONTINUE','<a href="'.xtc_href_link(FILENAME_DEFAULT).'">'. xtc_image_button('button_continue.gif', IMAGE_BUTTON_CONTINUE).'</a>');
 
 }
   $smarty->assign('language', $_SESSION['language']);
@@ -118,4 +118,5 @@ $smarty->assign('BUTTON_CHECKOUT','<a href="'.xtc_href_link(FILENAME_CHECKOUT_SH
   $smarty->caching = 0;
   if (!defined(RM)) $smarty->load_filter('output', 'note');
   $smarty->display(CURRENT_TEMPLATE . '/index.html');
+  echo $_SESSION['cart']->content_type;
 ?>

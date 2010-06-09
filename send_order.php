@@ -29,10 +29,10 @@
 	$order = new order($insert_id,&$xtPrice);
 
 	
-  	$smarty->assign('address_label_customer',xtc_address_format($order->customer['format_id'], $order->customer, 1, '', '<br>'));
-  	$smarty->assign('address_label_shipping',xtc_address_format($order->delivery['format_id'], $order->delivery, 1, '', '<br>'));
+  	$smarty->assign('address_label_customer',xtc_address_format($order->customer['format_id'], $order->customer, 1, '', '<br />'));
+  	$smarty->assign('address_label_shipping',xtc_address_format($order->delivery['format_id'], $order->delivery, 1, '', '<br />'));
     if ($_SESSION['credit_covers']!='1') {
-  	$smarty->assign('address_label_payment',xtc_address_format($order->billing['format_id'], $order->billing, 1, '', '<br>'));
+  	$smarty->assign('address_label_payment',xtc_address_format($order->billing['format_id'], $order->billing, 1, '', '<br />'));
     }
   	$smarty->assign('csID',$order->customer['csID']);
   	// get products data
@@ -57,8 +57,8 @@
         	$attributes_data='';
         	$attributes_model='';
         	while ($attributes_data_values = xtc_db_fetch_array($attributes_query)) {
-        	$attributes_data .=$attributes_data_values['products_options'].':'.$attributes_data_values['products_options_values'].'<br>';
-        	$attributes_model .=xtc_get_attributes_model($order_data_values['products_id'],$attributes_data_values['products_options_values']).'<br>';
+        	$attributes_data .=$attributes_data_values['products_options'].':'.$attributes_data_values['products_options_values'].'<br />';
+        	$attributes_model .=xtc_get_attributes_model($order_data_values['products_id'],$attributes_data_values['products_options_values']).'<br />';
         	}
         $order_data[]=array(
         		'PRODUCTS_MODEL' => $order_data_values['products_model'],
@@ -105,9 +105,15 @@
   // EU Bank Transfer
   if ($order->info['payment_method']=='eustandardtransfer')  {
    $smarty->assign('PAYMENT_INFO_HTML',MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION);
-   $smarty->assign('PAYMENT_INFO_TXT',str_replace("<BR>","\n",MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION));
+   $smarty->assign('PAYMENT_INFO_TXT',str_replace("<br />","\n",MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION));
   }
 
+  // MONEYORDER
+  if ($order->info['payment_method']=='moneyorder')  {
+   $smarty->assign('PAYMENT_INFO_HTML',MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION);
+   $smarty->assign('PAYMENT_INFO_TXT',str_replace("<br />","\n",MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION));
+  }
+  
   	// dont allow cache
   	$smarty->caching = false;
   	
@@ -117,7 +123,7 @@
   // create subject
   $order_subject=str_replace('{$nr}',$insert_id,EMAIL_BILLING_SUBJECT_ORDER);
   $order_subject=str_replace('{$date}',strftime(DATE_FORMAT_LONG),$order_subject);
-  $order_subject=str_replace('{$lastname}',$order->customer['firstname'],$order_subject);
+  $order_subject=str_replace('{$lastname}',$order->customer['lastname'],$order_subject);
   $order_subject=str_replace('{$firstname}',$order->customer['firstname'],$order_subject);
 
 
@@ -151,6 +157,11 @@
                $html_mail ,
                $txt_mail );
 
+if (AFTERBUY_ACTIVATED=='true') {
+	require_once(DIR_WS_CLASSES .'afterbuy.php');
+	$aBUY=new xtc_afterbuy_functions($insert_id);
+	if ($aBUY->order_send()) $aBUY->process_order();
+}
 
 } else {
 $smarty->assign('ERROR','You are not allowed to view this order!');

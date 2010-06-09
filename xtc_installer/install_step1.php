@@ -77,7 +77,7 @@
 <div align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="FFAF00">xtc:</font><font color="#999999">Install</font></b></font></div></td>
         </tr>
         <tr> 
-          <td bgcolor="F3F3F3" ><br> 
+          <td bgcolor="F3F3F3" ><br /> 
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
                 <td width="10">&nbsp;</td>
@@ -95,17 +95,17 @@
                 <td>&nbsp;</td>
               </tr>
             </table>
-            <br></td>
+            <br /></td>
         </tr>
       </table>
     </td>
     <td align="right" valign="top" style="border-top: 1px solid; border-bottom: 1px solid; border-right: 1px solid; border-color: #6D6D6D;"> 
-      <br>
+      <br />
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br>
-            <br>
-            <br>
+          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br />
+            <br />
+            <br />
             <?php echo TEXT_WELCOME_STEP1; ?></font></td>
         </tr>
       </table>
@@ -123,18 +123,18 @@
                 </tr>
               </table>
               <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo xtc_draw_checkbox_field_installer('install[]', 'database', true); ?>
-                <b><?php echo TEXT_IMPORT_DB; ?></b><br>
+                <b><?php echo TEXT_IMPORT_DB; ?></b><br />
                 <?php echo TEXT_IMPORT_DB_LONG; ?></font></p>
               <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo xtc_draw_checkbox_field_installer('install[]', 'configure', true); ?> 
-                <b><?php echo TEXT_AUTOMATIC; ?></b><br>
+                <b><?php echo TEXT_AUTOMATIC; ?></b><br />
                 <?php echo TEXT_AUTOMATIC_LONG; ?></font></p>
 
 </td>
   </tr>
 </table>
-        <br>
+        <br />
         <img src="images/break-el.gif" width="100%" height="1">
-                <br>
+                <br />
         <table width="98%" border="0" cellpadding="0" cellspacing="0">
           <tr> 
             <td>
@@ -147,23 +147,23 @@
               </table>
               <p><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><b> 
                 </b></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_DATABASE_SERVER; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DB_SERVER'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_DATABASE_SERVER; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DB_SERVER'); ?><br />
                 <?php echo TEXT_DATABASE_SERVER_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_USERNAME; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DB_SERVER_USERNAME'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_USERNAME; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DB_SERVER_USERNAME'); ?><br />
                 <?php echo TEXT_USERNAME_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_PASSWORD; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DB_SERVER_PASSWORD'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_PASSWORD; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DB_SERVER_PASSWORD'); ?><br />
                 <?php echo TEXT_PASSWORD_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_DATABASE; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DB_DATABASE'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_DATABASE; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DB_DATABASE'); ?><br />
                 <?php echo TEXT_DATABASE_LONG; ?></font></p></td>
           </tr>
         </table>
-                <br>
+                <br />
                 <img src="images/break-el.gif" width="100%" height="1">
-                <br>
+                <br />
                 <table width="98%" border="0" cellpadding="0" cellspacing="0">
           <tr> 
             <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -174,26 +174,26 @@
                 </tr>
               </table>
               <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ROOT; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_FS_DOCUMENT_ROOT', $dir_fs_www_root,'','size=60'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ROOT; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_FS_DOCUMENT_ROOT', $dir_fs_www_root,'','size=60'); ?><br />
                 <?php echo TEXT_WS_ROOT_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_XTC; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_FS_CATALOG', $local_install_path,'','size=60'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_XTC; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_FS_CATALOG', $local_install_path,'','size=60'); ?><br />
                 <?php echo TEXT_WS_XTC_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ADMIN; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_FS_ADMIN', $local_install_path.'admin/','','size=60'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><?php echo TEXT_WS_ADMIN; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_FS_ADMIN', $local_install_path.'admin/','','size=60'); ?><br />
                <?php echo TEXT_WS_ADMIN_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b> <?php echo TEXT_WS_CATALOG; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_WS_CATALOG', $dir_ws_www_root . '/','','size=60'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b> <?php echo TEXT_WS_CATALOG; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_WS_CATALOG', $dir_ws_www_root . '/','','size=60'); ?><br />
                  <?php echo TEXT_WS_CATALOG_LONG; ?></font></p>
-              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b> <?php echo TEXT_WS_ADMINTOOL; ?></b><br>
-                <?php echo xtc_draw_input_field_installer('DIR_WS_ADMIN', $dir_ws_www_root . '/admin/','','size=60'); ?><br>
+              <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b> <?php echo TEXT_WS_ADMINTOOL; ?></b><br />
+                <?php echo xtc_draw_input_field_installer('DIR_WS_ADMIN', $dir_ws_www_root . '/admin/','','size=60'); ?><br />
                  <?php echo TEXT_WS_ADMINTOOL_LONG; ?></font></p></td>
           </tr>
         </table>
-<br>
+<br />
 <img src="images/break-el.gif" width="100%" height="1">
-<br>
+<br />
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr>
     <td align="center"><a href="index.php"><img src="images/button_cancel.gif" border="0" alt="Cancel"></a></td>

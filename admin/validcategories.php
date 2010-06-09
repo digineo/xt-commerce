@@ -34,29 +34,22 @@ require('includes/application_top.php');
 <html>
 <head>
 <title>Valid Categories/Products List</title>
-<style type="text/css">
-<!--
-h4 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: x-small; text-align: center}
-p {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
-th {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
-td {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: xx-small}
--->
-</style>
+<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
 <head>
 <body>
-<table width="550" border="1" cellspacing="1" bordercolor="gray">
+<table width="550" cellspacing="1">
 <tr>
-<td colspan="4">
-<h4><?php echo TEXT_VALID_CATEGORIES_LIST; ?></h4>
+<td class="pageHeading" colspan="3">
+<?php echo TEXT_VALID_CATEGORIES_LIST; ?>
 </td>
 </tr>
 <?
-    echo "<tr><th>" . TEXT_VALID_CATEGORIES_ID . "</th><th>" . TEXT_VALID_CATEGORIES_NAME . "</th></tr><tr>";
+    echo "<tr><th class=\"dataTableHeadingContent\">" . TEXT_VALID_CATEGORIES_ID . "</th><th class=\"dataTableHeadingContent\">" . TEXT_VALID_CATEGORIES_NAME . "</th></tr><tr>";
     $result = xtc_db_query("SELECT * FROM categories, categories_description WHERE categories.categories_id = categories_description.categories_id and categories_description.language_id = '" . $_SESSION['languages_id'] . "' ORDER BY categories.categories_id");
     if ($row = xtc_db_fetch_array($result)) {
         do {
-            echo "<td>".$row["categories_id"]."</td>\n";
-            echo "<td>".$row["categories_name"]."</td>\n";
+            echo "<td class=\"dataTableHeadingContent\">".$row["categories_id"]."</td>\n";
+            echo "<td class=\"dataTableHeadingContent\">".$row["categories_name"]."</td>\n";
             echo "</tr>\n";
         }
         while($row = xtc_db_fetch_array($result));

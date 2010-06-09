@@ -21,6 +21,7 @@
   
   switch ($_GET['action']) {
     case 'banner':
+      $_GET['goto']=(int)$_GET['goto'];
       $banner_query = xtc_db_query("select banners_url from " . TABLE_BANNERS . " where banners_id = '" . $_GET['goto'] . "'");
       if (xtc_db_num_rows($banner_query)) {
         $banner = xtc_db_fetch_array($banner_query);

@@ -40,6 +40,7 @@
         $current_page_number = $num_pages;
       }
       $offset = ($max_rows_per_page * ($current_page_number - 1));
+      if ($offset < 0) $offset=0; 
       $sql_query .= " limit " . $offset . ", " . $max_rows_per_page;
     }
 

@@ -23,11 +23,11 @@ define('TEXT_BANK_FAX', 'Collect Authorization will be approved via Fax');
 define('TEXT_BANK_STATUS', 'Verify Status:');
 define('TEXT_BANK_PRZ', 'Method of Verify:');
 
-define('TEXT_BANK_ERROR_1', 'Accountnumber and Bank Code are not compatible!<br>Please try again!');
+define('TEXT_BANK_ERROR_1', 'Accountnumber and Bank Code are not compatible!<br />Please try again!');
 define('TEXT_BANK_ERROR_2', 'Sorry, we are unable to proof this account number!');
 define('TEXT_BANK_ERROR_3', 'Account number not proofable! Method of Verify not implemented');
-define('TEXT_BANK_ERROR_4', 'Account number technically not proofable!<br>Please try again!');
-define('TEXT_BANK_ERROR_5', 'Bank Code not found!<br>Please try again.!');
+define('TEXT_BANK_ERROR_4', 'Account number technically not proofable!<br />Please try again!');
+define('TEXT_BANK_ERROR_5', 'Bank Code not found!<br />Please try again.!');
 define('TEXT_BANK_ERROR_8', 'No match for your Bank Code or Bank Code not given!');
 define('TEXT_BANK_ERROR_9', 'No account number given!');
 define('TEXT_BANK_ERRORCODE', 'Errorcode:');
@@ -52,6 +52,7 @@ define('TABLE_HEADING_PRICE_EXCLUDING_TAX', 'Price (ex)');
 define('TABLE_HEADING_PRICE_INCLUDING_TAX', 'Price (inc)');
 define('TABLE_HEADING_TOTAL_EXCLUDING_TAX', 'Total (ex)');
 define('TABLE_HEADING_TOTAL_INCLUDING_TAX', 'Total');
+define('TABLE_HEADING_AFTERBUY','Afterbuy');
 
 define('TABLE_HEADING_STATUS', 'Status');
 define('TABLE_HEADING_CUSTOMER_NOTIFIED', 'Customer Notified');

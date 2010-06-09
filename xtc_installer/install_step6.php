@@ -676,7 +676,7 @@ xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_i
 <div align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><b><font color="FFAF00">xtc:</font><font color="#999999">Install</font></b></font></div></td>
         </tr>
         <tr> 
-          <td bgcolor="F3F3F3" ><br> 
+          <td bgcolor="F3F3F3" ><br /> 
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr> 
                 <td width="10">&nbsp;</td>
@@ -724,21 +724,21 @@ xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_i
   }
 ?>
             </table>
-            <br></td>
+            <br /></td>
         </tr>
       </table>
     </td>
     <td align="right" valign="top" style="border-top: 1px solid; border-bottom: 1px solid; border-right: 1px solid; border-color: #6D6D6D;"> 
-      <br>
+      <br />
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr> 
-          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br>
-            <br>
-            <br>
+          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif"> <img src="images/title_index.gif" width="586" height="100" border="0"><br />
+            <br />
+            <br />
             <?php echo TEXT_WELCOME_STEP6; ?></font></td>
         </tr>
       </table> 
-      <br>
+      <br />
       <table width="98%" border="0" cellpadding="0" cellspacing="0">
         <tr> 
           <td>
@@ -840,7 +840,7 @@ xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_i
                 <td style="border-bottom: 1px solid; border-color: #CFCFCF">&nbsp;</td>
               </tr>
             </table>
-              <font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo  TITLE_SHOP_CONFIG_NOTE; ?></font><br>
+              <font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo  TITLE_SHOP_CONFIG_NOTE; ?></font><br />
               <table width="100%" border="0">
                 <tr> 
                   <td width="26%"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong><?php echo  TEXT_STORE; ?></strong></font></td>
@@ -867,7 +867,7 @@ xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_i
                   <td style="border-bottom: 1px solid; border-color: #CFCFCF">&nbsp;</td>
                 </tr>
               </table>
-              <font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo  TITLE_ZONE_CONFIG_NOTE; ?></font><br>
+              <font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo  TITLE_ZONE_CONFIG_NOTE; ?></font><br />
               <table width="100%" border="0">
                 <tr> 
                   <td width="26%"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong><?php echo  TEXT_ZONE; ?></strong></font></td>
@@ -877,11 +877,11 @@ xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_i
                     <?php echo xtc_draw_radio_field_installer('ZONE_SETUP', 'no'); ?></td>
                 </tr>
               </table>
-              <p><br>
+              <p><br />
               </p>
               <center>
                 <input name="image" type="image" src="images/button_continue.gif" alt="Continue" align="middle" border="0">
-                <br>
+                <br />
               </center>
             </form></td>
         </tr>
@@ -895,7 +895,7 @@ xtc_db_query("UPDATE zones_to_geo_zones SET geo_zone_id='5' WHERE zone_country_i
 
 
 
-<p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_FOOTER; ?><br>
+<p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_FOOTER; ?><br />
   </font></p>
 <p align="center">&nbsp;</p>
 </body>

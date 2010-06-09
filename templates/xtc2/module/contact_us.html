@@ -1,14 +1,19 @@
 {config_load file="$language/lang_$language.conf" section="contact_us"}
-<font size="3" face="Verdana, Arial, Helvetica, sans-serif"><strong>{$CONTACT_HEADING}</strong></font><br>
-<br>
-{if $error_message!=''}
-<br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td class="main" style="border: 1px solid; border-color: #ff0000;" bgcolor="#FFCCCC"><div align="center">{$error_message}</div></td>
+    <td class="contentsTopics">{$CONTACT_HEADING}</td>
   </tr>
 </table>
-<br>
+<br />
+<br />
+{if $error_message!=''}
+<br />
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="main" style="border: 1px solid; border-color: #ff0000;" bgcolor="#FFCCCC" align="center">{$error_message}</td>
+  </tr>
+</table>
+<br />
 {/if}
 
 {if $success!='1'}
@@ -18,13 +23,12 @@
     <td class="main">{$CONTACT_CONTENT}</td>
   </tr>
   <tr> 
-    <td><div align="right"><br>
-      </div></td>
+    <td align="right"><br /></td>
   </tr>
   <tr> 
     <td><table width="100%" border="0" cellspacing="2" cellpadding="0">
         <tr> 
-          <td class="main" width="150">{#text_name#}</td>
+          <td class="main">{#text_name#}</td>
           <td>{$INPUT_NAME}</td>
         </tr>
         <tr> 
@@ -41,20 +45,19 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td><div align="right">{$BUTTON_SUBMIT}</div></td>
+    <td align="right">{$BUTTON_SUBMIT}</td>
   </tr>
 </table>
 {$FORM_END}
 {else}
 <table width="100%" border="0" cellspacing="0" cellpadding="5">
   <tr> 
-    <td><img src="{$tpl_path}img/checkout_success.gif"></td>
-    <td class="main"valign="top"><br>
-      {#text_success#}<br> <br>
-      <br> <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <td><img src="{$tpl_path}img/checkout_success.gif" alt="" /></td>
+    <td class="main"valign="top"><br />
+      {#text_success#}<br /> <br />
+      <br /> <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr> 
-          <td><div align="right"><br>
-              {$BUTTON_CONTINUE}</div></td>
+          <td align="right"><br />{$BUTTON_CONTINUE}</td>
         </tr>
       </table></td>
   </tr>

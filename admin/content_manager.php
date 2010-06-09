@@ -30,7 +30,7 @@
  if ($_GET['special']=='delete') {
  
  xtc_db_query("DELETE FROM ".TABLE_CONTENT_MANAGER." where content_id='".(int)$_GET['coID']."'");
- xtc_redirect(xtc_href_link(FILENAME_CONTENT_MANAGER)); 
+ xtc_redirect(xtc_href_link(FILENAME_CONTENT_MANAGER));
 } // if get special
 
  if ($_GET['special']=='delete_product') {
@@ -190,9 +190,22 @@ if ($select_file=='default') {
  } else {
   $content_file_name=$select_file;
 }     
-         // if        
+         // if
                 
-           // update data in table 
+           // update data in table
+
+        // set allowed c.groups
+        $group_ids='';
+        if(isset($_POST['groups'])) foreach($_POST['groups'] as $b){
+        $group_ids .= 'c_'.$b."_group ,";
+        }
+        $customers_statuses_array=xtc_get_customers_statuses();
+        if (strstr($group_ids,'c_all_group')) {
+        $group_ids='c_all_group,';
+         for ($i=0;$n=sizeof($customers_statuses_array),$i<$n;$i++) {
+            $group_ids .='c_'.$customers_statuses_array[$i]['id'].'_group,';
+         }
+        }
         
           $sql_data_array = array(
                                 'products_id' => $product,
@@ -216,7 +229,7 @@ if ($select_file=='default') {
         
         
         
-        xtc_redirect(xtc_href_link(FILENAME_CONTENT_MANAGER,'pID='.$product));  
+        xtc_redirect(xtc_href_link(FILENAME_CONTENT_MANAGER,'pID='.$product));
         }// if error
 
         
@@ -284,7 +297,7 @@ if ($select_file=='default') {
 <?php
 if (!$_GET['action']) {
 ?>
-<div class="pageHeading"><br><?php echo HEADING_CONTENT; ?><br></div>
+<div class="pageHeading"><br /><?php echo HEADING_CONTENT; ?><br /></div>
 <div class="main"><?php echo CONTENT_NOTE; ?></div>
  <?php
  xtc_spaceUsed(DIR_FS_CATALOG.'media/content/');
@@ -292,7 +305,7 @@ echo '<div class="main">'.USED_SPACE.xtc_format_filesize($total).'</div>';
 ?>
 <?php
 // Display Content
-for ($i = 0, $n = sizeof($languages); $i < $n; $i++) { 
+for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         $content=array();
 
 
@@ -337,7 +350,7 @@ for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
         
         
 ?>
-<br>
+<br />
 <div class="main"><?php echo xtc_image(DIR_WS_LANGUAGES.$languages[$i]['directory'].'/admin/images/'.$languages[$i]['image']).'&nbsp;&nbsp;'.$languages[$i]['name']; ?></div>
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
@@ -352,7 +365,7 @@ for ($i = 0, $n = sizeof($languages); $i < $n; $i++) {
                 <td class="dataTableHeadingContent" width="30%" align="middle"><?php echo TABLE_HEADING_CONTENT_ACTION; ?>&nbsp;</td>
               </tr>
  <?php
-for ($ii = 0, $nn = sizeof($content); $ii < $nn; $ii++) {  
+for ($ii = 0, $nn = sizeof($content); $ii < $nn; $ii++) {
  $file_flag_sql = xtc_db_query("SELECT file_flag_name FROM " . TABLE_CM_FILE_FLAGS . " WHERE file_flag=" . $content[$ii]['FILE_FLAG']);
  $file_flag_result = xtc_db_fetch_array($file_flag_sql);
  echo '              <tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\'" onmouseout="this.className=\'dataTableRow\'">' . "\n";
@@ -387,7 +400,7 @@ for ($ii = 0, $nn = sizeof($content); $ii < $nn; $ii++) {
  </tr>
  
  <?php
- $content_1='';
+ $content_1=array();
          $content_1_query=xtc_db_query("SELECT
                                         content_id,
                                         categories_id,
@@ -422,7 +435,7 @@ for ($ii = 0, $nn = sizeof($content); $ii < $nn; $ii++) {
                         'CONTENT_DELETE' => $content_1_data['content_delete'],
                         'CONTENT_STATUS' => $content_1_data['content_status']);
  }      
-for ($a = 0, $x = sizeof($content_1); $a < $x; $a++) { 
+for ($a = 0, $x = sizeof($content_1); $a < $x; $a++) {
 if ($content_1[$a]!='') {
  $file_flag_sql = xtc_db_query("SELECT file_flag_name FROM " . TABLE_CM_FILE_FLAGS . " WHERE file_flag=" . $content_1[$a]['FILE_FLAG']);
  $file_flag_result = xtc_db_fetch_array($file_flag_sql);
@@ -519,7 +532,7 @@ switch ($_GET['action']) {
                         'text'=>$categories_data['content_title']);
  }   
 ?>
-<br><br>
+<br /><br />
 <?php
  if ($_GET['action']!='new') {
 echo xtc_draw_form('edit_content',FILENAME_CONTENT_MANAGER,'action=edit&id=update&coID='.$_GET['coID'],'post','enctype="multipart/form-data"').xtc_draw_hidden_field('coID',$_GET['coID']);
@@ -580,7 +593,7 @@ while($file_flag = xtc_db_fetch_array($file_flag_sql)) {
       echo xtc_draw_checkbox_field('status', 'yes',false).' '.TEXT_STATUS_DESCRIPTION;
       }
 
-      ?><br><br></td>
+      ?><br /><br /></td>
    </tr>
 
           <?php
@@ -600,7 +613,7 @@ $checked='checked ';
 } else {
 $checked='';
 }
-echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[$i]['id'].'"'.$checked.'> '.$customers_statuses_array[$i]['text'].'<br>';
+echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[$i]['id'].'"'.$checked.'> '.$customers_statuses_array[$i]['text'].'<br />';
 }
 ?>
 </td>
@@ -633,7 +646,7 @@ echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[
         if (is_file( DIR_FS_CATALOG.'media/content/'.$file) and ($file !="index.html")){
         $files[]=array(
                         'id' => $file,
-                        'text' => $file); 
+                        'text' => $file);
         }//if
         } // while
         closedir($dir);
@@ -662,10 +675,10 @@ $default_value=$content['content_file'];
     $files=array_merge($default_array,$files);
     }
 }
-echo '<br>'.TEXT_CHOOSE_FILE_SERVER.'</br>';
+echo '<br />'.TEXT_CHOOSE_FILE_SERVER.'</br>';
 echo xtc_draw_pull_down_menu('select_file',$files,$default_value);
       if ($content['content_file']!='') {
-        echo TEXT_CURRENT_FILE.' <b>'.$content['content_file'].'</b><br>';
+        echo TEXT_CURRENT_FILE.' <b>'.$content['content_file'].'</b><br />';
         }
 
 
@@ -676,7 +689,7 @@ echo xtc_draw_pull_down_menu('select_file',$files,$default_value);
    </tr> 
    <tr> 
       <td width="10%" valign="top"></td>
-      <td colspan="90%" valign="top"><br><?php echo TEXT_FILE_DESCRIPTION; ?></td>
+      <td colspan="90%" valign="top"><br /><?php echo TEXT_FILE_DESCRIPTION; ?></td>
    </tr> 
    <tr> 
       <td width="10%" valign="top"><?php echo TEXT_CONTENT; ?></td>
@@ -725,7 +738,7 @@ echo xtc_draw_textarea_field('cont','','100%','35',$content['content_text']);
                                 products_name
                                 FROM ".TABLE_PRODUCTS_DESCRIPTION."
                                 WHERE language_id='".(int)$_SESSION['languages_id']."'");
- $products_array='';
+ $products_array=array();
 
  while ($products_data=xtc_db_fetch_array($products_query)) {
  
@@ -756,7 +769,7 @@ echo xtc_draw_textarea_field('cont','','100%','35',$content['content_text']);
                                 content_file
                                 FROM ".TABLE_PRODUCTS_CONTENT."
                                 WHERE content_file!=''");
- $content_files='';
+ $content_files=array();
 
  while ($content_files_data=xtc_db_fetch_array($content_files_query)) {
  
@@ -809,7 +822,7 @@ $checked='checked ';
 } else {
 $checked='';
 }
-echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[$i]['id'].'"'.$checked.'> '.$customers_statuses_array[$i]['text'].'<br>';
+echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[$i]['id'].'"'.$checked.'> '.$customers_statuses_array[$i]['text'].'<br />';
 }
 ?>
 </td>
@@ -844,11 +857,10 @@ echo '<input type="checkbox" name="groups[]" value="'.$customers_statuses_array[
  <?php
  if ($content['content_file']!='') {
  ?>
- 
-         <tr> 
+    <tr> 
       <td width="10%"><?php echo TEXT_FILENAME; ?></td>
-      <td width="90%"><?php echo xtc_draw_hidden_field('file_name',$content['content_file']).'<b>'.xtc_image(DIR_WS_CATALOG.'admin/images/icons/icon'.strstr($content['content_file'],'.').'.gif').$content['content_file'].'</b>'; ?></td>
-   </tr>
+      <td width="90%" valign="top"><?php echo xtc_draw_hidden_field('file_name',$content['content_file']).xtc_image(DIR_WS_CATALOG.'admin/images/icons/icon_'.str_replace('.','',strstr($content['content_file'],'.')).'.gif').$content['content_file']; ?></td>
+    </tr>
   <?php
 }
 ?>
@@ -887,7 +899,7 @@ if (!$_GET['action']) {
                                 FROM ".TABLE_PRODUCTS_CONTENT." pc, ".TABLE_PRODUCTS_DESCRIPTION." pd
                                 WHERE pd.products_id=pc.products_id and pd.language_id='".(int)$_SESSION['languages_id']."'");
  
- $products_ids='';
+ $products_ids=array();
  while ($products_id_data=xtc_db_fetch_array($products_id_query)) {
         
         $products_ids[]=array(
@@ -898,7 +910,7 @@ if (!$_GET['action']) {
         
         
  ?>
- <div class="pageHeading"><br><?php echo HEADING_PRODUCTS_CONTENT; ?><br></div>
+ <div class="pageHeading"><br /><?php echo HEADING_PRODUCTS_CONTENT; ?><br /></div>
   <?php
  xtc_spaceUsed(DIR_FS_CATALOG.'media/products/');
 echo '<div class="main">'.USED_SPACE.xtc_format_filesize($total).'</div></br>';
@@ -1078,7 +1090,6 @@ echo '</table></td></tr>';
 <script type="text/javascript">
       HTMLArea.loadPlugin("SpellChecker");
       HTMLArea.loadPlugin("TableOperations");
-      HTMLArea.loadPlugin("FullPage");
       HTMLArea.loadPlugin("CharacterMap");
       HTMLArea.loadPlugin("ContextMenu");
       HTMLArea.loadPlugin("ImageManager");
@@ -1087,7 +1098,6 @@ HTMLArea.onload = function() {
 <?php if ($_GET['action']!='new_products_content') { ?>
 var editor= new HTMLArea("cont");
 editor.registerPlugin(TableOperations);
-editor.registerPlugin(FullPage);
 editor.registerPlugin(ContextMenu);
 editor.registerPlugin(CharacterMap);
 editor.registerPlugin(ImageManager);
@@ -1095,7 +1105,6 @@ editor.generate();
 <?php } else { ?>
 var editor2= new HTMLArea("file_comment");
 editor2.registerPlugin(TableOperations);
-editor2.registerPlugin(FullPage);
 editor2.registerPlugin(ContextMenu);
 editor2.registerPlugin(CharacterMap);
 editor2.registerPlugin(ImageManager);

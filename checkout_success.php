@@ -34,7 +34,6 @@
   require(DIR_FS_CATALOG .'templates/'.CURRENT_TEMPLATE. '/source/boxes.php'); 
   // include needed functions
   require_once(DIR_FS_INC . 'xtc_draw_checkbox_field.inc.php');
-  require_once(DIR_FS_INC . 'xtc_draw_selection_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
 
   // if the customer is not logged on, redirect them to the shopping cart page
@@ -80,25 +79,9 @@
  require(DIR_WS_INCLUDES . 'header.php');
  
 
-  if ($global['global_product_notifications'] != '1') {
-    $notifications= '<p class="productsNotifications">';
-
-    $products_displayed = array();
-    for ($i=0, $n=sizeof($products_array); $i<$n; $i++) {
-      if (!in_array($products_array[$i]['id'], $products_displayed)) {
-        $notifications.=  xtc_draw_checkbox_field('notify[]', $products_array[$i]['id']) . ' ' . $products_array[$i]['text'] . '<br>';
-        $products_displayed[] = $products_array[$i]['id'];
-      }
-    }
-
-    $notifications.=  '</p>';
-  } else {
-    $notifications.=  TEXT_SEE_ORDERS . '<br><br>' . TEXT_CONTACT_STORE_OWNER;
-  }
- $smarty->assign('NOTIFICATION_BLOCK',$notifications);
  $smarty->assign('FORM_ACTION',xtc_draw_form('order', xtc_href_link(FILENAME_CHECKOUT_SUCCESS, 'action=update', 'SSL')));
  $smarty->assign('BUTTON_CONTINUE',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
- $smarty->assign('BUTTON_PRINT','<img src="'.'templates/'.CURRENT_TEMPLATE.'/buttons/' . $_SESSION['language'].'/button_print.gif" style="cursor:hand" onClick="window.open(\''. xtc_href_link(FILENAME_PRINT_ORDER,'oID='.$orders['orders_id']).'\', \'popup\', \'toolbar=0, width=640, height=600\')">');
+ $smarty->assign('BUTTON_PRINT','<img src="'.'templates/'.CURRENT_TEMPLATE.'/buttons/' . $_SESSION['language'].'/button_print.gif" style="cursor:hand" onclick="window.open(\''. xtc_href_link(FILENAME_PRINT_ORDER,'oID='.$orders['orders_id']).'\', \'popup\', \'toolbar=0, width=640, height=600\')" />');
  $smarty->assign('FORM_END','</form>');
  // GV Code Start
  $gv_query=xtc_db_query("select amount from " . TABLE_COUPON_GV_CUSTOMER . " where customer_id='".$_SESSION['customer_id']."'");
@@ -114,8 +97,8 @@
     $smarty->assign('google_tracking','true');
     $smarty->assign('tracking_code','
 <noscript>
-<a href="http://services.google.com/sitestats/'.GOOGLE_LANG.'.html" target=_blank>
-<img height=27 width=135 border=0 src="http://www.googleadservices.com/pagead/conversion/'.GOOGLE_CONVERSION_ID.'/?hl='.GOOGLE_LANG.'">
+<a href="http://services.google.com/sitestats/'.GOOGLE_LANG.'.html" onclick="window.open(this.href); return false;">
+<img height=27 width=135 border=0 src="http://www.googleadservices.com/pagead/conversion/'.GOOGLE_CONVERSION_ID.'/?hl='.GOOGLE_LANG.'" />
 </a>
 </noscript>
     ');

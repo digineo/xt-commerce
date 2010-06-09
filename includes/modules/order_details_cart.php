@@ -68,6 +68,7 @@ $mark_stock='';
   			'PRODUCTS_MODEL' => $products[$i]['model'],
             'PRODUCTS_TAX' => number_format($products[$i]['tax'], TAX_DECIMAL_PLACES),
   			'PRODUCTS_IMAGE' => $image,
+  			'IMAGE_ALT' => $products[$i]['name'],			
   			'BOX_DELETE' => xtc_draw_checkbox_field('cart_delete[]', $products[$i]['id']),
   			'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $products[$i]['id']),
             'PRODUCTS_PRICE' => $xtPrice->xtcFormat($products[$i]['price']*$products[$i]['quantity'],true),
@@ -109,13 +110,13 @@ $mark_stock='';
   $total_content='';
    if ($_SESSION['customers_status']['customers_status_ot_discount_flag'] == '1' && $_SESSION['customers_status']['customers_status_ot_discount'] != '0.00') {
       $discount = xtc_recalculate_price($_SESSION['cart']->show_total(), $_SESSION['customers_status']['customers_status_ot_discount']);
-    $total_content= $_SESSION['customers_status']['customers_status_ot_discount'] . ' % ' . SUB_TITLE_OT_DISCOUNT . ' -' . xtc_format_price($discount, $price_special=1, $calculate_currencies=false) .'<br>';
+    $total_content= $_SESSION['customers_status']['customers_status_ot_discount'] . ' % ' . SUB_TITLE_OT_DISCOUNT . ' -' . xtc_format_price($discount, $price_special=1, $calculate_currencies=false) .'<br />';
     }
 
     if ($_SESSION['customers_status']['customers_status_show_price'] == '1') {
-      $total_content.= SUB_TITLE_SUB_TOTAL . $xtPrice->xtcFormat($_SESSION['cart']->show_total(),true) . '<br>';
+      $total_content.= SUB_TITLE_SUB_TOTAL . $xtPrice->xtcFormat($_SESSION['cart']->show_total(),true) . '<br />';
     } else {
-     $total_content.= TEXT_INFO_SHOW_PRICE_NO . '<br>';
+     $total_content.= TEXT_INFO_SHOW_PRICE_NO . '<br />';
     }
     // display only if there is an ot_discount
     if ($customer_status_value['customers_status_ot_discount'] != 0) {

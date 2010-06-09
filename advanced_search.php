@@ -34,18 +34,17 @@
 
  require(DIR_WS_INCLUDES . 'header.php');
 
-$smarty->assign('FORM_ACTION',xtc_draw_form('advanced_search', xtc_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'NONSSL', false), 'get', 'onSubmit="return check_form(this);"') . xtc_hide_session_id());
+$smarty->assign('FORM_ACTION',xtc_draw_form('advanced_search', xtc_href_link(FILENAME_ADVANCED_SEARCH_RESULT, '', 'NONSSL', false), 'get', 'onsubmit="return check_form(this);"') . xtc_hide_session_id());
 
 
   $smarty->assign('INPUT_KEYWORDS',xtc_draw_input_field('keywords', '', 'style="width: 100%"'));
-  $smarty->assign('CHECKBOX_DESCRIPTION',xtc_draw_checkbox_field('search_in_description', '1'));
   $smarty->assign('HELP_LINK','javascript:popupWindow(\'' . xtc_href_link(FILENAME_POPUP_SEARCH_HELP) . '\')');
   $smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_search.gif', IMAGE_BUTTON_SEARCH));
 
   $options_box = '<table border="0" width="100%" cellspacing="0" cellpadding="2">' . "\n" .
                  '  <tr>' . "\n" .
                  '    <td class="fieldKey">' . ENTRY_CATEGORIES . '</td>' . "\n" .
-                 '    <td class="fieldValue">' . xtc_draw_pull_down_menu('categories_id', xtc_get_categories(array(array('id' => '', 'text' => TEXT_ALL_CATEGORIES)))) . '<br></td>' . "\n" .
+                 '    <td class="fieldValue">' . xtc_draw_pull_down_menu('categories_id', xtc_get_categories(array(array('id' => '', 'text' => TEXT_ALL_CATEGORIES)))) . '<br /></td>' . "\n" .
                  '  </tr>' . "\n" .
                  '  <tr>' . "\n" .
                  '    <td class="fieldKey">&nbsp;</td>' . "\n" .
@@ -69,7 +68,6 @@ $smarty->assign('FORM_ACTION',xtc_draw_form('advanced_search', xtc_href_link(FIL
                  '    <td class="fieldKey">' . ENTRY_PRICE_TO . '</td>' . "\n" .
                  '    <td class="fieldValue">' . xtc_draw_input_field('pto') . '</td>' . "\n" .
                  '  </tr>' . "\n" .
-                 '  <tr>' . "\n" .
                  '</table>';
                  '    <td colspan="2">' . xtc_draw_separator('pixel_trans.gif', '100%', '10') . '</td>' . "\n" .
                  '  </tr>' . "\n" .
@@ -88,28 +86,28 @@ $smarty->assign('OPTIONS_BOX',$options_box);
 $error='';
   if (isset($_GET['errorno'])) {
     if (($_GET['errorno'] & 1) == 1) {
-      $error.= str_replace('\n', '<br>', JS_AT_LEAST_ONE_INPUT);
+      $error.= str_replace('\n', '<br />', JS_AT_LEAST_ONE_INPUT);
     }
     if (($_GET['errorno'] & 10) == 10) {
-      $error.= str_replace('\n', '<br>', JS_INVALID_FROM_DATE);
+      $error.= str_replace('\n', '<br />', JS_INVALID_FROM_DATE);
     }
     if (($_GET['errorno'] & 100) == 100) {
-      $error.= str_replace('\n', '<br>', JS_INVALID_TO_DATE);
+      $error.= str_replace('\n', '<br />', JS_INVALID_TO_DATE);
     }
     if (($_GET['errorno'] & 1000) == 1000) {
-      $error.= str_replace('\n', '<br>', JS_TO_DATE_LESS_THAN_FROM_DATE);
+      $error.= str_replace('\n', '<br />', JS_TO_DATE_LESS_THAN_FROM_DATE);
     }
     if (($_GET['errorno'] & 10000) == 10000) {
-      $error.= str_replace('\n', '<br>', JS_PRICE_FROM_MUST_BE_NUM);
+      $error.= str_replace('\n', '<br />', JS_PRICE_FROM_MUST_BE_NUM);
     }
     if (($_GET['errorno'] & 100000) == 100000) {
-      $error.= str_replace('\n', '<br>', JS_PRICE_TO_MUST_BE_NUM);
+      $error.= str_replace('\n', '<br />', JS_PRICE_TO_MUST_BE_NUM);
     }
     if (($_GET['errorno'] & 1000000) == 1000000) {
-      $error.= str_replace('\n', '<br>', JS_PRICE_TO_LESS_THAN_PRICE_FROM);
+      $error.= str_replace('\n', '<br />', JS_PRICE_TO_LESS_THAN_PRICE_FROM);
     }
     if (($_GET['errorno'] & 10000000) == 10000000) {
-      $error.= str_replace('\n', '<br>', JS_INVALID_KEYWORDS);
+      $error.= str_replace('\n', '<br />', JS_INVALID_KEYWORDS);
     }
   }
 

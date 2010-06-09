@@ -12,10 +12,10 @@
 ?>
 
 
-<script language="JavaScript">
+<script type="text/javascript">
 <!--
 google_conversion_id = <?php echo GOOGLE_CONVERSION_ID; ?>;
 google_conversion_language = "<?php echo GOOGLE_LANG; ?>";
 -->
-<script language="JavaScript" src="http://www.googleadservices.com/pagead/conversion.js">
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
 </script>

@@ -27,10 +27,8 @@
   require_once(DIR_FS_INC . 'xtc_address_label.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_country_name.inc.php');
   
-  if (!isset($_SESSION['customer_id'])) {
-    
-    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-  }
+  if (!isset($_SESSION['customer_id']))xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+  
 
 
   if (isset($_GET['action']) && ($_GET['action'] == 'deleteconfirm') && isset($_GET['delete']) && is_numeric($_GET['delete'])) {
@@ -246,7 +244,7 @@
   }
 
  require(DIR_WS_INCLUDES . 'header.php');
- if (isset($_GET['delete']) == false) $action= xtc_draw_form('addressbook', xtc_href_link(FILENAME_ADDRESS_BOOK_PROCESS, (isset($_GET['edit']) ? 'edit=' . $_GET['edit'] : ''), 'SSL'), 'post', 'onSubmit="return check_form(addressbook);"');
+ if (isset($_GET['delete']) == false) $action= xtc_draw_form('addressbook', xtc_href_link(FILENAME_ADDRESS_BOOK_PROCESS, (isset($_GET['edit']) ? 'edit=' . $_GET['edit'] : ''), 'SSL'), 'post', 'onsubmit="return check_form(addressbook);"');
 
   $smarty->assign('FORM_ACTION',$action);
   if ($messageStack->size('addressbook') > 0) {
@@ -256,7 +254,7 @@
 
   if (isset($_GET['delete'])) {
   $smarty->assign('delete','1');
-  $smarty->assign('ADDRESS',xtc_address_label($_SESSION['customer_id'], $_GET['delete'], true, ' ', '<br>'));
+  $smarty->assign('ADDRESS',xtc_address_label($_SESSION['customer_id'], $_GET['delete'], true, ' ', '<br />'));
 
 $smarty->assign('BUTTON_BACK','<a href="' . xtc_href_link(FILENAME_ADDRESS_BOOK, '', 'SSL') . '">' . xtc_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>');
 $smarty->assign('BUTTON_DELETE','<a href="' . xtc_href_link(FILENAME_ADDRESS_BOOK_PROCESS, 'delete=' . $_GET['delete'] . '&action=deleteconfirm', 'SSL') . '">' . xtc_image_button('button_delete.gif', IMAGE_BUTTON_DELETE) . '</a>');
@@ -278,6 +276,7 @@ $smarty->assign('BUTTON_DELETE','<a href="' . xtc_href_link(FILENAME_ADDRESS_BOO
       $smarty->assign('BUTTON_UPDATE',xtc_draw_hidden_field('action', 'process') . xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
 
     }
+  $smarty->assign('FORM_END','</form>');    
   }
 
   $smarty->assign('language', $_SESSION['language']);

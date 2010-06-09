@@ -46,26 +46,20 @@
 
 
   // if the customer is not logged on, redirect them to the login page
-  if (!isset($_SESSION['customer_id'])) {
-    
-    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-  }
+  if (!isset($_SESSION['customer_id'])) xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+  
 
   // if there is nothing in the customers cart, redirect them to the shopping cart page
-  if ($_SESSION['cart']->count_contents() < 1) {
-    xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
-  }
+  if ($_SESSION['cart']->count_contents() < 1) xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
+  
 
   // if no shipping method has been selected, redirect the customer to the shipping method selection page
-  if (!isset($_SESSION['shipping'])) {
-    xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
-  }
+  if (!isset($_SESSION['shipping'])) xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
+  
 
   // avoid hack attempts during the checkout procedure by checking the internal cartID
   if (isset($_SESSION['cart']->cartID) && isset($_SESSION['cartID'])) {
-    if ($_SESSION['cart']->cartID != $_SESSION['cartID']) {
-      xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
-    }
+    if ($_SESSION['cart']->cartID != $_SESSION['cartID'])xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL'));
   }
 
   if(isset($_SESSION['credit_covers'])) unset($_SESSION['credit_covers']);  //ICW ADDED FOR CREDIT CLASS SYSTEM
@@ -74,13 +68,10 @@
     $products = $_SESSION['cart']->get_products();
     $any_out_of_stock = 0;
     for ($i=0, $n=sizeof($products); $i<$n; $i++) {
-      if (xtc_check_stock($products[$i]['id'], $products[$i]['quantity'])) {
-        $any_out_of_stock = 1;
-      }
+      if (xtc_check_stock($products[$i]['id'], $products[$i]['quantity'])) $any_out_of_stock = 1;     
     }
-    if ($any_out_of_stock == 1) {
-      xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
-    }
+    if ($any_out_of_stock == 1) xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART));
+    
   }
 
   // if no billing destination address was selected, use the customers own address as default
@@ -110,9 +101,8 @@
 //  $total_count = $_SESSION['cart']->count_contents();
   $total_count = $_SESSION['cart']->count_contents_virtual(); // GV Code ICW ADDED FOR CREDIT CLASS SYSTEM
   
-  if ($order->billing['country']['iso_code_2'] != '') {
-    $_SESSION['delivery_zone'] = $order->billing['country']['iso_code_2'];
-  }
+  if ($order->billing['country']['iso_code_2'] != '') $_SESSION['delivery_zone'] = $order->billing['country']['iso_code_2'];
+  
   // load all enabled payment modules
   require(DIR_WS_CLASSES . 'payment.php');
   $payment_modules = new payment;
@@ -125,8 +115,8 @@
   $breadcrumb->add(NAVBAR_TITLE_2_CHECKOUT_PAYMENT, xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
   
   
-$smarty->assign('FORM_ACTION',xtc_draw_form('checkout_payment', xtc_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onsubmit="return check_form();"'));
-$smarty->assign('ADDRESS_LABEL',xtc_address_label($_SESSION['customer_id'], $_SESSION['billto'], true, ' ', '<br>'));
+$smarty->assign('FORM_ACTION',xtc_draw_form('checkout_payment', xtc_href_link(FILENAME_CHECKOUT_CONFIRMATION, '', 'SSL'), 'post', 'onSubmit="return check_form();"'));
+$smarty->assign('ADDRESS_LABEL',xtc_address_label($_SESSION['customer_id'], $_SESSION['billto'], true, ' ', '<br />'));
 $smarty->assign('BUTTON_ADDRESS','<a href="' . xtc_href_link(FILENAME_CHECKOUT_PAYMENT_ADDRESS, '', 'SSL') . '">' . xtc_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>');
 $smarty->assign('BUTTON_CONTINUE',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
 $smarty->assign('FORM_END','</form>');
@@ -164,18 +154,18 @@ $payment_block .= '
   for ($i=0, $n=sizeof($selection); $i<$n; $i++) {
 $payment_block .= '
               <tr>
-                <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                 <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                 ';
 
     if ( ($selection[$i]['id'] == $payment) || ($n == 1) ) {
-      $payment_block .= '                  <tr id="defaultSelected" class="moduleRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
+      $payment_block .= '<tr id="defaultSelected" class="moduleRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
     } else {
-      $payment_block .= '                   <tr class="moduleRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
+      $payment_block .= '<tr class="moduleRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
     }
 $payment_block .= ' 
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
-                    <td class="main" colspan="3"><b>'. $selection[$i]['module'].'</b></td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="main" colspan="3"><strong>'. $selection[$i]['module'].'</strong></td>
                     <td class="main" align="right">
 ';
 
@@ -186,44 +176,44 @@ $payment_block .= '
     }
 $payment_block .= ' 
                     </td>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>
 ';
     if (isset($selection[$i]['error'])) {
 $payment_block .= ' 
                   <tr>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                     <td class="main" colspan="4">'.$selection[$i]['error'].'</td>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>
 ';
     } else {
 $payment_block .= ' 
                   <tr>
-                    <td width="10">'.xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'.xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                     <td colspan="4"><table border="0" cellspacing="0" cellpadding="2">
 ';
       for ($j=0, $n2=sizeof($selection[$i]['fields']); $j<$n2; $j++) {
 $payment_block .= ' 
                       <tr>
-                        <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                        <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                         <td class="main">'. $selection[$i]['fields'][$j]['title'].'</td>
-                        <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                        <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                         <td class="main">'. $selection[$i]['fields'][$j]['field'].'</td>
-                        <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                        <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                       </tr>
 ';
       }
 $payment_block .= ' 
                     </table></td>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>
 ';
       $radio_buttons++;
     }
 $payment_block .= ' 
                 </table></td>
-                <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
               </tr>
 ';
 
@@ -265,11 +255,11 @@ $conditions= '<iframe SRC="'.DIR_WS_CATALOG.'media/content/'.$shop_content_data[
 $conditions.= '</iframe>';
  } else {
 
- $conditions= '<textarea name="blabla" cols="60" rows="10" readonly="readonly">'.  strip_tags(str_replace('<BR>',"\n",$shop_content_data['content_text'])).'</textarea>';
+ $conditions= '<textarea name="blabla" cols="60" rows="10" readonly="readonly">'.  strip_tags(str_replace('<br />',"\n",$shop_content_data['content_text'])).'</textarea>';
 }
   
 $smarty->assign('AGB',$conditions);
-$smarty->assign('AGB_checkbox','<input type="checkbox" name="conditions" id="1">');
+$smarty->assign('AGB_checkbox','<input type="checkbox" value="conditions" name="conditions" />');
 
   }
 

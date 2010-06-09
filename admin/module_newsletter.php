@@ -20,39 +20,34 @@
   require_once(DIR_FS_CATALOG.DIR_WS_CLASSES.'class.phpmailer.php');
   require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 
-
-
-
   switch ($_GET['action']) {  // actions for datahandling
 
     case 'save': // save newsletter
 
-     $newsletter_title=xtc_db_prepare_input($_POST['title']);
-     $body=xtc_db_prepare_input($_POST['newsletter_body']);
      $id=xtc_db_prepare_input((int)$_POST['ID']);
      $status_all=xtc_db_prepare_input($_POST['status_all']);
      if ($newsletter_title=='') $newsletter_title='no title';
      $customers_status=xtc_get_customers_statuses();
+     
      $rzp='';
      for ($i=0,$n=sizeof($customers_status);$i<$n; $i++) {
-
-     if (xtc_db_prepare_input($_POST['status'][$i])=='yes') {
-         if ($rzp!='') $rzp.=',';
-     $rzp.=$customers_status[$i]['id'];
+         if (xtc_db_prepare_input($_POST['status'][$i])=='yes') {
+             if ($rzp!='') $rzp.=',';
+             $rzp.=$customers_status[$i]['id'];
+         }
      }
-
-
-     }
+     
       if (xtc_db_prepare_input($_POST['status_all'])=='yes') $rzp.=',all';
-     $error=false; // reset error flag
 
-      if ($error == false) {
+   $error=false; // reset error flag
+   if ($error == false) {
 
-      $sql_data_array = array('title'=> $newsletter_title,
+      $sql_data_array = array( 'title'=> xtc_db_prepare_input($_POST['title']),
                                'status' => '0',
                                'bc'=>$rzp,
+                               'cc'=>xtc_db_prepare_input($_POST['cc']),
                                'date' => 'now()',
-                               'body' => $body);
+                               'body' => xtc_db_prepare_input($_POST['newsletter_body']));
 
    if ($id!='') {
    xtc_db_perform(TABLE_MODULE_NEWSLETTER, $sql_data_array, 'update', "newsletter_id = '" . $id . "'");
@@ -99,7 +94,7 @@
    $sql_data_array='';
 
    for ($i=0,$n=sizeof($groups);$i<$n;$i++) {
-   // check if cusomer want newsletter
+   // check if customer wants newsletter
    
    if (xtc_db_prepare_input($_POST['status_all'])=='yes') {
    $customers_query=xtc_db_query("SELECT
@@ -116,7 +111,7 @@
                                   customers_id,
                                   customers_firstname,
                                   customers_lastname,
-                        mail_key        
+                                  mail_key        
                                   FROM ".TABLE_NEWSLETTER_RECIPIENTS."
                                   WHERE
                                   customers_status='".$groups[$i]."' and
@@ -231,7 +226,7 @@ $limit_up = $limits['1'];
 
  $link1 = chr(13).chr(10).chr(13).chr(10).TEXT_NEWSLETTER_REMOVE.chr(13).chr(10).chr(13).chr(10).HTTP_CATALOG_SERVER.DIR_WS_CATALOG.FILENAME_CATALOG_NEWSLETTER.'?action=remove&email='.$email_data[$i-1]['email'].'&key='.$email_data[$i-1]['key'];
 
- $link2 = '<br><br>'.TEXT_NEWSLETTER_REMOVE.'<br>'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.FILENAME_CATALOG_NEWSLETTER.'?action=remove&email='.$email_data[$i-1]['email'].'&key='.$email_data[$i-1]['key'];
+ $link2 = '<br /><br />'.TEXT_NEWSLETTER_REMOVE.'<br /><a href="'.HTTP_CATALOG_SERVER.DIR_WS_CATALOG.FILENAME_CATALOG_NEWSLETTER.'?action=remove&email='.$email_data[$i-1]['email'].'&key='.$email_data[$i-1]['key'].'">Link</a>';
 
 
   xtc_php_mail(EMAIL_SUPPORT_ADDRESS,
@@ -263,7 +258,7 @@ $limit_up = $limits['1'];
      xtc_db_query("UPDATE ".TABLE_MODULE_NEWSLETTER." SET status='1' WHERE newsletter_id='".(int)$_GET['ID']."'");
      xtc_redirect(xtc_href_link(FILENAME_MODULE_NEWSLETTER));
      } else {
-     echo '<b>'.$limit1_data['count'].'<b> emails send<br>';
+     echo '<b>'.$limit1_data['count'].'<b> emails send<br />';
      echo '<b>'.$limit1_data['count']-$limit_data['count'].'<b> emails left';
      }
 
@@ -298,9 +293,6 @@ $limit_up = $limits['1'];
 <script type="text/javascript" src="includes/htmlarea/htmlarea.js"></script>
 <script type="text/javascript" src="includes/htmlarea/dialog.js"></script>
 <script tyle="text/javascript" src="includes/htmlarea/lang/<?php echo $data['code']; ?>.js"></script>
-
-
-
 
 <?php } ?>
 </head>
@@ -373,7 +365,7 @@ switch ($_GET['action']) {
      $group_data=xtc_db_fetch_array($group_query);
 
 
- $customer_group[]=array('ID'=>$customer_group_data['customers_status_id'],
+ $customer_group[]=array( 'ID'=>$customer_group_data['customers_status_id'],
                           'NAME'=>$customer_group_data['customers_status_name'],
                           'IMAGE'=>$customer_group_data['customers_status_image'],
                           'USERS'=>$group_data['count']);
@@ -382,7 +374,7 @@ switch ($_GET['action']) {
  }
 
  ?>
-<br>
+<br />
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -410,7 +402,7 @@ for ($i=0,$n=sizeof($customer_group); $i<$n; $i++) {
     ?></td>
   </tr>
 </table>
- <br>
+ <br />
  <?php
 
  // get data for newsletter overwiev
@@ -461,11 +453,11 @@ $total_data=xtc_db_fetch_array($total_query);
 <td class="dataTableContent" valign="top" style="border-bottom: 1px solid; border-color: #f1f1f1;" align="left">
   <a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=delete&ID='.$news_data[$i]['id']); ?>" onClick="return confirm('<?php echo CONFIRM_DELETE; ?>')">
   <?php
-  echo xtc_image_button('button_delete.gif','Delete','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'</a><br>';
+  echo xtc_image_button('button_delete.gif','Delete','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'</a><br />';
   ?>
 <a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=edit&ID='.$news_data[$i]['id']); ?>">
 <?php echo xtc_image_button('button_edit.gif','Edit','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'</a>'; ?>
-<a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=send&ID='.$news_data[$i]['id']); ?>"><br><br><hr noshade>
+<a href="<?php echo xtc_href_link(FILENAME_MODULE_NEWSLETTER,'action=send&ID='.$news_data[$i]['id']); ?>"><br /><br /><hr noshade>
 <?php echo xtc_image_button('button_send.gif','Edit','','','style="cursor:hand" onClick="return confirm(\''.DELETE_ENTRY.'\')"').'</a>'; ?>
 
 </td>
@@ -479,7 +471,7 @@ $total_data=xtc_db_fetch_array($total_query);
                                   WHERE newsletter_id='".(int)$_GET['ID']."'");
    $newsletters_data=xtc_db_fetch_array($newsletters_query);
 
-echo TEXT_TITLE.$newsletters_data['title'].'<br>';
+echo TEXT_TITLE.$newsletters_data['title'].'<br />';
 
      $customers_status=xtc_get_customers_statuses();
      for ($i=0,$n=sizeof($customers_status);$i<$n; $i++) {
@@ -488,8 +480,8 @@ echo TEXT_TITLE.$newsletters_data['title'].'<br>';
 
      }
 
-echo TEXT_TO.$newsletters_data['bc'].'<br>';
-echo TEXT_CC.$newsletters_data['cc'].'<br><br>'.TEXT_PREVIEW;
+echo TEXT_TO.$newsletters_data['bc'].'<br />';
+echo TEXT_CC.$newsletters_data['cc'].'<br /><br />'.TEXT_PREVIEW;
 echo '<table style="border-color: #cccccc; border: 1px solid;" width="100%"><tr><td>'.$newsletters_data['body'].'</td></tr></table>';
 ?>
 </td></tr>
@@ -504,7 +496,7 @@ echo '<table style="border-color: #cccccc; border: 1px solid;" width="100%"><tr>
 
 ?>
 </table>
-<br><br>
+<br /><br />
 <?php
  $newsletters_query=xtc_db_query("SELECT
                                    newsletter_id,date,title
@@ -560,10 +552,7 @@ if ($news_data[$i]['id']!='') {
 
   case 'edit':
 
-   $newsletters_query=xtc_db_query("SELECT
-                                   title,body,cc
-                                  FROM ".TABLE_MODULE_NEWSLETTER."
-                                  WHERE newsletter_id='".(int)$_GET['ID']."'");
+   $newsletters_query=xtc_db_query("SELECT title,body,cc,bc FROM ".TABLE_MODULE_NEWSLETTER." WHERE newsletter_id='".(int)$_GET['ID']."'");
    $newsletters_data=xtc_db_fetch_array($newsletters_query);
 
   case 'safe':
@@ -575,14 +564,14 @@ $customers_status=xtc_get_customers_statuses();
   echo xtc_draw_form('edit_newsletter',FILENAME_MODULE_NEWSLETTER,'action=save','post','enctype="multipart/form-data"').xtc_draw_hidden_field('ID',$_GET['ID']);
   ?>
 
-  <br><br>
+  <br /><br />
  <table class="main" width="100%" border="0">
    </tr>
       <tr>
       <td width="10%"><?php echo TEXT_TITLE; ?></td>
       <td width="90%"><?php echo xtc_draw_input_field('title',$newsletters_data['title'],'size=100'); ?></td>
    </tr>
-            <tr>
+   <tr>
       <td width="10%"><?php echo TEXT_TO; ?></td>
       <td width="90%"><?php
 for ($i=0,$n=sizeof($customers_status);$i<$n; $i++) {
@@ -599,10 +588,12 @@ for ($i=0,$n=sizeof($customers_status);$i<$n; $i++) {
                                 customers_status='".$customers_status[$i]['id']."'");
      $group_data_all=xtc_db_fetch_array($group_query);
 
-echo xtc_draw_checkbox_field('status['.$i.']', 'yes',true).' '.$customers_status[$i]['text'].'  <i>(<b>'.$group_data['count'].'</b>'.TEXT_USERS.$group_data_all['count'].TEXT_CUSTOMERS.'<br>';
+     $bc_array = explode(',', $newsletters_data['bc']);
+
+echo xtc_draw_checkbox_field('status['.$i.']','yes', in_array($customers_status[$i]['id'], $bc_array)).' '.$customers_status[$i]['text'].'  <i>(<b>'.$group_data['count'].'</b>'.TEXT_USERS.$group_data_all['count'].TEXT_CUSTOMERS.'<br />';
 
 }
-echo xtc_draw_checkbox_field('status_all', 'yes',false).' <b>'.TEXT_NEWSLETTER_ONLY.'</b>';
+echo xtc_draw_checkbox_field('status_all', 'yes',in_array('all', $bc_array)).' <b>'.TEXT_NEWSLETTER_ONLY.'</b>';
 
        ?></td>
    </tr>
@@ -650,7 +641,6 @@ echo xtc_draw_textarea_field('newsletter_body', 'soft', '150', '45', stripslashe
 <script type="text/javascript">
       HTMLArea.loadPlugin("SpellChecker");
       HTMLArea.loadPlugin("TableOperations");
-      HTMLArea.loadPlugin("FullPage");
       HTMLArea.loadPlugin("CharacterMap");
       HTMLArea.loadPlugin("ContextMenu");
       HTMLArea.loadPlugin("ImageManager");
@@ -659,7 +649,6 @@ HTMLArea.onload = function() {
 
 var editor= new HTMLArea("newsletter_body");
 editor.registerPlugin(TableOperations);
-editor.registerPlugin(FullPage);
 editor.registerPlugin(ContextMenu);
 editor.registerPlugin(CharacterMap);
 editor.registerPlugin(ImageManager);

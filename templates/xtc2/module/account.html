@@ -1,10 +1,13 @@
 {config_load file="$language/lang_$language.conf" section="account"}
 
-<div class="moduleHeading" align="left">{#heading_account#}{$error_message}</div>
-
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr valign="top">
+		<td class="moduleHeading" align="left">{#heading_account#}{$error_message}</td>
+	</tr>
+</table>
 <table width="100%" border="0" cellspacing="0" cellpadding="2">
   <tr>
-    <td width="50%" valign="top">
+    <td valign="top">
 	{if $products_history}<span class="smallHeading">{#title_viewed_products#}</span>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr> 
@@ -12,7 +15,7 @@
       	<table width="100%" border="0" cellspacing="0" cellpadding="3">
               {foreach name=history_products item=products_history from=$products_history} 
               <tr> 
-                <td width="1" rowspan="4" valign="top" class="main" style="border-bottom: 1px solid; border-color: #cccccc;"><a href="{$products_history.PRODUCTS_URL}"><img src="{$products_history.PRODUCTS_IMAGE}" border="0"></a></td>
+                <td rowspan="4" valign="top" class="main" style="border-bottom: 1px solid; border-color: #cccccc;"><a href="{$products_history.PRODUCTS_URL}"><img src="{$products_history.PRODUCTS_IMAGE}" alt="{$products_history.PRODUCTS_NAME}" border="0" /></a></td>
                 <td valign="top" class="main"><a href="{$products_history.PRODUCTS_URL}">{$products_history.PRODUCTS_NAME}</a></td>
               </tr>
               <tr> 
@@ -43,23 +46,23 @@
       {/if}{if $LINK_LOGIN}
       <table width="100%" border="0" cellspacing="0" cellpadding="3">
         <tr>
-          <td valign="top" class="main"><img src="{$tpl_path}img/arrow_green.gif"><a href="{$LINK_LOGIN}">{#text_login#}</a></td>
+          <td valign="top" class="main"><img src="{$tpl_path}img/arrow_green.gif" alt="" /><a href="{$LINK_LOGIN}">{#text_login#}</a></td>
         </tr>
       </table> 
       {/if}</td>
-    <td width="50%" valign="top"><span class="smallHeading">{#title_account#}</span> 
+    <td valign="top"><span class="smallHeading">{#title_account#}</span> 
       <table width="100%" border="0" cellspacing="0" cellpadding="4">
         <tr> 
           <td valign="middle" class="main" style="border-top: 1px solid; border-color: #cccccc;"> 
             <table width="100%" border="0" cellspacing="0" cellpadding="3">
               <tr> 
-                <td width="50%" class="main"><img src="{$tpl_path}img/arrow_green.gif"><a href="{$LINK_EDIT}">{#text_edit#}</a></td>
+                <td class="main"><img src="{$tpl_path}img/arrow_green.gif" alt="" /><a href="{$LINK_EDIT}">{#text_edit#}</a></td>
               </tr>
               <tr> 
-                <td width="50%" class="main"><img src="{$tpl_path}img/arrow_green.gif"><a href="{$LINK_ADDRESS}">{#text_address#}</a></td>
+                <td class="main"><img src="{$tpl_path}img/arrow_green.gif" alt="" /><a href="{$LINK_ADDRESS}">{#text_address#}</a></td>
               </tr>
               <tr> 
-                <td width="50%" class="main"><img src="{$tpl_path}img/arrow_green.gif"><a href="{$LINK_PASSWORD}">{#text_password#}</a></td>
+                <td class="main"><img src="{$tpl_path}img/arrow_green.gif" alt="" /><a href="{$LINK_PASSWORD}">{#text_password#}</a></td>
               </tr>
             </table></td>
         </tr>
@@ -67,11 +70,11 @@
       {if $order_content}<span class="smallHeading">{#title_orders#}&nbsp;</span><a href="{$LINK_ALL}"><span class="smallHeading">{#text_all#}</span></a> 
       <table width="100%" border="0" cellspacing="0" cellpadding="4">
         <tr> 
-          <td width="95%" valign="middle" class="main" style="border-top: 1px solid; border-color: #cccccc;"> 
+          <td valign="middle" class="main" style="border-top: 1px solid; border-color: #cccccc;"> 
             <table width="100%" border="0" cellspacing="0" cellpadding="3">
               {foreach name=aussen item=order_data from=$order_content} 
               <tr> 
-                <td width="1" rowspan="2" valign="top" class="main"><img src="{$tpl_path}img/arrow_green.gif"></td>
+                <td rowspan="2" valign="top" class="main"><img src="{$tpl_path}img/arrow_green.gif" alt="" /></td>
                 <td class="main"><a href="{$order_data.ORDER_LINK}">{$order_data.ORDER_DATE}</a>&nbsp;&nbsp;{#order_nr#}{$order_data.ORDER_ID}</td>
                 <td class="main">{#order_total#}{$order_data.ORDER_TOTAL}</td>
               </tr>
@@ -90,14 +93,10 @@
           <td valign="middle" class="main" style="border-top: 1px solid; border-color: #cccccc;"> 
             <table width="100%" border="0" cellspacing="0" cellpadding="3">
               <tr> 
-                <td class="main"><img src="{$tpl_path}img/arrow_green.gif"><a href="{$LINK_NEWSLETTER}">{#text_newsletter#}</a></td>
-              </tr>
-              <tr> 
-                <td class="main"><img src="{$tpl_path}img/arrow_green.gif"><a href="{$LINK_NOTIFICATIONS}">{#text_notifications#}</a></td>
+                <td class="main"><img src="{$tpl_path}img/arrow_green.gif" alt="" /><a href="{$LINK_NEWSLETTER}">{#text_newsletter#}</a></td>
               </tr>
             </table></td>
         </tr>
       </table></td>
   </tr>
 </table>
-

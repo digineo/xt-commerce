@@ -27,10 +27,8 @@
   require_once(DIR_FS_INC . 'xtc_encrypt_password.inc.php');
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
 
-  if (!isset($_SESSION['customer_id'])) {
-    
-    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-  }
+  if (!isset($_SESSION['customer_id'])) xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+  
 
   if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
     $password_current = xtc_db_prepare_input($_POST['password_current']);
@@ -78,17 +76,18 @@
 
  require(DIR_WS_INCLUDES . 'header.php');
 
-  if ($messageStack->size('account_password') > 0) {
-  $smarty->assign('error',$messageStack->output('account_password'));
+  if ($messageStack->size('account_password') > 0) $smarty->assign('error',$messageStack->output('account_password'));
 
-  }
-  $smarty->assign('FORM_ACTION',xtc_draw_form('account_password', xtc_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL'), 'post', 'onSubmit="return check_form(account_password);"') . xtc_draw_hidden_field('action', 'process'));
-  $smarty->assign('INPUT_ACTUAL',xtc_draw_password_field('password_current') . '&nbsp;' . (xtc_not_null(ENTRY_PASSWORD_CURRENT_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_CURRENT_TEXT . '</span>': ''));
-  $smarty->assign('INPUT_NEW',xtc_draw_password_field('password_new') . '&nbsp;' . (xtc_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_NEW_TEXT . '</span>': ''));
-  $smarty->assign('INPUT_CONFIRM',xtc_draw_password_field('password_confirmation') . '&nbsp;' . (xtc_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>': ''));
+
+  $smarty->assign('FORM_ACTION',xtc_draw_form('account_password', xtc_href_link(FILENAME_ACCOUNT_PASSWORD, '', 'SSL'), 'post', 'onsubmit="return check_form(account_password);"') . xtc_draw_hidden_field('action', 'process'));
+
+  $smarty->assign('INPUT_ACTUAL',xtc_draw_password_fieldNote(array('name'=>'password_current','text'=>'&nbsp;' . (xtc_not_null(ENTRY_PASSWORD_CURRENT_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_CURRENT_TEXT . '</span>': ''))));
+  $smarty->assign('INPUT_NEW',xtc_draw_password_fieldNote(array('name'=>'password_new','text'=>'&nbsp;' . (xtc_not_null(ENTRY_PASSWORD_NEW_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_NEW_TEXT . '</span>': ''))));
+  $smarty->assign('INPUT_CONFIRM',xtc_draw_password_fieldNote(array('name'=>'password_confirmation','text'=>'&nbsp;' . (xtc_not_null(ENTRY_PASSWORD_CONFIRMATION_TEXT) ? '<span class="inputRequirement">' . ENTRY_PASSWORD_CONFIRMATION_TEXT . '</span>': ''))));
 
  $smarty->assign('BUTTON_BACK','<a href="' . xtc_href_link(FILENAME_ACCOUNT, '', 'SSL') . '">' . xtc_image_button('button_back.gif', IMAGE_BUTTON_BACK) . '</a>');
  $smarty->assign('BUTTON_SUBMIT',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
+ $smarty->assign('FORM_END','</form>');
 
   $smarty->assign('language', $_SESSION['language']);
 

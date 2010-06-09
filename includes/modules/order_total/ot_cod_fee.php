@@ -34,10 +34,10 @@
 
     function ot_cod_fee($price) {
       $this->code = 'ot_cod_fee';
-      $this->title = MODULE_ORDER_TOTAL_COD_TITLE;
-      $this->description = MODULE_ORDER_TOTAL_COD_DESCRIPTION;
-      $this->enabled = ((MODULE_ORDER_TOTAL_COD_STATUS == 'true') ? true : false);
-      $this->sort_order = MODULE_ORDER_TOTAL_COD_SORT_ORDER;
+      $this->title = MODULE_ORDER_TOTAL_COD_FEE_TITLE;
+      $this->description = MODULE_ORDER_TOTAL_COD_FEE_DESCRIPTION;
+      $this->enabled = ((MODULE_ORDER_TOTAL_COD_FEE_STATUS == 'true') ? true : false);
+      $this->sort_order = MODULE_ORDER_TOTAL_COD_FEE_SORT_ORDER;
       $this->Price=$price;
 
       $this->output = array();
@@ -46,7 +46,7 @@
     function process() {
       global $order, $currencies, $cod_cost, $cod_country, $shipping;
 
-      if (MODULE_ORDER_TOTAL_COD_STATUS == 'true') {
+      if (MODULE_ORDER_TOTAL_COD_FEE_STATUS == 'true') {
 
         //Will become true, if cod can be processed.
         $cod_country = false;
@@ -101,8 +101,8 @@
 
         if ($cod_country) {
 
-            $cod_tax = xtc_get_tax_rate(MODULE_ORDER_TOTAL_COD_TAX_CLASS, $order->delivery['country']['id'], $order->delivery['zone_id']);
-            $cod_tax_description = xtc_get_tax_description(MODULE_ORDER_TOTAL_COD_TAX_CLASS, $order->delivery['country']['id'], $order->delivery['zone_id']);
+            $cod_tax = xtc_get_tax_rate(MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS, $order->delivery['country']['id'], $order->delivery['zone_id']);
+            $cod_tax_description = xtc_get_tax_description(MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS, $order->delivery['country']['id'], $order->delivery['zone_id']);
         if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 1) {
             $order->info['tax'] += xtc_add_tax($cod_cost, $cod_tax)-$cod_cost;
             $order->info['tax_groups'][TAX_ADD_TAX . "$cod_tax_description"] += xtc_add_tax($cod_cost, $cod_tax)-$cod_cost;
@@ -138,20 +138,20 @@
 
     function check() {
       if (!isset($this->_check)) {
-        $check_query = xtc_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_ORDER_TOTAL_COD_STATUS'");
+        $check_query = xtc_db_query("select configuration_value from " . TABLE_CONFIGURATION . " where configuration_key = 'MODULE_ORDER_TOTAL_COD_FEE_STATUS'");
         $this->_check = xtc_db_num_rows($check_query);
       }
       return $this->_check;
     }
 
     function keys() {
-      return array('MODULE_ORDER_TOTAL_COD_STATUS', 'MODULE_ORDER_TOTAL_COD_SORT_ORDER', 'MODULE_ORDER_TOTAL_COD_FEE_FLAT', 'MODULE_ORDER_TOTAL_COD_FEE_ITEM', 'MODULE_ORDER_TOTAL_COD_FEE_TABLE','MODULE_ORDER_TOTAL_COD_FEE_CHRONOPOST','MODULE_ORDER_TOTAL_COD_FEE_DHL','MODULE_ORDER_TOTAL_COD_FEE_CHP', 'MODULE_ORDER_TOTAL_COD_FEE_ZONES', 'MODULE_ORDER_TOTAL_COD_FEE_AP', 'MODULE_ORDER_TOTAL_COD_FEE_DP', 'MODULE_ORDER_TOTAL_COD_FEE_FREE', 'MODULE_ORDER_TOTAL_COD_TAX_CLASS');
+      return array('MODULE_ORDER_TOTAL_COD_FEE_STATUS', 'MODULE_ORDER_TOTAL_COD_FEE_SORT_ORDER', 'MODULE_ORDER_TOTAL_COD_FEE_FLAT', 'MODULE_ORDER_TOTAL_COD_FEE_ITEM', 'MODULE_ORDER_TOTAL_COD_FEE_TABLE','MODULE_ORDER_TOTAL_COD_FEE_CHRONOPOST','MODULE_ORDER_TOTAL_COD_FEE_DHL','MODULE_ORDER_TOTAL_COD_FEE_CHP', 'MODULE_ORDER_TOTAL_COD_FEE_ZONES', 'MODULE_ORDER_TOTAL_COD_FEE_AP', 'MODULE_ORDER_TOTAL_COD_FEE_DP', 'MODULE_ORDER_TOTAL_COD_FEE_FREE', 'MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS');
     }
 
     function install() {
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_ORDER_TOTAL_COD_STATUS', 'true', '6', '0', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_STATUS', 'true', '6', '0', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_SORT_ORDER', '35', '6', '0', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_SORT_ORDER', '35', '6', '0', now())");
 
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_FLAT', 'AT:3.00,DE:3.58,00:9.99', '6', '0', now())");
 
@@ -173,7 +173,7 @@
 
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_FREE', 'AT:3.00,DE:3.58,00:9.99', '6', '0', now())");
 
-      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_ORDER_TOTAL_COD_TAX_CLASS', '0', '6', '0', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', now())");
+      xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_ORDER_TOTAL_COD_FEE_TAX_CLASS', '0', '6', '0', 'xtc_get_tax_class_title', 'xtc_cfg_pull_down_tax_classes(', now())");
     }
 
     function remove() {

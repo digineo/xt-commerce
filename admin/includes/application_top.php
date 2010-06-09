@@ -49,7 +49,7 @@
   define('SQL_CACHEDIR',DIR_FS_CATALOG.'cache/');
 
   // Define the project version
-  define('PROJECT_VERSION', 'xt:Commerce v3.0.2');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.3');
 
   // Set the length of the redeem code, the longer the more secure
   define('SECURITY_CODE_LENGTH', '6');
@@ -130,6 +130,7 @@
   define('FILENAME_MODULE_EXPORT','module_export.php');
   define('FILENAME_EASY_POPULATE','easypopulate.php');
   define('FILENAME_BLACKLIST', 'blacklist.php');
+  define('FILENAME_PRODUCTS_VPE','products_vpe.php');
 
   // define the database table names used in the project
   define('TABLE_ADDRESS_BOOK', 'address_book');
@@ -176,6 +177,7 @@
   define('TABLE_PRODUCTS_OPTIONS_VALUES', 'products_options_values');
   define('TABLE_PRODUCTS_OPTIONS_VALUES_TO_PRODUCTS_OPTIONS', 'products_options_values_to_products_options');
   define('TABLE_PRODUCTS_TO_CATEGORIES', 'products_to_categories');
+  define('TABLE_PRODUCTS_VPE','products_vpe');
   define('TABLE_REVIEWS', 'reviews');
   define('TABLE_REVIEWS_DESCRIPTION', 'reviews_description');
   define('TABLE_SESSIONS', 'sessions');
@@ -227,6 +229,7 @@
   require_once(DIR_FS_INC . 'xtc_not_null.inc.php');
   require_once(DIR_FS_INC . 'xtc_add_tax.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_tax_rate.inc.php');
+  require_once(DIR_FS_INC . 'xtc_get_qty.inc.php');
 
 
   // customization for the design layout
@@ -479,7 +482,7 @@
 
 
     // Include Template Engine
-  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.5/Smarty.class.php');
+  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.6/Smarty.class.php');
 
   
 ?>

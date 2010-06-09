@@ -72,7 +72,6 @@
 
   // include Html output functions
   require_once(DIR_FS_INC.'xtc_draw_input_field_installer.inc.php');
-  require_once(DIR_FS_INC.'xtc_draw_selection_field_installer.inc.php');
   require_once(DIR_FS_INC.'xtc_draw_password_field_installer.inc.php');
   require_once(DIR_FS_INC.'xtc_draw_hidden_field_installer.inc.php');
   require_once(DIR_FS_INC.'xtc_draw_checkbox_field_installer.inc.php');

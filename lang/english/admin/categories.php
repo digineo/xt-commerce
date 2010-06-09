@@ -41,7 +41,7 @@ define('TEXT_DATE_ADDED', 'Date Added:');
 define('TEXT_DATE_AVAILABLE', 'Date Available:');
 define('TEXT_LAST_MODIFIED', 'Last Modified:');
 define('TEXT_IMAGE_NONEXISTENT', 'IMAGE DOES NOT EXIST');
-define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Please insert a new category or product in <br>&nbsp;<br><b>%s</b>');
+define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Please insert a new category or product in <br />&nbsp;<br /><b>%s</b>');
 define('TEXT_PRODUCT_MORE_INFORMATION', 'For more information, please visit this products <a href="http://%s" target="blank"><u>webpage</u></a>.');
 define('TEXT_PRODUCT_DATE_ADDED', 'This product was added to our catalog on %s.');
 define('TEXT_PRODUCT_DATE_AVAILABLE', 'This product will be in stock on %s.');
@@ -118,7 +118,7 @@ define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Error: Catalog images di
 
 define('TEXT_PRODUCTS_DISCOUNT_ALLOWED','Discount allowed:');
 define('HEADING_PRICES_OPTIONS','<b>Price options</b>');
-define('HEADING_PRODUCT_OPTIONS','<b>Product options</b>');
+define('HEADING_PRODUCT_IMAGES','<b>Products Images</b>');
 define('TEXT_PRODUCTS_WEIGHT_INFO','<small>(kg)</small>');
 define('TEXT_PRODUCTS_SHORT_DESCRIPTION','Shortdescription:');
 define('TXT_STK','Stk: ');
@@ -151,5 +151,9 @@ define('TEXT_MULTICOPY','Multiple');
 define('TEXT_MULTICOPY_DESC','Copy/link product into following categories (if 1 selected, Single settings are ignored)');
 define('TEXT_SINGLECOPY','Single');
 define('TEXT_SINGLECOPY_DESC','Copy/link product into following categorie');
+
+define('TEXT_PRODUCTS_VPE','Unit');
+define('TEXT_PRODUCTS_VPE_VISIBLE','Show Unit Price:');
+define('TEXT_PRODUCTS_VPE_VALUE',' Value:');
 
 ?>

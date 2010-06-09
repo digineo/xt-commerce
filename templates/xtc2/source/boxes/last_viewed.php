@@ -73,8 +73,10 @@ if ($random_product['products_name']!='') {
     if ($random_product['products_image']!='') {
     $image=DIR_WS_THUMBNAIL_IMAGES . $random_product['products_image'];
     }
-
-    $box_smarty->assign('LINK',xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $random_product["products_id"]));
+	$SEF_parameter='';
+    if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&'.xtc_cleanName($random_product['categories_name'],false).'='.xtc_cleanName($random_product['products_name']); 
+    
+    $box_smarty->assign('LINK',xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $random_product["products_id"].$SEF_parameter));
     $box_smarty->assign('IMAGE',$image);
     $box_smarty->assign('NAME',$random_product['products_name']);
     $box_smarty->assign('PRICE',$random_products_price);
@@ -82,7 +84,10 @@ if ($random_product['products_name']!='') {
     $box_smarty->assign('MY_PAGE', 'TEXT_MY_PAGE');
     $box_smarty->assign('WATCH_CATGORY', 'TEXT_WATCH_CATEGORY');
     $box_smarty->assign('MY_PERSONAL_PAGE',xtc_href_link(FILENAME_ACCOUNT));
-    $box_smarty->assign('CATEGORY_LINK',xtc_href_link(FILENAME_DEFAULT, $category_path));
+    $SEF_parameter='';
+    if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&category='.xtc_cleanName($random_product['categories_name']); 
+    
+    $box_smarty->assign('CATEGORY_LINK',xtc_href_link(FILENAME_DEFAULT, $category_path.$SEF_parameter));
     $box_smarty->assign('CATEGORY_NAME',$random_product['categories_name']);
     $box_smarty->assign('language', $_SESSION['language']);
 

@@ -114,7 +114,7 @@ define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exp
                        $products['products_model'] . '|' .
                        $products['products_name'] . '|'.
                        $products_description . '|'.
-                       $products_price. '|'.
+                       number_format($products_price,2,'.',''). '|'.
                        HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $products['products_id'] . '|' .
                        HTTP_CATALOG_SERVER . DIR_WS_CATALOG_THUMBNAIL_IMAGES . $products['products_image'] . "\n";
 

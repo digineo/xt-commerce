@@ -94,7 +94,8 @@ define('BOX_CONFIGURATION_14', 'Gzip Compression');
 define('BOX_CONFIGURATION_15', 'Sessions');
 define('BOX_CONFIGURATION_16', 'Meta-Tags/Searchengines');
 define('BOX_CONFIGURATION_17', 'Specialmodules');
-define('BOX_CONFIGURATION_19', 'Google Conversion'); 
+define('BOX_CONFIGURATION_19', 'xt:C Partner');
+ 
 define('BOX_MODULES', 'Payment-/Shipping-/Billing-Modules');
 define('BOX_PAYMENT', 'Payment Systems');
 define('BOX_SHIPPING', 'Shipping Methods');
@@ -146,6 +147,8 @@ define('BOX_GV_ADMIN_MAIL', 'Mail Gift Voucher');
 define('BOX_GV_ADMIN_SENT', 'Gift Vouchers sent');
 define('BOX_COUPON_ADMIN','Coupon Admin');
 define('BOX_TOOLS_BLACKLIST','-CC-Blacklist');
+define('BOX_IMPORT','Import/Export'); 
+define('BOX_PRODUCTS_VPE','Packing unit');
 
 define('TXT_GROUPS','<b>Groups</b>:');
 define('TXT_SYSTEM','System');
@@ -304,6 +307,7 @@ define('IMAGE_STATUS','Customer status');
 define('IMAGE_IPLOG','IP-Log');
 define('CREATE_ACCOUNT','Create Account');
 define('IMAGE_START','Start module');
+define('IMAGE_AFTERBUY_SEND','Resend order to Afterbuy');
 
 define('ICON_CROSS', 'False');
 define('ICON_CURRENT_FOLDER', 'Current Folder');
@@ -332,6 +336,7 @@ define('TEXT_DISPLAY_NUMBER_OF_MANUFACTURERS', 'Displaying <b>%d</b> to <b>%d</b
 define('TEXT_DISPLAY_NUMBER_OF_NEWSLETTERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Newsletters)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Orders)');
 define('TEXT_DISPLAY_NUMBER_OF_ORDERS_STATUS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Orders Status)');
+define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_VPE', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Packing Units)');
 define('TEXT_DISPLAY_NUMBER_OF_SHIPPING_STATUS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Shippingstatus)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> Products)');
 define('TEXT_DISPLAY_NUMBER_OF_PRODUCTS_EXPECTED', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> products expected)');
@@ -366,8 +371,8 @@ define('SUCCESS_FILE_SAVED_SUCCESSFULLY', 'Success: File upload saved successful
 define('WARNING_NO_FILE_UPLOADED', 'Warnung: No file uploaded.');
 
 define('DELETE_ENTRY','Delete entry?');
-define('TEXT_PAYMENT_ERROR','<b>WARNING:</b><br>Please activate a Payment Module!');
-define('TEXT_SHIPPING_ERROR','<b>WARNING:</b><br>Please activate a Shipping Module!');
+define('TEXT_PAYMENT_ERROR','<b>WARNING:</b><br />Please activate a Payment Module!');
+define('TEXT_SHIPPING_ERROR','<b>WARNING:</b><br />Please activate a Shipping Module!');
 
 define('TEXT_NETTO','no tax: ');
 

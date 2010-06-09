@@ -195,7 +195,11 @@ require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
         $dvd_cdob = explode(" ",$dvd_cdob_result['customers_dob']);
         $dvd_cdob_parts = explode("-",$dvd_cdob[0]);
 
-
+        if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
 		$process_button_string = xtc_draw_hidden_field('PAGENUMBER', MODULE_PAYMENT_LIBERECO_CC_PAGENUMBER) .
                                //xtc_draw_hidden_field('TESTSIGNUP', 'true') .
                                xtc_draw_hidden_field('USERNR', $customer_id) .
@@ -203,7 +207,7 @@ require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
                                xtc_draw_hidden_field('LANGUAGE', $dvd_lang) .
                                xtc_draw_hidden_field('PAYMENTTYPE', 'LIBERECO_CC') .
                                xtc_draw_hidden_field('CURRENCY', $currency) .
-                               xtc_draw_hidden_field('AMOUNT', sprintf("%0.2f", $order->info['total'])) .
+                               xtc_draw_hidden_field('AMOUNT', sprintf("%0.2f", $total)) .
                                xtc_draw_hidden_field('INFO_FIELD', 'Bestellung bei FutureJam Media BV') .
                                xtc_draw_hidden_field('FIRSTNAME', $order->customer['firstname']) .
                                xtc_draw_hidden_field('LASTNAME', $order->customer['lastname']) .

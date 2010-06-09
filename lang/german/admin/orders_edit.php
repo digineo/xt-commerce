@@ -49,4 +49,10 @@ define('TEXT_COD_COSTS', 'Nachnahmegebühr');
 define('TEXT_VALUE', 'Preis');
 define('TEXT_DESC', 'einfügen');
 
+define('TEXT_COMPANY', 'Firma:');
+define('TEXT_NAME', 'Name:');
+define('TEXT_STREET', 'Straße');
+define('TEXT_ZIP', 'Plz:');
+define('TEXT_CITY', 'Stadt:');
+define('TEXT_COUNTRY', 'Land:');
 ?>

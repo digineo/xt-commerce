@@ -27,7 +27,7 @@ $box_content='';
 
   if (!xtc_session_is_registered('customer_id')) {
 
-    $box_smarty->assign('FORM_ACTION','<form name="login" method="post" action="' . xtc_href_link(FILENAME_LOGIN, 'action=process', 'SSL') . '">');
+    $box_smarty->assign('FORM_ACTION','<form id="loginbox" method="post" action="' . xtc_href_link(FILENAME_LOGIN, 'action=process', 'SSL') . '">');
     $box_smarty->assign('FIELD_EMAIL',xtc_draw_input_field('email_address', '', 'size="25" maxlength="50"'));
     $box_smarty->assign('TEXT_EMAIL',BOX_LOGINBOX_EMAIL);
     $box_smarty->assign('FIELD_PWD',xtc_draw_password_field('password', '', 'size="10" maxlength="30"'));
@@ -35,7 +35,7 @@ $box_content='';
     $box_smarty->assign('BUTTON',xtc_image_submit('button_login_small.gif', IMAGE_BUTTON_LOGIN));
     $box_smarty->assign('TEXT_FORGOT',TEXT_FORGOT);
     $box_smarty->assign('LINK_LOST_PASSWORD',xtc_href_link(FILENAME_PASSWORD_DOUBLE_OPT, '', 'SSL'));
-    $box_smarty->assign('FORM_END','</FORM>');
+    $box_smarty->assign('FORM_END','</form>');
 
 
 

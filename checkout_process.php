@@ -96,6 +96,12 @@
   } else {
   $discount='0.00';
   }
+  
+  if($_SERVER["HTTP_X_FORWARDED_FOR"]){
+		$customers_ip=$_SERVER["HTTP_X_FORWARDED_FOR"];
+	} else {
+		$customers_ip=$_SERVER["REMOTE_ADDR"];
+	}
   if ($_SESSION['credit_covers']!='1') {
   $sql_data_array = array('customers_id' => $_SESSION['customer_id'],
                           'customers_name' => $order->customer['firstname'] . ' ' . $order->customer['lastname'],
@@ -150,7 +156,7 @@
                           'orders_status' => $order->info['order_status'],
                           'currency' => $order->info['currency'],
                           'currency_value' => $order->info['currency_value'],
-                          'customers_ip' =>  $_SERVER['REMOTE_ADDR'],
+                          'customers_ip' =>  $customers_ip,
                           'language'=>$_SESSION['language'],
                           'comments' => $order->info['comments']);
    } else {
@@ -194,7 +200,7 @@
                           'orders_status' => $order->info['order_status'],
                           'currency' => $order->info['currency'],
                           'currency_value' => $order->info['currency_value'],
-                          'customers_ip' =>  $_SERVER['REMOTE_ADDR'],
+                          'customers_ip' =>  $customers_ip,
                           'comments' => $order->info['comments']);
    }
 
@@ -279,7 +285,7 @@
     xtc_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
     $order_products_id = xtc_db_insert_id();
 
-// Änderung Specials Quantity Anfang
+// ï¿½nderung Specials Quantity Anfang
     $specials_result = xtc_db_query("SELECT products_id, specials_quantity from " . TABLE_SPECIALS . " WHERE products_id = '" . xtc_get_prid($order->products[$i]['id']) . "' ");
     if (xtc_db_num_rows($specials_result)) {
     $spq = xtc_db_fetch_array($specials_result);
@@ -292,7 +298,7 @@
     xtc_db_query("update " . TABLE_SPECIALS . " set status = '0', specials_quantity = '" . $new_sp_quantity . "' where products_id = '" . xtc_get_prid($order->products[$i]['id']) . "' ");
     }
      }
-// Änderung Ende
+// ï¿½nderung Ende
 
 
     $order_total_modules->update_credit_account($i);// GV Code ICW ADDED FOR CREDIT CLASS SYSTEM

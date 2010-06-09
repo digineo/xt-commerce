@@ -150,9 +150,13 @@
 
     function process_button() {
       global $order;
-
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
       $process_button_string = xtc_draw_hidden_field('x_login', MODULE_PAYMENT_2CHECKOUT_LOGIN) .
-                               xtc_draw_hidden_field('x_amount', round($order->info['total'], 2)) .
+                               xtc_draw_hidden_field('x_amount', round($total, 2)) .
                                xtc_draw_hidden_field('x_invoice_num', date('YmdHis')) .
                                xtc_draw_hidden_field('x_test_request', ((MODULE_PAYMENT_2CHECKOUT_TESTMODE == 'Test') ? 'Y' : 'N')) .
                                xtc_draw_hidden_field('x_card_num', $this->cc_card_number) .

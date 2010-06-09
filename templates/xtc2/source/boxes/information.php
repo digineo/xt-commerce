@@ -35,8 +35,10 @@ $content_query="SELECT
 $content_query = xtDBquery($content_query);
 
  while ($content_data=xtc_db_fetch_array(&$content_query,true)) {
- 	
- $content_string .= '<img src="templates/'.CURRENT_TEMPLATE.'/img/icon_arrow.jpg"> <a href="' . xtc_href_link(FILENAME_CONTENT,'coID='.$content_data['content_group']) . '">' . $content_data['content_title'] . '</a><br>';
+ $SEF_parameter='';
+ if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&product='.xtc_cleanName($content_data['content_title']); 
+    	
+ $content_string .= '<img src="templates/'.CURRENT_TEMPLATE.'/img/icon_arrow.jpg" alt="" /> <a href="' . xtc_href_link(FILENAME_CONTENT,'coID='.$content_data['content_group'].$SEF_parameter) . '">' . $content_data['content_title'] . '</a><br />';
 }
 
  if ($content_string!='') {

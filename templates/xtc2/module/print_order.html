@@ -1,9 +1,9 @@
 {config_load file="$language/lang_$language.conf" section="print_order"} 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>{#title#} {$oID}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 
 <body onload="window.print()">
@@ -11,28 +11,28 @@
   <tr> 
     <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr> 
-          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif">{$address_label_customer}<br>
-              <br>{if $csID}<strong>{#csID#}</strong>{$csID}<br>{/if}
-            {if $PAYMENT_METHOD}<strong>{#payment#}</strong> {$PAYMENT_METHOD}<br>{/if}
-            <strong>{#order#}</strong> {$oID}<br>
-            <strong>{#date#}</strong> {$DATE}<br>
+          <td><font size="1" face="Verdana, Arial, Helvetica, sans-serif">{$address_label_customer}<br />
+              <br />{if $csID}<strong>{#csID#}</strong>{$csID}<br />{/if}
+            {if $PAYMENT_METHOD}<strong>{#payment#}</strong> {$PAYMENT_METHOD}<br />{/if}
+            <strong>{#order#}</strong> {$oID}<br />
+            <strong>{#date#}</strong> {$DATE}<br />
             </font></td>
-          <td width="1"><img src="{$tpl_path}img/logo.gif"></td>
+          <td width="1"><img src="{$tpl_path}img/logo.gif" alt="{$store_name}" /></td>
         </tr>
       </table>
-      <br>
+      <br />
       <table style="border-top:1px solid; border-bottom:1px solid;" width="100%" border="0">
         <tr bgcolor="#f1f1f1"> 
           <td width="50%"> 
             <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong>
             </strong><strong>
             {#shipping_address#}
-            </strong><br>
+            </strong><br />
           </font></p></td>{if $address_label_payment}
           <td> 
             <p><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><strong>              </strong><strong>
               {#payment_address#}
-              </strong><br>
+              </strong><br />
           </font> </p></td>{/if}
         </tr>
         <tr>
@@ -78,7 +78,7 @@
 	<table width="100%" border="0" cellpadding="3" cellspacing="0">
   {foreach name=aussen item=order_total_values from=$order_total}
   <tr> 
-    <td nowrap width="100%" style="border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;"><div align="right"><font size="1" face="Arial, Helvetica, sans-serif">{$order_total_values.TITLE} 
+    <td nowrap="nowrap" width="100%" style="border-right: 2px solid; border-bottom: 2px solid; border-color: #ffffff;"><div align="right"><font size="1" face="Arial, Helvetica, sans-serif">{$order_total_values.TITLE} 
               {$order_total_values.TEXT}</font></div></td>
   </tr>
   {/foreach} 

@@ -26,10 +26,8 @@
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
   require_once(DIR_FS_INC . 'xtc_count_customer_address_book_entries.inc.php');
 
-  if (!isset($_SESSION['customer_id'])) {
-    
-    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-  }
+  if (!isset($_SESSION['customer_id'])) xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+  
 
 
   $breadcrumb->add(NAVBAR_TITLE_1_ADDRESS_BOOK, xtc_href_link(FILENAME_ACCOUNT, '', 'SSL'));
@@ -39,11 +37,10 @@
 
 
 
-  if ($messageStack->size('addressbook') > 0) {
-  $smarty->assign('error',$messageStack->output('addressbook'));
+  if ($messageStack->size('addressbook') > 0) $smarty->assign('error',$messageStack->output('addressbook'));
 
-  }
-  $smarty->assign('ADDRESS_DEFAULT',xtc_address_label($_SESSION['customer_id'], $_SESSION['customer_default_address_id'], true, ' ', '<br>'));
+  
+  $smarty->assign('ADDRESS_DEFAULT',xtc_address_label($_SESSION['customer_id'], $_SESSION['customer_default_address_id'], true, ' ', '<br />'));
 
   $addresses_data=array();
   $addresses_query = xtc_db_query("select address_book_id, entry_firstname as firstname, entry_lastname as lastname, entry_company as company, entry_street_address as street_address, entry_suburb as suburb, entry_city as city, entry_postcode as postcode, entry_state as state, entry_zone_id as zone_id, entry_country_id as country_id from " . TABLE_ADDRESS_BOOK . " where customers_id = '" . (int)$_SESSION['customer_id'] . "' order by firstname, lastname");
@@ -58,7 +55,7 @@
                           'NAME'=> $addresses['firstname'] . ' ' . $addresses['lastname'],
                           'BUTTON_EDIT'=> '<a href="' . xtc_href_link(FILENAME_ADDRESS_BOOK_PROCESS, 'edit=' . $addresses['address_book_id'], 'SSL') . '">' . xtc_image_button('small_edit.gif', SMALL_IMAGE_BUTTON_EDIT) . '</a>',
                           'BUTTON_DELETE'=> '<a href="' . xtc_href_link(FILENAME_ADDRESS_BOOK_PROCESS, 'delete=' . $addresses['address_book_id'], 'SSL') . '">' . xtc_image_button('small_delete.gif', SMALL_IMAGE_BUTTON_DELETE) . '</a>',
-                          'ADDRESS'=> xtc_address_format($format_id, $addresses, true, ' ', '<br>'),
+                          'ADDRESS'=> xtc_address_format($format_id, $addresses, true, ' ', '<br />'),
                           'PRIMARY'=> $primary);
 
 

@@ -1165,8 +1165,8 @@ HTMLArea.prototype.focusEditor = function() {
 	    // notice the try { ... } catch block to avoid some rare exceptions in FireFox
 	    // (perhaps also in other Gecko browsers). Manual focus by user is required in
         // case of an error. Somebody has an idea?
-	    case "wysiwyg" : try { this._iframe.contentWindow.focus() } catch (e) {} break;
-	    case "textmode": try { this._textArea.focus() } catch (e) {} break;
+	    case "wysiwyg" : try { this._iframe.contentWindow() } catch (e) {} break;
+	    case "textmode": try { this._textArea() } catch (e) {} break;
 	    default	   : alert("ERROR: mode " + this._editMode + " is not defined");
 	}
 	return this._doc;

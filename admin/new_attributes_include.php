@@ -32,6 +32,7 @@
   </tr>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="SUBMIT_ATTRIBUTES" enctype="multipart/form-data"><input type="hidden" name="current_product_id" value="<?php echo $_POST['current_product_id']; ?>"><input type="hidden" name="action" value="change">
 <?php
+echo xtc_draw_hidden_field(xtc_session_name(), xtc_session_id());
   if ($cPath) echo '<input type="hidden" name="cPathID" value="' . $cPath . '">';
 
   require('new_attributes_functions.php');
@@ -119,8 +120,8 @@
 
                // echo "<td colspan=\"2\">File: <input type=\"file\" name=\"" . $current_value_id . "_download_file\"></td>";
                 echo "<td colspan=\"2\">".xtc_draw_pull_down_menu($current_value_id . '_download_file', xtc_getDownloads(), $attribute_value_download_filename, '')."</td>";
-                echo "<td>&nbsp;".DL_COUNT." <input type=\"text\" name=\"" . $current_value_id . "_download_count\" value=\"" . $attribute_value_download_count . "\"></td>";
-                echo "<td>&nbsp;".DL_EXPIRE." <input type=\"text\" name=\"" . $current_value_id . "_download_expire\" value=\"" . $attribute_value_download_expire . "\"></td>";
+                echo "<td class=\"main\">&nbsp;".DL_COUNT." <input type=\"text\" name=\"" . $current_value_id . "_download_count\" value=\"" . $attribute_value_download_count . "\"></td>";
+                echo "<td class=\"main\">&nbsp;".DL_EXPIRE." <input type=\"text\" name=\"" . $current_value_id . "_download_expire\" value=\"" . $attribute_value_download_expire . "\"></td>";
                 echo "</tr>";
             }
             // Download function end

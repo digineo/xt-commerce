@@ -218,8 +218,8 @@ require_once(DIR_FS_INC . 'xtc_rand.inc.php');
                      '<LAST_MODIFIED>' . $cat['last_modified'] . '</LAST_MODIFIED>' . "\n";
                      
           
-          $detail_query = xtc_db_query("select manufacturers_id, " . TABLE_MANUFACTURERS_INFO . ".languages_id, manufacturers_url, url_clicked, date_last_click, " . TABLE_LANGUAGES . ".code as lang_code, " . TABLE_LANGUAGES . ".name as lang_name from " . TABLE_MANUFACTURERS_INFO . "," . TABLE_LANGUAGES .
-												   " where " . TABLE_MANUFACTURERS_INFO . ".manufacturers_id=" . $cat['manufacturers_id'] . " and " . TABLE_LANGUAGES . ".languages_id=" . TABLE_MANUFACTURERS_INFO . ".languages_id");
+          $detail_query = xtc_db_query("select manufacturers_id, mi.languages_id, manufacturers_url, url_clicked, date_last_click, l.code as lang_code, l.name as lang_name from " . TABLE_MANUFACTURERS_INFO . " mi, " . TABLE_LANGUAGES .
+												   " l where mi.manufacturers_id='" . $cat['manufacturers_id'] . "' and l.languages_id = mi.languages_id");
 
 	       while ($details = xtc_db_fetch_array($detail_query))
           {
@@ -469,8 +469,7 @@ require_once(DIR_FS_INC . 'xtc_rand.inc.php');
 
                  $schema .= "<PRODUCT_GROUP_PRICES ID='".$customers_status[$i]['id']."' NAME='".$customers_status[$i]['text']. "'>". "\n";
 
-                 $group_price_query=xtc_db_query("SELECT
-                                                  * FROM personal_offers_by_customers_status_".$customers_status[$i]['id']);
+                 $group_price_query=xtc_db_query("SELECT * FROM personal_offers_by_customers_status_".$customers_status[$i]['id']." where products_id = '".$products['products_id']."'");
 
                  while ($group_price_data=xtc_db_fetch_array($group_price_query)) {
                  //if ($group_price_data['personal_offer']!='0') {

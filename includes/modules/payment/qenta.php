@@ -125,9 +125,13 @@
       }
 
       $this->transaction_id = $this->generate_trid();
-
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
       $request_fingerprint = md5(MODULE_PAYMENT_QENTA_MERCHANTKEY.
-	  						     round($xtPrice->xtcCalculateCurrEx($order->info['total'] ,$qCurrency), $xtPrice->get_decimal_places($qCurrency)).
+	  						     round($xtPrice->xtcCalculateCurrEx($total,$qCurrency), $xtPrice->get_decimal_places($qCurrency)).
 	  						     $qCurrency.
 	  						     $qLanguage.
 	  						     $this->transaction_id.'-'.$order->customer['firstname'].' '.$order->customer['lastname'].
@@ -141,7 +145,7 @@
    	  $result = xtc_db_query("INSERT INTO payment_qenta (q_TRID, q_DATE) VALUES ('$this->transaction_id', NOW())");
 
       $process_button_string = xtc_draw_hidden_field('merchantKey', MODULE_PAYMENT_QENTA_MERCHANTKEY) .
-                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($order->info['total'] ,$qCurrency), $xtPrice->get_decimal_places($qCurrency))) .
+                               xtc_draw_hidden_field('amount', round($xtPrice->xtcCalculateCurrEx($total ,$qCurrency), $xtPrice->get_decimal_places($qCurrency))) .
                                xtc_draw_hidden_field('currency', $qCurrency) .
                                xtc_draw_hidden_field('paymentType', MODULE_PAYMENT_QENTA_PAYMENTTYPE) .
                                xtc_draw_hidden_field('language', $qLanguage) .

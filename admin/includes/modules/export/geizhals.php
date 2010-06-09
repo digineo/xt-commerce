@@ -22,16 +22,16 @@ define('MODULE_GEIZHALS_FILE_TITLE' , '<hr noshade>Dateiname');
 define('MODULE_GEIZHALS_FILE_DESC' , 'Geben Sie einen Dateinamen ein, falls die Exportadatei am Server gespeichert werden soll.<br>(Verzeichnis export/)');
 define('MODULE_GEIZHALS_STATUS_DESC','Modulstatus');
 define('MODULE_GEIZHALS_STATUS_TITLE','Status');
-define('MODULE_GEIZHALS_CURRENCY_TITLE','Währung');
-define('MODULE_GEIZHALS_CURRENCY_DESC','Welche Währung soll exportiert werden?');
+define('MODULE_GEIZHALS_CURRENCY_TITLE','W&auml;hrung');
+define('MODULE_GEIZHALS_CURRENCY_DESC','Welche W&auml;hrung soll exportiert werden?');
 define('EXPORT_YES','Nur Herunterladen');
 define('EXPORT_NO','Am Server Speichern');
-define('CURRENCY','<hr noshade><b>Währung:</b>');
-define('CURRENCY_DESC','Währung in der Exportdatei');
+define('CURRENCY','<hr noshade><b>W&auml;hrung:</b>');
+define('CURRENCY_DESC','W&auml;hrung in der Exportdatei');
 define('EXPORT','Bitte den Sicherungsprozess AUF KEINEN FALL unterbrechen. Dieser kann einige Minuten in Anspruch nehmen.');
 define('EXPORT_TYPE','<hr noshade><b>Speicherart:</b>');
 define('EXPORT_STATUS_TYPE','<hr noshade><b>Kundengruppe:</b>');
-define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exportierten Preis bildet. (Falls Sie keine Kundengruppenpreise haben, wählen Sie <i>Gast</i>):</b>');
+define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exportierten Preis bildet. (Falls Sie keine Kundengruppenpreise haben, w&auml;hlen Sie <i>Gast</i>):</b>');
 
 // include needed functions
 
@@ -113,7 +113,7 @@ define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exp
                        $products['products_model'] . ';' .
                        $products['manufacturers_name'] .';'.
                        $products['products_name'] . ';' .
-                       $products_price. ';' .
+                       number_format($products_price,2,'.',''). ';' .
                        xtc_get_shipping_status_name($products['products_shippingtime']). ';' .
                        HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $products['products_id'] . ';' .
                        $products_description . "\n";

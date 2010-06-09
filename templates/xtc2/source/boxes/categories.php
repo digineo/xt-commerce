@@ -73,7 +73,7 @@ $box_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
     while (list($key, $value) = each($id)) {
       unset($prev_id);
       unset($first_id);
-      $categories_query = "select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_status = '1' and c.parent_id = '" . $value . "' and c.categories_id = cd.categories_id and cd.language_id='" . $_SESSION['languages_id'] ."' order by sort_order, cd.categories_name";
+      $categories_query = "select c.categories_id, cd.categories_name, c.parent_id from " . TABLE_CATEGORIES . " c, " . TABLE_CATEGORIES_DESCRIPTION . " cd where c.categories_status = '1' and c.parent_id = '" . $value . "' ".$group_check." and c.categories_id = cd.categories_id and cd.language_id='" . $_SESSION['languages_id'] ."' order by sort_order, cd.categories_name";
       $categories_query = xtDBquery($categories_query);
       $category_check = xtc_db_num_rows(&$categories_query,true);
       if ($category_check > 0) {

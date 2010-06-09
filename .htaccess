@@ -28,8 +28,7 @@
 #</Directory>
 #
 # 'All' with also work. (This configuration is in your
-# apache/conf/httpd.conf file)
-
+# apache/conf/httpd.conf file)www
 <IfModule mod_setenvif.c>
   <IfDefine SSL>
     SetEnvIf User-Agent ".*MSIE.*" \

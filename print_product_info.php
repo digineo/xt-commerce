@@ -75,7 +75,7 @@
   $mo_images = xtc_get_products_mo_images($product_info['products_id']);
   if (isset($mo_images)){ 
   foreach($mo_images as $img) {
-  	$mo_img = xtc_href_link(DIR_WS_INFO_IMAGES . $img['image_name']);
+  	$mo_img = DIR_WS_CATALOG . DIR_WS_THUMBNAIL_IMAGES . $img['image_name'];
   	$smarty->assign('PRODUCTS_IMAGE_'.$img['image_nr'], $mo_img);  	
   }}
 

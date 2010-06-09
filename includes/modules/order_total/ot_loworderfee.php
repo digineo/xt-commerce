@@ -32,7 +32,10 @@
 
     function process() {
       global $order, $currencies;
-
+      
+      //include needed functions
+      require_once(DIR_FS_INC . 'xtc_calculate_tax.inc.php');
+      
       if (MODULE_ORDER_TOTAL_LOWORDERFEE_LOW_ORDER_FEE == 'true') {
         switch (MODULE_ORDER_TOTAL_LOWORDERFEE_DESTINATION) {
           case 'national':
@@ -49,13 +52,36 @@
           $tax = xtc_get_tax_rate(MODULE_ORDER_TOTAL_LOWORDERFEE_TAX_CLASS, $order->delivery['country']['id'], $order->delivery['zone_id']);
           $tax_description = xtc_get_tax_description(MODULE_ORDER_TOTAL_LOWORDERFEE_TAX_CLASS, $order->delivery['country']['id'], $order->delivery['zone_id']);
 
-          $order->info['tax'] += xtc_calculate_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax);
-          $order->info['tax_groups']["$tax_description"] += xtc_calculate_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax);
+
+
+          
+
+		if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 1) {
+		  $order->info['tax'] += xtc_calculate_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax);
+          $order->info['tax_groups'][TAX_ADD_TAX . "$tax_description"] += xtc_calculate_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax);
           $order->info['total'] += MODULE_ORDER_TOTAL_LOWORDERFEE_FEE + xtc_calculate_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax);
+          $low_order_fee=xtc_add_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax);
+        }
+        
+        if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+		$low_order_fee=MODULE_ORDER_TOTAL_LOWORDERFEE_FEE;
+		$order->info['tax'] += xtc_calculate_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax);
+        $order->info['tax_groups'][TAX_NO_TAX . "$tax_description"] += xtc_calculate_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax);
+		$order->info['subtotal'] += $low_order_fee;
+        $order->info['total'] += $low_order_fee;
+        }
+        
+        if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] != 1) {
+		$low_order_fee=MODULE_ORDER_TOTAL_LOWORDERFEE_FEE;
+		$order->info['subtotal'] += $low_order_fee;
+        $order->info['total'] += $low_order_fee;
+        }
+
+
 
           $this->output[] = array('title' => $this->title . ':',
-                                  'text' => $this->Price->xtcFormat(xtc_add_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax), true),
-                                  'value' => xtc_add_tax(MODULE_ORDER_TOTAL_LOWORDERFEE_FEE, $tax));
+                                  'text' => $this->Price->xtcFormat($low_order_fee, true),
+                                  'value' => $low_order_fee);
         }
       }
     }

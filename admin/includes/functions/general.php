@@ -97,10 +97,10 @@
   function xtc_set_categories_rekursiv($categories_id,$status) {
 
            // get products in categorie
-           $products_query=xtc_db_query("SELECT products_id FROM ".TABLE_PRODUCTS_TO_CATEGORIES." where categories_id='".$categories_id."'");
-           while ($products=xtc_db_fetch_array($products_query)) {
-           xtc_db_query("UPDATE ".TABLE_PRODUCTS." SET products_status='".$status."' where products_id='".$products['products_id']."'");
-           }
+           //$products_query=xtc_db_query("SELECT products_id FROM ".TABLE_PRODUCTS_TO_CATEGORIES." where categories_id='".$categories_id."'");
+           //while ($products=xtc_db_fetch_array($products_query)) {
+           //xtc_db_query("UPDATE ".TABLE_PRODUCTS." SET products_status='".$status."' where products_id='".$products['products_id']."'");
+           //}
            // set status of categorie
            xtc_db_query("update " . TABLE_CATEGORIES . " set categories_status = '".$status."' where categories_id = '" . $categories_id . "'");
            // look for deeper categories and go rekursiv
@@ -480,8 +480,8 @@
 
     if ($html) {
       // HTML Mode
-      $HR = '<hr>';
-      $hr = '<hr>';
+      $HR = '<hr />';
+      $hr = '<hr />';
       if ( ($boln == '') && ($eoln == "\n") ) { // Values not specified, use rational defaults
         $CR = '<br>';
         $cr = '<br>';
@@ -645,6 +645,15 @@
     }
 
     return $orders_status_array;
+  }
+  
+    function xtc_get_products_vpe_name($products_vpe_id, $language_id = '') {
+
+    if (!$language_id) $language_id = $_SESSION['languages_id'];
+    $products_vpe_query = xtc_db_query("select products_vpe_name from " . TABLE_PRODUCTS_VPE . " where products_vpe_id = '" . $products_vpe_id . "' and language_id = '" . $language_id . "'");
+    $products_vpe = xtc_db_fetch_array($products_vpe_query);
+
+    return $products_vpe['products_vpe_name'];
   }
 
     function xtc_get_shipping_status() {
@@ -1444,7 +1453,7 @@ $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');
         }
         closedir($dir);
         sort($templates_array);
- return xtc_draw_pull_down_menu($name, $templates_array, 0);
+ return xtc_draw_pull_down_menu($name, $templates_array, CURRENT_TEMPLATE);
  }
 }
  
@@ -1569,7 +1578,7 @@ $name = (($key) ? 'configuration[' . $key . ']' : 'configuration_value');
     return $user_info_array;
   }
 
-  //---------------------------------------------------------------kommt wieder raus später!!
+  //---------------------------------------------------------------kommt wieder raus spï¿½ter!!
   function xtc_get_uploaded_file($filename) {   
     if (isset($_FILES[$filename])) {   
       $uploaded_file = array('name' => $_FILES[$filename]['name'],   

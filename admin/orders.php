@@ -146,6 +146,15 @@ require(DIR_WS_CLASSES . 'currencies.php');
 
       xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'oID=' . $_GET['oID'] . '&action=edit'));
       break;
+      
+    case 'afterbuy_send':
+    		$oID = xtc_db_prepare_input($_GET['oID']);
+    		require_once(DIR_FS_CATALOG .'includes/classes/afterbuy.php');
+		$aBUY=new xtc_afterbuy_functions($oID);
+		if ($aBUY->order_send()) $aBUY->process_order();
+		
+    break;
+    
 // BMC Delete CC Info End
   }
 ?>
@@ -182,7 +191,7 @@ require(DIR_WS_CLASSES . 'currencies.php');
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
   <tr> 
     <td width="80" rowspan="2"><?php echo xtc_image(DIR_WS_ICONS.'heading_customers.gif'); ?></td>
-    <td class="pageHeading"><?php echo HEADING_TITLE . ' N° : ' . $oID . ' - ' . $order->info['date_purchased'] ; ?></td>
+    <td class="pageHeading"><?php echo HEADING_TITLE . ' Nï¿½ : ' . $oID . ' - ' . $order->info['date_purchased'] ; ?></td>
   </tr>
   <tr> 
     <td class="main" valign="top">XT Customers</td>
@@ -210,7 +219,7 @@ require(DIR_WS_CLASSES . 'currencies.php');
             <?php } ?>
               <tr>
                 <td class="main" valign="top"><b><?php echo ENTRY_CUSTOMER; ?></b></td>
-                <td class="main"><?php echo xtc_address_format($order->customer['format_id'], $order->customer, 1, '', '<br>'); ?></td>
+                <td class="main"><?php echo xtc_address_format($order->customer['format_id'], $order->customer, 1, '', '<br />'); ?></td>
               </tr>
               <tr>
                 <td colspan="2"><?php echo xtc_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
@@ -245,13 +254,13 @@ $memo_count=xtc_db_fetch_array($memo_query);
             <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2">
               <tr>
                 <td class="main" valign="top"><b><?php echo ENTRY_SHIPPING_ADDRESS; ?></b></td>
-                <td class="main"><?php echo xtc_address_format($order->delivery['format_id'], $order->delivery, 1, '', '<br>'); ?></td>
+                <td class="main"><?php echo xtc_address_format($order->delivery['format_id'], $order->delivery, 1, '', '<br />'); ?></td>
               </tr>
             </table></td>
             <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="2">
               <tr>
                 <td class="main" valign="top"><b><?php echo ENTRY_BILLING_ADDRESS; ?></b></td>
-                <td class="main"><?php echo xtc_address_format($order->billing['format_id'], $order->billing, 1, '', '<br>'); ?></td>
+                <td class="main"><?php echo xtc_address_format($order->billing['format_id'], $order->billing, 1, '', '<br />'); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -402,13 +411,13 @@ if ($order->info['cc_number'] != '0000000000000000') {
     for ($i = 0, $n = sizeof($order->products); $i < $n; $i++) {
 
       echo '          <tr class="dataTableRow">' . "\n" .
-           '            <td class="dataTableContent" valign="top" align="right">' . $order->products[$i]['qty'] . '&nbsp;x</td>' . "\n" .
+           '            <td class="dataTableContent" valign="top" align="right">' . $order->products[$i]['qty'] . '&nbsp;x&nbsp;</td>' . "\n" .
            '            <td class="dataTableContent" valign="top">' . $order->products[$i]['name'];
 
       if (sizeof($order->products[$i]['attributes']) > 0) {
         for ($j = 0, $k = sizeof($order->products[$i]['attributes']); $j < $k; $j++) {
 
-          echo '<br><nobr><small>&nbsp;<i> - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] . ': ';
+          echo '<br /><nobr><small>&nbsp;<i> - ' . $order->products[$i]['attributes'][$j]['option'] . ': ' . $order->products[$i]['attributes'][$j]['value'] . ': ';
 
 
           }
@@ -424,7 +433,7 @@ if ($order->info['cc_number'] != '0000000000000000') {
            if ($order->products[$i]['model']!='') {
                echo $order->products[$i]['model'];
            } else {
-               echo '<br>';
+               echo '<br />';
            }
 
            // attribute models
@@ -435,7 +444,7 @@ if ($order->info['cc_number'] != '0000000000000000') {
             if ($model!='') {
                echo $model;
            } else {
-               echo '<br>';
+               echo '<br />';
            }
         }
       }
@@ -510,7 +519,7 @@ if ($order->info['cc_number'] != '0000000000000000') {
         </table></td>
       </tr>
       <tr>
-        <td class="main"><br><b><?php echo TABLE_HEADING_COMMENTS; ?></b></td>
+        <td class="main"><br /><b><?php echo TABLE_HEADING_COMMENTS; ?></b></td>
       </tr>
       <tr>
         <td><?php echo xtc_draw_separator('pixel_trans.gif', '1', '5'); ?></td>
@@ -597,23 +606,26 @@ echo '<a href="' . xtc_href_link(FILENAME_GV_MAIL, xtc_get_all_get_params(array(
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
                 <td class="dataTableHeadingContent"><?php echo TABLE_HEADING_CUSTOMERS; ?></td>
-                <td class="dataTableHeadingContent" align="right"><?php echo 'N°' ; ?></td>
+                <td class="dataTableHeadingContent" align="right"><?php echo 'Nr'; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ORDER_TOTAL; ?></td>
                 <td class="dataTableHeadingContent" align="center"><?php echo TABLE_HEADING_DATE_PURCHASED; ?></td>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_STATUS; ?></td>
+                <?php if (AFTERBUY_ACTIVATED=='true') { ?>
+                <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_AFTERBUY; ?></td>
+                <?php } ?>
                 <td class="dataTableHeadingContent" align="right"><?php echo TABLE_HEADING_ACTION; ?>&nbsp;</td>
               </tr>
 <?php
     if ($_GET['cID']) {
       $cID = xtc_db_prepare_input($_GET['cID']);
-      $orders_query_raw = "select o.orders_id, o.customers_name, o.customers_id, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.customers_id = '" . xtc_db_input($cID) . "' and o.orders_status = s.orders_status_id and s.language_id = '" . $_SESSION['languages_id'] . "' and ot.class = 'ot_total' order by orders_id DESC";
+      $orders_query_raw = "select o.orders_id, o.afterbuy_success, o.afterbuy_id, o.customers_name, o.customers_id, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.customers_id = '" . xtc_db_input($cID) . "' and o.orders_status = s.orders_status_id and s.language_id = '" . $_SESSION['languages_id'] . "' and ot.class = 'ot_total' order by orders_id DESC";
     } elseif ($_GET['status']) {
       $status = xtc_db_prepare_input($_GET['status']);
-      $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . $_SESSION['languages_id'] . "' and s.orders_status_id = '" . xtc_db_input($status) . "' and ot.class = 'ot_total' order by o.orders_id DESC";
+      $orders_query_raw = "select o.orders_id, o.afterbuy_success, o.afterbuy_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . $_SESSION['languages_id'] . "' and s.orders_status_id = '" . xtc_db_input($status) . "' and ot.class = 'ot_total' order by o.orders_id DESC";
     } else {
-      $orders_query_raw = "select o.orders_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . $_SESSION['languages_id'] . "' and ot.class = 'ot_total' order by o.orders_id DESC";
+      $orders_query_raw = "select o.orders_id, o.afterbuy_success, o.afterbuy_id, o.customers_name, o.payment_method, o.date_purchased, o.last_modified, o.currency, o.currency_value, s.orders_status_name, ot.text as order_total from " . TABLE_ORDERS . " o left join " . TABLE_ORDERS_TOTAL . " ot on (o.orders_id = ot.orders_id), " . TABLE_ORDERS_STATUS . " s where o.orders_status = s.orders_status_id and s.language_id = '" . $_SESSION['languages_id'] . "' and ot.class = 'ot_total' order by o.orders_id DESC";
     }
-    $orders_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $orders_query_raw, $orders_query_numrows);
+    $orders_split = new splitPageResults($_GET['page'], '20', $orders_query_raw, $orders_query_numrows);
     $orders_query = xtc_db_query($orders_query_raw);
     while ($orders = xtc_db_fetch_array($orders_query)) {
       if (((!$_GET['oID']) || ($_GET['oID'] == $orders['orders_id'])) && (!$oInfo)) {
@@ -631,6 +643,15 @@ echo '<a href="' . xtc_href_link(FILENAME_GV_MAIL, xtc_get_all_get_params(array(
                 <td class="dataTableContent" align="right"><?php echo strip_tags($orders['order_total']); ?></td>
                 <td class="dataTableContent" align="center"><?php echo xtc_datetime_short($orders['date_purchased']); ?></td>
                 <td class="dataTableContent" align="right"><?php echo $orders['orders_status_name']; ?></td>
+                <?php if (AFTERBUY_ACTIVATED=='true') { ?>
+                <td class="dataTableContent" align="right"><?php
+                 	if ($orders['afterbuy_success']==1) {
+						echo $orders['afterbuy_id'];
+   					} else {
+						echo 'TRANSMISSION_ERROR';
+				}              
+                ?></td>
+                <?php } ?>
                 <td class="dataTableContent" align="right"><?php if ( (is_object($oInfo)) && ($orders['orders_id'] == $oInfo->orders_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ''); } else { echo '<a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID')) . 'oID=' . $orders['orders_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
               </tr>
 <?php
@@ -639,8 +660,8 @@ echo '<a href="' . xtc_href_link(FILENAME_GV_MAIL, xtc_get_all_get_params(array(
               <tr>
                 <td colspan="5"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="smallText" valign="top"><?php echo $orders_split->display_count($orders_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_ORDERS); ?></td>
-                    <td class="smallText" align="right"><?php echo $orders_split->display_links($orders_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], xtc_get_all_get_params(array('page', 'oID', 'action'))); ?></td>
+                    <td class="smallText" valign="top"><?php echo $orders_split->display_count($orders_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_ORDERS); ?></td>
+                    <td class="smallText" align="right"><?php echo $orders_split->display_links($orders_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page'], xtc_get_all_get_params(array('page', 'oID', 'action'))); ?></td>
                   </tr>
                 </table></td>
               </tr>
@@ -653,24 +674,27 @@ echo '<a href="' . xtc_href_link(FILENAME_GV_MAIL, xtc_get_all_get_params(array(
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_ORDER . '</b>');
 
       $contents = array('form' => xtc_draw_form('orders', FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=deleteconfirm'));
-      $contents[] = array('text' => TEXT_INFO_DELETE_INTRO . '<br><br><b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
-      $contents[] = array('text' => '<br>' . xtc_draw_checkbox_field('restock') . ' ' . TEXT_INFO_RESTOCK_PRODUCT_QUANTITY);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . xtc_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('text' => TEXT_INFO_DELETE_INTRO . '<br /><br /><b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
+      $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('restock') . ' ' . TEXT_INFO_RESTOCK_PRODUCT_QUANTITY);
+      $contents[] = array('align' => 'center', 'text' => '<br />' . xtc_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
     default:
       if (is_object($oInfo)) {
         $heading[] = array('text' => '<b>[' . $oInfo->orders_id . ']&nbsp;&nbsp;' . xtc_datetime_short($oInfo->date_purchased) . '</b>');
 
         $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=edit') . '">' . xtc_image_button('button_edit.gif', IMAGE_EDIT) . '</a> <a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=delete') . '">' . xtc_image_button('button_delete.gif', IMAGE_DELETE) . '</a>');
-       
+       if (AFTERBUY_ACTIVATED=='true') {
+       $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_ORDERS, xtc_get_all_get_params(array('oID', 'action')) . 'oID=' . $oInfo->orders_id . '&action=afterbuy_send') . '">' . xtc_image_button('button_afterbuy_send.gif', IMAGE_AFTERBUY_SEND) . '</a>');	
+       	
+       }
         //$contents[] = array('align' => 'center', 'text' => '');
 
-        $contents[] = array('text' => '<br>' . TEXT_DATE_ORDER_CREATED . ' ' . xtc_date_short($oInfo->date_purchased));
+        $contents[] = array('text' => '<br />' . TEXT_DATE_ORDER_CREATED . ' ' . xtc_date_short($oInfo->date_purchased));
         if (xtc_not_null($oInfo->last_modified)) $contents[] = array('text' => TEXT_DATE_ORDER_LAST_MODIFIED . ' ' . xtc_date_short($oInfo->last_modified));
-        $contents[] = array('text' => '<br>' . TEXT_INFO_PAYMENT_METHOD . ' '  . $oInfo->payment_method);
+        $contents[] = array('text' => '<br />' . TEXT_INFO_PAYMENT_METHOD . ' '  . $oInfo->payment_method);
         // elari added to display product list for selected order
         $order = new order($oInfo->orders_id);
-        $contents[] = array('text' => '<br><br>' . sizeof($order->products) . ' Products ' );
+        $contents[] = array('text' => '<br /><br />' . sizeof($order->products) . ' Products ' );
         for ($i=0; $i<sizeof($order->products); $i++) {
           $contents[] = array('text' => $order->products[$i]['qty'] . '&nbsp;x' . $order->products[$i]['name']);
 
@@ -711,7 +735,7 @@ echo '<a href="' . xtc_href_link(FILENAME_GV_MAIL, xtc_get_all_get_params(array(
     require(DIR_WS_INCLUDES . 'footer.php');
 ?>
 <!-- footer_eof //-->
-<br>
+<br />
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

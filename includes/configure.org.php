@@ -17,13 +17,13 @@
 // Define the webserver and path parameters
 // * DIR_FS_* = Filesystem directories (local/physical)
 // * DIR_WS_* = Webserver directories (virtual/URL)
-  define('HTTP_SERVER', 'http://localhost'); // eg, http://localhost - should not be empty for productive servers
-  define('HTTPS_SERVER', 'https://localhost'); // eg, https://localhost - should not be empty for productive servers
+  define('HTTP_SERVER', ''); // eg, http://localhost - should not be empty for productive servers
+  define('HTTPS_SERVER', ''); // eg, https://localhost - should not be empty for productive servers
   define('ENABLE_SSL', false); // secure webserver for checkout procedure?
-  define('DIR_WS_CATALOG', '/XTC/xtcommerce/'); // absolute path required
-  define('DIR_FS_DOCUMENT_ROOT', 'D:/xampp/htdocs/XTC/xtcommerce/');
-  define('DIR_FS_CATALOG', 'D:/xampp/htdocs/XTC/xtcommerce/');
-  define('DIR_WS_IMAGES', 'images/');
+  define('DIR_WS_CATALOG', ''); // absolute path required
+  define('DIR_FS_DOCUMENT_ROOT', '');
+  define('DIR_FS_CATALOG', '');
+  define('DIR_WS_IMAGES', '');
   define('DIR_WS_ORIGINAL_IMAGES', DIR_WS_IMAGES .'product_images/original_images/');
   define('DIR_WS_THUMBNAIL_IMAGES', DIR_WS_IMAGES .'product_images/thumbnail_images/');
   define('DIR_WS_INFO_IMAGES', DIR_WS_IMAGES .'product_images/info_images/');
@@ -41,10 +41,10 @@
   define('DIR_FS_INC', DIR_FS_CATALOG . 'inc/');
 
 // define our database connection
-  define('DB_SERVER', 'localhost'); // eg, localhost - should not be empty for productive servers
-  define('DB_SERVER_USERNAME', 'root');
+  define('DB_SERVER', ''); // eg, localhost - should not be empty for productive servers
+  define('DB_SERVER_USERNAME', '');
   define('DB_SERVER_PASSWORD', '');
-  define('DB_DATABASE', 'xtc_rc12');
-  define('USE_PCONNECT', 'false'); // use persistent connections?
+  define('DB_DATABASE', '');
+  define('USE_PCONNECT', 'true'); // use persistent connections?
   define('STORE_SESSIONS', 'mysql'); // leave empty '' for default handler or set to 'mysql'
 ?>

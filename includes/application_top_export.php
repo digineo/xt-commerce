@@ -37,7 +37,7 @@
 
   
   // define the project version
-  define('PROJECT_VERSION', 'XT-Commerce v2.0 RC1.2');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.3');
 
   // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -98,7 +98,7 @@
   }
 
     // Include Template Engine
-  require(DIR_WS_CLASSES . 'Smarty_2.6.5/Smarty.class.php');
+  require(DIR_WS_CLASSES . 'Smarty_2.6.6/Smarty.class.php');
 
 
 ?>

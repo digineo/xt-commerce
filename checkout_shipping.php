@@ -174,7 +174,7 @@
  require(DIR_WS_INCLUDES . 'header.php'); 
 
 $smarty->assign('FORM_ACTION',xtc_draw_form('checkout_address', xtc_href_link(FILENAME_CHECKOUT_SHIPPING, '', 'SSL')) . xtc_draw_hidden_field('action', 'process'));
-$smarty->assign('ADDRESS_LABEL',xtc_address_label($_SESSION['customer_id'], $_SESSION['sendto'], true, ' ', '<br>'));
+$smarty->assign('ADDRESS_LABEL',xtc_address_label($_SESSION['customer_id'], $_SESSION['sendto'], true, ' ', '<br />'));
 $smarty->assign('BUTTON_ADDRESS','<a href="' . xtc_href_link(FILENAME_CHECKOUT_SHIPPING_ADDRESS, '', 'SSL') . '">' . xtc_image_button('button_change_address.gif', IMAGE_BUTTON_CHANGE_ADDRESS) . '</a>');
 $smarty->assign('BUTON_CONTINUE',xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
 $smarty->assign('FORM_END','</form>');
@@ -193,20 +193,20 @@ $shipping_block ='
 
 $shipping_block .='
               <tr>
-                <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
-                <td colspan="2" width="100%"><table border="0" width="100%" cellspacing="0" cellpadding="2">
+                <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                     <td class="main" colspan="3"><b>'. FREE_SHIPPING_TITLE.'</b>&nbsp;'. $quotes[$i]['icon'].'</td>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>
                   <tr id="defaultSelected" class="moduleRowSelected" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, 0)">
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
-                    <td class="main" width="100%">'. sprintf(FREE_SHIPPING_DESCRIPTION, $xtPrice->xtcFormat(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER,true)) . xtc_draw_hidden_field('shipping', 'free_free').'</td>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="main">'. sprintf(FREE_SHIPPING_DESCRIPTION, $xtPrice->xtcFormat(MODULE_ORDER_TOTAL_SHIPPING_FREE_SHIPPING_OVER,true)) . xtc_draw_hidden_field('shipping', 'free_free').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>
                 </table></td>
-                <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td> 
+                <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td> 
               </tr>';
 
     } else {
@@ -214,20 +214,20 @@ $shipping_block .='
       for ($i=0, $n=sizeof($quotes); $i<$n; $i++) {
 $shipping_block .='
               <tr>
-                <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                 <td colspan="2"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                     <td class="main" colspan="3"><b>'. $quotes[$i]['module'].'</b>&nbsp;'. $quotes[$i]['icon'].'</td>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>';
 
         if (isset($quotes[$i]['error'])) {
 $shipping_block .='
                   <tr>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                     <td class="main" colspan="3">'. $quotes[$i]['error'].'</td>
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>';
         } else {
           for ($j=0, $n2=sizeof($quotes[$i]['methods']); $j<$n2; $j++) {
@@ -240,15 +240,15 @@ $shipping_block .='
               $shipping_block .= '                 <tr class="moduleRow" onmouseover="rowOverEffect(this)" onmouseout="rowOutEffect(this)" onclick="selectRowEffect(this, ' . $radio_buttons . ')">' . "\n";
             }
 $shipping_block .='
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
-                    <td class="main" width="75%">'. $quotes[$i]['methods'][$j]['title'].'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="main">'. $quotes[$i]['methods'][$j]['title'].'</td>
 ';
             if ( ($n > 1) || ($n2 > 1) ) {
               if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 ) $quotes[$i]['tax'] = '';
 if ($_SESSION['customers_status']['customers_status_show_price_tax']==0)  $quotes[$i]['tax']=0;
               $shipping_block .='
-                    <td class="main">'. $xtPrice->xtcFormat(xtc_add_tax($quotes[$i]['methods'][$j]['cost'], $quotes[$i]['tax']),true,0,true).'</td>
-                    <td class="main" align="right">'. xtc_draw_radio_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id'], $checked).'</td>
+                    <td class="main" align="right">'. $xtPrice->xtcFormat(xtc_add_tax($quotes[$i]['methods'][$j]['cost'], $quotes[$i]['tax']),true,0,true).'</td>
+                    <td class="onepxwidth" align="right">'. xtc_draw_radio_field('shipping', $quotes[$i]['id'] . '_' . $quotes[$i]['methods'][$j]['id'], $checked).'</td>
 ';
             } else {
 
@@ -258,7 +258,7 @@ $shipping_block .='
 ';
             }
 $shipping_block .='
-                    <td width="10">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
+                    <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td>
                   </tr>
 ';
             $radio_buttons++;
@@ -266,7 +266,7 @@ $shipping_block .='
         }
 $shipping_block .='
                 </table></td>
-                <td>'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td> 
+                <td class="onepxwidth">'. xtc_draw_separator('pixel_trans.gif', '10', '1').'</td> 
               </tr>
 ';
       }

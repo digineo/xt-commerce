@@ -455,11 +455,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>"> 
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 <?php
   if ($_GET['action'] == 'edit' || $_GET['action'] == 'update') {
 ?>
-<script language="javascript"><!--
+<script type="text/javascript"><!--
 function check_form() {
   var error = 0;
   var error_message = "<?php echo JS_ERROR; ?>";
@@ -1050,7 +1050,7 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
                                 group by c.customers_id
                                 ".$sort;
 
-    $customers_split = new splitPageResults($_GET['page'], MAX_DISPLAY_SEARCH_RESULTS, $customers_query_raw, $customers_query_numrows);
+    $customers_split = new splitPageResults($_GET['page'], '20', $customers_query_raw, $customers_query_numrows);
     $customers_query = xtc_db_query($customers_query_raw);
     while ($customers = xtc_db_fetch_array($customers_query)) {
       $info_query = xtc_db_query("select customers_info_date_account_created as date_account_created, customers_info_date_account_last_modified as date_account_last_modified, customers_info_date_of_last_logon as date_last_logon, customers_info_number_of_logons as number_of_logons from " . TABLE_CUSTOMERS_INFO . " where customers_info_id = '" . $customers['customers_id'] . "'");
@@ -1096,7 +1096,7 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
                 <td class="dataTableContent" align="left">&nbsp;
                 <?php
                  if ($customers['customers_vat_id']){
-                 echo $customers['customers_vat_id'] . '<br><span style="font-size:8pt"><nobr>(' . xtc_validate_vatid_status($customers['customers_id']) . ')</nobr></span>' ;
+                 echo $customers['customers_vat_id'] . '<br /><span style="font-size:8pt"><nobr>(' . xtc_validate_vatid_status($customers['customers_id']) . ')</nobr></span>' ;
                  }
                   ?>
                 </td>
@@ -1110,8 +1110,8 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
               <tr>
                 <td colspan="4"><table border="0" width="100%" cellspacing="0" cellpadding="2">
                   <tr>
-                    <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
-                    <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, MAX_DISPLAY_SEARCH_RESULTS, MAX_DISPLAY_PAGE_LINKS, $_GET['page'], xtc_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
+                    <td class="smallText" valign="top"><?php echo $customers_split->display_count($customers_query_numrows, '20', $_GET['page'], TEXT_DISPLAY_NUMBER_OF_CUSTOMERS); ?></td>
+                    <td class="smallText" align="right"><?php echo $customers_split->display_links($customers_query_numrows, '20', MAX_DISPLAY_PAGE_LINKS, $_GET['page'], xtc_get_all_get_params(array('page', 'info', 'x', 'y', 'cID'))); ?></td>
                   </tr>
 <?php
     if (xtc_not_null($_GET['search'])) {
@@ -1133,9 +1133,9 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
       $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_DELETE_CUSTOMER . '</b>');
 
       $contents = array('form' => xtc_draw_form('customers', FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=deleteconfirm'));
-      $contents[] = array('text' => TEXT_DELETE_INTRO . '<br><br><b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
-      if ($cInfo->number_of_reviews > 0) $contents[] = array('text' => '<br>' . xtc_draw_checkbox_field('delete_reviews', 'on', true) . ' ' . sprintf(TEXT_DELETE_REVIEWS, $cInfo->number_of_reviews));
-      $contents[] = array('align' => 'center', 'text' => '<br>' . xtc_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('text' => TEXT_DELETE_INTRO . '<br /><br /><b>' . $cInfo->customers_firstname . ' ' . $cInfo->customers_lastname . '</b>');
+      if ($cInfo->number_of_reviews > 0) $contents[] = array('text' => '<br />' . xtc_draw_checkbox_field('delete_reviews', 'on', true) . ' ' . sprintf(TEXT_DELETE_REVIEWS, $cInfo->number_of_reviews));
+      $contents[] = array('align' => 'center', 'text' => '<br />' . xtc_image_submit('button_delete.gif', IMAGE_DELETE) . ' <a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
 
     case 'editstatus':
@@ -1143,7 +1143,7 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
         $customers_history_query = xtc_db_query("select new_value, old_value, date_added, customer_notified from " . TABLE_CUSTOMERS_STATUS_HISTORY . " where customers_id = '" . xtc_db_input($_GET['cID']) . "' order by customers_status_history_id desc");
         $heading[] = array('text' => '<b>' . TEXT_INFO_HEADING_STATUS_CUSTOMER . '</b>');
         $contents = array('form' => xtc_draw_form('customers', FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=statusconfirm'));
-        $contents[] = array('text' => '<br>' . xtc_draw_pull_down_menu('status', $customers_statuses_array, $cInfo->customers_status) );
+        $contents[] = array('text' => '<br />' . xtc_draw_pull_down_menu('status', $customers_statuses_array, $cInfo->customers_status) );
         $contents[] = array('text' => '<table nowrap border="0" cellspacing="0" cellpadding="0"><tr><td style="border-bottom: 1px solid; border-color: #000000;" nowrap class="smallText" align="center"><b>' . TABLE_HEADING_NEW_VALUE .' </b></td><td style="border-bottom: 1px solid; border-color: #000000;" nowrap class="smallText" align="center"><b>' . TABLE_HEADING_DATE_ADDED . '</b></td></tr>');
 
         if (xtc_db_num_rows($customers_history_query)) {
@@ -1157,7 +1157,7 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
           $contents[] = array('text' => '<tr>' . "\n" . ' <td class="smallText" colspan="2">' . TEXT_NO_CUSTOMER_HISTORY . '</td>' . "\n" . ' </tr>' . "\n");
         }
         $contents[] = array('text' => '</table>');
-        $contents[] = array('align' => 'center', 'text' => '<br>' . xtc_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<br />' . xtc_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
         $status = xtc_db_prepare_input($_POST['status']);    // maybe this line not needed to recheck...
       }
       break;
@@ -1195,19 +1195,19 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
           $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_ACCOUNTING, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id) . '">' . xtc_image_button('button_accounting.gif', IMAGE_ACCOUNTING) . '</a>');
         }
         // elari cs v3.x changed for added iplog module
-        $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_ORDERS, 'cID=' . $cInfo->customers_id) . '">' . xtc_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . xtc_href_link(FILENAME_MAIL, 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . xtc_image_button('button_email.gif', IMAGE_EMAIL) . '</a><br><a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=iplog') . '">' . xtc_image_button('button_iplog.gif', IMAGE_IPLOG) . '</a><br><a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=new_order') . '">' . xtc_image_button('button_new_order.gif', IMAGE_NEW_ORDER) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_ORDERS, 'cID=' . $cInfo->customers_id) . '">' . xtc_image_button('button_orders.gif', IMAGE_ORDERS) . '</a> <a href="' . xtc_href_link(FILENAME_MAIL, 'selected_box=tools&customer=' . $cInfo->customers_email_address) . '">' . xtc_image_button('button_email.gif', IMAGE_EMAIL) . '</a><br /><a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=iplog') . '">' . xtc_image_button('button_iplog.gif', IMAGE_IPLOG) . '</a><br /><a href="' . xtc_href_link(FILENAME_CUSTOMERS, xtc_get_all_get_params(array('cID', 'action')) . 'cID=' . $cInfo->customers_id . '&action=new_order') . '">' . xtc_image_button('button_new_order.gif', IMAGE_NEW_ORDER) . '</a>');
 
-        $contents[] = array('text' => '<br>' . TEXT_DATE_ACCOUNT_CREATED . ' ' . xtc_date_short($cInfo->date_account_created));
-        $contents[] = array('text' => '<br>' . TEXT_DATE_ACCOUNT_LAST_MODIFIED . ' ' . xtc_date_short($cInfo->date_account_last_modified));
-        $contents[] = array('text' => '<br>' . TEXT_INFO_DATE_LAST_LOGON . ' '  . xtc_date_short($cInfo->date_last_logon));
-        $contents[] = array('text' => '<br>' . TEXT_INFO_NUMBER_OF_LOGONS . ' ' . $cInfo->number_of_logons);
-        $contents[] = array('text' => '<br>' . TEXT_INFO_COUNTRY . ' ' . $cInfo->countries_name);
-        $contents[] = array('text' => '<br>' . TEXT_INFO_NUMBER_OF_REVIEWS . ' ' . $cInfo->number_of_reviews);
+        $contents[] = array('text' => '<br />' . TEXT_DATE_ACCOUNT_CREATED . ' ' . xtc_date_short($cInfo->date_account_created));
+        $contents[] = array('text' => '<br />' . TEXT_DATE_ACCOUNT_LAST_MODIFIED . ' ' . xtc_date_short($cInfo->date_account_last_modified));
+        $contents[] = array('text' => '<br />' . TEXT_INFO_DATE_LAST_LOGON . ' '  . xtc_date_short($cInfo->date_last_logon));
+        $contents[] = array('text' => '<br />' . TEXT_INFO_NUMBER_OF_LOGONS . ' ' . $cInfo->number_of_logons);
+        $contents[] = array('text' => '<br />' . TEXT_INFO_COUNTRY . ' ' . $cInfo->countries_name);
+        $contents[] = array('text' => '<br />' . TEXT_INFO_NUMBER_OF_REVIEWS . ' ' . $cInfo->number_of_reviews);
       }
 
       if ($_GET['action']=='iplog') {
       	if (isset ($_GET['cID'])) {
-        $contents[] = array('text' => '<br><b>IPLOG :' );
+        $contents[] = array('text' => '<br /><b>IPLOG :' );
         $customers_id = xtc_db_prepare_input($_GET['cID']);
         $customers_log_info_array = xtc_get_user_info($customers_id);
         if (xtc_db_num_rows($customers_log_info_array)) {
@@ -1243,7 +1243,7 @@ $select_data=array(array('id' => '99', 'text' => TEXT_SELECT),array('id' => '100
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<br>
+<br />
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

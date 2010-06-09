@@ -17,6 +17,7 @@
    
   function xtc_db_perform($table, $data, $action = 'insert', $parameters = '', $link = 'db_link') {
     reset($data);
+
     if ($action == 'insert') {
       $query = 'insert into ' . $table . ' (';
       while (list($columns, ) = each($data)) {
@@ -25,7 +26,8 @@
       $query = substr($query, 0, -2) . ') values (';
       reset($data);
       while (list(, $value) = each($data)) {
-        switch ((string)$value) {
+      	 $value = (is_Float($value) & PHP4_3_10) ? sprintf("%.F",$value) : (string)($value);
+        switch ($value) {
           case 'now()':
             $query .= 'now(), ';
             break;
@@ -41,7 +43,8 @@
     } elseif ($action == 'update') {
       $query = 'update ' . $table . ' set ';
       while (list($columns, $value) = each($data)) {
-        switch ((string)$value) {
+         $value = (is_Float($value) & PHP4_3_10) ? sprintf("%.F",$value) : (string)($value);
+      	switch ($value) {
           case 'now()':
             $query .= $columns . ' = now(), ';
             break;

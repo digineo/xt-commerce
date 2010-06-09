@@ -23,13 +23,10 @@
   // include needed functions
   require_once(DIR_FS_INC . 'xtc_draw_hidden_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_checkbox_field.inc.php');
-  require_once(DIR_FS_INC . 'xtc_draw_selection_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_image_button.inc.php');
 
-  if (!isset($_SESSION['customer_id'])) {
-    
-    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-  }
+  if (!isset($_SESSION['customer_id'])) xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
+ 
 
 
 

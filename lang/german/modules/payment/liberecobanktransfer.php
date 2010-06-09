@@ -22,7 +22,7 @@
 
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_TITLE', 'Lastschriftverfahren');
   define('MODULE_PAYMENT_LIBERECOBANKTRANSFER_TEXT_TITLE', 'Lastschriftverfahren');
-  define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_DESCRIPTION', 'liberECO Lastschriftverfahren Modul<br>http://www.liberECO.net<br>');
+  define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_DESCRIPTION', 'liberECO Lastschriftverfahren Modul<br />http://www.liberECO.net<br />');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK', 'Bankeinzug');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_EMAIL_FOOTER', 'Hinweis: Sie können sich unser Faxformular unter ' . HTTP_SERVER . DIR_WS_CATALOG . MODULE_PAYMENT_BANKTRANSFER_URL_NOTE . ' herunterladen und es ausgefüllt an uns zurücksenden.');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_INFO', 'Bitte beachten Sie, dass das Lastschriftverfahren <b>nur</b> von einem <b>deutschen Girokonto</b> aus möglich ist');
@@ -42,7 +42,7 @@
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_BANK_ERROR_9', 'Keine Kontonummer angegeben!');
 
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_NOTE', 'Hinweis:');
-  define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_NOTE2', 'Wenn Sie aus Sicherheitsbedenken keine Bankdaten über das Internet<br>übertragen wollen, können Sie sich unser ');
+  define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_NOTE2', 'Wenn Sie aus Sicherheitsbedenken keine Bankdaten über das Internet<br />übertragen wollen, können Sie sich unser ');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_NOTE3', 'Faxformular');
   define('MODULE_PAYMENT_LIBERECO_BANKTRANSFER_TEXT_NOTE4', ' herunterladen und uns ausgefüllt zusenden.');
 

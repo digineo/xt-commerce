@@ -20,7 +20,7 @@
 
 
     // image for first level
-    $img_1='<img src="templates/'.CURRENT_TEMPLATE.'/img/icon_arrow.jpg">&nbsp;';
+    $img_1='<img src="templates/'.CURRENT_TEMPLATE.'/img/icon_arrow.jpg" alt="" />&nbsp;';
 
     for ($a=0; $a<$foo[$counter]['level']; $a++) {
 
@@ -49,6 +49,7 @@
       $cPath_new = 'cPath=' . $foo[$counter]['path'];
     }
 
+    if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $cPath_new.='&category='.xtc_cleanName($foo[$counter]['name']);
     $categories_string .= xtc_href_link(FILENAME_DEFAULT, $cPath_new);
     $categories_string .= '">';
 
@@ -79,7 +80,7 @@
       }
     }
 
-    $categories_string .= '<br>';
+    $categories_string .= '<br />';
 
     if ($foo[$counter]['next_id']) {
         xtc_show_category($foo[$counter]['next_id']);

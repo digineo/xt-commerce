@@ -25,12 +25,10 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
 
     //fsk18 lock
   $fsk_lock='';
-  if ($_SESSION['customers_status']['customers_fsk18_display']=='0') {
-  $fsk_lock=' and p.products_fsk18!=1';
-  }
-  if (GROUP_CHECK=='true') {
-   $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
-  }
+  if ($_SESSION['customers_status']['customers_fsk18_display']=='0') $fsk_lock=' and p.products_fsk18!=1';
+  
+  if (GROUP_CHECK=='true') $group_check="and p.group_ids LIKE '%c_".$_SESSION['customers_status']['customers_status_id']."_group%'";
+  
     $orders_query = xtc_db_query("select
                                   p.products_fsk18,
                                   p.products_id,
@@ -61,7 +59,9 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
 
     $image='';
     if ($orders['products_image']!='') $image=DIR_WS_THUMBNAIL_IMAGES . $orders['products_image'];
-
+	$SEF_parameter='';
+    if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&product='.xtc_cleanName($orders['products_name']); 
+      
     if ($_SESSION['customers_status']['customers_status_show_price']!='0') {
     $buy_now='';
     if ($_SESSION['customers_status']['customers_fsk18']=='1') {
@@ -74,7 +74,7 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
 							'PRODUCTS_NAME' => $orders['products_name'],
 							'PRODUCTS_DESCRIPTION' => $orders['products_short_description'],
 							'PRODUCTS_PRICE' => $xtPrice->xtcGetPrice($orders['products_id'],$format=true,1,$orders['products_tax_class_id'],$orders['products_price']),
-							'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $orders['products_id']),
+							'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $orders['products_id'].$SEF_parameter),
 							'PRODUCTS_IMAGE' => $image,
 							'BUTTON_BUY_NOW'=>$buy_now);
   } else {
@@ -82,7 +82,7 @@ $module_smarty->assign('tpl_path','templates/'.CURRENT_TEMPLATE.'/');
                             'PRODUCTS_NAME' => $orders['products_name'],
                             'PRODUCTS_DESCRIPTION' => $orders['products_short_description'],
                             'PRODUCTS_PRICE' => $xtPrice->xtcGetPrice($orders['products_id'],$format=true,1,$orders['products_tax_class_id'],$orders['products_price']),
-                            'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $orders['products_id']),
+                            'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $orders['products_id'].$SEF_parameter),
                             'PRODUCTS_FSK18' => 'true',
                             'PRODUCTS_IMAGE' => $image);
 

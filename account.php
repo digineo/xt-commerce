@@ -29,23 +29,17 @@
   require_once(DIR_FS_INC . 'xtc_get_product_path.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_products_name.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_products_image.inc.php');
-  if (!xtc_session_is_registered('customer_id')) {
 
-//    xtc_redirect(xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
-}
+
 
 $breadcrumb->add(NAVBAR_TITLE_ACCOUNT, xtc_href_link(FILENAME_ACCOUNT, '', 'SSL'));
 
  require(DIR_WS_INCLUDES . 'header.php'); 
  
  
-  if ($messageStack->size('account') > 0) {
-        
-$smarty->assign('error_message',$messageStack->output('account'));
+  if ($messageStack->size('account') > 0) $smarty->assign('error_message',$messageStack->output('account'));
 
-  }
-
-
+  
 //$max=$_SESSION['tracking']['products_history'];
 $i=0;
 $max = count($_SESSION[tracking][products_history]);
@@ -114,7 +108,6 @@ $order_content='';
   if (!isset($_SESSION['customer_id'])) $smarty->assign('LINK_LOGIN',xtc_href_link(FILENAME_LOGIN, '', 'SSL'));
   $smarty->assign('LINK_ORDERS',xtc_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL'));
   $smarty->assign('LINK_NEWSLETTER',xtc_href_link(FILENAME_NEWSLETTER, '', 'SSL'));
-  $smarty->assign('LINK_NOTIFICATIONS',xtc_href_link(FILENAME_ACCOUNT_NOTIFICATIONS, '', 'SSL'));
   $smarty->assign('LINK_ALL',xtc_href_link(FILENAME_ACCOUNT_HISTORY, '', 'SSL'));
   $smarty->assign('order_content',$order_content);
   $smarty->assign('products_history',$products_history);

@@ -17,17 +17,17 @@
 
   define('MODULE_PAYMENT_EUTRANSFER_TEXT_TITLE', 'EU-Standard Bank Transfer');
   define('MODULE_PAYMENT_EUSTANDARDTRANSFER_TEXT_TITLE', 'EU-Standard Bank Transfer');
-  define('MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION', '<BR>Die billigste und einfachste Zahlungsmethode innerhalb der EU ist die Überweisung mittels IBAN und BIC.' .
-													   '<BR>Bitte verwenden Sie folgende Daten für die Überweisung des Gesamtbetrages:<BR>' .
-                                                       '<BR>Name der Bank: ' . MODULE_PAYMENT_EUTRANSFER_BANKNAM .
-                                                       '<BR>Zweigstelle: ' . MODULE_PAYMENT_EUTRANSFER_BRANCH .
-                                                       '<BR>Kontoname: ' . MODULE_PAYMENT_EUTRANSFER_ACCNAM .
-                                                       '<BR>Kontonummer: ' . MODULE_PAYMENT_EUTRANSFER_ACCNUM .
-                                                       '<BR>IBAN: ' . MODULE_PAYMENT_EUTRANSFER_ACCIBAN .
-                                                       '<BR>BIC/SWIFT: ' . MODULE_PAYMENT_EUTRANSFER_BANKBIC .
-//                                                     '<BR>Sort Code: ' . MODULE_PAYMENT_EUTRANSFER_SORTCODE .
-                                                       '<BR><BR>Die Ware wird ausgeliefert wenn der Betrag auf unserem Konto eingegangen ist.<BR>');
-  define('MODULE_PAYMENT_EUTRANSFER_TEXT_EMAIL_FOOTER', str_replace('<BR>','\n',MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION));
+  define('MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION', '<br />Die billigste und einfachste Zahlungsmethode innerhalb der EU ist die Überweisung mittels IBAN und BIC.' .
+													   '<br />Bitte verwenden Sie folgende Daten für die Überweisung des Gesamtbetrages:<br />' .
+                                                       '<br />Name der Bank: ' . MODULE_PAYMENT_EUTRANSFER_BANKNAM .
+                                                       '<br />Zweigstelle: ' . MODULE_PAYMENT_EUTRANSFER_BRANCH .
+                                                       '<br />Kontoname: ' . MODULE_PAYMENT_EUTRANSFER_ACCNAM .
+                                                       '<br />Kontonummer: ' . MODULE_PAYMENT_EUTRANSFER_ACCNUM .
+                                                       '<br />IBAN: ' . MODULE_PAYMENT_EUTRANSFER_ACCIBAN .
+                                                       '<br />BIC/SWIFT: ' . MODULE_PAYMENT_EUTRANSFER_BANKBIC .
+//                                                     '<br />Sort Code: ' . MODULE_PAYMENT_EUTRANSFER_SORTCODE .
+                                                       '<br /><br />Die Ware wird ausgeliefert wenn der Betrag auf unserem Konto eingegangen ist.<br />');
+  define('MODULE_PAYMENT_EUTRANSFER_TEXT_EMAIL_FOOTER', str_replace('<br />','\n',MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION));
 
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_TITLE','Allow Bank Transfer Payment');
   define('MODULE_PAYMENT_EUTRANSFER_STATUS_DESC','Do you want to accept bank transfer order payments?');
@@ -45,10 +45,10 @@
   define('MODULE_PAYMENT_EUTRANSFER_ACCNUM_DESC','Your account number.');
 
   define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_TITLE','Bank Account IBAN');
-  define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_DESC','International account id.<br>(ask your bank if you don\'t know it)');
+  define('MODULE_PAYMENT_EUTRANSFER_ACCIBAN_DESC','International account id.<br />(ask your bank if you don\'t know it)');
 
   define('MODULE_PAYMENT_EUTRANSFER_BANKBIC_TITLE','Bank Bic');
-  define('MODULE_PAYMENT_EUTRANSFER_BANKBIC_DESC','International bank id.<br>(ask your bank if you don\'t know it)');
+  define('MODULE_PAYMENT_EUTRANSFER_BANKBIC_DESC','International bank id.<br />(ask your bank if you don\'t know it)');
 
   define('MODULE_PAYMENT_EUTRANSFER_SORT_ORDER_TITLE','Module Sort order of display.');
   define('MODULE_PAYMENT_EUTRANSFER_SORT_ORDER_DESC','Sort order of display. Lowest is displayed first.');

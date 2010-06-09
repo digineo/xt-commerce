@@ -128,7 +128,7 @@ define('DATE_FORMAT_EXPORT', '%d.%m.%Y');  // this is used for strftime()
             $schema .=
                       	$products['products_name'] .';'.
                         $products_description .';'.
-                        $products_price. ';' .
+                        number_format($products_price,2,'.',''). ';' .
                         HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $products['products_id'] . ';' .
                         HTTP_CATALOG_SERVER . DIR_WS_CATALOG_THUMBNAIL_IMAGES .$products['products_image'] . ';' .
                         $_POST['currencies']. ';' .

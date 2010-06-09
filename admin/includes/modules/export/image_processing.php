@@ -16,11 +16,11 @@
    ---------------------------------------------------------------------------------------*/
 
 
-define('MODULE_IMAGE_PROCESS_TEXT_DESCRIPTION', 'XT-Commerce Imageprocessing - Stapelverarbeitung für Bildbearbeitung');
+define('MODULE_IMAGE_PROCESS_TEXT_DESCRIPTION', 'XT-Commerce Imageprocessing - Stapelverarbeitung fï¿½r Bildbearbeitung');
 define('MODULE_IMAGE_PROCESS_TEXT_TITLE', 'XT-Imageprocessing');
 define('MODULE_IMAGE_PROCESS_STATUS_DESC','Modulstatus');
 define('MODULE_IMAGE_PROCESS_STATUS_TITLE','Status');
-define('IMAGE_EXPORT','Drücken Sie Ok um die Stapelverarbeitung zu starten, dieser Vorgang kann einige Zeit dauern, auf keinen Fall unterbrechen!.');
+define('IMAGE_EXPORT','Drï¿½cken Sie Ok um die Stapelverarbeitung zu starten, dieser Vorgang kann einige Zeit dauern, auf keinen Fall unterbrechen!.');
 define('IMAGE_EXPORT_TYPE','<hr noshade><b>Stapelverarbeitung:</b>');
 
 
@@ -52,7 +52,7 @@ include ('includes/classes/'.FILENAME_IMAGEMANIPULATOR);
 
         if ($dir= opendir(DIR_FS_CATALOG_ORIGINAL_IMAGES)){
             while  ($file = readdir($dir)) {
-                     if (is_file(DIR_FS_CATALOG_ORIGINAL_IMAGES.$file) and ($file !="index.html")){
+                     if (is_file(DIR_FS_CATALOG_ORIGINAL_IMAGES.$file) and ($file !="index.html") and (strtolower($file) != "thumbs.db")){
                          $files[]=array(
                                         'id' => $file,
                                         'text' =>$file);

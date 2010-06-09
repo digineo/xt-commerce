@@ -30,8 +30,8 @@ function _compile_end($content) {
   <tr valign="bottom">
     <td>
    <div align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif">
-        Dieser Shop wurde mit xt:Commerce erstellt.<br>
-        xt:Commerce ist als freie Software unter der GNU/GPL Lizenz erhältlich.<br>
+        Dieser Shop wurde mit xt:Commerce erstellt.<br />
+        xt:Commerce ist als freie Software unter der GNU/GPL Lizenz erhältlich.<br />
         eCommerce Engine © 2004 <a href="http://www.xt-commerce.com" target="new">xt:Commerce</a></font>
 
         </div></td></tr></table></body></html>';

@@ -70,7 +70,7 @@ $module_content='';
                             'PRODUCTS_PRICE' => $products_price,
                             'PRODUCTS_LINK' => xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $specials['products_id']),
                             'PRODUCTS_IMAGE'=> $image,
-                            'PRODUCTS_SHORT_DESCRIPTION' => xtc_get_short_description($new_products['products_id']));
+                            'PRODUCTS_SHORT_DESCRIPTION' => xtc_get_short_description($specials['products_id']));
 
     }
 

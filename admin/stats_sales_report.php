@@ -223,13 +223,13 @@ $srFilter);  $startDate = $sr->startDate;
               <table border="0" style="border: 1px solid; border-color: #cccccc;" width="100%" cellspacing="0" cellpadding="0">
                 <tr>
                   <td align="left" rowspan="2" class="menuBoxHeading">
-                    <input type="radio" name="report" value="1" <?php if ($srView == 1) echo "checked"; ?>><?php echo REPORT_TYPE_YEARLY; ?><br>
-                    <input type="radio" name="report" value="2" <?php if ($srView == 2) echo "checked"; ?>><?php echo REPORT_TYPE_MONTHLY; ?><br>
-                    <input type="radio" name="report" value="3" <?php if ($srView == 3) echo "checked"; ?>><?php echo REPORT_TYPE_WEEKLY; ?><br>
-                    <input type="radio" name="report" value="4" <?php if ($srView == 4) echo "checked"; ?>><?php echo REPORT_TYPE_DAILY; ?><br>
+                    <input type="radio" name="report" value="1" <?php if ($srView == 1) echo "checked"; ?>><?php echo REPORT_TYPE_YEARLY; ?><br />
+                    <input type="radio" name="report" value="2" <?php if ($srView == 2) echo "checked"; ?>><?php echo REPORT_TYPE_MONTHLY; ?><br />
+                    <input type="radio" name="report" value="3" <?php if ($srView == 3) echo "checked"; ?>><?php echo REPORT_TYPE_WEEKLY; ?><br />
+                    <input type="radio" name="report" value="4" <?php if ($srView == 4) echo "checked"; ?>><?php echo REPORT_TYPE_DAILY; ?><br />
                   </td>
                   <td class="menuBoxHeading">
-<?php echo REPORT_START_DATE; ?><br>
+<?php echo REPORT_START_DATE; ?><br />
                     <select name="startD" size="1">
 <?php
       if ($startDate) {
@@ -274,13 +274,13 @@ $srFilter);  $startDate = $sr->startDate;
                     </select>
                   </td>
                   <td rowspan="2" align="left" class="menuBoxHeading">
-                    <?php echo REPORT_DETAIL; ?><br>
+                    <?php echo REPORT_DETAIL; ?><br />
                     <select name="detail" size="1">
                       <option value="0"<?php if ($srDetail == 0) echo "selected"; ?>><?php echo DET_HEAD_ONLY; ?></option>
                       <option value="1"<?php if ($srDetail == 1) echo " selected"; ?>><?php echo DET_DETAIL; ?></option>
                       <option value="2"<?php if ($srDetail == 2) echo " selected"; ?>><?php echo DET_DETAIL_ONLY; ?></option>
-                    </select><br>
-<?php echo REPORT_MAX; ?><br>
+                    </select><br />
+<?php echo REPORT_MAX; ?><br />
                     <select name="max" size="1">
                       <option value="0"><?php echo REPORT_ALL; ?></option>
                       <option<?php if ($srMax == 1) echo " selected"; ?>>1</option>
@@ -292,7 +292,7 @@ $srFilter);  $startDate = $sr->startDate;
                     </select>
                   </td>
                   <td rowspan="2" align="left" class="menuBoxHeading">
-                    <?php echo REPORT_STATUS_FILTER; ?><br>
+                    <?php echo REPORT_STATUS_FILTER; ?><br />
                     <select name="status" size="1">
                       <option value="0"><?php echo REPORT_ALL; ?></option>
 <?php
@@ -302,16 +302,16 @@ $srFilter);  $startDate = $sr->startDate;
 <?php
                          }
 ?>
-                    </select><br>
+                    </select><br />
                   </td>
                   <td rowspan="2" align="left" class="menuBoxHeading">
-                    <?php echo REPORT_EXP; ?><br>
+                    <?php echo REPORT_EXP; ?><br />
                     <select name="export" size="1">
                       <option value="0" selected><?php echo EXP_NORMAL; ?></option>
                       <option value="1"><?php echo EXP_HTML; ?></option>
                       <option value="2"><?php echo EXP_CSV; ?></option>
-                    </select><br>
-                    <?php echo REPORT_SORT; ?><br>
+                    </select><br />
+                    <?php echo REPORT_SORT; ?><br />
                     <select name="sort" size="1">
                       <option value="0"<?php if ($srSort == 0) echo " selected"; ?>><?php echo SORT_VAL0; ?></option>
                       <option value="1"<?php if ($srSort == 1) echo " selected"; ?>><?php echo SORT_VAL1; ?></option>
@@ -320,12 +320,12 @@ $srFilter);  $startDate = $sr->startDate;
                       <option value="4"<?php if ($srSort == 4) echo " selected"; ?>><?php echo SORT_VAL4; ?></option>
                       <option value="5"<?php if ($srSort == 5) echo " selected"; ?>><?php echo SORT_VAL5; ?></option>
                       <option value="6"<?php if ($srSort == 6) echo " selected"; ?>><?php echo SORT_VAL6; ?></option>
-                    </select><br>
+                    </select><br />
                   </td>
                 </tr>
                 <tr>
                   <td class="menuBoxHeading">
-<?php echo REPORT_END_DATE; ?><br>
+<?php echo REPORT_END_DATE; ?><br />
                     <select name="endD" size="1">
 <?php
     if ($endDate) {

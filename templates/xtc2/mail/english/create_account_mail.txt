@@ -28,5 +28,5 @@ Below are details of the Discount Coupon created just for you.
 
 Description: {$COUPON_DESC}
 
-To use the coupon enter the redeem code which is b9a671 during checkout while making a purchase 
+To use the coupon enter the redeem code which is {$COUPON_CODE} during checkout while making a purchase 
 {/if}

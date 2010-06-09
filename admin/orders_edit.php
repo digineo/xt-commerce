@@ -14,7 +14,7 @@
 
    Released under the GNU General Public License 
 
-   To do: Rabatte berücksichtigen
+   To do: Rabatte berï¿½cksichtigen
    --------------------------------------------------------------*/
 
   require('includes/application_top.php');
@@ -114,7 +114,7 @@ $inp_price = $final_price;
 }
 // Artikel bearbeiten Ende
 
-// Artikel einfügen Anfang
+// Artikel einfï¿½gen Anfang
 
 if ($_GET['action'] == "product_ins") {
 
@@ -122,15 +122,14 @@ if ($_GET['action'] == "product_ins") {
   $product = xtc_db_fetch_array($product_query);
 
   $tax = xtc_oe_get_tax_rate($product['products_tax_class_id']);
-  $customers_status = xtc_oe_get_customers_status($_POST['cID']);
   $tax_id=xtc_get_tax_class_id($_POST['products_id']);
 
 // select Order Currencie
-$curr_query=xtc_db_query("SELECT currency FROM ".TABLE_ORDERS." WHERE orders_id='".(int)$_POST['oID']."'");
+$curr_query=xtc_db_query("SELECT customers_id,customers_status,currency FROM ".TABLE_ORDERS." WHERE orders_id='".(int)$_POST['oID']."'");
 $curr_data=xtc_db_fetch_array($curr_query);
 
   require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'xtcPrice.php');
-  $xtPrice = new xtcPrice($curr_data['currency'],$customers_status);
+  $xtPrice = new xtcPrice($curr_data['currency'],$curr_data['customers_status']);
 
   $final_price=$xtPrice->xtcGetPrice($_POST['products_id'],
                                         $format=false,
@@ -142,7 +141,7 @@ $curr_data=xtc_db_fetch_array($curr_query);
 
   $inp_price = $final_price;
   $final_price*=$_POST['products_quantity'];
-  $allow_tax = xtc_oe_get_allow_tax($_POST['cID']);
+  $allow_tax = xtc_oe_get_allow_tax($curr_data['customers_id']);
 
           $sql_data_array = array('orders_id' => xtc_db_prepare_input($_POST['oID']),
                                   'products_id' => xtc_db_prepare_input($_POST['products_id']),
@@ -158,9 +157,9 @@ $curr_data=xtc_db_fetch_array($curr_query);
             $sql_data_array = xtc_array_merge($sql_data_array, $insert_sql_data);
             xtc_db_perform(TABLE_ORDERS_PRODUCTS, $sql_data_array);
 
-             xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=products&cID='.$_POST['cID'].'&oID=' . $_POST['oID']));
+             xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=products&cID='.$curr_data['customers_id'].'&oID=' . $_POST['oID']));
 }
-// Artikel einfügen Ende
+// Artikel einfï¿½gen Ende
 
 // Versandkosten bearbeiten Anfang
 
@@ -180,7 +179,7 @@ $inp_price = $_POST['value'];
 $inp_price = xtc_oe_get_price_o_tax($_POST['value'], $_POST['tax'], 0);
 }
 
-$text = $xtPrice->xtcFormat($inp_price,false);
+$text = $xtPrice->xtcFormat($inp_price,true);
 
           $sql_data_array = array('orders_id' => xtc_db_prepare_input($_POST['oID']),
                                   'title' => xtc_db_prepare_input($_POST['title']),
@@ -194,7 +193,7 @@ $text = $xtPrice->xtcFormat($inp_price,false);
 }
 // Versandkosten bearbeiten Ende
 
-// Versandkosten Einfügen Anfang
+// Versandkosten Einfï¿½gen Anfang
 if ($_GET['action'] == "shipping_ins") {
 
 $customers_status = xtc_oe_get_customers_status($_POST['cID']);
@@ -212,7 +211,7 @@ $inp_price = $_POST['value'];
 $inp_price = xtc_oe_get_price_o_tax($_POST['value'], $_POST['tax'], 0);
 }
 
-$text = $xtPrice->xtcFormat($inp_price,false);
+$text = $xtPrice->xtcFormat($inp_price,true);
 $sort = MODULE_ORDER_TOTAL_SHIPPING_SORT_ORDER;
 
 
@@ -228,9 +227,9 @@ $sort = MODULE_ORDER_TOTAL_SHIPPING_SORT_ORDER;
 
              xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=shipping&cID='.$_POST['cID'].'&oID=' . $_POST['oID']));
 }
-// Versandkosten Einfügen Ende
+// Versandkosten Einfï¿½gen Ende
 
-// Nachnahmegebühr bearbeiten Anfang
+// Nachnahmegebï¿½hr bearbeiten Anfang
 if ($_GET['action'] == "cod_edit") {
 
 $customers_status = xtc_oe_get_customers_status($_POST['cID']);
@@ -248,7 +247,7 @@ $inp_price = $_POST['value'];
 $inp_price = xtc_oe_get_price_o_tax($_POST['value'], $_POST['tax'], 0);
 }
 
-$text = $xtPrice->xtcFormat($inp_price,false);
+$text = $xtPrice->xtcFormat($inp_price,true);
 
           $sql_data_array = array('orders_id' => xtc_db_prepare_input($_POST['oID']),
                                   'title' => xtc_db_prepare_input($_POST['title']),
@@ -260,9 +259,9 @@ $text = $xtPrice->xtcFormat($inp_price,false);
 
              xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=shipping&cID='.$_POST['cID'].'&oID=' . $_POST['oID']));
 }
-// Nachnahmegebühr bearbeiten Ende
+// Nachnahmegebï¿½hr bearbeiten Ende
 
-// Nachnahmegebühr Einfügen Anfang
+// Nachnahmegebï¿½hr Einfï¿½gen Anfang
 if ($_GET['action'] == "cod_ins") {
 $customers_status = xtc_oe_get_customers_status($_POST['cID']);
 $allow_tax = xtc_oe_get_allow_tax($_POST['cID']);
@@ -279,7 +278,7 @@ $inp_price = $_POST['value'];
 $inp_price = xtc_oe_get_price_o_tax($_POST['value'], $_POST['tax'], 0);
 }
 
-$text = $xtPrice->xtcFormat($inp_price,false);
+$text = $xtPrice->xtcFormat($inp_price,true);
 $sort = MODULE_ORDER_TOTAL_COD_SORT_ORDER;
 
 
@@ -295,7 +294,7 @@ $sort = MODULE_ORDER_TOTAL_COD_SORT_ORDER;
 
              xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=shipping&cID='.$_POST['cID'].'&oID=' . $_POST['oID']));
 }
-// Nachnahmegebühr Einfügen Ende
+// Nachnahmegebï¿½hr Einfï¿½gen Ende
 
 // Produkt Optionen bearbeiten Anfang
 
@@ -381,7 +380,7 @@ $final_price = ($inp_price*$_POST['qTY']);
 // Produkt Optionen bearbeiten Ende
 
 
-// Produkt Optionen Einfügen Anfang
+// Produkt Optionen Einfï¿½gen Anfang
 
 if ($_GET['action'] == "product_option_ins") {
 
@@ -459,18 +458,18 @@ $final_price = ($inp_price*$_POST['qTY']);
           xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=options&oID='.$_POST['oID'].'&cID='.$_POST['cID'].'&pID='.$_POST['pID'].'&pTX='.$_POST['pTX'].'&aTX='.$_POST['aTX'].'&qTY='.$_POST['qTY'].'&opID='.$_POST['opID']));
 }
 
-// Produkt Optionen Einfügen Ende
+// Produkt Optionen Einfï¿½gen Ende
 
 
 
 // Berechnung der Bestellung Anfang
 if ($_GET['action'] == "save_order") {
-// Werte für alle Berechnungen
+// Werte fï¿½r alle Berechnungen
 $customers_status = xtc_oe_get_customers_status($_POST['cID']);
 $allow_tax = xtc_oe_get_allow_tax($_POST['cID']);
 
 
-// Errechne neue Zwischensumme für die Bestellung Anfang
+// Errechne neue Zwischensumme fï¿½r die Bestellung Anfang
   $products_query = xtc_db_query("select SUM(final_price) as subtotal_final from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $_POST['orders_id'] . "' ");
   $products = xtc_db_fetch_array($products_query);
   $subtotal_final = $products['subtotal_final'];
@@ -487,10 +486,10 @@ $allow_tax = xtc_oe_get_allow_tax($_POST['cID']);
   $subtotal_text=$xtPrice->xtcFormat($subtotal_final,true);
 
   xtc_db_query("update " . TABLE_ORDERS_TOTAL . " set text = '" . $subtotal_text . "', value = '" . $subtotal_final . "' where orders_id = '" . $_POST['orders_id'] . "' and class = 'ot_subtotal' ");
-// Errechne neue Zwischensumme für die Bestellung Ende
+// Errechne neue Zwischensumme fï¿½r die Bestellung Ende
 
 
-// Errechne neue Netto Zwischensumme für die Bestellung Anfang
+// Errechne neue Netto Zwischensumme fï¿½r die Bestellung Anfang
 if ($allow_tax == '0'){
   $subtotal_no_tax_value_query = xtc_db_query("select SUM(value) as subtotal_no_tax_value from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . $_POST['orders_id'] . "' and class != 'ot_tax' and class != 'ot_total' and class != 'ot_subtotal_no_tax' and class != 'ot_coupon' and class != 'ot_gv'");
   $subtotal_no_tax_value = xtc_db_fetch_array($subtotal_no_tax_value_query);
@@ -499,10 +498,10 @@ if ($allow_tax == '0'){
 //  $subtotal_no_tax_text = $currencies->format(xtc_round($subtotal_no_tax_final,PRICE_PRECISION));
   xtc_db_query("update " . TABLE_ORDERS_TOTAL . " set text = '" . $subtotal_no_tax_text . "', value = '" . $subtotal_no_tax_final . "' where orders_id = '" . $_POST['orders_id'] . "' and class = 'ot_subtotal_no_tax' ");
 }
-// Errechne neue Netto Zwischensumme für die Bestellung Ende
+// Errechne neue Netto Zwischensumme fï¿½r die Bestellung Ende
 
 
-// Errechne neue MWSt. für die Bestellung Anfang
+// Errechne neue MWSt. fï¿½r die Bestellung Anfang
   // Produkte
   $products_query = xtc_db_query("select final_price, products_tax from " . TABLE_ORDERS_PRODUCTS . " where orders_id = '" . $_POST['orders_id'] . "' ");
   while($products = xtc_db_fetch_array($products_query)){
@@ -720,9 +719,9 @@ $tax = '0';
 
   // GV Ende
 
-  // Alte UST Löschen
+  // Alte UST Lï¿½schen
             xtc_db_query("delete from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . xtc_db_input($_POST['orders_id']) . "' and class='ot_tax'");
-  // Alte UST Löschen ENDE
+  // Alte UST Lï¿½schen ENDE
 
   // Neue UST Zusammenrechnen und in die DB Schreiben
 
@@ -756,9 +755,9 @@ $text=$xtPrice->xtcFormat($ust['tax_value_new'],true);
   // Neue UST Zusammenrechnen und in die DB Schreiben ENDE
 
 
-// Errechne neue MWSt. für die Bestellung Ende
+// Errechne neue MWSt. fï¿½r die Bestellung Ende
 
-// Errechne neue Gesamtsumme für die Bestellung Anfang
+// Errechne neue Gesamtsumme fï¿½r die Bestellung Anfang
 
 if ($allow_tax =='1'){
   $total_query = xtc_db_query("select SUM(value) as value_new from " . TABLE_ORDERS_TOTAL . " where orders_id = '" . (int)$_POST['orders_id'] . "' and class!='ot_coupon' and class!='ot_gv' and class!='ot_tax' and class!='ot_total'");
@@ -827,9 +826,9 @@ $text=$xtPrice->xtcFormat($total['value_new'],true);
 
             xtc_redirect(xtc_href_link(FILENAME_ORDERS, 'action=edit&oID=' . $_POST['orders_id']));
 }
-// Errechne neue Gesamtsumme für die Bestellung Ende
+// Errechne neue Gesamtsumme fï¿½r die Bestellung Ende
 
-// Löschfunktionen Anfang
+// Lï¿½schfunktionen Anfang
 
 if ($_GET['action'] == "product_delete") {
 
@@ -897,7 +896,7 @@ if ($_GET['action'] == "cod_del") {
             xtc_redirect(xtc_href_link(FILENAME_ORDERS_EDIT, 'edit_action=shipping&cID='.$_POST['cID'].'&oID=' . $_POST['oID']));
 }
 
-// Löschfunktionen Ende
+// Lï¿½schfunktionen Ende
 
 
 ?>
@@ -934,7 +933,7 @@ if ($_GET['action'] == "cod_del") {
   <tr>
 <td>
 <!-- Anfang //-->
-<br><br>
+<br /><br />
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <tr class="dataTableHeadingRow">
 <td class="dataTableHeadingContent" align="left">
@@ -981,7 +980,7 @@ echo xtc_image_submit('button_orders_shipping_edit.gif', TEXT_EDIT_SHIPPING,'sty
 </table>
 
 <!-- Meldungen Anfang //-->
-<br><br>
+<br /><br />
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <tr>
 <td class="main">
@@ -1009,7 +1008,7 @@ if ($_GET['edit_action']=='address'){
 ?>
 
 <!-- Bestellung Sichern Anfang //-->
-<br><br>
+<br /><br />
 <table border="0" width="100%" cellspacing="0" cellpadding="2">
 <tr class="dataTableRow">
 <td class="dataTableContent" align="right">
@@ -1026,7 +1025,7 @@ echo xtc_image_submit('button_save.gif', TEXT_BUTTON_SAVE_ORDER,'style="cursor:h
 </tr>
 
 </table>
-<br><br>
+<br /><br />
 <!-- Bestellung Sichern Ende //-->
 
 
@@ -1045,7 +1044,7 @@ echo xtc_image_submit('button_save.gif', TEXT_BUTTON_SAVE_ORDER,'style="cursor:h
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<br>
+<br />
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

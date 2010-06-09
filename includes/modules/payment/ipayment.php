@@ -181,14 +181,23 @@
           }
           break;
       }
-
+      if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 0 && $_SESSION['customers_status']['customers_status_add_tax_ot'] == 1) {
+          $total=$order->info['total']+$order->info['tax'];
+      } else {
+          $total=$order->info['total'];
+      }
+      if ($_SESSION['currency']==$trx_currency) {
+      $amount=round($total, $xtPrice->get_decimal_places($trx_currency));
+      } else {
+      $amount=round($xtPrice->xtcCalculateCurrEx($total,$trx_currency) , $xtPrice->get_decimal_places($trx_currency));
+      }
       $process_button_string = xtc_draw_hidden_field('silent', '1') .
                                xtc_draw_hidden_field('trx_paymenttyp', 'cc') .
                                xtc_draw_hidden_field('trxuser_id', MODULE_PAYMENT_IPAYMENT_USER_ID) .
                                xtc_draw_hidden_field('trxpassword', MODULE_PAYMENT_IPAYMENT_PASSWORD) .
                                xtc_draw_hidden_field('item_name', STORE_NAME) .
                                xtc_draw_hidden_field('trx_currency', $trx_currency) .
-                               xtc_draw_hidden_field('trx_amount', round($xtPrice->xtcCalculateCurr($order->info['total']), 0, '','')) .
+                               xtc_draw_hidden_field('trx_amount', round($amount*100, 0)) .
                                xtc_draw_hidden_field('cc_expdate_month', $_POST['ipayment_cc_expires_month']) .
                                xtc_draw_hidden_field('cc_expdate_year', $_POST['ipayment_cc_expires_year']) .
                                xtc_draw_hidden_field('cc_number', $_POST['ipayment_cc_number']) .

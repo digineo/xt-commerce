@@ -215,22 +215,22 @@
       reset($mInfo->keys);
       while (list($key, $value) = each($mInfo->keys)) {
 	 // if($value['description']!='_DESC' && $value['title']!='_TITLE'){ 
-        $keys .= '<b>' . $value['title'] . '</b><br>' .  $value['description'].'<br>';
+        $keys .= '<b>' . $value['title'] . '</b><br />' .  $value['description'].'<br />';
 	//	}
         if ($value['set_function']) {
           eval('$keys .= ' . $value['set_function'] . "'" . $value['value'] . "', '" . $key . "');");
         } else {
           $keys .= xtc_draw_input_field('configuration[' . $key . ']', $value['value']);
         }
-        $keys .= '<br><br>';
+        $keys .= '<br /><br />';
       }
-      $keys = substr($keys, 0, strrpos($keys, '<br><br>'));
+      $keys = substr($keys, 0, strrpos($keys, '<br /><br />'));
 
       $heading[] = array('text' => '<b>' . $mInfo->title . '</b>');
 
       $contents = array('form' => xtc_draw_form('modules', FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module'] . '&action=save'));
       $contents[] = array('text' => $keys);
-      $contents[] = array('align' => 'center', 'text' => '<br>' . xtc_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module']) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
+      $contents[] = array('align' => 'center', 'text' => '<br />' . xtc_image_submit('button_update.gif', IMAGE_UPDATE) . ' <a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module']) . '">' . xtc_image_button('button_cancel.gif', IMAGE_CANCEL) . '</a>');
       break;
 
     default:
@@ -240,7 +240,7 @@
         $keys = '';
         reset($mInfo->keys);
         while (list(, $value) = each($mInfo->keys)) {
-          $keys .= '<b>' . $value['title'] . '</b><br>';
+          $keys .= '<b>' . $value['title'] . '</b><br />';
           if ($value['use_function']) {
             $use_function = $value['use_function'];
             if (ereg('->', $use_function)) {
@@ -260,16 +260,16 @@
             $keys .=  $value['value'];
 			}
           }
-          $keys .= '<br><br>';
+          $keys .= '<br /><br />';
         }
-        $keys = substr($keys, 0, strrpos($keys, '<br><br>'));
+        $keys = substr($keys, 0, strrpos($keys, '<br /><br />'));
 
         $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $mInfo->code . '&action=remove') . '">' . xtc_image_button('button_module_remove.gif', IMAGE_MODULE_REMOVE) . '</a> <a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $_GET['module'] . '&action=edit') . '">' . xtc_image_button('button_edit.gif', IMAGE_EDIT) . '</a>');
-        $contents[] = array('text' => '<br>' . $mInfo->description);
-        $contents[] = array('text' => '<br>' . $keys);
+        $contents[] = array('text' => '<br />' . $mInfo->description);
+        $contents[] = array('text' => '<br />' . $keys);
       } else {
         $contents[] = array('align' => 'center', 'text' => '<a href="' . xtc_href_link(FILENAME_MODULES, 'set=' . $_GET['set'] . '&module=' . $mInfo->code . '&action=install') . '">' . xtc_image_button('button_module_install.gif', IMAGE_MODULE_INSTALL) . '</a>');
-        $contents[] = array('text' => '<br>' . $mInfo->description);
+        $contents[] = array('text' => '<br />' . $mInfo->description);
       }
       break;
   }
@@ -295,7 +295,7 @@
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<br>
+<br />
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

@@ -43,8 +43,13 @@
       'STATUS_IMAGE' => $group_values['customers_status_image'],
       'STATUS_ID' => $group_values['customers_status_id']);
   }
-  echo HEADING_PRICES_OPTIONS;
-?><table width="100%" border="0" bgcolor="f3f3f3" style="border: 1px solid; border-color: #cccccc;">
+?>  
+<table width="100%"><tr><td style="border-bottom: thin dashed Gray;">&nbsp;</td></tr></table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr><td><span class="main" style="padding-left: 10px;"><?php echo HEADING_PRICES_OPTIONS; ?></span></td></tr>
+</table>
+<br>
+<table width="100%" border="0" bgcolor="f3f3f3" style="border: 1px solid; border-color: #cccccc;">
           <tr>
             <td width="50%" class="main"><?php echo TEXT_PRODUCTS_PRICE; ?></td>
 <?php

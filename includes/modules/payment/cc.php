@@ -21,6 +21,7 @@
 // include needed functions
 require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
 require_once(DIR_FS_INC . 'xtc_validate_email.inc.php');
+//require_once(DIR_FS_INC . 'xtc_draw_pull_down_menu.inc.php');
 
   class cc {
     var $code, $title, $description, $enabled;

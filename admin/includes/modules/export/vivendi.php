@@ -128,7 +128,7 @@ define('EXPORT_STATUS','Bitte wählen Sie die Kundengruppe, die Basis für den Exp
             $schema .=
                        $products['products_model'] . ';' .
                        $products['products_name'] . ';' .
-                       $products_price. ';' .
+                       number_format($products_price,2,'.',''). ';' .
                        HTTP_CATALOG_SERVER . DIR_WS_CATALOG . 'product_info.php?products_id=' . $products['products_id'] . ';' .
                        $products_description . ';' .
                        xtc_get_shipping_status_name($products['products_shippingtime']). ';' .

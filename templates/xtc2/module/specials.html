@@ -4,12 +4,12 @@
   {foreach name=aussen item=module_data from=$module_content}
   {php} $col++; 
   {/php}
-    <td class="main"><div align="center">{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" border="1"></a><br>{/if}
+    <td class="main" align="center">{if $module_data.PRODUCTS_IMAGE!=''}<a href="{$module_data.PRODUCTS_LINK}"><img src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME}" /></a><br />
+      {/if}
         <strong><a href="{$module_data.PRODUCTS_LINK}">{$module_data.PRODUCTS_NAME}</a></strong> 
-        <br>
-        <strong>{$module_data.PRODUCTS_PRICE}</strong> <br>
-        <br>
-      </div></td>
+        <br />
+        <strong>{$module_data.PRODUCTS_PRICE}</strong> <br />
+        <br /></td>
   {php} 
 
   if ($col>=2) {

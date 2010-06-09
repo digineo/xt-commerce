@@ -41,7 +41,7 @@ define('TEXT_DATE_ADDED', 'hinzugef&uuml;gt am:');
 define('TEXT_DATE_AVAILABLE', 'Erscheinungsdatum:');
 define('TEXT_LAST_MODIFIED', 'letzte &Auml;nderung:');
 define('TEXT_IMAGE_NONEXISTENT', 'BILD EXISTIERT NICHT');
-define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Bitte f&uuml;gen Sie eine neue Kategorie oder einen Artikel in <br>&nbsp;<br><b>%s</b> ein.');
+define('TEXT_NO_CHILD_CATEGORIES_OR_PRODUCTS', 'Bitte f&uuml;gen Sie eine neue Kategorie oder einen Artikel in <br />&nbsp;<br /><b>%s</b> ein.');
 define('TEXT_PRODUCT_MORE_INFORMATION', 'F&uuml;r weitere Informationen, besuchen Sie bitte die <a href="http://%s" target="blank"><u>Homepage</u></a> des Herstellers.');
 define('TEXT_PRODUCT_DATE_ADDED', 'Diesen Artikel haben wir am %s in unseren Katalog aufgenommen.');
 define('TEXT_PRODUCT_DATE_AVAILABLE', 'Dieser Artikel ist erh&auml;ltlich ab %s.');
@@ -118,7 +118,7 @@ define('ERROR_CATALOG_IMAGE_DIRECTORY_DOES_NOT_EXIST', 'Fehler: Das Verzeichnis 
 
 define('TEXT_PRODUCTS_DISCOUNT_ALLOWED','Rabatt erlaubt:');
 define('HEADING_PRICES_OPTIONS','<b>Preis-Optionen</b>');
-define('HEADING_PRODUCT_OPTIONS','<b>Artikel-Optionen</b>');
+define('HEADING_PRODUCT_IMAGES','<b>Artikel-Bilder</b>');
 define('TEXT_PRODUCTS_WEIGHT_INFO','<small>(kg)</small>');
 define('TEXT_PRODUCTS_SHORT_DESCRIPTION','Kurzbeschreibung:');
 define('TXT_STK','Stk: ');
@@ -148,7 +148,11 @@ define('TXT_WEIGHT','Gewicht');
 define('TXT_QTY','Auf Lager');
 
 define('TEXT_MULTICOPY','Multiple');
-define('TEXT_MULTICOPY_DESC','Artikel in folgende Kategorien Verlinken/Kopieren (falls ausgewählt, werden Einstellungen von Single ignoriert)');
+define('TEXT_MULTICOPY_DESC','Artikel in folgende Kategorien Verlinken/Kopieren (falls ausgew&auml;hlt, werden Einstellungen von Single ignoriert)');
 define('TEXT_SINGLECOPY','Single');
 define('TEXT_SINGLECOPY_DESC','Artikel in folgende Kategorie Verlinken/Kopieren (Unter Multiple keine Kateogorie aktiviert)');
+
+define('TEXT_PRODUCTS_VPE','VPE');
+define('TEXT_PRODUCTS_VPE_VISIBLE','Anzeige VPE:');
+define('TEXT_PRODUCTS_VPE_VALUE',' Wert:');
 ?>

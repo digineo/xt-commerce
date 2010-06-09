@@ -25,7 +25,7 @@
 
 // alt is added to the img tag even if it is null to prevent browsers from outputting
 // the image filename as default
-    $image = '<img src="' . xtc_parse_input_field_data($src, array('"' => '&quot;')) . '" border="0" alt="' . xtc_parse_input_field_data($alt, array('"' => '&quot;')) . '"';
+    $image = '<img src="' . xtc_parse_input_field_data($src, array('"' => '&quot;')) . '" alt="' . xtc_parse_input_field_data($alt, array('"' => '&quot;')) . '"';
 
     if (xtc_not_null($alt)) {
       $image .= ' title=" ' . xtc_parse_input_field_data($alt, array('"' => '&quot;')) . ' "';
@@ -54,7 +54,7 @@
 
     if (xtc_not_null($parameters)) $image .= ' ' . $parameters;
 
-    $image .= '>';
+    $image .= ' />';
     return $image;
   }
  ?>

@@ -50,15 +50,16 @@
       global $order;
 
 
-       $check_order_query = xtc_db_query("select orders_id from " . TABLE_ORDERS . " where customers_id = '" . $_SESSION['customer_id'] . "'");
-       $order_check = xtc_db_num_rows($check_order_query);
+       $check_order_query = xtc_db_query("select count(*) as count from " . TABLE_ORDERS . " where customers_id = '" . (int)$_SESSION['customer_id'] . "'");
+       $order_check = xtc_db_fetch_array($check_order_query);
 
 
-
-       if ($order_check >= MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER) {
+       if ($order_check['count'] < MODULE_PAYMENT_BANKTRANSFER_MIN_ORDER) {
        $check_flag = false;
+       $this->enabled = false;
 
        }else{
+       $check_flag = true;
 
       if ( ($this->enabled == true) && ((int)MODULE_PAYMENT_BANKTRANSFER_ZONE > 0) ) {
         $check_flag = false;
@@ -72,7 +73,7 @@
             break;
           }
         }
-}
+      }
         if ($check_flag == false) {
           $this->enabled = false;
         }

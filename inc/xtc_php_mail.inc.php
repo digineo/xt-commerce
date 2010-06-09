@@ -13,7 +13,7 @@
 
    Released under the GNU General Public License 
    ---------------------------------------------------------------------------------------*/
-   
+  // include the mail classes
  function xtc_php_mail($from_email_address, $from_email_name, $to_email_address, $to_name, $forwarding_to, $reply_address, $reply_address_name, $path_to_attachement, $path_to_more_attachements, $email_subject, $message_body_html, $message_body_plain) {
      global $mail_error;
 
@@ -48,7 +48,7 @@ if ( EMAIL_USE_HTML=='true' )                                   // set email for
      $mail -> IsHTML(true);
      $mail->Body    = $message_body_html;
      // remove html tags
-     $message_body_plain=str_replace('<br>'," \n",$message_body_plain);
+     $message_body_plain=str_replace('<br />'," \n",$message_body_plain);
      $message_body_plain=strip_tags($message_body_plain);
      $mail->AltBody = $message_body_plain;
 }
@@ -56,7 +56,7 @@ else
 {
      $mail -> IsHTML(false);
      //remove html tags
-     $message_body_plain=str_replace('<br>'," \n",$message_body_plain);
+     $message_body_plain=str_replace('<br />'," \n",$message_body_plain);
      $message_body_plain=strip_tags($message_body_plain);
      $mail->Body    = $message_body_plain;
 } 

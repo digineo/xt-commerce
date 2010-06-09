@@ -41,7 +41,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['language_charset']; ?>"> 
 <title><?php echo TITLE; ?></title>
 <link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
-<script language="javascript" src="includes/general.js"></script>
+<script type="text/javascript" src="includes/general.js"></script>
 </head>
 <body marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" bgcolor="#FFFFFF" onload="SetFocus();">
 <!-- header //-->
@@ -70,9 +70,37 @@
 </table> </td>
       </tr>
       <tr>
-        <td style="border-top: 3px solid; border-color: #cccccc;"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+        <td style="border-top: 3px solid; border-color: #cccccc;" class="main"><table border="0" width="100%" cellspacing="0" cellpadding="0">
+         <?php
+         	switch ($_GET['gID']) {
+         		case 21:
+         			echo AFTERBUY_URL;
+         		case 19:
+         			echo '<table class="infoBoxHeading" width="100%">
+            				<tr>
+                			<td width="150" align="center">
+                			<a href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=21', 'NONSSL').'">Afterbuy</a>
+                			</td>
+                			<td width="1">|
+                			</td>
+                			<td width="150" align="center">
+                			<a href="'.xtc_href_link(FILENAME_CONFIGURATION, 'gID=19', 'NONSSL').'">Google Conversion</a>
+                			</td>
+                			<td width="1">|
+                			</td>
+                			<td>
+                			</td>
+            				</tr>
+        					</table>';
+         		
+         			break;
+         	}
+         	?> 
+         
+          
           <tr>
             <td valign="top" align="right">
+            
 <?php echo xtc_draw_form('configuration', FILENAME_CONFIGURATION, 'gID=' . (int)$_GET['gID'] . '&action=save'); ?>
             <table width="100%"  border="0" cellspacing="0" cellpadding="4">
 <?php
@@ -150,7 +178,7 @@
         <td style="background-color:#FCF2CF ; border: 1px solid; border-color: #CCCCCC;" class="dataTableContent">'.$value_field.'</td>
       </tr>
     </table>
-    <br>'.constant(strtoupper( $configuration['configuration_key'].'_DESC')).'</td>
+    <br />'.constant(strtoupper( $configuration['configuration_key'].'_DESC')).'</td>
   </tr>
   ';
 
@@ -172,7 +200,7 @@
 <!-- footer //-->
 <?php require(DIR_WS_INCLUDES . 'footer.php'); ?>
 <!-- footer_eof //-->
-<br>
+<br />
 </body>
 </html>
 <?php require(DIR_WS_INCLUDES . 'application_bottom.php'); ?>

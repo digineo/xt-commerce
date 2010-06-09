@@ -45,7 +45,7 @@
        $check_order_query = xtc_db_query("select count(*) as count from " . TABLE_ORDERS . " where customers_id = '" . (int)$_SESSION['customer_id'] . "'");
        $order_check = xtc_db_fetch_array($check_order_query);
 
-       if ($order_check['count'] <= MODULE_PAYMENT_INVOICE_MIN_ORDER) {
+       if ($order_check['count'] < MODULE_PAYMENT_INVOICE_MIN_ORDER) {
        $check_flag = false;
        $this->enabled = false;
 

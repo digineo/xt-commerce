@@ -41,9 +41,10 @@
     include('includes/configure.php');
   }
 
-  
+  $php4_3_10 = (0 == version_compare(phpversion(), "4.3.10"));
+  define ('PHP4_3_10',$php4_3_10);
   // define the project version
-  define('PROJECT_VERSION', 'xt:Commerce v3.0.2');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.3');
 
   // set the type of request (secure or not)
   $request_type = (getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -78,6 +79,9 @@
 
   // Store DB-Querys in a Log File
   define('STORE_DB_TRANSACTIONS', 'false');
+
+  // graduated prices model or products assigned ?
+  define('GRADUATED_ASSIGN','true');
 
   // include used functions
   require_once(DIR_FS_INC . 'xtc_db_connect.inc.php');
@@ -127,11 +131,9 @@
   require_once(DIR_FS_INC . 'xtc_get_tax_rate.inc.php');
   require_once(DIR_FS_INC . 'xtc_add_tax.inc.php');
   require_once(DIR_FS_INC . 'xtc_php_mail.inc.php');
+  require_once(DIR_FS_INC . 'xtc_cleanName.inc.php');
 
   require_once(DIR_FS_INC . 'xtc_input_validation.inc.php');
-
-  require_once(DIR_FS_INC . 'xtc_Security.inc.php');
-
 
   // make a connection to the database... now
   xtc_db_connect() or die('Unable to connect to database server!');
@@ -144,6 +146,9 @@
     define($configuration['cfgKey'], $configuration['cfgValue']);
   }
 
+  require_once(DIR_WS_CLASSES . 'class.phpmailer.php');
+  if (EMAIL_TRANSPORT == 'smtp') require_once(DIR_WS_CLASSES . 'class.smtp.php');
+  require_once(DIR_FS_INC . 'xtc_Security.inc.php');
   // check GET/POST/COOKIE VARS
   xtc_Security();
     // set the application parameters
@@ -315,10 +320,6 @@
   */
 
 
-  // include the mail classes
-  require_once(DIR_WS_CLASSES . 'class.phpmailer.php');
-  if (EMAIL_TRANSPORT == 'smtp') require_once(DIR_WS_CLASSES . 'class.smtp.php');
-
 
   // set the language
   if (!isset($_SESSION['language']) || isset($_GET['language'])) {
@@ -423,7 +424,10 @@
                                         and cd.language_id='" . (int)$_SESSION['languages_id'] . "'");
       if (xtc_db_num_rows($categories_query) > 0) {
         $categories = xtc_db_fetch_array($categories_query);
-        $breadcrumb->add($categories['categories_name'], xtc_href_link(FILENAME_DEFAULT, 'cPath=' . implode('_', array_slice($cPath_array, 0, ($i+1)))));
+        $SEF_parameter='';
+    		if (SEARCH_ENGINE_FRIENDLY_URLS == 'true') $SEF_parameter='&category='.xtc_cleanName($categories['categories_name']); 
+    
+        $breadcrumb->add($categories['categories_name'], xtc_href_link(FILENAME_DEFAULT, 'cPath=' . implode('_', array_slice($cPath_array, 0, ($i+1))).$SEF_parameter));
       } else {
         break;
       }
@@ -438,7 +442,11 @@
   if (isset($_GET['products_id'])) {
     $model_query = xtc_db_query("select products_model from " . TABLE_PRODUCTS . " where products_id = '" . (int)$_GET['products_id'] . "'");
     $model = xtc_db_fetch_array($model_query);
-    $breadcrumb->add($model['products_model'], xtc_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $cPath . '&products_id=' . (int)$_GET['products_id']));
+    if ($cPath == ''){
+	$breadcrumb->add($model['products_model'], xtc_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . (int)$_GET['products_id']));
+    }else{
+	$breadcrumb->add($model['products_model'], xtc_href_link(FILENAME_PRODUCT_INFO, 'cPath=' . $cPath . '&products_id=' . (int)$_GET['products_id']));
+    }
   }
 
   // initialize the message stack for output messages
@@ -456,7 +464,7 @@
 
 
   // Include Template Engine
-  require(DIR_WS_CLASSES . 'Smarty_2.6.5/Smarty.class.php');
+  require(DIR_WS_CLASSES . 'Smarty_2.6.6/Smarty.class.php');
 
   if (isset($_SESSION['customer_id'])) {
   $account_type_query=xtc_db_query("SELECT
