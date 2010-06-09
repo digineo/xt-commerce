@@ -1,13 +1,77 @@
                                      CHANGELOG
 ###################################################################################
 
-xt:Commerce v3.0.4SP1
-Release Datum: 28.10.2005
+xt:Commerce v3.0.4SP2.1
+Release Datum: 20.08.2006
 
 ###################################################################################
 
+#### 3.0.4 SP2.1
 
-#### 3.0.4 SP1 28.10.2005
+BUGFIX: fixed cookie bug in some IE Versions
+BUGFIX: #0000201 wrong attribute price when multiple currencies are installed
+BUGFIX: #0000209 products_description in listing
+BUGFIX: #0000169 added navigation bar to reviews.php
+BUGFIX: #0000135 added check for min password length in admin/customers.php
+BUGFIX: #0000210 changed navbar for account_history.php
+BUGFIX: #0000207 added cursor:pointer to print info and print order link
+BUGFIX: #0000192 added firstname/lastname variable for send_order.php
+BUGFIX: #none	 removed buy now buttons when customers status is set to view price = no
+BUGFIX: #0000206 bug in shopping cart (when removing products), in several php Versions
+BUGFIX: #none	 bug in captcha creation, on several servers, captcha in newsletter.php could be passed without an entry
+
+CHANGE: customers must login/create account for coupon redeem
+
+#### 3.0.4 SP2
+
+BUGFIX: MySQL 5 combatiblity (5.0.22 teseted)
+BUGFIX: #0000075 
+BUGFIX: fixed problems with guest accounts
+BUGFIX: #0000128
+BUGFIX: #0000132
+BUGFIX: #0000107
+BUGFIX: fixed "The TEXTAREA id "message" was not found in several admin pages
+BUGFIX: #0000129
+BUGFIX: #0000122
+BUGFIX: #0000120
+BUGFIX: #0000121
+BUGFIX: new paypal workflow (no lost payments anymore)
+BUGFIX: #0000127
+BUGFIX: new vatid verification algorithm for italy
+BUGFIX: tax/no tax calculation problems for special prices in admin area
+BUGFIX: #0000134
+BUGFIX: #0000139
+BUGFIX: #0000138
+BUGFIX: #0000153
+BUGFIX: #0000158
+BUGFIX: #0000159
+BUGFIX: #0000157
+BUGFIX: #0000165
+BUGFIX: #0000161
+BUGFIX: #0000185
+BUGFIX: stripslashes for export/import
+BUGFIX: #0000188
+BUGFIX: #0000197
+BUGFIX: fixed cookie bug on .xx.xx domains
+
+
+
+FEATURE: new vat check for spain (redondo)
+FEATURE: digital download products for manual orders in admin
+FEATURE: #0000164 
+FEATURE: new blz algorithms for germany (up to C0)
+FEATURE: Trusted Shops certification (www.trusted-shops.de)
+			- Price Disclaimers (PanGV)
+			- several text changes
+			- HTML/Javascrip Popup Links
+			- Standard C.o.u./Imprint
+			- Shipping time during order process and order mail
+			- display right of revocation during checkout
+FEATURE: Search for attributes in admin
+PERFORMANCE: runtime error in gift module
+
+
+#### 3.0.4 SP1
 
 BUGFIX: Kundengruppenzuweisung bei Kunden aus dem Ausland
 BUGFIX: UST Berechnung in Warenkorb bei Attributen
@@ -23,7 +87,7 @@ BUGFIX: Bug bei geloeschten kundengruppen
 
 FEATURE: Import unterstuetzt nun mehrere Bilder
 
-#### Version 3.0.4 1.10.2005
+#### Version 3.0.4
 
 CLEANUP: Logik von admin/categories.php in eine Neue Kategorie Klasse admin/includes/classes/categories.php verschoben.
 CLEANUP: Neue Produktklasse includes/classes/product.php für Produktbezogene Informationen

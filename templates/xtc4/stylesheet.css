@@ -362,7 +362,13 @@ TD.formAreaTitle {
   font-weight: bold;
 }
 
-TD.copyright {
+.copyright {
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  text-align:center;
+}
+.parseTime {
   font-family: Verdana, Arial, sans-serif;
   font-size: 11px;
   line-height: 1.5;
@@ -375,6 +381,7 @@ A.copyright:hover {
   color: #0000ff;
   text-decoration: underline;
 }
+
 
 SPAN.markProductOutOfStock {
   font-family: Tahoma, Verdana, Arial, sans-serif;

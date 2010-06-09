@@ -28,10 +28,10 @@
   require_once(DIR_FS_INC .'xtc_db_num_rows.inc.php');
   require_once(DIR_FS_INC .'xtc_redirect.inc.php');
   require_once(DIR_FS_INC .'xtc_href_link.inc.php');
-  require_once(DIR_FS_INC . 'xtc_get_countries.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_pull_down_menu.inc.php');
   require_once(DIR_FS_INC . 'xtc_draw_input_field.inc.php');
   require_once(DIR_FS_INC . 'xtc_get_country_list.inc.php');
+
 
     include('language/'.$_SESSION['language'].'.php');
   
@@ -196,6 +196,7 @@ xtc_db_query("insert into " . TABLE_CUSTOMERS . " (
 										customers_status,
 										customers_firstname,
 										customers_lastname,
+										customers_gender,
 										customers_email_address,
 										customers_default_address_id,
 										customers_telephone,
@@ -204,7 +205,7 @@ xtc_db_query("insert into " . TABLE_CUSTOMERS . " (
 										('1',
 										'0',
 										'".$firstname."',
-										'".$lastname."',
+										'".$lastname."','m',
 										'".$email_address."',
 										'1',
 										'".$telephone."',
@@ -643,6 +644,7 @@ xtc_db_query("INSERT INTO zones_to_geo_zones (association_id, zone_country_id, z
 
 
 }																			
+	
 	      xtc_redirect(xtc_href_link('xtc_installer/install_step7.php', '', 'NONSSL'));
 		}
 			

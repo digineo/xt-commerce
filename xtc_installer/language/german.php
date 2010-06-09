@@ -13,7 +13,7 @@
    Released under the GNU General Public License 
    --------------------------------------------------------------*/
 // Global
-define('TEXT_FOOTER','Copyright  &copy; 2002 - 2005 <a href="http://www.xt-commerce.com">XT-Commerce</a><br />Powered by xt:Commerce'); 
+define('TEXT_FOOTER','Copyright  &copy; 2002 - 2006 <a href="http://www.xt-commerce.com">xt:Commerce</a><br />Powered by xt:Commerce'); 
    
 // Box names
 define('BOX_LANGUAGE','Sprache');

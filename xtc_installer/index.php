@@ -69,6 +69,7 @@
 </head>
 
 <body>
+<img src='http://www.xt-commerce.com/_banner/adview.php?what=zone:18&amp;n=a61c088d' border='0' alt=''>
 <table width="800" height="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td height="95" colspan="2" ><table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -109,7 +110,11 @@
                 <td><br />                  <table width="100%"  border="0" cellpadding="2" cellspacing="2" style="border: 1px solid; border-color: #4CC534;" bgcolor="#C2FFB6">
                   <tr>
                     <td width="1"><img src="images/install.gif" border="0"></td>
-                    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><a href="http://www.xt-commerce.com/modules/wfsection/article.php?articleid=54" target="new">Installationsanleitung auf www.xt-commerce.com</a></font></td>
+                    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><a href="http://www.xt-commerce.com/forum/showthread.php?t=35187" target="_blank">Installationsanleitung auf www.xt-commerce.com</a></font></td>
+                  </tr>
+                  <tr>
+                    <td width="1"><img src="images/install.gif" border="0"></td>
+                    <td><font size="2" face="Verdana, Arial, Helvetica, sans-serif"><a href="http://www.xt-commerce.com/shop/product_info.php?products_id=1&utm_source=installer&utm_medium=link" target="_blank">xt:Commerce Support</a></font></td>
                   </tr>
                 </table></td>
               </tr>
@@ -147,6 +152,13 @@
 
  // smarty folders
  $folder_flag==false;
+ 
+    if (!is_writeable(DIR_FS_CATALOG . 'admin/rss/xt-news.cache')) {
+    $error_flag=true;
+    $folder_flag=true;
+    $message .= 'WRONG PERMISSION on '.DIR_FS_CATALOG . 'admin/rss/xt-news.cache<br />';
+ }
+ 
    if (!is_writeable(DIR_FS_CATALOG . 'templates_c/')) {
     $error_flag=true;
     $folder_flag=true;
@@ -329,6 +341,5 @@ if ($ok_message!='') {
 <p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif"><?php echo TEXT_FOOTER; ?>  </font></p>
 <p align="center"><font size="1" face="Verdana, Arial, Helvetica, sans-serif">
   </font></p>
-  <center><img src="http://www.xt-commerce.com/xtc_banner1.jpg">
 </body>
 </html>

@@ -96,7 +96,7 @@ if ($_SESSION['customers_status']['customers_status_show_price'] == '1') {
 	if ($_SESSION['customers_status']['customers_status_show_price_tax'] == 1) $total-=$discount;
 	$total_content .= SUB_TITLE_SUB_TOTAL.$xtPrice->xtcFormat($total, true).'<br />';
 } else {
-	$total_content .= TEXT_INFO_SHOW_PRICE_NO.'<br />';
+	$total_content .= NOT_ALLOWED_TO_SEE_PRICES.'<br />';
 }
 // display only if there is an ot_discount
 if ($customer_status_value['customers_status_ot_discount'] != 0) {
@@ -105,8 +105,9 @@ if ($customer_status_value['customers_status_ot_discount'] != 0) {
 if (SHOW_SHIPPING == 'true') {
 	$module_smarty->assign('SHIPPING_INFO', ' '.SHIPPING_EXCL.'<a href="javascript:newWin=void(window.open(\''.xtc_href_link(FILENAME_POPUP_CONTENT, 'coID='.SHIPPING_INFOS).'\', \'popup\', \'toolbar=0, width=640, height=600\'))"> '.SHIPPING_COSTS.'</a>');
 }
-
+if ($_SESSION['customers_status']['customers_status_show_price'] == '1') {
 $module_smarty->assign('UST_CONTENT', $_SESSION['cart']->show_tax());
+}
 $module_smarty->assign('TOTAL_CONTENT', $total_content);
 $module_smarty->assign('language', $_SESSION['language']);
 $module_smarty->assign('module_content', $module_content);

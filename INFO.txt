@@ -1,8 +1,8 @@
                                      INFO
 ###################################################################################
 
-  XT-Commerce v3.0.4SP1
-  Release Datum: 28.10.2005
+  XT-Commerce v3.0.4SP2.1
+  Release Datum: 20.08.2006
   
   ------------------------------------------------------------------------
   Dieses Programm ist freie Software. Sie koennen es unter den Bedingungen
@@ -40,9 +40,7 @@
   ------------------------------------------------------------------------
 
   Installationsanleitung/Installguide:
-  http://www.xt-commerce.com/documentation/article.php?id=061
-
-  http://www.xt-commerce.com/forums/index.php?showtopic=16138
+  http://www.xt-commerce.com/forum/showthread.php?t=35187
 
 
   mfg,

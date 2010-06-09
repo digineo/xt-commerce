@@ -200,7 +200,7 @@ class xtcImport {
 			return false;
 		return true;
 	}
-	
+
 	/**
 	*   Check if a image exists
 	*   @param string $model products modelnumber
@@ -290,6 +290,7 @@ class xtcImport {
 			$products_array = array_merge($products_array, array ('products_shippingtime' => $dataArray['p_shipping']));
 		if ($this->FileSheme['p_sorting'] == 'Y')
 			$products_array = array_merge($products_array, array ('products_sort' => $dataArray['p_sorting']));
+		$products_array = array_merge($products_array, array ('products_date_added' => 'now()'));
 
 		if ($mode == 'insert') {
 			$this->counter['prod_new']++;
@@ -329,14 +330,14 @@ class xtcImport {
 				xtc_db_perform(TABLE_PRODUCTS, $insert_array, 'update', 'products_id = \''.$products_id.'\'');
 			}
 		}
-		
+
 		// insert images
 		for ($i = 1; $i < MO_PICS + 1; $i ++) {
-			if (isset($dataArray['p_image.'.$i]) && $dataArray['p_image.'.$i]!="") {		
+			if (isset($dataArray['p_image.'.$i]) && $dataArray['p_image.'.$i]!="") {
 			// check if entry exists
 			if ($this->checkImage($i,$products_id)) {
 				$insert_array = array ('image_name' => $dataArray['p_image.'.$i]);
-				xtc_db_perform(TABLE_PRODUCTS_IMAGES, $insert_array, 'update', 'products_id = \''.$products_id.'\' and image_nr=\''.$i.'\'');	
+				xtc_db_perform(TABLE_PRODUCTS_IMAGES, $insert_array, 'update', 'products_id = \''.$products_id.'\' and image_nr=\''.$i.'\'');
 			} else {
 				$insert_array = array ('image_name' => $dataArray['p_image.'.$i],'image_nr'=>$i,'products_id'=>$products_id);
 				xtc_db_perform(TABLE_PRODUCTS_IMAGES, $insert_array);
@@ -676,7 +677,7 @@ class xtcExport {
 			// group permissions
 			if (GROUP_CHECK == 'true') {
 				for ($i = 0; $i < count($this->Groups) - 1; $i ++) {
-					$line .= $this->TextSign.$lang_data['group_permission_'.$this->Groups[$i +1]['id']].$this->TextSign.$this->seperator;
+					$line .= $this->TextSign.$export_data['group_permission_'.$this->Groups[$i +1]['id']].$this->TextSign.$this->seperator;
 				}
 			}
 
@@ -846,7 +847,7 @@ class xtcExport {
 	function getManufacturers() {
 		$man = array ();
 		$man_query = xtc_db_query("SELECT
-										                                manufacturers_name,manufacturers_id 
+										                                manufacturers_name,manufacturers_id
 										                                FROM
 										                                ".TABLE_MANUFACTURERS);
 		while ($man_data = xtc_db_fetch_array($man_query)) {
