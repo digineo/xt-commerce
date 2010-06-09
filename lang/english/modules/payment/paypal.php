@@ -32,4 +32,8 @@ define('MODULE_PAYMENT_PAYPAL_ZONE_TITLE' , 'Payment Zone');
 define('MODULE_PAYMENT_PAYPAL_ZONE_DESC' , 'If a zone is selected, only enable this payment method for that zone.');
 define('MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID_TITLE' , 'Set Order Status');
 define('MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID_DESC' , 'Set the status of orders made with this payment module to this value');
+define('MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID_TITLE','Pending Order Status');
+define('MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID_DESC','Set the status for pending transactions');
+define('MODULE_PAYMENT_PAYPAL_USE_CURL_TITLE', 'cURL');
+define('MODULE_PAYMENT_PAYPAL_USE_CURL_DESC', 'Use cURL or redirection.');
 ?>

@@ -139,6 +139,10 @@ echo '<td><span class="main">'.xtc_draw_pull_down_menu('categories_template',$fi
 ?>
         </span></td>
       </tr>
+             	  <tr>
+            <td class="main"><?php echo TEXT_EDIT_STATUS; ?>:</td>
+            <td class="main"><?php echo xtc_draw_selection_field('status', 'checkbox', '1',$cInfo->categories_status==1 ? true : false); ?></td>
+          </tr>
       <tr>
 <?php
 $order_array='';

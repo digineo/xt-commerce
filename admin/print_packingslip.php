@@ -61,7 +61,7 @@
         	$attributes_model='';
         	while ($attributes_data_values = xtc_db_fetch_array($attributes_query)) {
         	$attributes_data .='<br />'.$attributes_data_values['products_options'].':'.$attributes_data_values['products_options_values'];	
-        	$attributes_model .='<br />'.xtc_get_attributes_model($order_data_values['products_id'],$attributes_data_values['products_options_values']);
+        	$attributes_model .='<br />'.xtc_get_attributes_model($order_data_values['products_id'],$attributes_data_values['products_options_values'],$attributes_data_values['products_options']);
         	}
         $order_data[]=array(
         		'PRODUCTS_MODEL' => $order_data_values['products_model'],

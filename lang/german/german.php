@@ -449,4 +449,9 @@ define('TAX_INFO_EXCL','exkl. %s UST');
 define('TAX_INFO_ADD','zzgl. %s UST');
 define('SHIPPING_EXCL','exkl.');
 define('SHIPPING_COSTS','Versandkosten');
+
+
+// changes 3.0.4 SP2
+define('SHIPPING_TIME','Lieferzeit: ');
+define('MORE_INFO','[Mehr]');
 ?>

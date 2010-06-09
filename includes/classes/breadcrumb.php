@@ -45,5 +45,26 @@
 
       return $trail_string;
     }
+    
+        // Begin Econda-Monitor
+
+    function econda() { // for drill-down
+
+      $econda_string = '';
+
+      for ($i=1, $n=sizeof($this->_trail); $i<$n; $i++) {
+
+        $econda_string .= $this->_trail[$i]['title'];
+
+        if (($i+1) < $n) $econda_string .= '/';
+
+      }
+
+      return $econda_string;
+
+    }
+
+    // End Econda-Monitor
+    
   }
 ?>

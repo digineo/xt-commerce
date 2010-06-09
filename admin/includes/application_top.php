@@ -52,7 +52,7 @@
   define('SQL_CACHEDIR',DIR_FS_CATALOG.'cache/');
 
   // Define the project version
-  define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP1');
+  define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP2');
 
   // Set the length of the redeem code, the longer the more secure
   define('SECURITY_CODE_LENGTH', '6');
@@ -299,7 +299,7 @@
 
   // set the session name and save path
   session_name('XTCsid');
-  session_save_path(SESSION_WRITE_DIRECTORY);
+	if (STORE_SESSIONS != 'mysql') session_save_path(SESSION_WRITE_DIRECTORY);
 
   // set the session cookie parameters
   if (function_exists('session_set_cookie_params')) {
@@ -494,7 +494,7 @@ if (SESSION_CHECK_USER_AGENT == 'True') {
 
 
     // Include Template Engine
-  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.10/Smarty.class.php');
+  require(DIR_FS_CATALOG.DIR_WS_CLASSES . 'Smarty_2.6.14/Smarty.class.php');
 
   
 ?>

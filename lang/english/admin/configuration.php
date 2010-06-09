@@ -575,4 +575,9 @@ define('SEARCH_IN_DESC_DESC','Activate to enable search in Products Descriptions
 define('SEARCH_IN_ATTR_TITLE','Search in Products Attributes');
 define('SEARCH_IN_ATTR_DESC','Activate to enable search in Products Attributes');
 
+// changes for 3.0.4 SP2
+define('REVOCATION_ID_TITLE','Revocation ID');
+define('REVOCATION_ID_DESC','Content ID of Revocation content');
+define('DISPLAY_REVOCATION_ON_CHECKOUT_TITLE','Display right of revocation?');
+define('DISPLAY_REVOCATION_ON_CHECKOUT_DESC','Display right of revocation on checkout_confirmation?');
 ?>

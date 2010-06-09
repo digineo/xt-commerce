@@ -28,6 +28,8 @@ class paypal {
 		$this->sort_order = MODULE_PAYMENT_PAYPAL_SORT_ORDER;
 		$this->enabled = ((MODULE_PAYMENT_PAYPAL_STATUS == 'True') ? true : false);
 		$this->info = MODULE_PAYMENT_PAYPAL_TEXT_INFO;
+		$this->tmpOrders = true;
+		$this->tmpStatus = MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID;
 		if ((int) MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID > 0) {
 			$this->order_status = MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID;
 		}
@@ -76,8 +78,16 @@ class paypal {
 	function confirmation() {
 		return false;
 	}
-
+	
 	function process_button() {
+		return false;
+	}
+
+	function before_process() {
+		return false;
+	}
+	
+	function payment_action() {
 		global $order, $xtPrice;
 
 		if (MODULE_PAYMENT_PAYPAL_CURRENCY == 'Selected Currency') {
@@ -101,13 +111,22 @@ class paypal {
 			$amount = round($xtPrice->xtcCalculateCurrEx($total, $my_currency), $xtPrice->get_decimal_places($my_currency));
 			$shipping = round($xtPrice->xtcCalculateCurrEx($order->info['shipping_cost'], $my_currency), $xtPrice->get_decimal_places($my_currency));
 		}
-		$process_button_string = xtc_draw_hidden_field('cmd', '_xclick').xtc_draw_hidden_field('business', MODULE_PAYMENT_PAYPAL_ID).xtc_draw_hidden_field('item_name', STORE_NAME).xtc_draw_hidden_field('amount', $amount - $shipping).xtc_draw_hidden_field('shipping', $shipping).xtc_draw_hidden_field('currency_code', $my_currency).xtc_draw_hidden_field('return', xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL')).xtc_draw_hidden_field('cancel_return', xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL'));
+		
+		$dataString = 'cmd=_xclick&business='.MODULE_PAYMENT_PAYPAL_ID.'&item_name='.STORE_NAME.'-OID:'.$_SESSION['tmp_oID'].'&amount='. ($amount - $shipping).'&shipping='.$shipping.'&currency_code='.$my_currency.'&return='.xtc_href_link(FILENAME_CHECKOUT_PROCESS, '', 'SSL').'&cancel_return='.xtc_href_link(FILENAME_CHECKOUT_PAYMENT, '', 'SSL');
+		
+		if (MODULE_PAYMENT_PAYPAL_USE_CURL == 'True') {
+			$url = $this->form_action_url;
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString."&");
+			curl_exec($ch);
+			curl_close($ch);
+		}
+		else {
+			xtc_redirect($this->form_action_url.'?'.$dataString);
+		}
 
-		return $process_button_string;
-	}
-
-	function before_process() {
-		return false;
 	}
 
 	function after_process() {
@@ -136,6 +155,8 @@ class paypal {
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, date_added) values ('MODULE_PAYMENT_PAYPAL_SORT_ORDER', '0', '6', '0', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, use_function, set_function, date_added) values ('MODULE_PAYMENT_PAYPAL_ZONE', '0', '6', '2', 'xtc_get_zone_class_title', 'xtc_cfg_pull_down_zone_classes(', now())");
 		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID', '0',  '6', '0', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, use_function, date_added) values ('MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID', '0',  '6', '8', 'xtc_cfg_pull_down_order_statuses(', 'xtc_get_order_status_name', now())");
+		xtc_db_query("insert into ".TABLE_CONFIGURATION." ( configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) values ('MODULE_PAYMENT_PAYPAL_USE_CURL', 'True', '6', '9', 'xtc_cfg_select_option(array(\'True\', \'False\'), ', now())");
 	}
 
 	function remove() {
@@ -143,7 +164,7 @@ class paypal {
 	}
 
 	function keys() {
-		return array ('MODULE_PAYMENT_PAYPAL_STATUS', 'MODULE_PAYMENT_PAYPAL_ALLOWED', 'MODULE_PAYMENT_PAYPAL_ID', 'MODULE_PAYMENT_PAYPAL_CURRENCY', 'MODULE_PAYMENT_PAYPAL_ZONE', 'MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID', 'MODULE_PAYMENT_PAYPAL_SORT_ORDER');
+		return array ('MODULE_PAYMENT_PAYPAL_STATUS', 'MODULE_PAYMENT_PAYPAL_ALLOWED', 'MODULE_PAYMENT_PAYPAL_ID', 'MODULE_PAYMENT_PAYPAL_CURRENCY', 'MODULE_PAYMENT_PAYPAL_ZONE', 'MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID', 'MODULE_PAYMENT_PAYPAL_SORT_ORDER','MODULE_PAYMENT_PAYPAL_USE_CURL','MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID');
 	}
 }
 ?>

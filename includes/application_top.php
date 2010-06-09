@@ -45,7 +45,7 @@ if (file_exists('includes/local/configure.php')) {
 $php4_3_10 = (0 == version_compare(phpversion(), "4.3.10"));
 define('PHP4_3_10', $php4_3_10);
 // define the project version
-define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP1');
+define('PROJECT_VERSION', 'xt:Commerce v3.0.4 SP2');
 
 // set the type of request (secure or not)
 $request_type = (getenv('HTTPS') == '1' || getenv('HTTPS') == 'on') ? 'SSL' : 'NONSSL';
@@ -247,7 +247,7 @@ require (DIR_WS_FUNCTIONS.'sessions.php');
 
 // set the session name and save path
 session_name('XTCsid');
-session_save_path(SESSION_WRITE_DIRECTORY);
+if (STORE_SESSIONS != 'mysql') session_save_path(SESSION_WRITE_DIRECTORY);
 
 // set the session cookie parameters
 if (function_exists('session_set_cookie_params')) {
@@ -347,6 +347,19 @@ if (!isset ($_SESSION['language']) || isset ($_GET['language'])) {
 	$_SESSION['language_code'] = $lng->language['code'];
 }
 
+if (isset($_SESSION['language']) && !isset($_SESSION['language_charset'])) {
+	
+	include (DIR_WS_CLASSES.'language.php');
+	$lng = new language(xtc_input_validation($_SESSION['language'], 'char', ''));
+
+
+	$_SESSION['language'] = $lng->language['directory'];
+	$_SESSION['languages_id'] = $lng->language['id'];
+	$_SESSION['language_charset'] = $lng->language['language_charset'];
+	$_SESSION['language_code'] = $lng->language['code'];
+	
+}
+
 // include the language translations
 require (DIR_WS_LANGUAGES.$_SESSION['language'].'/'.$_SESSION['language'].'.php');
 
@@ -374,6 +387,12 @@ $main = new main();
 
 require (DIR_WS_CLASSES.'xtcPrice.php');
 $xtPrice = new xtcPrice($_SESSION['currency'], $_SESSION['customers_status']['customers_status_id']);
+
+// econda tracking
+if (TRACKING_ECONDA_ACTIVE=='true') {		
+	require(DIR_WS_INCLUDES . 'econda/class.econda304SP2.php');
+	$econda = new econda();
+}
 
 require (DIR_WS_INCLUDES.FILENAME_CART_ACTIONS);
 // create the shopping cart & fix the cart if necesary
@@ -480,7 +499,7 @@ if (isset ($cPath_array)) {
 		}
 	}
 }
-elseif (isset ($_GET['manufacturers_id'])) {
+elseif (xtc_not_null($_GET['manufacturers_id'])) {
 	$manufacturers_query = xtDBquery("select manufacturers_name from ".TABLE_MANUFACTURERS." where manufacturers_id = '".(int) $_GET['manufacturers_id']."'");
 	$manufacturers = xtc_db_fetch_array($manufacturers_query, true);
 
@@ -506,7 +525,7 @@ define('WARN_SESSION_AUTO_START', 'true');
 define('WARN_DOWNLOAD_DIRECTORY_NOT_READABLE', 'true');
 
 // Include Template Engine
-require (DIR_WS_CLASSES.'Smarty_2.6.10/Smarty.class.php');
+require (DIR_WS_CLASSES.'Smarty_2.6.14/Smarty.class.php');
 
 if (isset ($_SESSION['customer_id'])) {
 	$account_type_query = xtc_db_query("SELECT
@@ -534,5 +553,12 @@ if (isset ($_SESSION['customer_id'])) {
 
 // modification for nre graduated system
 unset ($_SESSION['actual_content']);
+
+// econda tracking
+if (TRACKING_ECONDA_ACTIVE=='true') {	
+	
+	require(DIR_WS_INCLUDES . 'econda/emos.php');
+}
+
 xtc_count_cart();
 ?>

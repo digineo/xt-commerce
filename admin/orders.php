@@ -415,6 +415,9 @@ if (($_GET['action'] == 'edit') && ($order_exists)) {
 
 	}
 	// end modification for banktransfer
+
+if ($order->info['payment_method'] == 'luupws') include( DIR_FS_CATALOG.DIR_WS_INCLUDES.'nusoap/luup_orders.php' );
+
 ?>
         </table></td>
       </tr>
@@ -473,9 +476,9 @@ if (($_GET['action'] == 'edit') && ($order_exists)) {
 		if (sizeof($order->products[$i]['attributes']) > 0) {
 			for ($j = 0, $k = sizeof($order->products[$i]['attributes']); $j < $k; $j ++) {
 
-				$model = xtc_get_attributes_model($order->products[$i]['id'], $order->products[$i]['attributes'][$j]['value']);
+				$model = xtc_get_attributes_model($order->products[$i]['id'], $order->products[$i]['attributes'][$j]['value'],$order->products[$i]['attributes'][$j]['option']);
 				if ($model != '') {
-					echo $model;
+					echo $model.'<br />';
 				} else {
 					echo '<br />';
 				}

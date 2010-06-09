@@ -45,7 +45,7 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 	$password = xtc_db_prepare_input($_POST['password']);
 
 	// Check if email exists
-	$check_customer_query = xtc_db_query("select customers_id, customers_vat_id, customers_firstname,customers_lastname, customers_gender, customers_password, customers_email_address, customers_default_address_id from ".TABLE_CUSTOMERS." where customers_email_address = '".xtc_db_input($email_address)."'");
+	$check_customer_query = xtc_db_query("select customers_id, customers_vat_id, customers_firstname,customers_lastname, customers_gender, customers_password, customers_email_address, customers_default_address_id from ".TABLE_CUSTOMERS." where customers_email_address = '".xtc_db_input($email_address)."' and account_type = '0'");
 	if (!xtc_db_num_rows($check_customer_query)) {
 		$_GET['login'] = 'fail';
 		$info_message = TEXT_NO_EMAIL_ADDRESS_FOUND;
@@ -78,6 +78,8 @@ if (isset ($_GET['action']) && ($_GET['action'] == 'process')) {
 			xtc_write_user_info((int) $_SESSION['customer_id']);
 			// restore cart contents
 			$_SESSION['cart']->restore_contents();
+			
+			if (is_object($econda)) $econda->_loginUser();
 
 			if ($_SESSION['cart']->count_contents() > 0) {
 				xtc_redirect(xtc_href_link(FILENAME_SHOPPING_CART, '', 'SSL'));

@@ -32,4 +32,9 @@ define('MODULE_PAYMENT_PAYPAL_ZONE_TITLE' , 'Zahlungszone');
 define('MODULE_PAYMENT_PAYPAL_ZONE_DESC' , 'Wenn eine Zone ausgew&auml;hlt ist, gilt die Zahlungsmethode nur f&uuml;r diese Zone.');
 define('MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID_TITLE' , 'Bestellstatus festlegen');
 define('MODULE_PAYMENT_PAYPAL_ORDER_STATUS_ID_DESC' , 'Bestellungen, welche mit diesem Modul gemacht werden, auf diesen Status setzen');
+define('MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID_TITLE','Tempor&auml;er Bestellstatus');
+define('MODULE_PAYMENT_PAYPAL_TMP_STATUS_ID_DESC','Bestellstatus f&auml;r noch nicht abgeschlossene Transaktionen');
+define('MODULE_PAYMENT_PAYPAL_USE_CURL_TITLE', 'cURL');
+define('MODULE_PAYMENT_PAYPAL_USE_CURL_DESC', 'cURL Anbindung oder normale Weiterleitung.');
+
 ?>

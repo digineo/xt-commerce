@@ -373,19 +373,8 @@ if (count($campaign->result)) {
 
 	}
 ?>
-  
-  
-</table>                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
- <?php } ?>               
+</table>
+<?php } ?>
                 &nbsp; </td>
               </tr>
             </table>
@@ -410,4 +399,4 @@ if (count($campaign->result)) {
 <?php
 
 	require (DIR_WS_INCLUDES.'application_bottom.php');
-?>  
+?>

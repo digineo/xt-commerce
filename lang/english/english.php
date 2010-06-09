@@ -449,4 +449,8 @@ define('TAX_INFO_EXCL','excl. %s Tax');
 define('TAX_INFO_ADD','plus. %s Tax');
 define('SHIPPING_EXCL','excl.');
 define('SHIPPING_COSTS','Shipping costs');
+
+// changes 3.0.4 SP2
+define('SHIPPING_TIME','Shipping time: ');
+define('MORE_INFO','[More]');
 ?>

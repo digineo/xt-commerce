@@ -85,42 +85,18 @@ class ipayment {
 	}
 
 	function pre_confirmation_check() {
-
-		include (DIR_WS_CLASSES.'cc_validation.php');
-
-		$cc_validation = new cc_validation();
-		$result = $cc_validation->validate($_POST['ipayment_cc_number'], $_POST['ipayment_cc_expires_month'], $_POST['ipayment_cc_expires_year']);
-
-		$error = '';
-		switch ($result) {
-			case -1 :
-				$error = sprintf(TEXT_CCVAL_ERROR_UNKNOWN_CARD, substr($cc_validation->cc_number, 0, 4));
-				break;
-			case -2 :
-			case -3 :
-			case -4 :
-				$error = TEXT_CCVAL_ERROR_INVALID_DATE;
-				break;
-			case false :
-				$error = TEXT_CCVAL_ERROR_INVALID_NUMBER;
-				break;
-		}
-
-		if (($result == false) || ($result < 1)) {
-			$payment_error_return = 'payment_error='.$this->code.'&error='.urlencode($error).'&ipayment_cc_owner='.urlencode($_POST['ipayment_cc_owner']).'&ipayment_cc_expires_month='.$_POST['ipayment_cc_expires_month'].'&ipayment_cc_expires_year='.$_POST['ipayment_cc_expires_year'].'&ipayment_cc_checkcode='.$_POST['ipayment_cc_checkcode'];
-
-			xtc_redirect(xtc_href_link(FILENAME_CHECKOUT_PAYMENT, $payment_error_return, 'SSL', true, false));
-		}
-
-		$this->cc_card_type = $cc_validation->cc_type;
-		$this->cc_card_number = $cc_validation->cc_number;
-		$this->cc_expiry_month = $cc_validation->cc_expiry_month;
-		$this->cc_expiry_year = $cc_validation->cc_expiry_year;
+		return false;
 	}
 
 	function confirmation() {
 
-		$confirmation = array ('title' => $this->title.': '.$this->cc_card_type, 'fields' => array (array ('title' => MODULE_PAYMENT_IPAYMENT_TEXT_CREDIT_CARD_OWNER, 'field' => $_POST['ipayment_cc_owner']), array ('title' => MODULE_PAYMENT_IPAYMENT_TEXT_CREDIT_CARD_NUMBER, 'field' => substr($this->cc_card_number, 0, 4).str_repeat('X', (strlen($this->cc_card_number) - 8)).substr($this->cc_card_number, -4)), array ('title' => MODULE_PAYMENT_IPAYMENT_TEXT_CREDIT_CARD_EXPIRES, 'field' => strftime('%B, %Y', mktime(0, 0, 0, $_POST['ipayment_cc_expires_month'], 1, '20'.$_POST['ipayment_cc_expires_year'])))));
+		$confirmation = array ('title' => $this->title.': '.$this->cc_card_type,
+							'fields' => array (array ('title' => MODULE_PAYMENT_IPAYMENT_TEXT_CREDIT_CARD_OWNER,
+												 'field' => $_POST['ipayment_cc_owner']),
+												  array ('title' => MODULE_PAYMENT_IPAYMENT_TEXT_CREDIT_CARD_NUMBER,
+												   'field' => substr($_POST['ipayment_cc_number'], 0, 4).str_repeat('X', (strlen($_POST['ipayment_cc_number']) - 8)).substr($_POST['ipayment_cc_number'], -4)),
+												    array ('title' => MODULE_PAYMENT_IPAYMENT_TEXT_CREDIT_CARD_EXPIRES,
+												     'field' => strftime('%B, %Y', mktime(0, 0, 0, $_POST['ipayment_cc_expires_month'], 1, '20'.$_POST['ipayment_cc_expires_year'])))));
 
 		if (xtc_not_null($_POST['ipayment_cc_checkcode'])) {
 			$confirmation['fields'][] = array ('title' => MODULE_PAYMENT_IPAYMENT_TEXT_CREDIT_CARD_CHECKNUMBER, 'field' => $_POST['ipayment_cc_checkcode']);

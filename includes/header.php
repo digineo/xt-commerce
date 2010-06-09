@@ -254,9 +254,10 @@ function resize() {
   self.focus();
 }
 //--></script>
+<?php 
+} 
 
-
-<?php } ?>
+?>
 </head>
 <?php
 if (strstr($PHP_SELF, FILENAME_POPUP_IMAGE )) {
@@ -264,6 +265,21 @@ echo '<body onload="resize();"> ';
 } else {
 echo '<body>';
 }
+
+// econda tracking
+if (TRACKING_ECONDA_ACTIVE=='true') {	
+?>
+<script type="text/javascript">
+<!--
+var emos_kdnr='<?php echo TRACKING_ECONDA_ID; ?>';
+//-->
+</script>
+<a name="emos_sid" rel="<?php echo session_id(); ?>" rev=""></a>
+<a name="emos_name" title="siteid" rel="<?php echo $_SESSION['languages_id']; ?>" rev=""></a>
+<?php	
+//	require_once(DIR_WS_INCLUDES . 'econda/econda.php');
+}
+
 
 if (strstr($PHP_SELF, FILENAME_CHECKOUT_SUCCESS) && GOOGLE_CONVERSION == 'true') {
 require('includes/google_conversiontracking.js.php');
